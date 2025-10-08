@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Client Intake · Numerologist{% endblock %}
+
+{% block content %}
+<section class="stack">
+  <header class="page-header">
+    <h1>Client intake</h1>
+    <p class="lead">Capture client details and generate a quick numerology snapshot in one step.</p>
+  </header>
+
+  <form method="post" novalidate class="card stack">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="alert alert-error">
+      <p>Please fix the highlighted issues before continuing.</p>
+      <ul>
+        {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% for field in form %}
+    <div class="form-field">
+      <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}</label>
+      {{ field }}
+      {% if field.help_text %}<p class="hint">{{ field.help_text }}</p>{% endif %}
+      {% if field.errors %}
+      <ul class="errors">
+        {% for error in field.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="btn-primary">Calculate profile</button>
+  </form>
+
+  {% if result %}
+  <section class="card stack">
+    <h2>Numerology profile for {{ result.full_name }}</h2>
+    <p class="meta">Born {{ result.birth_date|date:"F j, Y" }} · {{ result.email }}</p>
+    {% if result.focus_area %}<p><strong>Focus area:</strong> {{ result.focus_area }}</p>{% endif %}
+    {% if result.notes %}<p><strong>Notes:</strong> {{ result.notes|linebreaksbr }}</p>{% endif %}
+
+    <div class="grid">
+      {% for item in result.numbers %}
+      <article class="stat">
+        <h3>{{ item.label }}</h3>
+        <p class="stat-number">{{ item.value }}</p>
+        {% if item.description %}<p class="hint">{{ item.description }}</p>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+</section>
+{% endblock %}
