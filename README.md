@@ -42,11 +42,11 @@ Current live subdomain:
 ---
 
 ## 📖 Documentation
-- [[Setup Guide]]
-- [[Numerology Engine]]
-- [[API Reference]]
-- [[Architecture Overview]]
-- [[Contributors & Credits]]
+- [Setup Guide](docs/Setup_Guide.md)
+- [Numerology Engine](docs/Numerology_Engine.md)
+- [API Reference](docs/API_Reference.md)
+- [Architecture Overview](docs/Architecture_Overview.md)
+- [Contributors & Credits](docs/Contributors_and_Credits.md)
 
 ---
 
