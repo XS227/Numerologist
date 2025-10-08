@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Numerologist Platform{% endblock %}
+
+{% block content %}
+<section class="stack">
+  <header class="page-header">
+    <p class="meta">Numerologist</p>
+    <h1>Everything you need to onboard clients and deliver magical reports</h1>
+    <p class="lead">
+      Intake new clients, calculate their core numbers instantly, and manage evergreen content using Wagtail’s editor-friendly CMS.
+    </p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+      <a class="btn-primary" href="/intake/">Launch intake form</a>
+      <a class="btn-secondary" href="/cms/">Open the CMS</a>
+    </div>
+  </header>
+
+  <section class="card stack">
+    <h2>Workflow highlights</h2>
+    <div class="grid">
+      {% for feature in features %}
+      <article class="stat">
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+        <p><a href="{{ feature.href }}">Explore →</a></p>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="card stack">
+    <h2>What’s inside the intake profile?</h2>
+    <table class="summary">
+      <tbody>
+        <tr>
+          <th scope="row">Life path</th>
+          <td>The big-picture mission based on the birth date.</td>
+        </tr>
+        <tr>
+          <th scope="row">Expression</th>
+          <td>Natural talents pulled from the full birth name.</td>
+        </tr>
+        <tr>
+          <th scope="row">Soul urge</th>
+          <td>Inner motivations revealed by vowels.</td>
+        </tr>
+        <tr>
+          <th scope="row">Personality</th>
+          <td>First impressions shaped by consonants.</td>
+        </tr>
+        <tr>
+          <th scope="row">Birth day</th>
+          <td>Daily gifts and energetic signature.</td>
+        </tr>
+        <tr>
+          <th scope="row">Maturity</th>
+          <td>Later-life synthesis of the life path and expression numbers.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</section>
+{% endblock %}
