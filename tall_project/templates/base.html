@@ -21,7 +21,7 @@
       * { box-sizing: border-box; }
       body {
         margin: 0;
-        background: var(--bg);
+        background: linear-gradient(180deg, #f5f2ff 0%, #ffffff 100%);
         color: var(--text);
         min-height: 100vh;
         display: flex;
@@ -70,6 +70,98 @@
         padding: 1.75rem;
         box-shadow: 0 20px 60px rgba(82, 61, 139, 0.08);
       }
+      .landing { display: grid; gap: 2.5rem; }
+      .landing__grid {
+        display: grid;
+        gap: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        align-items: stretch;
+      }
+      .landing__hero {
+        position: relative;
+        overflow: hidden;
+        color: #22164a;
+        padding: 3rem;
+        background: radial-gradient(circle at top left, rgba(138, 111, 255, 0.45), transparent 55%),
+          radial-gradient(circle at bottom right, rgba(244, 232, 255, 0.65), transparent 50%),
+          var(--surface);
+      }
+      .landing__hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(104, 74, 255, 0.12));
+        pointer-events: none;
+      }
+      .landing__hero > * { position: relative; z-index: 1; }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.45rem 0.95rem;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--accent-dark);
+        background: rgba(106, 77, 255, 0.12);
+      }
+      .hero-title { font-size: clamp(2.1rem, 3vw, 3rem); margin: 0; }
+      .tagline { margin: 0; color: #5a4a76; }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 1.75rem;
+      }
+      .hero-actions .btn-primary { box-shadow: 0 12px 30px rgba(106, 77, 255, 0.25); }
+      .milestones {
+        display: grid;
+        gap: 1rem;
+        margin: 2rem 0 0;
+      }
+      .milestone {
+        display: grid;
+        gap: 0.5rem;
+        padding: 1rem 1.25rem;
+        border-radius: 0.85rem;
+        background: rgba(106, 77, 255, 0.08);
+        border: 1px solid rgba(106, 77, 255, 0.16);
+      }
+      .milestone-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 1rem;
+      }
+      .milestone-header dt {
+        margin: 0;
+        font-weight: 600;
+      }
+      .milestone-header dd {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #5a4a76;
+      }
+      .progress-bar {
+        height: 0.5rem;
+        background: rgba(106, 77, 255, 0.12);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .progress-bar span {
+        display: block;
+        height: 100%;
+        background: linear-gradient(135deg, var(--accent), #8c6bff);
+      }
+      .landing__calculator { display: grid; gap: 1.5rem; }
+      .landing__calculator header { display: grid; gap: 0.75rem; }
+      .landing__calculator .meta { font-size: 0.95rem; }
+      .landing__calculator form { display: grid; gap: 1.25rem; }
+      .section-card {
+        gap: 1rem;
+      }
+      .stack-tight { gap: 0.75rem; }
+      .stack-roomy { gap: 1rem; }
       .form-field { display: grid; gap: 0.35rem; }
       label { font-weight: 600; }
       .required { color: var(--accent); margin-left: 0.1rem; }
@@ -127,6 +219,38 @@
         gap: 1rem;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       }
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.75rem 1.25rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        color: var(--accent-dark);
+        background: #f0ecff;
+        font-weight: 600;
+      }
+      .heading-reset { margin: 0; }
+      .lite-calculator__fields {
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .lite-calculator__results {
+        gap: 1rem;
+        background: #f8f5ff;
+        border: 1px solid rgba(106, 77, 255, 0.18);
+      }
+      .lite-calculator__stats {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
+      .lite-calculator__stat {
+        padding: 1.1rem;
+        border-radius: 1rem;
+        border: 1px solid var(--border);
+        background: #f2edff;
+      }
       .stat {
         padding: 1.25rem;
         border-radius: 1rem;
@@ -134,6 +258,99 @@
         background: #f2edff;
       }
       .stat-number { font-size: 2.5rem; font-weight: 700; margin: 0.25rem 0; }
+      .feature-list { margin: 0; padding-left: 1.25rem; display: grid; gap: 0.75rem; }
+      .roadmap {
+        counter-reset: roadmap;
+        display: grid;
+        gap: 1.25rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .roadmap li {
+        counter-increment: roadmap;
+        padding-left: 2.75rem;
+        position: relative;
+      }
+      .roadmap li::before {
+        content: counter(roadmap, decimal-leading-zero);
+        position: absolute;
+        left: 0;
+        top: 0.1rem;
+        font-weight: 700;
+        color: var(--accent);
+        background: rgba(106, 77, 255, 0.12);
+        border-radius: 999px;
+        padding: 0.35rem 0.65rem;
+      }
+      .roadmap__title { font-weight: 600; display: block; margin-bottom: 0.35rem; }
+      .insight-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .insight {
+        padding: 1.2rem;
+        border-radius: 1rem;
+        border: 1px solid rgba(106, 77, 255, 0.14);
+        background: rgba(245, 240, 255, 0.7);
+        display: grid;
+        gap: 0.45rem;
+      }
+      .insight strong { font-size: 1.05rem; }
+      .announcement {
+        padding: 1rem 1.25rem;
+        border-radius: 0.75rem;
+        background: rgba(40, 210, 149, 0.12);
+        border: 1px solid rgba(40, 210, 149, 0.25);
+        color: #196c51;
+        font-size: 0.95rem;
+      }
+      blockquote {
+        margin: 0;
+        padding: 1.25rem 1.5rem;
+        border-left: 4px solid var(--accent);
+        background: rgba(106, 77, 255, 0.08);
+        border-radius: 0.85rem;
+        font-style: italic;
+        color: #4a3a6c;
+      }
+      blockquote cite {
+        display: block;
+        margin-top: 0.75rem;
+        font-style: normal;
+        font-weight: 600;
+        color: var(--text);
+      }
+      pre {
+        margin: 0;
+        padding: 1rem 1.25rem;
+        border-radius: 0.85rem;
+        background: #1f163d;
+        color: #f5f2ff;
+        overflow-x: auto;
+        font-size: 0.95rem;
+      }
+      code {
+        font-family: "Fira Code", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      }
+      .info-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .info-table th,
+      .info-table td {
+        padding: 0.75rem 0.85rem;
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+      }
+      @media (max-width: 600px) {
+        .landing__hero {
+          padding: 2.5rem 1.75rem;
+        }
+        .hero-actions { flex-direction: column; align-items: stretch; }
+        .hero-actions .btn-primary, .hero-actions .btn-secondary { justify-content: center; }
+      }
       table.summary {
         width: 100%;
         border-collapse: collapse;
@@ -164,7 +381,7 @@
       </div>
     </main>
     <footer>
-      <div class="container">Built with Django &amp; Wagtail for numerology professionals.</div>
+      <div class="container">Will be made with Codex and Python for Åse, by Setaei.</div>
     </footer>
   </body>
 </html>
