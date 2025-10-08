@@ -1,64 +1,223 @@
 {% extends "base.html" %}
 
-{% block title %}Numerologist Platform{% endblock %}
+{% block title %}Numerologist — Under construction{% endblock %}
 
 {% block content %}
-<section class="stack">
-  <header class="page-header">
-    <p class="meta">Numerologist</p>
-    <h1>Everything you need to onboard clients and deliver magical reports</h1>
-    <p class="lead">
-      Intake new clients, calculate their core numbers instantly, and manage evergreen content using Wagtail’s editor-friendly CMS.
-    </p>
-    <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-      <a class="btn-primary" href="/intake/">Launch intake form</a>
-      <a class="btn-secondary" href="/cms/">Open the CMS</a>
-    </div>
-  </header>
+<section class="landing" aria-labelledby="under-construction-title">
+  <div class="landing__grid">
+    <article class="card landing__hero">
+      <p class="badge">🚧 Under construction</p>
+      <h1 id="under-construction-title" class="hero-title">Numerologist is evolving</h1>
+      <p class="lead">
+        We&rsquo;re crafting a focused numerology workspace that fuses deep calculations, collaborative workflows, and AI-assisted
+        insights. The full launch is coming soon.
+      </p>
+      <p class="tagline">Will be made with Codex and Python for Åse, by Setaei.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#lite-calculator">Preview lite calculator</a>
+        <a class="btn-secondary" href="https://github.com/XS227/Numerologist" target="_blank" rel="noopener">Follow on GitHub</a>
+      </div>
+      <dl class="milestones">
+        <div class="milestone">
+          <div class="milestone-header">
+            <dt>Numerology engine</dt>
+            <dd>QA &amp; automation</dd>
+          </div>
+          <div class="progress-bar" role="img" aria-label="Numerology engine 75% complete"><span style="width: 75%"></span></div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-header">
+            <dt>Client workspace</dt>
+            <dd>Design iteration</dd>
+          </div>
+          <div class="progress-bar" role="img" aria-label="Client workspace 55% complete"><span style="width: 55%"></span></div>
+        </div>
+        <div class="milestone">
+          <div class="milestone-header">
+            <dt>Learning hub</dt>
+            <dd>Content assembly</dd>
+          </div>
+          <div class="progress-bar" role="img" aria-label="Learning hub 40% complete"><span style="width: 40%"></span></div>
+        </div>
+      </dl>
+    </article>
 
-  <section class="card stack">
-    <h2>Workflow highlights</h2>
-    <div class="grid">
-      {% for feature in features %}
-      <article class="stat">
-        <h3>{{ feature.title }}</h3>
-        <p>{{ feature.description }}</p>
-        <p><a href="{{ feature.href }}">Explore →</a></p>
-      </article>
-      {% endfor %}
-    </div>
-  </section>
+    <article class="card stack section-card" aria-labelledby="ase-engine-title">
+      <h2 id="ase-engine-title" class="heading-reset">Numerology engine (Åse Steinsland method)</h2>
+      <p class="lead">
+        The Numerologist engine is rooted in Åse Steinsland&rsquo;s Scandinavian numerology framework, where letters carry
+        distinct vibrations and energetic stories.
+      </p>
+      <blockquote>
+        <p>&ldquo;Every letter holds vibration &mdash; every vibration holds a story.&rdquo;</p>
+        <cite>&mdash; Åse Steinsland</cite>
+      </blockquote>
+      <section class="stack stack-tight" aria-labelledby="setaei-implementation-title">
+        <h3 id="setaei-implementation-title" class="heading-reset">The Setaei implementation</h3>
+        <p class="meta heading-reset">
+          Our AI layer translates Åse&rsquo;s symbolic, linguistic, and energetic balance into a modern Python application,
+          keeping the system interactive, teachable, and ready for expansion.
+        </p>
+      </section>
+      <section class="stack stack-tight" aria-labelledby="core-formula-title">
+        <h3 id="core-formula-title" class="heading-reset">Core formula</h3>
+        <ul class="feature-list">
+          <li>Each letter is mapped to Åse&rsquo;s numeric table to preserve the intended vibration.</li>
+          <li>Vowels and consonants are evaluated separately to honour soul and personality dimensions.</li>
+          <li>Totals reduce to a single digit unless the vibration is a master number (11, 22, 33).</li>
+          <li>Context&mdash;including name, birth data, and cultural cues&mdash;modulates the interpretive weight.</li>
+        </ul>
+      </section>
+      <section class="stack stack-tight" aria-labelledby="technical-overview-title">
+        <h3 id="technical-overview-title" class="heading-reset">Technical overview</h3>
+        <table class="info-table">
+          <thead>
+            <tr>
+              <th scope="col">Component</th>
+              <th scope="col">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Engine base</td>
+              <td>Python 3.11 core with modular numerology services.</td>
+            </tr>
+            <tr>
+              <td>Calculation model</td>
+              <td>Åse Steinsland&rsquo;s Nordic mapping of letters and vibrations.</td>
+            </tr>
+            <tr>
+              <td>AI layer</td>
+              <td>Text generation that reflects the calculated vibrations.</td>
+            </tr>
+            <tr>
+              <td>API</td>
+              <td>JSON-first endpoints for integrating with web experiences.</td>
+            </tr>
+            <tr>
+              <td>Data storage</td>
+              <td>SQLite or PostgreSQL with caching for high-volume lookups.</td>
+            </tr>
+            <tr>
+              <td>Language support</td>
+              <td>English, Norsk, and Persian (in development).</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="stack stack-tight" aria-labelledby="example-title">
+        <h3 id="example-title" class="heading-reset">Example</h3>
+        <pre><code>from numerologist.engine import calculate_profile
 
-  <section class="card stack">
-    <h2>What’s inside the intake profile?</h2>
-    <table class="summary">
-      <tbody>
-        <tr>
-          <th scope="row">Life path</th>
-          <td>The big-picture mission based on the birth date.</td>
-        </tr>
-        <tr>
-          <th scope="row">Expression</th>
-          <td>Natural talents pulled from the full birth name.</td>
-        </tr>
-        <tr>
-          <th scope="row">Soul urge</th>
-          <td>Inner motivations revealed by vowels.</td>
-        </tr>
-        <tr>
-          <th scope="row">Personality</th>
-          <td>First impressions shaped by consonants.</td>
-        </tr>
-        <tr>
-          <th scope="row">Birth day</th>
-          <td>Daily gifts and energetic signature.</td>
-        </tr>
-        <tr>
-          <th scope="row">Maturity</th>
-          <td>Later-life synthesis of the life path and expression numbers.</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+profile = calculate_profile(name="Setaei", birth_date="1989-06-25")
+print(profile.summary)
+
+{
+  "name_vibration": 3,
+  "soul_number": 6,
+  "personality_number": 7,
+  "master_influence": null,
+  "summary": "Creative and analytical — combines heart and intellect through service."
+}</code></pre>
+      </section>
+    </article>
+
+    <article id="lite-calculator" class="card landing__calculator" aria-labelledby="lite-calculator-title">
+      <header>
+        <h2 id="lite-calculator-title" class="heading-reset">Preview the lite calculator</h2>
+        <p class="meta heading-reset">
+          Enter your birth name and date to sample three of the numbers that will power the full Numerologist experience.
+        </p>
+        <div class="announcement" role="status" aria-live="polite">
+          This demo is for inspiration only &mdash; final accuracy and expanded reports arrive at launch.
+        </div>
+      </header>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {% if form.errors %}
+        <div class="alert alert-error" role="status" aria-live="polite">
+          Please review the highlighted fields and try again.
+        </div>
+        {% endif %}
+        <div class="grid lite-calculator__fields">
+          <div class="form-field">
+            {{ form.full_name.label_tag }}
+            {{ form.full_name }}
+            {% if form.full_name.help_text %}<p class="hint">{{ form.full_name.help_text }}</p>{% endif %}
+            {% if form.full_name.errors %}
+            <ul class="errors">{% for error in form.full_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+          </div>
+          <div class="form-field">
+            {{ form.birth_date.label_tag }}
+            {{ form.birth_date }}
+            {% if form.birth_date.help_text %}<p class="hint">{{ form.birth_date.help_text }}</p>{% endif %}
+            {% if form.birth_date.errors %}
+            <ul class="errors">{% for error in form.birth_date.errors %}<li>{{ error }}</li>{% endfor %}</ul>
+            {% endif %}
+          </div>
+        </div>
+        <button type="submit" class="btn-primary">Calculate</button>
+        {% if result %}
+        <div class="card stack lite-calculator__results" role="status" aria-live="polite">
+          <h3 class="heading-reset">Your numbers</h3>
+          <div class="lite-calculator__stats">
+            <div class="lite-calculator__stat">
+              <p class="meta heading-reset">Life Path</p>
+              <p class="stat-number heading-reset">{{ result.life_path }}</p>
+              <p class="hint heading-reset">Reveals purpose and season of growth.</p>
+            </div>
+            <div class="lite-calculator__stat">
+              <p class="meta heading-reset">Expression</p>
+              <p class="stat-number heading-reset">{{ result.expression }}</p>
+              <p class="hint heading-reset">Highlights skills you lead with.</p>
+            </div>
+            <div class="lite-calculator__stat">
+              <p class="meta heading-reset">Soul Urge</p>
+              <p class="stat-number heading-reset">{{ result.soul_urge }}</p>
+              <p class="hint heading-reset">Captures inner motivations.</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </form>
+    </article>
+
+    <article class="card stack section-card" aria-labelledby="roadmap-title">
+      <h2 id="roadmap-title" class="heading-reset">What&rsquo;s landing next</h2>
+      <ol class="roadmap">
+        <li>
+          <span class="roadmap__title">Guided intake journeys</span>
+          <p class="meta heading-reset">Dynamic forms that adapt to client goals and archive their responses automatically.</p>
+        </li>
+        <li>
+          <span class="roadmap__title">Automated report studio</span>
+          <p class="meta heading-reset">Generate share-ready numerology narratives with templates tuned by our practitioners.</p>
+        </li>
+        <li>
+          <span class="roadmap__title">Studio analytics</span>
+          <p class="meta heading-reset">Track client progress, session cadence, and master numbers from a unified dashboard.</p>
+        </li>
+      </ol>
+    </article>
+
+    <article class="card stack section-card" aria-labelledby="insight-title">
+      <h2 id="insight-title" class="heading-reset">Three numbers, countless insights</h2>
+      <div class="insight-grid">
+        <div class="insight">
+          <strong>Life Path</strong>
+          <p class="meta heading-reset">Your navigational star. It maps the rhythm, lessons, and allies you meet along the way.</p>
+        </div>
+        <div class="insight">
+          <strong>Expression</strong>
+          <p class="meta heading-reset">How the world experiences your gifts &mdash; the craft, leadership, and voice you offer.</p>
+        </div>
+        <div class="insight">
+          <strong>Soul Urge</strong>
+          <p class="meta heading-reset">The inner pull that keeps you aligned. It whispers the motivations that fuel every decision.</p>
+        </div>
+      </div>
+    </article>
+  </div>
 </section>
 {% endblock %}

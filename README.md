@@ -65,3 +65,9 @@ python -m venv venv
 source venv/bin/activate  # or venv\Scripts\activate on Windows
 pip install -r requirements.txt
 ```
+
+If you see `ModuleNotFoundError: No module named 'django'` when running management
+commands, double-check that the dependency installation finished successfully.
+Corporate or sandboxed environments may block outbound PyPI traffic; in that
+case download the wheels from a networked machine and install them via
+`pip install --no-index --find-links <wheel-directory> -r requirements.txt`.

@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-change-me")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-_default_allowed = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "*").split(",") if host.strip()]
+_default_allowed = [host.strip() for host in os.getenv("ALLOWED_HOSTS", "").split(",") if host.strip()]
 ALLOWED_HOSTS = [
     "numerologist.setaei.com",
     "localhost",
