@@ -5,6 +5,8 @@ import os
 from pathlib import Path
 from urllib.parse import urlparse
 
+from django.utils.translation import gettext_lazy as _
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-change-me")
@@ -122,8 +124,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en"
 LANGUAGES = [
-    ("en", "English"),
-    ("fa", "Persian"),
+    ("en", _("English")),
+    ("nb", _("Norwegian Bokmål")),
+    ("fa", _("Persian")),
 ]
 LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = "UTC"

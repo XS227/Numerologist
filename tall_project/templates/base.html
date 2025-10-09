@@ -105,31 +105,46 @@
         align-items: center;
         gap: 1rem;
       }
-      .language-switcher {
+      .language-toggle {
         display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.95rem;
-      }
-      .language-switcher select,
-      .language-switcher button {
+        align-items: stretch;
         border: 1px solid var(--border);
-        background: var(--surface);
-        color: inherit;
-        padding: 0.35rem 0.75rem;
-      }
-      .language-switcher button {
-        cursor: pointer;
         border-radius: 999px;
+        background: var(--surface);
+        overflow: hidden;
+        font-size: 0.9rem;
       }
-      .language-switcher select {
-        border-radius: 0.5rem;
+      .language-toggle form {
+        margin: 0;
+        display: flex;
+      }
+      .language-toggle button {
+        appearance: none;
+        border: none;
+        background: transparent;
+        color: inherit;
+        padding: 0.4rem 0.85rem;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+      .language-toggle form + form button {
+        border-inline-start: 1px solid var(--border);
+      }
+      .language-toggle button:is(:focus-visible, :hover) {
+        background: rgba(90, 49, 244, 0.12);
+      }
+      .language-toggle button.is-active {
+        background: var(--accent);
+        color: #fff;
       }
       main {
         flex: 1;
         padding: 2.5rem 0 3rem;
       }
-      footer p {
+      footer .footer-copy {
+        display: grid;
+        gap: 0.25rem;
         margin: 0;
         font-size: 0.9rem;
         text-align: center;
@@ -219,21 +234,24 @@
               <li><a href="/cms/" rel="noreferrer" target="_blank">{% trans "CMS" %}</a></li>
             </ul>
           </nav>
-          <form class="language-switcher" action="{% url 'set_language' %}" method="post">
-            {% csrf_token %}
-            <label for="language-select">{% trans "Language" %}</label>
-            <select id="language-select" name="language">
-              {% get_available_languages as languages %}
-              {% get_language_info_list for languages as languages_info %}
-              {% for language in languages_info %}
-                <option value="{{ language.code }}" {% if language.code == CURRENT_LANGUAGE %}selected{% endif %}>
-                  {{ language.name_local }}
-                </option>
-              {% endfor %}
-            </select>
-            <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-            <button type="submit">{% trans "Apply" %}</button>
-          </form>
+          <div class="language-toggle" role="group" aria-label="{% trans 'Switch language' %}">
+            {% get_available_languages as languages %}
+            {% get_language_info_list for languages as languages_info %}
+            {% for language in languages_info %}
+              <form action="{% url 'set_language' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="language" value="{{ language.code }}" />
+                <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+                <button
+                  type="submit"
+                  class="language-toggle__btn{% if language.code == CURRENT_LANGUAGE %} is-active{% endif %}"
+                  {% if language.code == CURRENT_LANGUAGE %}aria-pressed="true"{% endif %}
+                >
+                  {{ language.code|upper }}
+                </button>
+              </form>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </header>
@@ -244,7 +262,10 @@
     </main>
     <footer>
       <div class="container">
-        <p>&copy; {% now "Y" %} Numerologist. {% trans "All rights reserved." %}</p>
+        <p class="footer-copy">
+          &copy; {% now "Y" %} Setaei Intelligence. {% trans "Developed in collaboration with numerologist Åse Steinsland using her calculation method — implemented with Python, Codex, and Git." %}
+          <span>{% trans "All rights reserved." %}</span>
+        </p>
       </div>
     </footer>
   </body>
