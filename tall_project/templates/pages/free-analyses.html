@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Explore sample readings and downloadable exercises that showcase Åse's methodology. These resources offer a taste of
+    the full consultations and help you decide which service fits best.
+    {% endblocktrans %}
+  </p>
+  <ul>
+    <li>{% blocktrans %}Mini birth chart walkthroughs with commentary.{% endblocktrans %}</li>
+    <li>{% blocktrans %}Checklists for preparing questions before a session.{% endblocktrans %}</li>
+  </ul>
+</article>
+{% endblock %}

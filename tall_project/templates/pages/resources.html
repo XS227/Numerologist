@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Access Åse's growing library of self-study materials, articles, and media appearances. Everything here is curated to
+    support your numerology practice between private sessions.
+    {% endblocktrans %}
+  </p>
+  <section aria-labelledby="resources-topics">
+    <h2 id="resources-topics">{% trans "Dive in" %}</h2>
+    <ul>
+      <li><a href="{% url 'static_page' 'free-analyses' %}">{% trans "Free Analyses" %}</a></li>
+      <li><a href="{% url 'static_page' 'blog-articles' %}">{% trans "Blog / Articles" %}</a></li>
+      <li><a href="{% url 'static_page' 'references' %}">{% trans "References" %}</a></li>
+      <li><a href="{% url 'static_page' 'numerologist-in-media' %}">{% trans "Numerologist in the Media" %}</a></li>
+    </ul>
+  </section>
+</article>
+{% endblock %}

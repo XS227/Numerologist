@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Discover the difference between vowel, consonant, and total name vibrations. Åse explains how each element reveals a
+    facet of your inner drive, outward expression, and everyday motivation.
+    {% endblocktrans %}
+  </p>
+  <ul>
+    <li>{% blocktrans %}Learn how to split a name and manage double letters.{% endblocktrans %}</li>
+    <li>{% blocktrans %}Compare the final numbers to your destiny and life-path insights.{% endblocktrans %}</li>
+  </ul>
+</article>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Ready to apply the theory to your own life? The Personal Insights hub gathers every calculator and interpretive guide
+    that helps Åse's clients navigate relationships, careers, and spiritual development.
+    {% endblocktrans %}
+  </p>
+  <section aria-labelledby="insights-topics">
+    <h2 id="insights-topics">{% trans "Featured explorations" %}</h2>
+    <ul>
+      <li><a href="{% url 'static_page' 'compute-destiny-number' %}">{% trans "Compute Your Destiny Number" %}</a></li>
+      <li><a href="{% url 'static_page' 'compute-name-vowel-consonant' %}">{% trans "Compute Name, Vowel & Consonant Numbers" %}</a></li>
+      <li><a href="{% url 'static_page' 'lifes-fourth-stage' %}">{% trans "Life's 4th Development Stage" %}</a></li>
+      <li><a href="{% url 'static_page' 'realization-number' %}">{% trans "Realization Number — Your Ultimate Aim" %}</a></li>
+      <li><a href="{% url 'static_page' 'pythagoras-arrows' %}">{% trans "Pythagoras' Arrows" %}</a></li>
+      <li><a href="{% url 'static_page' 'same-number-meaning' %}">{% trans "Do You See the Same Number?" %}</a></li>
+    </ul>
+  </section>
+</article>
+{% endblock %}

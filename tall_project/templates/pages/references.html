@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    A curated bibliography of books, teachers, and research that informs Åse's practice. Use it to dive deeper into
+    numerology or to source materials for your own study group.
+    {% endblocktrans %}
+  </p>
+</article>
+{% endblock %}

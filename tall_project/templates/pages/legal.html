@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Transparency matters. This hub gathers the policies that protect your privacy, explain our terms of service, and outline
+    how Numerologist handles data in compliance with Norwegian and EU regulations.
+    {% endblocktrans %}
+  </p>
+  <section aria-labelledby="legal-links">
+    <h2 id="legal-links">{% trans "Policies" %}</h2>
+    <ul>
+      <li><a href="{% url 'static_page' 'terms-conditions' %}">{% trans "Terms & Conditions" %}</a></li>
+      <li><a href="{% url 'static_page' 'privacy-policy' %}">{% trans "Privacy Policy" %}</a></li>
+    </ul>
+  </section>
+</article>
+{% endblock %}

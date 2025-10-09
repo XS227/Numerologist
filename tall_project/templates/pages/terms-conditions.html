@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Review the agreement that applies when you book a session with Åse. It covers payment terms, cancellations, client
+    responsibilities, and how guidance should be integrated alongside professional advice.
+    {% endblocktrans %}
+  </p>
+</article>
+{% endblock %}

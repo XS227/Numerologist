@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Repeating numbers feel like nudges from the universe. Åse shares a quick reference guide for triple digits, mirror
+    hours, and other sequences so you can decode the messages on the go.
+    {% endblocktrans %}
+  </p>
+</article>
+{% endblock %}

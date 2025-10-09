@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Convert any name into numbers using Åse's preferred alphabet chart. We include guidance for Norwegian letters, common
+    variations, and practical tips for translating nicknames or company names.
+    {% endblocktrans %}
+  </p>
+  <p>{% blocktrans %}Download a printable version and keep it beside you as you explore the calculators.{% endblocktrans %}</p>
+</article>
+{% endblock %}

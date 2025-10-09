@@ -1,5 +1,8 @@
+{% load i18n %}
+{% get_current_language as CURRENT_LANGUAGE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ CURRENT_LANGUAGE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -62,6 +65,66 @@
         gap: 1.25rem;
         font-weight: 600;
       }
+      .main-nav > ul {
+        gap: 1.75rem;
+      }
+      .main-nav li {
+        position: relative;
+      }
+      .main-nav li > ul {
+        display: none;
+        position: absolute;
+        top: calc(100% + 0.75rem);
+        inset-inline-start: 0;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 0.75rem;
+        padding: 0.75rem;
+        min-width: 16rem;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
+        flex-direction: column;
+        gap: 0.5rem;
+        z-index: 10;
+      }
+      .main-nav li:focus-within > ul,
+      .main-nav li:hover > ul {
+        display: flex;
+      }
+      .main-nav li > ul a {
+        font-weight: 500;
+        display: block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.5rem;
+      }
+      .main-nav li > ul a:focus,
+      .main-nav li > ul a:hover {
+        background: rgba(90, 49, 244, 0.08);
+      }
+      .site-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .language-switcher {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.95rem;
+      }
+      .language-switcher select,
+      .language-switcher button {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: inherit;
+        padding: 0.35rem 0.75rem;
+      }
+      .language-switcher button {
+        cursor: pointer;
+        border-radius: 999px;
+      }
+      .language-switcher select {
+        border-radius: 0.5rem;
+      }
       main {
         flex: 1;
         padding: 2.5rem 0 3rem;
@@ -78,12 +141,56 @@
         padding: 1.75rem;
         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
       }
+      .prose {
+        display: grid;
+        gap: 1.25rem;
+        line-height: 1.7;
+      }
+      .prose h1,
+      .prose h2,
+      .prose h3 {
+        margin-top: 0;
+      }
+      .prose ul,
+      .prose ol {
+        margin: 0;
+        padding-inline-start: 1.35rem;
+        display: grid;
+        gap: 0.5rem;
+      }
+      [dir="rtl"] .prose ul,
+      [dir="rtl"] .prose ol {
+        padding-inline-start: 0;
+        padding-inline-end: 1.35rem;
+      }
       button {
         font: inherit;
       }
       input,
       button {
         border-radius: 0.5rem;
+      }
+      @media (max-width: 900px) {
+        .main-nav > ul {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.75rem;
+        }
+        .main-nav li > ul {
+          position: static;
+          display: flex;
+          border: none;
+          box-shadow: none;
+          padding: 0.5rem 0 0.25rem;
+          background: transparent;
+        }
+        .main-nav li > ul a {
+          padding-inline-start: 1rem;
+        }
+      }
+      [dir="rtl"] .main-nav li > ul {
+        inset-inline-start: auto;
+        inset-inline-end: 0;
       }
       {% block extra_styles %}{% endblock %}
     </style>
@@ -92,13 +199,42 @@
     <header class="site-header">
       <div class="container site-header__inner">
         <a href="/" class="logo" style="font-weight:700; font-size:1.2rem;">Numerologist</a>
-        <nav aria-label="Site">
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/intake/">Client intake</a></li>
-            <li><a href="/cms/" rel="noreferrer" target="_blank">CMS</a></li>
-          </ul>
-        </nav>
+        <div class="site-actions">
+          <nav class="main-nav" aria-label="{% trans 'Primary' %}">
+            <ul>
+              <li><a href="/">{% trans "Home" %}</a></li>
+              <li><a href="/intake/">{% trans "Client intake" %}</a></li>
+              {% for item in site_navigation %}
+                <li>
+                  <a href="{{ item.url }}">{{ item.title }}</a>
+                  {% if item.children %}
+                    <ul>
+                      {% for child in item.children %}
+                        <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </li>
+              {% endfor %}
+              <li><a href="/cms/" rel="noreferrer" target="_blank">{% trans "CMS" %}</a></li>
+            </ul>
+          </nav>
+          <form class="language-switcher" action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <label for="language-select">{% trans "Language" %}</label>
+            <select id="language-select" name="language">
+              {% get_available_languages as languages %}
+              {% get_language_info_list for languages as languages_info %}
+              {% for language in languages_info %}
+                <option value="{{ language.code }}" {% if language.code == CURRENT_LANGUAGE %}selected{% endif %}>
+                  {{ language.name_local }}
+                </option>
+              {% endfor %}
+            </select>
+            <input type="hidden" name="next" value="{{ request.get_full_path }}" />
+            <button type="submit">{% trans "Apply" %}</button>
+          </form>
+        </div>
       </div>
     </header>
     <main>
@@ -108,7 +244,7 @@
     </main>
     <footer>
       <div class="container">
-        <p>Crafted for Åse by Setaei &mdash; powered by Django.</p>
+        <p>&copy; {% now "Y" %} Numerologist. {% trans "All rights reserved." %}</p>
       </div>
     </footer>
   </body>

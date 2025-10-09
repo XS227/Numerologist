@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Learn the difference between reduction methods, compound totals, and intuitive adjustments. Åse walks you through the
+    formulas she applies when she translates names, dates, and milestones into energetic signatures.
+    {% endblocktrans %}
+  </p>
+  <ol>
+    <li>{% blocktrans %}Step-by-step examples for calculating core numbers.{% endblocktrans %}</li>
+    <li>{% blocktrans %}When to keep master numbers intact and when to reduce further.{% endblocktrans %}</li>
+    <li>{% blocktrans %}How personal years, months, and days build on foundational calculations.{% endblocktrans %}</li>
+  </ol>
+</article>
+{% endblock %}

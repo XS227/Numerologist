@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Find answers to common questions about bookings, cancellations, and the numerology process. If you need personal
+    support, you can reach Åse directly using the contact details provided here.
+    {% endblocktrans %}
+  </p>
+</article>
+{% endblock %}
