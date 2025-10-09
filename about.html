@@ -208,6 +208,7 @@
       .story-grid {
         display: grid;
         gap: 1.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       }
 
       .story-card {
@@ -234,19 +235,22 @@
         font-size: 0.85rem;
       }
 
-      @media (max-width: 720px) {
-        header {
-          padding: 1.25rem 1.5rem 0.75rem;
-        }
-
+      @media (max-width: 900px) {
         .nav-shell {
           flex-direction: column;
           align-items: flex-start;
+          gap: 1rem;
         }
 
         .nav-links {
           flex-wrap: wrap;
           gap: 1rem;
+        }
+      }
+
+      @media (max-width: 720px) {
+        header {
+          padding: 1.25rem 1.5rem 0.75rem;
         }
 
         .nav-dropdown {
@@ -257,6 +261,20 @@
 
         .story-card {
           border-radius: 22px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-links {
+          flex-direction: column;
+          align-items: flex-start;
+          width: 100%;
+        }
+
+        .nav-links a,
+        .nav-links summary,
+        .mode-toggle {
+          width: 100%;
         }
       }
     </style>
@@ -326,6 +344,41 @@
             </p>
           </article>
         </section>
+        <section class="story-grid" aria-label="Numerology foundations">
+          <article class="story-card">
+            <h2>About numerology</h2>
+            <p>
+              Numerology observes how patterns in names, birth dates, and life cycles echo the rhythms of the universe. Åse teaches it as a
+              compassionate language—one that helps people name what is shifting, stabilising, or longing to be heard within their story.
+            </p>
+          </article>
+          <article class="story-card">
+            <h2>More about numbers</h2>
+            <p>
+              Core numbers act like constellations. Life Path reveals the terrain you travel, Expression shows how you contribute, Soul Urge
+              whispers desires, and Personality signals the energy others feel first. Together they paint a layered portrait of growth.
+            </p>
+            <ul style="margin:0; padding-left:1.1rem; color:var(--muted); line-height:1.6;">
+              <li>1, 4, and 8 steady ambition with structure.</li>
+              <li>2, 6, and 9 nurture relationships and collective care.</li>
+              <li>3, 5, and 7 explore creativity, curiosity, and inner wisdom.</li>
+            </ul>
+          </article>
+          <article class="story-card">
+            <h2>Philosophy behind</h2>
+            <p>
+              Our studio trusts both intuition and evidence. Numbers are invitations—not verdicts. We pair Åse's metaphors with transparent
+              methodology so seekers understand how each calculation is made and can choose the practices that resonate most deeply.
+            </p>
+          </article>
+          <article class="story-card">
+            <h2>When and where</h2>
+            <p>
+              Numerologist Studio hosts online circles, seasonal retreats in Norway, and remote mentorships that welcome the global community.
+              Whether someone joins from a quiet morning commute or a classroom gathering, our resources are paced to meet them where they are.
+            </p>
+          </article>
+        </section>
       </div>
     </main>
     <footer>© <span id="year"></span> Numerologist Studio. Guided by Åse Steinsland.</footer>
@@ -354,35 +407,36 @@
       const nightStyles = document.createElement("style");
       nightStyles.textContent = `
         body.night {
-          background: radial-gradient(circle at top right, rgba(69, 48, 107, 0.45), transparent 60%),
-            radial-gradient(circle at bottom left, rgba(255, 138, 61, 0.15), transparent 55%), #1f1b2a;
-          color: #f6f2ff;
+          background: #101322;
+          color: #f4f6ff;
         }
-        body.night .card {
-          background: linear-gradient(150deg, rgba(53, 39, 79, 0.85), rgba(30, 25, 42, 0.95));
-        }
+        body.night .card,
         body.night .story-card {
-          background: rgba(33, 28, 46, 0.92);
-          border-color: rgba(115, 90, 168, 0.4);
+          background: #171b2b;
+          border-color: rgba(92, 105, 210, 0.25);
+          box-shadow: none;
         }
         body.night .nav-links a,
         body.night .nav-links summary,
         body.night .mode-toggle {
-          color: rgba(246, 242, 255, 0.75);
+          color: rgba(244, 246, 255, 0.78);
         }
         body.night .nav-dropdown {
-          background: rgba(30, 25, 42, 0.95);
-          border-color: rgba(115, 90, 168, 0.4);
-          box-shadow: 0px 30px 60px rgba(22, 16, 38, 0.6);
+          background: #1f2336;
+          border-color: rgba(92, 105, 210, 0.25);
+          box-shadow: 0 24px 44px rgba(8, 10, 18, 0.6);
         }
         body.night .nav-dropdown a:hover,
         body.night .nav-dropdown a:focus {
-          background: rgba(255, 138, 61, 0.2);
-          color: #f6f2ff;
+          background: rgba(127, 140, 255, 0.18);
+          color: #f4f6ff;
         }
         body.night .mode-toggle {
-          background: rgba(246, 242, 255, 0.08);
-          border-color: rgba(115, 90, 168, 0.3);
+          background: rgba(127, 140, 255, 0.12);
+          border-color: rgba(92, 105, 210, 0.25);
+        }
+        body.night footer {
+          color: rgba(244, 246, 255, 0.6);
         }
       `;
       document.head.appendChild(nightStyles);
