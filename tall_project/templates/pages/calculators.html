@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Calculator suite" %} · Numerologist{% endblock %}
+
+{% block extra_styles %}
+  <style>
+    .calculator-hero {
+      text-align: center;
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .calculator-hero__pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.45rem 1.5rem;
+      border-radius: 999px;
+      background: rgba(90, 49, 244, 0.08);
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    .calculator-hero h1 {
+      font-size: clamp(2rem, 3.4vw, 2.75rem);
+      margin: 0;
+    }
+    .calculator-hero p {
+      margin: 0 auto;
+      max-width: 60ch;
+      color: rgba(31, 31, 31, 0.7);
+      line-height: 1.7;
+    }
+    .calculator-grid {
+      display: grid;
+      gap: 1.75rem;
+    }
+    .calculator-card {
+      background: linear-gradient(180deg, rgba(90, 49, 244, 0.06) 0%, rgba(90, 49, 244, 0) 60%), var(--surface);
+      border: 1px solid rgba(90, 49, 244, 0.2);
+      border-radius: 1.75rem;
+      padding: 1.75rem;
+      box-shadow: 0 22px 44px rgba(16, 12, 40, 0.08);
+      display: grid;
+      gap: 0.75rem;
+    }
+    .calculator-card h2 {
+      margin: 0;
+      font-size: 1.35rem;
+    }
+    .calculator-card p {
+      margin: 0;
+      color: rgba(31, 31, 31, 0.7);
+    }
+    .calculator-card ul {
+      margin: 0;
+      padding-inline-start: 1.25rem;
+      display: grid;
+      gap: 0.35rem;
+      color: rgba(31, 31, 31, 0.65);
+    }
+    [dir="rtl"] .calculator-card ul {
+      padding-inline-start: 0;
+      padding-inline-end: 1.25rem;
+    }
+    .calculator-cta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .calculator-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 999px;
+      padding: 0.85rem 1.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .calculator-button:hover,
+    .calculator-button:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 32px rgba(90, 49, 244, 0.18);
+      text-decoration: none;
+    }
+    .calculator-button--primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 12px 28px rgba(90, 49, 244, 0.22);
+    }
+    .calculator-button--ghost {
+      background: transparent;
+      border: 1px solid rgba(90, 49, 244, 0.28);
+      color: var(--accent);
+    }
+    @media (min-width: 780px) {
+      .calculator-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 720px) {
+      .calculator-card {
+        border-radius: 1.25rem;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="calculator-hero">
+    <span class="calculator-hero__pill">{% trans "Calculator suite" %}</span>
+    <h1>{% trans "Every numerology calculator at a glance" %}</h1>
+    <p>
+      {% blocktrans %}
+        Explore the individual tools Åse references while preparing a full master analysis. Each calculator can be explored on its
+        own so you can see how the pieces fit together before or after your full session.
+      {% endblocktrans %}
+    </p>
+  </div>
+  <div class="calculator-grid" role="list">
+    <article class="calculator-card" role="listitem">
+      <h2>{% trans "Life Path Number" %}</h2>
+      <p>{% trans "The rhythm of your life lessons revealed through your birth date." %}</p>
+      <ul>
+        <li>{% trans "Breaks your birth date into core digits" %}</li>
+        <li>{% trans "Honours master numbers 11, 22, and 33 during reduction" %}</li>
+        <li>{% trans "Guides the milestones and curriculum of your lifetime" %}</li>
+      </ul>
+    </article>
+    <article class="calculator-card" role="listitem">
+      <h2>{% trans "Expression Number" %}</h2>
+      <p>{% trans "Highlights the talents and gifts encoded within your full name." %}</p>
+      <ul>
+        <li>{% trans "Maps each letter to its Pythagorean value" %}</li>
+        <li>{% trans "Shows how you naturally share your abilities with the world" %}</li>
+        <li>{% trans "Balances what comes easily with where mastery is calling" %}</li>
+      </ul>
+    </article>
+    <article class="calculator-card" role="listitem">
+      <h2>{% trans "Soul Urge Number" %}</h2>
+      <p>{% trans "The whisper of your heart’s deepest desires, drawn from the vowels in your name." %}</p>
+      <ul>
+        <li>{% trans "Connects you with motivations that keep you inspired" %}</li>
+        <li>{% trans "Reveals the emotional current beneath your decisions" %}</li>
+        <li>{% trans "Illuminates the self-care practices that truly nourish" %}</li>
+      </ul>
+    </article>
+    <article class="calculator-card" role="listitem">
+      <h2>{% trans "Personality Number" %}</h2>
+      <p>{% trans "The first impression you offer, measured through the consonants of your name." %}</p>
+      <ul>
+        <li>{% trans "Describes how others initially perceive your energy" %}</li>
+        <li>{% trans "Shows the doorway people walk through to meet you" %}</li>
+        <li>{% trans "Helps refine your presence with deliberate intention" %}</li>
+      </ul>
+    </article>
+    <article class="calculator-card" role="listitem">
+      <h2>{% trans "Compatibility Insight" %}</h2>
+      <p>{% trans "Cross-reference two birth dates to understand shared lessons and harmony." %}</p>
+      <ul>
+        <li>{% trans "Compares combined life path cycles" %}</li>
+        <li>{% trans "Spotlights master number pairings" %}</li>
+        <li>{% trans "Offers prompts for nourishing the relationship" %}</li>
+      </ul>
+    </article>
+    <article class="calculator-card" role="listitem">
+      <h2>{% trans "Personal Year Forecast" %}</h2>
+      <p>{% trans "Discover the focus of the year you’re currently walking through." %}</p>
+      <ul>
+        <li>{% trans "Calculates your yearly vibration from your birth date" %}</li>
+        <li>{% trans "Places it in context with your overarching life path" %}</li>
+        <li>{% trans "Invites rituals to partner with the year’s momentum" %}</li>
+      </ul>
+    </article>
+  </div>
+  <div class="calculator-cta">
+    <a class="calculator-button calculator-button--primary" href="/">{% trans "Return to intake" %}</a>
+    <a class="calculator-button calculator-button--ghost" href="#top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">{% trans "Back to top" %}</a>
+  </div>
+{% endblock %}

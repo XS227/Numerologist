@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Åse teaches a four-stage development model inspired by Nordic numerology. The fourth stage marks a synthesis of every
+    lesson learned earlier in life. Explore how to calculate when it begins and what themes typically emerge.
+    {% endblocktrans %}
+  </p>
+  <p>{% blocktrans %}Use the journal prompts to reflect on the opportunities, mentors, and inner work available in this phase.{% endblocktrans %}</p>
+</article>
+{% endblock %}

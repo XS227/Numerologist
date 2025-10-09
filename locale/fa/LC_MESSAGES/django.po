@@ -1,0 +1,413 @@
+# Persian translations for Numerologist
+msgid ""
+msgstr ""
+"Project-Id-Version: Numerologist\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-09 03:13+0000\n"
+"PO-Revision-Date: 2025-10-09 00:00+0000\n"
+"Last-Translator: ChatGPT <>\n"
+"Language-Team: Persian\n"
+"Language: fa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: tall_project/navigation.py:32 tall_project/navigation.py:103
+msgid "Discover Numerology"
+msgstr "کشف علم اعداد"
+
+#: tall_project/navigation.py:33 tall_project/navigation.py:105
+#: tall_project/templates/pages/discover-numerology.html:25
+msgid "Pythagoras' Legacy"
+msgstr "میراث فیثاغورس"
+
+#: tall_project/navigation.py:36 tall_project/navigation.py:106
+#: tall_project/templates/pages/discover-numerology.html:26
+msgid "General Interpretation of Numbers"
+msgstr "تفسیر کلی اعداد"
+
+#: tall_project/navigation.py:41 tall_project/navigation.py:107
+#: tall_project/templates/pages/discover-numerology.html:27
+msgid "Calculation Methods Overview"
+msgstr "مروری بر روش‌های محاسبه"
+
+#: tall_project/navigation.py:46 tall_project/navigation.py:108
+#: tall_project/templates/pages/discover-numerology.html:28
+msgid "Letter Value Chart"
+msgstr "جدول ارزش حروف"
+
+#: tall_project/navigation.py:49 tall_project/navigation.py:113
+msgid "Personal Insights"
+msgstr "بینش‌های فردی"
+
+#: tall_project/navigation.py:52 tall_project/navigation.py:115
+#: tall_project/templates/pages/personal-insights.html:18
+msgid "Compute Your Destiny Number"
+msgstr "محاسبه عدد سرنوشت"
+
+#: tall_project/navigation.py:57 tall_project/navigation.py:116
+#: tall_project/templates/pages/personal-insights.html:19
+msgid "Compute Name, Vowel & Consonant Numbers"
+msgstr "محاسبه اعداد نام، حروف صدادار و بی‌صدا"
+
+#: tall_project/navigation.py:62 tall_project/navigation.py:117
+#: tall_project/templates/pages/personal-insights.html:20
+msgid "Life's 4th Development Stage"
+msgstr "مرحله چهارم رشد زندگی"
+
+#: tall_project/navigation.py:67 tall_project/navigation.py:118
+#: tall_project/templates/pages/personal-insights.html:21
+msgid "Realization Number — Your Ultimate Aim"
+msgstr "عدد تحقق — هدف غایی شما"
+
+#: tall_project/navigation.py:72 tall_project/navigation.py:119
+#: tall_project/templates/pages/personal-insights.html:22
+msgid "Pythagoras' Arrows"
+msgstr "فلش‌های فیثاغورس"
+
+#: tall_project/navigation.py:77 tall_project/navigation.py:120
+#: tall_project/templates/pages/personal-insights.html:23
+msgid "Do You See the Same Number?"
+msgstr "آیا همان عدد را می‌بینید؟"
+
+#: tall_project/navigation.py:80 tall_project/navigation.py:125
+msgid "Resources"
+msgstr "منابع"
+
+#: tall_project/navigation.py:81 tall_project/navigation.py:127
+#: tall_project/templates/pages/resources.html:18
+msgid "Free Analyses"
+msgstr "تحلیل‌های رایگان"
+
+#: tall_project/navigation.py:82 tall_project/navigation.py:128
+#: tall_project/templates/pages/resources.html:19
+msgid "Blog / Articles"
+msgstr "بلاگ / مقالات"
+
+#: tall_project/navigation.py:83 tall_project/navigation.py:129
+#: tall_project/templates/pages/resources.html:20
+msgid "References"
+msgstr "مراجع"
+
+#: tall_project/navigation.py:86 tall_project/navigation.py:130
+#: tall_project/templates/pages/resources.html:21
+msgid "Numerologist in the Media"
+msgstr "عددشناس در رسانه"
+
+#: tall_project/navigation.py:89 tall_project/navigation.py:135
+msgid "Guidance & Support"
+msgstr "راهنمایی و پشتیبانی"
+
+#: tall_project/navigation.py:90 tall_project/navigation.py:137
+#: tall_project/templates/pages/guidance-support.html:18
+msgid "About the Firm"
+msgstr "درباره مؤسسه"
+
+#: tall_project/navigation.py:91 tall_project/navigation.py:138
+#: tall_project/templates/pages/guidance-support.html:19
+msgid "Telephone Guidance"
+msgstr "راهنمایی تلفنی"
+
+#: tall_project/navigation.py:92 tall_project/navigation.py:139
+#: tall_project/templates/pages/guidance-support.html:20
+msgid "Contact / Q&A"
+msgstr "تماس / پرسش و پاسخ"
+
+#: tall_project/navigation.py:93 tall_project/navigation.py:144
+msgid "Legal"
+msgstr "مسائل حقوقی"
+
+#: tall_project/navigation.py:94 tall_project/navigation.py:146
+#: tall_project/templates/pages/legal.html:18
+msgid "Terms & Conditions"
+msgstr "شرایط و ضوابط"
+
+#: tall_project/navigation.py:95 tall_project/navigation.py:147
+#: tall_project/templates/pages/legal.html:19
+msgid "Privacy Policy"
+msgstr "سیاست حفظ حریم خصوصی"
+
+#: tall_project/templates/base.html:203
+msgid "Primary"
+msgstr "اصلی"
+
+#: tall_project/templates/base.html:205
+msgid "Home"
+msgstr "خانه"
+
+#: tall_project/templates/base.html:206
+msgid "Client intake"
+msgstr "فرم پذیرش مشتری"
+
+#: tall_project/templates/base.html:219
+msgid "CMS"
+msgstr "مدیریت محتوا"
+
+#: tall_project/templates/base.html:224
+msgid "Language"
+msgstr "زبان"
+
+#: tall_project/templates/base.html:234
+msgid "Apply"
+msgstr "اعمال"
+
+#: tall_project/templates/base.html:246
+msgid "All rights reserved."
+msgstr "کلیه حقوق محفوظ است."
+
+#: tall_project/templates/pages/about-the-firm.html:10
+msgid "Learn about Åse's background, credentials, and the ethos that guides Numerologist. From her early studies in Norway to decades of client work, this page honours the path that shaped her approach."
+msgstr "با پیشینه، مدارک و رویکرد اخلاقی آسه که الهام‌بخش Numerologist است آشنا شوید. از سال‌های نخستین تحصیل در نروژ تا دهه‌ها کار با مراجعان، این صفحه مسیر شکل‌گیری روش او را روایت می‌کند."
+
+#: tall_project/templates/pages/blog-articles.html:10
+msgid "Browse essays, seasonal forecasts, and interviews from Åse's journal. Each article blends storytelling with practical numerology tips you can apply immediately."
+msgstr "مقالات، پیش‌بینی‌های فصلی و گفت‌وگوهای دفترچه آسه را مرور کنید. هر مطلب آمیزه‌ای از داستان‌گویی و نکته‌های کاربردی علم اعداد است که بلافاصله می‌توانید به کار ببندید."
+
+#: tall_project/templates/pages/calculation-methods-overview.html:10
+msgid "Learn the difference between reduction methods, compound totals, and intuitive adjustments. Åse walks you through the formulas she applies when she translates names, dates, and milestones into energetic signatures."
+msgstr "با تفاوت روش‌های کاهش، جمع‌های مرکب و تنظیمات شهودی آشنا شوید. آسه فرمول‌هایی را که هنگام تبدیل نام‌ها، تاریخ‌ها و رویدادها به امضاهای انرژی به کار می‌برد قدم‌به‌قدم توضیح می‌دهد."
+
+#: tall_project/templates/pages/calculation-methods-overview.html:16
+msgid "Step-by-step examples for calculating core numbers."
+msgstr "نمونه‌های مرحله‌به‌مرحله برای محاسبه اعداد اصلی."
+
+#: tall_project/templates/pages/calculation-methods-overview.html:17
+msgid "When to keep master numbers intact and when to reduce further."
+msgstr "زمان حفظ اعداد استادانه و زمان ادامه کاهش آنها."
+
+#: tall_project/templates/pages/calculation-methods-overview.html:18
+msgid "How personal years, months, and days build on foundational calculations."
+msgstr "چگونگی شکل‌گیری سال‌ها، ماه‌ها و روزهای شخصی بر پایه محاسبات بنیادی."
+
+#: tall_project/templates/pages/compute-destiny-number.html:10
+msgid "Follow Åse's step-by-step process to calculate the destiny number from your full birth name. We cover the reduction process, common edge cases, and how to interpret the final vibration."
+msgstr "فرآیند گام‌به‌گام آسه را برای محاسبه عدد سرنوشت از نام کامل شناسنامه‌ای دنبال کنید. روند کاهش، حالت‌های خاص متداول و شیوه تفسیر ارتعاش نهایی توضیح داده شده است."
+
+#: tall_project/templates/pages/compute-destiny-number.html:15
+msgid "A downloadable worksheet is included so you can repeat the calculation with clients or loved ones."
+msgstr "یک برگه کار قابل دانلود همراه شماست تا بتوانید این محاسبه را برای مراجعان یا عزیزان تکرار کنید."
+
+#: tall_project/templates/pages/compute-name-vowel-consonant.html:10
+msgid "Discover the difference between vowel, consonant, and total name vibrations. Åse explains how each element reveals a facet of your inner drive, outward expression, and everyday motivation."
+msgstr "با تفاوت ارتعاش حروف صدادار، بی‌صدا و مجموع نام آشنا شوید. آسه توضیح می‌دهد که هر بخش چگونه جنبه‌ای از انگیزه درونی، بیان بیرونی و محرک روزانه شما را آشکار می‌کند."
+
+#: tall_project/templates/pages/compute-name-vowel-consonant.html:16
+msgid "Learn how to split a name and manage double letters."
+msgstr "یاد بگیرید چگونه نام را تفکیک و حروف تکراری را مدیریت کنید."
+
+#: tall_project/templates/pages/compute-name-vowel-consonant.html:17
+msgid "Compare the final numbers to your destiny and life-path insights."
+msgstr "اعداد نهایی را با بینش‌های عدد سرنوشت و مسیر زندگی خود مقایسه کنید."
+
+#: tall_project/templates/pages/contact-qa.html:10
+msgid "Find answers to common questions about bookings, cancellations, and the numerology process. If you need personal support, you can reach Åse directly using the contact details provided here."
+msgstr "پاسخ پرسش‌های رایج درباره رزرو، لغو و روند علم اعداد را بیابید. در صورت نیاز به همراهی شخصی، می‌توانید از طریق اطلاعات تماس درج شده مستقیماً با آسه ارتباط بگیرید."
+
+#: tall_project/templates/pages/discover-numerology.html:10
+msgid "Numerology is the language Åse uses to translate numbers into stories about timing, purpose, and potential. In this section you will meet the philosophical roots of her method and learn how each calculation is grounded in Pythagorean thought and contemporary practice."
+msgstr "علم اعداد زبانی است که آسه با آن اعداد را به داستان‌هایی درباره زمان‌بندی، رسالت و ظرفیت تبدیل می‌کند. در این بخش با ریشه‌های فلسفی روش او آشنا می‌شوید و می‌آموزید هر محاسبه چگونه بر اندیشه فیثاغورثی و تمرین معاصر تکیه دارد."
+
+#: tall_project/templates/pages/discover-numerology.html:17
+msgid "Start here if you want an overview of why numerology matters, how Åse interprets each digit, and the reference charts that sit behind your personalised readings."
+msgstr "اگر می‌خواهید بدانید چرا علم اعداد اهمیت دارد، آسه هر رقم را چگونه تفسیر می‌کند و چه جداول مرجعی پشت گزارش‌های شخصی‌سازی‌شده شماست، از اینجا آغاز کنید."
+
+#: tall_project/templates/pages/discover-numerology.html:23
+msgid "Key topics"
+msgstr "موضوعات کلیدی"
+
+#: tall_project/templates/pages/free-analyses.html:10
+msgid "Explore sample readings and downloadable exercises that showcase Åse's methodology. These resources offer a taste of the full consultations and help you decide which service fits best."
+msgstr "نمونه گزارش‌ها و تمرین‌های قابل دانلودی را بررسی کنید که روش آسه را نشان می‌دهند. این منابع طعم جلسات کامل را ارائه می‌دهند و به شما کمک می‌کنند مناسب‌ترین خدمت را انتخاب کنید."
+
+#: tall_project/templates/pages/free-analyses.html:16
+msgid "Mini birth chart walkthroughs with commentary."
+msgstr "نمونه‌خوانی‌های کوتاه نقشه تولد همراه با توضیحات."
+
+#: tall_project/templates/pages/free-analyses.html:17
+msgid "Checklists for preparing questions before a session."
+msgstr "فهرست‌های آماده‌سازی پرسش‌ها پیش از جلسه."
+
+#: tall_project/templates/pages/general-interpretation.html:10
+msgid "Every number carries a personality. Here Åse summarises the qualities, challenges, and growth opportunities linked to digits one through nine, along with master numbers eleven, twenty-two, and thirty-three."
+msgstr "هر عدد شخصیتی ویژه دارد. آسه در اینجا ویژگی‌ها، چالش‌ها و فرصت‌های رشد اعداد یک تا نه و همچنین اعداد استادانه یازده، بیست‌ودو و سی‌وسه را جمع‌بندی می‌کند."
+
+#: tall_project/templates/pages/general-interpretation.html:15
+msgid "Use this guide as a companion when you receive your charts or practice interpreting numbers for friends."
+msgstr "این راهنما را هنگام دریافت نمودارهای خود یا تمرین تفسیر اعداد برای دوستان همراهتان داشته باشید."
+
+#: tall_project/templates/pages/guidance-support.html:10
+msgid "Åse's practice is rooted in compassionate guidance. Discover how to work with her, what to expect before a call, and the support systems she offers between sessions."
+msgstr "کار آسه بر پایه راهنمایی دلسوزانه استوار است. بیاموزید چگونه با او همکاری کنید، پیش از تماس چه انتظاری داشته باشید و چه حمایت‌هایی میان جلسات ارائه می‌دهد."
+
+#: tall_project/templates/pages/guidance-support.html:16
+msgid "Stay supported"
+msgstr "در همراهی بمانید"
+
+#: tall_project/templates/pages/home.html:4
+msgid "Coming soon"
+msgstr "به‌زودی"
+
+#: tall_project/templates/pages/home.html:114
+msgid "Under construction"
+msgstr "در دست ساخت"
+
+#: tall_project/templates/pages/home.html:115
+msgid "Numerologist is getting a fresh coat of stardust ✨"
+msgstr "عددشناس دارد ردایی تازه از غبار ستاره می‌پوشد ✨"
+
+#: tall_project/templates/pages/home.html:117
+msgid "We are preparing a calm, focused numerology studio for Åse&rsquo;s clients. While the full experience lands, you can explore a lite calculator and follow our progress."
+msgstr "در حال آماده‌سازی استودیویی آرام و متمرکز برای مراجعان آسه هستیم. تا زمان راه‌اندازی کامل، می‌توانید از ماشین‌حساب ساده استفاده کنید و پیشرفت ما را دنبال نمایید."
+
+#: tall_project/templates/pages/home.html:123
+msgid "Contact Setaei"
+msgstr "تماس با ستایی"
+
+#: tall_project/templates/pages/home.html:124
+msgid "Project on GitHub"
+msgstr "پروژه در گیت‌هاب"
+
+#: tall_project/templates/pages/home.html:129
+msgid "What’s coming"
+msgstr "چه چیزهایی در راه است"
+
+#: tall_project/templates/pages/home.html:131
+msgid "Guided reports"
+msgstr "گزارش‌های هدایت‌شده"
+
+#: tall_project/templates/pages/home.html:131
+msgid "Friendly flows turn birth data into clear, shareable insights."
+msgstr "روندهای دوستانه داده‌های تولد را به بینش‌های شفاف و قابل اشتراک تبدیل می‌کنند."
+
+#: tall_project/templates/pages/home.html:132
+msgid "Client workspace"
+msgstr "فضای کاری مراجع"
+
+#: tall_project/templates/pages/home.html:132
+msgid "Intake, notes, and archives in one tidy dashboard."
+msgstr "پذیرش، یادداشت‌ها و آرشیوها در یک پیشخوان مرتب."
+
+#: tall_project/templates/pages/home.html:133
+msgid "Åse’s numerology engine"
+msgstr "موتور علم اعداد آسه"
+
+#: tall_project/templates/pages/home.html:133
+msgid "Built on her Norwegian methodology, tuned by Python."
+msgstr "بر پایه روش نروژی او و با پیاده‌سازی پایتون ساخته شده است."
+
+#: tall_project/templates/pages/home.html:138
+msgid "Try the lite calculator"
+msgstr "ماشین‌حساب سبک را امتحان کنید"
+
+#: tall_project/templates/pages/home.html:139
+msgid "Share your name and birth date for a quick sample of the numbers we’re polishing for launch."
+msgstr "نام و تاریخ تولد خود را برای دریافت نمونه‌ای سریع از اعدادی که برای رونمایی صیقل می‌دهیم وارد کنید."
+
+#: tall_project/templates/pages/home.html:156
+msgid "Calculate"
+msgstr "محاسبه"
+
+#: tall_project/templates/pages/home.html:159
+msgid "Your numbers"
+msgstr "اعداد شما"
+
+#: tall_project/templates/pages/home.html:160
+msgid "Life Path"
+msgstr "مسیر زندگی"
+
+#: tall_project/templates/pages/home.html:161
+msgid "Expression"
+msgstr "بیان"
+
+#: tall_project/templates/pages/home.html:162
+msgid "Soul Urge"
+msgstr "اشتیاق روح"
+
+#: tall_project/templates/pages/legal.html:10
+msgid "Transparency matters. This hub gathers the policies that protect your privacy, explain our terms of service, and outline how Numerologist handles data in compliance with Norwegian and EU regulations."
+msgstr "شفافیت اهمیت دارد. این مرکز، سیاست‌هایی را گرد هم می‌آورد که از حریم خصوصی شما محافظت می‌کند، شرایط خدمات ما را توضیح می‌دهد و نحوه مدیریت داده‌ها توسط Numerologist مطابق با مقررات نروژ و اتحادیه اروپا را روشن می‌سازد."
+
+#: tall_project/templates/pages/legal.html:16
+msgid "Policies"
+msgstr "سیاست‌ها"
+
+#: tall_project/templates/pages/letter-value-chart.html:10
+msgid "Convert any name into numbers using Åse's preferred alphabet chart. We include guidance for Norwegian letters, common variations, and practical tips for translating nicknames or company names."
+msgstr "هر نامی را با استفاده از جدول الفبای مورد علاقه آسه به عدد تبدیل کنید. راهنمای حروف نروژی، گونه‌های رایج و نکته‌های کاربردی برای ترجمه القاب یا نام شرکت‌ها نیز ارائه شده است."
+
+#: tall_project/templates/pages/letter-value-chart.html:15
+msgid "Download a printable version and keep it beside you as you explore the calculators."
+msgstr "نسخه قابل چاپ را دانلود کنید و هنگام کار با ماشین‌حساب‌ها در کنار خود داشته باشید."
+
+#: tall_project/templates/pages/lifes-fourth-stage.html:10
+msgid "Åse teaches a four-stage development model inspired by Nordic numerology. The fourth stage marks a synthesis of every lesson learned earlier in life. Explore how to calculate when it begins and what themes typically emerge."
+msgstr "آسه مدل رشد چهارمرحله‌ای الهام‌گرفته از علم اعداد نوردیک را آموزش می‌دهد. مرحله چهارم جمع‌بندی همه درس‌های آموخته‌شده پیشین است. بیاموزید این مرحله چه زمانی آغاز می‌شود و معمولاً چه موضوعاتی را فعال می‌کند."
+
+#: tall_project/templates/pages/lifes-fourth-stage.html:15
+msgid "Use the journal prompts to reflect on the opportunities, mentors, and inner work available in this phase."
+msgstr "از پرسش‌های دفترچه استفاده کنید تا بر فرصت‌ها، مربیان و کار درونی این دوره تأمل کنید."
+
+#: tall_project/templates/pages/numerologist-in-media.html:10
+msgid "Interviews, podcasts, and press features where Åse shares numerology insights with a wider audience. Catch up on her latest appearances and request media assets for your own publication."
+msgstr "مصاحبه‌ها، پادکست‌ها و گزارش‌های رسانه‌ای که آسه در آنها بینش‌های علم اعداد را با مخاطبان گسترده به اشتراک گذاشته است. آخرین حضورهای او را دنبال کنید و در صورت نیاز دارایی‌های رسانه‌ای درخواست نمایید."
+
+#: tall_project/templates/pages/personal-insights.html:10
+msgid "Ready to apply the theory to your own life? The Personal Insights hub gathers every calculator and interpretive guide that helps Åse's clients navigate relationships, careers, and spiritual development."
+msgstr "آماده‌اید نظریه را در زندگی خود به کار ببرید؟ مرکز بینش‌های فردی همه ماشین‌حساب‌ها و راهنماهای تفسیری را که به مراجعان آسه در مسیر روابط، شغل و رشد معنوی کمک می‌کند در یک جا گرد آورده است."
+
+#: tall_project/templates/pages/personal-insights.html:16
+msgid "Featured explorations"
+msgstr "کاوش‌های منتخب"
+
+#: tall_project/templates/pages/privacy-policy.html:10
+msgid "Learn how Numerologist collects, stores, and protects your personal information. The policy explains data retention practices, third-party tools, and your rights under GDPR."
+msgstr "بیاموزید Numerologist چگونه اطلاعات شخصی شما را جمع‌آوری، نگه‌داری و محافظت می‌کند. این سیاست، شیوه‌های حفظ داده، ابزارهای شخص ثالث و حقوق شما طبق GDPR را توضیح می‌دهد."
+
+#: tall_project/templates/pages/pythagoras-arrows.html:10
+msgid "The arrows reveal number patterns inside your birth chart grid. Learn how lines of strength, creativity, and challenge appear, and how to balance missing numbers with supportive rituals."
+msgstr "فلش‌ها الگوهای عددی در شبکه نمودار تولد شما را آشکار می‌کنند. بیاموزید خطوط قدرت، خلاقیت و چالش چگونه پدیدار می‌شوند و چگونه می‌توان کمبود اعداد را با آیین‌های حمایتی متعادل ساخت."
+
+#: tall_project/templates/pages/pythagoras-legacy.html:10
+msgid "Åse traces her numerology back to the mystic schools of ancient Greece. This page outlines how Pythagoras connected sound, mathematics, and the harmony of the cosmos, and why his approach still resonates inside modern consultations."
+msgstr "آسه ریشه علم اعداد خود را به مدارس عرفانی یونان باستان پیوند می‌دهد. این صفحه نشان می‌دهد فیثاغورس چگونه صدا، ریاضیات و هارمونی کیهان را به هم پیوند داد و چرا رویکرد او هنوز در مشاوره‌های امروزی طنین دارد."
+
+#: tall_project/templates/pages/pythagoras-legacy.html:16
+msgid "Meet the historical figures who preserved the teachings and brought them to Scandinavia."
+msgstr "با چهره‌های تاریخی آشنا شوید که این آموزه‌ها را حفظ کردند و به اسکاندیناوی رساندند."
+
+#: tall_project/templates/pages/pythagoras-legacy.html:17
+msgid "Understand why numbers from one to nine form the foundation of every reading."
+msgstr "بفهمید چرا اعداد یک تا نه اساس هر خوانش را می‌سازند."
+
+#: tall_project/templates/pages/pythagoras-legacy.html:18
+msgid "See how Åse combines classical wisdom with contemporary life coaching."
+msgstr "ببینید آسه چگونه خرد کلاسیک را با کوچینگ زندگی معاصر ترکیب می‌کند."
+
+#: tall_project/templates/pages/realization-number.html:10
+msgid "The realization number blends your destiny and life-path numbers, revealing the grand theme you are here to embody. Åse shares interpretation cues, supportive questions, and the types of collaborations that amplify this vibration."
+msgstr "عدد تحقق، عدد سرنوشت و مسیر زندگی شما را در هم می‌آمیزد و موضوع بزرگی را که برای تجسم آن آمده‌اید آشکار می‌سازد. آسه نشانه‌های تفسیری، پرسش‌های حمایتی و نوع همکاری‌هایی را که این ارتعاش را تقویت می‌کند به اشتراک می‌گذارد."
+
+#: tall_project/templates/pages/references.html:10
+msgid "A curated bibliography of books, teachers, and research that informs Åse's practice. Use it to dive deeper into numerology or to source materials for your own study group."
+msgstr "کتابشناسی برگزیده‌ای از کتاب‌ها، استادان و پژوهش‌هایی که الهام‌بخش کار آسه هستند. از آن برای تعمیق دانش علم اعداد یا تأمین منابع گروه مطالعه خود بهره بگیرید."
+
+#: tall_project/templates/pages/resources.html:10
+msgid "Access Åse's growing library of self-study materials, articles, and media appearances. Everything here is curated to support your numerology practice between private sessions."
+msgstr "به کتابخانه رو به رشد آسه شامل منابع خودآموز، مقالات و حضورهای رسانه‌ای دسترسی پیدا کنید. هر آنچه در اینجا هست برای پشتیبانی از تمرین علم اعداد شما بین جلسات خصوصی انتخاب شده است."
+
+#: tall_project/templates/pages/resources.html:16
+msgid "Dive in"
+msgstr "غوطه‌ور شوید"
+
+#: tall_project/templates/pages/same-number-meaning.html:10
+msgid "Repeating numbers feel like nudges from the universe. Åse shares a quick reference guide for triple digits, mirror hours, and other sequences so you can decode the messages on the go."
+msgstr "اعداد تکرارشونده همچون اشاره‌هایی از جهان هستند. آسه راهنمایی سریع برای اعداد سه‌گانه، ساعت‌های آینه‌ای و دنباله‌های دیگر ارائه می‌دهد تا بتوانید پیام‌ها را در لحظه رمزگشایی کنید."
+
+#: tall_project/templates/pages/telephone-guidance.html:10
+msgid "Phone sessions create an intimate space for numerology coaching. Review pricing, scheduling details, and how to prepare so you can make the most of your time with Åse."
+msgstr "جلسات تلفنی فضایی صمیمی برای کوچینگ علم اعداد ایجاد می‌کنند. قیمت‌گذاری، زمان‌بندی و نحوه آماده‌سازی را مرور کنید تا بیشترین بهره را از زمان خود با آسه ببرید."
+
+#: tall_project/templates/pages/terms-conditions.html:10
+msgid "Review the agreement that applies when you book a session with Åse. It covers payment terms, cancellations, client responsibilities, and how guidance should be integrated alongside professional advice."
+msgstr "توافق‌نامه‌ای را مرور کنید که هنگام رزرو جلسه با آسه اعمال می‌شود. این متن شرایط پرداخت، لغو، مسئولیت‌های مراجع و نحوه همراهی راهنمایی با مشاوره حرفه‌ای را پوشش می‌دهد."

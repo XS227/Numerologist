@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Åse traces her numerology back to the mystic schools of ancient Greece. This page outlines how Pythagoras connected
+    sound, mathematics, and the harmony of the cosmos, and why his approach still resonates inside modern consultations.
+    {% endblocktrans %}
+  </p>
+  <ul>
+    <li>{% blocktrans %}Meet the historical figures who preserved the teachings and brought them to Scandinavia.{% endblocktrans %}</li>
+    <li>{% blocktrans %}Understand why numbers from one to nine form the foundation of every reading.{% endblocktrans %}</li>
+    <li>{% blocktrans %}See how Åse combines classical wisdom with contemporary life coaching.{% endblocktrans %}</li>
+  </ul>
+</article>
+{% endblock %}

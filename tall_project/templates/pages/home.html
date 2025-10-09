@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load i18n %}
 
-{% block title %}Numerologist — Coming soon{% endblock %}
+{% block title %}Numerologist — {% trans "Coming soon" %}{% endblock %}
 
 {% block extra_styles %}
       .stack { display: grid; gap: 1.25rem; }
@@ -86,8 +87,12 @@
         color: #c62828;
         margin: 0;
         list-style: disc;
-        padding-left: 1.25rem;
+        padding-inline-start: 1.25rem;
         font-size: 0.95rem;
+      }
+      [dir="rtl"] .errors {
+        padding-inline-start: 0;
+        padding-inline-end: 1.25rem;
       }
       .result-card {
         display: grid;
@@ -106,30 +111,32 @@
 {% block content %}
 <div class="stack">
   <section class="card hero" aria-labelledby="hero-title">
-    <p style="font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:rgba(31,31,31,0.7);">Under construction</p>
-    <h1 id="hero-title">Numerologist is getting a fresh coat of stardust ✨</h1>
+    <p style="font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:rgba(31,31,31,0.7);">{% trans "Under construction" %}</p>
+    <h1 id="hero-title">{% trans "Numerologist is getting a fresh coat of stardust ✨" %}</h1>
     <p>
+      {% blocktrans trimmed %}
       We are preparing a calm, focused numerology studio for Åse&rsquo;s clients. While the full experience lands, you can
       explore a lite calculator and follow our progress.
+      {% endblocktrans %}
     </p>
     <div class="cta-group">
-      <a class="btn-secondary" href="mailto:studio@setaei.com">Contact Setaei</a>
-      <a class="btn-secondary" href="https://github.com/XS227/Numerologist" target="_blank" rel="noopener">Project on GitHub</a>
+      <a class="btn-secondary" href="mailto:studio@setaei.com">{% trans "Contact Setaei" %}</a>
+      <a class="btn-secondary" href="https://github.com/XS227/Numerologist" target="_blank" rel="noopener">{% trans "Project on GitHub" %}</a>
     </div>
   </section>
 
   <section class="card" aria-labelledby="glimpse-title">
-    <h2 id="glimpse-title" style="margin-top:0;">What&rsquo;s coming</h2>
+    <h2 id="glimpse-title" style="margin-top:0;">{% trans "What’s coming" %}</h2>
     <ul class="feature-list">
-      <li><span class="feature-icon">📊</span><span><strong>Guided reports:</strong> Friendly flows turn birth data into clear, shareable insights.</span></li>
-      <li><span class="feature-icon">🤝</span><span><strong>Client workspace:</strong> Intake, notes, and archives in one tidy dashboard.</span></li>
-      <li><span class="feature-icon">🔮</span><span><strong>Åse&rsquo;s numerology engine:</strong> Built on her Norwegian methodology, tuned by Python.</span></li>
+      <li><span class="feature-icon">📊</span><span><strong>{% trans "Guided reports" %}:</strong> {% trans "Friendly flows turn birth data into clear, shareable insights." %}</span></li>
+      <li><span class="feature-icon">🤝</span><span><strong>{% trans "Client workspace" %}:</strong> {% trans "Intake, notes, and archives in one tidy dashboard." %}</span></li>
+      <li><span class="feature-icon">🔮</span><span><strong>{% trans "Åse’s numerology engine" %}:</strong> {% trans "Built on her Norwegian methodology, tuned by Python." %}</span></li>
     </ul>
   </section>
 
   <section class="card" aria-labelledby="demo-title">
-    <h2 id="demo-title" style="margin-top:0;">Try the lite calculator</h2>
-    <p>Share your name and birth date for a quick sample of the numbers we&rsquo;re polishing for launch.</p>
+    <h2 id="demo-title" style="margin-top:0;">{% trans "Try the lite calculator" %}</h2>
+    <p>{% trans "Share your name and birth date for a quick sample of the numbers we’re polishing for launch." %}</p>
     <form method="post" class="lite-demo" novalidate>
       {% csrf_token %}
       <div class="field">
@@ -146,13 +153,13 @@
         <ul class="errors">{% for error in form.birth_date.errors %}<li>{{ error }}</li>{% endfor %}</ul>
         {% endif %}
       </div>
-      <button type="submit" class="btn-primary">Calculate</button>
+      <button type="submit" class="btn-primary">{% trans "Calculate" %}</button>
       {% if result %}
       <div class="result-card" role="status" aria-live="polite">
-        <strong>Your numbers</strong>
-        <p>Life Path: {{ result.life_path }}</p>
-        <p>Expression: {{ result.expression }}</p>
-        <p>Soul Urge: {{ result.soul_urge }}</p>
+        <strong>{% trans "Your numbers" %}</strong>
+        <p>{% trans "Life Path" %}: {{ result.life_path }}</p>
+        <p>{% trans "Expression" %}: {{ result.expression }}</p>
+        <p>{% trans "Soul Urge" %}: {{ result.soul_urge }}</p>
       </div>
       {% endif %}
     </form>

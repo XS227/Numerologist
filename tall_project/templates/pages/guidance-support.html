@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Åse's practice is rooted in compassionate guidance. Discover how to work with her, what to expect before a call, and
+    the support systems she offers between sessions.
+    {% endblocktrans %}
+  </p>
+  <section aria-labelledby="support-links">
+    <h2 id="support-links">{% trans "Stay supported" %}</h2>
+    <ul>
+      <li><a href="{% url 'static_page' 'about-the-firm' %}">{% trans "About the Firm" %}</a></li>
+      <li><a href="{% url 'static_page' 'telephone-guidance' %}">{% trans "Telephone Guidance" %}</a></li>
+      <li><a href="{% url 'static_page' 'contact-qa' %}">{% trans "Contact / Q&A" %}</a></li>
+    </ul>
+  </section>
+</article>
+{% endblock %}

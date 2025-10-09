@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Numerology is the language Åse uses to translate numbers into stories about timing, purpose, and potential. In this
+    section you will meet the philosophical roots of her method and learn how each calculation is grounded in Pythagorean
+    thought and contemporary practice.
+    {% endblocktrans %}
+  </p>
+  <p>
+    {% blocktrans trimmed %}
+    Start here if you want an overview of why numerology matters, how Åse interprets each digit, and the reference charts
+    that sit behind your personalised readings.
+    {% endblocktrans %}
+  </p>
+  <section aria-labelledby="discover-topics">
+    <h2 id="discover-topics">{% trans "Key topics" %}</h2>
+    <ul>
+      <li><a href="{% url 'static_page' 'pythagoras-legacy' %}">{% trans "Pythagoras' Legacy" %}</a></li>
+      <li><a href="{% url 'static_page' 'general-interpretation' %}">{% trans "General Interpretation of Numbers" %}</a></li>
+      <li><a href="{% url 'static_page' 'calculation-methods-overview' %}">{% trans "Calculation Methods Overview" %}</a></li>
+      <li><a href="{% url 'static_page' 'letter-value-chart' %}">{% trans "Letter Value Chart" %}</a></li>
+    </ul>
+  </section>
+</article>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    The arrows reveal number patterns inside your birth chart grid. Learn how lines of strength, creativity, and challenge
+    appear, and how to balance missing numbers with supportive rituals.
+    {% endblocktrans %}
+  </p>
+</article>
+{% endblock %}

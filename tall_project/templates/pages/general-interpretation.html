@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Every number carries a personality. Here Åse summarises the qualities, challenges, and growth opportunities linked to
+    digits one through nine, along with master numbers eleven, twenty-two, and thirty-three.
+    {% endblocktrans %}
+  </p>
+  <p>{% blocktrans %}Use this guide as a companion when you receive your charts or practice interpreting numbers for friends.{% endblocktrans %}</p>
+</article>
+{% endblock %}

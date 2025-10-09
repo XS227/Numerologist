@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    Follow Åse's step-by-step process to calculate the destiny number from your full birth name. We cover the reduction
+    process, common edge cases, and how to interpret the final vibration.
+    {% endblocktrans %}
+  </p>
+  <p>{% blocktrans %}A downloadable worksheet is included so you can repeat the calculation with clients or loved ones.{% endblocktrans %}</p>
+</article>
+{% endblock %}
