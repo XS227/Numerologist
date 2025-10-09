@@ -13,11 +13,12 @@ from __future__ import annotations
 
 import re
 from datetime import date, datetime
+from numbers import Integral
 from typing import Iterable, Union
 
 MASTER_NUMBERS = {11, 22, 33}
 
-RawInput = Union[int, str, date, datetime, Iterable[int]]
+RawInput = Union[Integral, str, date, datetime, Iterable[int]]
 
 
 def _digits_from_string(value: str) -> Iterable[int]:
@@ -35,8 +36,8 @@ def _digits_from_string(value: str) -> Iterable[int]:
 def _normalise_raw_input(raw: RawInput) -> Iterable[int]:
     """Yield digits from ``raw`` regardless of its original representation."""
 
-    if isinstance(raw, int):
-        return map(int, str(abs(raw)))
+    if isinstance(raw, Integral):
+        return map(int, str(abs(int(raw))))
     if isinstance(raw, (date, datetime)):
         return map(int, raw.strftime("%Y%m%d"))
     if isinstance(raw, str):
