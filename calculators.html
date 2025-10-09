@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Numerologist Studio — Calculators</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --page-bg: #fdf7f0;
+        --card-bg: #ffffff;
+        --card-elevated: #fffaf4;
+        --border: #f0dfcd;
+        --text: #2a2220;
+        --muted: #6f5b53;
+        --accent: #ff8a3d;
+        --accent-soft: rgba(255, 138, 61, 0.1);
+        --accent-strong: #f55d0d;
+        --shadow: 0px 30px 60px rgba(228, 187, 147, 0.35);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top right, rgba(255, 204, 153, 0.35), transparent 60%),
+          radial-gradient(circle at bottom left, rgba(255, 165, 102, 0.25), transparent 55%), var(--page-bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      header {
+        padding: 1.5rem 2.5rem 1rem;
+      }
+
+      .nav-shell {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .brand {
+        display: grid;
+        gap: 0.1rem;
+      }
+
+      .brand small {
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .brand strong {
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        font-size: 0.95rem;
+      }
+
+      .nav-links a,
+      .nav-links summary {
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a[aria-current="page"] {
+        color: var(--accent-strong);
+      }
+
+      .nav-links summary {
+        list-style: none;
+      }
+
+      .nav-links summary::-webkit-details-marker,
+      .nav-links summary::marker {
+        display: none;
+      }
+
+      .nav-links summary::after {
+        content: "▾";
+        font-size: 0.65rem;
+        transition: transform 0.2s ease;
+      }
+
+      .nav-links details {
+        position: relative;
+      }
+
+      .nav-links details[open] > summary {
+        color: var(--text);
+      }
+
+      .nav-links details[open] > summary::after {
+        transform: rotate(180deg);
+      }
+
+      .nav-dropdown {
+        position: absolute;
+        top: calc(100% + 0.75rem);
+        left: 0;
+        min-width: 14rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 0.75rem;
+        display: grid;
+        gap: 0.35rem;
+        box-shadow: var(--shadow);
+        z-index: 10;
+      }
+
+      .nav-dropdown a {
+        font-weight: 600;
+        color: var(--muted);
+        padding: 0.35rem 0.5rem;
+        border-radius: 10px;
+      }
+
+      .nav-dropdown a:hover,
+      .nav-dropdown a:focus {
+        color: var(--text);
+        background: var(--accent-soft);
+        outline: none;
+      }
+
+      main {
+        flex: 1;
+        padding: 0 1.5rem 3rem;
+      }
+
+      .layout {
+        max-width: 960px;
+        margin: 0 auto 4rem;
+        display: grid;
+        gap: 2.5rem;
+      }
+
+      .page-title {
+        display: grid;
+        gap: 0.75rem;
+        text-align: center;
+        margin-top: 1rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+      }
+
+      .page-title h1 {
+        font-size: clamp(2rem, 3vw, 2.75rem);
+        margin: 0;
+      }
+
+      .page-title p {
+        margin: 0 auto;
+        color: var(--muted);
+        max-width: 52ch;
+      }
+
+      .calculator-grid {
+        display: grid;
+        gap: 1.75rem;
+      }
+
+      .calculator-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 1.75rem;
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .calculator-card h2 {
+        margin: 0;
+        font-size: 1.35rem;
+      }
+
+      .calculator-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .calculator-card ul {
+        margin: 0;
+        padding-left: 1.25rem;
+        color: var(--muted);
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+      }
+
+      .btn {
+        border-radius: 999px;
+        border: none;
+        padding: 0.8rem 1.6rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        box-shadow: 0 10px 24px rgba(255, 138, 61, 0.25);
+      }
+
+      .btn-secondary {
+        background: var(--accent-soft);
+        color: var(--accent-strong);
+        border: 1px solid rgba(255, 138, 61, 0.25);
+      }
+
+      footer {
+        padding: 1.5rem 2.5rem 2.5rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      @media (max-width: 720px) {
+        header {
+          padding: 1.25rem 1.25rem 0.5rem;
+        }
+
+        .nav-shell {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        main {
+          padding: 0 1rem 2.5rem;
+        }
+
+        .calculator-card {
+          border-radius: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-shell">
+        <a class="brand" href="/">
+          <small>ÅSE STEINSLAND</small>
+          <strong>Numerologist Studio</strong>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="/intake/">Intake</a>
+          <a href="/cms/">CMS</a>
+          <a href="/roadmap.html">Roadmap</a>
+          <a href="/calculators.html" aria-current="page">Calculators</a>
+          <details>
+            <summary>About Nummerology</summary>
+            <div class="nav-dropdown">
+              <a href="/about.html">Our Story</a>
+              <a href="/about-vision-mission.html">Vision &amp; Mission</a>
+              <a href="/about-academy.html">Academy &amp; AI</a>
+            </div>
+          </details>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="layout">
+        <div class="page-title">
+          <span class="pill" style="align-self:center; background:var(--accent-soft); color:var(--accent-strong); border-radius:999px; padding:0.4rem 1rem; font-weight:600; letter-spacing:0.08em;">CALCULATOR SUITE</span>
+          <h1>Every numerology calculator at a glance</h1>
+          <p>
+            Explore the individual tools Åse references while preparing a full master analysis. Each calculator can be explored
+            on its own so you can see how the pieces fit together before or after your full session.
+          </p>
+        </div>
+        <div class="calculator-grid" role="list">
+          <article class="calculator-card" role="listitem">
+            <h2>Life Path Number</h2>
+            <p>The rhythm of your life lessons revealed through your birth date.</p>
+            <ul>
+              <li>Breaks your birth date into core digits</li>
+              <li>Honours master numbers 11, 22, and 33 during reduction</li>
+              <li>Guides the milestones and curriculum of your lifetime</li>
+            </ul>
+          </article>
+          <article class="calculator-card" role="listitem">
+            <h2>Expression Number</h2>
+            <p>Highlights the talents and gifts encoded within your full name.</p>
+            <ul>
+              <li>Maps each letter to its Pythagorean value</li>
+              <li>Shows how you naturally share your abilities with the world</li>
+              <li>Balances what comes easily with where mastery is calling</li>
+            </ul>
+          </article>
+          <article class="calculator-card" role="listitem">
+            <h2>Soul Urge Number</h2>
+            <p>The whisper of your heart’s deepest desires, drawn from the vowels in your name.</p>
+            <ul>
+              <li>Connects you with motivations that keep you inspired</li>
+              <li>Reveals the emotional current beneath your decisions</li>
+              <li>Illuminates the self-care practices that truly nourish</li>
+            </ul>
+          </article>
+          <article class="calculator-card" role="listitem">
+            <h2>Personality Number</h2>
+            <p>The first impression you offer, measured through the consonants of your name.</p>
+            <ul>
+              <li>Describes how others initially perceive your energy</li>
+              <li>Shows the doorway people walk through to meet you</li>
+              <li>Helps refine your presence with deliberate intention</li>
+            </ul>
+          </article>
+          <article class="calculator-card" role="listitem">
+            <h2>Compatibility Insight</h2>
+            <p>Cross-reference two birth dates to understand shared lessons and harmony.</p>
+            <ul>
+              <li>Compares combined life path cycles</li>
+              <li>Spotlights master number pairings</li>
+              <li>Offers prompts for nourishing the relationship</li>
+            </ul>
+          </article>
+          <article class="calculator-card" role="listitem">
+            <h2>Personal Year Forecast</h2>
+            <p>Discover the focus of the year you’re currently walking through.</p>
+            <ul>
+              <li>Calculates your yearly vibration from your birth date</li>
+              <li>Places it in context with your overarching life path</li>
+              <li>Invites rituals to partner with the year’s momentum</li>
+            </ul>
+          </article>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/">Return to intake</a>
+          <a class="btn btn-secondary" href="#top" onclick="window.scrollTo({top:0, behavior:'smooth'}); return false;">Back to top</a>
+        </div>
+      </div>
+    </main>
+    <footer>Crafted for Åse Steinsland’s Numerologist Studio — explore each calculator as you prepare your reading.</footer>
+  </body>
+</html>

@@ -508,6 +508,7 @@
           <a href="/intake/">Intake</a>
           <a href="/cms/">CMS</a>
           <a href="/roadmap.html">Roadmap</a>
+          <a href="/calculators.html">Calculators</a>
           <details>
             <summary>About Nummerology</summary>
             <div class="nav-dropdown">
@@ -534,8 +535,8 @@
             <div class="greeting">
               <h1 id="welcome-title">Follow the guided steps to uncover every calculator Åse uses when preparing a reading.</h1>
               <p>
-                We start with a warm welcome and a simple intake. Share a preferred name, birth date, and the form Åse uses for
-                calculations. From here you can peek at a lite numerology overview or continue into the full studio.
+                We start with a warm welcome and a simple intake. Share a preferred name and birth date. From here you can peek at
+                a lite numerology overview or continue into the full studio.
               </p>
             </div>
             <article class="progress-card" aria-label="Intake progress">
@@ -562,24 +563,6 @@
                   Birth date
                   <input type="date" name="birth_date" id="birth_date" />
                   <span class="error-message" data-error-for="birth_date" hidden>Please choose your birth date.</span>
-                </label>
-                <label>
-                  Birth hour (optional)
-                  <input type="time" name="birth_time" id="birth_time" />
-                </label>
-                <label>
-                  Current location
-                  <input type="text" name="location" id="location" placeholder="City, Country" />
-                </label>
-                <label>
-                  Form to calculate
-                  <select name="form_type" id="form_type">
-                    <option value="">Choose one…</option>
-                    <option value="lite">Lite numerology overview</option>
-                    <option value="deep">Full Åse master analysis</option>
-                    <option value="compatibility">Compatibility session</option>
-                  </select>
-                  <span class="error-message" data-error-for="form_type" hidden>Please pick a form so we know what to prepare.</span>
                 </label>
               </div>
               <div class="actions">
@@ -619,7 +602,7 @@
               </div>
               <div class="snapshot-actions">
                 <button class="btn btn-primary" type="button" id="generateOverview">Generate overview</button>
-                <button class="btn btn-secondary" type="button" id="downloadSummary">Download full analysis</button>
+                <a class="btn btn-secondary" href="/calculators.html" id="viewCalculators">Explore all calculators</a>
               </div>
             </article>
           </div>
@@ -677,6 +660,21 @@
               <span class="story-title">The Sage</span>
               <p style="margin:0; color:var(--muted);">Compassion, vision, and the grace of completion.</p>
             </article>
+            <article class="story-tile">
+              <span class="story-number">Number 11</span>
+              <span class="story-title">The Visionary</span>
+              <p style="margin:0; color:var(--muted);">Spiritual illumination, insight, and inspiring leadership.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 22</span>
+              <span class="story-title">The Master Builder</span>
+              <p style="margin:0; color:var(--muted);">Grand-scale manifestation balanced with heart-led service.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 33</span>
+              <span class="story-title">The Cosmic Guide</span>
+              <p style="margin:0; color:var(--muted);">Compassionate mastery devoted to uplifting humanity.</p>
+            </article>
           </div>
         </section>
       </div>
@@ -691,7 +689,6 @@
       const progressLabel = document.getElementById("progressLabel");
       const progressTrack = document.querySelector(".progress-track");
       const generateBtn = document.getElementById("generateOverview");
-      const downloadBtn = document.getElementById("downloadSummary");
       const modeToggle = document.getElementById("modeToggle");
       const saveProgress = document.getElementById("saveProgress");
 
@@ -771,7 +768,7 @@
 
       function validateForm() {
         let valid = true;
-        ["preferred_name", "birth_date", "form_type"].forEach((fieldName) => {
+        ["preferred_name", "birth_date"].forEach((fieldName) => {
           const field = document.getElementById(fieldName);
           const error = document.querySelector(`[data-error-for="${fieldName}"]`);
           if (!field.value) {
@@ -803,7 +800,7 @@
         valueElements.soul.textContent = soulUrge ?? "—";
         valueElements.personality.textContent = personality ?? "—";
 
-        updateProgress(84);
+        updateProgress(100);
       }
 
       intakeForm.addEventListener("submit", (event) => {
@@ -811,38 +808,18 @@
         if (!validateForm()) {
           return;
         }
-        updateProgress(42);
+        updateProgress(50);
         document.getElementById("snapshot-title").scrollIntoView({ behavior: "smooth", block: "start" });
       });
 
       generateBtn.addEventListener("click", generateOverview);
 
-      downloadBtn.addEventListener("click", () => {
-        if (!validateForm()) {
-          return;
-        }
-        generateOverview();
-        const name = document.getElementById("preferred_name").value.trim() || "friend";
-        const text = `Numerology overview for ${name}\n\nLife Path: ${valueElements.life_path.textContent}\nExpression: ${valueElements.expression.textContent}\nSoul Urge: ${valueElements.soul.textContent}\nPersonality: ${valueElements.personality.textContent}`;
-        const blob = new Blob([text], { type: "text/plain" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = `${name.replace(/\s+/g, "-").toLowerCase() || "numerology"}-overview.txt`;
-        document.body.appendChild(link);
-        link.click();
-        setTimeout(() => {
-          URL.revokeObjectURL(link.href);
-          link.remove();
-        }, 0);
-      });
-
       saveProgress.addEventListener("click", () => {
         const name = document.getElementById("preferred_name").value.trim();
         const birth = document.getElementById("birth_date").value;
-        const form = document.getElementById("form_type").value;
-        const payload = { name, birth, form, timestamp: new Date().toISOString() };
+        const payload = { name, birth, timestamp: new Date().toISOString() };
         localStorage.setItem("numerologist-intake", JSON.stringify(payload));
-        updateProgress(24);
+        updateProgress(30);
         saveProgress.textContent = "Progress saved";
         setTimeout(() => (saveProgress.textContent = "Save for later"), 3000);
       });
@@ -860,8 +837,7 @@
           const payload = JSON.parse(saved);
           if (payload.name) document.getElementById("preferred_name").value = payload.name;
           if (payload.birth) document.getElementById("birth_date").value = payload.birth;
-          if (payload.form) document.getElementById("form_type").value = payload.form;
-          updateProgress(24);
+          updateProgress(30);
         } catch (error) {
           console.error("Unable to load saved progress", error);
         }
