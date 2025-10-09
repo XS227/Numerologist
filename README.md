@@ -47,6 +47,8 @@ Current live subdomain:
 - [API Reference](docs/API_Reference.md)
 - [Architecture Overview](docs/Architecture_Overview.md)
 - [Contributors & Credits](docs/Contributors_and_Credits.md)
+- [Documentation Backlog](docs/Documentation_Backlog.md)
+- [Numerologens Verden – Åse Steinsland Article Index](docs/NumerologensVerden_Articles.md)
 
 ---
 
