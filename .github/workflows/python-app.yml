@@ -22,6 +22,8 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      DJANGO_SETTINGS_MODULE: tall_project.settings
     strategy:
       fail-fast: false
       matrix:
