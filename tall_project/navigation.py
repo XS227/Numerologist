@@ -30,6 +30,7 @@ STATIC_PAGES: Dict[str, StaticPage] = {
     page.slug: page
     for page in (
         StaticPage("discover-numerology", _("Discover Numerology"), "pages/discover-numerology.html"),
+        StaticPage("calculators", _("Calculator suite"), "pages/calculators.html"),
         StaticPage("pythagoras-legacy", _("Pythagoras' Legacy"), "pages/pythagoras-legacy.html"),
         StaticPage(
             "general-interpretation",
@@ -98,6 +99,7 @@ STATIC_PAGES: Dict[str, StaticPage] = {
 
 
 NAVIGATION: Tuple[NavigationItem, ...] = (
+    NavigationItem("calculators", _("Calculator suite")),
     NavigationItem(
         slug="discover-numerology",
         title=_("Discover Numerology"),
