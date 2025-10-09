@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Numerologist Studio — Our Story</title>
+    <title>Numerologist Studio — The Arecibo Line</title>
     <style>
       :root {
         color-scheme: light;
@@ -159,108 +159,197 @@
         gap: 0.45rem;
         color: var(--muted);
         font-weight: 600;
+        box-shadow: var(--shadow);
         cursor: pointer;
-        transition: transform 0.2s ease;
-      }
-
-      .mode-toggle:hover {
-        transform: translateY(-1px);
       }
 
       main {
         flex: 1;
-        padding: 0 1.5rem 3.5rem;
+        padding: 0 2.5rem 3rem;
       }
 
       .layout {
-        max-width: 860px;
+        max-width: 1080px;
         margin: 0 auto;
         display: grid;
-        gap: 2.5rem;
+        gap: 2.25rem;
       }
 
-      h1 {
-        font-size: clamp(2.1rem, 4vw, 2.9rem);
-        margin: 0;
-        letter-spacing: -0.02em;
-      }
-
-      h2 {
-        margin: 0 0 0.35rem;
-        font-size: 1.6rem;
-      }
-
-      p {
-        margin: 0 0 1rem;
-        color: var(--muted);
-        line-height: 1.7;
-      }
-
-      .card {
-        background: linear-gradient(150deg, rgba(255, 243, 227, 0.9), rgba(255, 255, 255, 0.95));
-        border-radius: 32px;
-        padding: clamp(1.75rem, 3vw, 2.5rem);
+      .hero-card {
+        background: var(--card-elevated);
+        border-radius: 28px;
+        padding: 2.75rem;
         box-shadow: var(--shadow);
-        display: grid;
-        gap: 1rem;
-      }
-
-      .story-grid {
+        border: 1px solid var(--border);
         display: grid;
         gap: 1.75rem;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       }
 
-      .story-card {
+      .hero-card h1 {
+        font-size: clamp(2.25rem, 3.2vw, 2.85rem);
+        margin: 0;
+      }
+
+      .hero-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        color: var(--muted);
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+      }
+
+      .hero-meta span {
+        background: var(--accent-soft);
+        color: var(--accent-strong);
+        border-radius: 999px;
+        padding: 0.35rem 0.85rem;
+      }
+
+      .hero-card p {
+        font-size: 1.05rem;
+        line-height: 1.65;
+        margin: 0;
+      }
+
+      .insight-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      .insight {
+        background: var(--card-bg);
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        padding: 1.75rem;
+        display: grid;
+        gap: 0.85rem;
+        box-shadow: var(--shadow);
+      }
+
+      .insight h2 {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+
+      .insight p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .timeline {
         background: var(--card-bg);
         border-radius: 28px;
         border: 1px solid var(--border);
-        padding: clamp(1.35rem, 2.5vw, 1.75rem);
-        display: grid;
-        gap: 0.75rem;
+        padding: 2.5rem;
+        box-shadow: var(--shadow);
       }
 
-      blockquote {
+      .timeline h2 {
+        margin-top: 0;
+        font-size: 1.5rem;
+      }
+
+      .timeline ul {
+        list-style: none;
         margin: 0;
-        padding-left: 1.1rem;
-        border-left: 3px solid var(--accent);
+        padding: 0;
+        display: grid;
+        gap: 1.4rem;
+      }
+
+      .timeline li {
+        display: grid;
+        gap: 0.4rem;
+        border-left: 3px solid rgba(255, 138, 61, 0.25);
+        padding-left: 1.25rem;
+      }
+
+      .timeline strong {
+        font-size: 1.1rem;
+      }
+
+      .timeline span {
         color: var(--muted);
-        font-style: italic;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .cta {
+        background: linear-gradient(135deg, rgba(255, 138, 61, 0.18), rgba(255, 209, 168, 0.28));
+        border-radius: 26px;
+        padding: 2.5rem;
+        border: 1px solid rgba(255, 138, 61, 0.2);
+        display: grid;
+        gap: 1rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+      }
+
+      .cta h2 {
+        margin: 0;
+        font-size: 1.7rem;
+      }
+
+      .cta p {
+        margin: 0;
+        font-size: 1.05rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .cta a {
+        justify-self: center;
+        background: var(--accent);
+        color: white;
+        padding: 0.75rem 1.75rem;
+        border-radius: 999px;
+        font-weight: 600;
+        box-shadow: 0 16px 30px rgba(255, 138, 61, 0.35);
       }
 
       footer {
-        padding: 2rem 1.5rem 3rem;
+        padding: 2.5rem;
         text-align: center;
         color: var(--muted);
-        font-size: 0.85rem;
+        font-size: 0.9rem;
       }
 
       @media (max-width: 900px) {
+        .insight-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 720px) {
+        header {
+          padding: 1.25rem 1.25rem 0.5rem;
+        }
+
+        main {
+          padding: 0 1.25rem 2.5rem;
+        }
+
         .nav-shell {
           flex-direction: column;
           align-items: flex-start;
           gap: 1rem;
         }
 
-        .nav-links {
-          flex-wrap: wrap;
-          gap: 1rem;
-        }
-      }
-
-      @media (max-width: 720px) {
-        header {
-          padding: 1.25rem 1.5rem 0.75rem;
+        .insight-grid {
+          grid-template-columns: 1fr;
         }
 
-        .nav-dropdown {
-          position: static;
-          width: 100%;
-          box-shadow: none;
-        }
-
-        .story-card {
-          border-radius: 22px;
+        .hero-card,
+        .timeline,
+        .cta {
+          padding: 2rem;
         }
       }
 
@@ -291,12 +380,12 @@
           <a href="/cms/">CMS</a>
           <a href="/roadmap.html">Roadmap</a>
           <a href="/calculators.html">Calculators</a>
-          <a href="/arecibo.html">Arecibo Line</a>
+          <a href="/arecibo.html" aria-current="page">Arecibo Line</a>
           <a href="/articles.html">Articles</a>
-          <details open>
-            <summary aria-current="page">About Nummerology</summary>
+          <details>
+            <summary>About Nummerology</summary>
             <div class="nav-dropdown">
-              <a href="/about.html" aria-current="page">Our Story</a>
+              <a href="/about.html">Our Story</a>
               <a href="/about-vision-mission.html">Vision &amp; Mission</a>
               <a href="/about-academy.html">Academy &amp; AI</a>
             </div>
@@ -310,77 +399,81 @@
     </header>
     <main>
       <div class="layout">
-        <section class="card" aria-labelledby="about-title">
-          <h1 id="about-title">Åse's story, woven into Numerologist Studio</h1>
+        <section class="hero-card" aria-labelledby="arecibo-title">
+          <div class="hero-meta" aria-hidden="true">
+            <span>Signal cartography</span>
+            <span>Research notes</span>
+          </div>
+          <h1 id="arecibo-title">Tracing the story of the Arecibo Line</h1>
           <p>
-            What began as Åse Steinsland's intimate numerology readings has grown into a studio for seekers, students, and mentors.
-            Every calculator, meditation, and journal prompt is grounded in Åse's decades of practice and her belief that numbers can
-            soften life's sharp edges.
+            The Arecibo Line is our studio's cosmic notebook. We map humanity's most curious transmissions—from the 1974 radio
+            message to modern fast radio bursts—and translate their number sequences into guidance Åse can weave into a reading.
+            Each pulse becomes a mirror for seekers exploring how their own vibration resonates with the wider universe.
           </p>
           <p>
-            Numerologist Studio keeps that heart-forward approach. We document rituals with the same warmth Åse brings to her sessions,
-            inviting contributors to honour the quiet details—pronunciation of a name, the stories held in a birthdate, the way guidance
-            lands differently for every soul.
+            Below you'll find the goals guiding the project, the data sources we curate, and how contributors can jump in. Think
+            of it as a living field guide for numerologists, astronomers, and storytellers collaborating under the same night sky.
           </p>
         </section>
-        <section class="story-grid" aria-label="Studio values">
-          <article class="story-card">
-            <h2>Rooted in relationship</h2>
+        <section class="insight-grid" aria-label="Project pillars">
+          <article class="insight">
+            <h2>Why it matters</h2>
             <p>
-              We favour deep listening over dashboards. Contributors are encouraged to sit with Åse's language, observe how she introduces
-              each calculator, and echo that care within the tools we build. The studio is a gathering space, not just a tech project.
-            </p>
-            <blockquote>“Numerology is the art of being present with someone's story long enough for the numbers to speak.”</blockquote>
-          </article>
-          <article class="story-card">
-            <h2>Crafted for guidance</h2>
-            <p>
-              From intake forms to follow-up rituals, every element is designed as a gentle guide. We map learning journeys that blend
-              practical numerology with reflection, so the studio supports both professional readers and curious newcomers.
+              By studying the cadence of interstellar messages we learn how collective intentions echo through number patterns.
+              These insights help Åse frame big-picture context during deep readings and community workshops.
             </p>
           </article>
-          <article class="story-card">
-            <h2>Powered by community</h2>
+          <article class="insight">
+            <h2>What we curate</h2>
             <p>
-              Developers, translators, and mentors collaborate in the open. GitHub keeps our work transparent; Codex helps transform Åse's
-              notes into polished experiences. Together we steward her legacy while making space for new voices.
+              We maintain a timeline of transmissions, open datasets, and Python notebooks hosted in the Arecibo-Line repository.
+              Contributors help verify data integrity and annotate each event with numerological interpretations.
+            </p>
+          </article>
+          <article class="insight">
+            <h2>How to contribute</h2>
+            <p>
+              Join the discussions in GitHub, explore the notebooks, or propose new visualisations. We welcome storytellers who can
+              translate technical findings into guidance that feels grounded and kind.
             </p>
           </article>
         </section>
-        <section class="story-grid" aria-label="Numerology foundations">
-          <article class="story-card">
-            <h2>About numerology</h2>
-            <p>
-              Numerology observes how patterns in names, birth dates, and life cycles echo the rhythms of the universe. Åse teaches it as a
-              compassionate language—one that helps people name what is shifting, stabilising, or longing to be heard within their story.
-            </p>
-          </article>
-          <article class="story-card">
-            <h2>More about numbers</h2>
-            <p>
-              Core numbers act like constellations. Life Path reveals the terrain you travel, Expression shows how you contribute, Soul Urge
-              whispers desires, and Personality signals the energy others feel first. Together they paint a layered portrait of growth.
-            </p>
-            <ul style="margin:0; padding-left:1.1rem; color:var(--muted); line-height:1.6;">
-              <li>1, 4, and 8 steady ambition with structure.</li>
-              <li>2, 6, and 9 nurture relationships and collective care.</li>
-              <li>3, 5, and 7 explore creativity, curiosity, and inner wisdom.</li>
-            </ul>
-          </article>
-          <article class="story-card">
-            <h2>Philosophy behind</h2>
-            <p>
-              Our studio trusts both intuition and evidence. Numbers are invitations—not verdicts. We pair Åse's metaphors with transparent
-              methodology so seekers understand how each calculation is made and can choose the practices that resonate most deeply.
-            </p>
-          </article>
-          <article class="story-card">
-            <h2>When and where</h2>
-            <p>
-              Numerologist Studio hosts online circles, seasonal retreats in Norway, and remote mentorships that welcome the global community.
-              Whether someone joins from a quiet morning commute or a classroom gathering, our resources are paced to meet them where they are.
-            </p>
-          </article>
+        <section class="timeline" aria-labelledby="timeline-title">
+          <h2 id="timeline-title">Pulse timeline</h2>
+          <ul>
+            <li>
+              <span>1974 · ARECIBO OBSERVATORY</span>
+              <strong>The original Arecibo message</strong>
+              <p>
+                A binary portrait of human life beamed toward Messier 13. We deconstruct the sequence and compare it with
+                contemporary life-path archetypes.
+              </p>
+            </li>
+            <li>
+              <span>1977 · OHIO STATE</span>
+              <strong>The Wow! signal</strong>
+              <p>
+                A mysterious burst captured by the Big Ear radio telescope. Our notebooks experiment with spectral reduction to
+                locate resonance numbers.
+              </p>
+            </li>
+            <li>
+              <span>2007–Present</span>
+              <strong>Fast radio bursts</strong>
+              <p>
+                Repeating signals mapped by teams around the globe. We analyse cadence, energy, and repetition to inspire new
+                meditations for seekers navigating rapid change.
+              </p>
+            </li>
+          </ul>
+        </section>
+        <section class="cta" aria-labelledby="cta-title">
+          <h2 id="cta-title">Explore the research in depth</h2>
+          <p>
+            Visit the dedicated GitHub space to browse notebooks, download datasets, and follow our open milestones. Every commit
+            keeps the project transparent and welcoming to new collaborators.
+          </p>
+          <a href="https://github.com/numerologist/Arecibo-Line">Open the repository</a>
         </section>
       </div>
     </main>
@@ -413,11 +506,17 @@
           background: #101322;
           color: #f4f6ff;
         }
-        body.night .card,
-        body.night .story-card {
+        body.night .hero-card,
+        body.night .insight,
+        body.night .timeline,
+        body.night .cta {
           background: #171b2b;
           border-color: rgba(92, 105, 210, 0.25);
           box-shadow: none;
+        }
+        body.night .cta {
+          background: linear-gradient(135deg, rgba(127, 140, 255, 0.18), rgba(92, 105, 210, 0.18));
+          border-color: rgba(92, 105, 210, 0.4);
         }
         body.night .nav-links a,
         body.night .nav-links summary,
