@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Numerologist Studio — Roadmap</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --page-bg: #fdf7f0;
+        --card-bg: #ffffff;
+        --card-elevated: #fffaf4;
+        --border: #f0dfcd;
+        --text: #2a2220;
+        --muted: #6f5b53;
+        --accent: #ff8a3d;
+        --accent-soft: rgba(255, 138, 61, 0.12);
+        --accent-strong: #f55d0d;
+        --shadow: 0px 30px 60px rgba(228, 187, 147, 0.35);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top right, rgba(255, 204, 153, 0.35), transparent 60%),
+          radial-gradient(circle at bottom left, rgba(255, 165, 102, 0.25), transparent 55%), var(--page-bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      header {
+        padding: 1.5rem 2.5rem 1rem;
+      }
+
+      .nav-shell {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .brand {
+        display: grid;
+        gap: 0.1rem;
+      }
+
+      .brand small {
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .brand strong {
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        font-size: 0.95rem;
+      }
+
+      .nav-links a,
+      .nav-links summary {
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links summary {
+        list-style: none;
+      }
+
+      .nav-links summary::-webkit-details-marker,
+      .nav-links summary::marker {
+        display: none;
+      }
+
+      .nav-links summary::after {
+        content: "▾";
+        font-size: 0.65rem;
+        transition: transform 0.2s ease;
+      }
+
+      .nav-links details {
+        position: relative;
+      }
+
+      .nav-links details[open] > summary {
+        color: var(--text);
+      }
+
+      .nav-links details[open] > summary::after {
+        transform: rotate(180deg);
+      }
+
+      .nav-dropdown {
+        position: absolute;
+        top: calc(100% + 0.75rem);
+        left: 0;
+        min-width: 14rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 0.75rem;
+        display: grid;
+        gap: 0.35rem;
+        box-shadow: var(--shadow);
+        z-index: 10;
+      }
+
+      .nav-dropdown a {
+        font-weight: 600;
+        color: var(--muted);
+        padding: 0.35rem 0.5rem;
+        border-radius: 10px;
+      }
+
+      .nav-dropdown a:hover,
+      .nav-dropdown a:focus {
+        color: var(--text);
+        background: var(--accent-soft);
+        outline: none;
+      }
+
+      .nav-links summary:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+      }
+
+      .mode-toggle {
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        background: #fff;
+        border-radius: 999px;
+        padding: 0.45rem 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .mode-toggle:hover {
+        transform: translateY(-1px);
+      }
+
+      main {
+        flex: 1;
+        padding: 0 1.5rem 3.5rem;
+      }
+
+      .layout {
+        max-width: 880px;
+        margin: 0 auto;
+        display: grid;
+        gap: 2.5rem;
+      }
+
+      h1 {
+        font-size: clamp(2.1rem, 4vw, 2.9rem);
+        margin: 0;
+        letter-spacing: -0.02em;
+      }
+
+      h2 {
+        margin: 0 0 0.35rem;
+        font-size: 1.6rem;
+      }
+
+      p {
+        margin: 0 0 1rem;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .card {
+        background: linear-gradient(150deg, rgba(255, 243, 227, 0.9), rgba(255, 255, 255, 0.95));
+        border-radius: 32px;
+        padding: clamp(1.75rem, 3vw, 2.5rem);
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 1rem;
+      }
+
+      .phase-list {
+        display: grid;
+        gap: 1.75rem;
+      }
+
+      .phase {
+        background: var(--card-bg);
+        border-radius: 28px;
+        border: 1px solid var(--border);
+        padding: clamp(1.35rem, 2.5vw, 1.75rem);
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .phase strong {
+        font-size: 1.1rem;
+        color: var(--text);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 1.1rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      footer {
+        padding: 2rem 1.5rem 3rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      @media (max-width: 720px) {
+        header {
+          padding: 1.25rem 1.5rem 0.75rem;
+        }
+
+        .nav-shell {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+          gap: 1rem;
+        }
+
+        .nav-dropdown {
+          position: static;
+          width: 100%;
+          box-shadow: none;
+        }
+
+        .phase {
+          border-radius: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-shell">
+        <a class="brand" href="/">
+          <small>ÅSE STEINSLAND</small>
+          <strong>Numerologist Studio</strong>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="/intake/">Intake</a>
+          <a href="/cms/">CMS</a>
+          <a href="/roadmap.html" aria-current="page">Roadmap</a>
+          <details>
+            <summary>About Nummerology</summary>
+            <div class="nav-dropdown">
+              <a href="/about.html">Our Story</a>
+              <a href="/about-vision-mission.html">Vision &amp; Mission</a>
+              <a href="/about-academy.html">Academy &amp; AI</a>
+            </div>
+          </details>
+          <button class="mode-toggle" type="button" id="modeToggle" aria-pressed="false">
+            <span aria-hidden="true">🌞</span>
+            Night mode
+          </button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <div class="layout">
+        <section class="card" aria-labelledby="roadmap-title">
+          <h1 id="roadmap-title">Our evolving roadmap</h1>
+          <p>
+            Numerologist Studio is growing from Åse's intimate readings into a living, collaborative academy. Below you'll find the
+            strategic phases guiding how we blend numerological wisdom with modern craft—keeping everything warm, human, and ready for
+            learners worldwide.
+          </p>
+        </section>
+        <section class="phase-list" aria-label="Roadmap phases">
+          <article class="phase">
+            <strong>Phase 1 · Foundations of trust</strong>
+            <p>
+              We are curating Åse's library of calculators, stories, and rituals into a shared GitHub home. GitHub Copilot and Codex help
+              us translate her intuition into clear documentation, reusable Python notebooks, and calm interfaces so every contributor can
+              move with confidence.
+            </p>
+            <ul>
+              <li>Document the original reading flow and glossary of Åse's language.</li>
+              <li>Stitch Codex suggestions into pull requests so that new features stay true to her voice.</li>
+              <li>Publish community guidelines that keep privacy, empathy, and spiritual consent at the centre.</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <strong>Phase 2 · Python as our fast &amp; secure builder</strong>
+            <p>
+              Python powers every calculator behind the studio. We're hardening those tools with automated tests, typed data models, and
+              secure packaging so readings scale safely. Codex reviews GitHub actions to keep deployments quick, auditable, and ready for
+              mentors joining from anywhere.
+            </p>
+            <ul>
+              <li>Refactor each calculator into shareable Python packages with clear APIs.</li>
+              <li>Adopt security scanning and dependency reviews to protect student data.</li>
+              <li>Create lightning-fast sandboxes so mentors can prototype spreads in minutes.</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <strong>Phase 3 · Global translation &amp; academy launch</strong>
+            <p>
+              AI translation lets Åse's teachings arrive in the language students dream in. We pair linguistic models with Åse's edits to
+              keep nuance, while an interactive learning portal introduces Numerologist Studio Academy. Learners explore lessons, practice
+              rituals, and earn badges that reflect both numerological progress and personal growth.
+            </p>
+            <ul>
+              <li>Co-create course storyboards with bilingual mentors and AI-assisted drafts.</li>
+              <li>Launch live workshops with instant translation, captioning, and glossary syncing.</li>
+              <li>Open an application path for apprenticeships and community-led cohorts.</li>
+            </ul>
+          </article>
+          <article class="phase">
+            <strong>Phase 4 · Tjorw calculator API &amp; future work</strong>
+            <p>
+              The Tjorw calculator API transforms years of numerology practice into a transparent service. By offering ethical automation,
+              we help career seekers, HR teams, and spiritual entrepreneurs design pathways that honour numerological insights without
+              replacing human wisdom.
+            </p>
+            <ul>
+              <li>Provide secure API keys with role-based access for partners and job-matching innovators.</li>
+              <li>Blend numerological profiles with coaching prompts that uplift job hunters rather than filter them out.</li>
+              <li>Publish open dashboards that show how Tjorw recommendations stay bias-aware and supportive.</li>
+            </ul>
+          </article>
+        </section>
+      </div>
+    </main>
+    <footer>© <span id="year"></span> Numerologist Studio. Guided by Åse Steinsland.</footer>
+    <script>
+      const modeToggle = document.getElementById("modeToggle");
+      const setMode = (night) => {
+        document.body.classList.toggle("night", night);
+        modeToggle.setAttribute("aria-pressed", night ? "true" : "false");
+        modeToggle.innerHTML = night
+          ? '<span aria-hidden="true">🌙</span> Light mode'
+          : '<span aria-hidden="true">🌞</span> Night mode';
+        localStorage.setItem("numerologist-mode", night ? "night" : "day");
+      };
+
+      modeToggle.addEventListener("click", () => {
+        setMode(!document.body.classList.contains("night"));
+      });
+
+      const savedMode = localStorage.getItem("numerologist-mode");
+      if (savedMode === "night") {
+        setMode(true);
+      }
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const nightStyles = document.createElement("style");
+      nightStyles.textContent = `
+        body.night {
+          background: radial-gradient(circle at top right, rgba(69, 48, 107, 0.45), transparent 60%),
+            radial-gradient(circle at bottom left, rgba(255, 138, 61, 0.15), transparent 55%), #1f1b2a;
+          color: #f6f2ff;
+        }
+        body.night .card {
+          background: linear-gradient(150deg, rgba(53, 39, 79, 0.85), rgba(30, 25, 42, 0.95));
+        }
+        body.night .phase {
+          background: rgba(33, 28, 46, 0.92);
+          border-color: rgba(115, 90, 168, 0.4);
+        }
+        body.night .nav-links a,
+        body.night .nav-links summary,
+        body.night .mode-toggle {
+          color: rgba(246, 242, 255, 0.75);
+        }
+        body.night .nav-dropdown {
+          background: rgba(30, 25, 42, 0.95);
+          border-color: rgba(115, 90, 168, 0.4);
+          box-shadow: 0px 30px 60px rgba(22, 16, 38, 0.6);
+        }
+        body.night .nav-dropdown a:hover,
+        body.night .nav-dropdown a:focus {
+          background: rgba(255, 138, 61, 0.2);
+          color: #f6f2ff;
+        }
+        body.night .mode-toggle {
+          background: rgba(246, 242, 255, 0.08);
+          border-color: rgba(115, 90, 168, 0.3);
+        }
+      `;
+      document.head.appendChild(nightStyles);
+    </script>
+  </body>
+</html>
