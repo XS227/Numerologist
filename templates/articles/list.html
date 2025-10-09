@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Artikler &amp; Analyser</h1>
+  <ul>
+    {% for article in articles %}
+      <li>
+        <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        <small>{{ article.published|date:"Y-m-d" }}</small>
+      </li>
+    {% empty %}
+      <li>Ingen artikler publisert enda.</li>
+    {% endfor %}
+  </ul>
+
+  {% if is_paginated %}
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">« Forrige</a>
+      {% endif %}
+      <span>Side {{ page_obj.number }} av {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Neste »</a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

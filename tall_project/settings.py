@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "articles.apps.ArticlesConfig",
     "intake.apps.IntakeConfig",
     "wagtail",
     "wagtail.admin",

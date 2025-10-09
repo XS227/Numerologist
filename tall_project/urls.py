@@ -16,6 +16,7 @@ urlpatterns = [
     path("documents/", include("wagtail.documents.urls")),
     path("intake/", include("intake.urls", namespace="intake")),
     path("i18n/", include("django.conf.urls.i18n")),
+    path("articles/", include("articles.urls")),
     path("healthz/", health_check, name="health_check"),
     path("", home, name="home"),
     path("<slug:slug>/", static_page, name="static_page"),
