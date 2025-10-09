@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <article>
+    <h1>{{ article.title }}</h1>
+    <p><small>Publisert: {{ article.published|date:"Y-m-d H:i" }} – {{ article.author }}</small></p>
+
+    {% if article.source_url %}
+      <p><a href="{{ article.source_url }}" target="_blank">Original artikkel / kilde</a></p>
+    {% endif %}
+
+    <div class="article-content">
+      {{ article.content|safe }}
+    </div>
+
+    {% if ai_analysis %}
+      <section class="ai-analysis">
+        <h2>AI Analyse</h2>
+        <p>{{ ai_analysis }}</p>
+      </section>
+    {% endif %}
+  </article>
+{% endblock %}
