@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Numerologist Studio — CMS Dashboard</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+        --bg: #fbf5ff;
+        --surface: rgba(255, 255, 255, 0.92);
+        --border: rgba(180, 156, 255, 0.35);
+        --accent: #7b5bff;
+        --accent-soft: rgba(123, 91, 255, 0.14);
+        --muted: #5d4b83;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top right, rgba(123, 91, 255, 0.25), transparent 55%),
+          radial-gradient(circle at bottom left, rgba(255, 203, 247, 0.25), transparent 60%), var(--bg);
+        color: #221a3a;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        padding: 1.5rem 2rem 1rem;
+      }
+
+      .nav {
+        max-width: 980px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+      }
+
+      .nav a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .nav small {
+        letter-spacing: 0.35em;
+        font-weight: 600;
+        font-size: 0.75rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-weight: 600;
+        font-size: 0.85rem;
+      }
+
+      main {
+        flex: 1;
+        padding: 0 1.25rem 3rem;
+      }
+
+      .container {
+        max-width: 980px;
+        margin: 0 auto;
+        display: grid;
+        gap: 2rem;
+      }
+
+      .panel {
+        background: var(--surface);
+        border-radius: 28px;
+        border: 1px solid var(--border);
+        padding: clamp(1.85rem, 3vw, 2.5rem);
+        backdrop-filter: blur(10px);
+        box-shadow: 0px 24px 40px rgba(135, 105, 220, 0.28);
+      }
+
+      h1 {
+        margin: 0 0 0.85rem;
+        font-size: clamp(2rem, 3vw, 2.7rem);
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+
+      .grid {
+        margin-top: 1.75rem;
+        display: grid;
+        gap: 1.2rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .tile {
+        border-radius: 20px;
+        padding: 1.2rem 1.35rem;
+        background: var(--accent-soft);
+        border: 1px solid rgba(123, 91, 255, 0.25);
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .tile strong {
+        font-size: 1.05rem;
+      }
+
+      .cta-group {
+        margin-top: 2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 0.8rem 1.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.2s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), #9f8fff);
+        color: #fff;
+        box-shadow: 0px 12px 24px rgba(123, 91, 255, 0.3);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--accent);
+        border: 1px solid rgba(123, 91, 255, 0.35);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      footer {
+        padding: 2rem 1.5rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 720px) {
+        header {
+          padding: 1.15rem 1.25rem 0.5rem;
+        }
+
+        .panel {
+          border-radius: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav">
+        <a href="/">
+          <small>ÅSE STEINSLAND</small>
+          <div>Numerologist Studio</div>
+        </a>
+        <span class="badge">CMS overview</span>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <section class="panel">
+          <h1>Content management dashboard</h1>
+          <p>
+            Here’s a quick snapshot of the tools Åse uses to publish numerology stories, manage reports, and keep track of
+            returning clients. Each tile links back into the live Django CMS once authentication is in place.
+          </p>
+          <div class="grid">
+            <div class="tile">
+              <strong>Client archive</strong>
+              <p>Review completed readings, session notes, and downloadable files.</p>
+            </div>
+            <div class="tile">
+              <strong>Report builder</strong>
+              <p>Create bespoke numerology breakdowns with Åse’s calculator presets.</p>
+            </div>
+            <div class="tile">
+              <strong>Scheduling</strong>
+              <p>Sync bookings, reminders, and follow-up prompts across time zones.</p>
+            </div>
+            <div class="tile">
+              <strong>Resource library</strong>
+              <p>Maintain meditations, templates, and references that support readings.</p>
+            </div>
+          </div>
+          <div class="cta-group">
+            <a class="btn btn-primary" href="/">Return to landing</a>
+            <a class="btn btn-secondary" href="mailto:studio@setaei.com">Request CMS access</a>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer>CMS preview crafted for Åse Steinsland’s numerology studio.</footer>
+  </body>
+</html>

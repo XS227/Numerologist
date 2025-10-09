@@ -3,254 +3,819 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Numerologist — Coming soon</title>
+    <title>Numerologist Studio — Welcome</title>
     <style>
       :root {
         color-scheme: light;
-        --bg: #f5f5f5;
-        --surface: #ffffff;
-        --border: #d9d9d9;
-        --text: #1f1f1f;
-        --accent: #5a31f4;
-        font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+        --page-bg: #fdf7f0;
+        --card-bg: #ffffff;
+        --card-elevated: #fffaf4;
+        --border: #f0dfcd;
+        --text: #2a2220;
+        --muted: #6f5b53;
+        --accent: #ff8a3d;
+        --accent-soft: rgba(255, 138, 61, 0.1);
+        --accent-strong: #f55d0d;
+        --shadow: 0px 30px 60px rgba(228, 187, 147, 0.35);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
       }
+
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
-        background: var(--bg);
+        min-height: 100vh;
+        background: radial-gradient(circle at top right, rgba(255, 204, 153, 0.35), transparent 60%),
+          radial-gradient(circle at bottom left, rgba(255, 165, 102, 0.25), transparent 55%), var(--page-bg);
         color: var(--text);
         display: flex;
         flex-direction: column;
-        min-height: 100vh;
       }
+
       a {
-        color: var(--accent);
+        color: inherit;
         text-decoration: none;
       }
-      a:hover {
-        text-decoration: underline;
+
+      header {
+        padding: 1.5rem 2.5rem 1rem;
       }
-      header,
-      footer {
-        background: var(--surface);
-        border-bottom: 1px solid var(--border);
-      }
-      footer {
-        border-bottom: none;
-        border-top: 1px solid var(--border);
-        margin-top: auto;
-      }
-      .container {
-        width: min(960px, 94vw);
+
+      .nav-shell {
+        max-width: 1080px;
         margin: 0 auto;
-        padding: 1.5rem 0;
-      }
-      .site-header__inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
-        flex-wrap: wrap;
+        gap: 2rem;
       }
-      nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
+
+      .brand {
+        display: grid;
+        gap: 0.1rem;
+      }
+
+      .brand small {
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .brand strong {
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      .nav-links {
         display: flex;
+        align-items: center;
         gap: 1.25rem;
-        font-weight: 600;
-      }
-      main {
-        flex: 1;
-        padding: 2.5rem 0 3rem;
-      }
-      footer p {
-        margin: 0;
-        font-size: 0.9rem;
-        text-align: center;
-      }
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 0.75rem;
-        padding: 1.75rem;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-      }
-      button {
-        font: inherit;
-      }
-      input,
-      button {
-        border-radius: 0.5rem;
-      }
-      .stack { display: grid; gap: 1.25rem; }
-      .hero {
-        text-align: center;
-        padding: 2.5rem 1.5rem;
-        background: linear-gradient(135deg, rgba(90, 49, 244, 0.14), rgba(90, 49, 244, 0));
-      }
-      .hero h1 {
-        margin: 0 0 0.75rem;
-        font-size: clamp(2rem, 4vw, 2.8rem);
-      }
-      .hero p {
-        margin: 0 auto;
-        max-width: 46rem;
-        line-height: 1.6;
-      }
-      .cta-group {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1.5rem;
-      }
-      .btn-primary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.75rem 1.5rem;
-        border-radius: 999px;
-        border: none;
-        background: var(--accent);
-        color: #fff;
-        font-weight: 600;
-        cursor: pointer;
-      }
-      .btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.75rem 1.5rem;
-        border-radius: 999px;
-        border: 1px solid var(--accent);
-        background: transparent;
-        color: var(--accent);
-        font-weight: 600;
-      }
-      .feature-list {
-        display: grid;
-        gap: 1rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-      .feature-list li {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.75rem;
-      }
-      .feature-list strong {
-        font-weight: 600;
-      }
-      .feature-icon {
-        font-size: 1.35rem;
-        line-height: 1;
-      }
-      form.lite-demo {
-        display: grid;
-        gap: 1rem;
-      }
-      .field {
-        display: grid;
-        gap: 0.35rem;
-        text-align: left;
-      }
-      .field input {
-        border: 1px solid var(--border);
-        padding: 0.65rem 0.75rem;
-        font: inherit;
-        background: #fafafa;
-      }
-      .errors {
-        color: #c62828;
-        margin: 0;
-        list-style: disc;
-        padding-left: 1.25rem;
         font-size: 0.95rem;
       }
-      .result-card {
-        display: grid;
-        gap: 0.5rem;
-        text-align: left;
-        border-top: 1px dashed var(--border);
-        padding-top: 1rem;
+
+      .nav-links a {
+        color: var(--muted);
+        font-weight: 600;
       }
-      @media (max-width: 600px) {
-        .hero {
-          padding: 2.25rem 1rem;
+
+      .mode-toggle {
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        background: #fff;
+        border-radius: 999px;
+        padding: 0.45rem 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+
+      .mode-toggle:hover {
+        transform: translateY(-1px);
+      }
+
+      main {
+        flex: 1;
+        padding: 0 1.5rem 3rem;
+      }
+
+      .layout {
+        max-width: 1080px;
+        margin: 0 auto 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      .hero-card {
+        position: relative;
+        border-radius: 36px;
+        background: linear-gradient(150deg, rgba(255, 243, 227, 0.9), rgba(255, 255, 255, 0.95));
+        box-shadow: var(--shadow);
+        padding: clamp(1.75rem, 3vw, 2.5rem);
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: -20% auto auto 55%;
+        width: 420px;
+        height: 420px;
+        background: radial-gradient(circle, rgba(255, 193, 125, 0.38) 0%, rgba(255, 193, 125, 0) 60%);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 1.75rem;
+      }
+
+      .card-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .greeting {
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .greeting h1 {
+        margin: 0;
+        font-size: clamp(2.1rem, 4vw, 2.9rem);
+        letter-spacing: -0.02em;
+      }
+
+      .greeting p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 32rem;
+        line-height: 1.6;
+        font-size: 1.05rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 181, 115, 0.35);
+        color: var(--muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .progress-card {
+        border-radius: 28px;
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 198, 141, 0.3);
+        padding: 1.5rem;
+        display: grid;
+        gap: 1rem;
+      }
+
+      .progress-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .progress-track {
+        position: relative;
+        height: 10px;
+        background: rgba(255, 198, 141, 0.2);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        position: absolute;
+        inset: 0;
+        width: 0%;
+        background: linear-gradient(135deg, var(--accent), #ffd29d);
+        border-radius: inherit;
+        transition: width 0.4s ease;
+      }
+
+      .step-card {
+        border-radius: 24px;
+        border: 1px solid rgba(255, 198, 141, 0.4);
+        padding: 1.75rem;
+        display: grid;
+        gap: 1.5rem;
+        background: var(--card-elevated);
+      }
+
+      .step-card header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0;
+      }
+
+      .step-card header h2 {
+        margin: 0;
+        font-size: 1.4rem;
+      }
+
+      .step-card header span {
+        font-weight: 600;
+        color: var(--accent-strong);
+        background: rgba(255, 138, 61, 0.15);
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+
+      .field-grid {
+        display: grid;
+        gap: 1.2rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      label {
+        display: grid;
+        gap: 0.4rem;
+        font-weight: 600;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      input,
+      select {
+        border-radius: 14px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 0.75rem 1rem;
+        font: inherit;
+        background: #fff;
+        color: inherit;
+        box-shadow: inset 0 1px 2px rgba(255, 176, 107, 0.15);
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 0.75rem 1.75rem;
+        border: none;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        color: #fff;
+        box-shadow: 0px 12px 28px rgba(245, 93, 13, 0.25);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--accent-strong);
+        border: 1px solid rgba(255, 138, 61, 0.3);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .snapshot-card {
+        border-radius: 24px;
+        border: 1px solid rgba(255, 198, 141, 0.4);
+        padding: 1.75rem;
+        background: #fff;
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .snapshot-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .snapshot-tile {
+        background: rgba(255, 138, 61, 0.08);
+        border-radius: 18px;
+        padding: 1.1rem 1.2rem;
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      .snapshot-tile strong {
+        font-size: 1.1rem;
+      }
+
+      .snapshot-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .stories-card {
+        border-radius: 30px;
+        background: #fff;
+        border: 1px solid rgba(255, 198, 141, 0.4);
+        padding: 1.75rem;
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .stories-card h2 {
+        margin: 0;
+        font-size: 1.4rem;
+      }
+
+      .story-grid {
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .story-tile {
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.65);
+        border: 1px solid rgba(255, 198, 141, 0.45);
+        padding: 1.25rem;
+        display: grid;
+        gap: 0.55rem;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      }
+
+      .story-number {
+        font-weight: 700;
+        color: var(--accent-strong);
+      }
+
+      .story-title {
+        font-weight: 600;
+      }
+
+      footer {
+        padding: 2rem;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .error-message {
+        color: #b3261e;
+        font-size: 0.85rem;
+        margin-top: 0.35rem;
+      }
+
+      @media (max-width: 720px) {
+        header {
+          padding: 1.25rem 1.25rem 0.5rem;
+        }
+
+        main {
+          padding: 0 1rem 2.5rem;
+        }
+
+        .hero-card {
+          border-radius: 28px;
+        }
+
+        .progress-card,
+        .step-card,
+        .snapshot-card,
+        .stories-card {
+          border-radius: 22px;
         }
       }
     </style>
   </head>
   <body>
-    <header class="site-header">
-      <div class="container site-header__inner">
-        <a href="/" class="logo" style="font-weight:700; font-size:1.2rem;">Numerologist</a>
-        <nav aria-label="Site">
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/intake/">Client intake</a></li>
-            <li><a href="/cms/" rel="noreferrer" target="_blank">CMS</a></li>
-          </ul>
-        </nav>
+    <header>
+      <div class="nav-shell">
+        <a class="brand" href="/">
+          <small>ÅSE STEINSLAND</small>
+          <strong>Numerologist Studio</strong>
+        </a>
+        <div class="nav-links">
+          <a href="/intake/">Intake</a>
+          <a href="/cms/">CMS</a>
+          <button class="mode-toggle" type="button" id="modeToggle" aria-pressed="false">
+            <span aria-hidden="true">🌞</span>
+            Night mode
+          </button>
+        </div>
       </div>
     </header>
     <main>
-      <div class="container">
-        <div class="stack">
-          <section class="card hero" aria-labelledby="hero-title">
-            <p style="font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:rgba(31,31,31,0.7);">Under construction</p>
-            <h1 id="hero-title">Numerologist is getting a fresh coat of stardust ✨</h1>
-            <p>
-              We are preparing a calm, focused numerology studio for Åse’s clients. While the full experience lands, you can
-              explore a lite calculator and follow our progress.
-            </p>
-            <div class="cta-group">
-              <a class="btn-secondary" href="mailto:studio@setaei.com">Contact Setaei</a>
-              <a class="btn-secondary" href="https://github.com/XS227/Numerologist" target="_blank" rel="noopener">Project on GitHub</a>
+      <div class="layout">
+        <section class="hero-card" aria-labelledby="welcome-title">
+          <div class="hero-content">
+            <div class="card-header">
+              <span class="pill">Hello friend</span>
+              <span class="pill">Progress tracker</span>
             </div>
-          </section>
-
-          <section class="card" aria-labelledby="glimpse-title">
-            <h2 id="glimpse-title" style="margin-top:0;">What’s coming</h2>
-            <ul class="feature-list">
-              <li><span class="feature-icon">📊</span><span><strong>Guided reports:</strong> Friendly flows turn birth data into clear, shareable insights.</span></li>
-              <li><span class="feature-icon">🤝</span><span><strong>Client workspace:</strong> Intake, notes, and archives in one tidy dashboard.</span></li>
-              <li><span class="feature-icon">🔮</span><span><strong>Åse’s numerology engine:</strong> Built on her Norwegian methodology, tuned by Python.</span></li>
-            </ul>
-          </section>
-
-          <section class="card" aria-labelledby="demo-title">
-            <h2 id="demo-title" style="margin-top:0;">Try the lite calculator</h2>
-            <p>Share your name and birth date for a quick sample of the numbers we’re polishing for launch.</p>
-            <form method="post" class="lite-demo" novalidate>
-              <div class="field">
-                <label for="full_name">Full name</label>
-                <input id="full_name" name="full_name" type="text" placeholder="Your full name" />
+            <div class="greeting">
+              <h1 id="welcome-title">Follow the guided steps to uncover every calculator Åse uses when preparing a reading.</h1>
+              <p>
+                We start with a warm welcome and a simple intake. Share a preferred name, birth date, and the form Åse uses for
+                calculations. From here you can peek at a lite numerology overview or continue into the full studio.
+              </p>
+            </div>
+            <article class="progress-card" aria-label="Intake progress">
+              <div class="progress-top">
+                <strong>Intake progress</strong>
+                <span id="progressLabel">Progress: 0% complete</span>
               </div>
-              <div class="field">
-                <label for="birth_date">Birth date</label>
-                <input id="birth_date" name="birth_date" type="date" />
+              <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <div class="progress-bar" id="progressBar"></div>
               </div>
-              <button type="submit" class="btn-primary">Calculate</button>
-              <div class="result-card" role="status" aria-live="polite">
-                <strong>Your numbers</strong>
-                <p>Life Path: 7</p>
-                <p>Expression: 5</p>
-                <p>Soul Urge: 9</p>
+            </article>
+            <form class="step-card" id="intakeForm" novalidate aria-labelledby="step-title">
+              <header>
+                <h2 id="step-title">Step 1 · Intake essentials</h2>
+                <span>3 mins</span>
+              </header>
+              <div class="field-grid">
+                <label>
+                  Preferred name
+                  <input type="text" name="preferred_name" id="preferred_name" placeholder="How should we greet you?" />
+                  <span class="error-message" data-error-for="preferred_name" hidden>Please add your name to continue.</span>
+                </label>
+                <label>
+                  Birth date
+                  <input type="date" name="birth_date" id="birth_date" />
+                  <span class="error-message" data-error-for="birth_date" hidden>Please choose your birth date.</span>
+                </label>
+                <label>
+                  Birth hour (optional)
+                  <input type="time" name="birth_time" id="birth_time" />
+                </label>
+                <label>
+                  Current location
+                  <input type="text" name="location" id="location" placeholder="City, Country" />
+                </label>
+                <label>
+                  Form to calculate
+                  <select name="form_type" id="form_type">
+                    <option value="">Choose one…</option>
+                    <option value="lite">Lite numerology overview</option>
+                    <option value="deep">Full Åse master analysis</option>
+                    <option value="compatibility">Compatibility session</option>
+                  </select>
+                  <span class="error-message" data-error-for="form_type" hidden>Please pick a form so we know what to prepare.</span>
+                </label>
+              </div>
+              <div class="actions">
+                <button class="btn btn-secondary" type="button" id="saveProgress">Save for later</button>
+                <button class="btn btn-primary" type="submit">Continue</button>
               </div>
             </form>
-          </section>
-        </div>
+            <article class="snapshot-card" aria-labelledby="snapshot-title">
+              <div>
+                <h2 id="snapshot-title" style="margin:0 0 0.35rem;">Your numerology snapshot</h2>
+                <p style="margin:0; color:var(--muted); max-width:38ch;">
+                  Share the details above and choose “Generate overview” to calculate your personal numerology profile using Åse’s
+                  light calculator.
+                </p>
+              </div>
+              <div class="snapshot-grid" id="snapshotGrid">
+                <div class="snapshot-tile">
+                  <strong>Life Path</strong>
+                  <span data-value="life_path">—</span>
+                  <small style="color:var(--muted);">Guides your lifetime rhythm and lessons.</small>
+                </div>
+                <div class="snapshot-tile">
+                  <strong>Expression</strong>
+                  <span data-value="expression">—</span>
+                  <small style="color:var(--muted);">How you naturally show gifts to the world.</small>
+                </div>
+                <div class="snapshot-tile">
+                  <strong>Soul Urge</strong>
+                  <span data-value="soul">—</span>
+                  <small style="color:var(--muted);">The desires your heart keeps whispering.</small>
+                </div>
+                <div class="snapshot-tile">
+                  <strong>Personality</strong>
+                  <span data-value="personality">—</span>
+                  <small style="color:var(--muted);">The impression people receive when you arrive.</small>
+                </div>
+              </div>
+              <div class="snapshot-actions">
+                <button class="btn btn-primary" type="button" id="generateOverview">Generate overview</button>
+                <button class="btn btn-secondary" type="button" id="downloadSummary">Download full analysis</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="stories-card" aria-labelledby="stories-title">
+          <h2 id="stories-title">Core number stories</h2>
+          <p style="margin:0; color:var(--muted); max-width:68ch;">
+            Each number carries a distinct tone. These quick notes help you connect the lite calculator’s insight with Åse’s
+            deeper readings. Come back after your full session to compare how the energies mature.
+          </p>
+          <div class="story-grid">
+            <article class="story-tile">
+              <span class="story-number">Number 1</span>
+              <span class="story-title">The Pioneer</span>
+              <p style="margin:0; color:var(--muted);">Courage, initiative, and a drive to set the pace for others.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 2</span>
+              <span class="story-title">The Diplomat</span>
+              <p style="margin:0; color:var(--muted);">Gentle balance, partnership, and the wisdom of patience.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 3</span>
+              <span class="story-title">The Creative</span>
+              <p style="margin:0; color:var(--muted);">Expression, optimism, and weaving joy into daily rituals.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 4</span>
+              <span class="story-title">The Builder</span>
+              <p style="margin:0; color:var(--muted);">Structure, loyalty, and crafting foundations that last.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 5</span>
+              <span class="story-title">The Explorer</span>
+              <p style="margin:0; color:var(--muted);">Freedom, curiosity, and thriving on fresh experiences.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 6</span>
+              <span class="story-title">The Guardian</span>
+              <p style="margin:0; color:var(--muted);">Harmony, devotion, and tending to family with warmth.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 7</span>
+              <span class="story-title">The Mystic</span>
+              <p style="margin:0; color:var(--muted);">Reflection, intuition, and seeking meaning beneath the surface.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 8</span>
+              <span class="story-title">The Steward</span>
+              <p style="margin:0; color:var(--muted);">Leadership, accountability, and stewardship of resources.</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">Number 9</span>
+              <span class="story-title">The Sage</span>
+              <p style="margin:0; color:var(--muted);">Compassion, vision, and the grace of completion.</p>
+            </article>
+          </div>
+        </section>
       </div>
     </main>
     <footer>
-      <div class="container">
-        <p>Crafted for Åse by Setaei — powered by Django.</p>
-      </div>
+      Crafted for Åse Steinsland’s Numerologist Studio — powered by a light calculator preview.
     </footer>
+
+    <script>
+      const intakeForm = document.getElementById("intakeForm");
+      const progressBar = document.getElementById("progressBar");
+      const progressLabel = document.getElementById("progressLabel");
+      const progressTrack = document.querySelector(".progress-track");
+      const generateBtn = document.getElementById("generateOverview");
+      const downloadBtn = document.getElementById("downloadSummary");
+      const modeToggle = document.getElementById("modeToggle");
+      const saveProgress = document.getElementById("saveProgress");
+
+      const valueElements = {
+        life_path: document.querySelector('[data-value="life_path"]'),
+        expression: document.querySelector('[data-value="expression"]'),
+        soul: document.querySelector('[data-value="soul"]'),
+        personality: document.querySelector('[data-value="personality"]'),
+      };
+
+      function reduceNumber(total) {
+        const masterNumbers = new Set([11, 22, 33]);
+        while (total > 9 && !masterNumbers.has(total)) {
+          total = total
+            .toString()
+            .split("")
+            .map(Number)
+            .reduce((sum, digit) => sum + digit, 0);
+        }
+        return total;
+      }
+
+      function lifePathFromDate(dateValue) {
+        if (!dateValue) return null;
+        const digits = dateValue.replace(/[^0-9]/g, "").split("").map(Number);
+        if (!digits.length) return null;
+        const total = digits.reduce((sum, digit) => sum + digit, 0);
+        return reduceNumber(total);
+      }
+
+      const letterValues = {
+        a: 1,
+        b: 2,
+        c: 3,
+        d: 4,
+        e: 5,
+        f: 6,
+        g: 7,
+        h: 8,
+        i: 9,
+        j: 1,
+        k: 2,
+        l: 3,
+        m: 4,
+        n: 5,
+        o: 6,
+        p: 7,
+        q: 8,
+        r: 9,
+        s: 1,
+        t: 2,
+        u: 3,
+        v: 4,
+        w: 5,
+        x: 6,
+        y: 7,
+        z: 8,
+      };
+
+      const vowels = new Set(["a", "e", "i", "o", "u", "y"]);
+
+      function calculateNameNumber(name, predicate) {
+        if (!name) return null;
+        const letters = name.toLowerCase().replace(/[^a-z]/g, "").split("");
+        const filtered = predicate ? letters.filter((char) => predicate(char)) : letters;
+        if (!filtered.length) return null;
+        const total = filtered.reduce((sum, char) => sum + (letterValues[char] || 0), 0);
+        return reduceNumber(total);
+      }
+
+      function updateProgress(percent) {
+        const normalized = Math.max(0, Math.min(100, Math.round(percent)));
+        progressBar.style.width = `${normalized}%`;
+        progressLabel.textContent = `Progress: ${normalized}% complete`;
+        progressTrack.setAttribute("aria-valuenow", String(normalized));
+      }
+
+      function validateForm() {
+        let valid = true;
+        ["preferred_name", "birth_date", "form_type"].forEach((fieldName) => {
+          const field = document.getElementById(fieldName);
+          const error = document.querySelector(`[data-error-for="${fieldName}"]`);
+          if (!field.value) {
+            valid = false;
+            error?.removeAttribute("hidden");
+            field.setAttribute("aria-invalid", "true");
+          } else {
+            error?.setAttribute("hidden", "");
+            field.removeAttribute("aria-invalid");
+          }
+        });
+        return valid;
+      }
+
+      function generateOverview() {
+        const name = document.getElementById("preferred_name").value.trim();
+        const birthDate = document.getElementById("birth_date").value;
+        if (!validateForm()) {
+          return;
+        }
+
+        const lifePath = lifePathFromDate(birthDate);
+        const expression = calculateNameNumber(name, () => true);
+        const soulUrge = calculateNameNumber(name, (char) => vowels.has(char));
+        const personality = calculateNameNumber(name, (char) => !vowels.has(char));
+
+        valueElements.life_path.textContent = lifePath ?? "—";
+        valueElements.expression.textContent = expression ?? "—";
+        valueElements.soul.textContent = soulUrge ?? "—";
+        valueElements.personality.textContent = personality ?? "—";
+
+        updateProgress(84);
+      }
+
+      intakeForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!validateForm()) {
+          return;
+        }
+        updateProgress(42);
+        document.getElementById("snapshot-title").scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      generateBtn.addEventListener("click", generateOverview);
+
+      downloadBtn.addEventListener("click", () => {
+        if (!validateForm()) {
+          return;
+        }
+        generateOverview();
+        const name = document.getElementById("preferred_name").value.trim() || "friend";
+        const text = `Numerology overview for ${name}\n\nLife Path: ${valueElements.life_path.textContent}\nExpression: ${valueElements.expression.textContent}\nSoul Urge: ${valueElements.soul.textContent}\nPersonality: ${valueElements.personality.textContent}`;
+        const blob = new Blob([text], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `${name.replace(/\s+/g, "-").toLowerCase() || "numerology"}-overview.txt`;
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          URL.revokeObjectURL(link.href);
+          link.remove();
+        }, 0);
+      });
+
+      saveProgress.addEventListener("click", () => {
+        const name = document.getElementById("preferred_name").value.trim();
+        const birth = document.getElementById("birth_date").value;
+        const form = document.getElementById("form_type").value;
+        const payload = { name, birth, form, timestamp: new Date().toISOString() };
+        localStorage.setItem("numerologist-intake", JSON.stringify(payload));
+        updateProgress(24);
+        saveProgress.textContent = "Progress saved";
+        setTimeout(() => (saveProgress.textContent = "Save for later"), 3000);
+      });
+
+      modeToggle.addEventListener("click", () => {
+        const pressed = modeToggle.getAttribute("aria-pressed") === "true";
+        modeToggle.setAttribute("aria-pressed", String(!pressed));
+        document.body.classList.toggle("night", !pressed);
+        modeToggle.innerHTML = !pressed ? '<span aria-hidden="true">🌙</span> Light mode' : '<span aria-hidden="true">🌞</span> Night mode';
+      });
+
+      const saved = localStorage.getItem("numerologist-intake");
+      if (saved) {
+        try {
+          const payload = JSON.parse(saved);
+          if (payload.name) document.getElementById("preferred_name").value = payload.name;
+          if (payload.birth) document.getElementById("birth_date").value = payload.birth;
+          if (payload.form) document.getElementById("form_type").value = payload.form;
+          updateProgress(24);
+        } catch (error) {
+          console.error("Unable to load saved progress", error);
+        }
+      }
+
+      const nightStyles = document.createElement("style");
+      nightStyles.textContent = `
+        body.night {
+          background: radial-gradient(circle at top right, rgba(69, 48, 107, 0.45), transparent 60%),
+            radial-gradient(circle at bottom left, rgba(255, 138, 61, 0.15), transparent 55%), #1f1b2a;
+          color: #f6f2ff;
+        }
+        body.night .hero-card {
+          background: linear-gradient(150deg, rgba(53, 39, 79, 0.85), rgba(30, 25, 42, 0.95));
+        }
+        body.night .progress-card,
+        body.night .step-card,
+        body.night .snapshot-card,
+        body.night .stories-card {
+          background: rgba(33, 28, 46, 0.92);
+          border-color: rgba(115, 90, 168, 0.4);
+        }
+        body.night .story-tile {
+          background: rgba(49, 40, 68, 0.85);
+          border-color: rgba(115, 90, 168, 0.4);
+        }
+        body.night .snapshot-tile {
+          background: rgba(255, 138, 61, 0.15);
+        }
+        body.night .pill {
+          background: rgba(255, 255, 255, 0.08);
+          color: rgba(246, 242, 255, 0.75);
+          border-color: rgba(115, 90, 168, 0.3);
+        }
+        body.night footer {
+          color: rgba(246, 242, 255, 0.65);
+        }
+        body.night .nav-links a,
+        body.night .mode-toggle {
+          color: rgba(246, 242, 255, 0.75);
+        }
+        body.night .mode-toggle {
+          background: rgba(246, 242, 255, 0.08);
+          border-color: rgba(115, 90, 168, 0.3);
+        }
+      `;
+      document.head.appendChild(nightStyles);
+    </script>
   </body>
 </html>
