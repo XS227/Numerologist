@@ -1,0 +1,38 @@
+# Norwegian Bokmål translations for Numerologist
+msgid ""
+msgstr ""
+"Project-Id-Version: Numerologist\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-09 03:13+0000\n"
+"PO-Revision-Date: 2025-10-09 00:00+0000\n"
+"Last-Translator: ChatGPT <>\n"
+"Language-Team: Norwegian Bokmål\n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: tall_project/settings.py:127
+msgid "English"
+msgstr "Engelsk"
+
+#: tall_project/settings.py:128
+msgid "Norwegian Bokmål"
+msgstr "Norsk bokmål"
+
+#: tall_project/settings.py:129
+msgid "Persian"
+msgstr "Persisk"
+
+#: tall_project/templates/base.html:233
+msgid "Switch language"
+msgstr "Bytt språk"
+
+#: tall_project/templates/base.html:262
+msgid "Developed in collaboration with numerologist Åse Steinsland using her calculation method — implemented with Python, Codex, and Git."
+msgstr "Utviklet i samarbeid med numerolog Åse Steinsland ved hjelp av hennes kalkulasjonsmetode – implementert med Python, Codex og Git."
+
+#: tall_project/templates/base.html:263
+msgid "All rights reserved."
+msgstr "Alle rettigheter reservert."

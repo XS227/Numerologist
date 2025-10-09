@@ -13,6 +13,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: tall_project/settings.py:127
+msgid "English"
+msgstr "انگلیسی"
+
+#: tall_project/settings.py:128
+msgid "Norwegian Bokmål"
+msgstr "نروژی بوکمول"
+
+#: tall_project/settings.py:129
+msgid "Persian"
+msgstr "فارسی"
+
+#: tall_project/templates/base.html:233
+msgid "Switch language"
+msgstr "تغییر زبان"
+
+#: tall_project/templates/base.html:262
+msgid "Developed in collaboration with numerologist Åse Steinsland using her calculation method — implemented with Python, Codex, and Git."
+msgstr "توسعه‌یافته با همکاری علم اعداد آسه استینسلاند با بهره‌گیری از روش محاسباتی او — پیاده‌سازی‌شده با پایتون، کودکس و گیت."
+
 #: tall_project/navigation.py:32 tall_project/navigation.py:103
 msgid "Discover Numerology"
 msgstr "کشف علم اعداد"
