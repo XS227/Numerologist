@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ALÅ Calculator — Translating Arecibo Line Vibrations</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --page-bg: #f6f1eb;
+        --card-bg: #ffffff;
+        --accent: #ff7a3d;
+        --accent-soft: rgba(255, 122, 61, 0.14);
+        --accent-strong: #f5580f;
+        --text: #241c18;
+        --muted: #6a5d58;
+        --border: #e5d8cf;
+        --shadow: 0px 28px 60px rgba(208, 174, 150, 0.32);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top right, rgba(255, 198, 145, 0.28), transparent 62%),
+          radial-gradient(circle at bottom left, rgba(255, 174, 120, 0.22), transparent 55%),
+          var(--page-bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        padding: 1.75rem 2.5rem 1.2rem;
+      }
+
+      .nav-shell {
+        max-width: 1120px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .brand {
+        display: grid;
+        gap: 0.2rem;
+      }
+
+      .brand small {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .brand strong {
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1.25rem;
+        font-size: 0.95rem;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .nav-links a {
+        color: inherit;
+        text-decoration: none;
+        position: relative;
+        padding-bottom: 0.2rem;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+      }
+
+      .nav-links a:hover::after,
+      .nav-links a:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      main {
+        flex: 1;
+        padding: 0 2.5rem 4rem;
+      }
+
+      .layout {
+        max-width: 1120px;
+        margin: 0 auto;
+        display: grid;
+        gap: 3rem;
+      }
+
+      .hero {
+        background: var(--card-bg);
+        border-radius: 32px;
+        padding: 3rem;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 2rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.4rem, 4vw, 3rem);
+        margin: 0;
+        line-height: 1.1;
+      }
+
+      .hero p {
+        margin: 0;
+        font-size: 1.05rem;
+        color: var(--muted);
+      }
+
+      .hero-grid {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .info-card {
+        background: var(--accent-soft);
+        border: 1px solid rgba(245, 88, 15, 0.16);
+        border-radius: 24px;
+        padding: 1.6rem;
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .info-card h2 {
+        font-size: 1.1rem;
+        margin: 0;
+        color: var(--accent-strong);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .info-card p {
+        margin: 0;
+        color: var(--text);
+        font-size: 0.98rem;
+        line-height: 1.6;
+      }
+
+      .calculator-section {
+        background: var(--card-bg);
+        border-radius: 28px;
+        padding: clamp(2.5rem, 3vw, 3rem);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        display: grid;
+        gap: 2.5rem;
+      }
+
+      .calculator-header {
+        display: grid;
+        gap: 0.8rem;
+      }
+
+      .calculator-header h2 {
+        margin: 0;
+        font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+      }
+
+      .calculator-header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.6;
+      }
+
+      form {
+        display: grid;
+        gap: 1.8rem;
+      }
+
+      .field-group {
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      label {
+        font-weight: 600;
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: #fff;
+        font-size: 1rem;
+        font-family: inherit;
+        color: var(--text);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+        transition: border 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      input[type="text"]:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(255, 122, 61, 0.18);
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .helper-text {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .results-grid {
+        display: grid;
+        gap: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .result-card {
+        border-radius: 22px;
+        padding: 1.6rem;
+        border: 1px solid var(--border);
+        background: #fff8f4;
+        display: grid;
+        gap: 0.45rem;
+      }
+
+      .result-card h3 {
+        margin: 0;
+        font-size: 0.95rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .result-card strong {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--accent-strong);
+      }
+
+      .result-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .interpretation {
+        background: var(--card-bg);
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        padding: 2.5rem;
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .interpretation h2 {
+        margin: 0;
+        font-size: 1.6rem;
+      }
+
+      .interpretation ul {
+        margin: 0;
+        padding-left: 1.25rem;
+        display: grid;
+        gap: 0.65rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      footer {
+        padding: 2rem 2.5rem 3rem;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .footer-shell {
+        max-width: 1120px;
+        margin: 0 auto;
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .credit {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.45rem 0.75rem;
+        background: var(--accent-soft);
+        border-radius: 999px;
+        font-weight: 600;
+      }
+
+      @media (max-width: 720px) {
+        header {
+          padding: 1.5rem 1.5rem 1rem;
+        }
+
+        main {
+          padding: 0 1.5rem 3rem;
+        }
+
+        footer {
+          padding: 2rem 1.5rem 3rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-shell">
+        <div class="brand">
+          <small>ÅSE STEINSLAND STUDIO</small>
+          <strong>ALÅ — Arecibo Line Translator</strong>
+        </div>
+        <nav class="nav-links" aria-label="Page sections">
+          <a href="#method">Method</a>
+          <a href="#calculator">Calculator</a>
+          <a href="#interpretation">Interpretation</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <div class="layout">
+        <section class="hero" id="method">
+          <h1>Decode the Arecibo Line into grounded numerological insight.</h1>
+          <p>
+            The ALÅ calculator blends Åse’s terrestrial numerology practice with the speculative linguistics of the Arecibo
+            Line. It helps you translate interstellar number streams into a grounded Earth frequency you can work with in
+            ceremony, client sessions, or personal study.
+          </p>
+          <div class="hero-grid">
+            <article class="info-card">
+              <h2>What it does</h2>
+              <p>
+                Converts alien transmissions—names, phrases, or symbols—into structured vibration totals. Each total is then
+                bridged into an Earth resonance number so you can compare cosmic tone with everyday life patterns.
+              </p>
+            </article>
+            <article class="info-card">
+              <h2>How it works</h2>
+              <p>
+                The method of Åse anchors cosmic glyphs to a 0–8 universal scale before reducing them with Pythagorean
+                integrity. Master numbers 11, 22, and 33 are preserved to honour high-frequency encounters.
+              </p>
+            </article>
+            <article class="info-card">
+              <h2>Why it matters</h2>
+              <p>
+                Translating universal numbers to earthly numbers lets you interpret guidance, prepare rituals, and create a
+                shared language with clients curious about off-world wisdom.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="calculator-section" id="calculator" aria-labelledby="calculator-title">
+          <div class="calculator-header">
+            <h2 id="calculator-title">Experiment with the ALÅ translator.</h2>
+            <p>
+              Enter an Earth anchor (your name, a place, or project) and a universal transmission (dream phrase, glyphs,
+              coordinates). Results refresh instantly so you can test variations and study the shifting vibration.
+            </p>
+          </div>
+          <form aria-describedby="calculator-helper">
+            <p id="calculator-helper" class="helper-text">
+              The alphabet below cycles every nine steps, including Å and other accented characters. Symbols or digits in your
+              universal transmission are mapped through their digital root before being merged into the cosmic total.
+            </p>
+            <div class="field-group">
+              <label for="earth-input">Earth anchor</label>
+              <input id="earth-input" type="text" placeholder="e.g. Åse Steinsland Studio" autocomplete="off" />
+            </div>
+            <div class="field-group">
+              <label for="cosmic-input">Universal transmission</label>
+              <textarea id="cosmic-input" placeholder="Describe the signal, phrase, or glyphs"></textarea>
+            </div>
+          </form>
+          <div class="results-grid" aria-live="polite">
+            <article class="result-card">
+              <h3>Cosmic vibration</h3>
+              <strong id="cosmic-total">0</strong>
+              <p id="cosmic-text">Awaiting universal transmission…</p>
+            </article>
+            <article class="result-card">
+              <h3>Earth resonance</h3>
+              <strong id="earth-total">0</strong>
+              <p id="earth-text">Share an Earth anchor to measure the bridge.</p>
+            </article>
+            <article class="result-card">
+              <h3>Bridge frequency</h3>
+              <strong id="bridge-total">0</strong>
+              <p id="bridge-text">When both fields are active, the bridge interprets your alignment.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="interpretation" id="interpretation" aria-labelledby="interpretation-title">
+          <h2 id="interpretation-title">Reading the numbers</h2>
+          <ul>
+            <li>
+              <strong>Cosmic vibration</strong> is the reduced sum of the universal transmission. When no reduction is possible
+              (11, 22, 33), you are touching a master signal that wants to stay expansive.
+            </li>
+            <li>
+              <strong>Earth resonance</strong> reflects your anchor. It reveals how grounded your presence is when receiving the
+              transmission. If it mirrors the cosmic vibration, the message is immediately actionable.
+            </li>
+            <li>
+              <strong>Bridge frequency</strong> combines both totals to show the collaborative path. A low bridge (1–3) signals a
+              call to initiate; a mid bridge (4–6) requests steady integration; a high bridge (7–9/11/22/33) invites advanced
+              study or mentorship.
+            </li>
+            <li>
+              Experiment with spelling, titles, and phrasing. The live feedback makes it easy to test ceremonial mantras before
+              sharing them with clients or community members.
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-shell">
+        <span class="credit">Credit to every researcher, dreamer, and journalist keeping the Arecibo Line in the news.</span>
+        <span>
+          Crafted for Åse Steinsland’s numerology studio. This tool is speculative, respectful, and built to inspire further
+          exploration into alien linguistic vibrations.
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      const cosmicField = document.getElementById("cosmic-input");
+      const earthField = document.getElementById("earth-input");
+      const cosmicTotalEl = document.getElementById("cosmic-total");
+      const earthTotalEl = document.getElementById("earth-total");
+      const bridgeTotalEl = document.getElementById("bridge-total");
+      const cosmicText = document.getElementById("cosmic-text");
+      const earthText = document.getElementById("earth-text");
+      const bridgeText = document.getElementById("bridge-text");
+
+      const cosmicAlphabet = [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "I",
+        "J",
+        "K",
+        "L",
+        "M",
+        "N",
+        "O",
+        "P",
+        "Q",
+        "R",
+        "S",
+        "T",
+        "U",
+        "V",
+        "W",
+        "X",
+        "Y",
+        "Z",
+        "Å",
+        "Æ",
+        "Ø",
+      ];
+
+      const cosmicMap = cosmicAlphabet.reduce((map, letter, index) => {
+        const value = (index % 9) + 1;
+        map[letter] = value;
+        return map;
+      }, {});
+
+      const masterNumbers = new Set([11, 22, 33]);
+
+      function digitalRoot(number) {
+        let n = Math.abs(number);
+        while (n > 9 && !masterNumbers.has(n)) {
+          n = n
+            .toString()
+            .split("")
+            .reduce((sum, digit) => sum + Number(digit), 0);
+        }
+        return n === 0 ? 0 : n;
+      }
+
+      function sumForValue(value) {
+        return value
+          .toUpperCase()
+          .split("")
+          .reduce((total, char) => {
+            if (cosmicMap[char]) {
+              return total + cosmicMap[char];
+            }
+            if (/\d/.test(char)) {
+              return total + digitalRoot(Number(char));
+            }
+            if (/[^A-ZÅÆØ]/.test(char)) {
+              // treat other unicode characters by mapping their code point
+              return total + digitalRoot(char.codePointAt(0));
+            }
+            return total;
+          }, 0);
+      }
+
+      function describeNumber(total) {
+        if (!total) {
+          return "";
+        }
+        if (masterNumbers.has(total)) {
+          return `Master frequency ${total} — hold the field open.`;
+        }
+        const qualities = {
+          1: "Initiation, pioneering, bold direction.",
+          2: "Partnership, diplomacy, intuitive listening.",
+          3: "Creative expression, storytelling, celebration.",
+          4: "Structure, stewardship, dependable rhythm.",
+          5: "Movement, experimentation, cross-dimensional travel.",
+          6: "Care, harmony, nurturing integration.",
+          7: "Mysticism, study, contemplative research.",
+          8: "Mastery, leadership, energetic architecture.",
+          9: "Completion, service, universal compassion.",
+        };
+        return qualities[total] || "";
+      }
+
+      function updateCalculator() {
+        const cosmicInput = cosmicField.value.trim();
+        const earthInput = earthField.value.trim();
+
+        const cosmicSum = cosmicInput ? sumForValue(cosmicInput) : 0;
+        const earthSum = earthInput ? sumForValue(earthInput) : 0;
+
+        const cosmicReduced = cosmicSum ? digitalRoot(cosmicSum) : 0;
+        const earthReduced = earthSum ? digitalRoot(earthSum) : 0;
+
+        const bridgeSum = cosmicReduced + earthReduced;
+        const bridgeReduced = bridgeSum ? digitalRoot(bridgeSum) : 0;
+
+        cosmicTotalEl.textContent = cosmicReduced;
+        earthTotalEl.textContent = earthReduced;
+        bridgeTotalEl.textContent = bridgeReduced;
+
+        cosmicText.textContent = cosmicInput
+          ? describeNumber(cosmicReduced)
+          : "Awaiting universal transmission…";
+
+        earthText.textContent = earthInput
+          ? describeNumber(earthReduced)
+          : "Share an Earth anchor to measure the bridge.";
+
+        bridgeText.textContent = cosmicInput && earthInput
+          ? describeNumber(bridgeReduced) || "Integrate both signals with curiosity."
+          : "When both fields are active, the bridge interprets your alignment.";
+      }
+
+      cosmicField.addEventListener("input", updateCalculator);
+      earthField.addEventListener("input", updateCalculator);
+      updateCalculator();
+    </script>
+  </body>
+</html>
