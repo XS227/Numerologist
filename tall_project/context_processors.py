@@ -24,4 +24,3 @@ def site_navigation(_request) -> Dict[str, Iterable[dict]]:
     return {
         "site_navigation": tuple(_serialise_item(item) for item in iter_navigation()),
     }
-

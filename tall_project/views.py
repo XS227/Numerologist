@@ -3,9 +3,8 @@ from __future__ import annotations
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import render
 
-from .navigation import STATIC_PAGES
-
 from .forms import LiteCalculatorForm
+from .navigation import STATIC_PAGES
 
 
 def home(request: HttpRequest) -> HttpResponse:

@@ -85,8 +85,12 @@ class IntakeForm(forms.Form):
         for field in self.fields.values():
             css_classes = field.widget.attrs.get("class", "")
             field.widget.attrs["class"] = f"{css_classes} input".strip()
-        self.fields["notes"].widget.attrs.setdefault("placeholder", "Notes to revisit during the session…")
-        self.fields["focus_area"].widget.attrs.setdefault("placeholder", "Career change, relationships, life path tune-up…")
+        self.fields["notes"].widget.attrs.setdefault(
+            "placeholder", "Notes to revisit during the session…"
+        )
+        self.fields["focus_area"].widget.attrs.setdefault(
+            "placeholder", "Career change, relationships, life path tune-up…"
+        )
 
     def clean_full_name(self) -> str:
         value = self.cleaned_data["full_name"]
@@ -96,11 +100,15 @@ class IntakeForm(forms.Form):
     def numerology_profile(self) -> NumerologyResult:
         birth_date = self.cleaned_data["birth_date"]
         full_name = self.cleaned_data["full_name"].upper()
-        life_path = self._reduce_digits("".join(c for c in birth_date.strftime("%Y%m%d")))
+        life_path = self._reduce_digits(
+            "".join(c for c in birth_date.strftime("%Y%m%d"))
+        )
         birth_day = self._reduce_digits(str(birth_date.day))
         expression = self._reduce_name(full_name)
         soul_urge = self._reduce_name(full_name, filter_set=VOWELS)
-        personality = self._reduce_name(full_name, filter_set=set(LETTER_VALUES) - VOWELS)
+        personality = self._reduce_name(
+            full_name, filter_set=set(LETTER_VALUES) - VOWELS
+        )
         maturity = self._reduce_digits(str(life_path + expression))
         return NumerologyResult(
             life_path=life_path,

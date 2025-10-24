@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from django import forms
 
-from intake.forms import IntakeForm, VOWELS
+from intake.forms import VOWELS, IntakeForm
 
 
 class LiteCalculatorForm(forms.Form):
@@ -24,7 +24,9 @@ class LiteCalculatorForm(forms.Form):
         for field in self.fields.values():
             css_classes = field.widget.attrs.get("class", "")
             field.widget.attrs["class"] = f"{css_classes} input".strip()
-        self.fields["full_name"].widget.attrs.setdefault("placeholder", "e.g. Åse Aurora Setaei")
+        self.fields["full_name"].widget.attrs.setdefault(
+            "placeholder", "e.g. Åse Aurora Setaei"
+        )
         self.fields["full_name"].widget.attrs.setdefault("autocomplete", "name")
         self.fields["birth_date"].widget.attrs.setdefault("autocomplete", "bday")
 
@@ -36,7 +38,9 @@ class LiteCalculatorForm(forms.Form):
     def calculate(self) -> dict[str, int]:
         birth_date = self.cleaned_data["birth_date"]
         full_name = self.cleaned_data["full_name"].upper()
-        life_path = IntakeForm._reduce_digits("".join(c for c in birth_date.strftime("%Y%m%d")))
+        life_path = IntakeForm._reduce_digits(
+            "".join(c for c in birth_date.strftime("%Y%m%d"))
+        )
         expression = IntakeForm._reduce_name(full_name)
         soul_urge = IntakeForm._reduce_name(full_name, filter_set=VOWELS)
         return {
