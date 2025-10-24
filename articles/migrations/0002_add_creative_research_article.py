@@ -1,6 +1,5 @@
 from django.db import migrations
 
-
 ARTICLE_SLUG = "creative-research-practice-for-numerology"
 
 

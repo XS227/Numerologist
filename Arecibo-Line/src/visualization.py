@@ -24,7 +24,9 @@ COLOR_MAP = {
 }
 
 
-def plot_timeline(events: pd.DataFrame, *, title: str = "Arecibo Line Timeline") -> plt.Figure:
+def plot_timeline(
+    events: pd.DataFrame, *, title: str = "Arecibo Line Timeline"
+) -> plt.Figure:
     """Return a timeline plot in which each event is drawn as a coloured pulse."""
 
     if "timestamp" not in events.columns:

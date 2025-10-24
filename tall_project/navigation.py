@@ -29,9 +29,15 @@ class NavigationItem:
 STATIC_PAGES: Dict[str, StaticPage] = {
     page.slug: page
     for page in (
-        StaticPage("discover-numerology", _("Discover Numerology"), "pages/discover-numerology.html"),
+        StaticPage(
+            "discover-numerology",
+            _("Discover Numerology"),
+            "pages/discover-numerology.html",
+        ),
         StaticPage("calculators", _("Calculator suite"), "pages/calculators.html"),
-        StaticPage("pythagoras-legacy", _("Pythagoras' Legacy"), "pages/pythagoras-legacy.html"),
+        StaticPage(
+            "pythagoras-legacy", _("Pythagoras' Legacy"), "pages/pythagoras-legacy.html"
+        ),
         StaticPage(
             "general-interpretation",
             _("General Interpretation of Numbers"),
@@ -47,7 +53,9 @@ STATIC_PAGES: Dict[str, StaticPage] = {
             _("Letter Value Chart"),
             "pages/letter-value-chart.html",
         ),
-        StaticPage("personal-insights", _("Personal Insights"), "pages/personal-insights.html"),
+        StaticPage(
+            "personal-insights", _("Personal Insights"), "pages/personal-insights.html"
+        ),
         StaticPage(
             "compute-destiny-number",
             _("Compute Your Destiny Number"),
@@ -87,12 +95,20 @@ STATIC_PAGES: Dict[str, StaticPage] = {
             _("Numerologist in the Media"),
             "pages/numerologist-in-media.html",
         ),
-        StaticPage("guidance-support", _("Guidance & Support"), "pages/guidance-support.html"),
+        StaticPage(
+            "guidance-support", _("Guidance & Support"), "pages/guidance-support.html"
+        ),
         StaticPage("about-the-firm", _("About the Firm"), "pages/about-the-firm.html"),
-        StaticPage("telephone-guidance", _("Telephone Guidance"), "pages/telephone-guidance.html"),
+        StaticPage(
+            "telephone-guidance",
+            _("Telephone Guidance"),
+            "pages/telephone-guidance.html",
+        ),
         StaticPage("contact-qa", _("Contact / Q&A"), "pages/contact-qa.html"),
         StaticPage("legal", _("Legal"), "pages/legal.html"),
-        StaticPage("terms-conditions", _("Terms & Conditions"), "pages/terms-conditions.html"),
+        StaticPage(
+            "terms-conditions", _("Terms & Conditions"), "pages/terms-conditions.html"
+        ),
         StaticPage("privacy-policy", _("Privacy Policy"), "pages/privacy-policy.html"),
     )
 }
@@ -105,8 +121,12 @@ NAVIGATION: Tuple[NavigationItem, ...] = (
         title=_("Discover Numerology"),
         children=(
             NavigationItem("pythagoras-legacy", _("Pythagoras' Legacy")),
-            NavigationItem("general-interpretation", _("General Interpretation of Numbers")),
-            NavigationItem("calculation-methods-overview", _("Calculation Methods Overview")),
+            NavigationItem(
+                "general-interpretation", _("General Interpretation of Numbers")
+            ),
+            NavigationItem(
+                "calculation-methods-overview", _("Calculation Methods Overview")
+            ),
             NavigationItem("letter-value-chart", _("Letter Value Chart")),
         ),
     ),
@@ -115,9 +135,14 @@ NAVIGATION: Tuple[NavigationItem, ...] = (
         title=_("Personal Insights"),
         children=(
             NavigationItem("compute-destiny-number", _("Compute Your Destiny Number")),
-            NavigationItem("compute-name-vowel-consonant", _("Compute Name, Vowel & Consonant Numbers")),
+            NavigationItem(
+                "compute-name-vowel-consonant",
+                _("Compute Name, Vowel & Consonant Numbers"),
+            ),
             NavigationItem("lifes-fourth-stage", _("Life's 4th Development Stage")),
-            NavigationItem("realization-number", _("Realization Number — Your Ultimate Aim")),
+            NavigationItem(
+                "realization-number", _("Realization Number — Your Ultimate Aim")
+            ),
             NavigationItem("pythagoras-arrows", _("Pythagoras' Arrows")),
             NavigationItem("same-number-meaning", _("Do You See the Same Number?")),
         ),
@@ -156,4 +181,3 @@ def iter_navigation() -> Iterable[NavigationItem]:
     """Helper used in templates and other consumers."""
 
     return NAVIGATION
-
