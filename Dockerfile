@@ -18,7 +18,6 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt ./
-
 RUN python -m venv /venv \
     && . /venv/bin/activate \
     && pip install --upgrade pip \
@@ -28,6 +27,10 @@ ENV PATH="/venv/bin:$PATH"
 
 COPY . .
 
+# Copy and configure entrypoint
+COPY entrypoint.sh /app/
+RUN chmod +x /app/entrypoint.sh
+
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+ENTRYPOINT ["/app/entrypoint.sh"]
