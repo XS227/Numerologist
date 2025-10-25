@@ -1,30 +1,43 @@
-- name: Deploy to production server
-  uses: appleboy/ssh-action@v1.1.0
-  with:
-    host: ${{ secrets.SERVER_HOST }}
-    username: ${{ secrets.SERVER_USER }}
-    key: ${{ secrets.SSH_PRIVATE_KEY }}
-    port: ${{ secrets.SSH_PORT }}
-    script: |
-      echo "🚀 Starting deployment on $HOSTNAME"
+name: Deploy to production server
 
-      cd /var/www/stee/app || exit 1
+on:
+  push:
+    branches: [ main ]
 
-      echo "📥 Pulling latest code..."
-      if [ -d .git ]; then
-        git fetch origin main
-        git reset --hard origin/main
-      else
-        echo "⚠️  No .git folder found, skipping git pull."
-      fi
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
-      echo "🐳 Rebuilding Docker containers..."
-      cd /var/www/stee
-      docker compose down
-      docker compose up -d --build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      echo "⚙️  Running migrations and collectstatic..."
-      docker exec stee-web python manage.py migrate --noinput || true
-      docker exec stee-web python manage.py collectstatic --noinput || true
+      - name: Deploy to production server
+        uses: appleboy/ssh-action@v1.1.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            echo "🚀 Starting deployment on $HOSTNAME"
+            cd /var/www/stee/app || exit 1
 
-      echo "✅ Deployment complete!"
+            echo "📥 Pulling latest code..."
+            if [ -d .git ]; then
+              git fetch origin main
+              git reset --hard origin/main
+            else
+              echo "⚠️  No .git folder found, skipping git pull."
+            fi
+
+            echo "🐳 Rebuilding Docker containers..."
+            cd /var/www/stee
+            docker compose down
+            docker compose up -d --build
+
+            echo "⚙️  Running migrations and collectstatic..."
+            docker exec stee-web python manage.py migrate --noinput || true
+            docker exec stee-web python manage.py collectstatic --noinput || true
+
+            echo "✅ Deployment complete!"
