@@ -313,7 +313,7 @@ msgid "Åse’s numerology engine"
 msgstr "موتور علم اعداد آسه"
 
 #: tall_project/templates/pages/home.html:133
-msgid "Built on her Norwegian methodology, tuned by Python.."
+msgid "Built on her Norwegian methodology, tuned by Python."
 msgstr "بر پایه روش نروژی او و با پیاده‌سازی پایتون ساخته شده است."
 
 #: tall_project/templates/pages/home.html:138
