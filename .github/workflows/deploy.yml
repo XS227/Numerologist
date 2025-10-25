@@ -21,6 +21,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             echo "🚀 Starting deployment on $HOSTNAME"
+
+            HOME=/home/deploy git config --global --add safe.directory /var/www/stee/app
             cd /var/www/stee/app || exit 1
 
             echo "📥 Pulling latest code..."
