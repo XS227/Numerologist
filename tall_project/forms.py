@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from django import forms
 
-from intake.forms import VOWELS, IntakeForm
+from intake.forms import LETTER_VALUES, VOWELS, IntakeForm
 
 
 class LiteCalculatorForm(forms.Form):
@@ -43,8 +43,12 @@ class LiteCalculatorForm(forms.Form):
         )
         expression = IntakeForm._reduce_name(full_name)
         soul_urge = IntakeForm._reduce_name(full_name, filter_set=VOWELS)
+        personality = IntakeForm._reduce_name(
+            full_name, filter_set=set(LETTER_VALUES) - VOWELS
+        )
         return {
             "life_path": life_path,
             "expression": expression,
             "soul_urge": soul_urge,
+            "personality": personality,
         }
