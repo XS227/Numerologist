@@ -10,162 +10,362 @@
     <style>
       :root {
         color-scheme: light;
-        --bg: #f5f5f5;
-        --surface: #ffffff;
-        --border: #d9d9d9;
-        --text: #1f1f1f;
-        --accent: #5a31f4;
-        font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+        --page-bg: #f0f8f3;
+        --card-bg: #ffffff;
+        --card-elevated: #f7fcf8;
+        --border: #c8e5d2;
+        --text: #1f3327;
+        --muted: #4f6b59;
+        --accent: #3cb179;
+        --accent-soft: rgba(60, 177, 121, 0.12);
+        --accent-strong: #2d8f60;
+        --shadow: 0px 30px 60px rgba(92, 170, 120, 0.28);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
       }
+
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
-        background: var(--bg);
+        min-height: 100vh;
+        background: radial-gradient(circle at top right, rgba(94, 214, 149, 0.32), transparent 60%),
+          radial-gradient(circle at bottom left, rgba(72, 176, 120, 0.2), transparent 55%), var(--page-bg);
         color: var(--text);
         display: flex;
         flex-direction: column;
-        min-height: 100vh;
       }
+
       a {
-        color: var(--accent);
+        color: inherit;
         text-decoration: none;
       }
-      a:hover {
-        text-decoration: underline;
+
+      a:hover,
+      a:focus-visible {
+        text-decoration: none;
+        color: var(--accent-strong);
       }
-      header,
-      footer {
-        background: var(--surface);
-        border-bottom: 1px solid var(--border);
+
+      header {
+        padding: 1.5rem 2.5rem 1rem;
       }
-      footer {
-        border-bottom: none;
-        border-top: 1px solid var(--border);
-        margin-top: auto;
-      }
-      .container {
-        width: min(960px, 94vw);
+
+      .nav-shell {
+        max-width: 1080px;
         margin: 0 auto;
-        padding: 1.5rem 0;
-      }
-      .site-header__inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
-        flex-wrap: wrap;
+        gap: 2rem;
       }
-      nav ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        gap: 1.25rem;
+
+      .brand {
+        display: grid;
+        gap: 0.1rem;
+      }
+
+      .brand small {
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
         font-weight: 600;
+        text-transform: uppercase;
+        color: var(--muted);
       }
-      .main-nav > ul {
-        gap: 1.75rem;
+
+      .brand strong {
+        font-size: 1.15rem;
+        font-weight: 700;
       }
-      .main-nav li {
+
+      .menu-toggle {
+        border: none;
+        background: var(--accent);
+        color: #fff;
+        border-radius: 999px;
+        padding: 0.6rem 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .menu-toggle:hover,
+      .menu-toggle:focus-visible {
+        transform: translateY(-1px);
+        background: var(--accent-strong);
+        outline: none;
+      }
+
+      .menu-icon {
         position: relative;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 999px;
+        transition: background 0.2s ease;
       }
-      .main-nav li > ul {
-        display: none;
+
+      .menu-icon::before,
+      .menu-icon::after {
+        content: "";
         position: absolute;
-        top: calc(100% + 0.75rem);
-        inset-inline-start: 0;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 0.75rem;
-        padding: 0.75rem;
-        min-width: 16rem;
-        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
-        flex-direction: column;
-        gap: 0.5rem;
-        z-index: 10;
+        left: 0;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 999px;
+        transition: transform 0.2s ease;
       }
-      .main-nav li:focus-within > ul,
-      .main-nav li:hover > ul {
+
+      .menu-icon::before {
+        top: -6px;
+      }
+
+      .menu-icon::after {
+        top: 6px;
+      }
+
+      .menu-toggle[aria-expanded="true"] .menu-icon {
+        background: transparent;
+      }
+
+      .menu-toggle[aria-expanded="true"] .menu-icon::before {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .menu-toggle[aria-expanded="true"] .menu-icon::after {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      .menu-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .nav-links {
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: min(320px, 85vw);
+        background: var(--card-bg);
+        border-left: 1px solid var(--border);
+        box-shadow: -24px 0 60px rgba(17, 37, 23, 0.18);
+        padding: 6rem 1.75rem 2rem;
         display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 20;
       }
-      .main-nav li > ul a {
-        font-weight: 500;
-        display: block;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.5rem;
+
+      body.menu-open .nav-links {
+        transform: translateX(0);
       }
-      .main-nav li > ul a:focus,
-      .main-nav li > ul a:hover {
-        background: rgba(90, 49, 244, 0.08);
-      }
-      .site-actions {
+
+      .nav-links a,
+      .nav-links summary {
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
         display: flex;
         align-items: center;
-        gap: 1rem;
+        justify-content: space-between;
+        gap: 0.35rem;
+        padding: 0.75rem 1rem;
+        border-radius: 14px;
+        transition: background 0.2s ease, color 0.2s ease;
       }
+
+      .nav-links a:hover,
+      .nav-links a:focus-visible,
+      .nav-links summary:hover,
+      .nav-links summary:focus-visible {
+        background: var(--accent-soft);
+        color: var(--accent-strong);
+        outline: none;
+      }
+
+      .nav-links summary {
+        list-style: none;
+      }
+
+      .nav-links summary::-webkit-details-marker,
+      .nav-links summary::marker {
+        display: none;
+      }
+
+      .nav-links details {
+        width: 100%;
+      }
+
+      .nav-links summary::after {
+        content: "▾";
+        font-size: 0.75rem;
+        transition: transform 0.2s ease;
+      }
+
+      .nav-links details[open] > summary {
+        color: var(--accent-strong);
+      }
+
+      .nav-links details[open] > summary::after {
+        transform: rotate(180deg);
+      }
+
+      .nav-dropdown {
+        margin-top: 0.35rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 0.5rem;
+        display: grid;
+        gap: 0.35rem;
+        box-shadow: none;
+      }
+
+      .nav-dropdown a {
+        font-weight: 600;
+        color: var(--muted);
+        padding: 0.45rem 0.75rem;
+        border-radius: 10px;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .nav-dropdown a:hover,
+      .nav-dropdown a:focus-visible {
+        color: var(--accent-strong);
+        background: var(--accent-soft);
+        outline: none;
+      }
+
+      .nav-meta {
+        margin-top: 1.5rem;
+        display: grid;
+        gap: 0.75rem;
+      }
+
       .language-toggle {
         display: inline-flex;
         align-items: stretch;
-        border: 1px solid var(--border);
+        border: 1px solid rgba(60, 177, 121, 0.35);
         border-radius: 999px;
-        background: var(--surface);
+        background: var(--card-bg);
         overflow: hidden;
         font-size: 0.9rem;
       }
+
       .language-toggle form {
         margin: 0;
         display: flex;
       }
+
       .language-toggle button {
         appearance: none;
         border: none;
         background: transparent;
-        color: inherit;
+        color: var(--muted);
         padding: 0.4rem 0.85rem;
         cursor: pointer;
         font-weight: 600;
         transition: background 0.2s ease, color 0.2s ease;
       }
+
       .language-toggle form + form button {
-        border-inline-start: 1px solid var(--border);
+        border-inline-start: 1px solid rgba(60, 177, 121, 0.25);
       }
+
       .language-toggle button:is(:focus-visible, :hover) {
-        background: rgba(90, 49, 244, 0.12);
+        background: var(--accent-soft);
+        color: var(--accent-strong);
+        outline: none;
       }
+
       .language-toggle button.is-active {
         background: var(--accent);
         color: #fff;
       }
+
+      .mode-toggle {
+        border: 1px solid rgba(60, 177, 121, 0.3);
+        background: #fff;
+        border-radius: 999px;
+        padding: 0.6rem 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
+        justify-content: center;
+      }
+
+      .mode-toggle:hover,
+      .mode-toggle:focus-visible {
+        transform: translateY(-1px);
+        background: var(--accent-soft);
+        outline: none;
+      }
+
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 35, 23, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 10;
+      }
+
+      body.menu-open .menu-overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
       main {
         flex: 1;
-        padding: 2.5rem 0 3rem;
+        padding: 0 1.5rem 4rem;
       }
-      footer .footer-copy {
+
+      .layout {
+        max-width: 1080px;
+        margin: 0 auto;
         display: grid;
-        gap: 0.25rem;
-        margin: 0;
-        font-size: 0.9rem;
-        text-align: center;
+        gap: 2.5rem;
       }
+
       .card {
-        background: var(--surface);
+        background: var(--card-bg);
         border: 1px solid var(--border);
-        border-radius: 0.75rem;
+        border-radius: 28px;
         padding: 1.75rem;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+        box-shadow: var(--shadow);
       }
+
       .prose {
         display: grid;
         gap: 1.25rem;
         line-height: 1.7;
+        color: var(--muted);
       }
+
       .prose h1,
       .prose h2,
       .prose h3 {
         margin-top: 0;
+        color: var(--text);
       }
+
       .prose ul,
       .prose ol {
         margin: 0;
@@ -173,67 +373,157 @@
         display: grid;
         gap: 0.5rem;
       }
+
+      footer {
+        padding: 2rem 1.5rem 2.75rem;
+        color: rgba(31, 51, 39, 0.7);
+        text-align: center;
+      }
+
+      footer .footer-copy {
+        margin: 0 auto;
+        max-width: 60ch;
+        display: grid;
+        gap: 0.35rem;
+        font-size: 0.95rem;
+      }
+
+      [dir="rtl"] .nav-links {
+        inset: 0 auto 0 0;
+        border-left: none;
+        border-right: 1px solid var(--border);
+        transform: translateX(-100%);
+      }
+
+      [dir="rtl"] body.menu-open .nav-links {
+        transform: translateX(0);
+      }
+
+      [dir="rtl"] .nav-links summary::after {
+        content: "▴";
+      }
+
+      [dir="rtl"] .nav-dropdown {
+        text-align: right;
+      }
+
       [dir="rtl"] .prose ul,
       [dir="rtl"] .prose ol {
         padding-inline-start: 0;
         padding-inline-end: 1.35rem;
       }
-      button {
-        font: inherit;
-      }
-      input,
-      button {
-        border-radius: 0.5rem;
-      }
-      @media (max-width: 900px) {
-        .main-nav > ul {
-          flex-direction: column;
-          align-items: stretch;
-          gap: 0.75rem;
+
+      @media (max-width: 720px) {
+        header {
+          padding: 1.25rem 1.25rem 0.5rem;
         }
-        .main-nav li > ul {
-          position: static;
-          display: flex;
-          border: none;
-          box-shadow: none;
-          padding: 0.5rem 0 0.25rem;
-          background: transparent;
-        }
-        .main-nav li > ul a {
-          padding-inline-start: 1rem;
+
+        main {
+          padding: 0 1.25rem 3.5rem;
         }
       }
-      [dir="rtl"] .main-nav li > ul {
-        inset-inline-start: auto;
-        inset-inline-end: 0;
+
+      body.night {
+        background: #0e1713;
+        color: #e8f5ec;
       }
+
+      body.night header,
+      body.night main {
+        background: transparent;
+      }
+
+      body.night .card {
+        background: #13231b;
+        border-color: rgba(60, 177, 121, 0.25);
+        box-shadow: none;
+      }
+
+      body.night .prose {
+        color: rgba(232, 245, 236, 0.75);
+      }
+
+      body.night .prose h1,
+      body.night .prose h2,
+      body.night .prose h3 {
+        color: #e8f5ec;
+      }
+
+      body.night .nav-links {
+        background: #0f1d17;
+        border-color: rgba(60, 177, 121, 0.25);
+        box-shadow: -24px 0 60px rgba(0, 0, 0, 0.55);
+      }
+
+      body.night .nav-links a,
+      body.night .nav-links summary,
+      body.night .mode-toggle {
+        color: rgba(232, 245, 236, 0.78);
+      }
+
+      body.night .nav-dropdown {
+        background: #16291f;
+        border-color: rgba(60, 177, 121, 0.25);
+        box-shadow: none;
+      }
+
+      body.night .nav-dropdown a:hover,
+      body.night .nav-dropdown a:focus-visible {
+        color: #e8f5ec;
+        background: rgba(60, 177, 121, 0.22);
+      }
+
+      body.night .language-toggle {
+        border-color: rgba(60, 177, 121, 0.35);
+        background: rgba(19, 35, 27, 0.85);
+      }
+
+      body.night .language-toggle button {
+        color: rgba(232, 245, 236, 0.8);
+      }
+
+      body.night footer {
+        color: rgba(232, 245, 236, 0.7);
+      }
+
       {% block extra_styles %}{% endblock %}
     </style>
   </head>
-  <body>
-    <header class="site-header">
-      <div class="container site-header__inner">
-        <a href="/" class="logo" style="font-weight:700; font-size:1.2rem;">Numerologist</a>
-        <div class="site-actions">
-          <nav class="main-nav" aria-label="{% trans 'Primary' %}">
-            <ul>
-              <li><a href="/">{% trans "Home" %}</a></li>
-              <li><a href="/intake/">{% trans "Client intake" %}</a></li>
-              {% for item in site_navigation %}
-                <li>
+  <body{% block body_attrs %}{% endblock %}>
+    <header>
+      <div class="nav-shell">
+        <a class="brand" href="{% url 'home' %}">
+          <small>{% trans "Åse Steinsland" %}</small>
+          <strong>{% trans "Numerologist Studio" %}</strong>
+        </a>
+        <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="primaryNav">
+          <span class="menu-icon" aria-hidden="true"></span>
+          <span class="menu-label">{% trans "Menu" %}</span>
+        </button>
+      </div>
+      <nav class="nav-links" id="primaryNav" aria-label="{% trans 'Primary' %}" aria-hidden="true">
+        <a href="{% url 'home' %}">{% trans "Home" %}</a>
+        <a href="{% url 'intake:index' %}">{% trans "Client intake" %}</a>
+        {% if site_navigation %}
+          {% for item in site_navigation %}
+            {% if item.children %}
+              <details>
+                <summary>{{ item.title }}</summary>
+                <div class="nav-dropdown">
                   <a href="{{ item.url }}">{{ item.title }}</a>
-                  {% if item.children %}
-                    <ul>
-                      {% for child in item.children %}
-                        <li><a href="{{ child.url }}">{{ child.title }}</a></li>
-                      {% endfor %}
-                    </ul>
-                  {% endif %}
-                </li>
-              {% endfor %}
-              <li><a href="/cms/" rel="noreferrer" target="_blank">{% trans "CMS" %}</a></li>
-            </ul>
-          </nav>
+                  {% for child in item.children %}
+                    <a href="{{ child.url }}">{{ child.title }}</a>
+                  {% endfor %}
+                </div>
+              </details>
+            {% else %}
+              <a href="{{ item.url }}">{{ item.title }}</a>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        <a href="{% url 'article_list_legacy' %}">{% trans "Articles" %}</a>
+        <a href="/cms/" rel="noreferrer" target="_blank">{% trans "CMS" %}</a>
+        <div class="nav-meta">
           <div class="language-toggle" role="group" aria-label="{% trans 'Switch language' %}">
             {% get_available_languages as languages %}
             {% get_language_info_list for languages as languages_info %}
@@ -252,21 +542,117 @@
               </form>
             {% endfor %}
           </div>
+          <button class="mode-toggle" type="button" id="modeToggle" aria-pressed="false">
+            <span aria-hidden="true">🌞</span>
+            {% trans "Night mode" %}
+          </button>
         </div>
-      </div>
+      </nav>
     </header>
+    <div class="menu-overlay" id="menuOverlay" hidden></div>
     <main>
-      <div class="container">
-        {% block content %}{% endblock %}
-      </div>
+      {% block main %}
+        <div class="layout">
+          {% block content %}{% endblock %}
+        </div>
+      {% endblock %}
     </main>
+    {% block after_main %}{% endblock %}
     <footer>
-      <div class="container">
-        <p class="footer-copy">
-          &copy; {% now "Y" %} Setaei Intelligence. {% trans "Developed in collaboration with numerologist Åse Steinsland using her calculation method — implemented with Python, Codex, and Git." %}
-          <span>{% trans "All rights reserved." %}</span>
-        </p>
+      <div class="layout">
+        {% block footer_content %}
+          <p class="footer-copy">
+            &copy; {% now "Y" %} Setaei Intelligence. {% trans "Developed in collaboration with numerologist Åse Steinsland using her calculation method — implemented with Python, Codex, and Git." %}
+            <span>{% trans "All rights reserved." %}</span>
+          </p>
+        {% endblock %}
       </div>
     </footer>
+    <script>
+      const body = document.body;
+      const menuToggleButton = document.getElementById("menuToggle");
+      const primaryNav = document.getElementById("primaryNav");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const modeToggle = document.getElementById("modeToggle");
+
+      const setMenuState = (open) => {
+        if (menuToggleButton) {
+          menuToggleButton.setAttribute("aria-expanded", String(open));
+        }
+        if (primaryNav) {
+          primaryNav.setAttribute("aria-hidden", String(!open));
+        }
+        if (menuOverlay) {
+          if (open) {
+            menuOverlay.removeAttribute("hidden");
+          } else {
+            menuOverlay.setAttribute("hidden", "");
+          }
+        }
+        body.classList.toggle("menu-open", open);
+      };
+
+      const closeMenu = () => {
+        setMenuState(false);
+        primaryNav?.querySelectorAll("details[open]").forEach((detail) => {
+          detail.removeAttribute("open");
+        });
+      };
+
+      menuToggleButton?.addEventListener("click", () => {
+        const expanded = menuToggleButton.getAttribute("aria-expanded") === "true";
+        if (expanded) {
+          closeMenu();
+        } else {
+          setMenuState(true);
+        }
+      });
+
+      menuOverlay?.addEventListener("click", closeMenu);
+
+      primaryNav?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          const expanded = menuToggleButton?.getAttribute("aria-expanded") === "true";
+          if (expanded) {
+            closeMenu();
+            menuToggleButton?.focus();
+          }
+        }
+      });
+
+      if (modeToggle) {
+        const setMode = (night) => {
+          body.classList.toggle("night", night);
+          modeToggle.setAttribute("aria-pressed", night ? "true" : "false");
+          modeToggle.innerHTML = night
+            ? '<span aria-hidden="true">🌙</span> {% trans "Light mode" %}'
+            : '<span aria-hidden="true">🌞</span> {% trans "Night mode" %}';
+          try {
+            window.localStorage.setItem("numerologist-mode", night ? "night" : "day");
+          } catch (error) {
+            console.warn("Unable to persist colour mode", error);
+          }
+        };
+
+        modeToggle.addEventListener("click", () => {
+          closeMenu();
+          setMode(!body.classList.contains("night"));
+        });
+
+        try {
+          const savedMode = window.localStorage.getItem("numerologist-mode");
+          if (savedMode === "night") {
+            setMode(true);
+          }
+        } catch (error) {
+          console.warn("Unable to read persisted colour mode", error);
+        }
+      }
+    </script>
+    {% block extra_scripts %}{% endblock %}
   </body>
 </html>
