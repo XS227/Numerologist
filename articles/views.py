@@ -13,7 +13,10 @@ def _load_ai_analysis_hook() -> Optional[Callable[[str], str]]:
     module_name = "some_module"
     if find_spec(module_name) is None:
         return None
-    module = import_module(module_name)
+    try:
+        module = import_module(module_name)
+    except ImportError:
+        return None
     return getattr(module, "ai_analyze_content", None)
 
 
