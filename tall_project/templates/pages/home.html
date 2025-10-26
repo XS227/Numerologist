@@ -1,168 +1,1014 @@
-{% extends "base.html" %}
 {% load i18n %}
+{% get_current_language as CURRENT_LANGUAGE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+<!DOCTYPE html>
+<html lang="{{ CURRENT_LANGUAGE }}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% trans "Numerologist Studio — Welcome" %}</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --page-bg: #f0f8f3;
+        --card-bg: #ffffff;
+        --card-elevated: #f7fcf8;
+        --border: #c8e5d2;
+        --text: #1f3327;
+        --muted: #4f6b59;
+        --accent: #3cb179;
+        --accent-soft: rgba(60, 177, 121, 0.12);
+        --accent-strong: #2d8f60;
+        --shadow: 0px 30px 60px rgba(92, 170, 120, 0.28);
+        font-family: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      }
 
-{% block title %}Numerologist — {% trans "Coming soon" %}{% endblock %}
+      * {
+        box-sizing: border-box;
+      }
 
-{% block extra_styles %}
-      .stack { display: grid; gap: 1.25rem; }
-      .hero {
-        text-align: center;
-        padding: 2.5rem 1.5rem;
-        background: linear-gradient(135deg, rgba(90, 49, 244, 0.14), rgba(90, 49, 244, 0));
-      }
-      .hero h1 {
-        margin: 0 0 0.75rem;
-        font-size: clamp(2rem, 4vw, 2.8rem);
-      }
-      .hero p {
-        margin: 0 auto;
-        max-width: 46rem;
-        line-height: 1.6;
-      }
-      .cta-group {
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top right, rgba(94, 214, 149, 0.32), transparent 60%),
+          radial-gradient(circle at bottom left, rgba(72, 176, 120, 0.2), transparent 55%), var(--page-bg);
+        color: var(--text);
         display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        margin-top: 1.5rem;
+        flex-direction: column;
       }
-      .btn-primary {
-        display: inline-flex;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      header {
+        padding: 1.5rem 2.5rem 1rem;
+      }
+
+      .nav-shell {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: flex;
         align-items: center;
-        justify-content: center;
-        padding: 0.75rem 1.5rem;
-        border-radius: 999px;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .brand {
+        display: grid;
+        gap: 0.1rem;
+      }
+
+      .brand small {
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .brand strong {
+        font-size: 1.15rem;
+        font-weight: 700;
+      }
+
+      .menu-toggle {
         border: none;
         background: var(--accent);
         color: #fff;
+        border-radius: 999px;
+        padding: 0.6rem 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-size: 0.95rem;
         font-weight: 600;
         cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
       }
-      .btn-secondary {
+
+      .menu-toggle:hover,
+      .menu-toggle:focus-visible {
+        transform: translateY(-1px);
+        background: var(--accent-strong);
+        outline: none;
+      }
+
+      .menu-icon {
+        position: relative;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 999px;
+        transition: background 0.2s ease;
+      }
+
+      .menu-icon::before,
+      .menu-icon::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        border-radius: 999px;
+        transition: transform 0.2s ease;
+      }
+
+      .menu-icon::before {
+        top: -6px;
+      }
+
+      .menu-icon::after {
+        top: 6px;
+      }
+
+      .menu-toggle[aria-expanded="true"] .menu-icon {
+        background: transparent;
+      }
+
+      .menu-toggle[aria-expanded="true"] .menu-icon::before {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      .menu-toggle[aria-expanded="true"] .menu-icon::after {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      .menu-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
+      .nav-links {
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: min(320px, 85vw);
+        background: var(--card-bg);
+        border-left: 1px solid var(--border);
+        box-shadow: -24px 0 60px rgba(17, 37, 23, 0.18);
+        padding: 6rem 1.75rem 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 20;
+      }
+
+      body.menu-open .nav-links {
+        transform: translateX(0);
+      }
+
+      .nav-links a,
+      .nav-links summary {
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.35rem;
+        padding: 0.75rem 1rem;
+        border-radius: 14px;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .nav-links summary {
+        list-style: none;
+      }
+
+      .nav-links summary::-webkit-details-marker,
+      .nav-links summary::marker {
+        display: none;
+      }
+
+      .nav-links details {
+        width: 100%;
+      }
+
+      .nav-links summary::after {
+        content: "▾";
+        font-size: 0.75rem;
+        transition: transform 0.2s ease;
+      }
+
+      .nav-links details[open] > summary {
+        color: var(--accent-strong);
+      }
+
+      .nav-links details[open] > summary::after {
+        transform: rotate(180deg);
+      }
+
+      .nav-dropdown {
+        margin-top: 0.35rem;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 0.5rem;
+        display: grid;
+        gap: 0.35rem;
+        box-shadow: none;
+      }
+
+      .nav-dropdown a {
+        font-weight: 600;
+        color: var(--muted);
+        padding: 0.45rem 0.75rem;
+        border-radius: 10px;
+        transition: background 0.2s ease, color 0.2s ease;
+      }
+
+      .nav-dropdown a:hover,
+      .nav-dropdown a:focus-visible {
+        color: var(--accent-strong);
+        background: var(--accent-soft);
+        outline: none;
+      }
+
+      .nav-links summary:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+      }
+
+      .mode-toggle {
+        border: 1px solid rgba(60, 177, 121, 0.3);
+        background: #fff;
+        border-radius: 999px;
+        padding: 0.6rem 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        color: var(--muted);
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease;
+        justify-content: center;
+      }
+
+      .mode-toggle:hover,
+      .mode-toggle:focus-visible {
+        transform: translateY(-1px);
+        background: var(--accent-soft);
+        outline: none;
+      }
+
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 35, 23, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 10;
+      }
+
+      body.menu-open .menu-overlay {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      main {
+        flex: 1;
+        padding: 0 1.5rem 6rem;
+      }
+
+      .layout {
+        max-width: 1080px;
+        margin: 0 auto 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      .hero-card {
+        position: relative;
+        border-radius: 36px;
+        background: linear-gradient(150deg, rgba(214, 244, 227, 0.9), rgba(255, 255, 255, 0.95));
+        box-shadow: var(--shadow);
+        padding: clamp(1.75rem, 3vw, 2.5rem);
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        inset: -20% auto auto 55%;
+        width: 420px;
+        height: 420px;
+        background: radial-gradient(circle, rgba(126, 220, 167, 0.38) 0%, rgba(126, 220, 167, 0) 60%);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 1.75rem;
+      }
+
+      .card-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(60, 177, 121, 0.32);
+        color: var(--muted);
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .greeting {
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .greeting h1 {
+        margin: 0;
+        font-size: clamp(2.1rem, 4vw, 2.9rem);
+        letter-spacing: -0.02em;
+      }
+
+      .greeting p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 32rem;
+        line-height: 1.6;
+        font-size: 1.05rem;
+      }
+
+      .step-card {
+        border-radius: 24px;
+        border: 1px solid rgba(60, 177, 121, 0.3);
+        padding: 1.75rem;
+        display: grid;
+        gap: 1.5rem;
+        background: var(--card-elevated);
+      }
+
+      .step-card header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0;
+      }
+
+      .step-card header h2 {
+        margin: 0;
+        font-size: 1.4rem;
+      }
+
+      .step-card header span {
+        font-weight: 600;
+        color: var(--accent-strong);
+        background: var(--accent-soft);
+        border: 1px solid rgba(60, 177, 121, 0.2);
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+
+      .form-errors {
+        margin: 0;
+        padding: 1rem;
+        border-radius: 1rem;
+        background: rgba(198, 40, 40, 0.12);
+        color: #7f1d1d;
+        font-weight: 600;
+      }
+
+      .field-grid {
+        display: grid;
+        gap: 1.2rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      label {
+        display: grid;
+        gap: 0.4rem;
+        font-weight: 600;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      input {
+        border-radius: 14px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 0.75rem 1rem;
+        font: inherit;
+        background: #fff;
+        color: inherit;
+        box-shadow: inset 0 1px 2px rgba(60, 177, 121, 0.15);
+      }
+
+      label.has-error input {
+        border-color: rgba(198, 40, 40, 0.65);
+        box-shadow: inset 0 1px 2px rgba(198, 40, 40, 0.25);
+      }
+
+      .error-message {
+        color: #7f1d1d;
+        font-size: 0.85rem;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 0.75rem 1.5rem;
         border-radius: 999px;
-        border: 1px solid var(--accent);
-        background: transparent;
-        color: var(--accent);
+        padding: 0.75rem 1.75rem;
+        border: none;
         font-weight: 600;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
-      .feature-list {
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+        color: #fff;
+        box-shadow: 0px 12px 28px rgba(45, 143, 96, 0.25);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--accent-strong);
+        border: 1px solid rgba(60, 177, 121, 0.3);
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .snapshot-card {
+        border-radius: 24px;
+        border: 1px solid rgba(60, 177, 121, 0.3);
+        padding: 1.75rem;
+        background: #fff;
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .snapshot-grid {
         display: grid;
         gap: 1rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       }
-      .feature-list li {
+
+      .snapshot-tile {
+        background: rgba(60, 177, 121, 0.12);
+        border-radius: 18px;
+        padding: 1.1rem 1.2rem;
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      .snapshot-actions {
         display: flex;
-        align-items: flex-start;
-        gap: 0.75rem;
+        justify-content: flex-start;
       }
-      .feature-list strong {
-        font-weight: 600;
+
+      .stories-card {
+        border-radius: 24px;
+        border: 1px solid rgba(60, 177, 121, 0.3);
+        padding: 1.75rem;
+        background: #fff;
+        display: grid;
+        gap: 1.5rem;
+        box-shadow: 0 18px 36px rgba(60, 177, 121, 0.15);
       }
-      .feature-icon {
-        font-size: 1.35rem;
-        line-height: 1;
+
+      .stories-card h2 {
+        margin: 0;
       }
-      form.lite-demo {
+
+      .story-grid {
         display: grid;
         gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
-      .field {
+
+      .story-tile {
+        border-radius: 18px;
+        border: 1px solid rgba(60, 177, 121, 0.25);
+        background: rgba(60, 177, 121, 0.1);
+        padding: 1.1rem 1.2rem;
         display: grid;
-        gap: 0.35rem;
-        text-align: left;
+        gap: 0.4rem;
       }
-      .field input {
-        border: 1px solid var(--border);
-        padding: 0.65rem 0.75rem;
-        font: inherit;
-        background: #fafafa;
+
+      .story-number {
+        font-weight: 600;
+        color: var(--accent-strong);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.75rem;
       }
-      .errors {
-        color: #c62828;
-        margin: 0;
-        list-style: disc;
-        padding-inline-start: 1.25rem;
+
+      .story-title {
+        font-weight: 700;
+        font-size: 1.05rem;
+      }
+
+      .progress-footer {
+        position: sticky;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1.25rem 2rem 1.75rem;
+        background: rgba(240, 248, 243, 0.92);
+        backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(200, 229, 210, 0.8);
+        display: flex;
+        justify-content: center;
+        z-index: 15;
+      }
+
+      .progress-card {
+        border-radius: 24px;
+        background: var(--card-bg);
+        border: 1px solid rgba(60, 177, 121, 0.35);
+        padding: 1.25rem 1.75rem;
+        display: grid;
+        gap: 1rem;
+        width: min(100%, 1080px);
+        box-shadow: 0 18px 40px rgba(60, 177, 121, 0.25);
+      }
+
+      .progress-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .progress-track {
+        position: relative;
+        height: 12px;
+        background: rgba(60, 177, 121, 0.15);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .progress-bar {
+        position: absolute;
+        inset: 0;
+        width: 0%;
+        background: linear-gradient(135deg, var(--accent), #8ce3b1);
+        border-radius: inherit;
+        transition: width 0.4s ease;
+        box-shadow: 0 6px 18px rgba(45, 143, 96, 0.35);
+      }
+
+      footer {
+        padding: 2rem 1.5rem 2.5rem;
+        text-align: center;
+        color: rgba(31, 51, 39, 0.7);
         font-size: 0.95rem;
       }
-      [dir="rtl"] .errors {
-        padding-inline-start: 0;
-        padding-inline-end: 1.25rem;
-      }
-      .result-card {
-        display: grid;
-        gap: 0.5rem;
-        text-align: left;
-        border-top: 1px dashed var(--border);
-        padding-top: 1rem;
-      }
-      @media (max-width: 600px) {
-        .hero {
-          padding: 2.25rem 1rem;
+
+      @media (max-width: 720px) {
+        header {
+          padding: 1.25rem 1.25rem 0.75rem;
+        }
+        main {
+          padding: 0 1.25rem 5rem;
+        }
+        .layout {
+          gap: 2rem;
+        }
+        .progress-footer {
+          padding-inline: 1.25rem;
         }
       }
-{% endblock %}
-
-{% block content %}
-<div class="stack">
-  <section class="card hero" aria-labelledby="hero-title">
-    <p style="font-weight:600; letter-spacing:0.05em; text-transform:uppercase; color:rgba(31,31,31,0.7);">{% trans "Under construction" %}</p>
-    <h1 id="hero-title">{% trans "Numerologist is getting a fresh coat of stardust ✨" %}</h1>
-    <p>
-      {% blocktrans trimmed %}
-      We are preparing a calm, focused numerology studio for Åse&rsquo;s clients. While the full experience lands, you can
-      explore a lite calculator and follow our progress.
-      {% endblocktrans %}
-    </p>
-    <div class="cta-group">
-      <a class="btn-secondary" href="mailto:studio@setaei.com">{% trans "Contact Setaei" %}</a>
-      <a class="btn-secondary" href="https://github.com/XS227/Numerologist" target="_blank" rel="noopener">{% trans "Project on GitHub" %}</a>
-    </div>
-  </section>
-
-  <section class="card" aria-labelledby="glimpse-title">
-    <h2 id="glimpse-title" style="margin-top:0;">{% trans "What’s coming" %}</h2>
-    <ul class="feature-list">
-      <li><span class="feature-icon">📊</span><span><strong>{% trans "Guided reports" %}:</strong> {% trans "Friendly flows turn birth data into clear, shareable insights." %}</span></li>
-      <li><span class="feature-icon">🤝</span><span><strong>{% trans "Client workspace" %}:</strong> {% trans "Intake, notes, and archives in one tidy dashboard." %}</span></li>
-      <li><span class="feature-icon">🔮</span><span><strong>{% trans "Åse’s numerology engine" %}:</strong> {% trans "Built on her Norwegian methodology, tuned by Python." %}</span></li>
-    </ul>
-  </section>
-
-  <section class="card" aria-labelledby="demo-title">
-    <h2 id="demo-title" style="margin-top:0;">{% trans "Try the lite calculator" %}</h2>
-    <p>{% trans "Share your name and birth date for a quick sample of the numbers we’re polishing for launch." %}</p>
-    <form method="post" class="lite-demo" novalidate>
-      {% csrf_token %}
-      <div class="field">
-        {{ form.full_name.label_tag }}
-        {{ form.full_name }}
-        {% if form.full_name.errors %}
-        <ul class="errors">{% for error in form.full_name.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-        {% endif %}
+    </style>
+  </head>
+  <body data-progress="{% if result %}100{% else %}0{% endif %}">
+    <header>
+      <div class="nav-shell">
+        <a class="brand" href="/">
+          <small>{% trans "Numerologist" %}</small>
+          <strong>{% trans "Studio preview" %}</strong>
+        </a>
+        <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false">
+          <span class="menu-icon" aria-hidden="true"></span>
+          <span class="menu-label">{% trans "Menu" %}</span>
+        </button>
+        <nav class="nav-links" id="primaryNav" aria-hidden="true">
+          <a href="/articles.html">{% trans "Latest articles" %}</a>
+          <details>
+            <summary>{% trans "Explore calculators" %}</summary>
+            <div class="nav-dropdown">
+              <a href="/calculators.html">{% trans "All calculators" %}</a>
+              <a href="/compute-destiny-number.html">{% trans "Destiny number" %}</a>
+              <a href="/compute-name-vowel-consonant.html">{% trans "Name vowels & consonants" %}</a>
+            </div>
+          </details>
+          <details>
+            <summary>{% trans "About numerology" %}</summary>
+            <div class="nav-dropdown">
+              <a href="/about.html">{% trans "Our story" %}</a>
+              <a href="/about-vision-mission.html">{% trans "Vision & mission" %}</a>
+              <a href="/about-academy.html">{% trans "Academy & AI" %}</a>
+            </div>
+          </details>
+          <button class="mode-toggle" type="button" id="modeToggle" aria-pressed="false">
+            <span aria-hidden="true">🌞</span>
+            {% trans "Night mode" %}
+          </button>
+        </nav>
       </div>
-      <div class="field">
-        {{ form.birth_date.label_tag }}
-        {{ form.birth_date }}
-        {% if form.birth_date.errors %}
-        <ul class="errors">{% for error in form.birth_date.errors %}<li>{{ error }}</li>{% endfor %}</ul>
-        {% endif %}
+    </header>
+    <div class="menu-overlay" id="menuOverlay" hidden></div>
+    <main>
+      <div class="layout">
+        <section class="hero-card" aria-labelledby="welcome-title">
+          <div class="hero-content">
+            <div class="card-header">
+              <span class="pill">{% trans "Hello friend" %}</span>
+              <span class="pill">{% trans "Progress tracker" %}</span>
+            </div>
+            <div class="greeting">
+              <h1 id="welcome-title">
+                {% trans "Follow the guided steps to uncover every calculator Åse uses when preparing a reading." %}
+              </h1>
+              <p>
+                {% trans "We start with a warm welcome and a simple intake. Share a preferred name and birth date. From here you can peek at a lite numerology overview or continue into the full studio." %}
+              </p>
+            </div>
+            <form method="post" class="step-card" id="intakeForm" novalidate aria-labelledby="step-title">
+              {% csrf_token %}
+              <header>
+                <h2 id="step-title">{% trans "Step 1 · Intake essentials" %}</h2>
+                <span>{% trans "3 mins" %}</span>
+              </header>
+              {% if form.non_field_errors %}
+              <div class="form-errors" role="alert">
+                {% for error in form.non_field_errors %}{{ error }}{% if not forloop.last %}<br />{% endif %}{% endfor %}
+              </div>
+              {% endif %}
+              <div class="field-grid">
+                <label for="{{ form.full_name.id_for_label }}" class="{% if form.full_name.errors %}has-error{% endif %}">
+                  {% trans "Preferred name" %}
+                  {{ form.full_name }}
+                  {% if form.full_name.errors %}
+                  <span class="error-message" data-error-for="full_name">{{ form.full_name.errors|first }}</span>
+                  {% endif %}
+                </label>
+                <label for="{{ form.birth_date.id_for_label }}" class="{% if form.birth_date.errors %}has-error{% endif %}">
+                  {% trans "Birth date" %}
+                  {{ form.birth_date }}
+                  {% if form.birth_date.errors %}
+                  <span class="error-message" data-error-for="birth_date">{{ form.birth_date.errors|first }}</span>
+                  {% endif %}
+                </label>
+              </div>
+              <div class="actions">
+                <button class="btn btn-primary" type="submit">{% trans "Continue" %}</button>
+              </div>
+            </form>
+            <article class="snapshot-card" aria-labelledby="snapshot-title">
+              <div>
+                <h2 id="snapshot-title" style="margin:0 0 0.35rem;">{% trans "Your numerology snapshot" %}</h2>
+                <p style="margin:0; color:var(--muted); max-width:38ch;">
+                  {% trans "Complete the intake form and choose “Continue” to instantly calculate your personal numerology profile using Åse’s light calculator." %}
+                </p>
+              </div>
+              <div class="snapshot-grid" id="snapshotGrid">
+                <div class="snapshot-tile">
+                  <strong>{% trans "Life Path" %}</strong>
+                  <span data-value="life_path">{% if result %}{{ result.life_path }}{% else %}&mdash;{% endif %}</span>
+                  <small style="color:var(--muted);">{% trans "Guides your lifetime rhythm and lessons." %}</small>
+                </div>
+                <div class="snapshot-tile">
+                  <strong>{% trans "Expression" %}</strong>
+                  <span data-value="expression">{% if result %}{{ result.expression }}{% else %}&mdash;{% endif %}</span>
+                  <small style="color:var(--muted);">{% trans "How you naturally show gifts to the world." %}</small>
+                </div>
+                <div class="snapshot-tile">
+                  <strong>{% trans "Soul Urge" %}</strong>
+                  <span data-value="soul">{% if result %}{{ result.soul_urge }}{% else %}&mdash;{% endif %}</span>
+                  <small style="color:var(--muted);">{% trans "The desires your heart keeps whispering." %}</small>
+                </div>
+                <div class="snapshot-tile">
+                  <strong>{% trans "Personality" %}</strong>
+                  <span data-value="personality">{% if result %}{{ result.personality }}{% else %}&mdash;{% endif %}</span>
+                  <small style="color:var(--muted);">{% trans "The impression people receive when you arrive." %}</small>
+                </div>
+              </div>
+              <div class="snapshot-actions">
+                <a class="btn btn-secondary" href="/calculators.html" id="viewCalculators">{% trans "Explore all calculators" %}</a>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="stories-card" aria-labelledby="stories-title">
+          <h2 id="stories-title">{% trans "Core number stories" %}</h2>
+          <p style="margin:0; color:var(--muted); max-width:68ch;">
+            {% trans "Each number carries a distinct tone. These quick notes help you connect the lite calculator’s insight with Åse’s deeper readings. Come back after your full session to compare how the energies mature." %}
+          </p>
+          <div class="story-grid">
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 1" %}</span>
+              <span class="story-title">{% trans "The Pioneer" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Courage, initiative, and a drive to set the pace for others." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 2" %}</span>
+              <span class="story-title">{% trans "The Diplomat" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Gentle balance, partnership, and the wisdom of patience." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 3" %}</span>
+              <span class="story-title">{% trans "The Creative" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Expression, optimism, and weaving joy into daily rituals." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 4" %}</span>
+              <span class="story-title">{% trans "The Builder" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Structure, loyalty, and crafting foundations that last." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 5" %}</span>
+              <span class="story-title">{% trans "The Explorer" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Freedom, curiosity, and thriving on fresh experiences." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 6" %}</span>
+              <span class="story-title">{% trans "The Guardian" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Harmony, devotion, and tending to family with warmth." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 7" %}</span>
+              <span class="story-title">{% trans "The Mystic" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Reflection, intuition, and seeking meaning beneath the surface." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 8" %}</span>
+              <span class="story-title">{% trans "The Steward" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Leadership, accountability, and stewardship of resources." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 9" %}</span>
+              <span class="story-title">{% trans "The Sage" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Compassion, vision, and the grace of completion." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 11" %}</span>
+              <span class="story-title">{% trans "The Visionary" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Spiritual illumination, insight, and inspiring leadership." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 22" %}</span>
+              <span class="story-title">{% trans "The Master Builder" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Grand-scale manifestation balanced with heart-led service." %}</p>
+            </article>
+            <article class="story-tile">
+              <span class="story-number">{% trans "Number 33" %}</span>
+              <span class="story-title">{% trans "The Cosmic Guide" %}</span>
+              <p style="margin:0; color:var(--muted);">{% trans "Compassionate mastery devoted to uplifting humanity." %}</p>
+            </article>
+          </div>
+        </section>
       </div>
-      <button type="submit" class="btn-primary">{% trans "Calculate" %}</button>
-      {% if result %}
-      <div class="result-card" role="status" aria-live="polite">
-        <strong>{% trans "Your numbers" %}</strong>
-        <p>{% trans "Life Path" %}: {{ result.life_path }}</p>
-        <p>{% trans "Expression" %}: {{ result.expression }}</p>
-        <p>{% trans "Soul Urge" %}: {{ result.soul_urge }}</p>
+    </main>
+    <aside class="progress-footer" aria-label="{% trans "Intake progress" %}">
+      <div class="progress-card">
+        <div class="progress-top">
+          <strong>{% trans "Intake progress" %}</strong>
+          <span id="progressLabel">{% if result %}{% trans "Progress: 100% complete" %}{% else %}{% trans "Progress: 0% complete" %}{% endif %}</span>
+        </div>
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="{% if result %}100{% else %}0{% endif %}"
+        >
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
       </div>
-      {% endif %}
-    </form>
-  </section>
-</div>
-{% endblock %}
+    </aside>
+    <footer>
+      {% trans "Crafted for Åse Steinsland’s Numerologist Studio — powered by a light calculator preview." %}
+    </footer>
+
+    <script>
+      const body = document.body;
+      const progressBar = document.getElementById("progressBar");
+      const progressLabel = document.getElementById("progressLabel");
+      const progressTrack = document.querySelector(".progress-track");
+      const modeToggle = document.getElementById("modeToggle");
+      const menuToggleButton = document.getElementById("menuToggle");
+      const primaryNav = document.getElementById("primaryNav");
+      const menuOverlay = document.getElementById("menuOverlay");
+      const nameInput = document.getElementById("{{ form.full_name.id_for_label }}");
+      const birthInput = document.getElementById("{{ form.birth_date.id_for_label }}");
+
+      const setMenuState = (open) => {
+        if (menuToggleButton) {
+          menuToggleButton.setAttribute("aria-expanded", String(open));
+        }
+        if (primaryNav) {
+          primaryNav.setAttribute("aria-hidden", String(!open));
+        }
+        if (menuOverlay) {
+          if (open) {
+            menuOverlay.removeAttribute("hidden");
+          } else {
+            menuOverlay.setAttribute("hidden", "");
+          }
+        }
+        document.body.classList.toggle("menu-open", open);
+      };
+
+      const closeMenu = () => {
+        setMenuState(false);
+        primaryNav?.querySelectorAll("details[open]").forEach((detail) => {
+          detail.removeAttribute("open");
+        });
+      };
+      const openMenu = () => setMenuState(true);
+
+      menuToggleButton?.addEventListener("click", () => {
+        const expanded = menuToggleButton.getAttribute("aria-expanded") === "true";
+        if (expanded) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+
+      menuOverlay?.addEventListener("click", closeMenu);
+
+      primaryNav?.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          const expanded = menuToggleButton?.getAttribute("aria-expanded") === "true";
+          if (expanded) {
+            closeMenu();
+            menuToggleButton?.focus();
+          }
+        }
+      });
+
+      function setProgress(value) {
+        if (!progressBar || !progressTrack || !progressLabel) {
+          return;
+        }
+        const clamped = Math.max(0, Math.min(100, value));
+        progressBar.style.width = `${clamped}%`;
+        progressTrack.setAttribute("aria-valuenow", String(clamped));
+        const label = clamped === 100
+          ? '{% trans "Progress: 100% complete" %}'
+          : clamped === 0
+            ? '{% trans "Progress: 0% complete" %}'
+            : `{% trans "Progress" %}: ${clamped}% {% trans "complete" %}`;
+        progressLabel.textContent = label;
+      }
+
+      function updateProgressFromInputs() {
+        const hasResult = body.dataset.progress === "100";
+        if (hasResult) {
+          setProgress(100);
+          return;
+        }
+        const filled = [nameInput?.value.trim(), birthInput?.value].filter(Boolean).length;
+        if (filled === 0) {
+          setProgress(0);
+        } else if (filled === 1) {
+          setProgress(50);
+        } else {
+          setProgress(80);
+        }
+      }
+
+      nameInput?.addEventListener("input", updateProgressFromInputs);
+      birthInput?.addEventListener("input", updateProgressFromInputs);
+
+      const initialProgress = parseInt(body.dataset.progress || "0", 10);
+      setProgress(initialProgress);
+      if (initialProgress !== 100) {
+        updateProgressFromInputs();
+      }
+
+      modeToggle?.addEventListener("click", () => {
+        closeMenu();
+        const pressed = modeToggle.getAttribute("aria-pressed") === "true";
+        modeToggle.setAttribute("aria-pressed", String(!pressed));
+        document.body.classList.toggle("night", !pressed);
+        modeToggle.innerHTML = !pressed
+          ? '<span aria-hidden="true">🌙</span> {% trans "Light mode" %}'
+          : '<span aria-hidden="true">🌞</span> {% trans "Night mode" %}';
+      });
+
+      const nightStyles = document.createElement("style");
+      nightStyles.textContent = `
+        body.night {
+          background: #0e1713;
+          color: #e8f5ec;
+        }
+        body.night header,
+        body.night main {
+          background: transparent;
+        }
+        body.night .hero-card,
+        body.night .step-card,
+        body.night .snapshot-card,
+        body.night .stories-card {
+          background: #13231b;
+          border-color: rgba(60, 177, 121, 0.25);
+          box-shadow: none;
+        }
+        body.night .progress-footer {
+          background: rgba(10, 20, 15, 0.92);
+          border-top-color: rgba(60, 177, 121, 0.25);
+        }
+        body.night .progress-card {
+          background: #16291f;
+          border-color: rgba(60, 177, 121, 0.3);
+          box-shadow: none;
+        }
+        body.night .progress-track {
+          background: rgba(60, 177, 121, 0.2);
+        }
+        body.night .progress-bar {
+          background: linear-gradient(135deg, #3cb179, #67f0aa);
+          box-shadow: 0 10px 25px rgba(60, 177, 121, 0.35);
+        }
+        body.night .snapshot-tile,
+        body.night .story-tile {
+          background: rgba(60, 177, 121, 0.18);
+          border-color: rgba(60, 177, 121, 0.25);
+        }
+        body.night .pill {
+          background: rgba(60, 177, 121, 0.2);
+          color: rgba(232, 245, 236, 0.85);
+          border-color: rgba(60, 177, 121, 0.35);
+        }
+        body.night .nav-links {
+          background: #0f1d17;
+          border-color: rgba(60, 177, 121, 0.25);
+          box-shadow: -24px 0 60px rgba(0, 0, 0, 0.55);
+        }
+        body.night .nav-links a,
+        body.night .nav-links summary,
+        body.night .mode-toggle {
+          color: rgba(232, 245, 236, 0.78);
+        }
+        body.night .nav-dropdown {
+          background: #16291f;
+          border-color: rgba(60, 177, 121, 0.25);
+          box-shadow: none;
+        }
+        body.night .nav-dropdown a:hover,
+        body.night .nav-dropdown a:focus {
+          background: rgba(60, 177, 121, 0.22);
+          color: #e8f5ec;
+        }
+        body.night .mode-toggle {
+          background: rgba(60, 177, 121, 0.16);
+          border-color: rgba(60, 177, 121, 0.3);
+        }
+        body.night .menu-overlay {
+          background: rgba(4, 12, 8, 0.7);
+        }
+        body.night footer {
+          color: rgba(232, 245, 236, 0.7);
+        }
+      `;
+      document.head.appendChild(nightStyles);
+    </script>
+  </body>
+</html>
