@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ article.title }} · {% trans "Articles & Library" %} · Numerologist{% endblock %}
+
+{% block extra_styles %}
+      .article-breadcrumb {
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .article-breadcrumb a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid rgba(45, 143, 96, 0.35);
+        color: #2d8f60;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .article-breadcrumb a:hover,
+      .article-breadcrumb a:focus {
+        background: rgba(45, 143, 96, 0.12);
+      }
+      .article-detail {
+        display: grid;
+        gap: clamp(1.75rem, 3vw, 2.5rem);
+        background: #ffffff;
+        padding: clamp(2rem, 3vw, 3rem);
+        border-radius: 1.75rem;
+        border: 1px solid rgba(33, 65, 48, 0.12);
+        box-shadow: 0 28px 60px rgba(33, 65, 48, 0.12);
+      }
+      .article-detail__header {
+        display: grid;
+        gap: 0.75rem;
+      }
+      .article-detail__eyebrow {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: rgba(31, 51, 39, 0.7);
+        font-weight: 600;
+      }
+      .article-detail__title {
+        margin: 0;
+        font-size: clamp(2.1rem, 4vw, 3.1rem);
+        line-height: 1.1;
+        color: #1f3327;
+      }
+      .article-detail__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        color: rgba(31, 51, 39, 0.65);
+      }
+      .article-detail__meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(60, 177, 121, 0.14);
+        color: #2d8f60;
+        font-weight: 600;
+      }
+      .article-detail__source {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+        font-weight: 600;
+        color: #2d8f60;
+      }
+      .article-detail__source:hover,
+      .article-detail__source:focus {
+        text-decoration: underline;
+      }
+      .article-detail__body {
+        display: grid;
+        gap: 1.5rem;
+        color: rgba(31, 51, 39, 0.85);
+      }
+      .article-detail__body .prose {
+        font-size: 1.02rem;
+      }
+      .article-analysis {
+        background: linear-gradient(135deg, rgba(60, 177, 121, 0.15), rgba(60, 177, 121, 0.05));
+        border: 1px solid rgba(45, 143, 96, 0.25);
+        border-radius: 1.5rem;
+        padding: clamp(1.75rem, 3vw, 2.25rem);
+        display: grid;
+        gap: 0.85rem;
+      }
+      .article-analysis__title {
+        margin: 0;
+        font-size: 1.35rem;
+        color: #1f3327;
+      }
+      .article-analysis__body {
+        color: rgba(31, 51, 39, 0.8);
+        line-height: 1.6;
+      }
+      @media (max-width: 720px) {
+        .article-detail {
+          padding: 1.75rem;
+        }
+        .article-detail__title {
+          font-size: clamp(1.8rem, 7vw, 2.4rem);
+        }
+      }
+{% endblock %}
+
+{% block content %}
+  <nav class="article-breadcrumb" aria-label="{% trans 'Back to articles' %}">
+    <a href="{% url 'article_list' %}">
+      <span aria-hidden="true">←</span>
+      {% trans "All articles" %}
+    </a>
+  </nav>
+
+  <article class="article-detail">
+    <header class="article-detail__header">
+      <span class="article-detail__eyebrow">{% trans "Numerologist library" %}</span>
+      <h1 class="article-detail__title">{{ article.title }}</h1>
+      <div class="article-detail__meta">
+        <span>{% blocktrans with author=article.author %}By {{ author }}{% endblocktrans %}</span>
+        <span>
+          {% blocktrans with date=article.published|date:"F j, Y" %}Published {{ date }}{% endblocktrans %}
+        </span>
+      </div>
+      {% if article.source_url %}
+        <a class="article-detail__source" href="{{ article.source_url }}" target="_blank" rel="noreferrer">
+          {% trans "View original source" %}
+          <span aria-hidden="true">↗</span>
+        </a>
+      {% endif %}
+    </header>
+
+    <div class="article-detail__body">
+      <div class="prose">
+        {{ article.content|safe }}
+      </div>
+    </div>
+  </article>
+
+  {% if ai_analysis %}
+    <section class="article-analysis" aria-labelledby="article-analysis-title">
+      <h2 id="article-analysis-title" class="article-analysis__title">{% trans "AI insight" %}</h2>
+      <p class="article-analysis__body">{{ ai_analysis }}</p>
+    </section>
+  {% endif %}
+{% endblock %}
