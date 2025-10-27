@@ -22,5 +22,6 @@ urlpatterns = [
     path("articles/", include("articles.urls")),
     path("healthz/", health_check, name="health_check"),
     path("", home, name="home"),
+    path("", home, name="index"),
     path("<slug:slug>/", static_page, name="static_page"),
 ]
