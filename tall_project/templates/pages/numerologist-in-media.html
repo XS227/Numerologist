@@ -8,9 +8,83 @@
   <h1 id="page-title">{{ page.title }}</h1>
   <p>
     {% blocktrans trimmed %}
-    Interviews, podcasts, and press features where Åse shares numerology insights with a wider audience. Catch up on her
-    latest appearances and request media assets for your own publication.
+    Interviews, podcasts, articles, and press features where Åse shares numerology insights with a wider audience.
+    Catch up on recent coverage, explore in-depth conversations, and request media assets for your own publication.
     {% endblocktrans %}
   </p>
+
+  <section aria-labelledby="featured-press">
+    <h2 id="featured-press">{% trans "Featured press coverage" %}</h2>
+    <p>
+      {% blocktrans trimmed %}
+      Major publications continue to spotlight numerology's resurgence in culture and personal development. These
+      evergreen features are helpful references when introducing readers to Åse's work and the broader numerology
+      movement.
+      {% endblocktrans %}
+    </p>
+    <ul>
+      <li>
+        <a href="https://www.vogue.com/article/numerology-meaning-life-path-number" target="_blank" rel="noopener noreferrer">
+          {% trans "Vogue: \"Numerology 101: How to Use Your Life Path Number to Get What You Want\"" %}
+        </a>
+        — {% trans "A primer on life-path numbers and how people are weaving numerology into everyday decision-making." %}
+      </li>
+      <li>
+        <a href="https://www.thecut.com/article/numerology-yearly-predictions-2024.html" target="_blank" rel="noopener noreferrer">
+          {% trans "The Cut: \"What Numerology Says About 2024\"" %}
+        </a>
+        — {% trans "Annual forecast that highlights how numerologists interpret collective energy through numbers." %}
+      </li>
+      <li>
+        <a href="https://www.bbc.com/worklife/article/20200707-why-so-many-people-believe-in-angel-numbers" target="_blank" rel="noopener noreferrer">
+          {% trans "BBC Worklife: \"Why so many people believe in angel numbers\"" %}
+        </a>
+        — {% trans "Explores the psychology behind repeating numbers and the cultural fascination with numeric patterns." %}
+      </li>
+      <li>
+        <a href="https://www.washingtonpost.com/wellness/2023/03/01/angel-numbers-meaning/" target="_blank" rel="noopener noreferrer">
+          {% trans "The Washington Post: \"Angel numbers are everywhere. Here's what they really mean.\"" %}
+        </a>
+        — {% trans "Breaks down how modern mystics, including numerologists, interpret frequently spotted sequences like 1111 and 222." %}
+      </li>
+      <li>
+        <a href="https://www.npr.org/2021/04/06/984185860/why-we-find-meaning-in-numbers" target="_blank" rel="noopener noreferrer">
+          {% trans "NPR Life Kit: \"Why We Find Meaning In Numbers\"" %}
+        </a>
+        — {% trans "An audio-friendly overview that situates numerology within a wider conversation about intuition and pattern recognition." %}
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="interview-topics">
+    <h2 id="interview-topics">{% trans "Interview-ready topics" %}</h2>
+    <p>
+      {% blocktrans trimmed %}
+      Looking to feature Åse on your platform? These go-to angles resonate with audiences who are curious about how
+      numerology can support personal and professional growth.
+      {% endblocktrans %}
+    </p>
+    <ul>
+      <li>{% trans "Personal year cycles for career planning and launch timing." %}</li>
+      <li>{% trans "How life-path numbers illuminate leadership styles and team dynamics." %}</li>
+      <li>{% trans "Translating repeating \"angel\" numbers into practical rituals and mindset shifts." %}</li>
+      <li>{% trans "Building intuitive businesses by combining numerology with evidence-based strategy." %}</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="press-resources">
+    <h2 id="press-resources">{% trans "Press resources" %}</h2>
+    <p>
+      {% blocktrans trimmed %}
+      Need a quote or a tailored numerology segment? Reach out for custom commentary, workshop bookings, or live event
+      coverage.
+      {% endblocktrans %}
+    </p>
+    <ul>
+      <li>{% trans "Email" %}: <a href="mailto:press@setaei.com">press@setaei.com</a></li>
+      <li>{% trans "Request a full media kit, including bio, talking points, and imagery, via email." %}</li>
+      <li>{% trans "Virtual and on-site interviews available across English and Scandinavian outlets." %}</li>
+    </ul>
+  </section>
 </article>
 {% endblock %}
