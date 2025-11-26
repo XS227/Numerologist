@@ -191,7 +191,7 @@
       outline: none;
     }
 
-    .snapshot-card {
+    #snapshot {
       border-radius: 24px;
       border: 1px solid rgba(60, 177, 121, 0.3);
       padding: 1.75rem;
@@ -206,12 +206,28 @@
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     }
 
-    .snapshot-tile {
-      background: rgba(60, 177, 121, 0.12);
+    .snapshot-card {
       border-radius: 18px;
       padding: 1.1rem 1.2rem;
       display: grid;
-      gap: 0.4rem;
+      gap: 0.35rem;
+      background: rgba(60, 177, 121, 0.12);
+      border: 1px solid rgba(60, 177, 121, 0.22);
+    }
+
+    .snapshot-card h3 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .snapshot-number {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    .snapshot-card p {
+      margin: 0;
     }
 
     .snapshot-actions {
@@ -233,28 +249,138 @@
       margin: 0;
     }
 
-    .story-grid {
+    .core-grid {
       display: grid;
       gap: 1rem;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
-    .story-tile {
+    .core-card {
       border-radius: 18px;
-      border: 1px solid rgba(60, 177, 121, 0.25);
-      background: rgba(60, 177, 121, 0.1);
-      padding: 1.1rem 1.2rem;
+      padding: 16px 18px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      background: #ffffff;
+      box-shadow: 0 4px 18px rgba(15, 118, 110, 0.05);
+      cursor: pointer;
+      transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+      text-align: left;
+    }
+
+    .core-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(15, 118, 110, 0.1);
+    }
+
+    .core-card.is-active {
+      border-color: #22c55e;
+      box-shadow: 0 10px 40px rgba(34, 197, 94, 0.25);
+      background: radial-gradient(circle at top left, #ecfdf3, #ffffff);
+    }
+
+    .core-card.is-active h3,
+    .core-card.is-active p {
+      color: #166534;
+      font-weight: 600;
+    }
+
+    .page-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+
+    .section-link {
+      font-size: 0.95rem;
+      text-decoration: none;
+      color: #059669;
+    }
+
+    .articles-grid {
       display: grid;
-      gap: 0.35rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
     }
 
-    .story-number {
-      font-weight: 600;
-      color: var(--accent-strong);
+    .article-card {
+      background: #ffffff;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(15, 118, 110, 0.12);
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.04);
+      transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
     }
 
-    .story-title {
+    .article-card a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+      height: 100%;
+    }
+
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 50px rgba(15, 23, 42, 0.12);
+      border-color: #22c55e;
+    }
+
+    .article-image-wrap {
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+    }
+
+    .article-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .article-content {
+      padding: 16px 18px 18px;
+    }
+
+    .article-tag {
+      display: inline-flex;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: #047857;
+      font-size: 0.75rem;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .article-content h3 {
+      margin-top: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+
+    .article-content p {
+      margin-top: 6px;
+      font-size: 0.9rem;
+      color: #4b5563;
+    }
+
+    .article-meta {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #9ca3af;
     }
 
     .progress-footer {
@@ -308,15 +434,16 @@
 
     body.night .hero-card,
     body.night .step-card,
-    body.night .snapshot-card,
-    body.night .stories-card {
+    body.night #snapshot,
+    body.night .stories-card,
+    body.night .article-card {
       background: #13231b;
       border-color: rgba(60, 177, 121, 0.25);
       box-shadow: none;
     }
 
-    body.night .snapshot-tile,
-    body.night .story-tile {
+    body.night .snapshot-card,
+    body.night .core-card {
       background: rgba(60, 177, 121, 0.18);
       border-color: rgba(60, 177, 121, 0.25);
     }
@@ -405,7 +532,7 @@
           <button class="btn btn-primary" type="submit">{% trans "Continue" %}</button>
         </div>
       </form>
-      <article class="snapshot-card" aria-labelledby="snapshot-title">
+      <section id="snapshot" aria-labelledby="snapshot-title">
         <div>
           <h2 id="snapshot-title" style="margin:0 0 0.35rem;">{% trans "Your numerology snapshot" %}</h2>
           <p style="margin:0; color:var(--muted); max-width:38ch;">
@@ -413,99 +540,137 @@
           </p>
         </div>
         <div class="snapshot-grid" id="snapshotGrid">
-          <div class="snapshot-tile">
-            <strong>{% trans "Life Path" %}</strong>
-            <span data-value="life_path">{% if result %}{{ result.life_path }}{% else %}&mdash;{% endif %}</span>
-            <small style="color:var(--muted);">{% trans "Guides your lifetime rhythm and lessons." %}</small>
+          <div class="snapshot-card" data-number="{% if result %}{{ result.life_path }}{% endif %}" data-kind="life-path">
+            <h3>{% trans "Life Path" %}</h3>
+            <p class="snapshot-number" data-value="life_path">{% if result %}{{ result.life_path }}{% else %}&mdash;{% endif %}</p>
+            <p style="color:var(--muted);">{% trans "Guides your lifetime rhythm and lessons." %}</p>
           </div>
-          <div class="snapshot-tile">
-            <strong>{% trans "Expression" %}</strong>
-            <span data-value="expression">{% if result %}{{ result.expression }}{% else %}&mdash;{% endif %}</span>
-            <small style="color:var(--muted);">{% trans "How you naturally show gifts to the world." %}</small>
+          <div class="snapshot-card" data-number="{% if result %}{{ result.expression }}{% endif %}" data-kind="expression">
+            <h3>{% trans "Expression" %}</h3>
+            <p class="snapshot-number" data-value="expression">{% if result %}{{ result.expression }}{% else %}&mdash;{% endif %}</p>
+            <p style="color:var(--muted);">{% trans "How you naturally show gifts to the world." %}</p>
           </div>
-          <div class="snapshot-tile">
-            <strong>{% trans "Soul Urge" %}</strong>
-            <span data-value="soul">{% if result %}{{ result.soul_urge }}{% else %}&mdash;{% endif %}</span>
-            <small style="color:var(--muted);">{% trans "The desires your heart keeps whispering." %}</small>
+          <div class="snapshot-card" data-number="{% if result %}{{ result.soul_urge }}{% endif %}" data-kind="soul-urge">
+            <h3>{% trans "Soul Urge" %}</h3>
+            <p class="snapshot-number" data-value="soul">{% if result %}{{ result.soul_urge }}{% else %}&mdash;{% endif %}</p>
+            <p style="color:var(--muted);">{% trans "The desires your heart keeps whispering." %}</p>
           </div>
-          <div class="snapshot-tile">
-            <strong>{% trans "Personality" %}</strong>
-            <span data-value="personality">{% if result %}{{ result.personality }}{% else %}&mdash;{% endif %}</span>
-            <small style="color:var(--muted);">{% trans "The impression people receive when you arrive." %}</small>
+          <div class="snapshot-card" data-number="{% if result %}{{ result.personality }}{% endif %}" data-kind="personality">
+            <h3>{% trans "Personality" %}</h3>
+            <p class="snapshot-number" data-value="personality">{% if result %}{{ result.personality }}{% else %}&mdash;{% endif %}</p>
+            <p style="color:var(--muted);">{% trans "The impression people receive when you arrive." %}</p>
           </div>
         </div>
         <div class="snapshot-actions">
           <a class="btn btn-secondary" href="{% url 'static_page' 'calculators' %}" id="viewCalculators">{% trans "Explore all calculators" %}</a>
         </div>
-      </article>
+      </section>
     </div>
   </section>
 
-  <section class="stories-card" aria-labelledby="stories-title">
+  <section id="core-numbers" class="stories-card" aria-labelledby="stories-title">
     <h2 id="stories-title">{% trans "Core number stories" %}</h2>
     <p style="margin:0; color:var(--muted); max-width:68ch;">
       {% trans "Each number carries a distinct tone. These quick notes help you connect the lite calculator’s insight with Åse’s deeper readings. Come back after your full session to compare how the energies mature." %}
     </p>
-    <div class="story-grid">
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 1" %}</span>
-        <span class="story-title">{% trans "The Pioneer" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Courage, initiative, and a drive to set the pace for others." %}</p>
+    <div class="core-grid">
+      <button class="core-card" data-number="1">
+        <h3>{% trans "Number 1" %}</h3>
+        <p>{% trans "Courage, initiative, and a drive to set the pace for others." %}</p>
+      </button>
+      <button class="core-card" data-number="2">
+        <h3>{% trans "Number 2" %}</h3>
+        <p>{% trans "Gentle balance, partnership, and the wisdom of patience." %}</p>
+      </button>
+      <button class="core-card" data-number="3">
+        <h3>{% trans "Number 3" %}</h3>
+        <p>{% trans "Expression, optimism, and weaving joy into daily rituals." %}</p>
+      </button>
+      <button class="core-card" data-number="4">
+        <h3>{% trans "Number 4" %}</h3>
+        <p>{% trans "Structure, loyalty, and crafting foundations that last." %}</p>
+      </button>
+      <button class="core-card" data-number="5">
+        <h3>{% trans "Number 5" %}</h3>
+        <p>{% trans "Freedom, curiosity, and thriving on fresh experiences." %}</p>
+      </button>
+      <button class="core-card" data-number="6">
+        <h3>{% trans "Number 6" %}</h3>
+        <p>{% trans "Harmony, devotion, and tending to family with warmth." %}</p>
+      </button>
+      <button class="core-card" data-number="7">
+        <h3>{% trans "Number 7" %}</h3>
+        <p>{% trans "Reflection, intuition, and seeking meaning beneath the surface." %}</p>
+      </button>
+      <button class="core-card" data-number="8">
+        <h3>{% trans "Number 8" %}</h3>
+        <p>{% trans "Leadership, accountability, and stewardship of resources." %}</p>
+      </button>
+      <button class="core-card" data-number="9">
+        <h3>{% trans "Number 9" %}</h3>
+        <p>{% trans "Compassion, vision, and the grace of completion." %}</p>
+      </button>
+      <button class="core-card" data-number="11">
+        <h3>{% trans "Number 11" %}</h3>
+        <p>{% trans "Spiritual illumination, insight, and inspiring leadership." %}</p>
+      </button>
+      <button class="core-card" data-number="22">
+        <h3>{% trans "Number 22" %}</h3>
+        <p>{% trans "Grand-scale manifestation balanced with heart-led service." %}</p>
+      </button>
+      <button class="core-card" data-number="33">
+        <h3>{% trans "Number 33" %}</h3>
+        <p>{% trans "Compassionate mastery devoted to uplifting humanity." %}</p>
+      </button>
+    </div>
+  </section>
+  <section id="latest-articles" class="page-section" aria-labelledby="latest-articles-title">
+    <div class="section-header">
+      <h2 id="latest-articles-title">{% trans "Siste artikler" %}</h2>
+      <a href="{% url 'static_page' 'articles' %}" class="section-link">{% trans "Se alle artikler →" %}</a>
+    </div>
+
+    <div class="articles-grid">
+      <article class="article-card">
+        <a href="/articles/numerological-reflection-on-mahsa-amini-and-bita-azizi/">
+          <div class="article-image-wrap">
+            <img src="/articles/mashajina_bitaazizi/images/cover.jpg" alt="{% trans 'Illustration of two silhouettes' %}" />
+          </div>
+          <div class="article-content">
+            <span class="article-tag">{% trans "Guides" %}</span>
+            <h3>{% trans "Hvordan forstå din Life Path" %}</h3>
+            <p>{% trans "En enkel introduksjon til hva livsveien forteller om ditt overordnede livstema." %}</p>
+            <span class="article-meta">{% trans "5 min lesing · 24. november 2025" %}</span>
+          </div>
+        </a>
       </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 2" %}</span>
-        <span class="story-title">{% trans "The Diplomat" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Gentle balance, partnership, and the wisdom of patience." %}</p>
+
+      <article class="article-card">
+        <a href="/articles/master-number-33/">
+          <div class="article-image-wrap">
+            <img src="/media/master-33.jpg" alt="{% trans 'Master number 33' %}" />
+          </div>
+          <div class="article-content">
+            <span class="article-tag">{% trans "Master numbers" %}</span>
+            <h3>{% trans "Hva betyr det å ha 33 i kartet ditt?" %}</h3>
+            <p>{% trans "En dypere titt på det medfølende, kosmiske lærer-tallet 33." %}</p>
+            <span class="article-meta">{% trans "7 min lesing · 12. november 2025" %}</span>
+          </div>
+        </a>
       </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 3" %}</span>
-        <span class="story-title">{% trans "The Creative" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Expression, optimism, and weaving joy into daily rituals." %}</p>
-      </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 4" %}</span>
-        <span class="story-title">{% trans "The Builder" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Structure, loyalty, and crafting foundations that last." %}</p>
-      </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 5" %}</span>
-        <span class="story-title">{% trans "The Explorer" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Freedom, curiosity, and thriving on fresh experiences." %}</p>
-      </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 6" %}</span>
-        <span class="story-title">{% trans "The Guardian" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Harmony, devotion, and tending to family with warmth." %}</p>
-      </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 7" %}</span>
-        <span class="story-title">{% trans "The Mystic" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Reflection, intuition, and seeking meaning beneath the surface." %}</p>
-      </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 8" %}</span>
-        <span class="story-title">{% trans "The Steward" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Leadership, accountability, and stewardship of resources." %}</p>
-      </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 9" %}</span>
-        <span class="story-title">{% trans "The Sage" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Compassion, vision, and the grace of completion." %}</p>
-      </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 11" %}</span>
-        <span class="story-title">{% trans "The Visionary" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Spiritual illumination, insight, and inspiring leadership." %}</p>
-      </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 22" %}</span>
-        <span class="story-title">{% trans "The Master Builder" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Grand-scale manifestation balanced with heart-led service." %}</p>
-      </article>
-      <article class="story-tile">
-        <span class="story-number">{% trans "Number 33" %}</span>
-        <span class="story-title">{% trans "The Cosmic Guide" %}</span>
-        <p style="margin:0; color:var(--muted);">{% trans "Compassionate mastery devoted to uplifting humanity." %}</p>
+
+      <article class="article-card">
+        <a href="/articles/navn-og-numerologi/">
+          <div class="article-image-wrap">
+            <img src="/media/name-numerology.jpg" alt="{% trans 'Navn og numerologi' %}" />
+          </div>
+          <div class="article-content">
+            <span class="article-tag">{% trans "Navn" %}</span>
+            <h3>{% trans "Navn &amp; numerologi: hvorfor navnet ditt føles «deg»" %}</h3>
+            <p>{% trans "Utforsk hvordan uttrykks-tallet fra navnet ditt farger personligheten." %}</p>
+            <span class="article-meta">{% trans "6 min lesing · 3. november 2025" %}</span>
+          </div>
+        </a>
       </article>
     </div>
   </section>
@@ -586,6 +751,49 @@
       if (initialProgress !== 100) {
         updateProgressFromInputs();
       }
+
+      const snapshotCards = document.querySelectorAll("#snapshot .snapshot-card");
+      const coreCards = document.querySelectorAll("#core-numbers .core-card");
+
+      function syncSnapshotDataNumbers() {
+        snapshotCards.forEach((card) => {
+          const valueElement = card.querySelector("[data-value]");
+          const textValue = valueElement?.textContent?.trim();
+          card.dataset.number = textValue && textValue !== "—" ? textValue : "";
+        });
+      }
+
+      function highlightCoreNumbers() {
+        const userNumbers = new Set();
+        snapshotCards.forEach((card) => {
+          const num = card.dataset.number;
+          if (num) {
+            userNumbers.add(num);
+          }
+        });
+
+        coreCards.forEach((card) => {
+          const num = card.dataset.number;
+          if (!num) return;
+          if (userNumbers.has(num)) {
+            card.classList.add("is-active");
+          } else {
+            card.classList.remove("is-active");
+          }
+        });
+      }
+
+      coreCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const number = card.dataset.number;
+          if (number) {
+            window.location.href = `/numbers/${number}`;
+          }
+        });
+      });
+
+      syncSnapshotDataNumbers();
+      highlightCoreNumbers();
     })();
   </script>
 {% endblock %}
