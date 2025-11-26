@@ -492,6 +492,43 @@
         border: 1px solid rgba(60, 177, 121, 0.3);
       }
 
+      .featured-article {
+        border-radius: 32px;
+        background: linear-gradient(135deg, rgba(60, 177, 121, 0.12), rgba(60, 177, 121, 0.06));
+        border: 1px solid rgba(60, 177, 121, 0.2);
+        padding: clamp(1.75rem, 3vw, 2.4rem);
+        box-shadow: 0 20px 48px rgba(45, 143, 96, 0.18);
+        display: grid;
+        gap: 1rem;
+      }
+
+      .featured-article h2 {
+        margin: 0;
+        font-size: clamp(1.6rem, 3vw, 2.1rem);
+        letter-spacing: -0.01em;
+      }
+
+      .featured-article p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 62ch;
+        line-height: 1.6;
+      }
+
+      .featured-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .featured-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
       .btn:hover {
         transform: translateY(-1px);
       }
@@ -760,6 +797,27 @@
                 <a class="btn btn-secondary" href="/calculators.html" id="viewCalculators">Explore all calculators</a>
               </div>
             </article>
+          </div>
+        </section>
+
+        <section class="featured-article" aria-labelledby="featured-article-title">
+          <span class="pill">Latest article</span>
+          <h2 id="featured-article-title">Numerological Reflection on Mahsa (Jina) Amini and Bita Azizi</h2>
+          <p>
+            Khabat Setaei explores mirrored numerological themes in the lives of Mahsa (Jina) Amini and Bita Azizi –
+            from life paths and master numbers to Abjad interpretations – offering a reflective lens on how their stories
+            continue to inspire change.
+          </p>
+          <div class="featured-meta">
+            <span>By Khabat Setaei</span>
+            <span aria-hidden="true">•</span>
+            <span>Fresh from the library</span>
+          </div>
+          <div class="featured-actions">
+            <a class="btn btn-primary" href="/articles/numerological-reflection-on-mahsa-amini-and-bita-azizi/">
+              Read the reflection
+            </a>
+            <a class="btn btn-secondary" href="/articles.html">Browse all articles</a>
           </div>
         </section>
 
