@@ -596,7 +596,7 @@
         transform: translateY(-1px);
       }
 
-      .snapshot-card {
+      #snapshot {
         border-radius: 24px;
         border: 1px solid rgba(60, 177, 121, 0.3);
         padding: 1.75rem;
@@ -611,16 +611,28 @@
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       }
 
-      .snapshot-tile {
-        background: rgba(60, 177, 121, 0.12);
+      .snapshot-card {
         border-radius: 18px;
         padding: 1.1rem 1.2rem;
         display: grid;
-        gap: 0.4rem;
+        gap: 0.35rem;
+        background: rgba(60, 177, 121, 0.12);
+        border: 1px solid rgba(60, 177, 121, 0.22);
       }
 
-      .snapshot-tile strong {
-        font-size: 1.1rem;
+      .snapshot-card h3 {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+
+      .snapshot-number {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 700;
+      }
+
+      .snapshot-card p {
+        margin: 0;
       }
 
       .snapshot-actions {
@@ -644,29 +656,138 @@
         font-size: 1.4rem;
       }
 
-      .story-grid {
+      .core-grid {
         display: grid;
         gap: 1.25rem;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
 
-      .story-tile {
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.7);
-        border: 1px solid rgba(60, 177, 121, 0.35);
-        padding: 1.25rem;
-        display: grid;
-        gap: 0.55rem;
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      .core-card {
+        border-radius: 18px;
+        padding: 16px 18px;
+        border: 1px solid rgba(0, 0, 0, 0.04);
+        background: #ffffff;
+        box-shadow: 0 4px 18px rgba(15, 118, 110, 0.05);
+        cursor: pointer;
+        transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+        text-align: left;
       }
 
-      .story-number {
-        font-weight: 700;
-        color: var(--accent-strong);
+      .core-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(15, 118, 110, 0.1);
       }
 
-      .story-title {
+      .core-card.is-active {
+        border-color: #22c55e;
+        box-shadow: 0 10px 40px rgba(34, 197, 94, 0.25);
+        background: radial-gradient(circle at top left, #ecfdf3, #ffffff);
+      }
+
+      .core-card.is-active h3,
+      .core-card.is-active p {
+        color: #166534;
         font-weight: 600;
+      }
+
+      .page-section {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 48px 24px;
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .section-header h2 {
+        font-size: 1.7rem;
+        font-weight: 700;
+      }
+
+      .section-link {
+        font-size: 0.95rem;
+        text-decoration: none;
+        color: #059669;
+      }
+
+      .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+      }
+
+      .article-card {
+        background: #ffffff;
+        border-radius: 22px;
+        overflow: hidden;
+        border: 1px solid rgba(15, 118, 110, 0.12);
+        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.04);
+        transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+      }
+
+      .article-card a {
+        color: inherit;
+        text-decoration: none;
+        display: block;
+        height: 100%;
+      }
+
+      .article-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 30px 50px rgba(15, 23, 42, 0.12);
+        border-color: #22c55e;
+      }
+
+      .article-image-wrap {
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+      }
+
+      .article-image-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .article-content {
+        padding: 16px 18px 18px;
+      }
+
+      .article-tag {
+        display: inline-flex;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: #ecfdf5;
+        color: #047857;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .article-content h3 {
+        margin-top: 10px;
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+
+      .article-content p {
+        margin-top: 6px;
+        font-size: 0.9rem;
+        color: #4b5563;
+      }
+
+      .article-meta {
+        display: block;
+        margin-top: 10px;
+        font-size: 0.75rem;
+        color: #9ca3af;
       }
 
       footer {
@@ -717,7 +838,7 @@
 
         .progress-card,
         .step-card,
-        .snapshot-card,
+        #snapshot,
         .stories-card {
           border-radius: 20px;
         }
@@ -746,7 +867,7 @@
       }
 
       @media (max-width: 480px) {
-        .story-grid {
+        .core-grid {
           grid-template-columns: 1fr;
         }
 
@@ -838,7 +959,7 @@
                 Fortsett
               </button>
             </form>
-            <article class="snapshot-card" aria-labelledby="snapshot-title">
+            <section id="snapshot" aria-labelledby="snapshot-title">
               <div>
                 <h2 id="snapshot-title" style="margin:0 0 0.35rem;">Your numerology snapshot</h2>
                 <p style="margin:0; color:var(--muted); max-width:38ch;">
@@ -847,31 +968,31 @@
                 </p>
               </div>
               <div class="snapshot-grid" id="snapshotGrid">
-                <div class="snapshot-tile">
-                  <strong>Life Path</strong>
-                  <span data-value="life_path">—</span>
-                  <small style="color:var(--muted);">Guides your lifetime rhythm and lessons.</small>
+                <div class="snapshot-card" data-number="" data-kind="life-path">
+                  <h3>Life Path</h3>
+                  <p class="snapshot-number" data-value="life_path">—</p>
+                  <p style="color:var(--muted);">Guides your lifetime rhythm and lessons.</p>
                 </div>
-                <div class="snapshot-tile">
-                  <strong>Expression</strong>
-                  <span data-value="expression">—</span>
-                  <small style="color:var(--muted);">How you naturally show gifts to the world.</small>
+                <div class="snapshot-card" data-number="" data-kind="expression">
+                  <h3>Expression</h3>
+                  <p class="snapshot-number" data-value="expression">—</p>
+                  <p style="color:var(--muted);">How you naturally show gifts to the world.</p>
                 </div>
-                <div class="snapshot-tile">
-                  <strong>Soul Urge</strong>
-                  <span data-value="soul">—</span>
-                  <small style="color:var(--muted);">The desires your heart keeps whispering.</small>
+                <div class="snapshot-card" data-number="" data-kind="soul-urge">
+                  <h3>Soul Urge</h3>
+                  <p class="snapshot-number" data-value="soul">—</p>
+                  <p style="color:var(--muted);">The desires your heart keeps whispering.</p>
                 </div>
-                <div class="snapshot-tile">
-                  <strong>Personality</strong>
-                  <span data-value="personality">—</span>
-                  <small style="color:var(--muted);">The impression people receive when you arrive.</small>
+                <div class="snapshot-card" data-number="" data-kind="personality">
+                  <h3>Personality</h3>
+                  <p class="snapshot-number" data-value="personality">—</p>
+                  <p style="color:var(--muted);">The impression people receive when you arrive.</p>
                 </div>
               </div>
               <div class="snapshot-actions">
                 <a class="btn btn-secondary" href="/calculators.html" id="viewCalculators">Explore all calculators</a>
               </div>
-            </article>
+            </section>
           </div>
         </section>
 
@@ -896,72 +1017,111 @@
           </div>
         </section>
 
-        <section class="stories-card" aria-labelledby="stories-title">
+        <section id="core-numbers" class="stories-card" aria-labelledby="stories-title">
           <h2 id="stories-title">Core number stories</h2>
           <p style="margin:0; color:var(--muted); max-width:68ch;">
             Each number carries a distinct tone. These quick notes help you connect the lite calculator’s insight with Åse’s
             deeper readings. Come back after your full session to compare how the energies mature.
           </p>
-          <div class="story-grid">
-            <article class="story-tile">
-              <span class="story-number">Number 1</span>
-              <span class="story-title">The Pioneer</span>
-              <p style="margin:0; color:var(--muted);">Courage, initiative, and a drive to set the pace for others.</p>
+          <div class="core-grid">
+            <button class="core-card" data-number="1">
+              <h3>Number 1</h3>
+              <p>Courage, initiative, and a drive to set the pace for others.</p>
+            </button>
+            <button class="core-card" data-number="2">
+              <h3>Number 2</h3>
+              <p>Gentle balance, partnership, and the wisdom of patience.</p>
+            </button>
+            <button class="core-card" data-number="3">
+              <h3>Number 3</h3>
+              <p>Expression, optimism, and weaving joy into daily rituals.</p>
+            </button>
+            <button class="core-card" data-number="4">
+              <h3>Number 4</h3>
+              <p>Structure, loyalty, and crafting foundations that last.</p>
+            </button>
+            <button class="core-card" data-number="5">
+              <h3>Number 5</h3>
+              <p>Freedom, curiosity, and thriving on fresh experiences.</p>
+            </button>
+            <button class="core-card" data-number="6">
+              <h3>Number 6</h3>
+              <p>Harmony, devotion, and tending to family with warmth.</p>
+            </button>
+            <button class="core-card" data-number="7">
+              <h3>Number 7</h3>
+              <p>Reflection, intuition, and seeking meaning beneath the surface.</p>
+            </button>
+            <button class="core-card" data-number="8">
+              <h3>Number 8</h3>
+              <p>Leadership, accountability, and stewardship of resources.</p>
+            </button>
+            <button class="core-card" data-number="9">
+              <h3>Number 9</h3>
+              <p>Compassion, vision, and the grace of completion.</p>
+            </button>
+            <button class="core-card" data-number="11">
+              <h3>Number 11</h3>
+              <p>Spiritual illumination, insight, and inspiring leadership.</p>
+            </button>
+            <button class="core-card" data-number="22">
+              <h3>Number 22</h3>
+              <p>Grand-scale manifestation balanced with heart-led service.</p>
+            </button>
+            <button class="core-card" data-number="33">
+              <h3>Number 33</h3>
+              <p>Compassionate mastery devoted to uplifting humanity.</p>
+            </button>
+          </div>
+        </section>
+
+        <section id="latest-articles" class="page-section" aria-labelledby="latest-articles-title">
+          <div class="section-header">
+            <h2 id="latest-articles-title">Siste artikler</h2>
+            <a href="/articles.html" class="section-link">Se alle artikler →</a>
+          </div>
+
+          <div class="articles-grid">
+            <article class="article-card">
+              <a href="/articles/numerological-reflection-on-mahsa-amini-and-bita-azizi/">
+                <div class="article-image-wrap">
+                  <img src="/articles/mashajina_bitaazizi/images/cover.jpg" alt="Illustration of two silhouettes" />
+                </div>
+                <div class="article-content">
+                  <span class="article-tag">Guides</span>
+                  <h3>Hvordan forstå din Life Path</h3>
+                  <p>En enkel introduksjon til hva livsveien forteller om ditt overordnede livstema.</p>
+                  <span class="article-meta">5 min lesing · 24. november 2025</span>
+                </div>
+              </a>
             </article>
-            <article class="story-tile">
-              <span class="story-number">Number 2</span>
-              <span class="story-title">The Diplomat</span>
-              <p style="margin:0; color:var(--muted);">Gentle balance, partnership, and the wisdom of patience.</p>
+
+            <article class="article-card">
+              <a href="/articles/master-number-33/">
+                <div class="article-image-wrap">
+                  <img src="/media/master-33.jpg" alt="Master number 33" />
+                </div>
+                <div class="article-content">
+                  <span class="article-tag">Master numbers</span>
+                  <h3>Hva betyr det å ha 33 i kartet ditt?</h3>
+                  <p>En dypere titt på det medfølende, kosmiske lærer-tallet 33.</p>
+                  <span class="article-meta">7 min lesing · 12. november 2025</span>
+                </div>
+              </a>
             </article>
-            <article class="story-tile">
-              <span class="story-number">Number 3</span>
-              <span class="story-title">The Creative</span>
-              <p style="margin:0; color:var(--muted);">Expression, optimism, and weaving joy into daily rituals.</p>
-            </article>
-            <article class="story-tile">
-              <span class="story-number">Number 4</span>
-              <span class="story-title">The Builder</span>
-              <p style="margin:0; color:var(--muted);">Structure, loyalty, and crafting foundations that last.</p>
-            </article>
-            <article class="story-tile">
-              <span class="story-number">Number 5</span>
-              <span class="story-title">The Explorer</span>
-              <p style="margin:0; color:var(--muted);">Freedom, curiosity, and thriving on fresh experiences.</p>
-            </article>
-            <article class="story-tile">
-              <span class="story-number">Number 6</span>
-              <span class="story-title">The Guardian</span>
-              <p style="margin:0; color:var(--muted);">Harmony, devotion, and tending to family with warmth.</p>
-            </article>
-            <article class="story-tile">
-              <span class="story-number">Number 7</span>
-              <span class="story-title">The Mystic</span>
-              <p style="margin:0; color:var(--muted);">Reflection, intuition, and seeking meaning beneath the surface.</p>
-            </article>
-            <article class="story-tile">
-              <span class="story-number">Number 8</span>
-              <span class="story-title">The Steward</span>
-              <p style="margin:0; color:var(--muted);">Leadership, accountability, and stewardship of resources.</p>
-            </article>
-            <article class="story-tile">
-              <span class="story-number">Number 9</span>
-              <span class="story-title">The Sage</span>
-              <p style="margin:0; color:var(--muted);">Compassion, vision, and the grace of completion.</p>
-            </article>
-            <article class="story-tile">
-              <span class="story-number">Number 11</span>
-              <span class="story-title">The Visionary</span>
-              <p style="margin:0; color:var(--muted);">Spiritual illumination, insight, and inspiring leadership.</p>
-            </article>
-            <article class="story-tile">
-              <span class="story-number">Number 22</span>
-              <span class="story-title">The Master Builder</span>
-              <p style="margin:0; color:var(--muted);">Grand-scale manifestation balanced with heart-led service.</p>
-            </article>
-            <article class="story-tile">
-              <span class="story-number">Number 33</span>
-              <span class="story-title">The Cosmic Guide</span>
-              <p style="margin:0; color:var(--muted);">Compassionate mastery devoted to uplifting humanity.</p>
+
+            <article class="article-card">
+              <a href="/articles/navn-og-numerologi/">
+                <div class="article-image-wrap">
+                  <img src="/media/name-numerology.jpg" alt="Navn og numerologi" />
+                </div>
+                <div class="article-content">
+                  <span class="article-tag">Navn</span>
+                  <h3>Navn &amp; numerologi: hvorfor navnet ditt føles «deg»</h3>
+                  <p>Utforsk hvordan uttrykks-tallet fra navnet ditt farger personligheten.</p>
+                  <span class="article-meta">6 min lesing · 3. november 2025</span>
+                </div>
+              </a>
             </article>
           </div>
         </section>
@@ -1054,6 +1214,49 @@
         soul: document.querySelector('[data-value="soul"]'),
         personality: document.querySelector('[data-value="personality"]'),
       };
+
+      const snapshotCards = document.querySelectorAll("#snapshot .snapshot-card");
+      const coreCards = document.querySelectorAll("#core-numbers .core-card");
+
+      function syncSnapshotDataNumbers() {
+        snapshotCards.forEach((card) => {
+          const valueElement = card.querySelector("[data-value]");
+          const textValue = valueElement?.textContent?.trim();
+          card.dataset.number = textValue && textValue !== "—" ? textValue : "";
+        });
+      }
+
+      function highlightCoreNumbers() {
+        const userNumbers = new Set();
+        snapshotCards.forEach((card) => {
+          const num = card.dataset.number;
+          if (num) {
+            userNumbers.add(num);
+          }
+        });
+
+        coreCards.forEach((card) => {
+          const num = card.dataset.number;
+          if (!num) return;
+          if (userNumbers.has(num)) {
+            card.classList.add("is-active");
+          } else {
+            card.classList.remove("is-active");
+          }
+        });
+      }
+
+      coreCards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const number = card.dataset.number;
+          if (number) {
+            window.location.href = `/numbers/${number}`;
+          }
+        });
+      });
+
+      syncSnapshotDataNumbers();
+      highlightCoreNumbers();
 
       function reduceNumber(total) {
         const masterNumbers = new Set([11, 22, 33]);
@@ -1156,6 +1359,9 @@
         valueElements.soul.textContent = soulUrge ?? "—";
         valueElements.personality.textContent = personality ?? "—";
 
+        syncSnapshotDataNumbers();
+        highlightCoreNumbers();
+
         updateProgress(100);
         return true;
       }
@@ -1189,8 +1395,9 @@
         }
         body.night .hero-card,
         body.night .step-card,
-        body.night .snapshot-card,
-        body.night .stories-card {
+        body.night #snapshot,
+        body.night .stories-card,
+        body.night .article-card {
           background: #13231b;
           border-color: rgba(60, 177, 121, 0.25);
           box-shadow: none;
@@ -1211,8 +1418,8 @@
           background: linear-gradient(135deg, #3cb179, #67f0aa);
           box-shadow: 0 10px 25px rgba(60, 177, 121, 0.35);
         }
-        body.night .snapshot-tile,
-        body.night .story-tile {
+        body.night .snapshot-card,
+        body.night .core-card {
           background: rgba(60, 177, 121, 0.18);
           border-color: rgba(60, 177, 121, 0.25);
         }
