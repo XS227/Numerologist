@@ -492,6 +492,69 @@
         border: 1px solid rgba(60, 177, 121, 0.3);
       }
 
+      .intake-form {
+        max-width: 420px;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        background: #f4faf7;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        border: 1px solid #c8e5d2;
+      }
+
+      .intake-form .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        margin-bottom: 1rem;
+      }
+
+      .intake-form label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #134e4a;
+      }
+
+      .intake-form input[type="text"],
+      .intake-form input[type="date"] {
+        padding: 0.6rem 0.8rem;
+        border-radius: 0.6rem;
+        border: 1px solid #cbd5e1;
+        font-size: 0.95rem;
+      }
+
+      .intake-form input[type="text"]:focus,
+      .intake-form input[type="date"]:focus {
+        outline: none;
+        border-color: #16a34a;
+        box-shadow: 0 0 0 1px #16a34a33;
+      }
+
+      .intake-form small {
+        font-size: 0.75rem;
+        color: #64748b;
+      }
+
+      .intake-form .error-message {
+        color: #b91c1c;
+      }
+
+      .intake-form button[type="submit"] {
+        margin-top: 0.5rem;
+        width: 100%;
+        padding: 0.7rem 1rem;
+        border-radius: 999px;
+        border: none;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        background: #16a34a;
+        color: white;
+      }
+
+      .intake-form button[type="submit"]:hover {
+        background: #15803d;
+      }
+
       .featured-article {
         border-radius: 32px;
         background: linear-gradient(135deg, rgba(60, 177, 121, 0.12), rgba(60, 177, 121, 0.06));
@@ -742,26 +805,38 @@
                 a lite numerology overview or continue into the full studio.
               </p>
             </div>
-            <form class="step-card" id="intakeForm" novalidate aria-labelledby="step-title">
-              <header>
-                <h2 id="step-title">Step 1 · Intake essentials</h2>
-                <span>3 mins</span>
-              </header>
-              <div class="field-grid">
-                <label>
-                  Preferred name
-                  <input type="text" name="preferred_name" id="preferred_name" placeholder="How should we greet you?" />
-                  <span class="error-message" data-error-for="preferred_name" hidden>Please add your name to continue.</span>
-                </label>
-                <label>
-                  Birth date
-                  <input type="date" name="birth_date" id="birth_date" />
-                  <span class="error-message" data-error-for="birth_date" hidden>Please choose your birth date.</span>
-                </label>
+            <form class="intake-form" id="intakeForm" novalidate aria-label="Intake essentials">
+              <div class="field-group">
+                <label for="preferred-name">Preferred name</label>
+                <input
+                  type="text"
+                  id="preferred-name"
+                  name="preferred_name"
+                  placeholder="Khabat Setaei"
+                  required
+                />
+                <small class="error-message" data-error-for="preferred-name" hidden>Please add your name to continue.</small>
               </div>
-              <div class="actions">
-                <button class="btn btn-primary" type="submit">Continue</button>
+
+              <div class="field-group">
+                <label for="birth-date">Birth date</label>
+                <input
+                  type="date"
+                  id="birth-date"
+                  name="birth_date"
+                  placeholder="YYYY-MM-DD"
+                  required
+                />
+                <small>
+                  Du kan enten velge fra kalenderen eller skrive datoen direkte
+                  (f.eks. 1992-04-07).
+                </small>
+                <small class="error-message" data-error-for="birth-date" hidden>Please choose your birth date.</small>
               </div>
+
+              <button type="submit">
+                Fortsett
+              </button>
             </form>
             <article class="snapshot-card" aria-labelledby="snapshot-title">
               <div>
@@ -1049,24 +1124,24 @@
 
       function validateForm() {
         let valid = true;
-        ["preferred_name", "birth_date"].forEach((fieldName) => {
-          const field = document.getElementById(fieldName);
-          const error = document.querySelector(`[data-error-for="${fieldName}"]`);
-          if (!field.value) {
+        ["preferred-name", "birth-date"].forEach((fieldId) => {
+          const field = document.getElementById(fieldId);
+          const error = document.querySelector(`[data-error-for="${fieldId}"]`);
+          if (!field?.value) {
             valid = false;
             error?.removeAttribute("hidden");
-            field.setAttribute("aria-invalid", "true");
+            field?.setAttribute("aria-invalid", "true");
           } else {
             error?.setAttribute("hidden", "");
-            field.removeAttribute("aria-invalid");
+            field?.removeAttribute("aria-invalid");
           }
         });
         return valid;
       }
 
       function generateOverview() {
-        const name = document.getElementById("preferred_name").value.trim();
-        const birthDate = document.getElementById("birth_date").value;
+        const name = document.getElementById("preferred-name")?.value.trim() ?? "";
+        const birthDate = document.getElementById("birth-date")?.value ?? "";
         if (!validateForm()) {
           return false;
         }
