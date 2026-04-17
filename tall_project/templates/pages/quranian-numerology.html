@@ -3,6 +3,86 @@
 
 {% block title %}{{ page.title }} — Numerologist{% endblock %}
 
+{% block extra_styles %}
+  {{ block.super }}
+  <style>
+    .surah-calculator {
+      margin-top: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--card-elevated);
+      padding: 1.1rem;
+    }
+
+    .surah-controls {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .surah-controls label {
+      font-weight: 700;
+      color: var(--muted);
+    }
+
+    .surah-controls select {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.7rem;
+      font: inherit;
+      background: var(--card-bg);
+      color: var(--text);
+    }
+
+    .surah-results {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .surah-summary {
+      padding: 0.9rem;
+      border-radius: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+    }
+
+    .surah-rhythm {
+      list-style: none;
+      display: flex;
+      gap: 0.6rem;
+      padding: 0;
+      margin: 0;
+      flex-wrap: wrap;
+    }
+
+    .surah-rhythm li {
+      min-width: 44px;
+      text-align: center;
+      border-radius: 999px;
+      padding: 0.35rem 0.7rem;
+      font-weight: 700;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      border: 1px solid rgba(60, 177, 121, 0.3);
+    }
+
+    .surah-graphic {
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card-bg);
+      padding: 0.75rem;
+    }
+
+    .surah-graphic svg {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+    }
+  </style>
+{% endblock %}
+
 {% block content %}
 <article class="card prose" aria-labelledby="page-title">
   <h1 id="page-title">{{ page.title }}</h1>
@@ -31,6 +111,26 @@
       creating a dynamic balance point.
       {% endblocktrans %}
     </p>
+  </section>
+
+  <section class="surah-calculator" aria-labelledby="surah-calculator-title">
+    <h2 id="surah-calculator-title">{% trans "Surah Numerology Calculator" %}</h2>
+    <p>
+      {% blocktrans trimmed %}
+      Choose any Surah (1–114) to view its numerology profile, a generated rhythm sequence (6–7–8 cycle), and a graphic wave card.
+      {% endblocktrans %}
+    </p>
+
+    <div class="surah-controls">
+      <label for="surah-select">{% trans "Select Surah" %}</label>
+      <select id="surah-select" name="surah"></select>
+    </div>
+
+    <div class="surah-results" aria-live="polite">
+      <div class="surah-summary" id="surah-summary"></div>
+      <ul class="surah-rhythm" id="surah-rhythm"></ul>
+      <div class="surah-graphic" id="surah-graphic"></div>
+    </div>
   </section>
 
   <section aria-labelledby="abjad-reduction">
@@ -79,4 +179,121 @@
     </p>
   </section>
 </article>
+{% endblock %}
+
+{% block extra_scripts %}
+  {{ block.super }}
+  <script>
+    (function () {
+      const names = {
+        1: "Al-Fatihah",
+        2: "Al-Baqarah",
+        3: "Ali 'Imran",
+        4: "An-Nisa",
+        5: "Al-Ma'idah",
+        6: "Al-An'am",
+        7: "Al-A'raf",
+        8: "Al-Anfal",
+        9: "At-Tawbah",
+        10: "Yunus",
+        36: "Ya-Sin",
+        55: "Ar-Rahman",
+        67: "Al-Mulk",
+        78: "An-Naba",
+        112: "Al-Ikhlas",
+        113: "Al-Falaq",
+        114: "An-Nas"
+      };
+
+      const versesBySurah = [
+        7, 286, 200, 176, 120, 165, 206, 75, 129, 109, 123, 111, 43, 52, 99, 128, 111, 110, 98, 135,
+        112, 78, 118, 64, 77, 227, 93, 88, 69, 60, 34, 30, 73, 54, 45, 83, 182, 88, 75, 85,
+        54, 53, 89, 59, 37, 35, 38, 29, 18, 45, 60, 49, 62, 55, 78, 96, 29, 22, 24, 13,
+        14, 11, 11, 18, 12, 12, 30, 52, 52, 44, 28, 28, 20, 56, 40, 31, 50, 40, 46, 42,
+        29, 19, 36, 25, 22, 17, 19, 26, 30, 20, 15, 21, 11, 8, 8, 19, 5, 8, 8, 11,
+        11, 8, 3, 9, 5, 4, 7, 3, 6, 3, 5, 4, 5, 6
+      ];
+
+      const surahSelect = document.getElementById("surah-select");
+      const summary = document.getElementById("surah-summary");
+      const rhythmContainer = document.getElementById("surah-rhythm");
+      const graphic = document.getElementById("surah-graphic");
+
+      if (!surahSelect || !summary || !rhythmContainer || !graphic) {
+        return;
+      }
+
+      const reduceNumber = (value) => {
+        let n = value;
+        while (n > 9) {
+          n = String(n)
+            .split("")
+            .reduce((total, digit) => total + Number(digit), 0);
+        }
+        return n;
+      };
+
+      const rhythmPattern = [6, 7, 8];
+
+      const renderSurah = (surahNumber) => {
+        const verseCount = versesBySurah[surahNumber - 1] ?? 0;
+        const total = surahNumber + verseCount;
+        const root = reduceNumber(total);
+        const startIndex = (root + surahNumber) % rhythmPattern.length;
+        const rhythm = Array.from({ length: 6 }, (_, index) => {
+          return rhythmPattern[(startIndex + index) % rhythmPattern.length];
+        });
+
+        const surahName = names[surahNumber] || `Surah ${surahNumber}`;
+
+        summary.innerHTML = `
+          <h3>${surahName} (${surahNumber})</h3>
+          <p><strong>Verse count:</strong> ${verseCount}</p>
+          <p><strong>Numerology value:</strong> ${surahNumber} + ${verseCount} = ${total} → ${root}</p>
+          <p><strong>Explanation:</strong> Root value ${root} opens a ${rhythm[0]}-${rhythm[1]}-${rhythm[2]} resonance, then repeats as rhythmic guidance.</p>
+        `;
+
+        rhythmContainer.innerHTML = rhythm.map((item) => `<li>${item}</li>`).join("");
+
+        const bars = rhythm
+          .map((item, index) => {
+            const barHeight = 22 + item * 9;
+            const x = 28 + index * 44;
+            const y = 120 - barHeight;
+            return `<rect x="${x}" y="${y}" width="28" height="${barHeight}" rx="8" fill="rgba(60,177,121,0.85)"></rect>
+              <text x="${x + 14}" y="134" text-anchor="middle" font-size="12" fill="#1f3327">${item}</text>`;
+          })
+          .join("");
+
+        graphic.innerHTML = `
+          <svg viewBox="0 0 320 150" role="img" aria-label="Numerology rhythm graphic for ${surahName}">
+            <defs>
+              <linearGradient id="waveGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#9de8be" />
+                <stop offset="100%" stop-color="#3cb179" />
+              </linearGradient>
+            </defs>
+            <rect x="0" y="0" width="320" height="150" rx="14" fill="#f7fcf8"></rect>
+            <path d="M 20 95 C 50 65, 90 125, 120 95 C 150 65, 190 125, 220 95 C 250 65, 280 125, 300 95" fill="none" stroke="url(#waveGradient)" stroke-width="6" stroke-linecap="round"></path>
+            ${bars}
+          </svg>
+        `;
+      };
+
+      for (let surahNumber = 1; surahNumber <= 114; surahNumber += 1) {
+        const option = document.createElement("option");
+        const label = names[surahNumber] ? `${surahNumber}. ${names[surahNumber]}` : `${surahNumber}. Surah ${surahNumber}`;
+        option.value = String(surahNumber);
+        option.textContent = label;
+        surahSelect.appendChild(option);
+      }
+
+      surahSelect.addEventListener("change", (event) => {
+        renderSurah(Number(event.target.value));
+      });
+
+      surahSelect.value = "1";
+      renderSurah(1);
+    })();
+  </script>
 {% endblock %}
