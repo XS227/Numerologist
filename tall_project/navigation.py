@@ -96,6 +96,11 @@ STATIC_PAGES: Dict[str, StaticPage] = {
             "pages/numerologist-in-media.html",
         ),
         StaticPage(
+            "quranian-numerology",
+            _("Quranian Numerology"),
+            "pages/quranian-numerology.html",
+        ),
+        StaticPage(
             "guidance-support", _("Guidance & Support"), "pages/guidance-support.html"
         ),
         StaticPage("about-the-firm", _("About the Firm"), "pages/about-the-firm.html"),
@@ -155,6 +160,7 @@ NAVIGATION: Tuple[NavigationItem, ...] = (
             NavigationItem("blog-articles", _("Blog / Articles")),
             NavigationItem("references", _("References")),
             NavigationItem("numerologist-in-media", _("Numerologist in the Media")),
+            NavigationItem("quranian-numerology", _("Quranian Numerology")),
         ),
     ),
     NavigationItem(
