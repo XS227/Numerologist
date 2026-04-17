@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    This project explores Surah-by-Surah number patterns and symbolic structures in the Quran. The aim is to examine whether
+    recurring number signatures can reveal hidden codes, resonance patterns, or meaning frameworks for deeper reflection.
+    {% endblocktrans %}
+  </p>
+
+  <section aria-labelledby="main-experiment">
+    <h2 id="main-experiment">{% trans "Main experiment: 6–7–8 and the electromagnetic pulse" %}</h2>
+    <p>
+      {% blocktrans trimmed %}
+      We are testing a frequency-wave model where 6, 7, and 8 form an oscillating structure:
+      {% endblocktrans %}
+    </p>
+    <ul>
+      <li><strong>6 (Lav):</strong> {% trans "Det magnetiske fundamentet." %}</li>
+      <li><strong>8 (Høy):</strong> {% trans "Den elektriske utladningen/toroiden." %}</li>
+      <li><strong>7 (Midt):</strong> {% trans "Den nøytrale terskelen eller faselåsingen." %}</li>
+    </ul>
+    <p>
+      {% blocktrans trimmed %}
+      In this model, 7 functions as a transition point that pushes consciousness between the earthly (6) and the cosmic (8),
+      creating a dynamic balance point.
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section aria-labelledby="abjad-reduction">
+    <h2 id="abjad-reduction">{% trans "Abjad reduction and 6/8 dominance" %}</h2>
+    <p>
+      {% blocktrans trimmed %}
+      After removing “Al-” (4), the repeated appearance of 6 and 8 is interpreted as stripping structural noise and exposing
+      a core motor in the language. Surah Al-Ikhlas (3–2–3–2) appears to break this pattern, which may indicate a different octave
+      or resonance layer.
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section aria-labelledby="semantic-equality">
+    <h2 id="semantic-equality">{% trans "Semantic equality (Iman/Kufr = 3)" %}</h2>
+    <p>
+      {% blocktrans trimmed %}
+      When semantic opposites produce the same number, the project treats this as possible interference symmetry:
+      belief and disbelief may trigger similar structural reactions in the numeric system, independent of moral framing.
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section aria-labelledby="grammar-code">
+    <h2 id="grammar-code">{% trans "P1–P6: the grammatical code" %}</h2>
+    <p>
+      {% blocktrans trimmed %}
+      The observed P1–P6 patterns are approached as a binary-like consciousness code. If these sequences continue to map as
+      stable waves, the text may act as a coherence signal for readers and listeners.
+      {% endblocktrans %}
+    </p>
+  </section>
+
+  <section aria-labelledby="project-note">
+    <h2 id="project-note">{% trans "Project note" %}</h2>
+    <p>
+      {% blocktrans trimmed %}
+      This is an exploratory numerology research project. Findings are treated as hypotheses for study, discussion, and further
+      verification, not as final doctrinal claims.
+      {% endblocktrans %}
+    </p>
+    <p>
+      <a href="https://chatgpt.com/share/69e2065a-d2f0-83eb-b780-4e1e8c788885" target="_blank" rel="noopener noreferrer">
+        {% trans "View the original project brief" %}
+      </a>
+    </p>
+  </section>
+</article>
+{% endblock %}
