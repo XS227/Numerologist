@@ -133,7 +133,8 @@
       font-size: 0.95rem;
     }
 
-    input {
+    input,
+    select {
       border-radius: 14px;
       border: 1px solid rgba(0, 0, 0, 0.05);
       padding: 0.75rem 1rem;
@@ -143,7 +144,8 @@
       box-shadow: inset 0 1px 2px rgba(60, 177, 121, 0.15);
     }
 
-    label.has-error input {
+    label.has-error input,
+    label.has-error select {
       border-color: rgba(198, 40, 40, 0.65);
       box-shadow: inset 0 1px 2px rgba(198, 40, 40, 0.25);
     }
@@ -151,6 +153,12 @@
     .error-message {
       color: #7f1d1d;
       font-size: 0.85rem;
+    }
+
+    .date-select-grid {
+      display: grid;
+      gap: 0.7rem;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .actions {
@@ -520,11 +528,19 @@
               <span class="error-message" data-error-for="full_name">{{ form.full_name.errors|first }}</span>
             {% endif %}
           </label>
-          <label for="{{ form.birth_date.id_for_label }}" class="{% if form.birth_date.errors %}has-error{% endif %}">
+          <label class="{% if form.birth_day.errors or form.birth_month.errors or form.birth_year.errors %}has-error{% endif %}">
             {% trans "Birth date" %}
-            {{ form.birth_date }}
-            {% if form.birth_date.errors %}
-              <span class="error-message" data-error-for="birth_date">{{ form.birth_date.errors|first }}</span>
+            <div class="date-select-grid">
+              {{ form.birth_day }}
+              {{ form.birth_month }}
+              {{ form.birth_year }}
+            </div>
+            {% if form.birth_day.errors %}
+              <span class="error-message" data-error-for="birth_day">{{ form.birth_day.errors|first }}</span>
+            {% elif form.birth_month.errors %}
+              <span class="error-message" data-error-for="birth_month">{{ form.birth_month.errors|first }}</span>
+            {% elif form.birth_year.errors %}
+              <span class="error-message" data-error-for="birth_year">{{ form.birth_year.errors|first }}</span>
             {% endif %}
           </label>
         </div>
@@ -627,14 +643,19 @@
   <section id="latest-articles" class="page-section" aria-labelledby="latest-articles-title">
     <div class="section-header">
       <h2 id="latest-articles-title">{% trans "Siste artikler" %}</h2>
-      <a href="{% url 'static_page' 'articles' %}" class="section-link">{% trans "Se alle artikler →" %}</a>
+      <a href="{% url 'article_list' %}" class="section-link">{% trans "Se alle artikler →" %}</a>
     </div>
 
     <div class="articles-grid">
       <article class="article-card">
         <a href="/articles/numerological-reflection-on-mahsa-amini-and-bita-azizi/">
           <div class="article-image-wrap">
-            <img src="/articles/mashajina_bitaazizi/images/cover.jpg" alt="{% trans 'Illustration of two silhouettes' %}" />
+            <svg viewBox="0 0 320 180" role="img" aria-label="{% trans 'Illustration of two silhouettes' %}">
+              <rect width="320" height="180" fill="#f2fbf6"></rect>
+              <circle cx="118" cy="64" r="26" fill="#80c8a3"></circle>
+              <circle cx="198" cy="64" r="26" fill="#5ba57f"></circle>
+              <path d="M62 166c9-34 34-56 58-56 21 0 41 14 53 37 10-23 29-37 52-37 27 0 50 22 59 56H62z" fill="#3f8f65"></path>
+            </svg>
           </div>
           <div class="article-content">
             <span class="article-tag">{% trans "Guides" %}</span>
@@ -648,7 +669,13 @@
       <article class="article-card">
         <a href="/articles/master-number-33/">
           <div class="article-image-wrap">
-            <img src="/media/master-33.jpg" alt="{% trans 'Master number 33' %}" />
+            <svg viewBox="0 0 320 180" role="img" aria-label="{% trans 'Master number 33' %}">
+              <rect width="320" height="180" fill="#f4f9ff"></rect>
+              <circle cx="120" cy="90" r="58" fill="#dbebff"></circle>
+              <circle cx="200" cy="90" r="58" fill="#c9e3ff"></circle>
+              <text x="98" y="106" font-size="56" font-family="Inter, sans-serif" fill="#3a63a6">3</text>
+              <text x="178" y="106" font-size="56" font-family="Inter, sans-serif" fill="#3a63a6">3</text>
+            </svg>
           </div>
           <div class="article-content">
             <span class="article-tag">{% trans "Master numbers" %}</span>
@@ -662,7 +689,12 @@
       <article class="article-card">
         <a href="/articles/navn-og-numerologi/">
           <div class="article-image-wrap">
-            <img src="/media/name-numerology.jpg" alt="{% trans 'Navn og numerologi' %}" />
+            <svg viewBox="0 0 320 180" role="img" aria-label="{% trans 'Navn og numerologi' %}">
+              <rect width="320" height="180" fill="#f9f4ff"></rect>
+              <rect x="42" y="32" width="236" height="116" rx="18" fill="#ffffff" stroke="#d6c4ef"></rect>
+              <text x="64" y="78" font-size="24" font-family="Inter, sans-serif" fill="#7b56b1">NAME</text>
+              <text x="64" y="114" font-size="20" font-family="Inter, sans-serif" fill="#7b56b1">1 + 4 + 9 = 14 → 5</text>
+            </svg>
           </div>
           <div class="article-content">
             <span class="article-tag">{% trans "Navn" %}</span>
@@ -710,7 +742,9 @@
       const progressLabel = document.getElementById("progressLabel");
       const progressTrack = document.querySelector(".progress-track");
       const nameInput = document.getElementById("{{ form.full_name.id_for_label }}");
-      const birthInput = document.getElementById("{{ form.birth_date.id_for_label }}");
+      const birthDayInput = document.getElementById("{{ form.birth_day.id_for_label }}");
+      const birthMonthInput = document.getElementById("{{ form.birth_month.id_for_label }}");
+      const birthYearInput = document.getElementById("{{ form.birth_year.id_for_label }}");
 
       function setProgress(value) {
         if (!progressBar || !progressTrack || !progressLabel) {
@@ -733,7 +767,10 @@
           setProgress(100);
           return;
         }
-        const filled = [nameInput?.value.trim(), birthInput?.value].filter(Boolean).length;
+        const birthComplete = Boolean(
+          birthDayInput?.value && birthMonthInput?.value && birthYearInput?.value
+        );
+        const filled = [nameInput?.value.trim(), birthComplete].filter(Boolean).length;
         if (filled === 0) {
           setProgress(0);
         } else if (filled === 1) {
@@ -744,7 +781,9 @@
       }
 
       nameInput?.addEventListener("input", updateProgressFromInputs);
-      birthInput?.addEventListener("input", updateProgressFromInputs);
+      birthDayInput?.addEventListener("change", updateProgressFromInputs);
+      birthMonthInput?.addEventListener("change", updateProgressFromInputs);
+      birthYearInput?.addEventListener("change", updateProgressFromInputs);
 
       const initialProgress = parseInt(body.dataset.progress || "0", 10);
       setProgress(initialProgress);

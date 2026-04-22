@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    This hub keeps all active research projects in one place so nothing gets lost between demos and production pages.
+    {% endblocktrans %}
+  </p>
+  <ul>
+    <li>
+      <a href="{% url 'static_page' 'arecibo-line' %}">{% trans "Arecibo Line" %}</a>
+      — {% trans "Signal-resonance research notebooks and calculator concepts." %}
+    </li>
+    <li>
+      <a href="{% url 'static_page' 'quranic-analysis' %}">{% trans "Quranic Analysis" %}</a>
+      — {% trans "Surah pattern exploration and 6–7–8 wave mapping." %}
+    </li>
+  </ul>
+</article>
+{% endblock %}
