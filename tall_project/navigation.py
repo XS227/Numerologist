@@ -87,6 +87,8 @@ STATIC_PAGES: Dict[str, StaticPage] = {
             "pages/same-number-meaning.html",
         ),
         StaticPage("resources", _("Resources"), "pages/resources.html"),
+        StaticPage("projects-lab", _("Projects Lab"), "pages/projects-lab.html"),
+        StaticPage("arecibo-line", _("Arecibo Line"), "pages/arecibo-line.html"),
         StaticPage("free-analyses", _("Free Analyses"), "pages/free-analyses.html"),
         StaticPage("blog-articles", _("Blog / Articles"), "pages/blog-articles.html"),
         StaticPage("references", _("References"), "pages/references.html"),
@@ -98,6 +100,11 @@ STATIC_PAGES: Dict[str, StaticPage] = {
         StaticPage(
             "quranian-numerology",
             _("Quranian Numerology"),
+            "pages/quranian-numerology.html",
+        ),
+        StaticPage(
+            "quranic-analysis",
+            _("Quranic Analysis"),
             "pages/quranian-numerology.html",
         ),
         StaticPage(
@@ -157,10 +164,13 @@ NAVIGATION: Tuple[NavigationItem, ...] = (
         title=_("Resources"),
         children=(
             NavigationItem("free-analyses", _("Free Analyses")),
+            NavigationItem("projects-lab", _("Projects Lab")),
+            NavigationItem("arecibo-line", _("Arecibo Line")),
             NavigationItem("blog-articles", _("Blog / Articles")),
             NavigationItem("references", _("References")),
             NavigationItem("numerologist-in-media", _("Numerologist in the Media")),
             NavigationItem("quranian-numerology", _("Quranian Numerology")),
+            NavigationItem("quranic-analysis", _("Quranic Analysis")),
         ),
     ),
     NavigationItem(

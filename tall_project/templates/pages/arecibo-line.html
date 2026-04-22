@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="page-title">
+  <h1 id="page-title">{{ page.title }}</h1>
+  <p>
+    {% blocktrans trimmed %}
+    The Arecibo Line project studies numerical resonance between astronomical observations and symbolic number systems.
+    {% endblocktrans %}
+  </p>
+  <h2>{% trans "Included project assets" %}</h2>
+  <ul>
+    <li>{% trans "Numerology and resonance modules in the Arecibo-Line source folder." %}</li>
+    <li>{% trans "Notebook experiments for frequency and pattern studies." %}</li>
+    <li>{% trans "Illustrative visualization workflows for future product pages." %}</li>
+  </ul>
+  <p>{% trans "This page is connected to the repository-backed Arecibo-Line project package used by the team." %}</p>
+</article>
+{% endblock %}
