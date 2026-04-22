@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ profile.title }} — Numerologist{% endblock %}
+
+{% block content %}
+<article class="card prose" aria-labelledby="number-title">
+  <h1 id="number-title">{{ profile.title }}</h1>
+  <p><strong>{% trans "Essence" %}:</strong> {{ profile.essence }}</p>
+
+  <h2>{% trans "Strengths" %}</h2>
+  <ul>
+    {% for item in profile.strengths %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>{% trans "Growth edges" %}</h2>
+  <ul>
+    {% for item in profile.challenges %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+
+  <h2>{% trans "Åse's guidance" %}</h2>
+  <p>{{ profile.ase_guidance }}</p>
+
+  <p>
+    <a href="{% url 'home' %}#core-numbers">{% trans "Back to core number stories" %}</a>
+  </p>
+</article>
+{% endblock %}
