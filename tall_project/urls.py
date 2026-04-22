@@ -5,7 +5,7 @@ from django.http import HttpRequest, HttpResponse
 from django.urls import include, path
 
 from articles.views import ArticleListView
-from tall_project.views import home, static_page
+from tall_project.views import home, number_detail, static_page
 
 
 def health_check(_request: HttpRequest) -> HttpResponse:
@@ -23,5 +23,6 @@ urlpatterns = [
     path("healthz/", health_check, name="health_check"),
     path("", home, name="home"),
     path("", home, name="index"),
+    path("numbers/<int:number>/", number_detail, name="number_detail"),
     path("<slug:slug>/", static_page, name="static_page"),
 ]
