@@ -1,0 +1,11 @@
+DirectoryIndex index.php
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  RewriteRule ^sider/([a-z0-9-]+)/?$ page.php?slug=$1 [L,QSA]
+  RewriteRule ^tall/(\d+)/?$ number.php?number=$1 [L,QSA]
+</IfModule>
