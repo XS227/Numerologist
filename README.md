@@ -1,73 +1,31 @@
-# Numerologist 🔢✨
+# Numerologist (PHP-utgave)
 
-Numerologist is an AI-driven web platform for **numerology analysis**, **character profiling**, and **life-path forecasting** — blending data science with spiritual symbolism.
+Denne versjonen er gjort om til **rene PHP-sider** slik at du kan laste opp prosjektet på et vanlig webhotell (ikke VPS), uten å installere Python, Django eller andre tjenester på serveren.
 
-It is developed and maintained by [Arshian Visionary & Intelligence](https://biiaab.ir) as part of the "Setaei Intelligence" ecosystem.
+## Hva som trengs på serveren
+- PHP 8.x (typisk allerede aktivert hos webhotell)
+- Apache/Nginx med vanlig PHP-støtte
+- FTP/SFTP for opplasting
 
----
+## Struktur
+- `index.php` — forside + numerologi-kalkulator
+- `page.php` — statiske infosider via `?slug=`
+- `number.php` — enkel tolkning av tall via `?number=`
+- `includes/data.php` — logikk og sideinnhold
+- `includes/layout.php` — header/footer
+- `assets/style.css` — stilark
+- `.htaccess` — valgfri rewrite for penere URL-er
 
-## 🚀 Features
-- Dynamic numerology calculations (Pythagorean & Chaldean)
-- Personality mapping (1–9 archetypes + master numbers)
-- AI-based text interpretation of results
-- Birthdate → Life Path visual charts
-- Name Analyzer (vowel/consonant balance)
-- Localization support (English / Norwegian / Persian)
-- API ready for integrations with other Arshian projects
-
----
-
-## 🧩 Tech Stack
-| Layer | Technology |
-|-------|-------------|
-| Frontend | Python Flask / FastAPI (planned React UI) |
-| Backend | Django (REST API) |
-| Database | PostgreSQL / SQLite (dev) |
-| Hosting | Codex + FTP Deployment (numerologist.setaei.com) |
-| Version Control | GitHub |
-| Dev Tools | Figma, VSCode, Docker (future), GitHub Actions |
-
----
-
-## 🌍 Deployment
-Current live subdomain:
-> https://numerologist.setaei.com
-
----
-
-## 🧪 Status
-🟢 **MVP Phase** — Core numerology engine and UI under development.  
-🧭 **Next:** Integrate dynamic charts and AI explanations (OpenAI API / local LLM).
-
----
-
-## 📖 Documentation
-- [Setup Guide](docs/Setup_Guide.md)
-- [Numerology Engine](docs/Numerology_Engine.md)
-- [API Reference](docs/API_Reference.md)
-- [Architecture Overview](docs/Architecture_Overview.md)
-- [Contributors & Credits](docs/Contributors_and_Credits.md)
-
----
-
-# 🛠️ Setup Guide
-
-## Requirements
-- Python 3.11+
-- pip / virtualenv
-- Git
-
-## Installation
+## Lokal test
 ```bash
-git clone https://github.com/XS227/Numerologist.git
-cd Numerologist
-python -m venv venv
-source venv/bin/activate  # or venv\Scripts\activate on Windows
-pip install -r requirements.txt
+php -S 127.0.0.1:8080
 ```
+Åpne deretter `http://127.0.0.1:8080`.
 
-If you see `ModuleNotFoundError: No module named 'django'` when running management
-commands, double-check that the dependency installation finished successfully.
-Corporate or sandboxed environments may block outbound PyPI traffic; in that
-case download the wheels from a networked machine and install them via
-`pip install --no-index --find-links <wheel-directory> -r requirements.txt`.
+## Opplasting til webhotell
+1. Last opp alle filene i prosjektroten til `public_html` (eller tilsvarende).
+2. Pass på at `index.php` ligger i webroot.
+3. Besøk domenet ditt — siden skal fungere uten ekstra installasjon.
+
+## Notat
+Denne varianten er bevisst enkel og driftssikker for delt hosting.
