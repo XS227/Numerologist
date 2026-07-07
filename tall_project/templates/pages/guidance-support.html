@@ -15,10 +15,21 @@
   <section aria-labelledby="support-links">
     <h2 id="support-links">{% trans "Stay supported" %}</h2>
     <ul>
-      <li><a href="{% url 'static_page' 'about-the-firm' %}">{% trans "About the Firm" %}</a></li>
-      <li><a href="{% url 'static_page' 'telephone-guidance' %}">{% trans "Telephone Guidance" %}</a></li>
-      <li><a href="{% url 'static_page' 'contact-qa' %}">{% trans "Contact / Q&A" %}</a></li>
+      <li><a href="{% url 'static_page' 'about-the-firm' %}">{% trans "About the Firm" %}</a> — {% trans "Åse's background, method, and approach." %}</li>
+      <li><a href="{% url 'static_page' 'telephone-guidance' %}">{% trans "Telephone Guidance" %}</a> — {% trans "how a phone session works and what to expect." %}</li>
+      <li><a href="{% url 'static_page' 'contact-qa' %}">{% trans "Contact / Q&A" %}</a> — {% trans "booking details and answers to common questions." %}</li>
     </ul>
+  </section>
+  <section aria-labelledby="support-faq">
+    <h2 id="support-faq">{% trans "Frequently asked questions" %}</h2>
+    <p>
+      <strong>{% trans "Do sessions happen in person or by phone?" %}</strong><br>
+      {% trans "Most guidance sessions are conducted by phone; see" %} <a href="{% url 'static_page' 'telephone-guidance' %}">{% trans "Telephone Guidance" %}</a> {% trans "for details." %}
+    </p>
+    <p>
+      <strong>{% trans "What should I prepare before a session?" %}</strong><br>
+      {% trans "Your full birth date and full birth name are usually enough for Åse to begin a reading — see" %} <a href="{% url 'static_page' 'contact-qa' %}">{% trans "Contact / Q&A" %}</a> {% trans "to book." %}
+    </p>
   </section>
 </article>
 {% endblock %}

@@ -15,15 +15,25 @@
   <section aria-labelledby="resources-topics">
     <h2 id="resources-topics">{% trans "Dive in" %}</h2>
     <ul>
-      <li><a href="{% url 'static_page' 'projects-lab' %}">{% trans "Projects Lab" %}</a></li>
-      <li><a href="{% url 'static_page' 'arecibo-line' %}">{% trans "Arecibo Line" %}</a></li>
-      <li><a href="{% url 'static_page' 'free-analyses' %}">{% trans "Free Analyses" %}</a></li>
-      <li><a href="{% url 'static_page' 'blog-articles' %}">{% trans "Blog / Articles" %}</a></li>
-      <li><a href="{% url 'static_page' 'references' %}">{% trans "References" %}</a></li>
-      <li><a href="{% url 'static_page' 'numerologist-in-media' %}">{% trans "Numerologist in the Media" %}</a></li>
-      <li><a href="{% url 'static_page' 'quranian-numerology' %}">{% trans "Quranian Numerology" %}</a></li>
-      <li><a href="{% url 'static_page' 'quranic-analysis' %}">{% trans "Quranic Analysis" %}</a></li>
+      <li><a href="{% url 'static_page' 'projects-lab' %}">{% trans "Projects Lab" %}</a> — {% trans "experimental work connecting numerology with data and culture." %}</li>
+      <li><a href="{% url 'static_page' 'arecibo-line' %}">{% trans "Arecibo Line" %}</a> — {% trans "number symbolism explored through the 1974 Arecibo message." %}</li>
+      <li><a href="{% url 'static_page' 'free-analyses' %}">{% trans "Free Analyses" %}</a> — {% trans "what a free introductory analysis with Åse includes." %}</li>
+      <li><a href="{% url 'static_page' 'blog-articles' %}">{% trans "Blog / Articles" %}</a> — {% trans "long-form writing on numerology and number meaning." %}</li>
+      <li><a href="{% url 'static_page' 'references' %}">{% trans "References" %}</a> — {% trans "sources and methods behind the practice." %}</li>
+      <li><a href="{% url 'static_page' 'numerologist-in-media' %}">{% trans "Numerologist in the Media" %}</a> — {% trans "press coverage and interviews." %}</li>
+      <li><a href="{% url 'static_page' 'quranian-numerology' %}">{% trans "Quranian Numerology" %}</a> — {% trans "how numerical patterns are studied in Quranic tradition." %}</li>
     </ul>
+  </section>
+  <section aria-labelledby="resources-faq">
+    <h2 id="resources-faq">{% trans "Frequently asked questions" %}</h2>
+    <p>
+      <strong>{% trans "Are these resources a substitute for a personal reading?" %}</strong><br>
+      {% trans "No. They give context and background, but a personal reading uses your own birth date and name, which these general resources cannot do." %}
+    </p>
+    <p>
+      <strong>{% trans "Where should I start if I'm completely new?" %}</strong><br>
+      {% trans "Start with" %} <a href="{% url 'static_page' 'discover-numerology' %}">{% trans "Discover Numerology" %}</a>{% trans ", then try the" %} <a href="{% url 'static_page' 'calculators' %}">{% trans "calculator suite" %}</a>.
+    </p>
   </section>
 </article>
 {% endblock %}

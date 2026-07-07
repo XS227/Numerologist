@@ -23,7 +23,14 @@ ALLOWED_HOSTS = [
     *_default_allowed,
 ]
 
-CSRF_TRUSTED_ORIGINS = ["https://numerologist.setaei.com"]
+CSRF_TRUSTED_ORIGINS = ["https://numerologist.setaei.com", "https://numerologist.setai.no"]
+
+# nginx terminates TLS and proxies to Gunicorn over plain HTTP, setting this
+# header on every request (see /etc/nginx/sites-available/numerologist).
+# Without it, request.is_secure()/build_absolute_uri() report http:// even
+# though the site is only ever served over https://, which would poison
+# every canonical URL generated from request context.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 INSTALLED_APPS = [
     "django.contrib.admin",

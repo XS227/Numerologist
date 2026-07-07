@@ -7,6 +7,18 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{% block title %}Numerologist{% endblock %}</title>
+    {% block meta_description %}{% if meta_description %}<meta name="description" content="{{ meta_description }}" />{% endif %}{% endblock %}
+    {% block canonical %}{% if canonical_url %}<link rel="canonical" href="{{ canonical_url }}" />{% endif %}{% endblock %}
+    {% if noindex %}<meta name="robots" content="noindex, follow" />{% endif %}
+    {% if canonical_url %}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Numerologist" />
+    <meta property="og:url" content="{{ canonical_url }}" />
+    <meta property="og:title" content="{% block og_title %}{{ page_title|default:"Numerologist" }}{% endblock %}" />
+    {% if meta_description %}<meta property="og:description" content="{{ meta_description }}" />{% endif %}
+    <meta name="twitter:card" content="summary" />
+    {% endif %}
+    {% block structured_data %}{% if structured_data %}<script type="application/ld+json">{{ structured_data|safe }}</script>{% endif %}{% endblock %}
     <style>
       :root {
         color-scheme: light;

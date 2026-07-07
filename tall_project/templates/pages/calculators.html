@@ -183,4 +183,17 @@
     <a class="calculator-button calculator-button--primary" href="/">{% trans "Return to intake" %}</a>
     <a class="calculator-button calculator-button--ghost" href="#top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">{% trans "Back to top" %}</a>
   </div>
+  <div class="card prose" style="margin-top:2.5rem">
+    <h2>{% trans "Frequently asked questions" %}</h2>
+    <p>
+      <strong>{% trans "What is the difference between life path and destiny number?" %}</strong><br>
+      {% trans "Life path is calculated from your birth date and describes the lessons of your lifetime. Destiny (expression) number is calculated from the letters in your full birth name and describes talents you are here to develop. See" %}
+      <a href="{% url 'static_page' 'compute-destiny-number' %}">{% trans "Compute Your Destiny Number" %}</a>.
+    </p>
+    <p>
+      <strong>{% trans "Are these calculators as accurate as a personal session?" %}</strong><br>
+      {% trans "They use the same Pythagorean method Åse references, but a personal session adds interpretation specific to your situation. See" %}
+      <a href="{% url 'static_page' 'guidance-support' %}">{% trans "Guidance & Support" %}</a> {% trans "to book one." %}
+    </p>
+  </div>
 {% endblock %}

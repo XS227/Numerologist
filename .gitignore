@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# PHP order database
+data/orders.db
+data/
+
+# Django collectstatic output (regenerate with manage.py collectstatic)
+static_collected/

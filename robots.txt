@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /cms/
+Disallow: /intake/
+Disallow: /media/
+Disallow: /*.php$
+
+Allow: /sitemap.php
+
+Sitemap: https://numerologist.setai.no/sitemap.php

@@ -1,16 +1,151 @@
 {% extends "base.html" %}
 {% load i18n %}
 
-{% block title %}{{ page.title }} — Numerologist{% endblock %}
+{% block title %}Om Åse Steinsland — Numerologist{% endblock %}
+
+{% block structured_data %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Åse Karin Steinsland",
+      "jobTitle": "Numerolog og livsveileder",
+      "image": "https://numerologist.setai.no/assets/images/ase-steinsland.jpg",
+      "url": "https://numerologist.setai.no/about-the-firm/",
+      "worksFor": { "@type": "ProfessionalService", "name": "Numerologist" }
+    },
+    {
+      "@type": "ProfessionalService",
+      "name": "Numerologist – Åse Steinsland",
+      "founder": { "@type": "Person", "name": "Åse Karin Steinsland" },
+      "email": "epost@numerologen.no",
+      "telephone": "+4795273772",
+      "areaServed": "NO",
+      "url": "https://numerologist.setai.no/about-the-firm/"
+    }
+  ]
+}
+</script>
+{% endblock %}
+
+{% block extra_styles %}
+  <style>
+    .about-hero-img {
+      width: 100%; max-height: 320px; object-fit: cover;
+      border-radius: 20px; margin-bottom: 1.5rem;
+    }
+    .about-bio-grid {
+      display: grid; grid-template-columns: 160px 1fr; gap: 1.5rem; align-items: start;
+    }
+    .about-bio-grid img {
+      width: 100%; border-radius: 16px; object-fit: cover;
+    }
+    @media (max-width: 560px) {
+      .about-bio-grid { grid-template-columns: 1fr; }
+      .about-bio-grid img { max-width: 200px; margin: 0 auto; }
+    }
+    .contact-form-grid {
+      display: grid; gap: .9rem; max-width: 520px;
+    }
+    .contact-form-grid label {
+      font-size: .85rem; font-weight: 600; color: var(--text); display: block; margin-bottom: .3rem;
+    }
+    .contact-form-grid input, .contact-form-grid textarea {
+      width: 100%; padding: .65rem .8rem; border-radius: 10px;
+      border: 1px solid var(--border); background: #fff; color: var(--text);
+      font-family: inherit; font-size: .95rem;
+    }
+    .contact-form-grid textarea { min-height: 120px; resize: vertical; }
+    .contact-form-grid .hp { position: absolute; left: -9999px; }
+    .contact-submit {
+      background: var(--accent); color: #fff; border: none; border-radius: 999px;
+      padding: .75rem 1.5rem; font-weight: 600; cursor: pointer; justify-self: start;
+    }
+    .contact-notice {
+      border-radius: 12px; padding: .85rem 1rem; margin-bottom: 1rem; font-size: .95rem;
+    }
+    .contact-notice.ok { background: rgba(60,177,121,.12); color: var(--accent-strong); border: 1px solid rgba(60,177,121,.35); }
+    .contact-notice.error { background: rgba(220,80,80,.1); color: #a33; border: 1px solid rgba(220,80,80,.3); }
+  </style>
+{% endblock %}
 
 {% block content %}
 <article class="card prose" aria-labelledby="page-title">
-  <h1 id="page-title">{{ page.title }}</h1>
+  <img class="about-hero-img" src="/assets/images/about-hero.jpg" alt="{% trans 'Numerologist Åse Steinsland – forsidebilde' %}" loading="lazy">
+
+  <h1 id="page-title">{% trans "Om Åse Steinsland" %}</h1>
+
+  <div class="about-bio-grid">
+    <img src="/assets/images/ase-steinsland.jpg" alt="{% trans 'Åse Karin Steinsland, numerolog og livsveileder' %}" loading="lazy">
+    <div>
+      <p>
+        {% blocktrans trimmed %}
+        Åse Karin Steinsland er numerolog og livsveileder, bosatt like utenfor Bergen. Hun har laget personlige
+        numerologiske analyser siden 1997, og har over 25 års erfaring med numerologi og livsveiledning.
+        {% endblocktrans %}
+      </p>
+      <p>
+        {% blocktrans trimmed %}
+        Metoden hennes bygger på Pytagoras, som studerte kabbalah og de matematiske systemene til flere gamle
+        kulturer. Hver analyse lages personlig av Åse selv, ikke maskinelt generert.
+        {% endblocktrans %}
+      </p>
+    </div>
+  </div>
+
+  <h2>{% trans "Telefonveiledning" %}</h2>
   <p>
     {% blocktrans trimmed %}
-    Learn about Åse's background, credentials, and the ethos that guides Numerologist. From her early studies in Norway to
-    decades of client work, this page honours the path that shaped her approach.
+    Åse tilbyr personlig veiledning på telefon for deg som vil vite mer om veien og årene fremover — gode og
+    vanskelige perioder, kjærlighet, økonomi, jobb, viktige valg og mer. Samtalen tar utgangspunkt i dine egne tall
+    og gir deg ny innsikt og perspektiv på situasjoner som kan føles fastlåste.
     {% endblocktrans %}
+  </p>
+  <p>
+    {% blocktrans trimmed %}
+    Telefonveiledning gis normalt på hverdager mellom kl. 10–18. Ta kontakt via skjemaet under for å avtale tid —
+    priser og betaling for telefonveiledning er midlertidig satt på pause mens vi oppdaterer denne tjenesten.
+    {% endblocktrans %}
+  </p>
+
+  <h2>{% trans "Ta kontakt" %}</h2>
+  {% if request.GET.contact == 'ok' %}
+    <div class="contact-notice ok">{% trans "Takk for din henvendelse! Åse svarer deg så snart hun kan." %}</div>
+  {% elif request.GET.contact == 'error' %}
+    <div class="contact-notice error">{% trans "Noe gikk galt — sjekk at navn, e-post og melding er fylt ut, og prøv igjen." %}</div>
+  {% endif %}
+  <form class="contact-form-grid" method="post" action="/api/contact-ase.php" novalidate>
+    <input type="text" name="website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+    <div>
+      <label for="ca-name">{% trans "Navn" %} *</label>
+      <input id="ca-name" name="name" type="text" required autocomplete="name">
+    </div>
+    <div>
+      <label for="ca-email">{% trans "E-post" %} *</label>
+      <input id="ca-email" name="email" type="email" required autocomplete="email">
+    </div>
+    <div>
+      <label for="ca-phone">{% trans "Telefon (valgfritt)" %}</label>
+      <input id="ca-phone" name="phone" type="tel" autocomplete="tel">
+    </div>
+    <div>
+      <label for="ca-message">{% trans "Din melding" %} *</label>
+      <textarea id="ca-message" name="message" required></textarea>
+    </div>
+    <button type="submit" class="contact-submit">{% trans "Send melding" %}</button>
+  </form>
+
+  <h2>{% trans "Kontaktinformasjon" %}</h2>
+  <ul>
+    <li>{% trans "E-post" %}: <a href="mailto:epost@numerologen.no">epost@numerologen.no</a></li>
+    <li>{% trans "Telefon" %}: 952 73 772 ({% trans "hverdager 09:00–16:00" %})</li>
+  </ul>
+
+  <p>
+    <a href="{% url 'static_page' 'discover-numerology' %}">{% trans "Les mer om numerologi" %}</a>
+    · <a href="{% url 'static_page' 'calculators' %}">{% trans "Beregn dine tall" %}</a>
   </p>
 </article>
 {% endblock %}

@@ -22,11 +22,22 @@
   <section aria-labelledby="discover-topics">
     <h2 id="discover-topics">{% trans "Key topics" %}</h2>
     <ul>
-      <li><a href="{% url 'static_page' 'pythagoras-legacy' %}">{% trans "Pythagoras' Legacy" %}</a></li>
-      <li><a href="{% url 'static_page' 'general-interpretation' %}">{% trans "General Interpretation of Numbers" %}</a></li>
-      <li><a href="{% url 'static_page' 'calculation-methods-overview' %}">{% trans "Calculation Methods Overview" %}</a></li>
-      <li><a href="{% url 'static_page' 'letter-value-chart' %}">{% trans "Letter Value Chart" %}</a></li>
+      <li><a href="{% url 'static_page' 'pythagoras-legacy' %}">{% trans "Pythagoras' Legacy" %}</a> — {% trans "the historical roots of the method." %}</li>
+      <li><a href="{% url 'static_page' 'general-interpretation' %}">{% trans "General Interpretation of Numbers" %}</a> — {% trans "what each core number represents." %}</li>
+      <li><a href="{% url 'static_page' 'calculation-methods-overview' %}">{% trans "Calculation Methods Overview" %}</a> — {% trans "the maths behind each reading." %}</li>
+      <li><a href="{% url 'static_page' 'letter-value-chart' %}">{% trans "Letter Value Chart" %}</a> — {% trans "how letters convert into numbers." %}</li>
     </ul>
+  </section>
+  <section aria-labelledby="discover-faq">
+    <h2 id="discover-faq">{% trans "Frequently asked questions" %}</h2>
+    <p>
+      <strong>{% trans "Is numerology the same as astrology?" %}</strong><br>
+      {% trans "No. Numerology works from your birth date and name using number reduction, while astrology works from planetary positions at birth. Some readers combine both, but they are separate systems." %}
+    </p>
+    <p>
+      <strong>{% trans "Where do I start if I want my own numbers calculated?" %}</strong><br>
+      {% trans "Go to the" %} <a href="{% url 'static_page' 'calculators' %}">{% trans "calculator suite" %}</a> {% trans "or jump straight to" %} <a href="{% url 'static_page' 'compute-destiny-number' %}">{% trans "computing your destiny number" %}</a>.
+    </p>
   </section>
 </article>
 {% endblock %}

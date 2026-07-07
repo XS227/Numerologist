@@ -25,6 +25,33 @@
   <h2>{% trans "Åse's guidance" %}</h2>
   <p>{{ profile.ase_guidance }}</p>
 
+  {% if profile.practical_note %}
+  <h2>{% trans "In work and relationships" %}</h2>
+  <p>{{ profile.practical_note }}</p>
+  {% endif %}
+
+  {% if profile.faq %}
+  <h2>{% trans "Frequently asked questions" %}</h2>
+  <dl>
+    {% for question, answer in profile.faq %}
+    <dt style="font-weight:600;margin-top:1rem">{{ question }}</dt>
+    <dd style="margin-left:0">{{ answer }}</dd>
+    {% endfor %}
+  </dl>
+  {% endif %}
+
+  <h2>{% trans "Calculate or explore further" %}</h2>
+  <p>
+    <a href="{% url 'static_page' 'compute-destiny-number' %}">{% trans "Compute your own destiny number" %}</a>
+    · <a href="{% url 'static_page' 'general-interpretation' %}">{% trans "General interpretation of all numbers" %}</a>
+    · <a href="{% url 'static_page' 'guidance-support' %}">{% trans "Book personal guidance with Åse" %}</a>
+  </p>
+
+  <h2>{% trans "Other core numbers" %}</h2>
+  <p>
+    {% for n in other_numbers %}<a href="{% url 'number_detail' n %}">{{ n }}</a>{% if not forloop.last %} · {% endif %}{% endfor %}
+  </p>
+
   <p>
     <a href="{% url 'home' %}#core-numbers">{% trans "Back to core number stories" %}</a>
   </p>
