@@ -19,6 +19,16 @@
     <meta name="twitter:card" content="summary" />
     {% endif %}
     {% block structured_data %}{% if structured_data %}<script type="application/ld+json">{{ structured_data|safe }}</script>{% endif %}{% endblock %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Numerologist",
+      "url": "https://numerologist.setai.no",
+      "parentOrganization": {"@type": "Organization", "name": "SetAI", "url": "https://setai.no"},
+      "sameAs": ["https://setai.no", "https://shahnameh.setaei.com", "https://setalink.no", "https://trustai.no"]
+    }
+    </script>
     <style>
       :root {
         color-scheme: light;

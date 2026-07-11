@@ -531,6 +531,16 @@ $serviceSchemas = [
     'og_type'     => 'website',
     'schema'      => $websiteSchema,
 ]); ?>
+  <script type="application/ld+json">
+  <?= json_encode([
+      '@context'         => 'https://schema.org',
+      '@type'            => 'Organization',
+      'name'             => 'Numerologist',
+      'url'              => SITE_URL,
+      'parentOrganization' => ['@type' => 'Organization', 'name' => 'SetAI', 'url' => 'https://setai.no'],
+      'sameAs'           => ['https://setai.no', 'https://shahnameh.setaei.com', 'https://setalink.no', 'https://trustai.no'],
+  ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
+  </script>
 <?php if (SHOW_PRICING): foreach ($serviceSchemas as $svcSchema): ?>
   <script type="application/ld+json">
   <?= json_encode($svcSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?>
