@@ -5,6 +5,7 @@ from django.http import HttpRequest, HttpResponse
 from django.urls import include, path
 
 from articles.views import ArticleListView
+from intake.views import profile_numbers_api
 from tall_project.views import home, number_detail, static_page
 
 
@@ -23,6 +24,11 @@ urlpatterns = [
     path("healthz/", health_check, name="health_check"),
     path("", home, name="home"),
     path("", home, name="index"),
+    # Listed before numbers/<int:number>/ so this literal path wins the match
+    # (Django tries urlpatterns in order) — reuses the already-proxied
+    # /numbers/ prefix (see nginx site "numerologist") instead of needing a
+    # new proxy_pass rule for a separate /api/ prefix.
+    path("numbers/profile/", profile_numbers_api, name="profile_numbers_api"),
     path("numbers/<int:number>/", number_detail, name="number_detail"),
     path("<slug:slug>/", static_page, name="static_page"),
 ]
