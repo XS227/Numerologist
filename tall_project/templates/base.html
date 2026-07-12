@@ -515,55 +515,32 @@
     <link rel="stylesheet" href="/assets/fibonacci.css">
   </head>
   <body{% block body_attrs %}{% endblock %}>
+    <!-- Unified .l-nav — identical markup to the PHP pages (styled by the shared
+         fibonacci.css) so the whole hybrid site has ONE menu, not two. -->
     <header>
-      <div class="nav-shell">
-        <a class="brand" href="{% url 'home' %}">
-          <small>{% trans "Åse Steinsland" %}</small>
-          <strong>{% trans "Numerologist Studio" %}</strong>
-        </a>
-        <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="primaryNav">
-          <span class="menu-icon" aria-hidden="true"></span>
-          <span class="menu-label">{% trans "Menu" %}</span>
-        </button>
-      </div>
-      <nav class="nav-links" id="primaryNav" aria-label="{% trans 'Primary' %}" aria-hidden="true">
-        <a href="{% url 'home' %}">{% trans "Home" %}</a>
-        <a href="/discover-numerology/">{% trans "Discover numerology" %}</a>
-        <a href="/#tjenester">{% trans "Services" %}</a>
-        {% if site_navigation %}
-          {% for item in site_navigation %}
-            {% if item.children %}
-              <details>
-                <summary>{{ item.title }}</summary>
-                <div class="nav-dropdown">
-                  <a href="{{ item.url }}">{{ item.title }}</a>
-                  {% for child in item.children %}
-                    <a href="{{ child.url }}">{{ child.title }}</a>
-                  {% endfor %}
-                </div>
-              </details>
-            {% else %}
-              <a href="{{ item.url }}">{{ item.title }}</a>
-            {% endif %}
-          {% endfor %}
-        {% endif %}
-        <a href="{% url 'article_list_legacy' %}">{% trans "Articles" %}</a>
-        <a href="{% url 'intake:index' %}" class="nav-cta">{% trans "Client intake" %}</a>
-        <div class="nav-meta">
-          <div class="language-toggle" role="group" aria-label="{% trans 'Switch language' %}">
-            {# Uses the SAME nl_lang cookie the PHP pages use, so language stays
-               consistent across the whole hybrid site (the bridge middleware
-               maps nl_lang → Django language). Pure client-side = works here
-               and on the PHP pages identically. #}
-            <button type="button" class="language-toggle__btn{% if LANGUAGE_CODE == 'nb' %} is-active{% endif %}"
-                    onclick="document.cookie='nl_lang=no;path=/;max-age=31536000;samesite=lax';location.reload()">NO</button>
-            <button type="button" class="language-toggle__btn{% if LANGUAGE_CODE == 'en' %} is-active{% endif %}"
-                    onclick="document.cookie='nl_lang=en;path=/;max-age=31536000;samesite=lax';location.reload()">EN</button>
+      <nav class="l-nav" aria-label="{% trans 'Primary' %}">
+        <div class="l-wrap l-nav-inner">
+          <a href="{% url 'home' %}" class="l-brand">Numero<em>logist</em></a>
+          <ul class="l-nav-links" id="primaryNav">
+            <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+            <li><a href="/discover-numerology/">{% trans "Discover numerology" %}</a></li>
+            <li><a href="/#tjenester">{% trans "Services" %}</a></li>
+            <li><a href="{% url 'article_list_legacy' %}">{% trans "Articles" %}</a></li>
+            <li><a href="{% url 'intake:index' %}" class="l-btn-sm">{% trans "Client intake" %}</a></li>
+          </ul>
+          <div class="l-nav-right">
+            {# Same nl_lang cookie as the PHP pages → language stays in sync
+               site-wide (the bridge middleware maps nl_lang → Django language). #}
+            <div class="l-lang" aria-label="{% trans 'Switch language' %}">
+              <a href="#" class="{% if LANGUAGE_CODE == 'nb' %}active{% endif %}"
+                 onclick="document.cookie='nl_lang=no;path=/;max-age=31536000;samesite=lax';location.reload();return false;">🇳🇴 NO</a>
+              <a href="#" class="{% if LANGUAGE_CODE == 'en' %}active{% endif %}"
+                 onclick="document.cookie='nl_lang=en;path=/;max-age=31536000;samesite=lax';location.reload();return false;">🇬🇧 EN</a>
+            </div>
+            <button class="l-burger" id="menuToggle" aria-expanded="false" aria-controls="primaryNav"
+                    aria-label="{% trans 'Menu' %}"
+                    onclick="var n=document.getElementById('primaryNav');var o=n.classList.toggle('is-open');this.setAttribute('aria-expanded',o);this.textContent=o?'✕':'☰';">☰</button>
           </div>
-          <button class="mode-toggle" type="button" id="modeToggle" aria-pressed="false">
-            <span aria-hidden="true">🌞</span>
-            {% trans "Night mode" %}
-          </button>
         </div>
       </nav>
     </header>
