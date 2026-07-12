@@ -6,11 +6,24 @@ import os
 from pathlib import Path
 from urllib.parse import urlparse
 
+from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-change-me")
+# SECURITY (2026-07-12): used to fall back to a hardcoded, guessable
+# 'dev-change-me' default — fine as long as .env is present and correct,
+# but a misconfigured/missing .env would silently degrade to a known key
+# instead of failing, which forges sessions/CSRF tokens/password-reset
+# links just as easily as an attacker who's read this file. Same failure
+# class as the TrustAI DB_PASS issue fixed the same day
+# (docs/DB_INCIDENT_2026-07-11.md in the Trust-AI repo) — fail loud, not
+# open. A real value is already set in this VPS's .env, so this doesn't
+# change current behavior, only what happens if that ever goes missing.
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+if not SECRET_KEY:
+    raise ImproperlyConfigured("DJANGO_SECRET_KEY is not set — refusing to start with a default secret key.")
+
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 _default_allowed = [
