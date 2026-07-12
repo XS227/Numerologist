@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: Numerologist\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-10-09 03:13+0000\n"
-"PO-Revision-Date: 2025-10-09 00:00+0000\n"
-"Last-Translator: ChatGPT <>\n"
+"PO-Revision-Date: 2026-07-12 00:00+0000\n"
+"Last-Translator: Numerologist\n"
 "Language-Team: Norwegian Bokmål\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -13,26 +13,86 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: tall_project/settings.py:127
 msgid "English"
 msgstr "Engelsk"
 
-#: tall_project/settings.py:128
 msgid "Norwegian Bokmål"
 msgstr "Norsk bokmål"
 
-#: tall_project/settings.py:129
 msgid "Persian"
 msgstr "Persisk"
 
-#: tall_project/templates/base.html:233
 msgid "Switch language"
 msgstr "Bytt språk"
 
-#: tall_project/templates/base.html:262
-msgid "Developed in collaboration with numerologist Åse Steinsland using her calculation method — implemented with Python, Codex, and Git."
-msgstr "Utviklet i samarbeid med numerolog Åse Steinsland ved hjelp av hennes kalkulasjonsmetode – implementert med Python, Codex og Git."
-
-#: tall_project/templates/base.html:263
 msgid "All rights reserved."
 msgstr "Alle rettigheter reservert."
+
+msgid "Where numbers and technology work together — Åse Steinsland’s Pythagorean method, computed in Python. Right calculation, right technology."
+msgstr "Der tall og teknologi jobber sammen — Åse Steinslands pytagoreiske metode, beregnet i Python. Riktig beregning, riktig teknologi."
+
+# ── Navigation / chrome (base.html) ──────────────────────────────────
+msgid "Åse Steinsland"
+msgstr "Åse Steinsland"
+
+msgid "Numerologist Studio"
+msgstr "Numerolog-studio"
+
+msgid "Menu"
+msgstr "Meny"
+
+msgid "Home"
+msgstr "Hjem"
+
+msgid "Client intake"
+msgstr "Ny henvendelse"
+
+msgid "Articles"
+msgstr "Artikler"
+
+msgid "CMS"
+msgstr "CMS"
+
+msgid "Night mode"
+msgstr "Nattmodus"
+
+msgid "Light mode"
+msgstr "Dagmodus"
+
+# ── Articles list (list.html) ────────────────────────────────────────
+msgid "Articles & Library"
+msgstr "Artikler og bibliotek"
+
+msgid "Articles that keep seekers company between sessions"
+msgstr "Artikler som følger deg mellom timene"
+
+msgid "Latest library additions"
+msgstr "Siste tilskudd i biblioteket"
+
+msgid "Read article"
+msgstr "Les artikkel"
+
+msgid "Source"
+msgstr "Kilde"
+
+msgid "No articles have been published yet. New stories are being prepared — please check back soon."
+msgstr "Ingen artikler er publisert ennå. Nye historier er under arbeid – kom gjerne tilbake snart."
+
+msgid "Previous"
+msgstr "Forrige"
+
+msgid "Next"
+msgstr "Neste"
+
+# ── Article detail (detail.html) ─────────────────────────────────────
+msgid "AI insight"
+msgstr "AI-innsikt"
+
+msgid "All articles"
+msgstr "Alle artikler"
+
+msgid "Numerologist library"
+msgstr "Numerolog-bibliotek"
+
+msgid "View original source"
+msgstr "Se originalkilden"

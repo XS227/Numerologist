@@ -61,6 +61,9 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
+    # Bridge the PHP site's nl_lang cookie (no/en) into Django so articles/CMS
+    # switch language together with the PHP pages. Must run after LocaleMiddleware.
+    "tall_project.nl_lang_bridge.NlLangCookieMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
