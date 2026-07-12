@@ -72,3 +72,41 @@
   opacity: 0.35;
   margin-block: var(--fib-5);
 }
+
+/* ============================================================================
+   Unified site navigation (.l-nav)
+   ----------------------------------------------------------------------------
+   ONE menu across the whole site. The sub-pages (style.css) already use these
+   classes; duplicating them here — with the palette inlined so they don't need
+   style.css's :root — lets the FRONT page use the exact same menu, killing the
+   "two different menus" split. Namespaced (.l-*) so it never touches other CSS.
+   ============================================================================ */
+.l-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.96);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid #c8e5d2; }
+.l-wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; }
+.l-nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: 60px; }
+.l-brand { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.35rem; font-weight: 700;
+  color: #1e6644; text-decoration: none; flex-shrink: 0; }
+.l-brand em { font-style: normal; color: #2d8f60; }
+.l-nav-links { display: flex; align-items: center; gap: .15rem; list-style: none; margin: 0; padding: 0; }
+.l-nav-links a { text-decoration: none; color: #4a6b55; font-size: .88rem; font-weight: 500;
+  padding: .38rem .7rem; border-radius: 9999px; transition: color .2s, background .2s; }
+.l-nav-links a:hover { color: #1e6644; background: #e4f3ec; }
+.l-nav-right { display: flex; align-items: center; gap: .6rem; }
+.l-btn-sm { display: inline-flex; align-items: center; padding: .4rem 1rem; border-radius: 9999px;
+  font-size: .85rem; font-weight: 600; text-decoration: none; background: #2d8f60; color: #fff; border: none; cursor: pointer; }
+.l-btn-sm:hover { background: #1e6644; }
+.l-lang { display: flex; align-items: center; gap: 2px; border: 1px solid #c8e5d2; border-radius: 9999px; padding: 3px; }
+.l-lang a { text-decoration: none; font-size: .76rem; font-weight: 700; padding: .2rem .55rem;
+  border-radius: 9999px; color: #4a6b55; transition: background .2s, color .2s; }
+.l-lang a.lang-active, .l-lang a.active { background: #2d8f60; color: #fff; }
+.l-burger { display: none; background: none; border: 1px solid #c8e5d2; border-radius: 8px;
+  padding: .38rem .5rem; color: #1a2e22; font-size: 1.05rem; line-height: 1; cursor: pointer; }
+@media (max-width: 720px) {
+  .l-nav-links { display: none; }
+  .l-nav-links.is-open { display: flex; flex-direction: column; align-items: flex-start;
+    position: fixed; top: 60px; left: 0; right: 0; background: #fff; border-bottom: 1px solid #c8e5d2;
+    padding: 1rem 1.25rem; gap: .1rem; box-shadow: 0 8px 30px rgba(0,0,0,.12); }
+  .l-nav-links.is-open a { padding: .55rem .7rem; width: 100%; }
+  .l-burger { display: flex; align-items: center; }
+}

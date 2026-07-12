@@ -567,27 +567,27 @@ $serviceSchemas = [
 <body>
 
 <!-- ═══════════════════════════════════════════════════ NAV -->
-<nav class="site-nav" aria-label="<?= $no ? 'Navigasjon' : 'Navigation' ?>">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">Numero<em>logist</em></a>
+<!-- Unified site nav (.l-nav) — identical to the sub-pages, so the whole site
+     has ONE menu. Keeps the ids navToggle/navLinks for the existing burger JS. -->
+<nav class="l-nav" aria-label="<?= $no ? 'Navigasjon' : 'Navigation' ?>">
+  <div class="l-wrap l-nav-inner">
+    <a href="/" class="l-brand">Numero<em>logist</em></a>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="/discover-numerology/"><?= $T['nav_about'] ?></a></li>
-        <li><a href="/#tjenester"><?= $T['nav_services'] ?></a></li>
-        <li><a href="/articles/"><?= $T['nav_articles'] ?></a></li>
-        <li><a href="/contact-qa/"><?= $T['nav_contact'] ?></a></li>
-        <li><a href="/about-the-firm/" class="btn btn-ghost nav-cta"><?= $T['nav_cta'] ?></a></li>
-      </ul>
+    <ul class="l-nav-links" id="navLinks">
+      <li><a href="/discover-numerology/"><?= $T['nav_about'] ?></a></li>
+      <li><a href="/#tjenester"><?= $T['nav_services'] ?></a></li>
+      <li><a href="/articles/"><?= $T['nav_articles'] ?></a></li>
+      <li><a href="/contact-qa/"><?= $T['nav_contact'] ?></a></li>
+      <li><a href="/about-the-firm/" class="l-btn-sm"><?= $T['nav_cta'] ?></a></li>
+    </ul>
 
-      <div class="nav-right">
-        <div class="lang-sw" aria-label="<?= $no ? 'Velg språk' : 'Select language' ?>">
-          <a href="/?lang=no" class="<?= $no ? 'active' : '' ?>" hreflang="no" aria-label="Norsk">🇳🇴 NO</a>
-          <a href="/?lang=en" class="<?= !$no ? 'active' : '' ?>" hreflang="en" aria-label="English">🇬🇧 EN</a>
-        </div>
-        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks"
-                aria-label="<?= $no ? 'Åpne meny' : 'Open menu' ?>">☰</button>
+    <div class="l-nav-right">
+      <div class="l-lang" aria-label="<?= $no ? 'Velg språk' : 'Select language' ?>">
+        <a href="/?lang=no" class="<?= $no ? 'active' : '' ?>" hreflang="no" aria-label="Norsk">🇳🇴 NO</a>
+        <a href="/?lang=en" class="<?= !$no ? 'active' : '' ?>" hreflang="en" aria-label="English">🇬🇧 EN</a>
       </div>
+      <button class="l-burger" id="navToggle" aria-expanded="false" aria-controls="navLinks"
+              aria-label="<?= $no ? 'Åpne meny' : 'Open menu' ?>">☰</button>
     </div>
   </div>
 </nav>
