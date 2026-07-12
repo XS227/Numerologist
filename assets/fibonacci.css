@@ -1,0 +1,74 @@
+/* ============================================================================
+   Fibonacci design system — Numerologist
+   ----------------------------------------------------------------------------
+   The site builds itself up the way numbers do: every spacing step is a
+   Fibonacci number (8, 13, 21, 34, 55, 89, 144), and the type scale grows by
+   the golden ratio φ (1.618) — the limit the Fibonacci sequence converges to.
+   So the layout's rhythm literally follows the mathematics it's about.
+
+   Shared by BOTH layouts (index.php/home.css and layout.php/style.css) so the
+   design language is one, not two. Loaded before the page CSS so pages can
+   still override; these are tokens + gentle global rhythm, not a hard reset.
+   ============================================================================ */
+
+:root {
+  /* Fibonacci spacing scale (px) — the vertical & horizontal rhythm. */
+  --fib-1: 8px;
+  --fib-2: 13px;
+  --fib-3: 21px;
+  --fib-4: 34px;
+  --fib-5: 55px;
+  --fib-6: 89px;
+  --fib-7: 144px;
+
+  /* Golden ratio — the number the design grows by. */
+  --phi: 1.618;
+
+  /* Type scale, stepped by φ from a 1rem base (down one step, up four). */
+  --text-xs:   0.618rem;   /* 1 / φ  */
+  --text-sm:   0.786rem;   /* 1 / √φ */
+  --text-base: 1rem;
+  --text-md:   1.272rem;   /* √φ     */
+  --text-lg:   1.618rem;   /* φ      */
+  --text-xl:   2.058rem;   /* φ·√φ   */
+  --text-2xl:  2.618rem;   /* φ²     */
+  --text-3xl:  4.236rem;   /* φ³     */
+
+  /* Line-height on φ for comfortable, golden reading rhythm. */
+  --leading: 1.618;
+
+  /* Container widths on Fibonacci-derived measures. */
+  --measure-text: 34rem;   /* ~ideal reading width */
+  --measure-wide: 55rem;
+
+  /* Golden-ratio radius + a soft golden accent used studio-wide. */
+  --radius-fib: var(--fib-2);
+  --gold: #C9A42A;
+}
+
+/* Gentle global rhythm — applied lightly so existing page CSS still leads. */
+.fib-section   { padding-block: var(--fib-6); }
+.fib-stack > * + * { margin-top: var(--fib-3); }
+.fib-stack-lg > * + * { margin-top: var(--fib-5); }
+.fib-measure   { max-width: var(--measure-text); }
+.fib-measure-wide { max-width: var(--measure-wide); }
+
+/* Footer ethos line — the numbers+technology tagline, quietly golden. */
+.l-footer-ethos, .footer-ethos {
+  display: block;
+  color: var(--gold);
+  opacity: 0.82;
+  font-size: var(--text-sm);
+  line-height: var(--leading);
+  max-width: var(--measure-wide);
+  margin-block: 0 var(--fib-2);
+}
+
+/* A decorative golden-spiral divider some sections can opt into. */
+.fib-spiral-rule {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.35;
+  margin-block: var(--fib-5);
+}

@@ -31,7 +31,7 @@ if ($page === null) {
 
 $title      = $no ? ($page['title']    ?? '') : ($page['title_en']    ?? $page['title']    ?? '');
 $desc       = $no ? ($page['description'] ?? '') : ($page['desc_en'] ?? $page['description'] ?? '');
-$body       = htmlspecialchars($page['body'] ?? '', ENT_QUOTES, 'UTF-8');
+$body       = htmlspecialchars(($no ? ($page['body'] ?? '') : ($page['body_en'] ?? $page['body'] ?? '')), ENT_QUOTES, 'UTF-8');
 $noindex    = (bool) ($page['noindex'] ?? false);
 
 // Canonical points to the clean Django URL (no ?slug= query string)
