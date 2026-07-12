@@ -202,8 +202,7 @@
             <li><a href="{% url 'intake:index' %}" class="l-btn-sm">{% trans "Client intake" %}</a></li>
           </ul>
           <div class="l-nav-right">
-            {# Same nl_lang cookie as the PHP pages → language stays in sync
-               site-wide (the bridge middleware maps nl_lang → Django language). #}
+            {# Same nl_lang cookie as the PHP pages so language stays in sync site-wide. #}
             <div class="l-lang" aria-label="{% trans 'Switch language' %}">
               <a href="#" class="{% if LANGUAGE_CODE == 'nb' %}active{% endif %}"
                  onclick="document.cookie='nl_lang=no;path=/;max-age=31536000;samesite=lax';location.reload();return false;">🇳🇴 NO</a>
