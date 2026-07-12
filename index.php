@@ -108,15 +108,20 @@ $T = $no ? [
     'nav_articles'    => 'Artikler',
     'nav_contact'     => 'Kontakt',
     'nav_cta'         => 'Kontakt Åse',
-    'hero_eyebrow'    => 'Norges fremste numerolog',
+    'hero_eyebrow'    => 'Velkommen inn i tallenes eventyr',
     'hero_h1_a'       => 'Forstå livet ditt gjennom',
     'hero_h1_b'       => 'tallenes energi',
-    'hero_sub'        => 'Åse Steinsland hjelper deg å kartlegge din livssti, dine medfødte styrker og ditt potensial – gjennom en dyptgående numerologisk analyse.',
+    'hero_sub'        => 'Her møtes tall og teknologi. Åse Steinsland tar deg i hånden inn i tallenes verden – lær dine egne og andres tall, oppdag kraften hvert tall bærer, og forstå din livssti, dine styrker og ditt potensial. Alle kan lære. Alle er velkomne.',
     'hero_cta1'       => 'Beregn dine tall ↓',
     'hero_cta2'       => 'Møt Åse',
     'hero_trust1'     => '20+ år erfaring',
     'hero_trust2'     => 'Tusenvis av analyser',
     'hero_trust3'     => 'Norsk & internasjonal klientbase',
+    'journey_title'   => 'Din reise i tallene',
+    'journey_lead'    => 'Fra første nysgjerrige steg til dyp mestring – en varm læringsvei der alle finner sin plass.',
+    'journey_t1'      => 'Begynner', 'journey_d1' => 'Ta dine første steg. Beregn tallene dine gratis og møt betydningen bak dem – ingen forkunnskaper nødvendig.',
+    'journey_t2'      => 'Utforsker', 'journey_d2' => 'Gå dypere. Lær hvordan tallene virker sammen, tyd tallene til dem du er glad i, og se mønstrene i ditt eget liv.',
+    'journey_t3'      => 'Mester', 'journey_d3' => 'Mester i tall. Forstå den fulle kraften og læringen hvert tall gir – veiledet av Åses metode, der riktig beregning møter riktig teknologi.',
     'tn_eyebrow'      => 'Daglig universell vibrasjon',
     'tn_badge'        => 'Dagens tall',
     'calc_title'      => 'Beregn dine kjernetal',
@@ -234,15 +239,20 @@ $T = $no ? [
     'nav_articles'    => 'Articles',
     'nav_contact'     => 'Contact',
     'nav_cta'         => 'Contact Åse',
-    'hero_eyebrow'    => 'Norway\'s leading numerologist',
+    'hero_eyebrow'    => 'Welcome into the adventure of numbers',
     'hero_h1_a'       => 'Understand your life through',
     'hero_h1_b'       => 'the energy of numbers',
-    'hero_sub'        => 'Åse Steinsland helps you map your life path, innate strengths and potential — through a deep numerological analysis tailored to you.',
+    'hero_sub'        => 'Where numbers and technology meet. Åse Steinsland takes you by the hand into the world of numbers — learn your own and others’ numbers, discover the power each number carries, and understand your life path, strengths and potential. Anyone can learn. Everyone is welcome.',
     'hero_cta1'       => 'Calculate your numbers ↓',
     'hero_cta2'       => 'Meet Åse',
     'hero_trust1'     => '20+ years experience',
     'hero_trust2'     => 'Thousands of readings',
     'hero_trust3'     => 'Norwegian & international clients',
+    'journey_title'   => 'Your journey into the numbers',
+    'journey_lead'    => 'From your first curious step to deep mastery — a warm path of learning where everyone finds their place.',
+    'journey_t1'      => 'Beginner', 'journey_d1' => 'Take your first steps. Calculate your numbers for free and meet the meaning behind them — no prior knowledge needed.',
+    'journey_t2'      => 'Explorer', 'journey_d2' => 'Go deeper. Learn how the numbers work together, read the numbers of those you love, and see the patterns in your own life.',
+    'journey_t3'      => 'Master', 'journey_d3' => 'Master of numbers. Understand the full power and learning each number gives — guided by Åse’s method, where right calculation meets right technology.',
     'tn_eyebrow'      => 'Universal daily vibration',
     'tn_badge'        => 'Today\'s number',
     'calc_title'      => 'Calculate your core numbers',
@@ -551,6 +561,7 @@ $serviceSchemas = [
   <!-- Fonts preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/assets/fibonacci.css">
   <link rel="stylesheet" href="/assets/home.css">
 </head>
 <body>
@@ -617,6 +628,25 @@ $serviceSchemas = [
         <span class="hero-trust-sep"></span>
         <span><?= htmlspecialchars($T['hero_trust3']) ?></span>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════ THE ADVENTURE OF NUMBERS (journey) -->
+<section class="journey-section fib-section" aria-labelledby="journey-title">
+  <div class="journey-wrap fib-measure-wide" style="margin-inline:auto;padding-inline:var(--fib-3)">
+    <h2 id="journey-title" class="journey-title" style="font-size:var(--text-2xl);color:var(--gold);text-align:center;margin-bottom:var(--fib-2)"><?= htmlspecialchars($T['journey_title']) ?></h2>
+    <p class="journey-lead" style="max-width:var(--measure-text);margin:0 auto var(--fib-5);text-align:center;line-height:var(--leading);opacity:.85"><?= htmlspecialchars($T['journey_lead']) ?></p>
+    <hr class="fib-spiral-rule">
+    <div class="journey-steps" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--fib-3)">
+      <?php foreach ([1,2,3] as $ji): ?>
+      <article class="journey-step" style="padding:var(--fib-4);border:1px solid rgba(201,164,42,.28);border-radius:var(--radius-fib);background:rgba(201,164,42,.05)">
+        <div class="journey-num" aria-hidden="true" style="font-size:var(--text-xl);color:var(--gold);font-weight:700"><?= $ji ?></div>
+        <h3 style="font-size:var(--text-lg);margin:var(--fib-1) 0 var(--fib-2)"><?= htmlspecialchars($T['journey_t'.$ji]) ?></h3>
+        <p style="line-height:var(--leading);opacity:.85"><?= htmlspecialchars($T['journey_d'.$ji]) ?></p>
+      </article>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>

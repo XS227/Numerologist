@@ -34,6 +34,7 @@ function render_header(string $pageTitle, array $seo = []): void
     seo_head($seo);
     echo "  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n";
     echo "  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n";
+    echo "  <link rel=\"stylesheet\" href=\"/assets/fibonacci.css\">\n";
     echo "  <link rel=\"stylesheet\" href=\"/assets/style.css\">\n";
     echo "</head>\n";
     echo "<body>\n";
