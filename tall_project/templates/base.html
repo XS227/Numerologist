@@ -510,6 +510,9 @@
 
       {% block extra_styles %}{% endblock %}
     </style>
+    <!-- Shared Fibonacci design tokens (golden-ratio scale + --gold), same as
+         the PHP pages, so the whole hybrid site speaks one design language. -->
+    <link rel="stylesheet" href="/assets/fibonacci.css">
   </head>
   <body{% block body_attrs %}{% endblock %}>
     <header>
@@ -525,7 +528,8 @@
       </div>
       <nav class="nav-links" id="primaryNav" aria-label="{% trans 'Primary' %}" aria-hidden="true">
         <a href="{% url 'home' %}">{% trans "Home" %}</a>
-        <a href="{% url 'intake:index' %}">{% trans "Client intake" %}</a>
+        <a href="/discover-numerology/">{% trans "Discover numerology" %}</a>
+        <a href="/#tjenester">{% trans "Services" %}</a>
         {% if site_navigation %}
           {% for item in site_navigation %}
             {% if item.children %}
@@ -544,25 +548,17 @@
           {% endfor %}
         {% endif %}
         <a href="{% url 'article_list_legacy' %}">{% trans "Articles" %}</a>
-        <a href="/cms/" rel="noreferrer" target="_blank">{% trans "CMS" %}</a>
+        <a href="{% url 'intake:index' %}" class="nav-cta">{% trans "Client intake" %}</a>
         <div class="nav-meta">
           <div class="language-toggle" role="group" aria-label="{% trans 'Switch language' %}">
-            {% get_available_languages as languages %}
-            {% get_language_info_list for languages as languages_info %}
-            {% for language in languages_info %}
-              <form action="{% url 'set_language' %}" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="language" value="{{ language.code }}" />
-                <input type="hidden" name="next" value="{{ request.get_full_path }}" />
-                <button
-                  type="submit"
-                  class="language-toggle__btn{% if language.code == CURRENT_LANGUAGE %} is-active{% endif %}"
-                  {% if language.code == CURRENT_LANGUAGE %}aria-pressed="true"{% endif %}
-                >
-                  {{ language.code|upper }}
-                </button>
-              </form>
-            {% endfor %}
+            {# Uses the SAME nl_lang cookie the PHP pages use, so language stays
+               consistent across the whole hybrid site (the bridge middleware
+               maps nl_lang → Django language). Pure client-side = works here
+               and on the PHP pages identically. #}
+            <button type="button" class="language-toggle__btn{% if LANGUAGE_CODE == 'nb' %} is-active{% endif %}"
+                    onclick="document.cookie='nl_lang=no;path=/;max-age=31536000;samesite=lax';location.reload()">NO</button>
+            <button type="button" class="language-toggle__btn{% if LANGUAGE_CODE == 'en' %} is-active{% endif %}"
+                    onclick="document.cookie='nl_lang=en;path=/;max-age=31536000;samesite=lax';location.reload()">EN</button>
           </div>
           <button class="mode-toggle" type="button" id="modeToggle" aria-pressed="false">
             <span aria-hidden="true">🌞</span>

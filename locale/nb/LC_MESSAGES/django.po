@@ -53,6 +53,12 @@ msgstr "Artikler"
 msgid "CMS"
 msgstr "CMS"
 
+msgid "Discover numerology"
+msgstr "Oppdag numerologi"
+
+msgid "Services"
+msgstr "Tjenester"
+
 msgid "Night mode"
 msgstr "Nattmodus"
 
