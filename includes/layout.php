@@ -79,6 +79,12 @@ function render_footer(): void
     $year  = date('Y');
     $no    = (current_lang() === 'no');
     $copy  = htmlspecialchars("© {$year} Åse Steinsland · Numerologist", ENT_QUOTES, 'UTF-8');
+    // Where numbers and technology meet: Åse's Pythagorean method, computed in
+    // Python. The studio's ethos — right calculation, right technology.
+    $ethos = htmlspecialchars($no
+        ? 'Der tall og teknologi jobber sammen — den pytagoreiske metoden, beregnet i Python. Riktig beregning, riktig teknologi.'
+        : 'Where numbers and technology work together — the Pythagorean method, computed in Python. Right calculation, right technology.',
+        ENT_QUOTES, 'UTF-8');
     $priv  = $no ? 'Personvern' : 'Privacy';
     $terms = $no ? 'Vilkår'     : 'Terms';
 
@@ -86,6 +92,7 @@ function render_footer(): void
 </main>
 <footer class="l-footer">
   <div class="l-wrap l-footer-inner">
+    <p class="l-footer-ethos">{$ethos}</p>
     <p>{$copy}</p>
     <nav aria-label="Footer">
       <a href="/privacy-policy/">{$priv}</a>

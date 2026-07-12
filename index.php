@@ -223,6 +223,7 @@ $T = $no ? [
     'footer_l1'   => [['Kalkulatorer','/calculators/'],['Om numerologi','/discover-numerology/'],['Møt Åse','/about-the-firm/']],
     'footer_l2'   => [['Om numerologi','/discover-numerology/'],['Kalkulatorer','/calculators/'],['Artikler','/articles/'],['Personvern','/privacy-policy/']],
     'footer_copy' => '© ' . date('Y') . ' Åse Steinsland · Numerologist',
+    'footer_ethos'=> 'Der tall og teknologi jobber sammen — den pytagoreiske metoden, beregnet i Python. Riktig beregning, riktig teknologi.',
 ] : [
     'html_lang'       => 'en',
     'title'           => 'Numerologist – Åse Steinsland | Understand Life Through Numbers',
@@ -348,6 +349,7 @@ $T = $no ? [
     'footer_l1'   => [['Calculators','/calculators/'],['About numerology','/discover-numerology/'],['Meet Åse','/about-the-firm/']],
     'footer_l2'   => [['About numerology','/discover-numerology/'],['Calculators','/calculators/'],['Articles','/articles/'],['Privacy policy','/privacy-policy/']],
     'footer_copy' => '© ' . date('Y') . ' Åse Steinsland · Numerologist',
+    'footer_ethos'=> 'Where numbers and technology work together — the Pythagorean method, computed in Python. Right calculation, right technology.',
 ];
 
 // Articles data (served by Django at /articles/)
@@ -902,7 +904,7 @@ $serviceSchemas = [
       </div>
     </div>
     <div class="footer-bottom">
-      <span><?= htmlspecialchars($T['footer_copy']) ?></span>
+      <span><?= htmlspecialchars($T['footer_copy']) ?><br><small class="footer-ethos"><?= htmlspecialchars($T['footer_ethos']) ?></small></span>
       <div style="display:flex;gap:.75rem;align-items:center">
         <a href="/?lang=no">🇳🇴 Norsk</a>
         <a href="/?lang=en">🇬🇧 English</a>
