@@ -74,285 +74,43 @@
         padding: 1.5rem 2.5rem 1rem;
       }
 
-      .nav-shell {
-        max-width: 1080px;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 2rem;
-      }
+      
 
-      .brand {
-        display: grid;
-        gap: 0.1rem;
-      }
+      
 
-      .brand small {
-        font-size: 0.75rem;
-        letter-spacing: 0.3em;
-        font-weight: 600;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
+      
 
-      .brand strong {
-        font-size: 1.15rem;
-        font-weight: 700;
-      }
+      
 
-      .menu-toggle {
-        border: none;
-        background: var(--accent);
-        color: #fff;
-        border-radius: 999px;
-        padding: 0.6rem 1.1rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.65rem;
-        font-size: 0.95rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.2s ease, background 0.2s ease;
-      }
+      
 
-      .menu-toggle:hover,
-      .menu-toggle:focus-visible {
-        transform: translateY(-1px);
-        background: var(--accent-strong);
-        outline: none;
-      }
+      
 
-      .menu-icon {
-        position: relative;
-        width: 18px;
-        height: 2px;
-        background: currentColor;
-        border-radius: 999px;
-        transition: background 0.2s ease;
-      }
+      
 
-      .menu-icon::before,
-      .menu-icon::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        width: 18px;
-        height: 2px;
-        background: currentColor;
-        border-radius: 999px;
-        transition: transform 0.2s ease;
-      }
+      
 
-      .menu-icon::before {
-        top: -6px;
-      }
+      
 
-      .menu-icon::after {
-        top: 6px;
-      }
+      
 
-      .menu-toggle[aria-expanded="true"] .menu-icon {
-        background: transparent;
-      }
+      
 
-      .menu-toggle[aria-expanded="true"] .menu-icon::before {
-        transform: translateY(6px) rotate(45deg);
-      }
+      
 
-      .menu-toggle[aria-expanded="true"] .menu-icon::after {
-        transform: translateY(-6px) rotate(-45deg);
-      }
+      
 
-      .menu-label {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-      }
+      
 
-      .nav-links {
-        position: fixed;
-        inset: 0 0 0 auto;
-        width: min(320px, 85vw);
-        background: var(--card-bg);
-        border-left: 1px solid var(--border);
-        box-shadow: -24px 0 60px rgba(17, 37, 23, 0.18);
-        padding: 6rem 1.75rem 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        z-index: 20;
-      }
+      
 
-      body.menu-open .nav-links {
-        transform: translateX(0);
-      }
+      
 
-      .nav-links a,
-      .nav-links summary {
-        color: var(--muted);
-        font-weight: 600;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.35rem;
-        padding: 0.75rem 1rem;
-        border-radius: 14px;
-        transition: background 0.2s ease, color 0.2s ease;
-      }
+      
 
-      .nav-links a:hover,
-      .nav-links a:focus-visible,
-      .nav-links summary:hover,
-      .nav-links summary:focus-visible {
-        background: var(--accent-soft);
-        color: var(--accent-strong);
-        outline: none;
-      }
+      
 
-      .nav-links summary {
-        list-style: none;
-      }
-
-      .nav-links summary::-webkit-details-marker,
-      .nav-links summary::marker {
-        display: none;
-      }
-
-      .nav-links details {
-        width: 100%;
-      }
-
-      .nav-links summary::after {
-        content: "▾";
-        font-size: 0.75rem;
-        transition: transform 0.2s ease;
-      }
-
-      .nav-links details[open] > summary {
-        color: var(--accent-strong);
-      }
-
-      .nav-links details[open] > summary::after {
-        transform: rotate(180deg);
-      }
-
-      .nav-dropdown {
-        margin-top: 0.35rem;
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 0.5rem;
-        display: grid;
-        gap: 0.35rem;
-        box-shadow: none;
-      }
-
-      .nav-dropdown a {
-        font-weight: 600;
-        color: var(--muted);
-        padding: 0.45rem 0.75rem;
-        border-radius: 10px;
-        transition: background 0.2s ease, color 0.2s ease;
-      }
-
-      .nav-dropdown a:hover,
-      .nav-dropdown a:focus-visible {
-        color: var(--accent-strong);
-        background: var(--accent-soft);
-        outline: none;
-      }
-
-      .nav-meta {
-        margin-top: 1.5rem;
-        display: grid;
-        gap: 0.75rem;
-      }
-
-      .language-toggle {
-        display: inline-flex;
-        align-items: stretch;
-        border: 1px solid rgba(60, 177, 121, 0.35);
-        border-radius: 999px;
-        background: var(--card-bg);
-        overflow: hidden;
-        font-size: 0.9rem;
-      }
-
-      .language-toggle form {
-        margin: 0;
-        display: flex;
-      }
-
-      .language-toggle button {
-        appearance: none;
-        border: none;
-        background: transparent;
-        color: var(--muted);
-        padding: 0.4rem 0.85rem;
-        cursor: pointer;
-        font-weight: 600;
-        transition: background 0.2s ease, color 0.2s ease;
-      }
-
-      .language-toggle form + form button {
-        border-inline-start: 1px solid rgba(60, 177, 121, 0.25);
-      }
-
-      .language-toggle button:is(:focus-visible, :hover) {
-        background: var(--accent-soft);
-        color: var(--accent-strong);
-        outline: none;
-      }
-
-      .language-toggle button.is-active {
-        background: var(--accent);
-        color: #fff;
-      }
-
-      .mode-toggle {
-        border: 1px solid rgba(60, 177, 121, 0.3);
-        background: #fff;
-        border-radius: 999px;
-        padding: 0.6rem 1.1rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        color: var(--muted);
-        font-weight: 600;
-        cursor: pointer;
-        transition: transform 0.2s ease, background 0.2s ease;
-        justify-content: center;
-      }
-
-      .mode-toggle:hover,
-      .mode-toggle:focus-visible {
-        transform: translateY(-1px);
-        background: var(--accent-soft);
-        outline: none;
-      }
-
-      .menu-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(15, 35, 23, 0.4);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-        z-index: 10;
-      }
-
-      body.menu-open .menu-overlay {
-        opacity: 1;
-        pointer-events: auto;
-      }
-
-      body.menu-open {
-        overflow: hidden;
-      }
+      
 
       main {
         flex: 1;
@@ -410,24 +168,9 @@
         font-size: 0.95rem;
       }
 
-      [dir="rtl"] .nav-links {
-        inset: 0 auto 0 0;
-        border-left: none;
-        border-right: 1px solid var(--border);
-        transform: translateX(-100%);
-      }
+      
 
-      [dir="rtl"] body.menu-open .nav-links {
-        transform: translateX(0);
-      }
-
-      [dir="rtl"] .nav-links summary::after {
-        content: "▴";
-      }
-
-      [dir="rtl"] .nav-dropdown {
-        text-align: right;
-      }
+      
 
       [dir="rtl"] .prose ul,
       [dir="rtl"] .prose ol {
@@ -436,77 +179,23 @@
       }
 
       @media (max-width: 720px) {
-        header {
-          padding: 1.25rem 1.25rem 0.5rem;
-        }
 
         main {
           padding: 0 1.25rem 3.5rem;
         }
       }
 
-      body.night {
-        background: #0e1713;
-        color: #e8f5ec;
-      }
+      
 
-      body.night header,
-      body.night main {
-        background: transparent;
-      }
+      
 
-      body.night .card {
-        background: #13231b;
-        border-color: rgba(60, 177, 121, 0.25);
-        box-shadow: none;
-      }
+      
 
-      body.night .prose {
-        color: rgba(232, 245, 236, 0.75);
-      }
+      
 
-      body.night .prose h1,
-      body.night .prose h2,
-      body.night .prose h3 {
-        color: #e8f5ec;
-      }
+      
 
-      body.night .nav-links {
-        background: #0f1d17;
-        border-color: rgba(60, 177, 121, 0.25);
-        box-shadow: -24px 0 60px rgba(0, 0, 0, 0.55);
-      }
-
-      body.night .nav-links a,
-      body.night .nav-links summary,
-      body.night .mode-toggle {
-        color: rgba(232, 245, 236, 0.78);
-      }
-
-      body.night .nav-dropdown {
-        background: #16291f;
-        border-color: rgba(60, 177, 121, 0.25);
-        box-shadow: none;
-      }
-
-      body.night .nav-dropdown a:hover,
-      body.night .nav-dropdown a:focus-visible {
-        color: #e8f5ec;
-        background: rgba(60, 177, 121, 0.22);
-      }
-
-      body.night .language-toggle {
-        border-color: rgba(60, 177, 121, 0.35);
-        background: rgba(19, 35, 27, 0.85);
-      }
-
-      body.night .language-toggle button {
-        color: rgba(232, 245, 236, 0.8);
-      }
-
-      body.night footer {
-        color: rgba(232, 245, 236, 0.7);
-      }
+      
 
       {% block extra_styles %}{% endblock %}
     </style>
@@ -544,7 +233,6 @@
         </div>
       </nav>
     </header>
-    <div class="menu-overlay" id="menuOverlay" hidden></div>
     <main>
       {% block main %}
         <div class="layout">
@@ -563,91 +251,6 @@
         {% endblock %}
       </div>
     </footer>
-    <script>
-      const body = document.body;
-      const menuToggleButton = document.getElementById("menuToggle");
-      const primaryNav = document.getElementById("primaryNav");
-      const menuOverlay = document.getElementById("menuOverlay");
-      const modeToggle = document.getElementById("modeToggle");
-
-      const setMenuState = (open) => {
-        if (menuToggleButton) {
-          menuToggleButton.setAttribute("aria-expanded", String(open));
-        }
-        if (primaryNav) {
-          primaryNav.setAttribute("aria-hidden", String(!open));
-        }
-        if (menuOverlay) {
-          if (open) {
-            menuOverlay.removeAttribute("hidden");
-          } else {
-            menuOverlay.setAttribute("hidden", "");
-          }
-        }
-        body.classList.toggle("menu-open", open);
-      };
-
-      const closeMenu = () => {
-        setMenuState(false);
-        primaryNav?.querySelectorAll("details[open]").forEach((detail) => {
-          detail.removeAttribute("open");
-        });
-      };
-
-      menuToggleButton?.addEventListener("click", () => {
-        const expanded = menuToggleButton.getAttribute("aria-expanded") === "true";
-        if (expanded) {
-          closeMenu();
-        } else {
-          setMenuState(true);
-        }
-      });
-
-      menuOverlay?.addEventListener("click", closeMenu);
-
-      primaryNav?.querySelectorAll("a").forEach((link) => {
-        link.addEventListener("click", closeMenu);
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-          const expanded = menuToggleButton?.getAttribute("aria-expanded") === "true";
-          if (expanded) {
-            closeMenu();
-            menuToggleButton?.focus();
-          }
-        }
-      });
-
-      if (modeToggle) {
-        const setMode = (night) => {
-          body.classList.toggle("night", night);
-          modeToggle.setAttribute("aria-pressed", night ? "true" : "false");
-          modeToggle.innerHTML = night
-            ? '<span aria-hidden="true">🌙</span> {% trans "Light mode" %}'
-            : '<span aria-hidden="true">🌞</span> {% trans "Night mode" %}';
-          try {
-            window.localStorage.setItem("numerologist-mode", night ? "night" : "day");
-          } catch (error) {
-            console.warn("Unable to persist colour mode", error);
-          }
-        };
-
-        modeToggle.addEventListener("click", () => {
-          closeMenu();
-          setMode(!body.classList.contains("night"));
-        });
-
-        try {
-          const savedMode = window.localStorage.getItem("numerologist-mode");
-          if (savedMode === "night") {
-            setMode(true);
-          }
-        } catch (error) {
-          console.warn("Unable to read persisted colour mode", error);
-        }
-      }
-    </script>
     {% block extra_scripts %}{% endblock %}
   </body>
 </html>
