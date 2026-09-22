@@ -124,12 +124,15 @@
    instead of three different (and differently complete) footers. Namespaced
    (.l-*) like .l-nav above, so it never collides with a page's own CSS.
    ============================================================================ */
-.l-footer { background: #091a10; color: rgba(240,248,243,.55); padding: 3.5rem 1.25rem 2rem; }
+/* Palette matches the journey redesign's --j-night/--j-gold/--j-paper
+   (tall_project/static/journey/journey.css) so the footer belongs on both
+   the classic pages and the new illustrated ones, not just one or the other. */
+.l-footer { background: #092426; color: rgba(243,240,232,.6); padding: 3.5rem 1.25rem 2rem; }
 .l-footer .l-wrap { max-width: 1100px; margin: 0 auto; padding: 0; }
 .l-footer-grid {
   display: grid; grid-template-columns: 1.6fr 1fr 1fr;
   gap: 3rem; padding-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(255,255,255,.07);
+  border-bottom: 1px solid rgba(243,240,232,.1);
   margin-bottom: 1.75rem;
 }
 @media (max-width: 680px) {
@@ -137,29 +140,29 @@
 }
 .l-footer-brand {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.4rem; font-weight: 700; color: #fff;
+  font-size: 1.4rem; font-weight: 700; color: #f3f0e8;
   text-decoration: none; display: block; margin-bottom: .65rem;
 }
-.l-footer-brand em { font-style: normal; }
+.l-footer-brand em { font-style: normal; color: #c6a775; }
 .l-footer-tagline { font-size: .88rem; line-height: 1.6; max-width: 30ch; margin: 0; }
 .l-footer-col h4 {
-  color: #fff; font-size: .75rem; font-weight: 700;
+  color: #f3f0e8; font-size: .75rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .09em; margin: 0 0 .9rem;
 }
 .l-footer-col ul { list-style: none; display: grid; gap: .45rem; margin: 0; padding: 0; }
 .l-footer-col ul a {
-  color: rgba(240,248,243,.55); text-decoration: none;
+  color: rgba(243,240,232,.6); text-decoration: none;
   font-size: .86rem; transition: color 200ms cubic-bezier(.4,0,.2,1);
 }
-.l-footer-col ul a:hover { color: #fff; }
+.l-footer-col ul a:hover { color: #c6a775; }
 .l-footer-bottom {
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: .75rem; font-size: .8rem;
 }
-.l-footer-bottom a { color: rgba(240,248,243,.45); text-decoration: none; }
-.l-footer-bottom a:hover { color: #fff; }
+.l-footer-bottom a { color: rgba(243,240,232,.5); text-decoration: none; }
+.l-footer-bottom a:hover { color: #c6a775; }
 .l-footer-langs { display: flex; gap: .75rem; align-items: center; }
-.l-footer-langs a.active { color: #fff; font-weight: 700; }
+.l-footer-langs a.active { color: #c6a775; font-weight: 700; }
 
 /* ============================================================================
    Embeddable calculator widget (.calc-widget)
