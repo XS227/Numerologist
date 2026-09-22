@@ -100,9 +100,7 @@ class IntakeForm(forms.Form):
     def numerology_profile(self) -> NumerologyResult:
         birth_date = self.cleaned_data["birth_date"]
         full_name = self.cleaned_data["full_name"].upper()
-        life_path = self._reduce_digits(
-            "".join(c for c in birth_date.strftime("%Y%m%d"))
-        )
+        life_path = self._life_path(birth_date)
         birth_day = self._reduce_digits(str(birth_date.day))
         expression = self._reduce_name(full_name)
         soul_urge = self._reduce_name(full_name, filter_set=VOWELS)
@@ -128,14 +126,34 @@ class IntakeForm(forms.Form):
 
     @classmethod
     def _reduce_name(cls, value: str, filter_set: set[str] | None = None) -> int:
-        letters = [
-            LETTER_VALUES[char]
-            for char in value
-            if char.isalpha()
-            and char in LETTER_VALUES
-            and (filter_set is None or char in filter_set)
-        ]
-        if not letters:
+        """Åse's method: reduce each name part (first/middle/last) to its own
+        single digit or master number FIRST, then add those reduced values
+        together and reduce again — not a flat sum of every letter in the
+        full string. Summing the whole name at once can land on a false
+        master number a per-part reduction would never hit (e.g. "MAHSA
+        AMINI"'s consonants: flat sum -> 22 [wrong]; per-part -> 13 -> 4)."""
+        total = 0
+        for word in value.split():
+            letters = [
+                LETTER_VALUES[char]
+                for char in word
+                if char.isalpha()
+                and char in LETTER_VALUES
+                and (filter_set is None or char in filter_set)
+            ]
+            if letters:
+                total += cls._reduce_digits(str(sum(letters)))
+        if not total:
             return 0
-        total = sum(letters)
         return cls._reduce_digits(str(total))
+
+    @classmethod
+    def _life_path(cls, birth_date) -> int:
+        """Day, month, and year are each reduced separately before being
+        summed and reduced again — matching the same per-part methodology
+        as _reduce_name, rather than reducing every digit of YYYYMMDD in
+        one flat pass."""
+        day = cls._reduce_digits(str(birth_date.day))
+        month = cls._reduce_digits(str(birth_date.month))
+        year = cls._reduce_digits(str(birth_date.year))
+        return cls._reduce_digits(str(day + month + year))

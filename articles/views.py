@@ -61,10 +61,20 @@ class ArticleListView(ListView):
         return context
 
 
+# Slugs that get a bespoke visual template instead of the generic prose
+# layout (e.g. side-by-side comparison dashboards). The article text itself
+# is never touched — only how it's framed.
+CUSTOM_ARTICLE_TEMPLATES = {
+    "numerological-reflection-on-mahsa-amini-and-bita-azizi": "articles/detail_mahsa_bita.html",
+}
+
+
 class ArticleDetailView(DetailView):
     model = Article
-    template_name = "articles/detail.html"
     context_object_name = "article"
+
+    def get_template_names(self):
+        return [CUSTOM_ARTICLE_TEMPLATES.get(self.object.slug, "articles/detail.html")]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

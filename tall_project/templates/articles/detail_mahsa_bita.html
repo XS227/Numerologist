@@ -1,0 +1,551 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ article.title }} · {% trans "Articles & Library" %} · Numerologist{% endblock %}
+
+{% block extra_styles %}
+      :root {
+        --mahsa: #5b5fc7;
+        --mahsa-soft: rgba(91, 95, 199, 0.1);
+        --mahsa-line: rgba(91, 95, 199, 0.35);
+        --bita: #c9832e;
+        --bita-soft: rgba(201, 131, 46, 0.1);
+        --bita-line: rgba(201, 131, 46, 0.35);
+        --shared: #2d8f60;
+      }
+
+      .article-breadcrumb {
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .article-breadcrumb a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid rgba(45, 143, 96, 0.35);
+        color: #2d8f60;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .article-breadcrumb a:hover,
+      .article-breadcrumb a:focus {
+        background: rgba(45, 143, 96, 0.12);
+      }
+
+      .article-detail {
+        display: grid;
+        gap: clamp(1.75rem, 3vw, 2.5rem);
+        background: #ffffff;
+        padding: clamp(2rem, 3vw, 3rem);
+        border-radius: 1.75rem;
+        border: 1px solid rgba(33, 65, 48, 0.12);
+        box-shadow: 0 28px 60px rgba(33, 65, 48, 0.12);
+      }
+
+      /* ---------- Header ---------- */
+      .mb-header {
+        display: grid;
+        gap: 1.1rem;
+        text-align: center;
+        justify-items: center;
+        padding-bottom: clamp(1.5rem, 3vw, 2rem);
+        border-bottom: 1px dashed rgba(33, 65, 48, 0.15);
+      }
+      .mb-emblems {
+        display: flex;
+        align-items: center;
+        gap: clamp(1rem, 4vw, 2.25rem);
+      }
+      .mb-emblems svg { display: block; }
+      .mb-emblems .divider {
+        font-size: 1.5rem;
+        color: rgba(31, 51, 39, 0.35);
+        font-weight: 300;
+      }
+      .article-detail__eyebrow {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: rgba(31, 51, 39, 0.7);
+        font-weight: 600;
+      }
+      .article-detail__title {
+        margin: 0;
+        font-size: clamp(1.9rem, 4vw, 2.85rem);
+        line-height: 1.15;
+        color: #1f3327;
+        max-width: 32ch;
+      }
+      .mb-subtitle {
+        margin: 0;
+        max-width: 46ch;
+        color: rgba(31, 51, 39, 0.65);
+        font-size: 1.05rem;
+      }
+      .article-detail__meta {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        color: rgba(31, 51, 39, 0.65);
+      }
+      .article-detail__meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(60, 177, 121, 0.14);
+        color: #2d8f60;
+        font-weight: 600;
+      }
+      .article-detail__source {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        color: #2d8f60;
+      }
+      .article-detail__source:hover,
+      .article-detail__source:focus { text-decoration: underline; }
+
+      /* ---------- Profile comparison cards ---------- */
+      .mb-profiles {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(1rem, 3vw, 1.75rem);
+      }
+      @media (max-width: 760px) {
+        .mb-profiles { grid-template-columns: 1fr; }
+      }
+      .mb-profile {
+        border-radius: 1.5rem;
+        padding: clamp(1.35rem, 2.5vw, 1.85rem);
+        display: grid;
+        gap: 1.1rem;
+        border: 1px solid transparent;
+      }
+      .mb-profile--mahsa {
+        background: linear-gradient(160deg, var(--mahsa-soft), rgba(255,255,255,0.4));
+        border-color: var(--mahsa-line);
+      }
+      .mb-profile--bita {
+        background: linear-gradient(160deg, var(--bita-soft), rgba(255,255,255,0.4));
+        border-color: var(--bita-line);
+      }
+      .mb-profile__head {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+      }
+      .mb-profile__head h2 {
+        margin: 0;
+        font-size: 1.3rem;
+        color: #1f3327;
+      }
+      .mb-profile__head p {
+        margin: 0.15rem 0 0;
+        font-size: 0.85rem;
+        color: rgba(31, 51, 39, 0.6);
+      }
+      .mb-avatar {
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        width: 3.1rem;
+        height: 3.1rem;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 6px 16px rgba(33, 65, 48, 0.14);
+      }
+      .mb-age {
+        justify-self: start;
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.4rem;
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        background: rgba(45, 143, 96, 0.14);
+        color: var(--shared);
+      }
+      .mb-age strong { font-size: 1.15rem; }
+      .mb-numbers {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.65rem;
+      }
+      .mb-stat {
+        background: rgba(255,255,255,0.75);
+        border: 1px solid rgba(33, 65, 48, 0.08);
+        border-radius: 1rem;
+        padding: 0.65rem 0.8rem;
+        display: grid;
+        gap: 0.15rem;
+      }
+      .mb-stat__label {
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: rgba(31, 51, 39, 0.55);
+        font-weight: 700;
+      }
+      .mb-stat__value {
+        font-size: 1.5rem;
+        font-weight: 800;
+        line-height: 1;
+      }
+      .mb-profile--mahsa .mb-stat__value { color: var(--mahsa); }
+      .mb-profile--bita .mb-stat__value { color: var(--bita); }
+      .mb-stat__note {
+        font-size: 0.78rem;
+        color: rgba(31, 51, 39, 0.6);
+      }
+      .mb-abjad {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        background: rgba(255,255,255,0.6);
+        border: 1px dashed rgba(33, 65, 48, 0.18);
+        border-radius: 1rem;
+        padding: 0.7rem 0.9rem;
+        font-size: 0.9rem;
+      }
+      .mb-abjad__script {
+        font-size: 1.4rem;
+        font-weight: 700;
+      }
+      .mb-abjad__sum {
+        font-weight: 700;
+      }
+
+      /* ---------- Recurring numbers constellation ---------- */
+      .mb-constellation {
+        display: grid;
+        gap: 0.9rem;
+        text-align: center;
+      }
+      .mb-constellation h2 {
+        margin: 0;
+        font-size: 1.05rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: rgba(31, 51, 39, 0.55);
+      }
+      .mb-chips {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: clamp(0.6rem, 2vw, 1.1rem);
+      }
+      .mb-chip {
+        display: grid;
+        justify-items: center;
+        gap: 0.3rem;
+        width: 5.6rem;
+      }
+      .mb-chip__num {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 1.1rem;
+        color: #fff;
+        background: var(--shared);
+        box-shadow: 0 8px 18px rgba(45, 143, 96, 0.35);
+      }
+      .mb-chip__label {
+        font-size: 0.72rem;
+        color: rgba(31, 51, 39, 0.6);
+        line-height: 1.25;
+      }
+
+      /* ---------- Timeline ---------- */
+      .mb-timeline {
+        display: grid;
+        gap: 1rem;
+      }
+      .mb-timeline h2 {
+        margin: 0 0 0.15rem;
+        font-size: 1.05rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: rgba(31, 51, 39, 0.55);
+        text-align: center;
+      }
+      .mb-lifeline {
+        display: grid;
+        grid-template-columns: minmax(9rem, 13rem) 1fr auto;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      @media (max-width: 620px) {
+        .mb-lifeline { grid-template-columns: 1fr; gap: 0.4rem; text-align: center; }
+      }
+      .mb-lifeline__who {
+        font-weight: 700;
+        font-size: 0.92rem;
+      }
+      .mb-lifeline__who span {
+        display: block;
+        font-weight: 400;
+        font-size: 0.78rem;
+        color: rgba(31, 51, 39, 0.55);
+      }
+      .mb-lifeline__track {
+        position: relative;
+        height: 0.5rem;
+        border-radius: 999px;
+        background: rgba(33, 65, 48, 0.08);
+      }
+      .mb-lifeline__bar {
+        position: absolute;
+        inset: 0;
+        border-radius: 999px;
+      }
+      .mb-profile--mahsa ~ .mb-lifeline__bar,
+      .mb-lifeline__bar--mahsa { background: linear-gradient(90deg, var(--mahsa-soft), var(--mahsa)); }
+      .mb-lifeline__bar--bita { background: linear-gradient(90deg, var(--bita-soft), var(--bita)); }
+      .mb-lifeline__end {
+        display: grid;
+        justify-items: center;
+        gap: 0.1rem;
+        font-size: 0.78rem;
+        color: rgba(31, 51, 39, 0.65);
+      }
+      .mb-lifeline__end strong {
+        font-size: 1.1rem;
+        color: var(--shared);
+      }
+      .mb-gap {
+        margin-top: 0.25rem;
+        text-align: center;
+        display: grid;
+        gap: 0.3rem;
+        padding-top: 0.85rem;
+        border-top: 1px dashed rgba(33, 65, 48, 0.15);
+      }
+      .mb-gap__days {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--shared);
+      }
+      .mb-gap__note {
+        font-size: 0.85rem;
+        color: rgba(31, 51, 39, 0.6);
+        max-width: 46ch;
+        margin: 0 auto;
+      }
+
+      .mb-dashboard {
+        display: grid;
+        gap: clamp(1.5rem, 3vw, 2.25rem);
+        padding: clamp(1.5rem, 3vw, 2.25rem);
+        border-radius: 1.5rem;
+        background: radial-gradient(circle at top left, rgba(91,95,199,0.06), transparent 55%),
+          radial-gradient(circle at bottom right, rgba(201,131,46,0.06), transparent 55%),
+          var(--card-elevated);
+        border: 1px solid rgba(33, 65, 48, 0.1);
+      }
+
+      .article-detail__body {
+        display: grid;
+        gap: 1.5rem;
+        color: rgba(31, 51, 39, 0.85);
+      }
+      .article-detail__body .prose { font-size: 1.02rem; }
+      .article-detail__body .prose h2 {
+        margin-top: 0.5rem;
+        color: #1f3327;
+      }
+
+      .article-analysis {
+        background: linear-gradient(135deg, rgba(60, 177, 121, 0.15), rgba(60, 177, 121, 0.05));
+        border: 1px solid rgba(45, 143, 96, 0.25);
+        border-radius: 1.5rem;
+        padding: clamp(1.75rem, 3vw, 2.25rem);
+        display: grid;
+        gap: 0.85rem;
+      }
+      .article-analysis__title { margin: 0; font-size: 1.35rem; color: #1f3327; }
+      .article-analysis__body { color: rgba(31, 51, 39, 0.8); line-height: 1.6; }
+
+      @media (max-width: 720px) {
+        .article-detail { padding: 1.75rem; }
+        .article-detail__title { font-size: clamp(1.7rem, 7vw, 2.2rem); }
+      }
+{% endblock %}
+
+{% block content %}
+  <nav class="article-breadcrumb" aria-label="{% trans 'Back to articles' %}">
+    <a href="{% url 'article_list' %}">
+      <span aria-hidden="true">←</span>
+      {% trans "All articles" %}
+    </a>
+  </nav>
+
+  <article class="article-detail">
+    <header class="mb-header">
+      <div class="mb-emblems" aria-hidden="true">
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+          <circle cx="28" cy="28" r="26" fill="var(--mahsa-soft)" />
+          <path d="M34 14a16 16 0 1 0 0 28 13 13 0 1 1 0-28Z" fill="var(--mahsa)" />
+        </svg>
+        <span class="divider">&amp;</span>
+        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+          <circle cx="28" cy="28" r="26" fill="var(--bita-soft)" />
+          <path d="M28 12l3.9 10.9L43 27l-11.1 4.1L28 42l-3.9-10.9L13 27l11.1-4.1Z" fill="var(--bita)" />
+        </svg>
+      </div>
+      <span class="article-detail__eyebrow">{% trans "Numerologist library" %} · {% trans "Comparative reflection" %}</span>
+      <h1 class="article-detail__title">{{ article.title }}</h1>
+      <p class="mb-subtitle">{% trans "Two young women, two continents, one age at parting — a side-by-side look at the numbers woven through their names, dates, and stories." %}</p>
+      <div class="article-detail__meta">
+        <span>{% blocktrans with author=article.author %}By {{ author }}{% endblocktrans %}</span>
+        <span>{% blocktrans with date=article.published|date:"F j, Y" %}Published {{ date }}{% endblocktrans %}</span>
+      </div>
+      {% if article.source_url %}
+        <a class="article-detail__source" href="{{ article.source_url }}" target="_blank" rel="noreferrer">
+          {% trans "View original source" %}
+          <span aria-hidden="true">↗</span>
+        </a>
+      {% endif %}
+    </header>
+
+    <div class="mb-dashboard">
+      <div class="mb-profiles">
+        <section class="mb-profile mb-profile--mahsa" aria-labelledby="mb-mahsa-title">
+          <div class="mb-profile__head">
+            <span class="mb-avatar">
+              <svg width="26" height="26" viewBox="0 0 56 56" fill="none">
+                <path d="M34 14a16 16 0 1 0 0 28 13 13 0 1 1 0-28Z" fill="var(--mahsa)" />
+              </svg>
+            </span>
+            <div>
+              <h2 id="mb-mahsa-title">Mahsa (Jina) Amini</h2>
+              <p>{% trans "Sept. 21, 1999 – Sept. 16, 2022 · Tehran, Iran" %}</p>
+            </div>
+          </div>
+          <span class="mb-age">{% trans "Age at passing" %} <strong>22</strong></span>
+          <div class="mb-numbers">
+            <div class="mb-stat">
+              <span class="mb-stat__label">{% trans "Life Path" %}</span>
+              <span class="mb-stat__value">4</span>
+              <span class="mb-stat__note">{% trans "The builder" %}</span>
+            </div>
+            <div class="mb-stat">
+              <span class="mb-stat__label">{% trans "Expression" %}</span>
+              <span class="mb-stat__value">7</span>
+              <span class="mb-stat__note">{% trans "Seeker of truth" %}</span>
+            </div>
+            <div class="mb-stat">
+              <span class="mb-stat__label">{% trans "Soul Urge" %}</span>
+              <span class="mb-stat__value">3</span>
+              <span class="mb-stat__note">{% trans "Joy & expression" %}</span>
+            </div>
+            <div class="mb-stat">
+              <span class="mb-stat__label">{% trans "Personality" %}</span>
+              <span class="mb-stat__value">4</span>
+              <span class="mb-stat__note">{% trans "Grounded & steady" %}</span>
+            </div>
+          </div>
+          <div class="mb-abjad">
+            <span class="mb-abjad__script" lang="fa" dir="rtl">مهسا</span>
+            <span>{% trans "Abjad" %} 106 → <span class="mb-abjad__sum">7</span></span>
+          </div>
+        </section>
+
+        <section class="mb-profile mb-profile--bita" aria-labelledby="mb-bita-title">
+          <div class="mb-profile__head">
+            <span class="mb-avatar">
+              <svg width="26" height="26" viewBox="0 0 56 56" fill="none">
+                <path d="M28 12l3.9 10.9L43 27l-11.1 4.1L28 42l-3.9-10.9L13 27l11.1-4.1Z" fill="var(--bita)" />
+              </svg>
+            </span>
+            <div>
+              <h2 id="mb-bita-title">Bita Azizi</h2>
+              <p>{% trans "Apr. 13, 2002 – Aug. 11, 2024 · Asker, Norway" %}</p>
+            </div>
+          </div>
+          <span class="mb-age">{% trans "Age at passing" %} <strong>22</strong></span>
+          <div class="mb-numbers">
+            <div class="mb-stat">
+              <span class="mb-stat__label">{% trans "Life Path" %}</span>
+              <span class="mb-stat__value">3</span>
+              <span class="mb-stat__note">{% trans "Creative optimism" %}</span>
+            </div>
+            <div class="mb-stat">
+              <span class="mb-stat__label">{% trans "Expression" %}</span>
+              <span class="mb-stat__value">4</span>
+              <span class="mb-stat__note">{% trans "Builder & carer" %}</span>
+            </div>
+            <div class="mb-stat">
+              <span class="mb-stat__label">{% trans "Soul Urge" %}</span>
+              <span class="mb-stat__value">2</span>
+              <span class="mb-stat__note">{% trans "Wants closeness" %}</span>
+            </div>
+            <div class="mb-stat">
+              <span class="mb-stat__label">{% trans "Personality" %}</span>
+              <span class="mb-stat__value">11</span>
+              <span class="mb-stat__note">{% trans "Quietly luminous" %}</span>
+            </div>
+          </div>
+          <div class="mb-abjad">
+            <span class="mb-abjad__script" lang="fa" dir="rtl">بیتا</span>
+            <span>{% trans "Abjad" %} 413 → <span class="mb-abjad__sum">8</span></span>
+          </div>
+        </section>
+      </div>
+
+      <div class="mb-constellation">
+        <h2>{% trans "Numbers that echo through both stories" %}</h2>
+        <div class="mb-chips">
+          <div class="mb-chip"><span class="mb-chip__num">22</span><span class="mb-chip__label">{% trans "shared age at passing" %}</span></div>
+          <div class="mb-chip"><span class="mb-chip__num">4</span><span class="mb-chip__label">{% trans "structure · foundation" %}</span></div>
+          <div class="mb-chip"><span class="mb-chip__num">7</span><span class="mb-chip__label">{% trans "spiritual seeking" %}</span></div>
+          <div class="mb-chip"><span class="mb-chip__num">11</span><span class="mb-chip__label">{% trans "illumination" %}</span></div>
+          <div class="mb-chip"><span class="mb-chip__num">2</span><span class="mb-chip__label">{% trans "partnership · unity" %}</span></div>
+          <div class="mb-chip"><span class="mb-chip__num">9</span><span class="mb-chip__label">{% trans "completion" %}</span></div>
+        </div>
+      </div>
+
+      <div class="mb-timeline">
+        <h2>{% trans "Two lifelines, one age" %}</h2>
+        <div class="mb-lifeline">
+          <div class="mb-lifeline__who">Mahsa Amini<span>{% trans "born" %} 1999</span></div>
+          <div class="mb-lifeline__track"><div class="mb-lifeline__bar mb-lifeline__bar--mahsa"></div></div>
+          <div class="mb-lifeline__end"><strong>22</strong>{% trans "Sept. 2022" %}</div>
+        </div>
+        <div class="mb-lifeline">
+          <div class="mb-lifeline__who">Bita Azizi<span>{% trans "born" %} 2002</span></div>
+          <div class="mb-lifeline__track"><div class="mb-lifeline__bar mb-lifeline__bar--bita"></div></div>
+          <div class="mb-lifeline__end"><strong>22</strong>{% trans "Aug. 2024" %}</div>
+        </div>
+        <div class="mb-gap">
+          <span class="mb-gap__days">695 {% trans "days apart" %}</span>
+          <p class="mb-gap__note">{% trans "≈ 99 weeks between their passings — 695 reduces to 2, and 99 reduces to 9, the same digits their death dates each carry." %}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-detail__body">
+      <div class="prose">
+        {{ article.content|safe }}
+      </div>
+    </div>
+  </article>
+
+  {% if ai_analysis %}
+    <section class="article-analysis" aria-labelledby="article-analysis-title">
+      <h2 id="article-analysis-title" class="article-analysis__title">{% trans "AI insight" %}</h2>
+      <p class="article-analysis__body">{{ ai_analysis }}</p>
+    </section>
+  {% endif %}
+{% endblock %}
