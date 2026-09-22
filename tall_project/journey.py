@@ -67,10 +67,8 @@ def journey_content(language):
                 "fremstilles som hans dokumenterte oppfinnelse.",
             ),
             alt=t(
-                "Artistic reconstruction of a Greek colonnade, monochord and "
-                "triangular pebble arrangement",
-                "Kunstnerisk rekonstruksjon av greske søyler, monokord og småstein"
-                " i trekant",
+                "Imagined historical portrait of Pythagoras with a monochord",
+                "Historisk inspirert portrett av Pythagoras med et monokord",
             ),
             symbol="triangle",
             source="https://plato.stanford.edu/entries/pythagoras/",

@@ -33,8 +33,11 @@ LETTER_VALUES = {
     "Z": 8,
     "I": 9,
     "R": 9,
+    "Å": 1,
+    "Æ": 5,
+    "Ø": 6,
 }
-VOWELS = {"A", "E", "I", "O", "U"}
+VOWELS = {"A", "E", "I", "O", "U", "Y", "Æ", "Ø", "Å"}
 
 
 @dataclass
@@ -119,7 +122,7 @@ class IntakeForm(forms.Form):
 
     @staticmethod
     def _reduce_digits(digits: str) -> int:
-        total = sum(int(char) for char in digits if char.isdigit())
+        total = int("".join(char for char in digits if char.isdigit()) or "0")
         while total > 9 and total not in MASTER_NUMBERS:
             total = sum(int(char) for char in str(total))
         return total

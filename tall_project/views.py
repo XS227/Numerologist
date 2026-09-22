@@ -354,6 +354,19 @@ def static_page(request: HttpRequest, slug: str) -> HttpResponse:
     if slug == "discover-numerology":
         from .journey import journey_content
         context["journey"] = journey_content(getattr(request, "LANGUAGE_CODE", "en"))
+    from .learning import ase_content, learning_content
+
+    language = getattr(request, "LANGUAGE_CODE", "en")
+    if slug in {
+        "discover-numerology", "general-interpretation", "letter-value-chart",
+        "compute-destiny-number", "pythagoras-legacy",
+    }:
+        context["ase"] = ase_content(language)
+    if slug in {
+        "general-interpretation", "letter-value-chart",
+        "compute-destiny-number", "pythagoras-legacy",
+    }:
+        context["lesson"] = learning_content(slug, language)
     if slug in SLUGS_WITH_CALCULATOR:
         form = LiteCalculatorForm(request.POST or None)
         result = None

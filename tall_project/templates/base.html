@@ -174,7 +174,7 @@
     </style>
     <!-- Shared Fibonacci design tokens (golden-ratio scale + --gold), same as
          the PHP pages, so the whole hybrid site speaks one design language. -->
-    <link rel="stylesheet" href="/assets/fibonacci.css">
+    <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-2">
   </head>
   <body{% block body_attrs %}{% endblock %}>
     <!-- Unified .l-nav — same link set as includes/layout.php and index.php
@@ -186,10 +186,10 @@
           <a href="{% url 'home' %}" class="l-brand">Numero<em>logist</em></a>
           <ul class="l-nav-links" id="primaryNav">
             <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
-            <li><a href="/discover-numerology/">{% trans "About numerology" %}</a></li>
-            <li><a href="/#tjenester">{% trans "Services" %}</a></li>
+            <li><a href="/discover-numerology/">{% if CURRENT_LANGUAGE == 'nb' %}Om numerologi{% else %}About numerology{% endif %}</a></li>
+            <li><a href="/#tjenester">{% if CURRENT_LANGUAGE == 'nb' %}Tjenester{% else %}Services{% endif %}</a></li>
             <li><a href="{% url 'article_list' %}">{% trans "Articles" %}</a></li>
-            <li><a href="/contact-qa/">{% trans "Contact" %}</a></li>
+            <li><a href="/contact-qa/">{% if CURRENT_LANGUAGE == 'nb' %}Kontakt{% else %}Contact{% endif %}</a></li>
           </ul>
           <div class="l-nav-right">
             {# Same nl_lang cookie as the PHP pages so language stays in sync site-wide. #}
@@ -220,22 +220,22 @@
           <div class="l-footer-grid">
             <div>
               <a href="{% url 'home' %}" class="l-footer-brand">Numero<em>logist</em></a>
-              <p class="l-footer-tagline">{% trans "Norway's leading numerologist, based in Oslo. Helping you understand yourself through the wisdom of numbers." %}</p>
+              <p class="l-footer-tagline">{% if LANGUAGE_CODE == 'nb' %}Åse Steinsland · Personlig numerologi og livsveiledning siden 1997.{% else %}Åse Steinsland · Personal numerology and life guidance since 1997.{% endif %}</p>
             </div>
             <div class="l-footer-col">
               <h4>{% trans "Explore" %}</h4>
               <ul>
-                <li><a href="/calculators/">{% trans "Calculators" %}</a></li>
-                <li><a href="/discover-numerology/">{% trans "About numerology" %}</a></li>
+                <li><a href="/calculators/">{% if CURRENT_LANGUAGE == 'nb' %}Kalkulatorer{% else %}Calculators{% endif %}</a></li>
+                <li><a href="/discover-numerology/">{% if CURRENT_LANGUAGE == 'nb' %}Om numerologi{% else %}About numerology{% endif %}</a></li>
                 <li><a href="{% url 'article_list' %}">{% trans "Articles" %}</a></li>
               </ul>
             </div>
             <div class="l-footer-col">
-              <h4>{% trans "About us" %}</h4>
+              <h4>{% if CURRENT_LANGUAGE == 'nb' %}Om oss{% else %}About us{% endif %}</h4>
               <ul>
-                <li><a href="/about-the-firm/">{% trans "Meet Åse" %}</a></li>
-                <li><a href="/guidance-support/">{% trans "Guidance" %}</a></li>
-                <li><a href="/privacy-policy/">{% trans "Privacy policy" %}</a></li>
+                <li><a href="/about-the-firm/">{% if CURRENT_LANGUAGE == 'nb' %}Møt Åse{% else %}Meet Åse{% endif %}</a></li>
+                <li><a href="/guidance-support/">{% if CURRENT_LANGUAGE == 'nb' %}Veiledning{% else %}Guidance{% endif %}</a></li>
+                <li><a href="/privacy-policy/">{% if CURRENT_LANGUAGE == 'nb' %}Personvern{% else %}Privacy policy{% endif %}</a></li>
               </ul>
             </div>
           </div>

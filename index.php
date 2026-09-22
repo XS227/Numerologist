@@ -230,7 +230,7 @@ $T = $no ? [
     'cta_sub'     => 'Beregn dine kjernetal gratis, og les mer om hva de forteller om deg.',
     'cta_btn1'    => 'Beregn dine tall gratis',
     'cta_btn2'    => 'Kontakt Åse',
-    'footer_tag'  => 'Norges fremste numerolog, basert i Oslo. Vi hjelper deg å forstå deg selv gjennom tallenes visdom.',
+    'footer_tag'  => 'Åse Steinsland · Personlig numerologi og livsveiledning siden 1997.',
     'footer_h1'   => 'Utforsk', 'footer_h2' => 'Om oss',
     'footer_l1'   => [['Kalkulatorer','/calculators/'],['Om numerologi','/discover-numerology/'],['Artikler','/articles/']],
     'footer_l2'   => [['Møt Åse','/about-the-firm/'],['Veiledning','/guidance-support/'],['Personvern','/privacy-policy/']],
@@ -361,7 +361,7 @@ $T = $no ? [
     'cta_sub'     => 'Calculate your core numbers for free, and discover what they reveal about you.',
     'cta_btn1'    => 'Calculate your numbers free',
     'cta_btn2'    => 'Contact Åse',
-    'footer_tag'  => 'Norway\'s leading numerologist, based in Oslo. Helping you understand yourself through the wisdom of numbers.',
+    'footer_tag'  => 'Åse Steinsland · Personal numerology and life guidance since 1997.',
     'footer_h1'   => 'Explore', 'footer_h2' => 'About us',
     'footer_l1'   => [['Calculators','/calculators/'],['About numerology','/discover-numerology/'],['Articles','/articles/']],
     'footer_l2'   => [['Meet Åse','/about-the-firm/'],['Guidance','/guidance-support/'],['Privacy policy','/privacy-policy/']],
@@ -568,7 +568,7 @@ $serviceSchemas = [
   <!-- Fonts preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/assets/fibonacci.css">
+  <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-2">
   <link rel="stylesheet" href="/assets/home.css">
 </head>
 <body>

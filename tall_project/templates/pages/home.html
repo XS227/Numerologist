@@ -6,7 +6,7 @@
 {% block body_attrs %} data-progress="{% if result %}100{% else %}0{% endif %}"{% endblock %}
 
 {% block extra_styles %}
-  <style>
+
     .layout {
       gap: 2.5rem;
     }
@@ -498,7 +498,7 @@
         padding-inline: 1.25rem;
       }
     }
-  </style>
+
 {% endblock %}
 
 {% block content %}
@@ -750,12 +750,6 @@
       </div>
     </div>
   </aside>
-{% endblock %}
-
-{% block footer_content %}
-  <p class="footer-copy">
-    {% trans "Crafted for Åse Steinsland’s Numerologist Studio — powered by a light calculator preview." %}
-  </p>
 {% endblock %}
 
 {% block extra_scripts %}

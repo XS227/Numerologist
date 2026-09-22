@@ -34,8 +34,8 @@ function render_header(string $pageTitle, array $seo = []): void
     seo_head($seo);
     echo "  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n";
     echo "  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n";
-    echo "  <link rel=\"stylesheet\" href=\"/assets/fibonacci.css\">\n";
-    echo "  <link rel=\"stylesheet\" href=\"/assets/style.css\">\n";
+    echo "  <link rel=\"stylesheet\" href=\"/assets/fibonacci.css?v=journey-2\">\n";
+    echo "  <link rel=\"stylesheet\" href=\"/assets/style.css?v=journey-2\">\n";
     echo "</head>\n";
     echo "<body>\n";
 
@@ -87,8 +87,8 @@ function render_footer(): void
         : 'Where numbers and technology work together — the Pythagorean method, computed in Python. Right calculation, right technology.',
         ENT_QUOTES, 'UTF-8');
     $tagline = htmlspecialchars($no
-        ? 'Norges fremste numerolog, basert i Oslo. Vi hjelper deg å forstå deg selv gjennom tallenes visdom.'
-        : "Norway's leading numerologist, based in Oslo. Helping you understand yourself through the wisdom of numbers.",
+        ? 'Åse Steinsland · Personlig numerologi og livsveiledning siden 1997.'
+        : "Åse Steinsland · Personal numerology and life guidance since 1997.",
         ENT_QUOTES, 'UTF-8');
     $h1 = $no ? 'Utforsk' : 'Explore';
     $h2 = $no ? 'Om oss' : 'About us';

@@ -3,7 +3,7 @@
 {% block title %}{{ page.title }} — Numerologist{% endblock %}
 {% block body_attrs %} class="number-journey"{% endblock %}
 {% block main %}
-<link rel="stylesheet" href="{% static 'journey/journey.css' %}">
+<link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=2">
 <svg class="j-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
 <symbol id="j-tablet" viewBox="0 0 32 32"><rect x="6" y="3" width="20" height="26" rx="3"/><path d="M11 10h10M11 16h10M11 22h5"/></symbol>
 <symbol id="j-triangle" viewBox="0 0 32 32"><path d="m16 3 14 25H2Z M9 16h14M6 22h20M16 3v25"/></symbol>
@@ -11,7 +11,7 @@
 <symbol id="j-grid" viewBox="0 0 32 32"><rect x="3" y="3" width="26" height="26" rx="2"/><path d="M3 12h26M3 21h26M12 3v26M21 3v26"/></symbol>
 <symbol id="j-spark" viewBox="0 0 32 32"><path d="m16 2 4 10 10 4-10 4-4 10-4-10L2 16l10-4Z"/></symbol>
 </defs></svg>
-<article class="j-story">
+<article class="j-story j-discover">
 <section class="j-hero" id="origins" aria-labelledby="journey-title" data-chapter>
   <div class="j-hero-visual"><img class="j-parallax" data-speed="0.16" src="{% static 'journey/images/origins.webp' %}" alt="{{ journey.labels.hero_alt }}" width="1536" height="1024" fetchpriority="high"></div>
   <div class="j-hero-content"><p class="j-eyebrow">{{ journey.labels.eyebrow }} <span>01 — 06</span></p>
@@ -27,10 +27,11 @@
 <section class="j-chapter {% cycle 'j-dark' 'j-light' %}" id="{{ c.id }}" aria-labelledby="title-{{ c.id }}" data-chapter>
   <div class="j-chapter-inner">
     <div class="j-copy j-reveal"><div class="j-chapter-meta"><svg class="j-icon" aria-hidden="true"><use href="#j-{{ c.symbol }}"/></svg><span>{{ c.date }}</span></div><p class="j-eyebrow">{{ c.numeral }} / {{ c.label }}</p><h2 id="title-{{ c.id }}">{{ c.title }}</h2><p class="j-body">{{ c.body }}</p><p class="j-note">{{ c.note }}</p>{% if c.link %}<a class="j-text-link" href="{{ c.link }}">{{ c.link_label }} <span aria-hidden="true">↗</span></a>{% endif %}{% if c.source %}<a class="j-source" href="{{ c.source }}" target="_blank" rel="noopener">{{ journey.labels.read_source }} · {{ c.source_name }} ↗</a>{% endif %}</div>
-    <figure class="j-figure"><div class="j-image-window"><img class="j-parallax" data-speed="0.09" src="{% static 'journey/images/' %}{{ c.id }}.webp" alt="{{ c.alt }}" width="1536" height="1024" loading="lazy" decoding="async"></div><span class="j-big-number" aria-hidden="true">{{ c.numeral }}</span><figcaption>{{ journey.labels.chapter }} {{ c.numeral }} <span>{{ c.label }}</span></figcaption></figure>
+    <figure class="j-figure"><div class="j-image-window"><img class="j-parallax" data-speed="0.09" src="{% static 'journey/images/' %}{% if c.id == 'pythagoras' %}pythagoras-portrait{% else %}{{ c.id }}{% endif %}.webp" alt="{{ c.alt }}" width="1536" height="1024" loading="lazy" decoding="async"></div><span class="j-big-number" aria-hidden="true">{{ c.numeral }}</span><figcaption>{{ journey.labels.chapter }} {{ c.numeral }} <span>{{ c.label }}</span></figcaption></figure>
   </div>
 </section>
 {% endfor %}
+{% include "pages/_ase_journey.html" %}
 <section class="j-more" aria-labelledby="explore-title"><div class="j-section-head"><p class="j-eyebrow">{{ journey.labels.next }}</p><h2 id="explore-title">1 · 2 · 3 · 4 · 5 · 6 · 7 · 8 · 9</h2></div><div class="j-resource-grid">{% for url,title,description,icon in journey.resources %}<a class="j-resource" href="{{ url }}"><svg class="j-icon" aria-hidden="true"><use href="#j-{{ icon }}"/></svg><h3>{{ title }} <span aria-hidden="true">↗</span></h3><p>{{ description }}</p></a>{% endfor %}</div></section>
 <section class="j-faq" aria-labelledby="faq-title"><h2 id="faq-title">{{ journey.labels.faq }}</h2><div>{% for question,answer in journey.faqs %}<details><summary>{{ question }}</summary><p>{{ answer }}</p></details>{% endfor %}</div></section>
 <aside class="j-colophon"><h2>{{ journey.labels.references }}</h2><p>{{ journey.labels.references_text }}</p><p><a href="https://www.metmuseum.org/art/collection/search/325500">The Metropolitan Museum of Art ↗</a> · <a href="https://plato.stanford.edu/entries/pythagoras/">Stanford Encyclopedia of Philosophy ↗</a></p><small>{{ journey.labels.art_note }}</small></aside>
