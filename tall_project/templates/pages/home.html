@@ -363,6 +363,29 @@
       display: block;
     }
 
+    .article-image-wrap--thumb {
+      display: grid;
+      place-items: center;
+      gap: 0.2rem;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .article-thumb-big {
+      font-family: Georgia, serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+    }
+
+    .article-thumb-small {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+
+
     .article-content {
       padding: 16px 18px 18px;
     }
@@ -671,63 +694,22 @@
     </div>
 
     <div class="articles-grid">
+      {% for article in latest_articles %}
       <article class="article-card">
-        <a href="/articles/numerological-reflection-on-mahsa-amini-and-bita-azizi/">
-          <div class="article-image-wrap">
-            <svg viewBox="0 0 320 180" role="img" aria-label="{% trans 'Illustration of two silhouettes' %}">
-              <rect width="320" height="180" fill="#f2fbf6"></rect>
-              <circle cx="118" cy="64" r="26" fill="#80c8a3"></circle>
-              <circle cx="198" cy="64" r="26" fill="#5ba57f"></circle>
-              <path d="M62 166c9-34 34-56 58-56 21 0 41 14 53 37 10-23 29-37 52-37 27 0 50 22 59 56H62z" fill="#3f8f65"></path>
-            </svg>
+        <a href="{{ article.get_absolute_url }}">
+          <div class="article-image-wrap article-image-wrap--thumb" style="background:{{ article.thumb.bg }};color:{{ article.thumb.fg }}">
+            <span class="article-thumb-big">{{ article.thumb.big }}</span>
+            {% if article.thumb.small %}<span class="article-thumb-small">{{ article.thumb.small }}</span>{% endif %}
           </div>
           <div class="article-content">
-            <span class="article-tag">{% trans "Guides" %}</span>
-            <h3>{% trans "Hvordan forstå din Life Path" %}</h3>
-            <p>{% trans "En enkel introduksjon til hva livsveien forteller om ditt overordnede livstema." %}</p>
-            <span class="article-meta">{% trans "5 min lesing · 24. november 2025" %}</span>
+            <span class="article-tag">{% trans "Article" %}</span>
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.content|striptags|truncatewords:22 }}</p>
+            <span class="article-meta">{{ article.published|date:"j. F Y" }}</span>
           </div>
         </a>
       </article>
-
-      <article class="article-card">
-        <a href="/articles/master-number-33/">
-          <div class="article-image-wrap">
-            <svg viewBox="0 0 320 180" role="img" aria-label="{% trans 'Master number 33' %}">
-              <rect width="320" height="180" fill="#f4f9ff"></rect>
-              <circle cx="120" cy="90" r="58" fill="#dbebff"></circle>
-              <circle cx="200" cy="90" r="58" fill="#c9e3ff"></circle>
-              <text x="98" y="106" font-size="56" font-family="Inter, sans-serif" fill="#3a63a6">3</text>
-              <text x="178" y="106" font-size="56" font-family="Inter, sans-serif" fill="#3a63a6">3</text>
-            </svg>
-          </div>
-          <div class="article-content">
-            <span class="article-tag">{% trans "Master numbers" %}</span>
-            <h3>{% trans "Hva betyr det å ha 33 i kartet ditt?" %}</h3>
-            <p>{% trans "En dypere titt på det medfølende, kosmiske lærer-tallet 33." %}</p>
-            <span class="article-meta">{% trans "7 min lesing · 12. november 2025" %}</span>
-          </div>
-        </a>
-      </article>
-
-      <article class="article-card">
-        <a href="/articles/navn-og-numerologi/">
-          <div class="article-image-wrap">
-            <svg viewBox="0 0 320 180" role="img" aria-label="{% trans 'Navn og numerologi' %}">
-              <rect width="320" height="180" fill="#f9f4ff"></rect>
-              <rect x="42" y="32" width="236" height="116" rx="18" fill="#ffffff" stroke="#d6c4ef"></rect>
-              <text x="64" y="78" font-size="24" font-family="Inter, sans-serif" fill="#7b56b1">NAME</text>
-              <text x="64" y="114" font-size="20" font-family="Inter, sans-serif" fill="#7b56b1">1 + 4 + 9 = 14 → 5</text>
-            </svg>
-          </div>
-          <div class="article-content">
-            <span class="article-tag">{% trans "Navn" %}</span>
-            <h3>{% trans "Navn &amp; numerologi: hvorfor navnet ditt føles «deg»" %}</h3>
-            <p>{% trans "Utforsk hvordan uttrykks-tallet fra navnet ditt farger personligheten." %}</p>
-            <span class="article-meta">{% trans "6 min lesing · 3. november 2025" %}</span>
-          </div>
-        </a>
-      </article>
+      {% endfor %}
     </div>
   </section>
 {% endblock %}

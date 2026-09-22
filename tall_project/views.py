@@ -276,14 +276,21 @@ CALCULATOR_PAUSED = False
 
 
 def home(request: HttpRequest) -> HttpResponse:
+    from articles.models import Article
+    from articles.thumbnails import get_thumbnail
+
     form = LiteCalculatorForm(request.POST or None)
     result = None
     if not CALCULATOR_PAUSED and request.method == "POST" and form.is_valid():
         result = form.calculate()
+    latest_articles = list(Article.objects.all()[:3])
+    for article in latest_articles:
+        article.thumb = get_thumbnail(article.slug, article.title)
     context = {
         "form": form,
         "result": result,
         "calculator_paused": CALCULATOR_PAUSED,
+        "latest_articles": latest_articles,
     }
     return render(request, "pages/home.html", context)
 
@@ -332,8 +339,19 @@ def number_detail(request: HttpRequest, number: int) -> HttpResponse:
 SLUGS_WITH_CALCULATOR = {
     "compute-name-vowel-consonant",
     "compute-destiny-number",
+    "compute-life-path-number",
     "letter-value-chart",
     "calculation-methods-overview",
+}
+
+# Which of the widget's four results to visually emphasise on a given
+# landing page, since one shared form produces all four at once — a page
+# built around a single number still shows the real, honest shared widget,
+# just with its own number picked out.
+SLUG_CALCULATOR_HIGHLIGHT = {
+    "compute-life-path-number": ["life_path"],
+    "compute-destiny-number": ["expression"],
+    "compute-name-vowel-consonant": ["soul_urge", "personality"],
 }
 
 
@@ -359,12 +377,12 @@ def static_page(request: HttpRequest, slug: str) -> HttpResponse:
     language = getattr(request, "LANGUAGE_CODE", "en")
     if slug in {
         "discover-numerology", "general-interpretation", "letter-value-chart",
-        "compute-destiny-number", "pythagoras-legacy",
+        "compute-destiny-number", "compute-life-path-number", "pythagoras-legacy",
     }:
         context["ase"] = ase_content(language)
     if slug in {
         "general-interpretation", "letter-value-chart",
-        "compute-destiny-number", "pythagoras-legacy",
+        "compute-destiny-number", "compute-life-path-number", "pythagoras-legacy",
     }:
         context["lesson"] = learning_content(slug, language)
     if slug in SLUGS_WITH_CALCULATOR:
@@ -375,4 +393,5 @@ def static_page(request: HttpRequest, slug: str) -> HttpResponse:
         context["calculator_form"] = form
         context["calculator_result"] = result
         context["calculator_paused"] = CALCULATOR_PAUSED
+        context["calculator_highlight"] = SLUG_CALCULATOR_HIGHLIGHT.get(slug, [])
     return render(request, page.template_name, context)

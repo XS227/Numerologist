@@ -103,6 +103,29 @@
         position: relative;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
       }
+      .article-card__thumb {
+        display: grid;
+        place-items: center;
+        gap: 0.15rem;
+        border-radius: 0.9rem;
+        padding: 1.6rem 1rem;
+        text-align: center;
+        line-height: 1;
+        margin: -0.25rem -0.25rem 0;
+      }
+      .article-card__thumb-big {
+        font-family: Georgia, serif;
+        font-size: 2.4rem;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+      .article-card__thumb-small {
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        opacity: 0.85;
+      }
       .article-card:hover,
       .article-card:focus-within {
         transform: translateY(-4px);
@@ -237,6 +260,10 @@
     <div class="articles-grid" role="list">
       {% for article in articles %}
         <article class="article-card" role="listitem">
+          <a class="article-card__thumb" href="{{ article.get_absolute_url }}" style="background:{{ article.thumb.bg }};color:{{ article.thumb.fg }}" aria-hidden="true" tabindex="-1">
+            <span class="article-card__thumb-big">{{ article.thumb.big }}</span>
+            {% if article.thumb.small %}<span class="article-card__thumb-small">{{ article.thumb.small }}</span>{% endif %}
+          </a>
           <header class="article-card__meta">
             <time datetime="{{ article.published|date:'c' }}">{{ article.published|date:"F j, Y" }}</time>
             <span>{% blocktrans with author=article.author %}By {{ author }}{% endblocktrans %}</span>

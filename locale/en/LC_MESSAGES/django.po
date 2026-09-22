@@ -1,0 +1,1394 @@
+# English translations for Numerologist
+msgid ""
+msgstr ""
+"Project-Id-Version: Numerologist\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-13 01:20+0000\n"
+"PO-Revision-Date: 2026-07-13 00:00+0000\n"
+"Last-Translator: Numerologist\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Discover Numerology"
+msgstr ""
+
+msgid ""
+"An introduction to numerology with Åse Steinsland: the Pythagorean roots of "
+"the method, how each digit is interpreted, and where to find the reference "
+"charts."
+msgstr ""
+
+msgid "Calculator suite"
+msgstr ""
+
+msgid ""
+"Free numerology calculators for your life path, destiny, and name numbers, "
+"with a plain-language explanation of what each result means."
+msgstr ""
+
+msgid "Pythagoras' Legacy"
+msgstr ""
+
+msgid ""
+"How Pythagorean number theory became the historical foundation for modern "
+"numerology, and what that lineage means for Åse's method today."
+msgstr ""
+
+msgid "General Interpretation of Numbers"
+msgstr ""
+
+msgid ""
+"A general guide to what each core number from 1-9 and the master numbers "
+"represent in numerology, before you calculate your own."
+msgstr ""
+
+msgid "Calculation Methods Overview"
+msgstr ""
+
+msgid ""
+"An overview of the calculation methods behind life path, destiny, and name "
+"numbers, so you understand the maths before trusting the result."
+msgstr ""
+
+msgid "Letter Value Chart"
+msgstr ""
+
+msgid ""
+"The Pythagorean letter-to-number chart used to calculate name, vowel, and "
+"consonant numbers, with guidance on how to apply it correctly."
+msgstr ""
+
+msgid "Personal Insights"
+msgstr ""
+
+msgid ""
+"How personal numerology insights — destiny, name, and life-stage numbers — "
+"fit together into one coherent reading of your path."
+msgstr ""
+
+msgid "Compute Your Destiny Number"
+msgstr ""
+
+msgid ""
+"How to calculate your destiny number from your birth date, and what it "
+"reveals about your long-term direction and purpose."
+msgstr ""
+
+msgid "Compute Name, Vowel & Consonant Numbers"
+msgstr ""
+
+msgid ""
+"How to calculate your name, vowel (soul urge), and consonant numbers, and "
+"what each one says about your inner motivation versus outer expression."
+msgstr ""
+
+msgid "Life's 4th Development Stage"
+msgstr ""
+
+msgid ""
+"What the fourth pinnacle stage of life represents in numerology, and how to "
+"recognise when you have entered it."
+msgstr ""
+
+msgid "Realization Number — Your Ultimate Aim"
+msgstr ""
+
+msgid ""
+"How to calculate your realization number, the numerology figure linked to "
+"your ultimate life aim and sense of fulfilment."
+msgstr ""
+
+msgid "Pythagoras' Arrows"
+msgstr ""
+
+msgid ""
+"How Pythagoras' Arrows (the numerology grid built from your birth date) "
+"reveal patterns of strength and missing lessons in your chart."
+msgstr ""
+
+msgid "Do You See the Same Number?"
+msgstr ""
+
+msgid ""
+"What it means in numerology when you keep noticing the same repeating "
+"number, such as 11:11, 222, or 333."
+msgstr ""
+
+msgid "Resources"
+msgstr ""
+
+msgid ""
+"Free analyses, projects, references, and media coverage from Åse "
+"Steinsland's numerology practice, gathered in one place."
+msgstr ""
+
+msgid "Projects Lab"
+msgstr ""
+
+msgid ""
+"Experimental and research projects from the Numerologist studio, connecting "
+"numerology with data, culture, and technology."
+msgstr ""
+
+msgid "Arecibo Line"
+msgstr ""
+
+msgid ""
+"The Arecibo Line project: exploring number symbolism through the lens of the "
+"1974 Arecibo message and its numerical structure."
+msgstr ""
+
+msgid "Free Analyses"
+msgstr ""
+
+msgid ""
+"What you get from a free introductory numerology analysis with Åse "
+"Steinsland, and how to request one."
+msgstr ""
+
+msgid "Blog / Articles"
+msgstr ""
+
+msgid ""
+"Articles and long-form writing on numerology, symbolism, and number meaning "
+"from Åse Steinsland's Numerologist studio."
+msgstr ""
+
+msgid "References"
+msgstr ""
+
+msgid ""
+"Sources, methods, and reference material behind Åse Steinsland's numerology "
+"practice."
+msgstr ""
+
+msgid "Numerologist in the Media"
+msgstr ""
+
+msgid ""
+"Press coverage and media appearances featuring numerologist Åse Steinsland."
+msgstr ""
+
+msgid "Quranian Numerology"
+msgstr ""
+
+msgid ""
+"How numerical patterns are studied in Quranic tradition, and how this "
+"compares with Pythagorean numerology."
+msgstr ""
+
+msgid "Quranic Analysis"
+msgstr ""
+
+msgid ""
+"A closer analytical look at numerical patterns in Quranic tradition — see "
+"Quranian Numerology for the full overview."
+msgstr ""
+
+msgid "Guidance & Support"
+msgstr ""
+
+msgid ""
+"How to get personal guidance and support from Åse Steinsland: about the "
+"firm, telephone sessions, and contact options."
+msgstr ""
+
+msgid "About the Firm"
+msgstr ""
+
+msgid ""
+"Om Åse Karin Steinsland: bakgrunn, metode og telefonveiledning, med "
+"kontaktskjema for å komme i kontakt direkte."
+msgstr ""
+"About Åse Karin Steinsland: background, method, and telephone guidance, with "
+"a contact form to reach her directly."
+
+msgid "Telephone Guidance"
+msgstr ""
+
+msgid ""
+"How telephone numerology guidance sessions with Åse Steinsland work, and "
+"what to expect from a call."
+msgstr ""
+
+msgid "Contact / Q&A"
+msgstr ""
+
+msgid ""
+"Contact details and answers to common questions about booking a numerology "
+"reading with Åse Steinsland."
+msgstr ""
+
+msgid "Legal"
+msgstr ""
+
+msgid ""
+"Legal information for the Numerologist studio, including terms and privacy "
+"policy references."
+msgstr ""
+
+msgid "Terms & Conditions"
+msgstr ""
+
+msgid ""
+"Terms and conditions for bookings and services provided by the Numerologist "
+"studio."
+msgstr ""
+
+msgid "Privacy Policy"
+msgstr ""
+
+msgid ""
+"How the Numerologist studio collects, uses, and protects personal data "
+"submitted through the site."
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Norwegian Bokmål"
+msgstr ""
+
+msgid "Persian"
+msgstr ""
+
+msgid "Articles & Library"
+msgstr ""
+
+msgid "Back to articles"
+msgstr ""
+
+msgid "All articles"
+msgstr ""
+
+msgid "Numerologist library"
+msgstr ""
+
+#, python-format
+msgid "By %(author)s"
+msgstr ""
+
+#, python-format
+msgid "Published %(date)s"
+msgstr ""
+
+msgid "View original source"
+msgstr ""
+
+msgid "AI insight"
+msgstr ""
+
+msgid "Numerologist Studio"
+msgstr ""
+
+msgid "Articles that keep seekers company between sessions"
+msgstr ""
+
+msgid ""
+"Browse Åse Steinsland's library of numerology research, interviews, and "
+"guided exercises. Each feature is handpicked to deepen your understanding "
+"while the calculations settle in."
+msgstr ""
+
+msgid ""
+"Come back after each consultation to revisit the practices mentioned and "
+"explore new materials selected for curious minds."
+msgstr ""
+
+#, python-format
+msgid "%(total)s published article"
+msgid_plural "%(total)s published articles"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "Updated regularly with new field notes"
+msgstr ""
+
+msgid "Latest library additions"
+msgstr ""
+
+#, python-format
+msgid "Page %(page_obj.number)s of %(page_obj.paginator.num_pages)s"
+msgstr ""
+
+msgid "Read article"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+msgid ""
+"No articles have been published yet. New stories are being prepared — please "
+"check back soon."
+msgstr ""
+
+msgid "Article pagination"
+msgstr ""
+
+#, python-format
+msgid "Showing page %(page_obj.number)s of %(page_obj.paginator.num_pages)s"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "Primary"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "About numerology"
+msgstr ""
+
+msgid "Services"
+msgstr ""
+
+msgid "Articles"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Order"
+msgstr ""
+
+msgid "Switch language"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid ""
+"Where numbers and technology work together — Åse Steinsland’s Pythagorean "
+"method, computed in Python. Right calculation, right technology."
+msgstr ""
+
+msgid "All rights reserved."
+msgstr ""
+
+msgid "Numerologist Åse Steinsland – forsidebilde"
+msgstr "Numerologist Åse Steinsland – hero image"
+
+msgid "Om Åse Steinsland"
+msgstr "About Åse Steinsland"
+
+msgid "Åse Karin Steinsland, numerolog og livsveileder"
+msgstr "Åse Karin Steinsland, numerologist and life guide"
+
+msgid ""
+"Åse Karin Steinsland er numerolog og livsveileder, bosatt like utenfor "
+"Bergen. Hun har laget personlige numerologiske analyser siden 1997, og har "
+"over 25 års erfaring med numerologi og livsveiledning."
+msgstr ""
+"Åse Karin Steinsland is a numerologist and life guide based just outside "
+"Bergen. She has created personal numerology analyses since 1997, and has "
+"over 25 years of experience in numerology and life guidance."
+
+msgid ""
+"Metoden hennes bygger på Pytagoras, som studerte kabbalah og de matematiske "
+"systemene til flere gamle kulturer. Hver analyse lages personlig av Åse "
+"selv, ikke maskinelt generert."
+msgstr ""
+"Her method is built on Pythagoras, who studied kabbalah and the mathematical "
+"systems of several ancient cultures. Every analysis is created personally by "
+"Åse herself — never machine-generated."
+
+msgid "Telefonveiledning"
+msgstr "Telephone Guidance"
+
+msgid ""
+"Åse tilbyr personlig veiledning på telefon for deg som vil vite mer om veien "
+"og årene fremover — gode og vanskelige perioder, kjærlighet, økonomi, jobb, "
+"viktige valg og mer. Samtalen tar utgangspunkt i dine egne tall og gir deg "
+"ny innsikt og perspektiv på situasjoner som kan føles fastlåste."
+msgstr ""
+"Åse offers personal telephone guidance for anyone who wants to know more "
+"about the road and years ahead — good and difficult periods, love, finances, "
+"career, important choices, and more. The conversation is grounded in your "
+"own numbers and gives you fresh insight and perspective on situations that "
+"can feel stuck."
+
+msgid ""
+"Telefonveiledning gis normalt på hverdager mellom kl. 10–18. Ta kontakt via "
+"skjemaet under for å avtale tid — priser og betaling for telefonveiledning "
+"er midlertidig satt på pause mens vi oppdaterer denne tjenesten."
+msgstr ""
+"Telephone guidance is normally offered on weekdays between 10:00–18:00. Get "
+"in touch via the form below to arrange a time — pricing and payment for "
+"telephone guidance is temporarily paused while we update this service."
+
+msgid "Ta kontakt"
+msgstr "Get in touch"
+
+msgid "Takk for din henvendelse! Åse svarer deg så snart hun kan."
+msgstr "Thank you for your message! Åse will reply as soon as she can."
+
+msgid ""
+"Noe gikk galt — sjekk at navn, e-post og melding er fylt ut, og prøv igjen."
+msgstr ""
+"Something went wrong — check that name, email, and message are filled in, "
+"and try again."
+
+msgid "Navn"
+msgstr "Name"
+
+msgid "E-post"
+msgstr "Email"
+
+msgid "Telefon (valgfritt)"
+msgstr "Phone (optional)"
+
+msgid "Din melding"
+msgstr "Your message"
+
+msgid "Send melding"
+msgstr "Send message"
+
+msgid "Kontaktinformasjon"
+msgstr "Contact Information"
+
+msgid "Telefon"
+msgstr "Phone"
+
+msgid "hverdager 09:00–16:00"
+msgstr "weekdays 09:00–16:00"
+
+msgid "Les mer om numerologi"
+msgstr "Read more about numerology"
+
+msgid "Beregn dine tall"
+msgstr "Calculate your numbers"
+
+msgid ""
+"The Arecibo Line project studies numerical resonance between astronomical "
+"observations and symbolic number systems."
+msgstr ""
+
+msgid "Included project assets"
+msgstr ""
+
+msgid "Numerology and resonance modules in the Arecibo-Line source folder."
+msgstr ""
+
+msgid "Notebook experiments for frequency and pattern studies."
+msgstr ""
+
+msgid "Illustrative visualization workflows for future product pages."
+msgstr ""
+
+msgid ""
+"This page is connected to the repository-backed Arecibo-Line project package "
+"used by the team."
+msgstr ""
+
+msgid ""
+"Browse essays, seasonal forecasts, and interviews from Åse's journal. Each "
+"article blends storytelling with practical numerology tips you can apply "
+"immediately."
+msgstr ""
+
+msgid ""
+"Learn the difference between reduction methods, compound totals, and "
+"intuitive adjustments. Åse walks you through the formulas she applies when "
+"she translates names, dates, and milestones into energetic signatures."
+msgstr ""
+
+msgid "Step-by-step examples for calculating core numbers."
+msgstr ""
+
+msgid "When to keep master numbers intact and when to reduce further."
+msgstr ""
+
+msgid ""
+"How personal years, months, and days build on foundational calculations."
+msgstr ""
+
+msgid "Every numerology calculator at a glance"
+msgstr ""
+
+msgid ""
+"\n"
+"        Explore the individual tools Åse references while preparing a full "
+"master analysis. Each calculator can be explored on its\n"
+"        own so you can see how the pieces fit together before or after your "
+"full session.\n"
+"      "
+msgstr ""
+
+msgid "Life Path Number"
+msgstr ""
+
+msgid "The rhythm of your life lessons revealed through your birth date."
+msgstr ""
+
+msgid "Breaks your birth date into core digits"
+msgstr ""
+
+msgid "Honours master numbers 11, 22, and 33 during reduction"
+msgstr ""
+
+msgid "Guides the milestones and curriculum of your lifetime"
+msgstr ""
+
+msgid "Expression Number"
+msgstr ""
+
+msgid "Highlights the talents and gifts encoded within your full name."
+msgstr ""
+
+msgid "Maps each letter to its Pythagorean value"
+msgstr ""
+
+msgid "Shows how you naturally share your abilities with the world"
+msgstr ""
+
+msgid "Balances what comes easily with where mastery is calling"
+msgstr ""
+
+msgid "Soul Urge Number"
+msgstr ""
+
+msgid ""
+"The whisper of your heart’s deepest desires, drawn from the vowels in your "
+"name."
+msgstr ""
+
+msgid "Connects you with motivations that keep you inspired"
+msgstr ""
+
+msgid "Reveals the emotional current beneath your decisions"
+msgstr ""
+
+msgid "Illuminates the self-care practices that truly nourish"
+msgstr ""
+
+msgid "Personality Number"
+msgstr ""
+
+msgid ""
+"The first impression you offer, measured through the consonants of your name."
+msgstr ""
+
+msgid "Describes how others initially perceive your energy"
+msgstr ""
+
+msgid "Shows the doorway people walk through to meet you"
+msgstr ""
+
+msgid "Helps refine your presence with deliberate intention"
+msgstr ""
+
+msgid "Compatibility Insight"
+msgstr ""
+
+msgid ""
+"Cross-reference two birth dates to understand shared lessons and harmony."
+msgstr ""
+
+msgid "Compares combined life path cycles"
+msgstr ""
+
+msgid "Spotlights master number pairings"
+msgstr ""
+
+msgid "Offers prompts for nourishing the relationship"
+msgstr ""
+
+msgid "Personal Year Forecast"
+msgstr ""
+
+msgid "Discover the focus of the year you’re currently walking through."
+msgstr ""
+
+msgid "Calculates your yearly vibration from your birth date"
+msgstr ""
+
+msgid "Places it in context with your overarching life path"
+msgstr ""
+
+msgid "Invites rituals to partner with the year’s momentum"
+msgstr ""
+
+msgid "Return to intake"
+msgstr ""
+
+msgid "Back to top"
+msgstr ""
+
+msgid "Frequently asked questions"
+msgstr ""
+
+msgid "What is the difference between life path and destiny number?"
+msgstr ""
+
+msgid ""
+"Life path is calculated from your birth date and describes the lessons of "
+"your lifetime. Destiny (expression) number is calculated from the letters in "
+"your full birth name and describes talents you are here to develop. See"
+msgstr ""
+
+msgid "Are these calculators as accurate as a personal session?"
+msgstr ""
+
+msgid ""
+"They use the same Pythagorean method Åse references, but a personal session "
+"adds interpretation specific to your situation. See"
+msgstr ""
+
+msgid "to book one."
+msgstr ""
+
+msgid ""
+"Follow Åse's step-by-step process to calculate the destiny number from your "
+"full birth name. We cover the reduction process, common edge cases, and how "
+"to interpret the final vibration."
+msgstr ""
+
+msgid ""
+"A downloadable worksheet is included so you can repeat the calculation with "
+"clients or loved ones."
+msgstr ""
+
+msgid ""
+"Discover the difference between vowel, consonant, and total name vibrations. "
+"Åse explains how each element reveals a facet of your inner drive, outward "
+"expression, and everyday motivation."
+msgstr ""
+
+msgid "Learn how to split a name and manage double letters."
+msgstr ""
+
+msgid "Compare the final numbers to your destiny and life-path insights."
+msgstr ""
+
+msgid ""
+"Find answers to common questions about bookings, cancellations, and the "
+"numerology process. If you need personal support, you can reach Åse directly "
+"using the contact details provided here."
+msgstr ""
+
+msgid ""
+"Numerology is the language Åse uses to translate numbers into stories about "
+"timing, purpose, and potential. In this section you will meet the "
+"philosophical roots of her method and learn how each calculation is grounded "
+"in Pythagorean thought and contemporary practice."
+msgstr ""
+
+msgid ""
+"Start here if you want an overview of why numerology matters, how Åse "
+"interprets each digit, and the reference charts that sit behind your "
+"personalised readings."
+msgstr ""
+
+msgid "Key topics"
+msgstr ""
+
+msgid "the historical roots of the method."
+msgstr ""
+
+msgid "what each core number represents."
+msgstr ""
+
+msgid "the maths behind each reading."
+msgstr ""
+
+msgid "how letters convert into numbers."
+msgstr ""
+
+msgid "Is numerology the same as astrology?"
+msgstr ""
+
+msgid ""
+"No. Numerology works from your birth date and name using number reduction, "
+"while astrology works from planetary positions at birth. Some readers "
+"combine both, but they are separate systems."
+msgstr ""
+
+msgid "Where do I start if I want my own numbers calculated?"
+msgstr ""
+
+msgid "Go to the"
+msgstr ""
+
+msgid "calculator suite"
+msgstr ""
+
+msgid "or jump straight to"
+msgstr ""
+
+msgid "computing your destiny number"
+msgstr ""
+
+msgid ""
+"Explore sample readings and downloadable exercises that showcase Åse's "
+"methodology. These resources offer a taste of the full consultations and "
+"help you decide which service fits best."
+msgstr ""
+
+msgid "Mini birth chart walkthroughs with commentary."
+msgstr ""
+
+msgid "Checklists for preparing questions before a session."
+msgstr ""
+
+msgid ""
+"Every number carries a personality. Here Åse summarises the qualities, "
+"challenges, and growth opportunities linked to digits one through nine, "
+"along with master numbers eleven, twenty-two, and thirty-three."
+msgstr ""
+
+msgid ""
+"Use this guide as a companion when you receive your charts or practice "
+"interpreting numbers for friends."
+msgstr ""
+
+msgid ""
+"Åse's practice is rooted in compassionate guidance. Discover how to work "
+"with her, what to expect before a call, and the support systems she offers "
+"between sessions."
+msgstr ""
+
+msgid "Stay supported"
+msgstr ""
+
+msgid "Åse's background, method, and approach."
+msgstr ""
+
+msgid "how a phone session works and what to expect."
+msgstr ""
+
+msgid "booking details and answers to common questions."
+msgstr ""
+
+msgid "Do sessions happen in person or by phone?"
+msgstr ""
+
+msgid "Most guidance sessions are conducted by phone; see"
+msgstr ""
+
+msgid "for details."
+msgstr ""
+
+msgid "What should I prepare before a session?"
+msgstr ""
+
+msgid ""
+"Your full birth date and full birth name are usually enough for Åse to begin "
+"a reading — see"
+msgstr ""
+
+msgid "to book."
+msgstr ""
+
+msgid "Numerologist Studio — Welcome"
+msgstr ""
+
+msgid "Hello friend"
+msgstr ""
+
+msgid "Progress tracker"
+msgstr ""
+
+msgid ""
+"Follow the guided steps to uncover every calculator Åse uses when preparing "
+"a reading."
+msgstr ""
+
+msgid ""
+"We start with a warm welcome and a simple intake. Share a preferred name and "
+"birth date. From here you can peek at a lite numerology overview or continue "
+"into the full studio."
+msgstr ""
+
+msgid "Step 1 · Intake essentials"
+msgstr ""
+
+msgid "3 mins"
+msgstr ""
+
+msgid "Preferred name"
+msgstr ""
+
+msgid "Birth date"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Your numerology snapshot"
+msgstr ""
+
+msgid ""
+"Complete the intake form and choose “Continue” to instantly calculate your "
+"personal numerology profile using Åse’s light calculator."
+msgstr ""
+
+msgid "Life Path"
+msgstr ""
+
+msgid "Guides your lifetime rhythm and lessons."
+msgstr ""
+
+msgid "Expression"
+msgstr ""
+
+msgid "How you naturally show gifts to the world."
+msgstr ""
+
+msgid "Soul Urge"
+msgstr ""
+
+msgid "The desires your heart keeps whispering."
+msgstr ""
+
+msgid "Personality"
+msgstr ""
+
+msgid "The impression people receive when you arrive."
+msgstr ""
+
+msgid "Explore all calculators"
+msgstr ""
+
+msgid "Core number stories"
+msgstr ""
+
+msgid ""
+"Each number carries a distinct tone. These quick notes help you connect the "
+"lite calculator’s insight with Åse’s deeper readings. Come back after your "
+"full session to compare how the energies mature."
+msgstr ""
+
+msgid "Number 1"
+msgstr ""
+
+msgid "Courage, initiative, and a drive to set the pace for others."
+msgstr ""
+
+msgid "Number 2"
+msgstr ""
+
+msgid "Gentle balance, partnership, and the wisdom of patience."
+msgstr ""
+
+msgid "Number 3"
+msgstr ""
+
+msgid "Expression, optimism, and weaving joy into daily rituals."
+msgstr ""
+
+msgid "Number 4"
+msgstr ""
+
+msgid "Structure, loyalty, and crafting foundations that last."
+msgstr ""
+
+msgid "Number 5"
+msgstr ""
+
+msgid "Freedom, curiosity, and thriving on fresh experiences."
+msgstr ""
+
+msgid "Number 6"
+msgstr ""
+
+msgid "Harmony, devotion, and tending to family with warmth."
+msgstr ""
+
+msgid "Number 7"
+msgstr ""
+
+msgid "Reflection, intuition, and seeking meaning beneath the surface."
+msgstr ""
+
+msgid "Number 8"
+msgstr ""
+
+msgid "Leadership, accountability, and stewardship of resources."
+msgstr ""
+
+msgid "Number 9"
+msgstr ""
+
+msgid "Compassion, vision, and the grace of completion."
+msgstr ""
+
+msgid "Number 11"
+msgstr ""
+
+msgid "Spiritual illumination, insight, and inspiring leadership."
+msgstr ""
+
+msgid "Number 22"
+msgstr ""
+
+msgid "Grand-scale manifestation balanced with heart-led service."
+msgstr ""
+
+msgid "Number 33"
+msgstr ""
+
+msgid "Compassionate mastery devoted to uplifting humanity."
+msgstr ""
+
+msgid "Siste artikler"
+msgstr "Latest articles"
+
+msgid "Se alle artikler →"
+msgstr "See all articles →"
+
+msgid "Illustration of two silhouettes"
+msgstr ""
+
+msgid "Guides"
+msgstr ""
+
+msgid "Hvordan forstå din Life Path"
+msgstr "How to understand your Life Path"
+
+msgid ""
+"En enkel introduksjon til hva livsveien forteller om ditt overordnede "
+"livstema."
+msgstr ""
+"A simple introduction to what your life path reveals about your overarching "
+"life theme."
+
+msgid "5 min lesing · 24. november 2025"
+msgstr "5 min read · November 24, 2025"
+
+msgid "Master number 33"
+msgstr ""
+
+msgid "Master numbers"
+msgstr ""
+
+msgid "Hva betyr det å ha 33 i kartet ditt?"
+msgstr "What does it mean to have 33 in your chart?"
+
+msgid "En dypere titt på det medfølende, kosmiske lærer-tallet 33."
+msgstr "A deeper look at the compassionate, cosmic teacher number 33."
+
+msgid "7 min lesing · 12. november 2025"
+msgstr "7 min read · November 12, 2025"
+
+msgid "Navn og numerologi"
+msgstr "Names and numerology"
+
+msgid "Navn &amp; numerologi: hvorfor navnet ditt føles «deg»"
+msgstr "Name &amp; numerology: why your name feels like “you”"
+
+msgid "Utforsk hvordan uttrykks-tallet fra navnet ditt farger personligheten."
+msgstr ""
+"Explore how the expression number from your name colors your personality."
+
+msgid "6 min lesing · 3. november 2025"
+msgstr "6 min read · November 3, 2025"
+
+msgid "Intake progress"
+msgstr ""
+
+#, python-format
+msgid "Progress: 100%% complete"
+msgstr ""
+
+#, python-format
+msgid "Progress: 0%% complete"
+msgstr ""
+
+msgid ""
+"Crafted for Åse Steinsland’s Numerologist Studio — powered by a light "
+"calculator preview."
+msgstr ""
+
+msgid "Progress"
+msgstr ""
+
+msgid "complete"
+msgstr ""
+
+msgid ""
+"Transparency matters. This hub gathers the policies that protect your "
+"privacy, explain our terms of service, and outline how Numerologist handles "
+"data in compliance with Norwegian and EU regulations."
+msgstr ""
+
+msgid "Policies"
+msgstr ""
+
+msgid ""
+"Convert any name into numbers using Åse's preferred alphabet chart. We "
+"include guidance for Norwegian letters, common variations, and practical "
+"tips for translating nicknames or company names."
+msgstr ""
+
+msgid ""
+"Download a printable version and keep it beside you as you explore the "
+"calculators."
+msgstr ""
+
+msgid ""
+"Åse teaches a four-stage development model inspired by Nordic numerology. "
+"The fourth stage marks a synthesis of every lesson learned earlier in life. "
+"Explore how to calculate when it begins and what themes typically emerge."
+msgstr ""
+
+msgid ""
+"Use the journal prompts to reflect on the opportunities, mentors, and inner "
+"work available in this phase."
+msgstr ""
+
+msgid "Essence"
+msgstr ""
+
+msgid "Strengths"
+msgstr ""
+
+msgid "Growth edges"
+msgstr ""
+
+msgid "Åse's guidance"
+msgstr ""
+
+msgid "In work and relationships"
+msgstr ""
+
+msgid "Calculate or explore further"
+msgstr ""
+
+msgid "Compute your own destiny number"
+msgstr ""
+
+msgid "General interpretation of all numbers"
+msgstr ""
+
+msgid "Book personal guidance with Åse"
+msgstr ""
+
+msgid "Other core numbers"
+msgstr ""
+
+msgid "Back to core number stories"
+msgstr ""
+
+msgid ""
+"Interviews, podcasts, articles, and press features where Åse shares "
+"numerology insights with a wider audience. Catch up on recent coverage, "
+"explore in-depth conversations, and request media assets for your own "
+"publication."
+msgstr ""
+
+msgid "Featured press coverage"
+msgstr ""
+
+msgid ""
+"Major publications continue to spotlight numerology's resurgence in culture "
+"and personal development. These evergreen features are helpful references "
+"when introducing readers to Åse's work and the broader numerology movement."
+msgstr ""
+
+msgid ""
+"Vogue: \"Numerology 101: How to Use Your Life Path Number to Get What You "
+"Want\""
+msgstr ""
+
+msgid ""
+"A primer on life-path numbers and how people are weaving numerology into "
+"everyday decision-making."
+msgstr ""
+
+msgid "The Cut: \"What Numerology Says About 2024\""
+msgstr ""
+
+msgid ""
+"Annual forecast that highlights how numerologists interpret collective "
+"energy through numbers."
+msgstr ""
+
+msgid "BBC Worklife: \"Why so many people believe in angel numbers\""
+msgstr ""
+
+msgid ""
+"Explores the psychology behind repeating numbers and the cultural "
+"fascination with numeric patterns."
+msgstr ""
+
+msgid ""
+"The Washington Post: \"Angel numbers are everywhere. Here&#8217;s what they "
+"really mean.\""
+msgstr ""
+
+msgid ""
+"Breaks down how modern mystics, including numerologists, interpret "
+"frequently spotted sequences like 1111 and 222."
+msgstr ""
+
+msgid "NPR Life Kit: \"Why We Find Meaning In Numbers\""
+msgstr ""
+
+msgid ""
+"An audio-friendly overview that situates numerology within a wider "
+"conversation about intuition and pattern recognition."
+msgstr ""
+
+msgid "Interview-ready topics"
+msgstr ""
+
+msgid ""
+"Looking to feature Åse on your platform? These go-to angles resonate with "
+"audiences who are curious about how numerology can support personal and "
+"professional growth."
+msgstr ""
+
+msgid "Personal year cycles for career planning and launch timing."
+msgstr ""
+
+msgid "How life-path numbers illuminate leadership styles and team dynamics."
+msgstr ""
+
+msgid ""
+"Translating repeating \"angel\" numbers into practical rituals and mindset "
+"shifts."
+msgstr ""
+
+msgid ""
+"Building intuitive businesses by combining numerology with evidence-based "
+"strategy."
+msgstr ""
+
+msgid "Press resources"
+msgstr ""
+
+msgid ""
+"Need a quote or a tailored numerology segment? Reach out for custom "
+"commentary, workshop bookings, or live event coverage."
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid ""
+"Request a full media kit, including bio, talking points, and imagery, via "
+"email."
+msgstr ""
+
+msgid ""
+"Virtual and on-site interviews available across English and Scandinavian "
+"outlets."
+msgstr ""
+
+msgid ""
+"Ready to apply the theory to your own life? The Personal Insights hub "
+"gathers every calculator and interpretive guide that helps Åse's clients "
+"navigate relationships, careers, and spiritual development."
+msgstr ""
+
+msgid "Featured explorations"
+msgstr ""
+
+msgid ""
+"Learn how Numerologist collects, stores, and protects your personal "
+"information. The policy explains data retention practices, third-party "
+"tools, and your rights under GDPR."
+msgstr ""
+
+msgid ""
+"This hub keeps all active research projects in one place so nothing gets "
+"lost between demos and production pages."
+msgstr ""
+
+msgid "Signal-resonance research notebooks and calculator concepts."
+msgstr ""
+
+msgid "Surah pattern exploration and 6–7–8 wave mapping."
+msgstr ""
+
+msgid ""
+"The arrows reveal number patterns inside your birth chart grid. Learn how "
+"lines of strength, creativity, and challenge appear, and how to balance "
+"missing numbers with supportive rituals."
+msgstr ""
+
+msgid ""
+"Åse traces her numerology back to the mystic schools of ancient Greece. This "
+"page outlines how Pythagoras connected sound, mathematics, and the harmony "
+"of the cosmos, and why his approach still resonates inside modern "
+"consultations."
+msgstr ""
+
+msgid ""
+"Meet the historical figures who preserved the teachings and brought them to "
+"Scandinavia."
+msgstr ""
+
+msgid ""
+"Understand why numbers from one to nine form the foundation of every reading."
+msgstr ""
+
+msgid "See how Åse combines classical wisdom with contemporary life coaching."
+msgstr ""
+
+msgid ""
+"This project explores Surah-by-Surah number patterns and symbolic structures "
+"in the Quran. The aim is to examine whether recurring number signatures can "
+"reveal hidden codes, resonance patterns, or meaning frameworks for deeper "
+"reflection."
+msgstr ""
+
+msgid "Main experiment: 6–7–8 and the electromagnetic pulse"
+msgstr ""
+
+msgid ""
+"We are testing a frequency-wave model where 6, 7, and 8 form an oscillating "
+"structure:"
+msgstr ""
+
+msgid "Det magnetiske fundamentet."
+msgstr "The magnetic foundation."
+
+msgid "Den elektriske utladningen/toroiden."
+msgstr "The electric discharge/toroid."
+
+msgid "Den nøytrale terskelen eller faselåsingen."
+msgstr "The neutral threshold or phase-lock."
+
+msgid ""
+"In this model, 7 functions as a transition point that pushes consciousness "
+"between the earthly (6) and the cosmic (8), creating a dynamic balance point."
+msgstr ""
+
+msgid "Surah Numerology Calculator"
+msgstr ""
+
+msgid ""
+"Choose any Surah (1–114) to view its numerology profile, a generated rhythm "
+"sequence (6–7–8 cycle), and a graphic wave card."
+msgstr ""
+
+msgid "Select Surah"
+msgstr ""
+
+msgid "Abjad reduction and 6/8 dominance"
+msgstr ""
+
+msgid ""
+"After removing “Al-” (4), the repeated appearance of 6 and 8 is interpreted "
+"as stripping structural noise and exposing a core motor in the language. "
+"Surah Al-Ikhlas (3–2–3–2) appears to break this pattern, which may indicate "
+"a different octave or resonance layer."
+msgstr ""
+
+msgid "Semantic equality (Iman/Kufr = 3)"
+msgstr ""
+
+msgid ""
+"When semantic opposites produce the same number, the project treats this as "
+"possible interference symmetry: belief and disbelief may trigger similar "
+"structural reactions in the numeric system, independent of moral framing."
+msgstr ""
+
+msgid "P1–P6: the grammatical code"
+msgstr ""
+
+msgid ""
+"The observed P1–P6 patterns are approached as a binary-like consciousness "
+"code. If these sequences continue to map as stable waves, the text may act "
+"as a coherence signal for readers and listeners."
+msgstr ""
+
+msgid "Project note"
+msgstr ""
+
+msgid ""
+"This is an exploratory numerology research project. Findings are treated as "
+"hypotheses for study, discussion, and further verification, not as final "
+"doctrinal claims."
+msgstr ""
+
+msgid "View the original project brief"
+msgstr ""
+
+msgid ""
+"The realization number blends your destiny and life-path numbers, revealing "
+"the grand theme you are here to embody. Åse shares interpretation cues, "
+"supportive questions, and the types of collaborations that amplify this "
+"vibration."
+msgstr ""
+
+msgid ""
+"A curated bibliography of books, teachers, and research that informs Åse's "
+"practice. Use it to dive deeper into numerology or to source materials for "
+"your own study group."
+msgstr ""
+
+msgid ""
+"Access Åse's growing library of self-study materials, articles, and media "
+"appearances. Everything here is curated to support your numerology practice "
+"between private sessions."
+msgstr ""
+
+msgid "Dive in"
+msgstr ""
+
+msgid "experimental work connecting numerology with data and culture."
+msgstr ""
+
+msgid "number symbolism explored through the 1974 Arecibo message."
+msgstr ""
+
+msgid "what a free introductory analysis with Åse includes."
+msgstr ""
+
+msgid "long-form writing on numerology and number meaning."
+msgstr ""
+
+msgid "sources and methods behind the practice."
+msgstr ""
+
+msgid "press coverage and interviews."
+msgstr ""
+
+msgid "how numerical patterns are studied in Quranic tradition."
+msgstr ""
+
+msgid "Are these resources a substitute for a personal reading?"
+msgstr ""
+
+msgid ""
+"No. They give context and background, but a personal reading uses your own "
+"birth date and name, which these general resources cannot do."
+msgstr ""
+
+msgid "Where should I start if I'm completely new?"
+msgstr ""
+
+msgid "Start with"
+msgstr ""
+
+msgid ", then try the"
+msgstr ""
+
+msgid ""
+"Repeating numbers feel like nudges from the universe. Åse shares a quick "
+"reference guide for triple digits, mirror hours, and other sequences so you "
+"can decode the messages on the go."
+msgstr ""
+
+msgid ""
+"Phone sessions create an intimate space for numerology coaching. Review "
+"pricing, scheduling details, and how to prepare so you can make the most of "
+"your time with Åse."
+msgstr ""
+
+msgid ""
+"Review the agreement that applies when you book a session with Åse. It "
+"covers payment terms, cancellations, client responsibilities, and how "
+"guidance should be integrated alongside professional advice."
+msgstr ""

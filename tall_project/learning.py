@@ -209,6 +209,105 @@ def learning_content(slug, language):
                 "ulike roller i analysen.",
             ),
         ),
+        "compute-life-path-number": dict(
+            kind="method",
+            image="personal",
+            eyebrow=t("04 / Follow the birth date", "04 / Følg fødselsdatoen"),
+            title=t("A date. A rhythm. A path.", "En dato. En rytme. En vei."),
+            subtitle=t(
+                "The headline number of a reading.", "Hovedtallet i en analyse."
+            ),
+            intro=t(
+                "The life path number is derived from your full birth date. Åse"
+                " treats it as the headline of a reading — the overall rhythm "
+                "and the lessons a lifetime is built around.",
+                "Livsveistallet beregnes fra hele fødselsdatoen din. Åse ser på "
+                "det som overskriften i en analyse – den overordnede rytmen og "
+                "lærdommene et liv bygges rundt.",
+            ),
+            alt=t(
+                "Illustration of a personal journey through time",
+                "Illustrasjon av en personlig reise gjennom tiden",
+            ),
+            section_title=t(
+                "Day, month and year — one at a time.",
+                "Dag, måned og år – én om gangen.",
+            ),
+            section_body=t(
+                "Day, month and year are each reduced on their own before they "
+                "are added together and reduced again — never as one long flat "
+                "string of digits. That per-part reduction keeps a genuine "
+                "master number (11, 22, 33) visible and prevents a false one "
+                "from appearing.",
+                "Dag, måned og år reduseres hver for seg før de legges sammen og"
+                " reduseres på nytt – aldri som én lang rekke sifre. Denne "
+                "delvise reduksjonen gjør at et ekte mestertall (11, 22, 33) "
+                "blir synlig, og hindrer at et falskt dukker opp.",
+            ),
+            steps=[
+                (
+                    t("Write the date", "Skriv datoen"),
+                    t(
+                        "Use the full birth date: day, month and the four-digit"
+                        " year.",
+                        "Bruk hele fødselsdatoen: dag, måned og årstall med "
+                        "fire sifre.",
+                    ),
+                ),
+                (
+                    t("Reduce the day", "Reduser dagen"),
+                    t(
+                        "Add the digits of the day until one digit remains, "
+                        "retaining 11 and 22 when reached.",
+                        "Legg sammen sifrene i dagen til ett siffer gjenstår, "
+                        "og behold 11 og 22 når de oppstår.",
+                    ),
+                ),
+                (
+                    t("Reduce month and year", "Reduser måned og år"),
+                    t(
+                        "Treat the month and the year the same way, each as its"
+                        " own part.",
+                        "Behandle måneden og året på samme måte, hver som sin "
+                        "egen del.",
+                    ),
+                ),
+                (
+                    t("Combine the parts", "Sett delene sammen"),
+                    t(
+                        "Add the three reduced parts, then apply the same "
+                        "reduction rule to the total.",
+                        "Legg sammen de tre reduserte delene, og bruk samme "
+                        "reduksjonsregel på summen.",
+                    ),
+                ),
+            ],
+            example_title=t("Work through 29 July 1990", "Regn gjennom 29. juli 1990"),
+            example_body=t(
+                "This is a teaching example, not a personal reading. The day 29"
+                " reduces to the master number 11, which is kept. July is 7. "
+                "The year 1990 reduces to 1. Only then are the three parts "
+                "combined.",
+                "Dette er et øvingseksempel, ikke en personlig analyse. Dagen 29"
+                " reduseres til mestertallet 11, som beholdes. Juli er 7. "
+                "Året 1990 reduseres til 1. Først da legges de tre delene "
+                "sammen.",
+            ),
+            formula="29 → 11 · 7 · 1990 → 1 · 11 + 7 + 1 = 19 → 1",
+            detail_title=t(
+                "The birth date is not the name.", "Fødselsdatoen er ikke navnet."
+            ),
+            detail_body=t(
+                "The life path comes from the birth date and describes the "
+                "rhythm of a lifetime. The destiny (expression) number comes "
+                "from the name and describes the talents you develop. Compare "
+                "the two to see where they align — or pull.",
+                "Livsveistallet kommer fra fødselsdatoen og beskriver rytmen i "
+                "et liv. Skjebnetallet (uttrykkstallet) kommer fra navnet og "
+                "beskriver talentene du utvikler. Sammenlign de to for å se hvor"
+                " de spiller sammen – eller trekker i hver sin retning.",
+            ),
+        ),
         "pythagoras-legacy": dict(
             kind="history",
             image="pythagoras-portrait",
@@ -369,7 +468,7 @@ def learning_content(slug, language):
         dict(value=n, letters=" · ".join(k for k, v in LETTER_VALUES.items() if v == n))
         for n in range(1, 10)
     ]
-    lesson["steps"] = [
+    lesson.setdefault("steps", [
         (
             t("Write the name", "Skriv navnet"),
             t(
@@ -406,7 +505,7 @@ def learning_content(slug, language):
                 "reduksjonsregel på summen.",
             ),
         ),
-    ]
+    ])
     lesson["related"] = [
         (s, "/" + s + "/", p["title"])
         for s, p in pages.items()

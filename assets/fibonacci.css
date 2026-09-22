@@ -243,6 +243,13 @@
 }
 .calc-widget__stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: #4a6b55; font-weight: 700; }
 .calc-widget__stat-value { font-size: 1.6rem; font-weight: 800; color: #1e6644; }
+.calc-widget__stat--highlight {
+  background: #eafff4;
+  border-color: #1e6644;
+  border-width: 2px;
+  box-shadow: 0 8px 20px rgba(30, 102, 68, 0.14);
+}
+.calc-widget__stat--highlight .calc-widget__stat-value { color: #123f2b; }
 
 /* ---------- Letter-value reference chart ---------- */
 .letter-chart { border-collapse: separate; border-spacing: 0.35rem; margin: 1rem 0 0.5rem; }

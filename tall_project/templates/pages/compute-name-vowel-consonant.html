@@ -8,14 +8,41 @@
   <h1 id="page-title">{{ page.title }}</h1>
   <p>
     {% blocktrans trimmed %}
-    Discover the difference between vowel, consonant, and total name vibrations. Åse explains how each element reveals a
-    facet of your inner drive, outward expression, and everyday motivation.
+    This page covers two related numbers calculated from your name: the soul urge number (from its vowels) and the
+    personality number (from its consonants). Enter your name and birth date once below — the same submission
+    calculates both, alongside your life path and destiny numbers.
     {% endblocktrans %}
   </p>
-  <ul>
-    <li>{% blocktrans %}Learn how to split a name and manage double letters.{% endblocktrans %}</li>
-    <li>{% blocktrans %}Compare the final numbers to your destiny and life-path insights.{% endblocktrans %}</li>
-  </ul>
   {% include "pages/_calculator_widget.html" %}
+
+  <section id="soul-urge-number" aria-labelledby="soul-urge-title" style="display:grid;gap:0.75rem;margin-top:1rem;padding-top:1.5rem;border-top:1px solid var(--border)">
+    <h2 id="soul-urge-title">{% trans "Soul Urge Number" %}</h2>
+    <h3>{% trans "What it does" %}</h3>
+    <p>
+      {% blocktrans trimmed %}
+      Only the vowels in each part of your full birth name are mapped to their Pythagorean values, reduced separately,
+      then summed and reduced again — vowels are treated as the "inner voice" of the name.
+      {% endblocktrans %}
+    </p>
+    <h3>{% trans "What you'll see" %}</h3>
+    <p>{% blocktrans %}Your soul urge result is highlighted in the calculator above once you submit your name and birth date.{% endblocktrans %}</p>
+    <h3>{% trans "What you can learn" %}</h3>
+    <p>{% blocktrans %}The soul urge number points to what quietly motivates you — the desires and needs beneath the surface, whether or not you show them outwardly.{% endblocktrans %}</p>
+  </section>
+
+  <section id="personality-number" aria-labelledby="personality-title" style="display:grid;gap:0.75rem;margin-top:0;padding-top:1.5rem;border-top:1px solid var(--border)">
+    <h2 id="personality-title">{% trans "Personality Number" %}</h2>
+    <h3>{% trans "What it does" %}</h3>
+    <p>
+      {% blocktrans trimmed %}
+      Only the consonants in each part of your full birth name are mapped to their Pythagorean values, reduced
+      separately, then summed and reduced again — consonants are treated as the "outer voice" of the name.
+      {% endblocktrans %}
+    </p>
+    <h3>{% trans "What you'll see" %}</h3>
+    <p>{% blocktrans %}Your personality result is highlighted in the calculator above once you submit your name and birth date.{% endblocktrans %}</p>
+    <h3>{% trans "What you can learn" %}</h3>
+    <p>{% blocktrans %}The personality number describes the first impression you tend to make — the surface others meet before they get to know your soul urge.{% endblocktrans %}</p>
+  </section>
 </article>
 {% endblock %}

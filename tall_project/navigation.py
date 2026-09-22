@@ -96,11 +96,20 @@ STATIC_PAGES: Dict[str, StaticPage] = {
             ),
         ),
         StaticPage(
+            "compute-life-path-number",
+            _("Compute Your Life Path Number"),
+            "pages/compute-life-path-number.html",
+            description=_(
+                "How to calculate your life path number from your birth date, and what it "
+                "reveals about your lifetime rhythm and lessons."
+            ),
+        ),
+        StaticPage(
             "compute-destiny-number",
             _("Compute Your Destiny Number"),
             "pages/compute-destiny-number.html",
             description=_(
-                "How to calculate your destiny number from your birth date, and what it "
+                "How to calculate your destiny number from your full birth name, and what it "
                 "reveals about your long-term direction and purpose."
             ),
         ),
@@ -321,6 +330,7 @@ NAVIGATION: Tuple[NavigationItem, ...] = (
         slug="personal-insights",
         title=_("Personal Insights"),
         children=(
+            NavigationItem("compute-life-path-number", _("Compute Your Life Path Number")),
             NavigationItem("compute-destiny-number", _("Compute Your Destiny Number")),
             NavigationItem(
                 "compute-name-vowel-consonant",

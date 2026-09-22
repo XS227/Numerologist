@@ -11,6 +11,7 @@ from django.utils.text import slugify
 from django.views.generic import DetailView, ListView
 
 from .models import Article
+from .thumbnails import get_thumbnail
 
 
 def _load_ai_analysis_hook() -> Optional[Callable[[str], str]]:
@@ -42,6 +43,8 @@ class ArticleListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        for article in context["articles"]:
+            article.thumb = get_thumbnail(article.slug, article.title)
         canonical_url = self.request.build_absolute_uri(self.request.path)
         description = (
             "Articles and long-form writing on numerology, symbolism, and number "

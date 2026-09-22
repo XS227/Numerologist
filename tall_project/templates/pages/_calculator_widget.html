@@ -43,19 +43,19 @@
   </form>
 
   <div class="calc-widget__results">
-    <div class="calc-widget__stat">
+    <div class="calc-widget__stat{% if 'life_path' in calculator_highlight %} calc-widget__stat--highlight{% endif %}">
       <span class="calc-widget__stat-label">{% trans "Life Path" %}</span>
       <span class="calc-widget__stat-value">{% if calculator_result %}{{ calculator_result.life_path }}{% else %}&mdash;{% endif %}</span>
     </div>
-    <div class="calc-widget__stat">
+    <div class="calc-widget__stat{% if 'expression' in calculator_highlight %} calc-widget__stat--highlight{% endif %}">
       <span class="calc-widget__stat-label">{% trans "Expression" %}</span>
       <span class="calc-widget__stat-value">{% if calculator_result %}{{ calculator_result.expression }}{% else %}&mdash;{% endif %}</span>
     </div>
-    <div class="calc-widget__stat">
+    <div class="calc-widget__stat{% if 'soul_urge' in calculator_highlight %} calc-widget__stat--highlight{% endif %}">
       <span class="calc-widget__stat-label">{% trans "Soul Urge" %}</span>
       <span class="calc-widget__stat-value">{% if calculator_result %}{{ calculator_result.soul_urge }}{% else %}&mdash;{% endif %}</span>
     </div>
-    <div class="calc-widget__stat">
+    <div class="calc-widget__stat{% if 'personality' in calculator_highlight %} calc-widget__stat--highlight{% endif %}">
       <span class="calc-widget__stat-label">{% trans "Personality" %}</span>
       <span class="calc-widget__stat-value">{% if calculator_result %}{{ calculator_result.personality }}{% else %}&mdash;{% endif %}</span>
     </div>

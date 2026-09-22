@@ -16,6 +16,7 @@ class LearningTests(SimpleTestCase):
                 "general-interpretation",
                 "letter-value-chart",
                 "compute-destiny-number",
+                "compute-life-path-number",
                 "pythagoras-legacy",
             ]:
                 response = self.client.get("/" + slug + "/")
@@ -30,6 +31,7 @@ class LearningTests(SimpleTestCase):
         self.assertEqual(IntakeForm._reduce_name("ØY ÅSE"), 11)
         self.assertEqual(IntakeForm._reduce_name("ØY ÅSE", VOWELS), 1)
         self.assertEqual(IntakeForm._life_path(date(2000, 1, 11)), 5)
+        self.assertEqual(IntakeForm._life_path(date(1990, 7, 29)), 1)
         for value in [11, 22, 33]:
             self.assertEqual(IntakeForm._reduce_digits(str(value)), value)
 

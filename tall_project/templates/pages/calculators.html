@@ -168,7 +168,7 @@
     </p>
   </div>
   <div class="calculator-grid" role="list">
-    <a class="calculator-card calculator-card--live" role="listitem" href="/#kalkulator">
+    <a class="calculator-card calculator-card--live" role="listitem" href="{% url 'static_page' 'compute-life-path-number' %}">
       <span class="calculator-card__badge">{% trans "Live" %}</span>
       <h2>{% trans "Life Path Number" %}</h2>
       <p>{% trans "The rhythm of your life lessons revealed through your birth date." %}</p>
@@ -179,7 +179,7 @@
       </ul>
       <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
     </a>
-    <a class="calculator-card calculator-card--live" role="listitem" href="/#kalkulator">
+    <a class="calculator-card calculator-card--live" role="listitem" href="{% url 'static_page' 'compute-destiny-number' %}">
       <span class="calculator-card__badge">{% trans "Live" %}</span>
       <h2>{% trans "Expression Number" %}</h2>
       <p>{% trans "Highlights the talents and gifts encoded within your full name." %}</p>
@@ -190,7 +190,7 @@
       </ul>
       <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
     </a>
-    <a class="calculator-card calculator-card--live" role="listitem" href="/#kalkulator">
+    <a class="calculator-card calculator-card--live" role="listitem" href="{% url 'static_page' 'compute-name-vowel-consonant' %}#soul-urge-number">
       <span class="calculator-card__badge">{% trans "Live" %}</span>
       <h2>{% trans "Soul Urge Number" %}</h2>
       <p>{% trans "The whisper of your heart’s deepest desires, drawn from the vowels in your name." %}</p>
@@ -201,7 +201,7 @@
       </ul>
       <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
     </a>
-    <a class="calculator-card calculator-card--live" role="listitem" href="/#kalkulator">
+    <a class="calculator-card calculator-card--live" role="listitem" href="{% url 'static_page' 'compute-name-vowel-consonant' %}#personality-number">
       <span class="calculator-card__badge">{% trans "Live" %}</span>
       <h2>{% trans "Personality Number" %}</h2>
       <p>{% trans "The first impression you offer, measured through the consonants of your name." %}</p>
