@@ -452,6 +452,55 @@ $articles = $no ? [
     ],
 ];
 
+// Newest articles straight from the Django database, so the home page never
+// lags behind /articles/. Poster thumbnails mirror articles/thumbnails.py.
+// Falls back to the curated list above if the database can't be read.
+function numerologist_latest_articles(int $limit, bool $no): array {
+    $posters = [
+        'wow-signalet-og-arecibo-linjen' => ['WOW', 'Signalet', '#092426', '#c6a775'],
+        'hva-avslorer-tallene-i-shahnameh' => ['TALL', 'i Shahnameh', '#fdf3e3', '#a5691d'],
+        'navn-og-numerologi' => ['NAVN', '& numerologi', '#f9f4ff', '#7b56b1'],
+        'master-number-33' => ['33', 'Mesterlærer', '#f4f9ff', '#3a63a6'],
+        'numerological-reflection-on-mahsa-amini-and-bita-azizi' => ['2', 'Mahsa & Bita', '#f2fbf6', '#3f8f65'],
+        'creative-research-practice-for-numerology' => ['LAB', 'Kreativ praksis', '#fdf1f5', '#b1467e'],
+    ];
+    $months = $no
+        ? ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
+        : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    try {
+        $db = new PDO('sqlite:' . __DIR__ . '/db.sqlite3', null, null, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::SQLITE_ATTR_OPEN_FLAGS => PDO::SQLITE_OPEN_READONLY,
+        ]);
+        $stmt = $db->prepare('SELECT slug, title, content, published FROM articles_article ORDER BY published DESC LIMIT :n');
+        $stmt->bindValue(':n', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        $out = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $row) {
+            $text = trim(preg_replace('/\s+/u', ' ', html_entity_decode(strip_tags($row['content']), ENT_QUOTES, 'UTF-8')));
+            $excerpt = mb_strlen($text) > 140 ? rtrim(mb_substr($text, 0, 140)) . '…' : $text;
+            $minutes = max(1, (int) ceil(str_word_count($text) / 200));
+            $ts = strtotime($row['published']);
+            $date = (int) date('j', $ts) . ($no ? '. ' : ' ') . $months[(int) date('n', $ts) - 1] . ' ' . date('Y', $ts);
+            $first = strtoupper(mb_substr(preg_split('/\s+/u', $row['title'])[0] ?? '#', 0, 8));
+            [$big, $small, $bg, $fg] = $posters[$row['slug']] ?? [$first, '', '#f0f8f3', '#2d8f60'];
+            $out[] = [
+                'slug' => $row['slug'], 'title' => $row['title'], 'excerpt' => $excerpt,
+                'tag' => $small !== '' ? $small : ($no ? 'Artikkel' : 'Article'),
+                'meta' => $minutes . ' min · ' . $date,
+                'poster' => ['big' => $big, 'small' => $small, 'bg' => $bg, 'fg' => $fg],
+            ];
+        }
+        return $out;
+    } catch (Throwable $e) {
+        return [];
+    }
+}
+$latestArticles = numerologist_latest_articles(3, $no);
+if ($latestArticles) {
+    $articles = $latestArticles;
+}
+
 require_once __DIR__ . '/includes/seo.php';
 
 $canonicalUrl = SITE_URL . '/';
@@ -568,8 +617,8 @@ $serviceSchemas = [
   <!-- Fonts preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-2">
-  <link rel="stylesheet" href="/assets/home.css">
+  <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-3">
+  <link rel="stylesheet" href="/assets/home.css?v=2">
 </head>
 <body>
 
@@ -708,19 +757,26 @@ $serviceSchemas = [
                      value="<?= htmlspecialchars($calcDate) ?>"
                      max="<?= date('Y-m-d') ?>">
             </div>
-            <div class="field">
-              <label for="access_code"><?= $no ? 'Tilgangskode' : 'Access code' ?></label>
-              <input type="text" id="access_code" name="access_code"
-                     value="<?= htmlspecialchars($calcCode) ?>"
-                     inputmode="numeric" autocomplete="off" maxlength="3"
-                     placeholder="•••">
-              <span id="codeHint" style="color:#c62828;font-size:.85rem;display:block;margin-top:.25rem"></span>
-              <p class="section-sub" style="margin:.35rem 0 0;font-size:.85rem">
-                <?= $no
-                  ? 'Denne kalkulatoren prøves ut med en liten gruppe først — spør Åse om gjeldende kode.'
-                  : 'This calculator is being tried out with a small group first — ask Åse for the current code.' ?>
-              </p>
-            </div>
+            <!-- Access code is asked for in a popup after "Calculate" (native <dialog>). -->
+            <dialog class="calc-code" id="calcCodeDialog"<?= ($calcError !== null && $calcName !== '' && $calcDate !== '') ? ' open' : '' ?> aria-labelledby="calcCodeTitle">
+              <p class="calc-code__lock" aria-hidden="true">✦</p>
+              <h3 id="calcCodeTitle"><?= $no ? 'Skriv inn tilgangskoden' : 'Enter the access code' ?></h3>
+              <p class="calc-code__hint"><?= $no
+                ? 'Kalkulatoren testes med en liten gruppe først. Spør Åse om den gjeldende koden på 3 sifre.'
+                : 'The calculator is being tried out with a small group first. Ask Åse for the current 3-digit code.' ?></p>
+              <label class="calc-code__field" for="access_code">
+                <span class="visually-hidden"><?= $no ? 'Tilgangskode' : 'Access code' ?></span>
+                <input type="text" id="access_code" name="access_code"
+                       value="<?= htmlspecialchars($calcCode) ?>"
+                       inputmode="numeric" autocomplete="off" maxlength="3"
+                       placeholder="•••">
+              </label>
+              <span id="codeHint" class="calc-widget__error" role="alert"></span>
+              <div class="calc-code__actions">
+                <button type="button" class="calc-code__cancel" id="calcCodeCancel"><?= $no ? 'Avbryt' : 'Cancel' ?></button>
+                <button type="submit" class="calc-widget__submit"><?= htmlspecialchars($T['calc_submit']) ?></button>
+              </div>
+            </dialog>
             <button type="submit" class="btn btn-primary btn-full"><?= htmlspecialchars($T['calc_submit']) ?></button>
           </form>
 
@@ -765,6 +821,36 @@ $serviceSchemas = [
           <a href="/about-the-firm/" class="btn btn-primary"><?= htmlspecialchars($T['about_cta']) ?></a>
         </div>
       </div>
+    </div>
+
+    <?php
+    $calcTiles = $no ? [
+      ['/compute-life-path-number/', 'personal', '1–9', 'Livsveistall', 'Fra fødselsdatoen'],
+      ['/compute-destiny-number/', 'name-method', 'A·B·C', 'Uttrykkstall', 'Fra hele navnet'],
+      ['/compute-name-vowel-consonant/#soul-urge-number', 'modern', 'A·E·I', 'Sjelstall', 'Fra vokalene'],
+      ['/compute-name-vowel-consonant/#personality-number', 'letter-workshop', 'B·C·D', 'Personlighetstall', 'Fra konsonantene'],
+    ] : [
+      ['/compute-life-path-number/', 'personal', '1–9', 'Life path', 'From the birth date'],
+      ['/compute-destiny-number/', 'name-method', 'A·B·C', 'Expression', 'From the full name'],
+      ['/compute-name-vowel-consonant/#soul-urge-number', 'modern', 'A·E·I', 'Soul urge', 'From the vowels'],
+      ['/compute-name-vowel-consonant/#personality-number', 'letter-workshop', 'B·C·D', 'Personality', 'From the consonants'],
+    ];
+    ?>
+    <div class="calc-tiles-head">
+      <h3 class="section-title"><?= $no ? 'Lær hvert tall for seg' : 'Learn each number' ?></h3>
+      <a href="/calculators/" class="view-all"><?= $no ? 'Alle kalkulatorer →' : 'All calculators →' ?></a>
+    </div>
+    <div class="calc-tiles">
+      <?php foreach ($calcTiles as [$href, $img, $glyph, $name, $sub]): ?>
+      <a class="calc-tile-home" href="<?= $href ?>">
+        <span class="calc-tile-home__media">
+          <img src="/static/journey/images/<?= $img ?>.webp" alt="" width="1536" height="1024" loading="lazy">
+          <span class="calc-tile-home__glyph" aria-hidden="true"><?= $glyph ?></span>
+        </span>
+        <span class="calc-tile-home__name"><?= $name ?></span>
+        <span class="calc-tile-home__sub"><?= $sub ?> →</span>
+      </a>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -849,7 +935,12 @@ $serviceSchemas = [
       <a class="article-card" href="/articles/<?= htmlspecialchars($a['slug']) ?>/"
          aria-label="<?= htmlspecialchars($a['title']) ?>">
         <div class="article-thumb">
-          <?php if (($a['type'] ?? '') === 'name'): ?>
+          <?php if (isset($a['poster'])): ?>
+            <div class="article-poster" style="background:<?= htmlspecialchars($a['poster']['bg']) ?>;color:<?= htmlspecialchars($a['poster']['fg']) ?>" aria-hidden="true">
+              <span class="article-poster__big"><?= htmlspecialchars($a['poster']['big']) ?></span>
+              <?php if ($a['poster']['small'] !== ''): ?><span class="article-poster__small"><?= htmlspecialchars($a['poster']['small']) ?></span><?php endif; ?>
+            </div>
+          <?php elseif (($a['type'] ?? '') === 'name'): ?>
             <svg viewBox="0 0 320 180" aria-hidden="true">
               <rect width="320" height="180" fill="<?= $a['svg_bg'] ?>"/>
               <rect x="42" y="32" width="236" height="116" rx="18"
@@ -1128,17 +1219,43 @@ $serviceSchemas = [
 
   if (nameInput) nameInput.addEventListener('input', updateResults);
   if (dateInput) dateInput.addEventListener('change', updateResults);
-  if (codeInput) codeInput.addEventListener('input', updateResults);
 
   // Prevent full page reload — JS handles it
   var form = document.getElementById('calcForm');
+  var codeDialog = document.getElementById('calcCodeDialog');
+  function openCodeDialog() {
+    if (codeDialog.open) codeDialog.close();
+    codeDialog.showModal();
+    codeInput.focus();
+    codeInput.select();
+  }
+  var codeCancel = document.getElementById('calcCodeCancel');
+  if (codeCancel && codeDialog) codeCancel.addEventListener('click', function () { codeDialog.close(); });
+  // Server-side wrong-code response (no-JS path) renders the dialog open; upgrade it to a modal.
+  if (codeDialog && codeDialog.hasAttribute('open') && typeof codeDialog.showModal === 'function') {
+    codeDialog.removeAttribute('open');
+    openCodeDialog();
+    if (codeHintEl && codeInput.value) codeHintEl.textContent = WRONG_CODE_TEXT;
+  }
   if (form) {
     form.addEventListener('submit', function(e) {
       var name = nameInput ? nameInput.value.trim() : '';
       var date = dateInput ? dateInput.value : '';
       if (name && date) {
         e.preventDefault();
+        var code = codeInput ? codeInput.value.trim() : '';
+        if (codeDialog && typeof codeDialog.showModal === 'function' && !codeDialog.open) {
+          openCodeDialog();
+          return;
+        }
         updateResults();
+        if (code === ACCESS_CODE && codeDialog && codeDialog.open) {
+          codeDialog.close();
+          var grid = document.getElementById('resultsGrid');
+          if (grid) grid.scrollIntoView({behavior: 'smooth', block: 'center'});
+        } else if (codeInput) {
+          codeInput.select();
+        }
       }
     });
   }

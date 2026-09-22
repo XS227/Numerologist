@@ -1,164 +1,51 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Calculator suite" %} · Numerologist{% endblock %}
 
+{% block body_attrs %} class="number-journey"{% endblock %}
+
 {% block extra_styles %}
-
-    .calculator-hero {
-      text-align: center;
-      display: grid;
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-    .calculator-hero__pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.45rem 1.5rem;
-      border-radius: 999px;
-      background: rgba(90, 49, 244, 0.08);
-      color: var(--accent);
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-    }
-    .calculator-hero h1 {
-      font-size: clamp(2rem, 3.4vw, 2.75rem);
-      margin: 0;
-    }
-    .calculator-hero p {
-      margin: 0 auto;
-      max-width: 60ch;
-      color: rgba(31, 31, 31, 0.7);
-      line-height: 1.7;
-    }
-    .calculator-grid {
-      display: grid;
-      gap: 1.75rem;
-    }
-    .calculator-card {
-      background: linear-gradient(180deg, rgba(90, 49, 244, 0.06) 0%, rgba(90, 49, 244, 0) 60%), var(--surface);
-      border: 1px solid rgba(90, 49, 244, 0.2);
-      border-radius: 1.75rem;
-      padding: 1.75rem;
-      box-shadow: 0 22px 44px rgba(16, 12, 40, 0.08);
-      display: grid;
-      gap: 0.75rem;
-    }
-    .calculator-card h2 {
-      margin: 0;
-      font-size: 1.35rem;
-    }
-    .calculator-card p {
-      margin: 0;
-      color: rgba(31, 31, 31, 0.7);
-    }
-    .calculator-card ul {
-      margin: 0;
-      padding-inline-start: 1.25rem;
-      display: grid;
-      gap: 0.35rem;
-      color: rgba(31, 31, 31, 0.65);
-    }
-    [dir="rtl"] .calculator-card ul {
-      padding-inline-start: 0;
-      padding-inline-end: 1.25rem;
-    }
-    .calculator-card {
-      position: relative;
-      text-decoration: none;
-      color: inherit;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    a.calculator-card:hover,
-    a.calculator-card:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 26px 50px rgba(16, 12, 40, 0.12);
-      text-decoration: none;
-    }
-    .calculator-card--soon {
-      border-style: dashed;
-      opacity: 0.92;
-    }
-    .calculator-card__badge {
-      justify-self: start;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.25rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .calculator-card--live .calculator-card__badge {
-      background: rgba(60, 177, 121, 0.14);
-      color: #2d8f60;
-    }
-    .calculator-card--soon .calculator-card__badge {
-      background: rgba(31, 31, 31, 0.08);
-      color: rgba(31, 31, 31, 0.6);
-    }
-    .calculator-card__cta {
-      margin-top: 0.35rem;
-      font-weight: 700;
-      font-size: 0.92rem;
-      color: var(--accent);
-    }
-    .calculator-card--soon .calculator-card__cta { color: rgba(31, 31, 31, 0.55); }
-
-    .calculator-cta {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 2.5rem;
-    }
-    .calculator-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-radius: 999px;
-      padding: 0.85rem 1.75rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .calculator-button:hover,
-    .calculator-button:focus-visible {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 32px rgba(90, 49, 244, 0.18);
-      text-decoration: none;
-    }
-    .calculator-button--primary {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 12px 28px rgba(90, 49, 244, 0.22);
-    }
-    .calculator-button--ghost {
-      background: transparent;
-      border: 1px solid rgba(90, 49, 244, 0.28);
-      color: var(--accent);
-    }
-    @media (min-width: 780px) {
-      .calculator-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-    @media (max-width: 720px) {
-      .calculator-card {
-        border-radius: 1.25rem;
-      }
-    }
-
+    .calc-suite { color: #f3f0e8; }
+    .calc-suite h1, .calc-suite h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.03em; }
+    .calc-suite__hero { text-align: center; padding: clamp(56px, 9vw, 110px) 6% clamp(40px, 6vw, 70px); background: radial-gradient(ellipse at 50% 0%, #c6a77533, transparent 62%); }
+    .calc-suite__pill { display: inline-block; padding: 6px 16px; border: 1px solid #c6a77590; border-radius: 999px; color: #c6a775; font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; }
+    .calc-suite__hero h1 { font-size: clamp(2.4rem, 6.5vw, 4.6rem); line-height: 1.05; max-width: 15ch; margin: 22px auto 18px; color: #f3f0e8; }
+    .calc-suite__hero p { max-width: 60ch; margin: 0 auto; color: #bdccc7; font-size: 1.1rem; line-height: 1.7; }
+    .calc-suite__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: clamp(18px, 2.5vw, 28px); max-width: 1180px; margin: 0 auto; padding: 0 6% clamp(60px, 8vw, 100px); }
+    .calc-tile { display: flex; flex-direction: column; background: #123739; border: 1px solid #c6a77530; border-radius: 16px; overflow: hidden; color: inherit; text-decoration: none; transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+    a.calc-tile:hover, a.calc-tile:focus-visible { transform: translateY(-4px); border-color: #c6a775; box-shadow: 0 24px 50px #05171a80; text-decoration: none; }
+    .calc-tile__media { position: relative; aspect-ratio: 3 / 2; overflow: hidden; }
+    .calc-tile__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
+    a.calc-tile:hover .calc-tile__media img { transform: scale(1.06); }
+    .calc-tile__media:after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, #123739 2%, transparent 55%); }
+    .calc-tile__glyph { position: absolute; left: 22px; bottom: 10px; z-index: 1; font-family: Georgia, serif; font-size: 3.4rem; line-height: 1; color: #e2cba2; text-shadow: 0 4px 18px #05171a; }
+    .calc-tile__badge { position: absolute; top: 14px; right: 14px; z-index: 1; padding: 5px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: #c6a775; color: #092426; }
+    .calc-tile--soon .calc-tile__badge { background: #092426cc; color: #d7dfd8; border: 1px solid #d7dfd850; }
+    .calc-tile--soon .calc-tile__media img { filter: grayscale(.55) brightness(.8); }
+    .calc-tile__body { display: flex; flex-direction: column; gap: 12px; padding: 18px 22px 24px; flex: 1; }
+    .calc-tile__body h2 { margin: 0; font-size: 1.75rem; color: #f3f0e8; }
+    .calc-tile__body p { margin: 0; color: #cdd8d4; line-height: 1.6; }
+    .calc-tile__body ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 0.92rem; color: #aebfba; }
+    .calc-tile__body li:before { content: '✦ '; color: #c6a775; }
+    .calc-tile__cta { margin-top: auto; padding-top: 8px; font-weight: 700; font-size: 0.92rem; color: #e2cba2; }
+    .calc-suite__learn { max-width: 1180px; margin: 0 auto; padding: 0 6% clamp(60px, 8vw, 90px); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .calc-suite__learn a { padding: 12px 20px; border: 1px solid #c6a77570; border-radius: 999px; color: #e2cba2; text-decoration: none; }
+    .calc-suite__learn a:hover { background: #c6a775; color: #092426; }
+    .calc-suite__faq { background: #f3f0e8; color: #102f31; padding: clamp(56px, 8vw, 90px) 6%; }
+    .calc-suite__faq > div { max-width: 760px; margin: 0 auto; }
+    .calc-suite__faq h2 { font-size: clamp(2rem, 4.5vw, 2.8rem); text-align: center; margin: 0 0 30px; }
+    .calc-suite__faq details { border-top: 1px solid #c6a77570; padding: 18px 0; }
+    .calc-suite__faq details:last-child { border-bottom: 1px solid #c6a77570; }
+    .calc-suite__faq summary { cursor: pointer; font-family: Georgia, serif; font-size: 1.25rem; }
+    .calc-suite__faq details p { margin: 12px 0 0; line-height: 1.7; color: #36575a; }
+    .calc-suite__faq a { color: #805d2d; }
 {% endblock %}
 
-{% block content %}
-  <div class="calculator-hero">
-    <span class="calculator-hero__pill">{% trans "Calculator suite" %}</span>
+{% block main %}
+<div class="calc-suite">
+  <header class="calc-suite__hero">
+    <span class="calc-suite__pill">{% trans "Calculator suite" %}</span>
     <h1>{% trans "Every numerology calculator at a glance" %}</h1>
     <p>
       {% blocktrans %}
@@ -166,90 +53,100 @@
         own so you can see how the pieces fit together before or after your full session.
       {% endblocktrans %}
     </p>
+  </header>
+  <div class="calc-suite__grid" role="list">
+    <a class="calc-tile" role="listitem" href="{% url 'static_page' 'compute-life-path-number' %}">
+      <div class="calc-tile__media"><img src="{% static 'journey/images/personal.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Live" %}</span><span class="calc-tile__glyph" aria-hidden="true">1–9</span></div>
+      <div class="calc-tile__body">
+        <h2>{% trans "Life Path Number" %}</h2>
+        <p>{% trans "The rhythm of your life lessons revealed through your birth date." %}</p>
+        <ul>
+          <li>{% trans "Breaks your birth date into core digits" %}</li>
+          <li>{% trans "Honours master numbers 11, 22, and 33 during reduction" %}</li>
+        </ul>
+        <span class="calc-tile__cta">{% trans "Try the calculator" %} →</span>
+      </div>
+    </a>
+    <a class="calc-tile" role="listitem" href="{% url 'static_page' 'compute-destiny-number' %}">
+      <div class="calc-tile__media"><img src="{% static 'journey/images/name-method.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Live" %}</span><span class="calc-tile__glyph" aria-hidden="true">A·B·C</span></div>
+      <div class="calc-tile__body">
+        <h2>{% trans "Expression Number" %}</h2>
+        <p>{% trans "Highlights the talents and gifts encoded within your full name." %}</p>
+        <ul>
+          <li>{% trans "Maps each letter to its Pythagorean value" %}</li>
+          <li>{% trans "Shows how you naturally share your abilities with the world" %}</li>
+        </ul>
+        <span class="calc-tile__cta">{% trans "Try the calculator" %} →</span>
+      </div>
+    </a>
+    <a class="calc-tile" role="listitem" href="{% url 'static_page' 'compute-name-vowel-consonant' %}#soul-urge-number">
+      <div class="calc-tile__media"><img src="{% static 'journey/images/modern.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Live" %}</span><span class="calc-tile__glyph" aria-hidden="true">A·E·I</span></div>
+      <div class="calc-tile__body">
+        <h2>{% trans "Soul Urge Number" %}</h2>
+        <p>{% trans "The whisper of your heart’s deepest desires, drawn from the vowels in your name." %}</p>
+        <ul>
+          <li>{% trans "Connects you with motivations that keep you inspired" %}</li>
+          <li>{% trans "Reveals the emotional current beneath your decisions" %}</li>
+        </ul>
+        <span class="calc-tile__cta">{% trans "Try the calculator" %} →</span>
+      </div>
+    </a>
+    <a class="calc-tile" role="listitem" href="{% url 'static_page' 'compute-name-vowel-consonant' %}#personality-number">
+      <div class="calc-tile__media"><img src="{% static 'journey/images/letter-workshop.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Live" %}</span><span class="calc-tile__glyph" aria-hidden="true">B·C·D</span></div>
+      <div class="calc-tile__body">
+        <h2>{% trans "Personality Number" %}</h2>
+        <p>{% trans "The first impression you offer, measured through the consonants of your name." %}</p>
+        <ul>
+          <li>{% trans "Describes how others initially perceive your energy" %}</li>
+          <li>{% trans "Shows the doorway people walk through to meet you" %}</li>
+        </ul>
+        <span class="calc-tile__cta">{% trans "Try the calculator" %} →</span>
+      </div>
+    </a>
+    <a class="calc-tile calc-tile--soon" role="listitem" href="{% url 'static_page' 'guidance-support' %}">
+      <div class="calc-tile__media"><img src="{% static 'journey/images/origins.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Coming soon" %}</span><span class="calc-tile__glyph" aria-hidden="true">1 + 1</span></div>
+      <div class="calc-tile__body">
+        <h2>{% trans "Compatibility Insight" %}</h2>
+        <p>{% trans "Cross-reference two birth dates to understand shared lessons and harmony." %}</p>
+        <ul>
+          <li>{% trans "Compares combined life path cycles" %}</li>
+          <li>{% trans "Spotlights master number pairings" %}</li>
+        </ul>
+        <span class="calc-tile__cta">{% trans "Included in a personal session with Åse for now" %} →</span>
+      </div>
+    </a>
+    <a class="calc-tile calc-tile--soon" role="listitem" href="{% url 'static_page' 'guidance-support' %}">
+      <div class="calc-tile__media"><img src="{% static 'journey/images/mesopotamia.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Coming soon" %}</span><span class="calc-tile__glyph" aria-hidden="true">{% now "Y" %}</span></div>
+      <div class="calc-tile__body">
+        <h2>{% trans "Personal Year Forecast" %}</h2>
+        <p>{% trans "Discover the focus of the year you’re currently walking through." %}</p>
+        <ul>
+          <li>{% trans "Calculates your yearly vibration from your birth date" %}</li>
+          <li>{% trans "Places it in context with your overarching life path" %}</li>
+        </ul>
+        <span class="calc-tile__cta">{% trans "Included in a personal session with Åse for now" %} →</span>
+      </div>
+    </a>
   </div>
-  <div class="calculator-grid" role="list">
-    <a class="calculator-card calculator-card--live" role="listitem" href="{% url 'static_page' 'compute-life-path-number' %}">
-      <span class="calculator-card__badge">{% trans "Live" %}</span>
-      <h2>{% trans "Life Path Number" %}</h2>
-      <p>{% trans "The rhythm of your life lessons revealed through your birth date." %}</p>
-      <ul>
-        <li>{% trans "Breaks your birth date into core digits" %}</li>
-        <li>{% trans "Honours master numbers 11, 22, and 33 during reduction" %}</li>
-        <li>{% trans "Guides the milestones and curriculum of your lifetime" %}</li>
-      </ul>
-      <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
-    </a>
-    <a class="calculator-card calculator-card--live" role="listitem" href="{% url 'static_page' 'compute-destiny-number' %}">
-      <span class="calculator-card__badge">{% trans "Live" %}</span>
-      <h2>{% trans "Expression Number" %}</h2>
-      <p>{% trans "Highlights the talents and gifts encoded within your full name." %}</p>
-      <ul>
-        <li>{% trans "Maps each letter to its Pythagorean value" %}</li>
-        <li>{% trans "Shows how you naturally share your abilities with the world" %}</li>
-        <li>{% trans "Balances what comes easily with where mastery is calling" %}</li>
-      </ul>
-      <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
-    </a>
-    <a class="calculator-card calculator-card--live" role="listitem" href="{% url 'static_page' 'compute-name-vowel-consonant' %}#soul-urge-number">
-      <span class="calculator-card__badge">{% trans "Live" %}</span>
-      <h2>{% trans "Soul Urge Number" %}</h2>
-      <p>{% trans "The whisper of your heart’s deepest desires, drawn from the vowels in your name." %}</p>
-      <ul>
-        <li>{% trans "Connects you with motivations that keep you inspired" %}</li>
-        <li>{% trans "Reveals the emotional current beneath your decisions" %}</li>
-        <li>{% trans "Illuminates the self-care practices that truly nourish" %}</li>
-      </ul>
-      <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
-    </a>
-    <a class="calculator-card calculator-card--live" role="listitem" href="{% url 'static_page' 'compute-name-vowel-consonant' %}#personality-number">
-      <span class="calculator-card__badge">{% trans "Live" %}</span>
-      <h2>{% trans "Personality Number" %}</h2>
-      <p>{% trans "The first impression you offer, measured through the consonants of your name." %}</p>
-      <ul>
-        <li>{% trans "Describes how others initially perceive your energy" %}</li>
-        <li>{% trans "Shows the doorway people walk through to meet you" %}</li>
-        <li>{% trans "Helps refine your presence with deliberate intention" %}</li>
-      </ul>
-      <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
-    </a>
-    <a class="calculator-card calculator-card--soon" role="listitem" href="{% url 'static_page' 'guidance-support' %}">
-      <span class="calculator-card__badge">{% trans "Coming soon" %}</span>
-      <h2>{% trans "Compatibility Insight" %}</h2>
-      <p>{% trans "Cross-reference two birth dates to understand shared lessons and harmony." %}</p>
-      <ul>
-        <li>{% trans "Compares combined life path cycles" %}</li>
-        <li>{% trans "Spotlights master number pairings" %}</li>
-        <li>{% trans "Offers prompts for nourishing the relationship" %}</li>
-      </ul>
-      <span class="calculator-card__cta">{% trans "Included in a personal session with Åse for now" %} →</span>
-    </a>
-    <a class="calculator-card calculator-card--soon" role="listitem" href="{% url 'static_page' 'guidance-support' %}">
-      <span class="calculator-card__badge">{% trans "Coming soon" %}</span>
-      <h2>{% trans "Personal Year Forecast" %}</h2>
-      <p>{% trans "Discover the focus of the year you’re currently walking through." %}</p>
-      <ul>
-        <li>{% trans "Calculates your yearly vibration from your birth date" %}</li>
-        <li>{% trans "Places it in context with your overarching life path" %}</li>
-        <li>{% trans "Invites rituals to partner with the year’s momentum" %}</li>
-      </ul>
-      <span class="calculator-card__cta">{% trans "Included in a personal session with Åse for now" %} →</span>
-    </a>
-  </div>
-  <div class="calculator-cta">
-    <a class="calculator-button calculator-button--primary" href="/">{% trans "Return to intake" %}</a>
-    <a class="calculator-button calculator-button--ghost" href="#top" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;">{% trans "Back to top" %}</a>
-  </div>
-  <div class="card prose" style="margin-top:2.5rem">
-    <h2>{% trans "Frequently asked questions" %}</h2>
-    <p>
-      <strong>{% trans "What is the difference between life path and destiny number?" %}</strong><br>
-      {% trans "Life path is calculated from your birth date and describes the lessons of your lifetime. Destiny (expression) number is calculated from the letters in your full birth name and describes talents you are here to develop. See" %}
-      <a href="{% url 'static_page' 'compute-destiny-number' %}">{% trans "Compute Your Destiny Number" %}</a>.
-    </p>
-    <p>
-      <strong>{% trans "Are these calculators as accurate as a personal session?" %}</strong><br>
-      {% trans "They use the same Pythagorean method Åse references, but a personal session adds interpretation specific to your situation. See" %}
-      <a href="{% url 'static_page' 'guidance-support' %}">{% trans "Guidance & Support" %}</a> {% trans "to book one." %}
-    </p>
-  </div>
+  <nav class="calc-suite__learn" aria-label="{% if CURRENT_LANGUAGE == 'nb' %}Lær metoden{% else %}Learn the method{% endif %}">
+    <a href="{% url 'static_page' 'calculation-methods-overview' %}">{% if CURRENT_LANGUAGE == 'nb' %}Slik reduseres tallene{% else %}How the numbers are reduced{% endif %} ↗</a>
+    <a href="{% url 'static_page' 'letter-value-chart' %}">{% if CURRENT_LANGUAGE == 'nb' %}Bokstavtabellen{% else %}The letter chart{% endif %} ↗</a>
+    <a href="/discover-numerology/">{% if CURRENT_LANGUAGE == 'nb' %}Om numerologi{% else %}About numerology{% endif %} ↗</a>
+  </nav>
+  <section class="calc-suite__faq" aria-labelledby="calc-faq-title">
+    <div>
+      <h2 id="calc-faq-title">{% trans "Frequently asked questions" %}</h2>
+      <details open>
+        <summary>{% trans "What is the difference between life path and destiny number?" %}</summary>
+        <p>{% trans "Life path is calculated from your birth date and describes the lessons of your lifetime. Destiny (expression) number is calculated from the letters in your full birth name and describes talents you are here to develop. See" %}
+          <a href="{% url 'static_page' 'compute-destiny-number' %}">{% trans "Compute Your Destiny Number" %}</a>.</p>
+      </details>
+      <details>
+        <summary>{% trans "Are these calculators as accurate as a personal session?" %}</summary>
+        <p>{% trans "They use the same Pythagorean method Åse references, but a personal session adds interpretation specific to your situation. See" %}
+          <a href="{% url 'static_page' 'guidance-support' %}">{% trans "Guidance & Support" %}</a> {% trans "to book one." %}</p>
+      </details>
+    </div>
+  </section>
+</div>
 {% endblock %}

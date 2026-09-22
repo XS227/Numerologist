@@ -378,11 +378,13 @@ def static_page(request: HttpRequest, slug: str) -> HttpResponse:
     if slug in {
         "discover-numerology", "general-interpretation", "letter-value-chart",
         "compute-destiny-number", "compute-life-path-number", "pythagoras-legacy",
+        "compute-name-vowel-consonant", "calculation-methods-overview",
     }:
         context["ase"] = ase_content(language)
     if slug in {
         "general-interpretation", "letter-value-chart",
         "compute-destiny-number", "compute-life-path-number", "pythagoras-legacy",
+        "compute-name-vowel-consonant", "calculation-methods-overview",
     }:
         context["lesson"] = learning_content(slug, language)
     if slug in SLUGS_WITH_CALCULATOR:

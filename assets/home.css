@@ -494,3 +494,27 @@ button { font: inherit; cursor: pointer; }
 /* ── Footer ────────────────────────────────────────────────────────────── */
 /* Moved to assets/fibonacci.css as the shared .l-footer* — same footer
    markup/classes now used on every page (PHP and Django), not just here. */
+
+/* ── Calculator tiles (link to each calculator's own page) ─────────────── */
+.calc-tiles-head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-top: 4rem; }
+.calc-tiles-head .section-title { font-size: 1.7rem; margin: 0; }
+.calc-tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.1rem; margin-top: 1.5rem; }
+@media (max-width: 900px) { .calc-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.calc-tile-home {
+  display: flex; flex-direction: column; gap: .2rem; text-decoration: none; color: inherit;
+  background: #123739; border: 1px solid rgba(198,167,117,.3); border-radius: var(--r-lg); overflow: hidden;
+  transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+}
+.calc-tile-home:hover, .calc-tile-home:focus-visible { transform: translateY(-4px); border-color: #c6a775; box-shadow: var(--sh-lg); }
+.calc-tile-home__media { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; }
+.calc-tile-home__media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s ease; }
+.calc-tile-home:hover .calc-tile-home__media img { transform: scale(1.06); }
+.calc-tile-home__media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, #123739 4%, transparent 60%); }
+.calc-tile-home__glyph { position: absolute; left: 1rem; bottom: .4rem; z-index: 1; font-family: Georgia, serif; font-size: 2.2rem; color: #e2cba2; text-shadow: 0 3px 14px #05171a; }
+.calc-tile-home__name { padding: .2rem 1rem 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.35rem; font-weight: 700; color: #f3f0e8; }
+.calc-tile-home__sub { padding: 0 1rem 1rem; font-size: .8rem; color: #e2cba2; }
+
+/* ── Article poster thumbnails (same treatment as /articles/) ──────────── */
+.article-poster { width: 100%; height: 100%; display: grid; place-content: center; justify-items: center; gap: .3rem; text-align: center; line-height: 1; }
+.article-poster__big { font-family: Georgia, serif; font-size: 3rem; font-weight: 700; letter-spacing: .01em; }
+.article-poster__small { font-size: .85rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .85; }

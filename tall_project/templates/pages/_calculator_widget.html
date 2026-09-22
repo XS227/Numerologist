@@ -4,8 +4,8 @@
   Expects: calculator_form, calculator_result, calculator_paused from the
   view. Any page embedding this must POST back to itself.
 {% endcomment %}
-<div class="calc-widget">
-  <form method="post" class="calc-widget__form" novalidate>
+<div class="calc-widget" id="calc">
+  <form method="post" action="#calc" class="calc-widget__form" novalidate data-calc-form>
     {% csrf_token %}
     {% if calculator_paused %}
       <div class="calc-widget__notice" role="status">
@@ -32,14 +32,24 @@
         </div>
         {% if calculator_form.birth_day.errors %}<span class="calc-widget__error">{{ calculator_form.birth_day.errors|first }}</span>{% endif %}
       </label>
-      <label>
-        {% trans "Access code" %}
-        {{ calculator_form.access_code }}
-        <span class="calc-widget__hint">{% trans "This calculator is being tried out with a small group first — ask Åse for the current code." %}</span>
-        {% if calculator_form.access_code.errors %}<span class="calc-widget__error">{{ calculator_form.access_code.errors|first }}</span>{% endif %}
-      </label>
     </div>
-    <button type="submit" class="calc-widget__submit"{% if calculator_paused %} disabled{% endif %}>{% trans "Continue" %}</button>
+    {# The access code is asked for in a popup after "Calculate" is pressed.   #}
+    {# Without JS (or when the code was wrong) the dialog simply renders open. #}
+    <dialog class="calc-code"{% if calculator_form.access_code.errors %} open{% endif %} aria-labelledby="calc-code-title">
+      <p class="calc-code__lock" aria-hidden="true">✦</p>
+      <h3 id="calc-code-title">{% if CURRENT_LANGUAGE == 'nb' %}Skriv inn tilgangskoden{% else %}Enter the access code{% endif %}</h3>
+      <p class="calc-code__hint">{% if CURRENT_LANGUAGE == 'nb' %}Kalkulatoren testes med en liten gruppe først. Spør Åse om den gjeldende koden på 3 sifre.{% else %}The calculator is being tried out with a small group first. Ask Åse for the current 3-digit code.{% endif %}</p>
+      <label class="calc-code__field">
+        <span class="visually-hidden">{% trans "Access code" %}</span>
+        {{ calculator_form.access_code }}
+      </label>
+      {% if calculator_form.access_code.errors %}<span class="calc-widget__error" role="alert">{{ calculator_form.access_code.errors|first }}</span>{% endif %}
+      <div class="calc-code__actions">
+        <button type="button" class="calc-code__cancel" data-calc-cancel>{% if CURRENT_LANGUAGE == 'nb' %}Avbryt{% else %}Cancel{% endif %}</button>
+        <button type="submit" class="calc-widget__submit" data-calc-confirm>{% if CURRENT_LANGUAGE == 'nb' %}Regn ut{% else %}Calculate{% endif %}</button>
+      </div>
+    </dialog>
+    <button type="submit" class="calc-widget__submit" data-calc-open{% if calculator_paused %} disabled{% endif %}>{% if CURRENT_LANGUAGE == 'nb' %}Regn ut{% else %}Calculate{% endif %}</button>
   </form>
 
   <div class="calc-widget__results">
@@ -61,3 +71,27 @@
     </div>
   </div>
 </div>
+<script>
+(() => {
+  const form = document.currentScript.previousElementSibling.querySelector('[data-calc-form]');
+  const dialog = form && form.querySelector('.calc-code');
+  if (!dialog || typeof dialog.showModal !== 'function') return;
+  const input = dialog.querySelector('input');
+  const hadError = dialog.hasAttribute('open');
+  dialog.removeAttribute('open');
+  const open = () => { dialog.showModal(); input.focus(); input.select(); };
+  input.setAttribute('inputmode', 'numeric');
+  input.setAttribute('autocomplete', 'off');
+  form.querySelector('[data-calc-open]').addEventListener('click', event => {
+    event.preventDefault();
+    if (!form.querySelector('[name$="full_name"]').value.trim()) { form.querySelector('[name$="full_name"]').focus(); return; }
+    open();
+  });
+  // Enter in a field triggers implicit submission — still ask for the code first.
+  form.addEventListener('submit', event => {
+    if (!dialog.open && !input.value.trim()) { event.preventDefault(); open(); }
+  });
+  dialog.querySelector('[data-calc-cancel]').addEventListener('click', () => dialog.close());
+  if (hadError) open();
+})();
+</script>

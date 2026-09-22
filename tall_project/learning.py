@@ -308,6 +308,206 @@ def learning_content(slug, language):
                 " de spiller sammen – eller trekker i hver sin retning.",
             ),
         ),
+        "compute-name-vowel-consonant": dict(
+            kind="method",
+            image="modern",
+            split_image="letter-workshop",
+            eyebrow=t("05 / Two voices in one name", "05 / To stemmer i ett navn"),
+            title=t("Inner voice. Outer voice.", "Indre stemme. Ytre stemme."),
+            subtitle=t(
+                "Soul urge and personality.", "Sjelstall og personlighetstall."
+            ),
+            intro=t(
+                "Your name holds two quieter numbers. The vowels give the soul "
+                "urge number. The consonants give the personality number.",
+                "Navnet ditt rommer to stillere tall. Vokalene gir sjelstallet. "
+                "Konsonantene gir personlighetstallet.",
+            ),
+            alt=t(
+                "Illustration of an open notebook with numbers on a desk",
+                "Illustrasjon av en åpen notatbok med tall på et skrivebord",
+            ),
+            section_title=t("Split the letters.", "Del bokstavene."),
+            section_body=t(
+                "Vowels are the inner voice: what motivates you. Consonants "
+                "are the outer voice: the first impression you give. Both use "
+                "the same letter chart and the same per-part method.",
+                "Vokalene er den indre stemmen: det som driver deg. "
+                "Konsonantene er den ytre stemmen: førsteinntrykket du gir. "
+                "Begge bruker samme bokstavtabell og samme metode, del for del.",
+            ),
+            pair=[
+                dict(
+                    id="soul-urge-number",
+                    eyebrow=t("Vowels", "Vokaler"),
+                    title=t("Soul urge number", "Sjelstallet"),
+                    letters="A E I O U Y Æ Ø Å".split(),
+                    body=t(
+                        "What quietly motivates you — the needs beneath the "
+                        "surface.",
+                        "Det som driver deg i stillhet – behovene under "
+                        "overflaten.",
+                    ),
+                ),
+                dict(
+                    id="personality-number",
+                    eyebrow=t("Consonants", "Konsonanter"),
+                    title=t("Personality number", "Personlighetstallet"),
+                    letters="B C D F G H …".split(),
+                    body=t(
+                        "The first impression you make — the door others walk"
+                        " through to meet you.",
+                        "Førsteinntrykket du gir – døren andre går gjennom "
+                        "for å møte deg.",
+                    ),
+                ),
+            ],
+            steps=[
+                (
+                    t("Write the name", "Skriv navnet"),
+                    t(
+                        "Keep first, middle and last names as separate parts.",
+                        "Behold fornavn, mellomnavn og etternavn som egne deler.",
+                    ),
+                ),
+                (
+                    t("Sort the letters", "Sorter bokstavene"),
+                    t(
+                        "Vowels to one side, consonants to the other. Y, Æ, Ø "
+                        "and Å count as vowels here.",
+                        "Vokaler på én side, konsonanter på den andre. Y, Æ, Ø "
+                        "og Å regnes som vokaler her.",
+                    ),
+                ),
+                (
+                    t("Reduce each part", "Reduser hver del"),
+                    t(
+                        "Add the values within each name part, then reduce. "
+                        "Keep 11, 22 and 33.",
+                        "Summer verdiene i hver navnedel, og reduser. Behold "
+                        "11, 22 og 33.",
+                    ),
+                ),
+                (
+                    t("Combine the parts", "Sett delene sammen"),
+                    t(
+                        "Add the reduced parts and reduce once more.",
+                        "Legg sammen de reduserte delene og reduser én gang til.",
+                    ),
+                ),
+            ],
+            example_title=t("Work through ANNA", "Regn gjennom ANNA"),
+            example_body=t(
+                "A teaching example. The vowels are A and A. The consonants are"
+                " N and N.",
+                "Et øvingseksempel. Vokalene er A og A. Konsonantene er N og N.",
+            ),
+            formula=t(
+                "Vowels: 1 + 1 = 2 · Consonants: 5 + 5 = 10 → 1",
+                "Vokaler: 1 + 1 = 2 · Konsonanter: 5 + 5 = 10 → 1",
+            ),
+            detail_title=t(
+                "Two numbers from one submission.", "To tall fra én utregning."
+            ),
+            detail_body=t(
+                "The calculator below returns both numbers at once — together "
+                "with your life path and destiny numbers. Compare the inner and"
+                " the outer voice: do they agree, or pull in different "
+                "directions?",
+                "Kalkulatoren under gir begge tallene samtidig – sammen med "
+                "livsveistallet og skjebnetallet. Sammenlign den indre og den "
+                "ytre stemmen: Er de enige, eller trekker de i hver sin "
+                "retning?",
+            ),
+        ),
+        "calculation-methods-overview": dict(
+            kind="method",
+            image="traditions",
+            split_image="name-method",
+            eyebrow=t("06 / The rules behind it all", "06 / Reglene bak alt"),
+            title=t("How the numbers are reduced.", "Slik reduseres tallene."),
+            subtitle=t(
+                "One method. Used everywhere.", "Én metode. Brukt overalt."
+            ),
+            intro=t(
+                "Every calculator on this site follows the same few rules. "
+                "Learn them once — then every result can be checked by hand.",
+                "Alle kalkulatorene her følger de samme få reglene. Lær dem én "
+                "gang – så kan du etterprøve hvert resultat for hånd.",
+            ),
+            alt=t(
+                "Illustration of old books and instruments in a library",
+                "Illustrasjon av gamle bøker og instrumenter i et bibliotek",
+            ),
+            section_title=t(
+                "Part by part, never one flat sum.",
+                "Del for del, aldri én samlet sum.",
+            ),
+            section_body=t(
+                "A flat sum of every letter or digit can land on a master "
+                "number that isn't really there. Reducing each part first keeps"
+                " the result honest.",
+                "En samlet sum av alle bokstaver eller sifre kan gi et "
+                "mestertall som egentlig ikke finnes. Reduserer du hver del "
+                "først, blir resultatet ærlig.",
+            ),
+            steps=[
+                (
+                    t("Add the digits", "Summer sifrene"),
+                    t(
+                        "28 becomes 2 + 8 = 10, and 10 becomes 1 + 0 = 1.",
+                        "28 blir 2 + 8 = 10, og 10 blir 1 + 0 = 1.",
+                    ),
+                ),
+                (
+                    t("Keep the master numbers", "Behold mestertallene"),
+                    t(
+                        "Stop at 11, 22 or 33 when you reach them. They also "
+                        "carry 2, 4 and 6.",
+                        "Stopp ved 11, 22 eller 33 når du når dem. De bærer "
+                        "også 2, 4 og 6.",
+                    ),
+                ),
+                (
+                    t("Reduce each part first", "Reduser hver del først"),
+                    t(
+                        "Name parts — or day, month and year — are reduced on "
+                        "their own before they are combined.",
+                        "Navnedeler – eller dag, måned og år – reduseres hver "
+                        "for seg før de legges sammen.",
+                    ),
+                ),
+                (
+                    t("Build on the core", "Bygg videre på kjernen"),
+                    t(
+                        "Personal years, months and days start from the same "
+                        "reduced birth-date parts.",
+                        "Personlige år, måneder og dager bygger på de samme "
+                        "reduserte delene av fødselsdatoen.",
+                    ),
+                ),
+            ],
+            example_title=t("Work through OLA NILSEN", "Regn gjennom OLA NILSEN"),
+            example_body=t(
+                "A teaching example. Per part, OLA gives 10 → 1 and NILSEN "
+                "gives 28 → 1. Together: 2. A flat sum of all letters would "
+                "give 38 → 11 — a master number that isn't there.",
+                "Et øvingseksempel. Del for del gir OLA 10 → 1 og NILSEN 28 → "
+                "1. Sammen: 2. En samlet sum av alle bokstavene ville gitt 38 →"
+                " 11 – et mestertall som ikke finnes.",
+            ),
+            formula="OLA 10 → 1 · NILSEN 28 → 1 · 1 + 1 = 2",
+            detail_title=t(
+                "Reproducible, then interpreted.", "Etterprøvbart, så tolket."
+            ),
+            detail_body=t(
+                "The arithmetic can always be checked. What a number means is "
+                "an interpretation — that part is where Åse's personal "
+                "analysis begins.",
+                "Regnestykket kan alltid etterprøves. Hva et tall betyr, er en "
+                "tolkning – og det er der Åses personlige analyse begynner.",
+            ),
+        ),
         "pythagoras-legacy": dict(
             kind="history",
             image="pythagoras-portrait",

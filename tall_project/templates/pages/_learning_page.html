@@ -3,7 +3,7 @@
 {% block body_attrs %} class="number-journey"{% endblock %}
 {% block main %}
 <link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=3">
-<link rel="stylesheet" href="{% static 'journey/learning.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'journey/learning.css' %}?v=4">
 <article class="j-story j-learning">
 <section class="j-hero lrn-hero" aria-labelledby="lesson-title"><div class="j-hero-visual"><img src="{% static 'journey/images/' %}{{ lesson.image }}.webp" class="j-parallax" data-speed="0.12" width="1536" height="1024" alt="{{ lesson.alt }}" fetchpriority="high"></div><div class="j-hero-content"><a class="lrn-back" href="/discover-numerology/">← {{ lesson.back }}</a><p class="j-eyebrow">{{ lesson.eyebrow }}</p><h1 id="lesson-title">{{ lesson.title }}</h1><p class="lrn-subtitle">{{ lesson.subtitle }}</p><p class="j-intro">{{ lesson.intro }}</p><a href="#lesson" class="j-button">{{ lesson.start }} ↓</a></div></section>
 <section id="lesson" class="lrn-intro"><p class="j-eyebrow">{{ lesson.eyebrow }}</p><h2>{{ lesson.section_title }}</h2><p>{{ lesson.section_body }}</p></section>
@@ -14,9 +14,10 @@
 {% elif lesson.kind == 'letters' %}
 <section class="lrn-chart"><h2>{{ lesson.chart_title }}</h2><div class="lrn-chart-scroll"><table class="lrn-grid"><caption>{{ lesson.chart_caption }}</caption><thead><tr>{% for row in lesson.chart %}<th scope="col">{{ row.value }}</th>{% endfor %}</tr></thead><tbody>{% for row in lesson.chart_rows %}<tr>{% for letter in row %}<td>{{ letter }}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div></section>
 {% elif lesson.kind == 'method' %}
+{% if lesson.pair %}<div class="lrn-pair">{% for p in lesson.pair %}<section id="{{ p.id }}" class="lrn-pair-card"><p class="j-eyebrow">{{ p.eyebrow }}</p><h2>{{ p.title }}</h2><div class="lrn-pair-letters" aria-hidden="true">{% for l in p.letters %}<span>{{ l }}</span>{% endfor %}</div><p>{{ p.body }}</p></section>{% endfor %}</div>{% endif %}
 <ol class="lrn-steps">{% for title,body in lesson.steps %}<li><span aria-hidden="true">0{{ forloop.counter }}</span><div><h2>{{ title }}</h2><p>{{ body }}</p></div></li>{% endfor %}</ol>
 {% endif %}
-{% if lesson.formula %}<section class="lrn-example"><p class="j-eyebrow">{{ lesson.example_title }}</p><h2>{{ lesson.example_title }}</h2><p>{{ lesson.example_body }}</p><div class="lrn-formula">{{ lesson.formula }}</div><p class="lrn-small">{{ lesson.note }}</p></section><section class="lrn-split"><img src="{% static 'journey/images/' %}{% if lesson.kind == 'history' %}pythagoras{% else %}modern{% endif %}.webp" alt="{{ lesson.art }}" width="1536" height="1024" loading="lazy"><div><h2>{{ lesson.detail_title }}</h2><p>{{ lesson.detail_body }}</p>{% if lesson.kind == 'history' %}<a href="https://plato.stanford.edu/entries/pythagoras/">{{ lesson.source }} ↗</a>{% endif %}</div></section>{% endif %}
+{% if lesson.formula %}<section class="lrn-example"><p class="j-eyebrow">{{ lesson.example_title }}</p><h2>{{ lesson.example_title }}</h2><p>{{ lesson.example_body }}</p><div class="lrn-formula">{{ lesson.formula }}</div><p class="lrn-small">{{ lesson.note }}</p></section><section class="lrn-split"><img src="{% static 'journey/images/' %}{% if lesson.kind == 'history' %}pythagoras{% else %}{{ lesson.split_image|default:'modern' }}{% endif %}.webp" alt="{{ lesson.art }}" width="1536" height="1024" loading="lazy"><div><h2>{{ lesson.detail_title }}</h2><p>{{ lesson.detail_body }}</p>{% if lesson.kind == 'history' %}<a href="https://plato.stanford.edu/entries/pythagoras/">{{ lesson.source }} ↗</a>{% endif %}</div></section>{% endif %}
 {% include 'pages/_ase_journey.html' %}
 {% if calculator_form %}<section class="lrn-calculator"><h2>{{ lesson.calculator }}</h2>{% include 'pages/_calculator_widget.html' %}</section>{% endif %}
 <section class="lrn-next"><p class="j-eyebrow">{{ lesson.explore }}</p><div>{% for slug,url,title in lesson.related %}<a href="{{ url }}">{{ title }} ↗</a>{% endfor %}<a href="/discover-numerology/">{{ lesson.back }} ↗</a></div></section><p class="lrn-disclaimer">{{ lesson.perspective }}</p>
