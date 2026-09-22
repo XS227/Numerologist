@@ -324,6 +324,19 @@ def number_detail(request: HttpRequest, number: int) -> HttpResponse:
     return render(request, "pages/number-detail.html", context)
 
 
+# These static pages are *about* the calculator (their whole copy promises
+# "learn how to calculate X") but never actually embedded one — visitors
+# hit a dead end. Both draw from the same LiteCalculatorForm/four-number
+# result the homepage tool produces, so give them the real, working thing
+# instead of just describing it.
+SLUGS_WITH_CALCULATOR = {
+    "compute-name-vowel-consonant",
+    "compute-destiny-number",
+    "letter-value-chart",
+    "calculation-methods-overview",
+}
+
+
 def static_page(request: HttpRequest, slug: str) -> HttpResponse:
     try:
         page = STATIC_PAGES[slug]
@@ -338,4 +351,12 @@ def static_page(request: HttpRequest, slug: str) -> HttpResponse:
         "noindex": page.noindex,
         "page_title": str(page.title),
     }
+    if slug in SLUGS_WITH_CALCULATOR:
+        form = LiteCalculatorForm(request.POST or None)
+        result = None
+        if not CALCULATOR_PAUSED and request.method == "POST" and form.is_valid():
+            result = form.calculate()
+        context["calculator_form"] = form
+        context["calculator_result"] = result
+        context["calculator_paused"] = CALCULATOR_PAUSED
     return render(request, page.template_name, context)

@@ -1,0 +1,61 @@
+{% load i18n %}
+{# Reusable embed of the real numerology calculator (LiteCalculatorForm).
+   Expects: calculator_form, calculator_result, calculator_paused from the
+   view. Any page embedding this must POST back to itself. #}
+<div class="calc-widget">
+  <form method="post" class="calc-widget__form" novalidate>
+    {% csrf_token %}
+    {% if calculator_paused %}
+      <div class="calc-widget__notice" role="status">
+        {% trans "The calculator is temporarily paused for maintenance while we fix a calculation issue. Please check back soon." %}
+      </div>
+    {% endif %}
+    {% if calculator_form.non_field_errors %}
+      <div class="calc-widget__notice" role="alert">
+        {% for error in calculator_form.non_field_errors %}{{ error }}{% if not forloop.last %}<br>{% endif %}{% endfor %}
+      </div>
+    {% endif %}
+    <div class="calc-widget__grid">
+      <label>
+        {% trans "Preferred name" %}
+        {{ calculator_form.full_name }}
+        {% if calculator_form.full_name.errors %}<span class="calc-widget__error">{{ calculator_form.full_name.errors|first }}</span>{% endif %}
+      </label>
+      <label>
+        {% trans "Birth date" %}
+        <div class="calc-widget__date">
+          {{ calculator_form.birth_day }}
+          {{ calculator_form.birth_month }}
+          {{ calculator_form.birth_year }}
+        </div>
+        {% if calculator_form.birth_day.errors %}<span class="calc-widget__error">{{ calculator_form.birth_day.errors|first }}</span>{% endif %}
+      </label>
+      <label>
+        {% trans "Access code" %}
+        {{ calculator_form.access_code }}
+        <span class="calc-widget__hint">{% trans "This calculator is being tried out with a small group first — ask Åse for the current code." %}</span>
+        {% if calculator_form.access_code.errors %}<span class="calc-widget__error">{{ calculator_form.access_code.errors|first }}</span>{% endif %}
+      </label>
+    </div>
+    <button type="submit" class="calc-widget__submit"{% if calculator_paused %} disabled{% endif %}>{% trans "Continue" %}</button>
+  </form>
+
+  <div class="calc-widget__results">
+    <div class="calc-widget__stat">
+      <span class="calc-widget__stat-label">{% trans "Life Path" %}</span>
+      <span class="calc-widget__stat-value">{% if calculator_result %}{{ calculator_result.life_path }}{% else %}&mdash;{% endif %}</span>
+    </div>
+    <div class="calc-widget__stat">
+      <span class="calc-widget__stat-label">{% trans "Expression" %}</span>
+      <span class="calc-widget__stat-value">{% if calculator_result %}{{ calculator_result.expression }}{% else %}&mdash;{% endif %}</span>
+    </div>
+    <div class="calc-widget__stat">
+      <span class="calc-widget__stat-label">{% trans "Soul Urge" %}</span>
+      <span class="calc-widget__stat-value">{% if calculator_result %}{{ calculator_result.soul_urge }}{% else %}&mdash;{% endif %}</span>
+    </div>
+    <div class="calc-widget__stat">
+      <span class="calc-widget__stat-label">{% trans "Personality" %}</span>
+      <span class="calc-widget__stat-value">{% if calculator_result %}{{ calculator_result.personality }}{% else %}&mdash;{% endif %}</span>
+    </div>
+  </div>
+</div>

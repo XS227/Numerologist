@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Numerologist\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-22 16:07+0000\n"
+"POT-Creation-Date: 2026-09-22 17:01+0000\n"
 "PO-Revision-Date: 2026-07-12 00:00+0000\n"
 "Last-Translator: Numerologist\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -290,188 +290,225 @@ msgstr "Persisk"
 
 # ── Articles list (list.html) ────────────────────────────────────────
 #: tall_project/templates/articles/detail.html:4
+#: tall_project/templates/articles/detail_creative_research.html:4
 #: tall_project/templates/articles/detail_mahsa_bita.html:4
+#: tall_project/templates/articles/detail_master33.html:4
+#: tall_project/templates/articles/detail_navn_numerologi.html:4
+#: tall_project/templates/articles/detail_shahnameh.html:4
 #: tall_project/templates/articles/list.html:4
 msgid "Articles & Library"
 msgstr "Artikler og bibliotek"
 
-#: tall_project/templates/articles/detail.html:117
-#: tall_project/templates/articles/detail_mahsa_bita.html:492
+#: tall_project/templates/articles/detail.html:209
+#: tall_project/templates/articles/detail_creative_research.html:246
+#: tall_project/templates/articles/detail_mahsa_bita.html:499
+#: tall_project/templates/articles/detail_master33.html:296
+#: tall_project/templates/articles/detail_navn_numerologi.html:414
+#: tall_project/templates/articles/detail_shahnameh.html:362
 msgid "Back to articles"
 msgstr "Tilbake til artikler"
 
-#: tall_project/templates/articles/detail.html:120
-#: tall_project/templates/articles/detail_mahsa_bita.html:495
+#: tall_project/templates/articles/detail.html:212
+#: tall_project/templates/articles/detail_creative_research.html:249
+#: tall_project/templates/articles/detail_mahsa_bita.html:502
+#: tall_project/templates/articles/detail_master33.html:299
+#: tall_project/templates/articles/detail_navn_numerologi.html:417
+#: tall_project/templates/articles/detail_shahnameh.html:365
 msgid "All articles"
 msgstr "Alle artikler"
 
-#: tall_project/templates/articles/detail.html:126
-#: tall_project/templates/articles/detail_mahsa_bita.html:512
+#: tall_project/templates/articles/detail.html:218
+#: tall_project/templates/articles/detail_creative_research.html:255
+#: tall_project/templates/articles/detail_mahsa_bita.html:519
+#: tall_project/templates/articles/detail_master33.html:305
+#: tall_project/templates/articles/detail_navn_numerologi.html:423
+#: tall_project/templates/articles/detail_shahnameh.html:371
 msgid "Numerologist library"
 msgstr "Numerolog-bibliotek"
 
-#: tall_project/templates/articles/detail.html:129
-#: tall_project/templates/articles/detail_mahsa_bita.html:516
+#: tall_project/templates/articles/detail.html:221
+#: tall_project/templates/articles/detail_creative_research.html:258
+#: tall_project/templates/articles/detail_mahsa_bita.html:523
+#: tall_project/templates/articles/detail_master33.html:308
+#: tall_project/templates/articles/detail_navn_numerologi.html:426
+#: tall_project/templates/articles/detail_shahnameh.html:374
 #: tall_project/templates/articles/list.html:242
 #, python-format
 msgid "By %(author)s"
 msgstr "Av %(author)s"
 
-#: tall_project/templates/articles/detail.html:131
-#: tall_project/templates/articles/detail_mahsa_bita.html:517
+#: tall_project/templates/articles/detail.html:223
+#: tall_project/templates/articles/detail_creative_research.html:259
+#: tall_project/templates/articles/detail_mahsa_bita.html:524
+#: tall_project/templates/articles/detail_master33.html:309
+#: tall_project/templates/articles/detail_navn_numerologi.html:427
+#: tall_project/templates/articles/detail_shahnameh.html:375
 #, python-format
 msgid "Published %(date)s"
 msgstr "Publisert %(date)s"
 
-#: tall_project/templates/articles/detail.html:136
-#: tall_project/templates/articles/detail_mahsa_bita.html:521
+#: tall_project/templates/articles/detail.html:228
+#: tall_project/templates/articles/detail_mahsa_bita.html:528
 msgid "View original source"
 msgstr "Se originalkilden"
 
+#: tall_project/templates/articles/detail.html:238
+#: tall_project/templates/articles/detail_creative_research.html:267
+#: tall_project/templates/articles/detail_mahsa_bita.html:654
+#: tall_project/templates/articles/detail_master33.html:317
+#: tall_project/templates/articles/detail_navn_numerologi.html:435
+#: tall_project/templates/articles/detail_shahnameh.html:383
+msgid "In this article"
+msgstr "I denne artikkelen"
+
 # ── Article detail (detail.html) ─────────────────────────────────────
-#: tall_project/templates/articles/detail.html:151
-#: tall_project/templates/articles/detail_mahsa_bita.html:692
+#: tall_project/templates/articles/detail.html:266
+#: tall_project/templates/articles/detail_creative_research.html:322
+#: tall_project/templates/articles/detail_mahsa_bita.html:702
+#: tall_project/templates/articles/detail_master33.html:383
+#: tall_project/templates/articles/detail_navn_numerologi.html:499
+#: tall_project/templates/articles/detail_shahnameh.html:466
 msgid "AI insight"
 msgstr "AI-innsikt"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:512
+#: tall_project/templates/articles/detail_mahsa_bita.html:519
 msgid "Comparative reflection"
 msgstr "Sammenlignende refleksjon"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:514
+#: tall_project/templates/articles/detail_mahsa_bita.html:521
 msgid "Two young women, two continents, one age at parting — a side-by-side look at the numbers woven through their names, dates, and stories."
 msgstr "To unge kvinner, to kontinenter, samme alder ved bortgang — et side-om-side-blikk på tallene vevd inn i navnene, datoene og historiene deres."
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:538
+#: tall_project/templates/articles/detail_mahsa_bita.html:545
 msgid "Sept. 21, 1999 – Sept. 16, 2022 · Tehran, Iran"
 msgstr "21. sep. 1999 – 16. sep. 2022 · Teheran, Iran"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:541
-#: tall_project/templates/articles/detail_mahsa_bita.html:582
+#: tall_project/templates/articles/detail_mahsa_bita.html:548
+#: tall_project/templates/articles/detail_mahsa_bita.html:589
 msgid "Age at passing"
 msgstr "Alder ved bortgang"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:544
-#: tall_project/templates/articles/detail_mahsa_bita.html:585
+#: tall_project/templates/articles/detail_mahsa_bita.html:551
+#: tall_project/templates/articles/detail_mahsa_bita.html:592
+#: tall_project/templates/pages/_calculator_widget.html:45
 #: tall_project/templates/pages/home.html:584
 msgid "Life Path"
 msgstr "Livsvei"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:546
+#: tall_project/templates/articles/detail_mahsa_bita.html:553
 msgid "The builder"
 msgstr "Byggeren"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:549
-#: tall_project/templates/articles/detail_mahsa_bita.html:590
+#: tall_project/templates/articles/detail_mahsa_bita.html:556
+#: tall_project/templates/articles/detail_mahsa_bita.html:597
+#: tall_project/templates/pages/_calculator_widget.html:49
 #: tall_project/templates/pages/home.html:589
 msgid "Expression"
 msgstr "Uttrykk"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:551
+#: tall_project/templates/articles/detail_mahsa_bita.html:558
 msgid "Seeker of truth"
 msgstr "Sannhetssøker"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:554
-#: tall_project/templates/articles/detail_mahsa_bita.html:595
+#: tall_project/templates/articles/detail_mahsa_bita.html:561
+#: tall_project/templates/articles/detail_mahsa_bita.html:602
+#: tall_project/templates/pages/_calculator_widget.html:53
 #: tall_project/templates/pages/home.html:594
 msgid "Soul Urge"
 msgstr "Sjelstall"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:556
+#: tall_project/templates/articles/detail_mahsa_bita.html:563
 msgid "Joy & expression"
 msgstr "Glede og uttrykk"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:559
-#: tall_project/templates/articles/detail_mahsa_bita.html:600
+#: tall_project/templates/articles/detail_mahsa_bita.html:566
+#: tall_project/templates/articles/detail_mahsa_bita.html:607
+#: tall_project/templates/pages/_calculator_widget.html:57
 #: tall_project/templates/pages/home.html:599
 msgid "Personality"
 msgstr "Personlighet"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:561
+#: tall_project/templates/articles/detail_mahsa_bita.html:568
 msgid "Grounded & steady"
 msgstr "Jordnær og stø"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:566
-#: tall_project/templates/articles/detail_mahsa_bita.html:607
+#: tall_project/templates/articles/detail_mahsa_bita.html:573
+#: tall_project/templates/articles/detail_mahsa_bita.html:614
 msgid "Abjad"
 msgstr "Abjad"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:579
+#: tall_project/templates/articles/detail_mahsa_bita.html:586
 msgid "Apr. 13, 2002 – Aug. 11, 2024 · Asker, Norway"
 msgstr "13. apr. 2002 – 11. aug. 2024 · Asker, Norge"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:587
+#: tall_project/templates/articles/detail_mahsa_bita.html:594
 msgid "Creative optimism"
 msgstr "Kreativ optimisme"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:592
+#: tall_project/templates/articles/detail_mahsa_bita.html:599
 msgid "Builder & carer"
 msgstr "Bygger og omsorgsperson"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:597
+#: tall_project/templates/articles/detail_mahsa_bita.html:604
 msgid "Wants closeness"
 msgstr "Ønsker nærhet"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:602
+#: tall_project/templates/articles/detail_mahsa_bita.html:609
 msgid "Quietly luminous"
 msgstr "Stille lysende"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:613
+#: tall_project/templates/articles/detail_mahsa_bita.html:620
 msgid "Numbers that echo through both stories"
 msgstr "Tall som gjenklinger gjennom begge historiene"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:615
+#: tall_project/templates/articles/detail_mahsa_bita.html:622
 msgid "shared age at passing"
 msgstr "delt alder ved bortgang"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:616
+#: tall_project/templates/articles/detail_mahsa_bita.html:623
 msgid "structure · foundation"
 msgstr "struktur · fundament"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:617
+#: tall_project/templates/articles/detail_mahsa_bita.html:624
 msgid "spiritual seeking"
 msgstr "åndelig søken"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:618
+#: tall_project/templates/articles/detail_mahsa_bita.html:625
 msgid "illumination"
 msgstr "opplysning"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:619
+#: tall_project/templates/articles/detail_mahsa_bita.html:626
 msgid "partnership · unity"
 msgstr "partnerskap · enhet"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:620
+#: tall_project/templates/articles/detail_mahsa_bita.html:627
 msgid "completion"
 msgstr "fullendelse"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:625
+#: tall_project/templates/articles/detail_mahsa_bita.html:632
 msgid "Two lifelines, one age"
 msgstr "To livslinjer, én alder"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:627
-#: tall_project/templates/articles/detail_mahsa_bita.html:632
+#: tall_project/templates/articles/detail_mahsa_bita.html:634
+#: tall_project/templates/articles/detail_mahsa_bita.html:639
 msgid "born"
 msgstr "født"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:629
+#: tall_project/templates/articles/detail_mahsa_bita.html:636
 msgid "Sept. 2022"
 msgstr "sep. 2022"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:634
+#: tall_project/templates/articles/detail_mahsa_bita.html:641
 msgid "Aug. 2024"
 msgstr "aug. 2024"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:637
+#: tall_project/templates/articles/detail_mahsa_bita.html:644
 msgid "days apart"
 msgstr "dager mellom"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:638
+#: tall_project/templates/articles/detail_mahsa_bita.html:645
 msgid "≈ 99 weeks between their passings — 695 reduces to 2, and 99 reduces to 9, the same digits their death dates each carry."
 msgstr "≈ 99 uker mellom bortgangene — 695 reduseres til 2, og 99 reduseres til 9, de samme sifrene som dødsdatoene deres hver for seg bærer."
-
-#: tall_project/templates/articles/detail_mahsa_bita.html:644
-msgid "In this article"
-msgstr "I denne artikkelen"
 
 #: tall_project/templates/articles/list.html:210
 msgid "Numerologist Studio"
@@ -538,49 +575,111 @@ msgstr "Forrige"
 msgid "Next"
 msgstr "Neste"
 
-#: tall_project/templates/base.html:195
+#: tall_project/templates/base.html:184
 msgid "Primary"
 msgstr "Hovedmeny"
 
-#: tall_project/templates/base.html:199
+#: tall_project/templates/base.html:188
 msgid "Home"
 msgstr "Hjem"
 
-#: tall_project/templates/base.html:200
+#: tall_project/templates/base.html:189 tall_project/templates/base.html:229
 msgid "About numerology"
 msgstr "Om numerologi"
 
-#: tall_project/templates/base.html:201
+#: tall_project/templates/base.html:190
 msgid "Services"
 msgstr "Tjenester"
 
-#: tall_project/templates/base.html:202
+#: tall_project/templates/base.html:191 tall_project/templates/base.html:230
 msgid "Articles"
 msgstr "Artikler"
 
-#: tall_project/templates/base.html:203
+#: tall_project/templates/base.html:192
 msgid "Contact"
 msgstr "Kontakt"
 
-#: tall_project/templates/base.html:204
-msgid "Order"
-msgstr "Bestill"
-
-#: tall_project/templates/base.html:208
+#: tall_project/templates/base.html:196
 msgid "Switch language"
 msgstr "Bytt språk"
 
-#: tall_project/templates/base.html:215
+#: tall_project/templates/base.html:203
 msgid "Menu"
 msgstr "Meny"
 
-#: tall_project/templates/base.html:233
+#: tall_project/templates/base.html:223
+msgid "Norway's leading numerologist, based in Oslo. Helping you understand yourself through the wisdom of numbers."
+msgstr "Norges fremste numerolog, basert i Oslo. Vi hjelper deg å forstå deg selv gjennom tallenes visdom."
+
+#: tall_project/templates/base.html:226
+msgid "Explore"
+msgstr "Utforsk"
+
+#: tall_project/templates/base.html:228
+msgid "Calculators"
+msgstr "Kalkulatorer"
+
+#: tall_project/templates/base.html:234
+msgid "About us"
+msgstr "Om oss"
+
+#: tall_project/templates/base.html:236
+msgid "Meet Åse"
+msgstr "Møt Åse"
+
+#: tall_project/templates/base.html:237
+msgid "Guidance"
+msgstr "Veiledning"
+
+#: tall_project/templates/base.html:238
+msgid "Privacy policy"
+msgstr "Personvernerklæring"
+
+#: tall_project/templates/base.html:245
 msgid "Where numbers and technology work together — Åse Steinsland’s Pythagorean method, computed in Python. Right calculation, right technology."
 msgstr "Der tall og teknologi jobber sammen — Åse Steinslands pytagoreiske metode, beregnet i Python. Riktig beregning, riktig teknologi."
 
-#: tall_project/templates/base.html:234
-msgid "All rights reserved."
-msgstr "Alle rettigheter reservert."
+#: tall_project/templates/pages/_calculator_coming_soon.html:6
+msgid "Not yet a self-serve tool"
+msgstr "Ikke et selvbetjent verktøy ennå"
+
+#: tall_project/templates/pages/_calculator_coming_soon.html:7
+msgid "This isn't calculated automatically on the site yet — book a personal session and Åse will work it out with you directly."
+msgstr "Dette beregnes ikke automatisk på siden ennå — bestill en personlig time, så finner Åse det ut sammen med deg."
+
+#: tall_project/templates/pages/_calculator_coming_soon.html:8
+msgid "Book a session"
+msgstr "Bestill en time"
+
+#: tall_project/templates/pages/_calculator_widget.html:10
+#: tall_project/templates/pages/home.html:527
+msgid "The calculator is temporarily paused for maintenance while we fix a calculation issue. Please check back soon."
+msgstr "Kalkulatoren er midlertidig satt på pause for vedlikehold mens vi retter en beregningsfeil. Kom gjerne tilbake snart."
+
+#: tall_project/templates/pages/_calculator_widget.html:20
+#: tall_project/templates/pages/home.html:537
+msgid "Preferred name"
+msgstr "Ønsket navn"
+
+#: tall_project/templates/pages/_calculator_widget.html:25
+#: tall_project/templates/pages/home.html:544
+msgid "Birth date"
+msgstr "Fødselsdato"
+
+#: tall_project/templates/pages/_calculator_widget.html:34
+#: tall_project/templates/pages/home.html:559
+msgid "Access code"
+msgstr "Tilgangskode"
+
+#: tall_project/templates/pages/_calculator_widget.html:36
+#: tall_project/templates/pages/home.html:561
+msgid "This calculator is being tried out with a small group first — ask Åse for the current code."
+msgstr "Denne kalkulatoren prøves ut med en liten gruppe først — spør Åse om gjeldende kode."
+
+#: tall_project/templates/pages/_calculator_widget.html:40
+#: tall_project/templates/pages/home.html:568
+msgid "Continue"
+msgstr "Fortsett"
 
 #: tall_project/templates/pages/about-the-firm.html:76
 msgid "Numerologist Åse Steinsland – forsidebilde"
@@ -1074,30 +1173,6 @@ msgstr "Steg 1 · Grunnleggende inntak"
 msgid "3 mins"
 msgstr "3 min"
 
-#: tall_project/templates/pages/home.html:527
-msgid "The calculator is temporarily paused for maintenance while we fix a calculation issue. Please check back soon."
-msgstr "Kalkulatoren er midlertidig satt på pause for vedlikehold mens vi retter en beregningsfeil. Kom gjerne tilbake snart."
-
-#: tall_project/templates/pages/home.html:537
-msgid "Preferred name"
-msgstr "Ønsket navn"
-
-#: tall_project/templates/pages/home.html:544
-msgid "Birth date"
-msgstr "Fødselsdato"
-
-#: tall_project/templates/pages/home.html:559
-msgid "Access code"
-msgstr "Tilgangskode"
-
-#: tall_project/templates/pages/home.html:561
-msgid "This calculator is being tried out with a small group first — ask Åse for the current code."
-msgstr "Denne kalkulatoren prøves ut med en liten gruppe først — spør Åse om gjeldende kode."
-
-#: tall_project/templates/pages/home.html:568
-msgid "Continue"
-msgstr "Fortsett"
-
 #: tall_project/templates/pages/home.html:573
 msgid "Your numerology snapshot"
 msgstr "Din numerologiske oversikt"
@@ -1342,6 +1417,10 @@ msgstr "Gjør om et hvilket som helst navn til tall med Åses foretrukne bokstav
 #: tall_project/templates/pages/letter-value-chart.html:15
 msgid "Download a printable version and keep it beside you as you explore the calculators."
 msgstr "Last ned en utskriftsvennlig versjon og hold den ved siden av deg mens du utforsker kalkulatorene."
+
+#: tall_project/templates/pages/letter-value-chart.html:27
+msgid "Å follows A (1), Æ follows E (5), and Ø follows O (6) — the same table the live calculators use, including for Norwegian names."
+msgstr "Å følger A (1), Æ følger E (5), og Ø følger O (6) — samme tabell som de aktive kalkulatorene bruker, også for norske navn."
 
 #: tall_project/templates/pages/lifes-fourth-stage.html:10
 msgid "Åse teaches a four-stage development model inspired by Nordic numerology. The fourth stage marks a synthesis of every lesson learned earlier in life. Explore how to calculate when it begins and what themes typically emerge."
