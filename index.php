@@ -110,11 +110,11 @@ $T = $no ? [
     'title'           => 'Numerologist – Åse Steinsland | Forstå livet gjennom tallenes energi',
     'meta_desc'       => 'Åse Steinsland er Norges fremste numerolog. Beregn ditt livsveitall, uttrykkstall, sjelstall og personlighetstall gratis, og les mer om hva de betyr for deg.',
     'og_title'        => 'Numerologist – Åse Steinsland',
+    'nav_home'        => 'Hjem',
     'nav_about'       => 'Om numerologi',
     'nav_services'    => 'Tjenester',
     'nav_articles'    => 'Artikler',
     'nav_contact'     => 'Kontakt',
-    'nav_cta'         => 'Kontakt Åse',
     'hero_eyebrow'    => 'Velkommen inn i tallenes eventyr',
     'hero_h1_a'       => 'Forstå livet ditt gjennom',
     'hero_h1_b'       => 'tallenes energi',
@@ -241,11 +241,11 @@ $T = $no ? [
     'title'           => 'Numerologist – Åse Steinsland | Understand Life Through Numbers',
     'meta_desc'       => 'Åse Steinsland is Norway\'s leading numerologist. Calculate your life path, expression, soul urge, and personality numbers for free, and discover what they reveal about you.',
     'og_title'        => 'Numerologist – Åse Steinsland',
+    'nav_home'        => 'Home',
     'nav_about'       => 'About numerology',
     'nav_services'    => 'Services',
     'nav_articles'    => 'Articles',
     'nav_contact'     => 'Contact',
-    'nav_cta'         => 'Contact Åse',
     'hero_eyebrow'    => 'Welcome into the adventure of numbers',
     'hero_h1_a'       => 'Understand your life through',
     'hero_h1_b'       => 'the energy of numbers',
@@ -574,18 +574,19 @@ $serviceSchemas = [
 <body>
 
 <!-- ═══════════════════════════════════════════════════ NAV -->
-<!-- Unified site nav (.l-nav) — identical to the sub-pages, so the whole site
-     has ONE menu. Keeps the ids navToggle/navLinks for the existing burger JS. -->
+<!-- Unified site nav (.l-nav) — same link set as includes/layout.php and
+     tall_project/templates/base.html. Keeps the ids navToggle/navLinks for
+     the existing burger JS. -->
 <nav class="l-nav" aria-label="<?= $no ? 'Navigasjon' : 'Navigation' ?>">
   <div class="l-wrap l-nav-inner">
     <a href="/" class="l-brand">Numero<em>logist</em></a>
 
     <ul class="l-nav-links" id="navLinks">
+      <li><a href="/"><?= $T['nav_home'] ?></a></li>
       <li><a href="/discover-numerology/"><?= $T['nav_about'] ?></a></li>
       <li><a href="/#tjenester"><?= $T['nav_services'] ?></a></li>
       <li><a href="/articles/"><?= $T['nav_articles'] ?></a></li>
       <li><a href="/contact-qa/"><?= $T['nav_contact'] ?></a></li>
-      <li><a href="/about-the-firm/" class="l-btn-sm"><?= $T['nav_cta'] ?></a></li>
     </ul>
 
     <div class="l-nav-right">

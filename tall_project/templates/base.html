@@ -188,18 +188,19 @@
     <link rel="stylesheet" href="/assets/fibonacci.css">
   </head>
   <body{% block body_attrs %}{% endblock %}>
-    <!-- Unified .l-nav — identical markup to the PHP pages (styled by the shared
-         fibonacci.css) so the whole hybrid site has ONE menu, not two. -->
+    <!-- Unified .l-nav — same link set as includes/layout.php and index.php
+         (styled by the shared fibonacci.css) so the whole hybrid site has ONE
+         menu, not three. -->
     <header>
       <nav class="l-nav" aria-label="{% trans 'Primary' %}">
         <div class="l-wrap l-nav-inner">
           <a href="{% url 'home' %}" class="l-brand">Numero<em>logist</em></a>
           <ul class="l-nav-links" id="primaryNav">
             <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
-            <li><a href="/discover-numerology/">{% trans "Discover numerology" %}</a></li>
+            <li><a href="/discover-numerology/">{% trans "About numerology" %}</a></li>
             <li><a href="/#tjenester">{% trans "Services" %}</a></li>
             <li><a href="{% url 'article_list_legacy' %}">{% trans "Articles" %}</a></li>
-            <li><a href="{% url 'intake:index' %}" class="l-btn-sm">{% trans "Client intake" %}</a></li>
+            <li><a href="/contact-qa/">{% trans "Contact" %}</a></li>
           </ul>
           <div class="l-nav-right">
             {# Same nl_lang cookie as the PHP pages so language stays in sync site-wide. #}

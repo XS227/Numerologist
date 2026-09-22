@@ -45,10 +45,10 @@ function render_header(string $pageTitle, array $seo = []): void
     $activeNo  = $no  ? ' class="lang-active"' : '';
     $activeEn  = !$no ? ' class="lang-active"' : '';
     $noLabel   = $no  ? 'Hjem'      : 'Home';
-    $aboutLabel = $no ? 'Numerologi' : 'About';
+    $aboutLabel = $no ? 'Om numerologi' : 'About numerology';
     $srvLabel  = $no  ? 'Tjenester' : 'Services';
     $artLabel  = $no  ? 'Artikler'  : 'Articles';
-    $ctaLabel  = $no  ? 'Bestill'   : 'Order';
+    $contactLabel = $no ? 'Kontakt' : 'Contact';
 
     echo <<<HTML
 <nav class="l-nav" aria-label="{$navLabel}">
@@ -59,7 +59,7 @@ function render_header(string $pageTitle, array $seo = []): void
       <li><a href="/discover-numerology/">{$aboutLabel}</a></li>
       <li><a href="/#tjenester">{$srvLabel}</a></li>
       <li><a href="/articles/">{$artLabel}</a></li>
-      <li><a href="/intake/" class="l-btn-sm">{$ctaLabel}</a></li>
+      <li><a href="/contact-qa/">{$contactLabel}</a></li>
     </ul>
     <div class="l-nav-right">
       <div class="l-lang" aria-label="Velg språk / Select language">
