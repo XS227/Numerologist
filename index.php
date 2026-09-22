@@ -80,18 +80,25 @@ $numData = [
 [$todayTitle, $todayEssence] = $numData[$lang][$todayNum] ?? $numData[$lang][1];
 
 // ── Calculator (PHP fallback for no-JS) ─────────────────────────────────────
+require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/data.php';
 $calcResult = null;
 $calcError  = null;
 $calcName   = '';
 $calcDate   = '';
+$calcCode   = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $calcName = trim((string) ($_POST['full_name'] ?? ''));
     $calcDate = (string) ($_POST['birth_date'] ?? '');
+    $calcCode = trim((string) ($_POST['access_code'] ?? ''));
     if ($calcName === '' || $calcDate === '') {
         $calcError = $no
             ? 'Fyll inn fullt navn og fødselsdato.'
             : 'Please enter your full name and date of birth.';
+    } elseif ($calcCode !== CALCULATOR_ACCESS_CODE) {
+        $calcError = $no
+            ? 'Feil tilgangskode — sjekk med Åse og prøv igjen.'
+            : "That code isn't right — check with Åse and try again.";
     } else {
         $calcResult = calculate_numerology($calcName, $calcDate);
     }
@@ -700,6 +707,19 @@ $serviceSchemas = [
                      value="<?= htmlspecialchars($calcDate) ?>"
                      max="<?= date('Y-m-d') ?>">
             </div>
+            <div class="field">
+              <label for="access_code"><?= $no ? 'Tilgangskode' : 'Access code' ?></label>
+              <input type="text" id="access_code" name="access_code"
+                     value="<?= htmlspecialchars($calcCode) ?>"
+                     inputmode="numeric" autocomplete="off" maxlength="3"
+                     placeholder="•••">
+              <span id="codeHint" style="color:#c62828;font-size:.85rem;display:block;margin-top:.25rem"></span>
+              <p class="section-sub" style="margin:.35rem 0 0;font-size:.85rem">
+                <?= $no
+                  ? 'Denne kalkulatoren prøves ut med en liten gruppe først — spør Åse om gjeldende kode.'
+                  : 'This calculator is being tried out with a small group first — ask Åse for the current code.' ?>
+              </p>
+            </div>
             <button type="submit" class="btn btn-primary btn-full"><?= htmlspecialchars($T['calc_submit']) ?></button>
           </form>
 
@@ -978,22 +998,43 @@ $serviceSchemas = [
   }
 
   function calcName(name, filter) {
-    var letters = name.toUpperCase().replace(/[^A-ZÆØÅ]/g,'').split('');
-    var sum = 0;
-    letters.forEach(function(c) {
-      if (!filter || filter[c]) sum += (LMAP[c] || 0);
+    // Reduce each word separately, then sum and reduce again — matches the
+    // server-side PHP/Django fix (flat-summing the whole name can land on a
+    // false master number a per-word reduction would never hit).
+    var words = name.toUpperCase().split(/\s+/).filter(Boolean);
+    var total = 0;
+    words.forEach(function(word) {
+      var letters = word.replace(/[^A-ZÆØÅ]/g,'').split('');
+      var wordSum = 0;
+      letters.forEach(function(c) {
+        if (!filter || filter[c]) wordSum += (LMAP[c] || 0);
+      });
+      if (wordSum > 0) total += reduce(wordSum);
     });
-    return reduce(sum);
+    return reduce(total);
   }
 
   function calcDate(dateStr) {
-    var digits = dateStr.replace(/\D/g,'');
-    return reduce(digits.split('').reduce(function(s,d){return s+parseInt(d,10);},0));
+    // <input type="date"> always gives YYYY-MM-DD; reduce day/month/year
+    // separately before summing, same as calcName's per-part approach.
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateStr);
+    if (!m) {
+      var digits = dateStr.replace(/\D/g,'');
+      return reduce(digits.split('').reduce(function(s,d){return s+parseInt(d,10);},0));
+    }
+    var year  = reduce(parseInt(m[1],10));
+    var month = reduce(parseInt(m[2],10));
+    var day   = reduce(parseInt(m[3],10));
+    return reduce(year + month + day);
   }
 
   // ── Live calculator ──────────────────────────────────────────────────────
   var nameInput = document.getElementById('full_name');
   var dateInput = document.getElementById('birth_date');
+  var codeInput = document.getElementById('access_code');
+  var codeHintEl = document.getElementById('codeHint');
+  var ACCESS_CODE = <?= json_encode(CALCULATOR_ACCESS_CODE) ?>;
+  var WRONG_CODE_TEXT = <?= json_encode($no ? 'Feil kode.' : "That code isn't right.") ?>;
   var resIds    = {
     '<?= $T['calc_lp'] ?>': 'life-path',
     '<?= $T['calc_ex'] ?>': 'expression',
@@ -1012,7 +1053,14 @@ $serviceSchemas = [
   function updateResults() {
     var name = nameInput ? nameInput.value : '';
     var date = dateInput ? dateInput.value : '';
+    var code = codeInput ? codeInput.value.trim() : '';
     if (!name || !date) return;
+
+    if (code !== ACCESS_CODE) {
+      if (codeHintEl) codeHintEl.textContent = code ? WRONG_CODE_TEXT : '';
+      return;
+    }
+    if (codeHintEl) codeHintEl.textContent = '';
 
     var consonants = {};
     Object.keys(LMAP).forEach(function(c){ if (!VOWELS[c]) consonants[c] = 1; });
@@ -1079,6 +1127,7 @@ $serviceSchemas = [
 
   if (nameInput) nameInput.addEventListener('input', updateResults);
   if (dateInput) dateInput.addEventListener('change', updateResults);
+  if (codeInput) codeInput.addEventListener('input', updateResults);
 
   // Prevent full page reload — JS handles it
   var form = document.getElementById('calcForm');

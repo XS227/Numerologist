@@ -37,26 +37,48 @@ function letter_value(string $letter): int
 
 function reduce_name(string $name, ?array $filterLetters = null): int
 {
-    $sum = 0;
-    $letters = preg_split('//u', mb_strtoupper($name), -1, PREG_SPLIT_NO_EMPTY);
+    // Reduce each word to its own digit/master number first, then sum those
+    // and reduce again — NOT a flat sum of every letter in the full string.
+    // Summing the whole name at once can land on a false master number a
+    // per-word reduction would never hit (e.g. consonants of "MAHSA AMINI":
+    // flat sum -> 22 [wrong]; per-word -> 13 -> 4).
+    $words = preg_split('/\s+/u', trim($name), -1, PREG_SPLIT_NO_EMPTY);
+    $total = 0;
 
-    foreach ($letters as $letter) {
-        if (!preg_match('/\p{L}/u', $letter)) {
-            continue;
+    foreach ($words as $word) {
+        $letters = preg_split('//u', mb_strtoupper($word), -1, PREG_SPLIT_NO_EMPTY);
+        $wordSum = 0;
+        foreach ($letters as $letter) {
+            if (!preg_match('/\p{L}/u', $letter)) {
+                continue;
+            }
+            if ($filterLetters !== null && !in_array($letter, $filterLetters, true)) {
+                continue;
+            }
+            $wordSum += letter_value($letter);
         }
-        if ($filterLetters !== null && !in_array($letter, $filterLetters, true)) {
-            continue;
+        if ($wordSum > 0) {
+            $total += reduce_number($wordSum);
         }
-        $sum += letter_value($letter);
     }
 
-    return reduce_number($sum);
+    return reduce_number($total);
 }
 
 function calculate_numerology(string $fullName, string $birthDate): array
 {
-    $dateDigits = preg_replace('/\D/', '', $birthDate) ?? '';
-    $lifePath = reduce_number((int) $dateDigits);
+    // Day, month, and year are each reduced separately before being summed
+    // and reduced again — same per-part methodology as reduce_name(), rather
+    // than reducing every digit of the date in one flat pass.
+    if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $birthDate, $m)) {
+        $year  = reduce_number((int) $m[1]);
+        $month = reduce_number((int) $m[2]);
+        $day   = reduce_number((int) $m[3]);
+        $lifePath = reduce_number($year + $month + $day);
+    } else {
+        $dateDigits = preg_replace('/\D/', '', $birthDate) ?? '';
+        $lifePath = reduce_number((int) $dateDigits);
+    }
 
     $vowels = ['A', 'E', 'I', 'O', 'U', 'Y', 'Æ', 'Ø', 'Å'];
     $allLetters = array_keys([

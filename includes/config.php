@@ -35,6 +35,12 @@ define('VIPPS_BASE_URL',         VIPPS_TEST_MODE
     ? 'https://apitest.vipps.no'
     : 'https://api.vipps.no');
 
+// ── Lite calculator soft-launch gate ──────────────────────────────────────────
+// 3-digit code visitors must enter to reveal their result while the homepage
+// calculator is tried out with trusted testers only. Mirrors
+// CALCULATOR_ACCESS_CODE on the Django side (same .env key, same value).
+define('CALCULATOR_ACCESS_CODE', env('CALCULATOR_ACCESS_CODE', '227'));
+
 // ── Mail ──────────────────────────────────────────────────────────────────────
 define('MAIL_FROM',      env('MAIL_FROM',      'noreply@numerologist.setai.no'));
 define('MAIL_FROM_NAME', env('MAIL_FROM_NAME', 'Numerologist – Åse Steinsland'));
