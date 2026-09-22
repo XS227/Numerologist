@@ -66,6 +66,50 @@
       padding-inline-start: 0;
       padding-inline-end: 1.25rem;
     }
+    .calculator-card {
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    a.calculator-card:hover,
+    a.calculator-card:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 26px 50px rgba(16, 12, 40, 0.12);
+      text-decoration: none;
+    }
+    .calculator-card--soon {
+      border-style: dashed;
+      opacity: 0.92;
+    }
+    .calculator-card__badge {
+      justify-self: start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .calculator-card--live .calculator-card__badge {
+      background: rgba(60, 177, 121, 0.14);
+      color: #2d8f60;
+    }
+    .calculator-card--soon .calculator-card__badge {
+      background: rgba(31, 31, 31, 0.08);
+      color: rgba(31, 31, 31, 0.6);
+    }
+    .calculator-card__cta {
+      margin-top: 0.35rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--accent);
+    }
+    .calculator-card--soon .calculator-card__cta { color: rgba(31, 31, 31, 0.55); }
+
     .calculator-cta {
       display: flex;
       flex-wrap: wrap;
@@ -124,7 +168,8 @@
     </p>
   </div>
   <div class="calculator-grid" role="list">
-    <article class="calculator-card" role="listitem">
+    <a class="calculator-card calculator-card--live" role="listitem" href="/#kalkulator">
+      <span class="calculator-card__badge">{% trans "Live" %}</span>
       <h2>{% trans "Life Path Number" %}</h2>
       <p>{% trans "The rhythm of your life lessons revealed through your birth date." %}</p>
       <ul>
@@ -132,8 +177,10 @@
         <li>{% trans "Honours master numbers 11, 22, and 33 during reduction" %}</li>
         <li>{% trans "Guides the milestones and curriculum of your lifetime" %}</li>
       </ul>
-    </article>
-    <article class="calculator-card" role="listitem">
+      <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
+    </a>
+    <a class="calculator-card calculator-card--live" role="listitem" href="/#kalkulator">
+      <span class="calculator-card__badge">{% trans "Live" %}</span>
       <h2>{% trans "Expression Number" %}</h2>
       <p>{% trans "Highlights the talents and gifts encoded within your full name." %}</p>
       <ul>
@@ -141,8 +188,10 @@
         <li>{% trans "Shows how you naturally share your abilities with the world" %}</li>
         <li>{% trans "Balances what comes easily with where mastery is calling" %}</li>
       </ul>
-    </article>
-    <article class="calculator-card" role="listitem">
+      <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
+    </a>
+    <a class="calculator-card calculator-card--live" role="listitem" href="/#kalkulator">
+      <span class="calculator-card__badge">{% trans "Live" %}</span>
       <h2>{% trans "Soul Urge Number" %}</h2>
       <p>{% trans "The whisper of your heart’s deepest desires, drawn from the vowels in your name." %}</p>
       <ul>
@@ -150,8 +199,10 @@
         <li>{% trans "Reveals the emotional current beneath your decisions" %}</li>
         <li>{% trans "Illuminates the self-care practices that truly nourish" %}</li>
       </ul>
-    </article>
-    <article class="calculator-card" role="listitem">
+      <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
+    </a>
+    <a class="calculator-card calculator-card--live" role="listitem" href="/#kalkulator">
+      <span class="calculator-card__badge">{% trans "Live" %}</span>
       <h2>{% trans "Personality Number" %}</h2>
       <p>{% trans "The first impression you offer, measured through the consonants of your name." %}</p>
       <ul>
@@ -159,8 +210,10 @@
         <li>{% trans "Shows the doorway people walk through to meet you" %}</li>
         <li>{% trans "Helps refine your presence with deliberate intention" %}</li>
       </ul>
-    </article>
-    <article class="calculator-card" role="listitem">
+      <span class="calculator-card__cta">{% trans "Try the calculator" %} →</span>
+    </a>
+    <a class="calculator-card calculator-card--soon" role="listitem" href="{% url 'static_page' 'guidance-support' %}">
+      <span class="calculator-card__badge">{% trans "Coming soon" %}</span>
       <h2>{% trans "Compatibility Insight" %}</h2>
       <p>{% trans "Cross-reference two birth dates to understand shared lessons and harmony." %}</p>
       <ul>
@@ -168,8 +221,10 @@
         <li>{% trans "Spotlights master number pairings" %}</li>
         <li>{% trans "Offers prompts for nourishing the relationship" %}</li>
       </ul>
-    </article>
-    <article class="calculator-card" role="listitem">
+      <span class="calculator-card__cta">{% trans "Included in a personal session with Åse for now" %} →</span>
+    </a>
+    <a class="calculator-card calculator-card--soon" role="listitem" href="{% url 'static_page' 'guidance-support' %}">
+      <span class="calculator-card__badge">{% trans "Coming soon" %}</span>
       <h2>{% trans "Personal Year Forecast" %}</h2>
       <p>{% trans "Discover the focus of the year you’re currently walking through." %}</p>
       <ul>
@@ -177,7 +232,8 @@
         <li>{% trans "Places it in context with your overarching life path" %}</li>
         <li>{% trans "Invites rituals to partner with the year’s momentum" %}</li>
       </ul>
-    </article>
+      <span class="calculator-card__cta">{% trans "Included in a personal session with Åse for now" %} →</span>
+    </a>
   </div>
   <div class="calculator-cta">
     <a class="calculator-button calculator-button--primary" href="/">{% trans "Return to intake" %}</a>

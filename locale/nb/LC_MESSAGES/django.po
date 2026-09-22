@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Numerologist\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-22 15:17+0000\n"
+"POT-Creation-Date: 2026-09-22 16:07+0000\n"
 "PO-Revision-Date: 2026-07-12 00:00+0000\n"
 "Last-Translator: Numerologist\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -24,7 +24,7 @@ msgstr "En introduksjon til numerologi med Åse Steinsland: metodens pytagoreisk
 
 #: tall_project/navigation.py:46 tall_project/navigation.py:305
 #: tall_project/templates/pages/calculators.html:4
-#: tall_project/templates/pages/calculators.html:117
+#: tall_project/templates/pages/calculators.html:161
 msgid "Calculator suite"
 msgstr "Kalkulatorsamling"
 
@@ -77,7 +77,7 @@ msgid "How personal numerology insights — destiny, name, and life-stage number
 msgstr "Hvordan personlig numerologisk innsikt — skjebnetall, navnetall og livsfasetall — henger sammen til én helhetlig tolkning av din vei."
 
 #: tall_project/navigation.py:100 tall_project/navigation.py:324
-#: tall_project/templates/pages/calculators.html:191
+#: tall_project/templates/pages/calculators.html:247
 #: tall_project/templates/pages/personal-insights.html:18
 msgid "Compute Your Destiny Number"
 msgstr "Beregn ditt skjebnetall"
@@ -213,7 +213,7 @@ msgid "A closer analytical look at numerical patterns in Quranic tradition — s
 msgstr "Et nærmere analytisk blikk på tallmønstre i koransk tradisjon — se Koransk numerologi for hele oversikten."
 
 #: tall_project/navigation.py:236 tall_project/navigation.py:353
-#: tall_project/templates/pages/calculators.html:196
+#: tall_project/templates/pages/calculators.html:252
 msgid "Guidance & Support"
 msgstr "Veiledning og støtte"
 
@@ -296,178 +296,182 @@ msgid "Articles & Library"
 msgstr "Artikler og bibliotek"
 
 #: tall_project/templates/articles/detail.html:117
-#: tall_project/templates/articles/detail_mahsa_bita.html:387
+#: tall_project/templates/articles/detail_mahsa_bita.html:492
 msgid "Back to articles"
 msgstr "Tilbake til artikler"
 
 #: tall_project/templates/articles/detail.html:120
-#: tall_project/templates/articles/detail_mahsa_bita.html:390
+#: tall_project/templates/articles/detail_mahsa_bita.html:495
 msgid "All articles"
 msgstr "Alle artikler"
 
 #: tall_project/templates/articles/detail.html:126
-#: tall_project/templates/articles/detail_mahsa_bita.html:407
+#: tall_project/templates/articles/detail_mahsa_bita.html:512
 msgid "Numerologist library"
 msgstr "Numerolog-bibliotek"
 
 #: tall_project/templates/articles/detail.html:129
-#: tall_project/templates/articles/detail_mahsa_bita.html:411
+#: tall_project/templates/articles/detail_mahsa_bita.html:516
 #: tall_project/templates/articles/list.html:242
 #, python-format
 msgid "By %(author)s"
 msgstr "Av %(author)s"
 
 #: tall_project/templates/articles/detail.html:131
-#: tall_project/templates/articles/detail_mahsa_bita.html:412
+#: tall_project/templates/articles/detail_mahsa_bita.html:517
 #, python-format
 msgid "Published %(date)s"
 msgstr "Publisert %(date)s"
 
 #: tall_project/templates/articles/detail.html:136
-#: tall_project/templates/articles/detail_mahsa_bita.html:416
+#: tall_project/templates/articles/detail_mahsa_bita.html:521
 msgid "View original source"
 msgstr "Se originalkilden"
 
 # ── Article detail (detail.html) ─────────────────────────────────────
 #: tall_project/templates/articles/detail.html:151
-#: tall_project/templates/articles/detail_mahsa_bita.html:547
+#: tall_project/templates/articles/detail_mahsa_bita.html:692
 msgid "AI insight"
 msgstr "AI-innsikt"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:407
+#: tall_project/templates/articles/detail_mahsa_bita.html:512
 msgid "Comparative reflection"
 msgstr "Sammenlignende refleksjon"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:409
+#: tall_project/templates/articles/detail_mahsa_bita.html:514
 msgid "Two young women, two continents, one age at parting — a side-by-side look at the numbers woven through their names, dates, and stories."
 msgstr "To unge kvinner, to kontinenter, samme alder ved bortgang — et side-om-side-blikk på tallene vevd inn i navnene, datoene og historiene deres."
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:433
+#: tall_project/templates/articles/detail_mahsa_bita.html:538
 msgid "Sept. 21, 1999 – Sept. 16, 2022 · Tehran, Iran"
 msgstr "21. sep. 1999 – 16. sep. 2022 · Teheran, Iran"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:436
-#: tall_project/templates/articles/detail_mahsa_bita.html:477
+#: tall_project/templates/articles/detail_mahsa_bita.html:541
+#: tall_project/templates/articles/detail_mahsa_bita.html:582
 msgid "Age at passing"
 msgstr "Alder ved bortgang"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:439
-#: tall_project/templates/articles/detail_mahsa_bita.html:480
+#: tall_project/templates/articles/detail_mahsa_bita.html:544
+#: tall_project/templates/articles/detail_mahsa_bita.html:585
 #: tall_project/templates/pages/home.html:584
 msgid "Life Path"
 msgstr "Livsvei"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:441
+#: tall_project/templates/articles/detail_mahsa_bita.html:546
 msgid "The builder"
 msgstr "Byggeren"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:444
-#: tall_project/templates/articles/detail_mahsa_bita.html:485
+#: tall_project/templates/articles/detail_mahsa_bita.html:549
+#: tall_project/templates/articles/detail_mahsa_bita.html:590
 #: tall_project/templates/pages/home.html:589
 msgid "Expression"
 msgstr "Uttrykk"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:446
+#: tall_project/templates/articles/detail_mahsa_bita.html:551
 msgid "Seeker of truth"
 msgstr "Sannhetssøker"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:449
-#: tall_project/templates/articles/detail_mahsa_bita.html:490
+#: tall_project/templates/articles/detail_mahsa_bita.html:554
+#: tall_project/templates/articles/detail_mahsa_bita.html:595
 #: tall_project/templates/pages/home.html:594
 msgid "Soul Urge"
 msgstr "Sjelstall"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:451
+#: tall_project/templates/articles/detail_mahsa_bita.html:556
 msgid "Joy & expression"
 msgstr "Glede og uttrykk"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:454
-#: tall_project/templates/articles/detail_mahsa_bita.html:495
+#: tall_project/templates/articles/detail_mahsa_bita.html:559
+#: tall_project/templates/articles/detail_mahsa_bita.html:600
 #: tall_project/templates/pages/home.html:599
 msgid "Personality"
 msgstr "Personlighet"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:456
+#: tall_project/templates/articles/detail_mahsa_bita.html:561
 msgid "Grounded & steady"
 msgstr "Jordnær og stø"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:461
-#: tall_project/templates/articles/detail_mahsa_bita.html:502
+#: tall_project/templates/articles/detail_mahsa_bita.html:566
+#: tall_project/templates/articles/detail_mahsa_bita.html:607
 msgid "Abjad"
 msgstr "Abjad"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:474
+#: tall_project/templates/articles/detail_mahsa_bita.html:579
 msgid "Apr. 13, 2002 – Aug. 11, 2024 · Asker, Norway"
 msgstr "13. apr. 2002 – 11. aug. 2024 · Asker, Norge"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:482
+#: tall_project/templates/articles/detail_mahsa_bita.html:587
 msgid "Creative optimism"
 msgstr "Kreativ optimisme"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:487
+#: tall_project/templates/articles/detail_mahsa_bita.html:592
 msgid "Builder & carer"
 msgstr "Bygger og omsorgsperson"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:492
+#: tall_project/templates/articles/detail_mahsa_bita.html:597
 msgid "Wants closeness"
 msgstr "Ønsker nærhet"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:497
+#: tall_project/templates/articles/detail_mahsa_bita.html:602
 msgid "Quietly luminous"
 msgstr "Stille lysende"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:508
+#: tall_project/templates/articles/detail_mahsa_bita.html:613
 msgid "Numbers that echo through both stories"
 msgstr "Tall som gjenklinger gjennom begge historiene"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:510
+#: tall_project/templates/articles/detail_mahsa_bita.html:615
 msgid "shared age at passing"
 msgstr "delt alder ved bortgang"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:511
+#: tall_project/templates/articles/detail_mahsa_bita.html:616
 msgid "structure · foundation"
 msgstr "struktur · fundament"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:512
+#: tall_project/templates/articles/detail_mahsa_bita.html:617
 msgid "spiritual seeking"
 msgstr "åndelig søken"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:513
+#: tall_project/templates/articles/detail_mahsa_bita.html:618
 msgid "illumination"
 msgstr "opplysning"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:514
+#: tall_project/templates/articles/detail_mahsa_bita.html:619
 msgid "partnership · unity"
 msgstr "partnerskap · enhet"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:515
+#: tall_project/templates/articles/detail_mahsa_bita.html:620
 msgid "completion"
 msgstr "fullendelse"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:520
+#: tall_project/templates/articles/detail_mahsa_bita.html:625
 msgid "Two lifelines, one age"
 msgstr "To livslinjer, én alder"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:522
-#: tall_project/templates/articles/detail_mahsa_bita.html:527
+#: tall_project/templates/articles/detail_mahsa_bita.html:627
+#: tall_project/templates/articles/detail_mahsa_bita.html:632
 msgid "born"
 msgstr "født"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:524
+#: tall_project/templates/articles/detail_mahsa_bita.html:629
 msgid "Sept. 2022"
 msgstr "sep. 2022"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:529
+#: tall_project/templates/articles/detail_mahsa_bita.html:634
 msgid "Aug. 2024"
 msgstr "aug. 2024"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:532
+#: tall_project/templates/articles/detail_mahsa_bita.html:637
 msgid "days apart"
 msgstr "dager mellom"
 
-#: tall_project/templates/articles/detail_mahsa_bita.html:533
+#: tall_project/templates/articles/detail_mahsa_bita.html:638
 msgid "≈ 99 weeks between their passings — 695 reduces to 2, and 99 reduces to 9, the same digits their death dates each carry."
 msgstr "≈ 99 uker mellom bortgangene — 695 reduseres til 2, og 99 reduseres til 9, de samme sifrene som dødsdatoene deres hver for seg bærer."
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:644
+msgid "In this article"
+msgstr "I denne artikkelen"
 
 #: tall_project/templates/articles/list.html:210
 msgid "Numerologist Studio"
@@ -709,143 +713,167 @@ msgstr "Når mesternumre skal beholdes urørt, og når de skal reduseres videre.
 msgid "How personal years, months, and days build on foundational calculations."
 msgstr "Hvordan personlige år, måneder og dager bygger videre på grunnleggende beregninger."
 
-#: tall_project/templates/pages/calculators.html:118
+#: tall_project/templates/pages/calculators.html:162
 msgid "Every numerology calculator at a glance"
 msgstr "Alle numerologikalkulatorene på ett sted"
 
-#: tall_project/templates/pages/calculators.html:120
+#: tall_project/templates/pages/calculators.html:164
 msgid "\n        Explore the individual tools Åse references while preparing a full master analysis. Each calculator can be explored on its\n        own so you can see how the pieces fit together before or after your full session.\n      "
 msgstr "\n        Utforsk de enkelte verktøyene Åse bruker som referanse når hun forbereder en full masteranalyse. Hver kalkulator kan utforskes på egen\n        hånd, slik at du ser hvordan bitene henger sammen før eller etter hele økten din.\n      "
 
-#: tall_project/templates/pages/calculators.html:128
+#: tall_project/templates/pages/calculators.html:172
+#: tall_project/templates/pages/calculators.html:183
+#: tall_project/templates/pages/calculators.html:194
+#: tall_project/templates/pages/calculators.html:205
+msgid "Live"
+msgstr "Aktiv"
+
+#: tall_project/templates/pages/calculators.html:173
 msgid "Life Path Number"
 msgstr "Livsveitall"
 
-#: tall_project/templates/pages/calculators.html:129
+#: tall_project/templates/pages/calculators.html:174
 msgid "The rhythm of your life lessons revealed through your birth date."
 msgstr "Rytmen i livets lærdommer, avdekket gjennom fødselsdatoen din."
 
-#: tall_project/templates/pages/calculators.html:131
+#: tall_project/templates/pages/calculators.html:176
 msgid "Breaks your birth date into core digits"
 msgstr "Bryter fødselsdatoen din ned i grunnsifre"
 
-#: tall_project/templates/pages/calculators.html:132
+#: tall_project/templates/pages/calculators.html:177
 msgid "Honours master numbers 11, 22, and 33 during reduction"
 msgstr "Bevarer mesternumrene 11, 22 og 33 under reduksjon"
 
-#: tall_project/templates/pages/calculators.html:133
+#: tall_project/templates/pages/calculators.html:178
 msgid "Guides the milestones and curriculum of your lifetime"
 msgstr "Veileder milepælene og læreplanen for livet ditt"
 
-#: tall_project/templates/pages/calculators.html:137
+#: tall_project/templates/pages/calculators.html:180
+#: tall_project/templates/pages/calculators.html:191
+#: tall_project/templates/pages/calculators.html:202
+#: tall_project/templates/pages/calculators.html:213
+msgid "Try the calculator"
+msgstr "Prøv kalkulatoren"
+
+#: tall_project/templates/pages/calculators.html:184
 msgid "Expression Number"
 msgstr "Uttrykkstall"
 
-#: tall_project/templates/pages/calculators.html:138
+#: tall_project/templates/pages/calculators.html:185
 msgid "Highlights the talents and gifts encoded within your full name."
 msgstr "Fremhever talentene og gavene kodet inn i hele navnet ditt."
 
-#: tall_project/templates/pages/calculators.html:140
+#: tall_project/templates/pages/calculators.html:187
 msgid "Maps each letter to its Pythagorean value"
 msgstr "Kobler hver bokstav til sin pytagoreiske verdi"
 
-#: tall_project/templates/pages/calculators.html:141
+#: tall_project/templates/pages/calculators.html:188
 msgid "Shows how you naturally share your abilities with the world"
 msgstr "Viser hvordan du naturlig deler evnene dine med verden"
 
-#: tall_project/templates/pages/calculators.html:142
+#: tall_project/templates/pages/calculators.html:189
 msgid "Balances what comes easily with where mastery is calling"
 msgstr "Balanserer det som kommer lett, med det som kaller på mestring"
 
-#: tall_project/templates/pages/calculators.html:146
+#: tall_project/templates/pages/calculators.html:195
 msgid "Soul Urge Number"
 msgstr "Sjelstall"
 
-#: tall_project/templates/pages/calculators.html:147
+#: tall_project/templates/pages/calculators.html:196
 msgid "The whisper of your heart’s deepest desires, drawn from the vowels in your name."
 msgstr "Hviskingen av hjertets dypeste ønsker, hentet fra vokalene i navnet ditt."
 
-#: tall_project/templates/pages/calculators.html:149
+#: tall_project/templates/pages/calculators.html:198
 msgid "Connects you with motivations that keep you inspired"
 msgstr "Kobler deg til motivasjonen som holder deg inspirert"
 
-#: tall_project/templates/pages/calculators.html:150
+#: tall_project/templates/pages/calculators.html:199
 msgid "Reveals the emotional current beneath your decisions"
 msgstr "Avdekker den følelsesmessige understrømmen bak beslutningene dine"
 
-#: tall_project/templates/pages/calculators.html:151
+#: tall_project/templates/pages/calculators.html:200
 msgid "Illuminates the self-care practices that truly nourish"
 msgstr "Belyser egenomsorgspraksisene som virkelig gir næring"
 
-#: tall_project/templates/pages/calculators.html:155
+#: tall_project/templates/pages/calculators.html:206
 msgid "Personality Number"
 msgstr "Personlighetstall"
 
-#: tall_project/templates/pages/calculators.html:156
+#: tall_project/templates/pages/calculators.html:207
 msgid "The first impression you offer, measured through the consonants of your name."
 msgstr "Førsteinntrykket du gir, målt gjennom konsonantene i navnet ditt."
 
-#: tall_project/templates/pages/calculators.html:158
+#: tall_project/templates/pages/calculators.html:209
 msgid "Describes how others initially perceive your energy"
 msgstr "Beskriver hvordan andre først oppfatter energien din"
 
-#: tall_project/templates/pages/calculators.html:159
+#: tall_project/templates/pages/calculators.html:210
 msgid "Shows the doorway people walk through to meet you"
 msgstr "Viser døren folk går gjennom for å møte deg"
 
-#: tall_project/templates/pages/calculators.html:160
+#: tall_project/templates/pages/calculators.html:211
 msgid "Helps refine your presence with deliberate intention"
 msgstr "Hjelper deg å forfine din tilstedeværelse med bevisst intensjon"
 
-#: tall_project/templates/pages/calculators.html:164
+#: tall_project/templates/pages/calculators.html:216
+#: tall_project/templates/pages/calculators.html:227
+msgid "Coming soon"
+msgstr "Kommer snart"
+
+#: tall_project/templates/pages/calculators.html:217
 msgid "Compatibility Insight"
 msgstr "Kompatibilitetsinnsikt"
 
-#: tall_project/templates/pages/calculators.html:165
+#: tall_project/templates/pages/calculators.html:218
 msgid "Cross-reference two birth dates to understand shared lessons and harmony."
 msgstr "Sammenlign to fødselsdatoer for å forstå felles lærdommer og harmoni."
 
-#: tall_project/templates/pages/calculators.html:167
+#: tall_project/templates/pages/calculators.html:220
 msgid "Compares combined life path cycles"
 msgstr "Sammenligner kombinerte livsveisykluser"
 
-#: tall_project/templates/pages/calculators.html:168
+#: tall_project/templates/pages/calculators.html:221
 msgid "Spotlights master number pairings"
 msgstr "Setter søkelys på mesternummer-kombinasjoner"
 
-#: tall_project/templates/pages/calculators.html:169
+#: tall_project/templates/pages/calculators.html:222
 msgid "Offers prompts for nourishing the relationship"
 msgstr "Gir innspill for å nære forholdet"
 
-#: tall_project/templates/pages/calculators.html:173
+#: tall_project/templates/pages/calculators.html:224
+#: tall_project/templates/pages/calculators.html:235
+msgid "Included in a personal session with Åse for now"
+msgstr "Foreløpig inkludert i en personlig time med Åse"
+
+#: tall_project/templates/pages/calculators.html:228
 msgid "Personal Year Forecast"
 msgstr "Personlig årsprognose"
 
-#: tall_project/templates/pages/calculators.html:174
+#: tall_project/templates/pages/calculators.html:229
 msgid "Discover the focus of the year you’re currently walking through."
 msgstr "Oppdag fokuset for året du er inne i akkurat nå."
 
-#: tall_project/templates/pages/calculators.html:176
+#: tall_project/templates/pages/calculators.html:231
 msgid "Calculates your yearly vibration from your birth date"
 msgstr "Beregner din årlige vibrasjon fra fødselsdatoen din"
 
-#: tall_project/templates/pages/calculators.html:177
+#: tall_project/templates/pages/calculators.html:232
 msgid "Places it in context with your overarching life path"
 msgstr "Setter den i sammenheng med din overordnede livsvei"
 
-#: tall_project/templates/pages/calculators.html:178
+#: tall_project/templates/pages/calculators.html:233
 msgid "Invites rituals to partner with the year’s momentum"
 msgstr "Inviterer til ritualer som følger årets fremdrift"
 
-#: tall_project/templates/pages/calculators.html:183
+#: tall_project/templates/pages/calculators.html:239
 msgid "Return to intake"
 msgstr "Tilbake til inntak"
 
-#: tall_project/templates/pages/calculators.html:184
+#: tall_project/templates/pages/calculators.html:240
 msgid "Back to top"
 msgstr "Til toppen"
 
-#: tall_project/templates/pages/calculators.html:187
+#: tall_project/templates/pages/calculators.html:243
 #: tall_project/templates/pages/discover-numerology.html:32
 #: tall_project/templates/pages/guidance-support.html:24
 #: tall_project/templates/pages/number-detail.html:34
@@ -853,23 +881,23 @@ msgstr "Til toppen"
 msgid "Frequently asked questions"
 msgstr "Ofte stilte spørsmål"
 
-#: tall_project/templates/pages/calculators.html:189
+#: tall_project/templates/pages/calculators.html:245
 msgid "What is the difference between life path and destiny number?"
 msgstr "Hva er forskjellen mellom livsveitall og skjebnetall?"
 
-#: tall_project/templates/pages/calculators.html:190
+#: tall_project/templates/pages/calculators.html:246
 msgid "Life path is calculated from your birth date and describes the lessons of your lifetime. Destiny (expression) number is calculated from the letters in your full birth name and describes talents you are here to develop. See"
 msgstr "Livsveitall beregnes fra fødselsdatoen din og beskriver livets lærdommer. Skjebnetall (uttrykkstall) beregnes fra bokstavene i hele fødselsnavnet ditt og beskriver talenter du er her for å utvikle. Se"
 
-#: tall_project/templates/pages/calculators.html:194
+#: tall_project/templates/pages/calculators.html:250
 msgid "Are these calculators as accurate as a personal session?"
 msgstr "Er disse kalkulatorene like nøyaktige som en personlig time?"
 
-#: tall_project/templates/pages/calculators.html:195
+#: tall_project/templates/pages/calculators.html:251
 msgid "They use the same Pythagorean method Åse references, but a personal session adds interpretation specific to your situation. See"
 msgstr "De bruker den samme pytagoreiske metoden Åse bygger på, men en personlig time legger til tolkning spesifikk for din situasjon. Se"
 
-#: tall_project/templates/pages/calculators.html:196
+#: tall_project/templates/pages/calculators.html:252
 msgid "to book one."
 msgstr "for å bestille en."
 
