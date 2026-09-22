@@ -3,8 +3,7 @@
 from django.contrib import admin
 from django.http import HttpRequest, HttpResponse
 from django.urls import include, path
-
-from articles.views import ArticleListView
+from django.views.generic import RedirectView
 from intake.views import profile_numbers_api
 from tall_project.views import home, number_detail, static_page
 
@@ -19,7 +18,15 @@ urlpatterns = [
     path("documents/", include("wagtail.documents.urls")),
     path("intake/", include("intake.urls", namespace="intake")),
     path("i18n/", include("django.conf.urls.i18n")),
-    path("articles.html", ArticleListView.as_view(), name="article_list_legacy"),
+    # Old PHP-era URL — merged into /articles/ (was serving identical
+    # duplicate content under a second URL; now a permanent redirect so old
+    # links/bookmarks still land somewhere, without the duplicate-content /
+    # split-canonical problem).
+    path(
+        "articles.html",
+        RedirectView.as_view(pattern_name="article_list", permanent=True),
+        name="article_list_legacy",
+    ),
     path("articles/", include("articles.urls")),
     path("healthz/", health_check, name="health_check"),
     path("", home, name="home"),
