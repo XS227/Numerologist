@@ -468,6 +468,13 @@ def learning_content(slug, language):
         dict(value=n, letters=" · ".join(k for k, v in LETTER_VALUES.items() if v == n))
         for n in range(1, 10)
     ]
+    # Transposed for the compact 1–9 grid: one column per value, letters
+    # stacked beneath (Å, Æ and Ø make some columns one row taller).
+    columns = [[k for k, v in LETTER_VALUES.items() if v == n] for n in range(1, 10)]
+    lesson["chart_rows"] = [
+        [col[i] if i < len(col) else "" for col in columns]
+        for i in range(max(len(col) for col in columns))
+    ]
     lesson.setdefault("steps", [
         (
             t("Write the name", "Skriv navnet"),
@@ -521,38 +528,19 @@ def ase_content(language):
         return nb if no else en
 
     return dict(
-        eyebrow=t(
-            "Your guide / Åse Karin Steinsland", "Din veileder / Åse Karin Steinsland"
-        ),
-        title=t(
-            "Years of practice. A personal approach.",
-            "Mange års praksis. En personlig tilnærming.",
-        ),
+        eyebrow=t("Your guide", "Din veileder"),
+        title="Åse Karin Steinsland",
         body=t(
-            "Åse is a numerologist and life guide based outside Bergen. She"
-            " has created personal numerology analyses since 1997. Her work"
-            " brings a Pythagorean-inspired calculation method together "
-            "with a conversation about the person behind the numbers.",
-            "Åse er numerolog og livsveileder, bosatt utenfor Bergen. Hun "
-            "har laget personlige numerologiske analyser siden 1997. "
-            "Arbeidet hennes kombinerer en pytagoreisk inspirert "
-            "beregningsmetode med en samtale om mennesket bak tallene.",
+            "Numerologist and life guide near Bergen. Personal analyses since"
+            " 1997.",
+            "Numerolog og livsveileder ved Bergen. Personlige analyser siden "
+            "1997.",
         ),
         method=t(
-            "Calculate the parts. Then read the whole.",
-            "Beregn delene. Les deretter helheten.",
-        ),
-        explanation=t(
-            "Names are calculated part by part; day, month and year are "
-            "also treated separately. The number is a starting point for "
-            "interpretation. The website’s automatic calculation is "
-            "distinct from Åse’s personal analysis and guidance.",
-            "Navn beregnes del for del; dag, måned og år behandles også "
-            "separat. Tallet er et utgangspunkt for tolkning. Nettstedets "
-            "automatiske beregning er noe annet enn Åses personlige analyse"
-            " og veiledning.",
+            "“Calculate the parts. Then read the whole.”",
+            "«Beregn delene. Les deretter helheten.»",
         ),
         link=t("Meet Åse", "Møt Åse"),
         method_link=t("Learn the method", "Lær metoden"),
-        since=t("Personal analyses since 1997", "Personlige analyser siden 1997"),
+        since=t("Since 1997", "Siden 1997"),
     )

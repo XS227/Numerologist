@@ -2,8 +2,8 @@
 {% block title %}{{ lesson.title }} — Numerologist{% endblock %}
 {% block body_attrs %} class="number-journey"{% endblock %}
 {% block main %}
-<link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=2">
-<link rel="stylesheet" href="{% static 'journey/learning.css' %}">
+<link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'journey/learning.css' %}?v=3">
 <article class="j-story j-learning">
 <section class="j-hero lrn-hero" aria-labelledby="lesson-title"><div class="j-hero-visual"><img src="{% static 'journey/images/' %}{{ lesson.image }}.webp" class="j-parallax" data-speed="0.12" width="1536" height="1024" alt="{{ lesson.alt }}" fetchpriority="high"></div><div class="j-hero-content"><a class="lrn-back" href="/discover-numerology/">← {{ lesson.back }}</a><p class="j-eyebrow">{{ lesson.eyebrow }}</p><h1 id="lesson-title">{{ lesson.title }}</h1><p class="lrn-subtitle">{{ lesson.subtitle }}</p><p class="j-intro">{{ lesson.intro }}</p><a href="#lesson" class="j-button">{{ lesson.start }} ↓</a></div></section>
 <section id="lesson" class="lrn-intro"><p class="j-eyebrow">{{ lesson.eyebrow }}</p><h2>{{ lesson.section_title }}</h2><p>{{ lesson.section_body }}</p></section>
@@ -12,7 +12,7 @@
 <div class="lrn-number-grid">{% for n in lesson.numbers %}<section id="number-{{ n.number }}" class="lrn-number"><span class="lrn-digit" aria-hidden="true">{{ n.number }}</span><h2>{{ n.number }} · {{ n.title }}</h2><p class="lrn-label">{{ lesson.strengths }}</p><p>{{ n.invitation }}</p><p class="lrn-label">{{ lesson.balance }}</p><p>{{ n.balance }}</p><a href="/numbers/{{ n.number }}/">{{ lesson.read }} ↗</a></section>{% endfor %}</div>
 <section class="lrn-split"><img src="{% static 'journey/images/modern.webp' %}" width="1536" height="1024" alt="{{ lesson.art }}" loading="lazy"><div><p class="j-eyebrow">11 / 22 / 33</p><h2>{{ lesson.masters }}</h2><p>{{ lesson.masters_body }}</p><div class="lrn-master-links"><a href="/numbers/11/">11 / 2 ↗</a><a href="/numbers/22/">22 / 4 ↗</a><a href="/numbers/33/">33 / 6 ↗</a></div></div></section>
 {% elif lesson.kind == 'letters' %}
-<section class="lrn-chart"><h2>{{ lesson.chart_title }}</h2><table><caption>{{ lesson.chart_caption }}</caption><thead><tr><th scope="col">{{ lesson.value }}</th><th scope="col">{{ lesson.letters }}</th></tr></thead><tbody>{% for row in lesson.chart %}<tr><th scope="row">{{ row.value }}</th><td>{{ row.letters }}</td></tr>{% endfor %}</tbody></table></section>
+<section class="lrn-chart"><h2>{{ lesson.chart_title }}</h2><div class="lrn-chart-scroll"><table class="lrn-grid"><caption>{{ lesson.chart_caption }}</caption><thead><tr>{% for row in lesson.chart %}<th scope="col">{{ row.value }}</th>{% endfor %}</tr></thead><tbody>{% for row in lesson.chart_rows %}<tr>{% for letter in row %}<td>{{ letter }}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div></section>
 {% elif lesson.kind == 'method' %}
 <ol class="lrn-steps">{% for title,body in lesson.steps %}<li><span aria-hidden="true">0{{ forloop.counter }}</span><div><h2>{{ title }}</h2><p>{{ body }}</p></div></li>{% endfor %}</ol>
 {% endif %}

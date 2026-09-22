@@ -1,0 +1,99 @@
+/* Journey layer for the chapter-based articles: dark hero, dark chapter
+   "title bands" alternating with paper reading bands, big gold numerals,
+   a sticky chapter bar with reading progress and scroll reveals — so a long
+   article keeps its rhythm after the first sections. Per-article visuals
+   (name-breakdown, trait-grid, reign-chart …) keep their own styles and sit
+   on the light bands they were designed for. */
+.j-article main{padding:0}
+.j-article .layout{display:block;max-width:none;gap:0}
+.j-article h1,.j-article h2,.j-article h3{font-family:Georgia,'Times New Roman',serif;font-weight:400;letter-spacing:-.03em}
+
+/* Reading progress */
+.ja-progress{position:fixed;top:0;left:0;height:3px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#c6a775,#e2cba2);z-index:60;pointer-events:none}
+
+/* Back link */
+.j-article .article-breadcrumb{max-width:1080px;margin:0 auto;padding:26px 6% 0;font-size:.9rem}
+.j-article .article-breadcrumb a{border:1px solid #c6a77570;color:#d7dfd8;background:none;border-radius:999px}
+.j-article .article-breadcrumb a:hover,.j-article .article-breadcrumb a:focus{background:#c6a77522;color:#e2cba2}
+
+/* Shell */
+.j-article .article-detail{display:block;background:none;border:0;border-radius:0;box-shadow:none;padding:0;color:#f3f0e8}
+
+/* Hero header */
+.j-article .article-detail__header,.j-article .mb-header{position:relative;max-width:none;margin:0;padding:clamp(56px,10vw,120px) 6% clamp(64px,9vw,110px);text-align:center;display:grid;justify-items:center;gap:18px;background:radial-gradient(ellipse at 50% 0%,#c6a77533,transparent 62%)}
+.j-article .article-detail__header:after,.j-article .mb-header:after{content:'↓';display:block;margin-top:26px;color:#c6a775;font-size:1.3rem;animation:ja-bob 2.4s ease-in-out infinite}
+.j-article .article-detail__eyebrow{color:#c6a775;letter-spacing:.18em;font-size:.78rem}
+.j-article .article-detail__title{color:#f3f0e8;font-size:clamp(2.5rem,7vw,5.2rem);line-height:1.04;max-width:16ch;margin:0 auto}
+.j-article .mb-subtitle{color:#bdccc7;max-width:620px;margin:0 auto;font-size:1.15rem}
+.j-article .article-detail__meta{justify-content:center}
+.j-article .article-detail__meta span{background:none;border:1px solid #c6a77570;color:#e2cba2}
+.j-article .article-detail__source{color:#e2cba2}
+
+/* Lead paragraph — large serif on the dark ground */
+.j-article .chapter-lead{max-width:760px;margin:0 auto;padding:0 6% clamp(50px,8vw,90px);color:#dce3df;font-family:Georgia,serif;font-size:clamp(1.2rem,2.4vw,1.45rem);line-height:1.7}
+.j-article .chapter-lead p:first-of-type::first-letter{color:#c6a775;font-weight:400;font-family:Georgia,serif}
+
+/* Sticky chapter bar */
+.j-article .article-toc,.j-article .mb-toc{position:sticky;top:0;z-index:40;display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0;padding:12px 6%;border:0;border-radius:0;border-top:1px solid #c6a77533;border-bottom:1px solid #c6a77533;background:#092426f0;backdrop-filter:blur(8px)}
+.j-article .article-toc::-webkit-scrollbar,.j-article .mb-toc::-webkit-scrollbar{display:none}
+.j-article .article-toc a,.j-article .mb-toc a{flex:0 0 auto;white-space:nowrap;background:none;border:1px solid #c6a77550;color:#d7dfd8;border-radius:999px;padding:7px 14px;font-size:.8rem;font-weight:600;text-decoration:none;transition:background .3s,color .3s}
+.j-article .article-toc a span,.j-article .mb-toc a span{background:#c6a775;color:#092426}
+.j-article .article-toc a.is-active,.j-article .mb-toc a.is-active{background:#c6a775;color:#092426;border-color:#c6a775}
+.j-article .article-toc a.is-active span,.j-article .mb-toc a.is-active span{background:#092426;color:#e2cba2}
+
+/* Chapters: dark title band + paper reading band */
+.j-article .article-detail__body{display:block;color:#102f31}
+.j-article .chapter{display:block;border:0;padding:0 0 clamp(56px,8vw,96px);background:#f3f0e8;color:#102f31;scroll-margin-top:56px}
+.j-article .chapter:nth-child(even){background:#e8e5dc}
+.j-article .chapter-head{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:clamp(56px,9vw,110px) 6% clamp(44px,6vw,70px);background:radial-gradient(ellipse at 50% 100%,#c6a77526,transparent 60%),#092426;color:#f3f0e8;overflow:hidden}
+.j-article .chapter-head:after{content:'✦';position:absolute;bottom:0;left:50%;transform:translate(-50%,50%);background:inherit;color:#c6a775;font-size:.9rem;padding:0 10px}
+.j-article .chapter-badge{width:auto;height:auto;background:none;border-radius:0;color:#c6a775;font-family:Georgia,serif;font-weight:400;font-size:clamp(3.6rem,10vw,6.5rem);line-height:1;display:flex;flex-direction:column;align-items:center;gap:10px}
+.j-article .chapter-badge svg{width:30px;height:30px;opacity:.85}
+.j-article .chapter-badge__num{font-size:inherit;font-weight:400}
+.j-article .chapter-head h2{color:#f3f0e8;font-size:clamp(1.9rem,5vw,3.3rem);line-height:1.12;max-width:20ch;margin:0}
+
+.j-article .chapter-body{max-width:68ch;margin:0 auto;padding:clamp(44px,6vw,70px) 6% 0;box-sizing:content-box;font-size:1.1rem;line-height:1.8;color:#1d3a3c}
+.j-article .chapter-body>p:first-of-type{font-family:Georgia,serif;font-size:clamp(1.2rem,2.2vw,1.35rem);line-height:1.65;color:#102f31}
+.j-article .chapter-body.has-dropcap p:first-of-type::first-letter{color:#c6a775;font-family:Georgia,serif;font-weight:400}
+.j-article .chapter-body a{color:#805d2d;text-decoration:underline;text-underline-offset:3px}
+.j-article .chapter-body h3{font-size:1.6rem;margin:1.8em 0 .5em;padding-top:1em;border-top:1px solid #c6a77570}
+.j-article .chapter-body strong{color:#102f31}
+.j-article .chapter-body ul,.j-article .chapter-body ol{padding-left:0;list-style:none;display:grid;gap:10px;margin:1.2em 0}
+.j-article .chapter-body li{position:relative;padding:14px 18px 14px 44px;background:#ffffff90;border:1px solid #c6a77540;border-radius:10px}
+.j-article .chapter-body ul>li:before{content:'✦';position:absolute;left:17px;top:14px;color:#c6a775}
+.j-article .chapter-body ol{counter-reset:ja}
+.j-article .chapter-body ol>li{counter-increment:ja}
+.j-article .chapter-body ol>li:before{content:counter(ja);position:absolute;left:16px;top:13px;font-family:Georgia,serif;color:#805d2d;font-size:1.1rem}
+
+/* Per-article visuals sitting between the text blocks */
+.j-article .chapter>:not(.chapter-head):not(.chapter-body):not(.chapter-quote){margin-left:auto;margin-right:auto;margin-top:clamp(28px,4vw,44px);max-width:min(88%,760px)}
+
+/* Pull quotes: an interlude, centred between gold rules */
+.j-article .chapter-quote{position:relative;max-width:min(88%,760px);margin:clamp(44px,6vw,70px) auto 0;padding:34px 0 30px;border:0;border-top:1px solid #c6a775;border-bottom:1px solid #c6a775;border-radius:0;background:none;text-align:center;font-family:Georgia,serif;font-style:italic;font-size:clamp(1.35rem,3vw,2rem);line-height:1.45;color:#805d2d}
+.j-article .chapter-quote:before{content:'✦';position:absolute;top:0;left:50%;transform:translate(-50%,-55%);padding:0 14px;background:inherit;font-size:1.2rem;line-height:1;color:#c6a775}
+.j-article .chapter:nth-child(odd) .chapter-quote:before{background:#f3f0e8}
+.j-article .chapter:nth-child(even) .chapter-quote:before{background:#e8e5dc}
+
+/* Fallback prose (articles without chapters) */
+.j-article .article-detail__body>.prose,.j-article .article-detail__body>div:not(.chapter){max-width:68ch;margin:0 auto;padding:clamp(44px,6vw,70px) 6%;background:#f3f0e8;color:#1d3a3c;font-size:1.1rem;line-height:1.8}
+
+.j-article .article-analysis{max-width:760px;margin:clamp(40px,6vw,70px) auto;background:#123739;border:1px solid #c6a77540;border-radius:14px;color:#dce3df}
+.j-article .article-analysis__title{color:#e2cba2}
+.j-article .article-analysis__body{color:#dce3df}
+
+/* Scroll reveal (only when JS is running and motion is welcome) */
+.ja-motion .ja-reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.ja-motion .ja-reveal.is-in{opacity:1;transform:none}
+@keyframes ja-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+@media(prefers-reduced-motion:reduce){.ja-motion .ja-reveal{opacity:1;transform:none;transition:none}.j-article .article-detail__header:after,.j-article .mb-header:after{animation:none}}
+
+@media(max-width:760px){
+  .j-article .chapter-body{font-size:1.04rem;padding-top:40px}
+  .j-article .chapter-head{padding:56px 6% 44px}
+  .j-article .chapter>:not(.chapter-head):not(.chapter-body):not(.chapter-quote),.j-article .chapter-quote{max-width:88%}
+  .j-article .chapter-body li{padding:12px 14px 12px 38px}
+  .j-article .chapter-body ul>li:before{left:13px;top:12px}
+  .j-article .chapter-body ol>li:before{left:13px;top:11px}
+}
+@media print{.ja-progress,.j-article .article-toc,.j-article .mb-toc{display:none}.j-article .chapter-head{background:#fff;color:#111}.j-article .chapter-head h2{color:#111}}
+.j-article .mb-dashboard{max-width:1080px;margin:0 auto;padding:0 6% clamp(50px,8vw,90px)}
