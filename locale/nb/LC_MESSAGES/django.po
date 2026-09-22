@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Numerologist\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-09 03:13+0000\n"
+"POT-Creation-Date: 2026-09-22 15:17+0000\n"
 "PO-Revision-Date: 2026-07-12 00:00+0000\n"
 "Last-Translator: Numerologist\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -13,92 +13,1648 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: tall_project/navigation.py:37 tall_project/navigation.py:308
+#: tall_project/templates/pages/resources.html:35
+msgid "Discover Numerology"
+msgstr "Oppdag numerologi"
+
+#: tall_project/navigation.py:40
+msgid "An introduction to numerology with Åse Steinsland: the Pythagorean roots of the method, how each digit is interpreted, and where to find the reference charts."
+msgstr "En introduksjon til numerologi med Åse Steinsland: metodens pytagoreiske røtter, hvordan hvert siffer tolkes, og hvor du finner referansetabellene."
+
+#: tall_project/navigation.py:46 tall_project/navigation.py:305
+#: tall_project/templates/pages/calculators.html:4
+#: tall_project/templates/pages/calculators.html:117
+msgid "Calculator suite"
+msgstr "Kalkulatorsamling"
+
+#: tall_project/navigation.py:49
+msgid "Free numerology calculators for your life path, destiny, and name numbers, with a plain-language explanation of what each result means."
+msgstr "Gratis numerologikalkulatorer for livsveitall, skjebnetall og navnetall, med en enkel forklaring av hva hvert resultat betyr."
+
+#: tall_project/navigation.py:55 tall_project/navigation.py:310
+#: tall_project/templates/pages/discover-numerology.html:25
+msgid "Pythagoras' Legacy"
+msgstr "Pytagoras' arv"
+
+#: tall_project/navigation.py:58
+msgid "How Pythagorean number theory became the historical foundation for modern numerology, and what that lineage means for Åse's method today."
+msgstr "Hvordan pytagoreisk tallteori ble det historiske fundamentet for moderne numerologi, og hva denne arven betyr for Åses metode i dag."
+
+#: tall_project/navigation.py:64 tall_project/navigation.py:312
+#: tall_project/templates/pages/discover-numerology.html:26
+msgid "General Interpretation of Numbers"
+msgstr "Generell tolkning av tall"
+
+#: tall_project/navigation.py:67
+msgid "A general guide to what each core number from 1-9 and the master numbers represent in numerology, before you calculate your own."
+msgstr "En generell guide til hva hvert grunntall fra 1–9 og mesternumrene representerer i numerologi, før du beregner dine egne."
+
+#: tall_project/navigation.py:73 tall_project/navigation.py:315
+#: tall_project/templates/pages/discover-numerology.html:27
+msgid "Calculation Methods Overview"
+msgstr "Oversikt over beregningsmetoder"
+
+#: tall_project/navigation.py:76
+msgid "An overview of the calculation methods behind life path, destiny, and name numbers, so you understand the maths before trusting the result."
+msgstr "En oversikt over beregningsmetodene bak livsveitall, skjebnetall og navnetall, slik at du forstår regnestykket før du stoler på resultatet."
+
+#: tall_project/navigation.py:82 tall_project/navigation.py:317
+#: tall_project/templates/pages/discover-numerology.html:28
+msgid "Letter Value Chart"
+msgstr "Bokstavverditabell"
+
+#: tall_project/navigation.py:85
+msgid "The Pythagorean letter-to-number chart used to calculate name, vowel, and consonant numbers, with guidance on how to apply it correctly."
+msgstr "Den pytagoreiske bokstav-til-tall-tabellen som brukes til å beregne navne-, vokal- og konsonanttall, med veiledning i riktig bruk."
+
+#: tall_project/navigation.py:91 tall_project/navigation.py:322
+msgid "Personal Insights"
+msgstr "Personlig innsikt"
+
+#: tall_project/navigation.py:94
+msgid "How personal numerology insights — destiny, name, and life-stage numbers — fit together into one coherent reading of your path."
+msgstr "Hvordan personlig numerologisk innsikt — skjebnetall, navnetall og livsfasetall — henger sammen til én helhetlig tolkning av din vei."
+
+#: tall_project/navigation.py:100 tall_project/navigation.py:324
+#: tall_project/templates/pages/calculators.html:191
+#: tall_project/templates/pages/personal-insights.html:18
+msgid "Compute Your Destiny Number"
+msgstr "Beregn ditt skjebnetall"
+
+#: tall_project/navigation.py:103
+msgid "How to calculate your destiny number from your birth date, and what it reveals about your long-term direction and purpose."
+msgstr "Hvordan du beregner skjebnetallet ditt fra fødselsdatoen, og hva det avslører om din langsiktige retning og hensikt."
+
+#: tall_project/navigation.py:109 tall_project/navigation.py:327
+#: tall_project/templates/pages/personal-insights.html:19
+msgid "Compute Name, Vowel & Consonant Numbers"
+msgstr "Beregn navne-, vokal- og konsonanttall"
+
+#: tall_project/navigation.py:112
+msgid "How to calculate your name, vowel (soul urge), and consonant numbers, and what each one says about your inner motivation versus outer expression."
+msgstr "Hvordan du beregner navnetall, vokaltall (sjelstall) og konsonanttall, og hva hvert av dem sier om din indre motivasjon versus ditt ytre uttrykk."
+
+#: tall_project/navigation.py:118 tall_project/navigation.py:329
+#: tall_project/templates/pages/personal-insights.html:20
+msgid "Life's 4th Development Stage"
+msgstr "Livets fjerde utviklingstrinn"
+
+#: tall_project/navigation.py:121
+msgid "What the fourth pinnacle stage of life represents in numerology, and how to recognise when you have entered it."
+msgstr "Hva det fjerde toppunktet i livet representerer i numerologi, og hvordan du kjenner igjen når du har trådt inn i det."
+
+#: tall_project/navigation.py:127 tall_project/navigation.py:331
+#: tall_project/templates/pages/personal-insights.html:21
+msgid "Realization Number — Your Ultimate Aim"
+msgstr "Realiseringstall — ditt endelige mål"
+
+#: tall_project/navigation.py:130
+msgid "How to calculate your realization number, the numerology figure linked to your ultimate life aim and sense of fulfilment."
+msgstr "Hvordan du beregner realiseringstallet, tallet i numerologien knyttet til ditt endelige livsmål og følelse av oppfyllelse."
+
+#: tall_project/navigation.py:136 tall_project/navigation.py:333
+#: tall_project/templates/pages/personal-insights.html:22
+msgid "Pythagoras' Arrows"
+msgstr "Pytagoras' piler"
+
+#: tall_project/navigation.py:139
+msgid "How Pythagoras' Arrows (the numerology grid built from your birth date) reveal patterns of strength and missing lessons in your chart."
+msgstr "Hvordan Pytagoras' piler (tallrutenettet bygget fra fødselsdatoen din) avslører styrkemønstre og lærdommer som mangler i kartet ditt."
+
+#: tall_project/navigation.py:145 tall_project/navigation.py:334
+#: tall_project/templates/pages/personal-insights.html:23
+msgid "Do You See the Same Number?"
+msgstr "Ser du det samme tallet igjen og igjen?"
+
+#: tall_project/navigation.py:148
+msgid "What it means in numerology when you keep noticing the same repeating number, such as 11:11, 222, or 333."
+msgstr "Hva det betyr i numerologi når du stadig legger merke til det samme gjentakende tallet, som 11:11, 222 eller 333."
+
+#: tall_project/navigation.py:154 tall_project/navigation.py:339
+msgid "Resources"
+msgstr "Ressurser"
+
+#: tall_project/navigation.py:157
+msgid "Free analyses, projects, references, and media coverage from Åse Steinsland's numerology practice, gathered in one place."
+msgstr "Gratis analyser, prosjekter, referanser og medieomtale fra Åse Steinslands numerologipraksis, samlet på ett sted."
+
+#: tall_project/navigation.py:163 tall_project/navigation.py:342
+#: tall_project/templates/pages/resources.html:18
+msgid "Projects Lab"
+msgstr "Prosjektlab"
+
+#: tall_project/navigation.py:166
+msgid "Experimental and research projects from the Numerologist studio, connecting numerology with data, culture, and technology."
+msgstr "Eksperimentelle forskningsprosjekter fra Numerologist-studioet, som knytter numerologi sammen med data, kultur og teknologi."
+
+#: tall_project/navigation.py:172 tall_project/navigation.py:343
+#: tall_project/templates/pages/projects-lab.html:16
+#: tall_project/templates/pages/resources.html:19
+msgid "Arecibo Line"
+msgstr "Arecibo Line"
+
+#: tall_project/navigation.py:175
+msgid "The Arecibo Line project: exploring number symbolism through the lens of the 1974 Arecibo message and its numerical structure."
+msgstr "Arecibo Line-prosjektet: utforsker tallsymbolikk gjennom Arecibo-budskapet fra 1974 og dets tallstruktur."
+
+#: tall_project/navigation.py:181 tall_project/navigation.py:341
+#: tall_project/templates/pages/resources.html:20
+msgid "Free Analyses"
+msgstr "Gratis analyser"
+
+#: tall_project/navigation.py:184
+msgid "What you get from a free introductory numerology analysis with Åse Steinsland, and how to request one."
+msgstr "Hva du får fra en gratis, innledende numerologisk analyse med Åse Steinsland, og hvordan du bestiller en."
+
+#: tall_project/navigation.py:190 tall_project/navigation.py:344
+#: tall_project/templates/pages/resources.html:21
+msgid "Blog / Articles"
+msgstr "Blogg / artikler"
+
+#: tall_project/navigation.py:193
+msgid "Articles and long-form writing on numerology, symbolism, and number meaning from Åse Steinsland's Numerologist studio."
+msgstr "Artikler og lengre tekster om numerologi, symbolikk og tallenes betydning fra Åse Steinslands Numerologist-studio."
+
+#: tall_project/navigation.py:199 tall_project/navigation.py:345
+#: tall_project/templates/pages/resources.html:22
+msgid "References"
+msgstr "Referanser"
+
+#: tall_project/navigation.py:202
+msgid "Sources, methods, and reference material behind Åse Steinsland's numerology practice."
+msgstr "Kilder, metoder og referansemateriale bak Åse Steinslands numerologipraksis."
+
+#: tall_project/navigation.py:208 tall_project/navigation.py:346
+#: tall_project/templates/pages/resources.html:23
+msgid "Numerologist in the Media"
+msgstr "Numerologen i mediene"
+
+#: tall_project/navigation.py:211
+msgid "Press coverage and media appearances featuring numerologist Åse Steinsland."
+msgstr "Presseomtale og medieopptredener med numerolog Åse Steinsland."
+
+#: tall_project/navigation.py:216 tall_project/navigation.py:347
+#: tall_project/templates/pages/resources.html:24
+msgid "Quranian Numerology"
+msgstr "Koransk numerologi"
+
+#: tall_project/navigation.py:219
+msgid "How numerical patterns are studied in Quranic tradition, and how this compares with Pythagorean numerology."
+msgstr "Hvordan tallmønstre studeres i koransk tradisjon, og hvordan dette sammenlignes med pytagoreisk numerologi."
+
+#: tall_project/navigation.py:225 tall_project/navigation.py:348
+#: tall_project/templates/pages/projects-lab.html:20
+msgid "Quranic Analysis"
+msgstr "Koransk analyse"
+
+#: tall_project/navigation.py:228
+msgid "A closer analytical look at numerical patterns in Quranic tradition — see Quranian Numerology for the full overview."
+msgstr "Et nærmere analytisk blikk på tallmønstre i koransk tradisjon — se Koransk numerologi for hele oversikten."
+
+#: tall_project/navigation.py:236 tall_project/navigation.py:353
+#: tall_project/templates/pages/calculators.html:196
+msgid "Guidance & Support"
+msgstr "Veiledning og støtte"
+
+#: tall_project/navigation.py:239
+msgid "How to get personal guidance and support from Åse Steinsland: about the firm, telephone sessions, and contact options."
+msgstr "Hvordan få personlig veiledning og støtte fra Åse Steinsland: om firmaet, telefonsamtaler og kontaktmuligheter."
+
+#: tall_project/navigation.py:245 tall_project/navigation.py:355
+#: tall_project/templates/pages/guidance-support.html:18
+msgid "About the Firm"
+msgstr "Om firmaet"
+
+#: tall_project/navigation.py:248
+msgid "Om Åse Karin Steinsland: bakgrunn, metode og telefonveiledning, med kontaktskjema for å komme i kontakt direkte."
+msgstr "Om Åse Karin Steinsland: bakgrunn, metode og telefonveiledning, med kontaktskjema for å komme i kontakt direkte."
+
+#: tall_project/navigation.py:254 tall_project/navigation.py:356
+#: tall_project/templates/pages/guidance-support.html:19
+#: tall_project/templates/pages/guidance-support.html:27
+msgid "Telephone Guidance"
+msgstr "Telefonveiledning"
+
+#: tall_project/navigation.py:257
+msgid "How telephone numerology guidance sessions with Åse Steinsland work, and what to expect from a call."
+msgstr "Hvordan telefonveiledning i numerologi med Åse Steinsland fungerer, og hva du kan forvente av en samtale."
+
+#: tall_project/navigation.py:263 tall_project/navigation.py:357
+#: tall_project/templates/pages/guidance-support.html:20
+#: tall_project/templates/pages/guidance-support.html:31
+msgid "Contact / Q&A"
+msgstr "Kontakt / spørsmål og svar"
+
+#: tall_project/navigation.py:266
+msgid "Contact details and answers to common questions about booking a numerology reading with Åse Steinsland."
+msgstr "Kontaktinformasjon og svar på vanlige spørsmål om å bestille en numerologisk lesning med Åse Steinsland."
+
+#: tall_project/navigation.py:272 tall_project/navigation.py:362
+msgid "Legal"
+msgstr "Juridisk"
+
+#: tall_project/navigation.py:275
+msgid "Legal information for the Numerologist studio, including terms and privacy policy references."
+msgstr "Juridisk informasjon for Numerologist-studioet, inkludert vilkår og personvernerklæring."
+
+#: tall_project/navigation.py:282 tall_project/navigation.py:364
+#: tall_project/templates/pages/legal.html:18
+msgid "Terms & Conditions"
+msgstr "Vilkår og betingelser"
+
+#: tall_project/navigation.py:285
+msgid "Terms and conditions for bookings and services provided by the Numerologist studio."
+msgstr "Vilkår og betingelser for bestillinger og tjenester levert av Numerologist-studioet."
+
+#: tall_project/navigation.py:292 tall_project/navigation.py:365
+#: tall_project/templates/pages/legal.html:19
+msgid "Privacy Policy"
+msgstr "Personvernerklæring"
+
+#: tall_project/navigation.py:295
+msgid "How the Numerologist studio collects, uses, and protects personal data submitted through the site."
+msgstr "Hvordan Numerologist-studioet samler inn, bruker og beskytter personopplysninger som sendes inn via nettstedet."
+
+#: tall_project/settings.py:164
 msgid "English"
 msgstr "Engelsk"
 
+#: tall_project/settings.py:165
 msgid "Norwegian Bokmål"
 msgstr "Norsk bokmål"
 
+#: tall_project/settings.py:166
 msgid "Persian"
 msgstr "Persisk"
 
-msgid "Switch language"
-msgstr "Bytt språk"
-
-msgid "All rights reserved."
-msgstr "Alle rettigheter reservert."
-
-msgid "Where numbers and technology work together — Åse Steinsland’s Pythagorean method, computed in Python. Right calculation, right technology."
-msgstr "Der tall og teknologi jobber sammen — Åse Steinslands pytagoreiske metode, beregnet i Python. Riktig beregning, riktig teknologi."
-
-# ── Navigation / chrome (base.html) ──────────────────────────────────
-msgid "Åse Steinsland"
-msgstr "Åse Steinsland"
-
-msgid "Numerologist Studio"
-msgstr "Numerolog-studio"
-
-msgid "Menu"
-msgstr "Meny"
-
-msgid "Home"
-msgstr "Hjem"
-
-msgid "Client intake"
-msgstr "Ny henvendelse"
-
-msgid "Articles"
-msgstr "Artikler"
-
-msgid "CMS"
-msgstr "CMS"
-
-msgid "Discover numerology"
-msgstr "Oppdag numerologi"
-
-msgid "Services"
-msgstr "Tjenester"
-
-msgid "Night mode"
-msgstr "Nattmodus"
-
-msgid "Light mode"
-msgstr "Dagmodus"
-
 # ── Articles list (list.html) ────────────────────────────────────────
+#: tall_project/templates/articles/detail.html:4
+#: tall_project/templates/articles/detail_mahsa_bita.html:4
+#: tall_project/templates/articles/list.html:4
 msgid "Articles & Library"
 msgstr "Artikler og bibliotek"
 
-msgid "Articles that keep seekers company between sessions"
-msgstr "Artikler som følger deg mellom timene"
+#: tall_project/templates/articles/detail.html:117
+#: tall_project/templates/articles/detail_mahsa_bita.html:387
+msgid "Back to articles"
+msgstr "Tilbake til artikler"
 
-msgid "Latest library additions"
-msgstr "Siste tilskudd i biblioteket"
-
-msgid "Read article"
-msgstr "Les artikkel"
-
-msgid "Source"
-msgstr "Kilde"
-
-msgid "No articles have been published yet. New stories are being prepared — please check back soon."
-msgstr "Ingen artikler er publisert ennå. Nye historier er under arbeid – kom gjerne tilbake snart."
-
-msgid "Previous"
-msgstr "Forrige"
-
-msgid "Next"
-msgstr "Neste"
-
-# ── Article detail (detail.html) ─────────────────────────────────────
-msgid "AI insight"
-msgstr "AI-innsikt"
-
+#: tall_project/templates/articles/detail.html:120
+#: tall_project/templates/articles/detail_mahsa_bita.html:390
 msgid "All articles"
 msgstr "Alle artikler"
 
+#: tall_project/templates/articles/detail.html:126
+#: tall_project/templates/articles/detail_mahsa_bita.html:407
 msgid "Numerologist library"
 msgstr "Numerolog-bibliotek"
 
+#: tall_project/templates/articles/detail.html:129
+#: tall_project/templates/articles/detail_mahsa_bita.html:411
+#: tall_project/templates/articles/list.html:242
+#, python-format
+msgid "By %(author)s"
+msgstr "Av %(author)s"
+
+#: tall_project/templates/articles/detail.html:131
+#: tall_project/templates/articles/detail_mahsa_bita.html:412
+#, python-format
+msgid "Published %(date)s"
+msgstr "Publisert %(date)s"
+
+#: tall_project/templates/articles/detail.html:136
+#: tall_project/templates/articles/detail_mahsa_bita.html:416
 msgid "View original source"
 msgstr "Se originalkilden"
+
+# ── Article detail (detail.html) ─────────────────────────────────────
+#: tall_project/templates/articles/detail.html:151
+#: tall_project/templates/articles/detail_mahsa_bita.html:547
+msgid "AI insight"
+msgstr "AI-innsikt"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:407
+msgid "Comparative reflection"
+msgstr "Sammenlignende refleksjon"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:409
+msgid "Two young women, two continents, one age at parting — a side-by-side look at the numbers woven through their names, dates, and stories."
+msgstr "To unge kvinner, to kontinenter, samme alder ved bortgang — et side-om-side-blikk på tallene vevd inn i navnene, datoene og historiene deres."
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:433
+msgid "Sept. 21, 1999 – Sept. 16, 2022 · Tehran, Iran"
+msgstr "21. sep. 1999 – 16. sep. 2022 · Teheran, Iran"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:436
+#: tall_project/templates/articles/detail_mahsa_bita.html:477
+msgid "Age at passing"
+msgstr "Alder ved bortgang"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:439
+#: tall_project/templates/articles/detail_mahsa_bita.html:480
+#: tall_project/templates/pages/home.html:584
+msgid "Life Path"
+msgstr "Livsvei"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:441
+msgid "The builder"
+msgstr "Byggeren"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:444
+#: tall_project/templates/articles/detail_mahsa_bita.html:485
+#: tall_project/templates/pages/home.html:589
+msgid "Expression"
+msgstr "Uttrykk"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:446
+msgid "Seeker of truth"
+msgstr "Sannhetssøker"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:449
+#: tall_project/templates/articles/detail_mahsa_bita.html:490
+#: tall_project/templates/pages/home.html:594
+msgid "Soul Urge"
+msgstr "Sjelstall"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:451
+msgid "Joy & expression"
+msgstr "Glede og uttrykk"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:454
+#: tall_project/templates/articles/detail_mahsa_bita.html:495
+#: tall_project/templates/pages/home.html:599
+msgid "Personality"
+msgstr "Personlighet"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:456
+msgid "Grounded & steady"
+msgstr "Jordnær og stø"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:461
+#: tall_project/templates/articles/detail_mahsa_bita.html:502
+msgid "Abjad"
+msgstr "Abjad"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:474
+msgid "Apr. 13, 2002 – Aug. 11, 2024 · Asker, Norway"
+msgstr "13. apr. 2002 – 11. aug. 2024 · Asker, Norge"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:482
+msgid "Creative optimism"
+msgstr "Kreativ optimisme"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:487
+msgid "Builder & carer"
+msgstr "Bygger og omsorgsperson"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:492
+msgid "Wants closeness"
+msgstr "Ønsker nærhet"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:497
+msgid "Quietly luminous"
+msgstr "Stille lysende"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:508
+msgid "Numbers that echo through both stories"
+msgstr "Tall som gjenklinger gjennom begge historiene"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:510
+msgid "shared age at passing"
+msgstr "delt alder ved bortgang"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:511
+msgid "structure · foundation"
+msgstr "struktur · fundament"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:512
+msgid "spiritual seeking"
+msgstr "åndelig søken"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:513
+msgid "illumination"
+msgstr "opplysning"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:514
+msgid "partnership · unity"
+msgstr "partnerskap · enhet"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:515
+msgid "completion"
+msgstr "fullendelse"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:520
+msgid "Two lifelines, one age"
+msgstr "To livslinjer, én alder"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:522
+#: tall_project/templates/articles/detail_mahsa_bita.html:527
+msgid "born"
+msgstr "født"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:524
+msgid "Sept. 2022"
+msgstr "sep. 2022"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:529
+msgid "Aug. 2024"
+msgstr "aug. 2024"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:532
+msgid "days apart"
+msgstr "dager mellom"
+
+#: tall_project/templates/articles/detail_mahsa_bita.html:533
+msgid "≈ 99 weeks between their passings — 695 reduces to 2, and 99 reduces to 9, the same digits their death dates each carry."
+msgstr "≈ 99 uker mellom bortgangene — 695 reduseres til 2, og 99 reduseres til 9, de samme sifrene som dødsdatoene deres hver for seg bærer."
+
+#: tall_project/templates/articles/list.html:210
+msgid "Numerologist Studio"
+msgstr "Numerolog-studio"
+
+#: tall_project/templates/articles/list.html:212
+msgid "Articles that keep seekers company between sessions"
+msgstr "Artikler som følger deg mellom timene"
+
+#: tall_project/templates/articles/list.html:216
+msgid "Browse Åse Steinsland's library of numerology research, interviews, and guided exercises. Each feature is handpicked to deepen your understanding while the calculations settle in."
+msgstr "Bla gjennom Åse Steinslands bibliotek av numerologisk forskning, intervjuer og veiledede øvelser. Hver artikkel er håndplukket for å utdype forståelsen din mens beregningene synker inn."
+
+#: tall_project/templates/articles/list.html:219
+msgid "Come back after each consultation to revisit the practices mentioned and explore new materials selected for curious minds."
+msgstr "Kom tilbake etter hver konsultasjon for å repetere praksisene som er nevnt, og utforske nytt materiale valgt ut for nysgjerrige sinn."
+
+#: tall_project/templates/articles/list.html:223
+#, python-format
+msgid "%(total)s published article"
+msgid_plural "%(total)s published articles"
+msgstr[0] "%(total)s publisert artikkel"
+msgstr[1] "%(total)s publiserte artikler"
+
+#: tall_project/templates/articles/list.html:224
+msgid "Updated regularly with new field notes"
+msgstr "Oppdateres jevnlig med nye feltnotater"
+
+#: tall_project/templates/articles/list.html:231
+msgid "Latest library additions"
+msgstr "Siste tilskudd i biblioteket"
+
+#: tall_project/templates/articles/list.html:233
+#, python-format
+msgid "Page %(page_obj.number)s of %(page_obj.paginator.num_pages)s"
+msgstr "Side %(page_obj.number)s av %(page_obj.paginator.num_pages)s"
+
+#: tall_project/templates/articles/list.html:252
+msgid "Read article"
+msgstr "Les artikkel"
+
+#: tall_project/templates/articles/list.html:257
+msgid "Source"
+msgstr "Kilde"
+
+#: tall_project/templates/articles/list.html:265
+msgid "No articles have been published yet. New stories are being prepared — please check back soon."
+msgstr "Ingen artikler er publisert ennå. Nye historier er under arbeid – kom gjerne tilbake snart."
+
+#: tall_project/templates/articles/list.html:271
+msgid "Article pagination"
+msgstr "Artikkelpaginering"
+
+#: tall_project/templates/articles/list.html:273
+#, python-format
+msgid "Showing page %(page_obj.number)s of %(page_obj.paginator.num_pages)s"
+msgstr "Viser side %(page_obj.number)s av %(page_obj.paginator.num_pages)s"
+
+#: tall_project/templates/articles/list.html:277
+msgid "Previous"
+msgstr "Forrige"
+
+#: tall_project/templates/articles/list.html:280
+msgid "Next"
+msgstr "Neste"
+
+#: tall_project/templates/base.html:195
+msgid "Primary"
+msgstr "Hovedmeny"
+
+#: tall_project/templates/base.html:199
+msgid "Home"
+msgstr "Hjem"
+
+#: tall_project/templates/base.html:200
+msgid "About numerology"
+msgstr "Om numerologi"
+
+#: tall_project/templates/base.html:201
+msgid "Services"
+msgstr "Tjenester"
+
+#: tall_project/templates/base.html:202
+msgid "Articles"
+msgstr "Artikler"
+
+#: tall_project/templates/base.html:203
+msgid "Contact"
+msgstr "Kontakt"
+
+#: tall_project/templates/base.html:204
+msgid "Order"
+msgstr "Bestill"
+
+#: tall_project/templates/base.html:208
+msgid "Switch language"
+msgstr "Bytt språk"
+
+#: tall_project/templates/base.html:215
+msgid "Menu"
+msgstr "Meny"
+
+#: tall_project/templates/base.html:233
+msgid "Where numbers and technology work together — Åse Steinsland’s Pythagorean method, computed in Python. Right calculation, right technology."
+msgstr "Der tall og teknologi jobber sammen — Åse Steinslands pytagoreiske metode, beregnet i Python. Riktig beregning, riktig teknologi."
+
+#: tall_project/templates/base.html:234
+msgid "All rights reserved."
+msgstr "Alle rettigheter reservert."
+
+#: tall_project/templates/pages/about-the-firm.html:76
+msgid "Numerologist Åse Steinsland – forsidebilde"
+msgstr "Numerologist Åse Steinsland – forsidebilde"
+
+# ── Navigation / chrome (base.html) ──────────────────────────────────
+#: tall_project/templates/pages/about-the-firm.html:78
+msgid "Om Åse Steinsland"
+msgstr "Om Åse Steinsland"
+
+#: tall_project/templates/pages/about-the-firm.html:81
+msgid "Åse Karin Steinsland, numerolog og livsveileder"
+msgstr "Åse Karin Steinsland, numerolog og livsveileder"
+
+#: tall_project/templates/pages/about-the-firm.html:84
+msgid "Åse Karin Steinsland er numerolog og livsveileder, bosatt like utenfor Bergen. Hun har laget personlige numerologiske analyser siden 1997, og har over 25 års erfaring med numerologi og livsveiledning."
+msgstr "Åse Karin Steinsland er numerolog og livsveileder, bosatt like utenfor Bergen. Hun har laget personlige numerologiske analyser siden 1997, og har over 25 års erfaring med numerologi og livsveiledning."
+
+#: tall_project/templates/pages/about-the-firm.html:90
+msgid "Metoden hennes bygger på Pytagoras, som studerte kabbalah og de matematiske systemene til flere gamle kulturer. Hver analyse lages personlig av Åse selv, ikke maskinelt generert."
+msgstr "Metoden hennes bygger på Pytagoras, som studerte kabbalah og de matematiske systemene til flere gamle kulturer. Hver analyse lages personlig av Åse selv, ikke maskinelt generert."
+
+#: tall_project/templates/pages/about-the-firm.html:98
+msgid "Telefonveiledning"
+msgstr "Telefonveiledning"
+
+#: tall_project/templates/pages/about-the-firm.html:100
+msgid "Åse tilbyr personlig veiledning på telefon for deg som vil vite mer om veien og årene fremover — gode og vanskelige perioder, kjærlighet, økonomi, jobb, viktige valg og mer. Samtalen tar utgangspunkt i dine egne tall og gir deg ny innsikt og perspektiv på situasjoner som kan føles fastlåste."
+msgstr "Åse tilbyr personlig veiledning på telefon for deg som vil vite mer om veien og årene fremover — gode og vanskelige perioder, kjærlighet, økonomi, jobb, viktige valg og mer. Samtalen tar utgangspunkt i dine egne tall og gir deg ny innsikt og perspektiv på situasjoner som kan føles fastlåste."
+
+#: tall_project/templates/pages/about-the-firm.html:107
+msgid "Telefonveiledning gis normalt på hverdager mellom kl. 10–18. Ta kontakt via skjemaet under for å avtale tid — priser og betaling for telefonveiledning er midlertidig satt på pause mens vi oppdaterer denne tjenesten."
+msgstr "Telefonveiledning gis normalt på hverdager mellom kl. 10–18. Ta kontakt via skjemaet under for å avtale tid — priser og betaling for telefonveiledning er midlertidig satt på pause mens vi oppdaterer denne tjenesten."
+
+#: tall_project/templates/pages/about-the-firm.html:113
+msgid "Ta kontakt"
+msgstr "Ta kontakt"
+
+#: tall_project/templates/pages/about-the-firm.html:115
+msgid "Takk for din henvendelse! Åse svarer deg så snart hun kan."
+msgstr "Takk for din henvendelse! Åse svarer deg så snart hun kan."
+
+#: tall_project/templates/pages/about-the-firm.html:117
+msgid "Noe gikk galt — sjekk at navn, e-post og melding er fylt ut, og prøv igjen."
+msgstr "Noe gikk galt — sjekk at navn, e-post og melding er fylt ut, og prøv igjen."
+
+#: tall_project/templates/pages/about-the-firm.html:122
+#: tall_project/templates/pages/home.html:724
+msgid "Navn"
+msgstr "Navn"
+
+#: tall_project/templates/pages/about-the-firm.html:126
+#: tall_project/templates/pages/about-the-firm.html:142
+msgid "E-post"
+msgstr "E-post"
+
+#: tall_project/templates/pages/about-the-firm.html:130
+msgid "Telefon (valgfritt)"
+msgstr "Telefon (valgfritt)"
+
+#: tall_project/templates/pages/about-the-firm.html:134
+msgid "Din melding"
+msgstr "Din melding"
+
+#: tall_project/templates/pages/about-the-firm.html:137
+msgid "Send melding"
+msgstr "Send melding"
+
+#: tall_project/templates/pages/about-the-firm.html:140
+msgid "Kontaktinformasjon"
+msgstr "Kontaktinformasjon"
+
+#: tall_project/templates/pages/about-the-firm.html:143
+msgid "Telefon"
+msgstr "Telefon"
+
+#: tall_project/templates/pages/about-the-firm.html:143
+msgid "hverdager 09:00–16:00"
+msgstr "hverdager 09:00–16:00"
+
+#: tall_project/templates/pages/about-the-firm.html:147
+msgid "Les mer om numerologi"
+msgstr "Les mer om numerologi"
+
+#: tall_project/templates/pages/about-the-firm.html:148
+msgid "Beregn dine tall"
+msgstr "Beregn dine tall"
+
+#: tall_project/templates/pages/arecibo-line.html:10
+msgid "The Arecibo Line project studies numerical resonance between astronomical observations and symbolic number systems."
+msgstr "Arecibo Line-prosjektet studerer tallresonans mellom astronomiske observasjoner og symbolske tallsystemer."
+
+#: tall_project/templates/pages/arecibo-line.html:14
+msgid "Included project assets"
+msgstr "Inkluderte prosjektressurser"
+
+#: tall_project/templates/pages/arecibo-line.html:16
+msgid "Numerology and resonance modules in the Arecibo-Line source folder."
+msgstr "Numerologi- og resonansmoduler i Arecibo-Line-kildemappen."
+
+#: tall_project/templates/pages/arecibo-line.html:17
+msgid "Notebook experiments for frequency and pattern studies."
+msgstr "Notatbok-eksperimenter for frekvens- og mønsterstudier."
+
+#: tall_project/templates/pages/arecibo-line.html:18
+msgid "Illustrative visualization workflows for future product pages."
+msgstr "Illustrerende visualiseringsflyter for fremtidige produktsider."
+
+#: tall_project/templates/pages/arecibo-line.html:20
+msgid "This page is connected to the repository-backed Arecibo-Line project package used by the team."
+msgstr "Denne siden er koblet til Arecibo-Line-prosjektpakken i repoet som teamet bruker."
+
+#: tall_project/templates/pages/blog-articles.html:10
+msgid "Browse essays, seasonal forecasts, and interviews from Åse's journal. Each article blends storytelling with practical numerology tips you can apply immediately."
+msgstr "Bla gjennom essays, sesongprognoser og intervjuer fra Åses journal. Hver artikkel blander fortelling med praktiske numerologitips du kan bruke med det samme."
+
+#: tall_project/templates/pages/calculation-methods-overview.html:10
+msgid "Learn the difference between reduction methods, compound totals, and intuitive adjustments. Åse walks you through the formulas she applies when she translates names, dates, and milestones into energetic signatures."
+msgstr "Lær forskjellen mellom reduksjonsmetoder, sammensatte totalsummer og intuitive justeringer. Åse tar deg gjennom formlene hun bruker når hun oversetter navn, datoer og milepæler til energisignaturer."
+
+#: tall_project/templates/pages/calculation-methods-overview.html:16
+msgid "Step-by-step examples for calculating core numbers."
+msgstr "Trinnvise eksempler for å beregne grunntall."
+
+#: tall_project/templates/pages/calculation-methods-overview.html:17
+msgid "When to keep master numbers intact and when to reduce further."
+msgstr "Når mesternumre skal beholdes urørt, og når de skal reduseres videre."
+
+#: tall_project/templates/pages/calculation-methods-overview.html:18
+msgid "How personal years, months, and days build on foundational calculations."
+msgstr "Hvordan personlige år, måneder og dager bygger videre på grunnleggende beregninger."
+
+#: tall_project/templates/pages/calculators.html:118
+msgid "Every numerology calculator at a glance"
+msgstr "Alle numerologikalkulatorene på ett sted"
+
+#: tall_project/templates/pages/calculators.html:120
+msgid "\n        Explore the individual tools Åse references while preparing a full master analysis. Each calculator can be explored on its\n        own so you can see how the pieces fit together before or after your full session.\n      "
+msgstr "\n        Utforsk de enkelte verktøyene Åse bruker som referanse når hun forbereder en full masteranalyse. Hver kalkulator kan utforskes på egen\n        hånd, slik at du ser hvordan bitene henger sammen før eller etter hele økten din.\n      "
+
+#: tall_project/templates/pages/calculators.html:128
+msgid "Life Path Number"
+msgstr "Livsveitall"
+
+#: tall_project/templates/pages/calculators.html:129
+msgid "The rhythm of your life lessons revealed through your birth date."
+msgstr "Rytmen i livets lærdommer, avdekket gjennom fødselsdatoen din."
+
+#: tall_project/templates/pages/calculators.html:131
+msgid "Breaks your birth date into core digits"
+msgstr "Bryter fødselsdatoen din ned i grunnsifre"
+
+#: tall_project/templates/pages/calculators.html:132
+msgid "Honours master numbers 11, 22, and 33 during reduction"
+msgstr "Bevarer mesternumrene 11, 22 og 33 under reduksjon"
+
+#: tall_project/templates/pages/calculators.html:133
+msgid "Guides the milestones and curriculum of your lifetime"
+msgstr "Veileder milepælene og læreplanen for livet ditt"
+
+#: tall_project/templates/pages/calculators.html:137
+msgid "Expression Number"
+msgstr "Uttrykkstall"
+
+#: tall_project/templates/pages/calculators.html:138
+msgid "Highlights the talents and gifts encoded within your full name."
+msgstr "Fremhever talentene og gavene kodet inn i hele navnet ditt."
+
+#: tall_project/templates/pages/calculators.html:140
+msgid "Maps each letter to its Pythagorean value"
+msgstr "Kobler hver bokstav til sin pytagoreiske verdi"
+
+#: tall_project/templates/pages/calculators.html:141
+msgid "Shows how you naturally share your abilities with the world"
+msgstr "Viser hvordan du naturlig deler evnene dine med verden"
+
+#: tall_project/templates/pages/calculators.html:142
+msgid "Balances what comes easily with where mastery is calling"
+msgstr "Balanserer det som kommer lett, med det som kaller på mestring"
+
+#: tall_project/templates/pages/calculators.html:146
+msgid "Soul Urge Number"
+msgstr "Sjelstall"
+
+#: tall_project/templates/pages/calculators.html:147
+msgid "The whisper of your heart’s deepest desires, drawn from the vowels in your name."
+msgstr "Hviskingen av hjertets dypeste ønsker, hentet fra vokalene i navnet ditt."
+
+#: tall_project/templates/pages/calculators.html:149
+msgid "Connects you with motivations that keep you inspired"
+msgstr "Kobler deg til motivasjonen som holder deg inspirert"
+
+#: tall_project/templates/pages/calculators.html:150
+msgid "Reveals the emotional current beneath your decisions"
+msgstr "Avdekker den følelsesmessige understrømmen bak beslutningene dine"
+
+#: tall_project/templates/pages/calculators.html:151
+msgid "Illuminates the self-care practices that truly nourish"
+msgstr "Belyser egenomsorgspraksisene som virkelig gir næring"
+
+#: tall_project/templates/pages/calculators.html:155
+msgid "Personality Number"
+msgstr "Personlighetstall"
+
+#: tall_project/templates/pages/calculators.html:156
+msgid "The first impression you offer, measured through the consonants of your name."
+msgstr "Førsteinntrykket du gir, målt gjennom konsonantene i navnet ditt."
+
+#: tall_project/templates/pages/calculators.html:158
+msgid "Describes how others initially perceive your energy"
+msgstr "Beskriver hvordan andre først oppfatter energien din"
+
+#: tall_project/templates/pages/calculators.html:159
+msgid "Shows the doorway people walk through to meet you"
+msgstr "Viser døren folk går gjennom for å møte deg"
+
+#: tall_project/templates/pages/calculators.html:160
+msgid "Helps refine your presence with deliberate intention"
+msgstr "Hjelper deg å forfine din tilstedeværelse med bevisst intensjon"
+
+#: tall_project/templates/pages/calculators.html:164
+msgid "Compatibility Insight"
+msgstr "Kompatibilitetsinnsikt"
+
+#: tall_project/templates/pages/calculators.html:165
+msgid "Cross-reference two birth dates to understand shared lessons and harmony."
+msgstr "Sammenlign to fødselsdatoer for å forstå felles lærdommer og harmoni."
+
+#: tall_project/templates/pages/calculators.html:167
+msgid "Compares combined life path cycles"
+msgstr "Sammenligner kombinerte livsveisykluser"
+
+#: tall_project/templates/pages/calculators.html:168
+msgid "Spotlights master number pairings"
+msgstr "Setter søkelys på mesternummer-kombinasjoner"
+
+#: tall_project/templates/pages/calculators.html:169
+msgid "Offers prompts for nourishing the relationship"
+msgstr "Gir innspill for å nære forholdet"
+
+#: tall_project/templates/pages/calculators.html:173
+msgid "Personal Year Forecast"
+msgstr "Personlig årsprognose"
+
+#: tall_project/templates/pages/calculators.html:174
+msgid "Discover the focus of the year you’re currently walking through."
+msgstr "Oppdag fokuset for året du er inne i akkurat nå."
+
+#: tall_project/templates/pages/calculators.html:176
+msgid "Calculates your yearly vibration from your birth date"
+msgstr "Beregner din årlige vibrasjon fra fødselsdatoen din"
+
+#: tall_project/templates/pages/calculators.html:177
+msgid "Places it in context with your overarching life path"
+msgstr "Setter den i sammenheng med din overordnede livsvei"
+
+#: tall_project/templates/pages/calculators.html:178
+msgid "Invites rituals to partner with the year’s momentum"
+msgstr "Inviterer til ritualer som følger årets fremdrift"
+
+#: tall_project/templates/pages/calculators.html:183
+msgid "Return to intake"
+msgstr "Tilbake til inntak"
+
+#: tall_project/templates/pages/calculators.html:184
+msgid "Back to top"
+msgstr "Til toppen"
+
+#: tall_project/templates/pages/calculators.html:187
+#: tall_project/templates/pages/discover-numerology.html:32
+#: tall_project/templates/pages/guidance-support.html:24
+#: tall_project/templates/pages/number-detail.html:34
+#: tall_project/templates/pages/resources.html:28
+msgid "Frequently asked questions"
+msgstr "Ofte stilte spørsmål"
+
+#: tall_project/templates/pages/calculators.html:189
+msgid "What is the difference between life path and destiny number?"
+msgstr "Hva er forskjellen mellom livsveitall og skjebnetall?"
+
+#: tall_project/templates/pages/calculators.html:190
+msgid "Life path is calculated from your birth date and describes the lessons of your lifetime. Destiny (expression) number is calculated from the letters in your full birth name and describes talents you are here to develop. See"
+msgstr "Livsveitall beregnes fra fødselsdatoen din og beskriver livets lærdommer. Skjebnetall (uttrykkstall) beregnes fra bokstavene i hele fødselsnavnet ditt og beskriver talenter du er her for å utvikle. Se"
+
+#: tall_project/templates/pages/calculators.html:194
+msgid "Are these calculators as accurate as a personal session?"
+msgstr "Er disse kalkulatorene like nøyaktige som en personlig time?"
+
+#: tall_project/templates/pages/calculators.html:195
+msgid "They use the same Pythagorean method Åse references, but a personal session adds interpretation specific to your situation. See"
+msgstr "De bruker den samme pytagoreiske metoden Åse bygger på, men en personlig time legger til tolkning spesifikk for din situasjon. Se"
+
+#: tall_project/templates/pages/calculators.html:196
+msgid "to book one."
+msgstr "for å bestille en."
+
+#: tall_project/templates/pages/compute-destiny-number.html:10
+msgid "Follow Åse's step-by-step process to calculate the destiny number from your full birth name. We cover the reduction process, common edge cases, and how to interpret the final vibration."
+msgstr "Følg Åses trinnvise prosess for å beregne skjebnetallet fra hele fødselsnavnet ditt. Vi dekker reduksjonsprosessen, vanlige spesialtilfeller og hvordan du tolker den endelige vibrasjonen."
+
+#: tall_project/templates/pages/compute-destiny-number.html:15
+msgid "A downloadable worksheet is included so you can repeat the calculation with clients or loved ones."
+msgstr "Et nedlastbart arbeidsark er inkludert, slik at du kan gjenta beregningen med klienter eller nære og kjære."
+
+#: tall_project/templates/pages/compute-name-vowel-consonant.html:10
+msgid "Discover the difference between vowel, consonant, and total name vibrations. Åse explains how each element reveals a facet of your inner drive, outward expression, and everyday motivation."
+msgstr "Oppdag forskjellen mellom vokal-, konsonant- og totale navnevibrasjoner. Åse forklarer hvordan hvert element avslører en side av din indre drivkraft, ditt ytre uttrykk og din daglige motivasjon."
+
+#: tall_project/templates/pages/compute-name-vowel-consonant.html:16
+msgid "Learn how to split a name and manage double letters."
+msgstr "Lær hvordan du deler opp et navn og håndterer doble bokstaver."
+
+#: tall_project/templates/pages/compute-name-vowel-consonant.html:17
+msgid "Compare the final numbers to your destiny and life-path insights."
+msgstr "Sammenlign sluttallene med innsikten fra skjebnetallet og livsveitallet ditt."
+
+#: tall_project/templates/pages/contact-qa.html:10
+msgid "Find answers to common questions about bookings, cancellations, and the numerology process. If you need personal support, you can reach Åse directly using the contact details provided here."
+msgstr "Finn svar på vanlige spørsmål om bestilling, avbestilling og numerologiprosessen. Trenger du personlig støtte, kan du nå Åse direkte via kontaktinformasjonen her."
+
+#: tall_project/templates/pages/discover-numerology.html:10
+msgid "Numerology is the language Åse uses to translate numbers into stories about timing, purpose, and potential. In this section you will meet the philosophical roots of her method and learn how each calculation is grounded in Pythagorean thought and contemporary practice."
+msgstr "Numerologi er språket Åse bruker for å oversette tall til historier om timing, hensikt og potensial. I denne seksjonen møter du de filosofiske røttene til metoden hennes, og lærer hvordan hver beregning er forankret i pytagoreisk tenkning og moderne praksis."
+
+#: tall_project/templates/pages/discover-numerology.html:17
+msgid "Start here if you want an overview of why numerology matters, how Åse interprets each digit, and the reference charts that sit behind your personalised readings."
+msgstr "Start her hvis du vil ha en oversikt over hvorfor numerologi er viktig, hvordan Åse tolker hvert siffer, og referansetabellene bak dine personlige lesninger."
+
+#: tall_project/templates/pages/discover-numerology.html:23
+msgid "Key topics"
+msgstr "Sentrale temaer"
+
+#: tall_project/templates/pages/discover-numerology.html:25
+msgid "the historical roots of the method."
+msgstr "metodens historiske røtter."
+
+#: tall_project/templates/pages/discover-numerology.html:26
+msgid "what each core number represents."
+msgstr "hva hvert grunntall representerer."
+
+#: tall_project/templates/pages/discover-numerology.html:27
+msgid "the maths behind each reading."
+msgstr "regnestykket bak hver lesning."
+
+#: tall_project/templates/pages/discover-numerology.html:28
+msgid "how letters convert into numbers."
+msgstr "hvordan bokstaver omgjøres til tall."
+
+#: tall_project/templates/pages/discover-numerology.html:34
+msgid "Is numerology the same as astrology?"
+msgstr "Er numerologi det samme som astrologi?"
+
+#: tall_project/templates/pages/discover-numerology.html:35
+msgid "No. Numerology works from your birth date and name using number reduction, while astrology works from planetary positions at birth. Some readers combine both, but they are separate systems."
+msgstr "Nei. Numerologi tar utgangspunkt i fødselsdato og navn gjennom tallreduksjon, mens astrologi tar utgangspunkt i planetposisjoner ved fødsel. Noen kombinerer begge deler, men de er separate systemer."
+
+#: tall_project/templates/pages/discover-numerology.html:38
+msgid "Where do I start if I want my own numbers calculated?"
+msgstr "Hvor begynner jeg hvis jeg vil ha mine egne tall beregnet?"
+
+#: tall_project/templates/pages/discover-numerology.html:39
+msgid "Go to the"
+msgstr "Gå til"
+
+#: tall_project/templates/pages/discover-numerology.html:39
+#: tall_project/templates/pages/resources.html:35
+msgid "calculator suite"
+msgstr "kalkulatorsamlingen"
+
+#: tall_project/templates/pages/discover-numerology.html:39
+msgid "or jump straight to"
+msgstr "eller hopp rett til"
+
+#: tall_project/templates/pages/discover-numerology.html:39
+msgid "computing your destiny number"
+msgstr "å beregne skjebnetallet ditt"
+
+#: tall_project/templates/pages/free-analyses.html:10
+msgid "Explore sample readings and downloadable exercises that showcase Åse's methodology. These resources offer a taste of the full consultations and help you decide which service fits best."
+msgstr "Utforsk eksempellesninger og nedlastbare øvelser som viser Åses metodikk. Disse ressursene gir en smakebit av de fulle konsultasjonene og hjelper deg å velge riktig tjeneste."
+
+#: tall_project/templates/pages/free-analyses.html:16
+msgid "Mini birth chart walkthroughs with commentary."
+msgstr "Korte gjennomganger av fødselskart med kommentarer."
+
+#: tall_project/templates/pages/free-analyses.html:17
+msgid "Checklists for preparing questions before a session."
+msgstr "Sjekklister for å forberede spørsmål før en time."
+
+#: tall_project/templates/pages/general-interpretation.html:10
+msgid "Every number carries a personality. Here Åse summarises the qualities, challenges, and growth opportunities linked to digits one through nine, along with master numbers eleven, twenty-two, and thirty-three."
+msgstr "Hvert tall bærer en personlighet. Her oppsummerer Åse egenskapene, utfordringene og vekstmulighetene knyttet til sifrene én til ni, samt mesternumrene elleve, tjueto og trettitre."
+
+#: tall_project/templates/pages/general-interpretation.html:15
+msgid "Use this guide as a companion when you receive your charts or practice interpreting numbers for friends."
+msgstr "Bruk denne guiden som følgesvenn når du mottar kartene dine, eller øver på å tolke tall for venner."
+
+#: tall_project/templates/pages/guidance-support.html:10
+msgid "Åse's practice is rooted in compassionate guidance. Discover how to work with her, what to expect before a call, and the support systems she offers between sessions."
+msgstr "Åses praksis er forankret i medfølende veiledning. Oppdag hvordan du kan jobbe med henne, hva du kan forvente før en samtale, og støtteordningene hun tilbyr mellom timene."
+
+#: tall_project/templates/pages/guidance-support.html:16
+msgid "Stay supported"
+msgstr "Hold deg støttet"
+
+#: tall_project/templates/pages/guidance-support.html:18
+msgid "Åse's background, method, and approach."
+msgstr "Åses bakgrunn, metode og tilnærming."
+
+#: tall_project/templates/pages/guidance-support.html:19
+msgid "how a phone session works and what to expect."
+msgstr "hvordan en telefontime fungerer, og hva du kan forvente."
+
+#: tall_project/templates/pages/guidance-support.html:20
+msgid "booking details and answers to common questions."
+msgstr "bestillingsdetaljer og svar på vanlige spørsmål."
+
+#: tall_project/templates/pages/guidance-support.html:26
+msgid "Do sessions happen in person or by phone?"
+msgstr "Foregår timene fysisk eller på telefon?"
+
+#: tall_project/templates/pages/guidance-support.html:27
+msgid "Most guidance sessions are conducted by phone; see"
+msgstr "De fleste veiledningstimer foregår på telefon; se"
+
+#: tall_project/templates/pages/guidance-support.html:27
+msgid "for details."
+msgstr "for detaljer."
+
+#: tall_project/templates/pages/guidance-support.html:30
+msgid "What should I prepare before a session?"
+msgstr "Hva bør jeg forberede før en time?"
+
+#: tall_project/templates/pages/guidance-support.html:31
+msgid "Your full birth date and full birth name are usually enough for Åse to begin a reading — see"
+msgstr "Hele fødselsdatoen og hele fødselsnavnet ditt er som regel nok for at Åse skal kunne starte en lesning — se"
+
+#: tall_project/templates/pages/guidance-support.html:31
+msgid "to book."
+msgstr "for å bestille."
+
+#: tall_project/templates/pages/home.html:4
+msgid "Numerologist Studio — Welcome"
+msgstr "Numerolog-studio — Velkommen"
+
+#: tall_project/templates/pages/home.html:508
+msgid "Hello friend"
+msgstr "Hei, venn"
+
+#: tall_project/templates/pages/home.html:509
+msgid "Progress tracker"
+msgstr "Fremdriftsmåler"
+
+#: tall_project/templates/pages/home.html:513
+msgid "Follow the guided steps to uncover every calculator Åse uses when preparing a reading."
+msgstr "Følg de veiledede trinnene for å oppdage hver kalkulator Åse bruker når hun forbereder en lesning."
+
+#: tall_project/templates/pages/home.html:516
+msgid "We start with a warm welcome and a simple intake. Share a preferred name and birth date. From here you can peek at a lite numerology overview or continue into the full studio."
+msgstr "Vi starter med en varm velkomst og et enkelt inntak. Del ønsket navn og fødselsdato. Herfra kan du kikke på en lett numerologisk oversikt, eller fortsette inn i hele studioet."
+
+#: tall_project/templates/pages/home.html:522
+msgid "Step 1 · Intake essentials"
+msgstr "Steg 1 · Grunnleggende inntak"
+
+#: tall_project/templates/pages/home.html:523
+msgid "3 mins"
+msgstr "3 min"
+
+#: tall_project/templates/pages/home.html:527
+msgid "The calculator is temporarily paused for maintenance while we fix a calculation issue. Please check back soon."
+msgstr "Kalkulatoren er midlertidig satt på pause for vedlikehold mens vi retter en beregningsfeil. Kom gjerne tilbake snart."
+
+#: tall_project/templates/pages/home.html:537
+msgid "Preferred name"
+msgstr "Ønsket navn"
+
+#: tall_project/templates/pages/home.html:544
+msgid "Birth date"
+msgstr "Fødselsdato"
+
+#: tall_project/templates/pages/home.html:559
+msgid "Access code"
+msgstr "Tilgangskode"
+
+#: tall_project/templates/pages/home.html:561
+msgid "This calculator is being tried out with a small group first — ask Åse for the current code."
+msgstr "Denne kalkulatoren prøves ut med en liten gruppe først — spør Åse om gjeldende kode."
+
+#: tall_project/templates/pages/home.html:568
+msgid "Continue"
+msgstr "Fortsett"
+
+#: tall_project/templates/pages/home.html:573
+msgid "Your numerology snapshot"
+msgstr "Din numerologiske oversikt"
+
+#: tall_project/templates/pages/home.html:576
+msgid "The lite calculator is temporarily paused while we fix a calculation issue. Explore the number pages and articles in the meantime."
+msgstr "Den lette kalkulatoren er midlertidig satt på pause mens vi retter en beregningsfeil. Utforsk tallsidene og artiklene i mellomtiden."
+
+#: tall_project/templates/pages/home.html:578
+msgid "Complete the intake form and choose “Continue” to instantly calculate your personal numerology profile using Åse’s light calculator."
+msgstr "Fyll ut inntaksskjemaet og velg «Fortsett» for å umiddelbart beregne din personlige numerologiske profil med Åses lette kalkulator."
+
+#: tall_project/templates/pages/home.html:586
+msgid "Guides your lifetime rhythm and lessons."
+msgstr "Veileder livets rytme og lærdommer."
+
+#: tall_project/templates/pages/home.html:591
+msgid "How you naturally show gifts to the world."
+msgstr "Hvordan du naturlig viser dine gaver til verden."
+
+#: tall_project/templates/pages/home.html:596
+msgid "The desires your heart keeps whispering."
+msgstr "Ønskene hjertet ditt stadig hvisker."
+
+#: tall_project/templates/pages/home.html:601
+msgid "The impression people receive when you arrive."
+msgstr "Inntrykket folk får når du kommer inn i rommet."
+
+#: tall_project/templates/pages/home.html:605
+msgid "Explore all calculators"
+msgstr "Utforsk alle kalkulatorene"
+
+#: tall_project/templates/pages/home.html:612
+msgid "Core number stories"
+msgstr "Historiene bak grunntallene"
+
+#: tall_project/templates/pages/home.html:614
+msgid "Each number carries a distinct tone. These quick notes help you connect the lite calculator’s insight with Åse’s deeper readings. Come back after your full session to compare how the energies mature."
+msgstr "Hvert tall bærer sin egen tone. Disse korte notatene hjelper deg å koble den lette kalkulatorens innsikt til Åses dypere lesninger. Kom tilbake etter hele økten din for å sammenligne hvordan energiene modnes."
+
+#: tall_project/templates/pages/home.html:618
+msgid "Number 1"
+msgstr "Tall 1"
+
+#: tall_project/templates/pages/home.html:619
+msgid "Courage, initiative, and a drive to set the pace for others."
+msgstr "Mot, initiativ og en drivkraft til å sette tempoet for andre."
+
+#: tall_project/templates/pages/home.html:622
+msgid "Number 2"
+msgstr "Tall 2"
+
+#: tall_project/templates/pages/home.html:623
+msgid "Gentle balance, partnership, and the wisdom of patience."
+msgstr "Mild balanse, partnerskap og tålmodighetens visdom."
+
+#: tall_project/templates/pages/home.html:626
+msgid "Number 3"
+msgstr "Tall 3"
+
+#: tall_project/templates/pages/home.html:627
+msgid "Expression, optimism, and weaving joy into daily rituals."
+msgstr "Uttrykk, optimisme og å veve glede inn i daglige ritualer."
+
+#: tall_project/templates/pages/home.html:630
+msgid "Number 4"
+msgstr "Tall 4"
+
+#: tall_project/templates/pages/home.html:631
+msgid "Structure, loyalty, and crafting foundations that last."
+msgstr "Struktur, lojalitet og å bygge fundamenter som varer."
+
+#: tall_project/templates/pages/home.html:634
+msgid "Number 5"
+msgstr "Tall 5"
+
+#: tall_project/templates/pages/home.html:635
+msgid "Freedom, curiosity, and thriving on fresh experiences."
+msgstr "Frihet, nysgjerrighet og å blomstre på nye erfaringer."
+
+#: tall_project/templates/pages/home.html:638
+msgid "Number 6"
+msgstr "Tall 6"
+
+#: tall_project/templates/pages/home.html:639
+msgid "Harmony, devotion, and tending to family with warmth."
+msgstr "Harmoni, hengivenhet og å ta vare på familien med varme."
+
+#: tall_project/templates/pages/home.html:642
+msgid "Number 7"
+msgstr "Tall 7"
+
+#: tall_project/templates/pages/home.html:643
+msgid "Reflection, intuition, and seeking meaning beneath the surface."
+msgstr "Refleksjon, intuisjon og å søke mening under overflaten."
+
+#: tall_project/templates/pages/home.html:646
+msgid "Number 8"
+msgstr "Tall 8"
+
+#: tall_project/templates/pages/home.html:647
+msgid "Leadership, accountability, and stewardship of resources."
+msgstr "Lederskap, ansvarlighet og forvaltning av ressurser."
+
+#: tall_project/templates/pages/home.html:650
+msgid "Number 9"
+msgstr "Tall 9"
+
+#: tall_project/templates/pages/home.html:651
+msgid "Compassion, vision, and the grace of completion."
+msgstr "Medfølelse, visjon og fullendelsens nåde."
+
+#: tall_project/templates/pages/home.html:654
+msgid "Number 11"
+msgstr "Tall 11"
+
+#: tall_project/templates/pages/home.html:655
+msgid "Spiritual illumination, insight, and inspiring leadership."
+msgstr "Åndelig opplysning, innsikt og inspirerende lederskap."
+
+#: tall_project/templates/pages/home.html:658
+msgid "Number 22"
+msgstr "Tall 22"
+
+#: tall_project/templates/pages/home.html:659
+msgid "Grand-scale manifestation balanced with heart-led service."
+msgstr "Storstilt manifestasjon balansert med hjertedrevet tjeneste."
+
+#: tall_project/templates/pages/home.html:662
+msgid "Number 33"
+msgstr "Tall 33"
+
+#: tall_project/templates/pages/home.html:663
+msgid "Compassionate mastery devoted to uplifting humanity."
+msgstr "Medfølende mestring viet til å løfte menneskeheten."
+
+#: tall_project/templates/pages/home.html:669
+msgid "Siste artikler"
+msgstr "Siste artikler"
+
+#: tall_project/templates/pages/home.html:670
+msgid "Se alle artikler →"
+msgstr "Se alle artikler →"
+
+#: tall_project/templates/pages/home.html:677
+msgid "Illustration of two silhouettes"
+msgstr "Illustrasjon av to silhuetter"
+
+#: tall_project/templates/pages/home.html:685
+msgid "Guides"
+msgstr "Guider"
+
+#: tall_project/templates/pages/home.html:686
+msgid "Hvordan forstå din Life Path"
+msgstr "Hvordan forstå din Life Path"
+
+#: tall_project/templates/pages/home.html:687
+msgid "En enkel introduksjon til hva livsveien forteller om ditt overordnede livstema."
+msgstr "En enkel introduksjon til hva livsveien forteller om ditt overordnede livstema."
+
+#: tall_project/templates/pages/home.html:688
+msgid "5 min lesing · 24. november 2025"
+msgstr "5 min lesing · 24. november 2025"
+
+#: tall_project/templates/pages/home.html:696
+msgid "Master number 33"
+msgstr "Mesternummer 33"
+
+#: tall_project/templates/pages/home.html:705
+msgid "Master numbers"
+msgstr "Mesternumre"
+
+#: tall_project/templates/pages/home.html:706
+msgid "Hva betyr det å ha 33 i kartet ditt?"
+msgstr "Hva betyr det å ha 33 i kartet ditt?"
+
+#: tall_project/templates/pages/home.html:707
+msgid "En dypere titt på det medfølende, kosmiske lærer-tallet 33."
+msgstr "En dypere titt på det medfølende, kosmiske lærer-tallet 33."
+
+#: tall_project/templates/pages/home.html:708
+msgid "7 min lesing · 12. november 2025"
+msgstr "7 min lesing · 12. november 2025"
+
+#: tall_project/templates/pages/home.html:716
+msgid "Navn og numerologi"
+msgstr "Navn og numerologi"
+
+#: tall_project/templates/pages/home.html:725
+msgid "Navn &amp; numerologi: hvorfor navnet ditt føles «deg»"
+msgstr "Navn &amp; numerologi: hvorfor navnet ditt føles «deg»"
+
+#: tall_project/templates/pages/home.html:726
+msgid "Utforsk hvordan uttrykks-tallet fra navnet ditt farger personligheten."
+msgstr "Utforsk hvordan uttrykks-tallet fra navnet ditt farger personligheten."
+
+#: tall_project/templates/pages/home.html:727
+msgid "6 min lesing · 3. november 2025"
+msgstr "6 min lesing · 3. november 2025"
+
+#: tall_project/templates/pages/home.html:736
+#: tall_project/templates/pages/home.html:739
+msgid "Intake progress"
+msgstr "Inntaksfremdrift"
+
+#: tall_project/templates/pages/home.html:740
+#: tall_project/templates/pages/home.html:781
+#, python-format
+msgid "Progress: 100%% complete"
+msgstr "Fremdrift: 100 %% fullført"
+
+#: tall_project/templates/pages/home.html:740
+#: tall_project/templates/pages/home.html:783
+#, python-format
+msgid "Progress: 0%% complete"
+msgstr "Fremdrift: 0 %% fullført"
+
+#: tall_project/templates/pages/home.html:757
+msgid "Crafted for Åse Steinsland’s Numerologist Studio — powered by a light calculator preview."
+msgstr "Laget for Åse Steinslands Numerologist Studio — drevet av en lett kalkulator-forhåndsvisning."
+
+#: tall_project/templates/pages/home.html:784
+msgid "Progress"
+msgstr "Fremdrift"
+
+#: tall_project/templates/pages/home.html:784
+msgid "complete"
+msgstr "fullført"
+
+#: tall_project/templates/pages/legal.html:10
+msgid "Transparency matters. This hub gathers the policies that protect your privacy, explain our terms of service, and outline how Numerologist handles data in compliance with Norwegian and EU regulations."
+msgstr "Åpenhet betyr noe. Denne siden samler retningslinjene som beskytter personvernet ditt, forklarer vilkårene våre, og skisserer hvordan Numerologist håndterer data i tråd med norsk regelverk og EU-regelverk."
+
+#: tall_project/templates/pages/legal.html:16
+msgid "Policies"
+msgstr "Retningslinjer"
+
+#: tall_project/templates/pages/letter-value-chart.html:10
+msgid "Convert any name into numbers using Åse's preferred alphabet chart. We include guidance for Norwegian letters, common variations, and practical tips for translating nicknames or company names."
+msgstr "Gjør om et hvilket som helst navn til tall med Åses foretrukne bokstavtabell. Vi inkluderer veiledning for norske bokstaver, vanlige varianter og praktiske tips for å oversette kallenavn eller firmanavn."
+
+#: tall_project/templates/pages/letter-value-chart.html:15
+msgid "Download a printable version and keep it beside you as you explore the calculators."
+msgstr "Last ned en utskriftsvennlig versjon og hold den ved siden av deg mens du utforsker kalkulatorene."
+
+#: tall_project/templates/pages/lifes-fourth-stage.html:10
+msgid "Åse teaches a four-stage development model inspired by Nordic numerology. The fourth stage marks a synthesis of every lesson learned earlier in life. Explore how to calculate when it begins and what themes typically emerge."
+msgstr "Åse underviser i en firetrinns utviklingsmodell inspirert av nordisk numerologi. Det fjerde trinnet markerer en syntese av alle lærdommer fra tidligere i livet. Utforsk hvordan du beregner når det starter, og hvilke temaer som typisk dukker opp."
+
+#: tall_project/templates/pages/lifes-fourth-stage.html:15
+msgid "Use the journal prompts to reflect on the opportunities, mentors, and inner work available in this phase."
+msgstr "Bruk journalspørsmålene til å reflektere over mulighetene, mentorene og det indre arbeidet som finnes i denne fasen."
+
+#: tall_project/templates/pages/number-detail.html:9
+msgid "Essence"
+msgstr "Essens"
+
+#: tall_project/templates/pages/number-detail.html:11
+msgid "Strengths"
+msgstr "Styrker"
+
+#: tall_project/templates/pages/number-detail.html:18
+msgid "Growth edges"
+msgstr "Vekstområder"
+
+#: tall_project/templates/pages/number-detail.html:25
+msgid "Åse's guidance"
+msgstr "Åses veiledning"
+
+#: tall_project/templates/pages/number-detail.html:29
+msgid "In work and relationships"
+msgstr "I arbeid og relasjoner"
+
+#: tall_project/templates/pages/number-detail.html:43
+msgid "Calculate or explore further"
+msgstr "Beregn eller utforsk videre"
+
+#: tall_project/templates/pages/number-detail.html:45
+msgid "Compute your own destiny number"
+msgstr "Beregn ditt eget skjebnetall"
+
+#: tall_project/templates/pages/number-detail.html:46
+msgid "General interpretation of all numbers"
+msgstr "Generell tolkning av alle tall"
+
+#: tall_project/templates/pages/number-detail.html:47
+msgid "Book personal guidance with Åse"
+msgstr "Bestill personlig veiledning med Åse"
+
+#: tall_project/templates/pages/number-detail.html:50
+msgid "Other core numbers"
+msgstr "Andre grunntall"
+
+#: tall_project/templates/pages/number-detail.html:56
+msgid "Back to core number stories"
+msgstr "Tilbake til historiene bak grunntallene"
+
+#: tall_project/templates/pages/numerologist-in-media.html:10
+msgid "Interviews, podcasts, articles, and press features where Åse shares numerology insights with a wider audience. Catch up on recent coverage, explore in-depth conversations, and request media assets for your own publication."
+msgstr "Intervjuer, podkaster, artikler og pressesaker der Åse deler numerologisk innsikt med et bredere publikum. Se nyere omtale, utforsk dyptgående samtaler, og be om mediemateriell til din egen publikasjon."
+
+#: tall_project/templates/pages/numerologist-in-media.html:17
+msgid "Featured press coverage"
+msgstr "Utvalgt presseomtale"
+
+#: tall_project/templates/pages/numerologist-in-media.html:19
+msgid "Major publications continue to spotlight numerology's resurgence in culture and personal development. These evergreen features are helpful references when introducing readers to Åse's work and the broader numerology movement."
+msgstr "Store publikasjoner fortsetter å sette søkelys på numerologiens fornyede popularitet innen kultur og personlig utvikling. Disse tidløse sakene er nyttige referanser når du introduserer lesere for Åses arbeid og den bredere numerologibevegelsen."
+
+#: tall_project/templates/pages/numerologist-in-media.html:28
+msgid "Vogue: \"Numerology 101: How to Use Your Life Path Number to Get What You Want\""
+msgstr "Vogue: «Numerology 101: How to Use Your Life Path Number to Get What You Want»"
+
+#: tall_project/templates/pages/numerologist-in-media.html:30
+msgid "A primer on life-path numbers and how people are weaving numerology into everyday decision-making."
+msgstr "En innføring i livsveitall og hvordan folk vever numerologi inn i hverdagens beslutninger."
+
+#: tall_project/templates/pages/numerologist-in-media.html:34
+msgid "The Cut: \"What Numerology Says About 2024\""
+msgstr "The Cut: «What Numerology Says About 2024»"
+
+#: tall_project/templates/pages/numerologist-in-media.html:36
+msgid "Annual forecast that highlights how numerologists interpret collective energy through numbers."
+msgstr "Årlig prognose som viser hvordan numerologer tolker kollektiv energi gjennom tall."
+
+#: tall_project/templates/pages/numerologist-in-media.html:40
+msgid "BBC Worklife: \"Why so many people believe in angel numbers\""
+msgstr "BBC Worklife: «Why so many people believe in angel numbers»"
+
+#: tall_project/templates/pages/numerologist-in-media.html:42
+msgid "Explores the psychology behind repeating numbers and the cultural fascination with numeric patterns."
+msgstr "Utforsker psykologien bak gjentakende tall og den kulturelle fascinasjonen for tallmønstre."
+
+#: tall_project/templates/pages/numerologist-in-media.html:46
+msgid "The Washington Post: \"Angel numbers are everywhere. Here&#8217;s what they really mean.\""
+msgstr "The Washington Post: «Angel numbers are everywhere. Here&#8217;s what they really mean.»"
+
+#: tall_project/templates/pages/numerologist-in-media.html:48
+msgid "Breaks down how modern mystics, including numerologists, interpret frequently spotted sequences like 1111 and 222."
+msgstr "Bryter ned hvordan moderne mystikere, inkludert numerologer, tolker ofte observerte tallrekker som 1111 og 222."
+
+#: tall_project/templates/pages/numerologist-in-media.html:52
+msgid "NPR Life Kit: \"Why We Find Meaning In Numbers\""
+msgstr "NPR Life Kit: «Why We Find Meaning In Numbers»"
+
+#: tall_project/templates/pages/numerologist-in-media.html:54
+msgid "An audio-friendly overview that situates numerology within a wider conversation about intuition and pattern recognition."
+msgstr "En lydvennlig oversikt som plasserer numerologi i en bredere samtale om intuisjon og mønstergjenkjenning."
+
+#: tall_project/templates/pages/numerologist-in-media.html:60
+msgid "Interview-ready topics"
+msgstr "Intervjuklare temaer"
+
+#: tall_project/templates/pages/numerologist-in-media.html:62
+msgid "Looking to feature Åse on your platform? These go-to angles resonate with audiences who are curious about how numerology can support personal and professional growth."
+msgstr "Vil du ha med Åse på din plattform? Disse innfallsvinklene appellerer til publikum som er nysgjerrige på hvordan numerologi kan støtte personlig og faglig vekst."
+
+#: tall_project/templates/pages/numerologist-in-media.html:68
+msgid "Personal year cycles for career planning and launch timing."
+msgstr "Personlige årssykluser for karriereplanlegging og riktig lanseringstidspunkt."
+
+#: tall_project/templates/pages/numerologist-in-media.html:69
+msgid "How life-path numbers illuminate leadership styles and team dynamics."
+msgstr "Hvordan livsveitall belyser lederstiler og gruppedynamikk."
+
+#: tall_project/templates/pages/numerologist-in-media.html:70
+msgid "Translating repeating \"angel\" numbers into practical rituals and mindset shifts."
+msgstr "Å oversette gjentakende «engle»-tall til praktiske ritualer og tankesettendringer."
+
+#: tall_project/templates/pages/numerologist-in-media.html:71
+msgid "Building intuitive businesses by combining numerology with evidence-based strategy."
+msgstr "Å bygge intuitive virksomheter ved å kombinere numerologi med evidensbasert strategi."
+
+#: tall_project/templates/pages/numerologist-in-media.html:76
+msgid "Press resources"
+msgstr "Presseressurser"
+
+#: tall_project/templates/pages/numerologist-in-media.html:78
+msgid "Need a quote or a tailored numerology segment? Reach out for custom commentary, workshop bookings, or live event coverage."
+msgstr "Trenger du et sitat eller et skreddersydd numerologiinnslag? Ta kontakt for tilpasset kommentar, workshop-booking eller dekning av arrangementer."
+
+#: tall_project/templates/pages/numerologist-in-media.html:84
+msgid "Email"
+msgstr "E-post"
+
+#: tall_project/templates/pages/numerologist-in-media.html:85
+msgid "Request a full media kit, including bio, talking points, and imagery, via email."
+msgstr "Be om en full mediepakke, inkludert biografi, samtalepunkter og bilder, per e-post."
+
+#: tall_project/templates/pages/numerologist-in-media.html:86
+msgid "Virtual and on-site interviews available across English and Scandinavian outlets."
+msgstr "Digitale og fysiske intervjuer tilgjengelig for engelskspråklige og skandinaviske medier."
+
+#: tall_project/templates/pages/personal-insights.html:10
+msgid "Ready to apply the theory to your own life? The Personal Insights hub gathers every calculator and interpretive guide that helps Åse's clients navigate relationships, careers, and spiritual development."
+msgstr "Klar til å bruke teorien i ditt eget liv? Personlig innsikt samler alle kalkulatorer og tolkningsguider som hjelper Åses klienter å navigere relasjoner, karriere og åndelig utvikling."
+
+#: tall_project/templates/pages/personal-insights.html:16
+msgid "Featured explorations"
+msgstr "Utvalgte utforskninger"
+
+#: tall_project/templates/pages/privacy-policy.html:10
+msgid "Learn how Numerologist collects, stores, and protects your personal information. The policy explains data retention practices, third-party tools, and your rights under GDPR."
+msgstr "Lær hvordan Numerologist samler inn, lagrer og beskytter personopplysningene dine. Retningslinjene forklarer praksis for datalagring, tredjepartsverktøy og dine rettigheter under GDPR."
+
+#: tall_project/templates/pages/projects-lab.html:10
+msgid "This hub keeps all active research projects in one place so nothing gets lost between demos and production pages."
+msgstr "Denne siden samler alle aktive forskningsprosjekter på ett sted, slik at ingenting går tapt mellom demoer og produksjonssider."
+
+#: tall_project/templates/pages/projects-lab.html:17
+msgid "Signal-resonance research notebooks and calculator concepts."
+msgstr "Forskningsnotatbøker om signalresonans og kalkulatorkonsepter."
+
+#: tall_project/templates/pages/projects-lab.html:21
+msgid "Surah pattern exploration and 6–7–8 wave mapping."
+msgstr "Utforskning av surah-mønstre og 6–7–8-bølgekartlegging."
+
+#: tall_project/templates/pages/pythagoras-arrows.html:10
+msgid "The arrows reveal number patterns inside your birth chart grid. Learn how lines of strength, creativity, and challenge appear, and how to balance missing numbers with supportive rituals."
+msgstr "Pilene avslører tallmønstre inne i fødselskart-rutenettet ditt. Lær hvordan linjer med styrke, kreativitet og utfordring viser seg, og hvordan du balanserer manglende tall med støttende ritualer."
+
+#: tall_project/templates/pages/pythagoras-legacy.html:10
+msgid "Åse traces her numerology back to the mystic schools of ancient Greece. This page outlines how Pythagoras connected sound, mathematics, and the harmony of the cosmos, and why his approach still resonates inside modern consultations."
+msgstr "Åse sporer sin numerologi tilbake til de mystiske skolene i antikkens Hellas. Denne siden skisserer hvordan Pytagoras knyttet sammen lyd, matematikk og kosmos' harmoni, og hvorfor tilnærmingen hans fortsatt gir gjenklang i moderne konsultasjoner."
+
+#: tall_project/templates/pages/pythagoras-legacy.html:16
+msgid "Meet the historical figures who preserved the teachings and brought them to Scandinavia."
+msgstr "Møt de historiske skikkelsene som bevarte læren og brakte den til Skandinavia."
+
+#: tall_project/templates/pages/pythagoras-legacy.html:17
+msgid "Understand why numbers from one to nine form the foundation of every reading."
+msgstr "Forstå hvorfor tallene fra én til ni danner fundamentet i enhver lesning."
+
+#: tall_project/templates/pages/pythagoras-legacy.html:18
+msgid "See how Åse combines classical wisdom with contemporary life coaching."
+msgstr "Se hvordan Åse kombinerer klassisk visdom med moderne livscoaching."
+
+#: tall_project/templates/pages/quranian-numerology.html:90
+msgid "This project explores Surah-by-Surah number patterns and symbolic structures in the Quran. The aim is to examine whether recurring number signatures can reveal hidden codes, resonance patterns, or meaning frameworks for deeper reflection."
+msgstr "Dette prosjektet utforsker tallmønstre og symbolske strukturer sure for sure i Koranen. Målet er å undersøke om gjentakende tallsignaturer kan avsløre skjulte koder, resonansmønstre eller meningsrammer for dypere refleksjon."
+
+#: tall_project/templates/pages/quranian-numerology.html:97
+msgid "Main experiment: 6–7–8 and the electromagnetic pulse"
+msgstr "Hovedeksperiment: 6–7–8 og den elektromagnetiske pulsen"
+
+#: tall_project/templates/pages/quranian-numerology.html:99
+msgid "We are testing a frequency-wave model where 6, 7, and 8 form an oscillating structure:"
+msgstr "Vi tester en frekvensbølgemodell der 6, 7 og 8 danner en oscillerende struktur:"
+
+#: tall_project/templates/pages/quranian-numerology.html:104
+msgid "Det magnetiske fundamentet."
+msgstr "Det magnetiske fundamentet."
+
+#: tall_project/templates/pages/quranian-numerology.html:105
+msgid "Den elektriske utladningen/toroiden."
+msgstr "Den elektriske utladningen/toroiden."
+
+#: tall_project/templates/pages/quranian-numerology.html:106
+msgid "Den nøytrale terskelen eller faselåsingen."
+msgstr "Den nøytrale terskelen eller faselåsingen."
+
+#: tall_project/templates/pages/quranian-numerology.html:109
+msgid "In this model, 7 functions as a transition point that pushes consciousness between the earthly (6) and the cosmic (8), creating a dynamic balance point."
+msgstr "I denne modellen fungerer 7 som et overgangspunkt som skyver bevisstheten mellom det jordiske (6) og det kosmiske (8), og skaper et dynamisk balansepunkt."
+
+#: tall_project/templates/pages/quranian-numerology.html:117
+msgid "Surah Numerology Calculator"
+msgstr "Surah-numerologikalkulator"
+
+#: tall_project/templates/pages/quranian-numerology.html:119
+msgid "Choose any Surah (1–114) to view its numerology profile, a generated rhythm sequence (6–7–8 cycle), and a graphic wave card."
+msgstr "Velg en hvilken som helst surah (1–114) for å se dens numerologiske profil, en generert rytmesekvens (6–7–8-syklus) og et grafisk bølgekort."
+
+#: tall_project/templates/pages/quranian-numerology.html:125
+msgid "Select Surah"
+msgstr "Velg surah"
+
+#: tall_project/templates/pages/quranian-numerology.html:137
+msgid "Abjad reduction and 6/8 dominance"
+msgstr "Abjad-reduksjon og 6/8-dominans"
+
+#: tall_project/templates/pages/quranian-numerology.html:139
+msgid "After removing “Al-” (4), the repeated appearance of 6 and 8 is interpreted as stripping structural noise and exposing a core motor in the language. Surah Al-Ikhlas (3–2–3–2) appears to break this pattern, which may indicate a different octave or resonance layer."
+msgstr "Etter å ha fjernet «Al-» (4), tolkes den gjentatte forekomsten av 6 og 8 som å fjerne strukturell støy og eksponere en kjernemotor i språket. Surah Al-Ikhlas (3–2–3–2) ser ut til å bryte dette mønsteret, noe som kan indikere et annet oktav eller resonanslag."
+
+#: tall_project/templates/pages/quranian-numerology.html:148
+msgid "Semantic equality (Iman/Kufr = 3)"
+msgstr "Semantisk likhet (Iman/Kufr = 3)"
+
+#: tall_project/templates/pages/quranian-numerology.html:150
+msgid "When semantic opposites produce the same number, the project treats this as possible interference symmetry: belief and disbelief may trigger similar structural reactions in the numeric system, independent of moral framing."
+msgstr "Når semantiske motsetninger gir samme tall, behandler prosjektet dette som mulig interferenssymmetri: tro og vantro kan utløse lignende strukturelle reaksjoner i tallsystemet, uavhengig av moralsk innramming."
+
+#: tall_project/templates/pages/quranian-numerology.html:158
+msgid "P1–P6: the grammatical code"
+msgstr "P1–P6: den grammatiske koden"
+
+#: tall_project/templates/pages/quranian-numerology.html:160
+msgid "The observed P1–P6 patterns are approached as a binary-like consciousness code. If these sequences continue to map as stable waves, the text may act as a coherence signal for readers and listeners."
+msgstr "De observerte P1–P6-mønstrene tilnærmes som en binærlignende bevissthetskode. Hvis disse sekvensene fortsetter å kartlegges som stabile bølger, kan teksten fungere som et koherenssignal for lesere og lyttere."
+
+#: tall_project/templates/pages/quranian-numerology.html:168
+msgid "Project note"
+msgstr "Prosjektnotat"
+
+#: tall_project/templates/pages/quranian-numerology.html:170
+msgid "This is an exploratory numerology research project. Findings are treated as hypotheses for study, discussion, and further verification, not as final doctrinal claims."
+msgstr "Dette er et utforskende numerologisk forskningsprosjekt. Funnene behandles som hypoteser for studium, diskusjon og videre verifisering, ikke som endelige doktrinære påstander."
+
+#: tall_project/templates/pages/quranian-numerology.html:177
+msgid "View the original project brief"
+msgstr "Se det opprinnelige prosjektnotatet"
+
+#: tall_project/templates/pages/realization-number.html:10
+msgid "The realization number blends your destiny and life-path numbers, revealing the grand theme you are here to embody. Åse shares interpretation cues, supportive questions, and the types of collaborations that amplify this vibration."
+msgstr "Realiseringstallet blander skjebnetallet og livsveitallet ditt, og avslører det store temaet du er her for å utforme. Åse deler tolkningsnøkler, støttende spørsmål og typer samarbeid som forsterker denne vibrasjonen."
+
+#: tall_project/templates/pages/references.html:10
+msgid "A curated bibliography of books, teachers, and research that informs Åse's practice. Use it to dive deeper into numerology or to source materials for your own study group."
+msgstr "En kuratert litteraturliste med bøker, lærere og forskning som ligger til grunn for Åses praksis. Bruk den til å fordype deg i numerologi eller finne materiale til din egen studiegruppe."
+
+#: tall_project/templates/pages/resources.html:10
+msgid "Access Åse's growing library of self-study materials, articles, and media appearances. Everything here is curated to support your numerology practice between private sessions."
+msgstr "Få tilgang til Åses voksende bibliotek av selvstudiemateriale, artikler og medieopptredener. Alt her er kuratert for å støtte numerologipraksisen din mellom private timer."
+
+#: tall_project/templates/pages/resources.html:16
+msgid "Dive in"
+msgstr "Dykk ned"
+
+#: tall_project/templates/pages/resources.html:18
+msgid "experimental work connecting numerology with data and culture."
+msgstr "eksperimentelt arbeid som knytter numerologi til data og kultur."
+
+#: tall_project/templates/pages/resources.html:19
+msgid "number symbolism explored through the 1974 Arecibo message."
+msgstr "tallsymbolikk utforsket gjennom Arecibo-budskapet fra 1974."
+
+#: tall_project/templates/pages/resources.html:20
+msgid "what a free introductory analysis with Åse includes."
+msgstr "hva en gratis, innledende analyse med Åse inkluderer."
+
+#: tall_project/templates/pages/resources.html:21
+msgid "long-form writing on numerology and number meaning."
+msgstr "lengre tekster om numerologi og tallenes betydning."
+
+#: tall_project/templates/pages/resources.html:22
+msgid "sources and methods behind the practice."
+msgstr "kilder og metoder bak praksisen."
+
+#: tall_project/templates/pages/resources.html:23
+msgid "press coverage and interviews."
+msgstr "presseomtale og intervjuer."
+
+#: tall_project/templates/pages/resources.html:24
+msgid "how numerical patterns are studied in Quranic tradition."
+msgstr "hvordan tallmønstre studeres i koransk tradisjon."
+
+#: tall_project/templates/pages/resources.html:30
+msgid "Are these resources a substitute for a personal reading?"
+msgstr "Er disse ressursene en erstatning for en personlig lesning?"
+
+#: tall_project/templates/pages/resources.html:31
+msgid "No. They give context and background, but a personal reading uses your own birth date and name, which these general resources cannot do."
+msgstr "Nei. De gir kontekst og bakgrunn, men en personlig lesning bruker din egen fødselsdato og ditt eget navn, noe disse generelle ressursene ikke kan tilby."
+
+#: tall_project/templates/pages/resources.html:34
+msgid "Where should I start if I'm completely new?"
+msgstr "Hvor bør jeg starte hvis jeg er helt ny?"
+
+#: tall_project/templates/pages/resources.html:35
+msgid "Start with"
+msgstr "Start med"
+
+#: tall_project/templates/pages/resources.html:35
+msgid ", then try the"
+msgstr ", prøv deretter"
+
+#: tall_project/templates/pages/same-number-meaning.html:10
+msgid "Repeating numbers feel like nudges from the universe. Åse shares a quick reference guide for triple digits, mirror hours, and other sequences so you can decode the messages on the go."
+msgstr "Gjentakende tall føles som dytt fra universet. Åse deler en rask referanseguide for trippelsifre, speiltimer og andre sekvenser, slik at du kan tyde budskapene der og da."
+
+#: tall_project/templates/pages/telephone-guidance.html:10
+msgid "Phone sessions create an intimate space for numerology coaching. Review pricing, scheduling details, and how to prepare so you can make the most of your time with Åse."
+msgstr "Telefontimer skaper et nært rom for numerologiveiledning. Se gjennom priser, timeplanlegging og hvordan du forbereder deg, slik at du får mest mulig ut av tiden med Åse."
+
+#: tall_project/templates/pages/terms-conditions.html:10
+msgid "Review the agreement that applies when you book a session with Åse. It covers payment terms, cancellations, client responsibilities, and how guidance should be integrated alongside professional advice."
+msgstr "Se gjennom avtalen som gjelder når du bestiller en time med Åse. Den dekker betalingsvilkår, avbestilling, klientens ansvar og hvordan veiledningen bør kombineres med profesjonell rådgivning."
