@@ -36,10 +36,18 @@
     background: radial-gradient(circle at 50% 38%, rgba(198,167,117,.22), transparent 62%), #092426;
     overflow: hidden;
   }
+  /* .j-parallax makes this span a 120%-tall absolute box, so the numeral has
+     to be centred inside it — otherwise it sits at the very top of the hero,
+     cut off under the nav. Right-aligned on wide screens so it doesn't sit
+     behind the title; centred and dimmed on phones. */
   .n-hero-numeral__num {
-    font-family: Georgia, serif; font-weight: 400; color: rgba(198,167,117,.9);
-    font-size: clamp(14rem, 32vw, 30rem); line-height: 1;
+    display: grid; place-items: center end; padding-right: 7%; box-sizing: border-box;
+    font-family: Georgia, serif; font-weight: 400; color: rgba(198,167,117,.85);
+    font-size: clamp(9rem, 24vw, 22rem); line-height: 1; letter-spacing: -.04em;
     text-shadow: 0 0 90px rgba(198,167,117,.35);
+  }
+  @media (max-width: 760px) {
+    .n-hero-numeral__num { place-items: center; padding-right: 0; font-size: clamp(9rem, 48vw, 14rem); color: rgba(198,167,117,.22); }
   }
 
   /* ---------- Master-number spectrum (reused pattern) ---------- */

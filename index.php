@@ -617,8 +617,8 @@ $serviceSchemas = [
   <!-- Fonts preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-4">
-  <link rel="stylesheet" href="/assets/home.css?v=2">
+  <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-5">
+  <link rel="stylesheet" href="/assets/home.css?v=3">
 </head>
 <body>
 
@@ -860,8 +860,9 @@ $serviceSchemas = [
   <div class="container">
     <div class="about-grid">
       <div>
-        <div class="about-photo" role="img" aria-label="Åse Steinsland – numerolog">
-          <div class="about-photo-monogram" aria-hidden="true">Å</div>
+        <div class="about-photo about-photo--circle">
+          <img src="/assets/images/ase-steinsland.jpg" alt="Åse Karin Steinsland – numerolog" width="259" height="240" loading="lazy">
+          <span class="about-photo-since"><?= $no ? 'Siden 1997' : 'Since 1997' ?></span>
         </div>
       </div>
       <div>

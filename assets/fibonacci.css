@@ -370,3 +370,30 @@
 .l-footer-bottom { align-items:flex-start; gap:1.5rem; }
 .l-footer-bottom > span { flex:1 1 400px; font-size:.875rem; }
 @media(max-width:680px){.l-footer { padding:3rem 6% 2rem; }.l-footer-grid{grid-template-columns:1fr 1fr;gap:2rem 1rem}.l-footer-grid>div:first-child{grid-column:1/-1}.l-footer-bottom{display:grid;grid-template-columns:1fr}.l-footer-langs{flex-wrap:wrap}}
+
+/* Journey pages: dark ground everywhere the body carries .number-journey —
+   not only where journey.css happens to be loaded (Åse's page, the
+   calculator suite and the articles don't load it). */
+.number-journey { --j-ink:#102f31; --j-night:#092426; --j-gold:#c6a775; --j-paper:#f3f0e8; background: #092426; color: #f3f0e8; }
+.number-journey main { padding: 0; }
+.number-journey .layout { max-width: none; display: block; }
+
+/* Plain content pages (the default body class in base.html): the old white
+   "card prose" pages sit as a paper sheet on the dark journey ground with
+   serif headings and gold accents, so every page shares one look. */
+.j-prose .layout { max-width: 880px; margin: 0 auto; padding: clamp(36px, 6vw, 80px) 16px clamp(56px, 8vw, 100px); display: grid; gap: 2rem; }
+.j-prose .card { background: #f3f0e8; color: #102f31; border: 1px solid rgba(198,167,117,.45); border-radius: 18px;
+  box-shadow: 0 30px 70px rgba(5,23,26,.45); padding: clamp(1.5rem, 4vw, 3rem); }
+.j-prose .prose { color: #36575a; }
+.j-prose .prose h1, .j-prose .prose h2, .j-prose .prose h3 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.02em; color: #102f31; }
+.j-prose .prose h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); line-height: 1.08; padding-bottom: .6rem; border-bottom: 1px solid rgba(198,167,117,.6); }
+.j-prose .prose h2 { font-size: clamp(1.6rem, 4vw, 2.1rem); }
+.j-prose .prose a { color: #805d2d; text-decoration-color: rgba(128,93,45,.4); text-underline-offset: 3px; }
+.j-prose .prose a:hover { color: #102f31; }
+.j-prose .prose ul li::marker { color: #c6a775; }
+.j-prose .prose ol li::marker { color: #805d2d; font-family: Georgia, serif; }
+.j-prose .prose strong { color: #102f31; }
+.j-prose .prose table { border-collapse: collapse; width: 100%; }
+.j-prose .prose th, .j-prose .prose td { border-bottom: 1px solid rgba(198,167,117,.4); padding: .55rem .4rem; text-align: left; }
+.j-prose .prose input, .j-prose .prose textarea, .j-prose .prose select { border-color: rgba(198,167,117,.6); }
+.j-prose .layout > :not(.card) { color: #f3f0e8; }
