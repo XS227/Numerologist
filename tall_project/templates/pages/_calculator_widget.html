@@ -1,7 +1,9 @@
 {% load i18n %}
-{# Reusable embed of the real numerology calculator (LiteCalculatorForm).
-   Expects: calculator_form, calculator_result, calculator_paused from the
-   view. Any page embedding this must POST back to itself. #}
+{% comment %}
+  Reusable embed of the real numerology calculator (LiteCalculatorForm).
+  Expects: calculator_form, calculator_result, calculator_paused from the
+  view. Any page embedding this must POST back to itself.
+{% endcomment %}
 <div class="calc-widget">
   <form method="post" class="calc-widget__form" novalidate>
     {% csrf_token %}
