@@ -1,0 +1,470 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ article.title }} · {% trans "Articles & Library" %} · Numerologist{% endblock %}
+
+{% block extra_styles %}
+      .article-breadcrumb { margin-bottom: 1.5rem; font-size: 0.95rem; }
+      .article-breadcrumb a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid rgba(45, 143, 96, 0.35);
+        color: #2d8f60;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .article-breadcrumb a:hover, .article-breadcrumb a:focus { background: rgba(45, 143, 96, 0.12); }
+      .article-detail {
+        display: grid;
+        gap: clamp(1.75rem, 3vw, 2.5rem);
+        background: #ffffff;
+        padding: clamp(2rem, 3vw, 3rem);
+        border-radius: 1.75rem;
+        border: 1px solid rgba(33, 65, 48, 0.12);
+        box-shadow: 0 28px 60px rgba(33, 65, 48, 0.12);
+      }
+      .article-detail__header { display: grid; gap: 0.75rem; }
+      .article-detail__eyebrow {
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: rgba(31, 51, 39, 0.7);
+        font-weight: 600;
+      }
+      .article-detail__title {
+        margin: 0;
+        font-size: clamp(2.1rem, 4vw, 3.1rem);
+        line-height: 1.1;
+        color: #1f3327;
+      }
+      .article-detail__meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        color: rgba(31, 51, 39, 0.65);
+      }
+      .article-detail__meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(60, 177, 121, 0.14);
+        color: #2d8f60;
+        font-weight: 600;
+      }
+
+      .article-toc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        padding: 1rem 1.1rem;
+        border-radius: 1.1rem;
+        background: rgba(60, 177, 121, 0.06);
+        border: 1px solid rgba(33, 65, 48, 0.1);
+      }
+      .article-toc a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid rgba(33, 65, 48, 0.12);
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: rgba(31, 51, 39, 0.75);
+        text-decoration: none;
+      }
+      .article-toc a:hover, .article-toc a:focus-visible { border-color: #2d8f60; color: #2d8f60; }
+      .article-toc a span {
+        display: inline-grid;
+        place-items: center;
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 50%;
+        background: #2d8f60;
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      .article-detail__body { display: grid; gap: clamp(1.5rem, 3vw, 2rem); color: rgba(31, 51, 39, 0.9); }
+      .chapter {
+        scroll-margin-top: 1.5rem;
+        border-top: 1px solid rgba(33, 65, 48, 0.1);
+        padding-top: clamp(1.5rem, 3vw, 2rem);
+        display: grid;
+        gap: 1.1rem;
+      }
+      .chapter.is-first-visible { border-top: none; padding-top: 0; }
+      .chapter-head { display: flex; align-items: center; gap: 0.85rem; }
+      .chapter-badge {
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background: rgba(60, 177, 121, 0.14);
+        color: #2d8f60;
+        font-weight: 800;
+        font-size: 0.95rem;
+      }
+      .chapter-head h2 { margin: 0; font-size: clamp(1.2rem, 2.4vw, 1.5rem); color: #1f3327; }
+      .chapter-body { max-width: 68ch; font-size: 1.03rem; line-height: 1.75; }
+      .chapter-body p { margin: 0 0 1.1em; }
+      .chapter-body p:last-child { margin-bottom: 0; }
+      .chapter-body ul { max-width: 68ch; line-height: 1.6; }
+      .chapter-lead {
+        max-width: 68ch;
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: rgba(31, 51, 39, 0.9);
+      }
+      .chapter-lead p:first-of-type::first-letter,
+      .chapter-body.has-dropcap p:first-of-type::first-letter {
+        float: left;
+        font-size: 3.4rem;
+        line-height: 0.85;
+        font-weight: 800;
+        padding: 0.05em 0.08em 0 0;
+        color: #2d8f60;
+      }
+
+      /* ---------- 33-year writing span ---------- */
+      .span-strip {
+        margin: 0.25rem 0 0.5rem;
+        padding: 1.1rem 1.25rem;
+        border-radius: 1.25rem;
+        background: var(--card-elevated, #f7fcf8);
+        border: 1px solid rgba(33, 65, 48, 0.1);
+        display: grid;
+        gap: 0.85rem;
+      }
+      .span-strip__track {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .span-strip__year {
+        font-weight: 800;
+        color: #1f3327;
+        font-size: 0.95rem;
+        white-space: nowrap;
+      }
+      .span-strip__bar {
+        flex: 1;
+        height: 0.5rem;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(45, 143, 96, 0.25), #2d8f60);
+        position: relative;
+      }
+      .span-strip__bar::after {
+        content: "33 år";
+        position: absolute;
+        top: -1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #2d8f60;
+        white-space: nowrap;
+      }
+      .span-strip__stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+      .span-stat {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid rgba(33, 65, 48, 0.12);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: rgba(31, 51, 39, 0.75);
+      }
+      .span-stat strong { color: #2d8f60; font-size: 0.95rem; }
+
+      /* ---------- Reign-year bar chart ---------- */
+      .reign-chart {
+        margin: 0.25rem 0 0.5rem;
+        display: grid;
+        gap: 0.65rem;
+      }
+      .reign-row {
+        display: grid;
+        grid-template-columns: 8.5rem 1fr 2.4rem;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .reign-row__name {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #1f3327;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .reign-row__track {
+        height: 0.65rem;
+        border-radius: 999px;
+        background: rgba(45, 143, 96, 0.1);
+        overflow: hidden;
+      }
+      .reign-row__bar {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(60, 177, 121, 0.5), #2d8f60);
+      }
+      .reign-row__digit {
+        display: grid;
+        place-items: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background: #2d8f60;
+        color: #fff;
+        font-weight: 800;
+        font-size: 0.85rem;
+        justify-self: end;
+      }
+      .reign-chart__sum {
+        margin-top: 0.15rem;
+        font-size: 0.85rem;
+        color: rgba(31, 51, 39, 0.65);
+      }
+
+      /* ---------- Converging chips (Fire konger) ---------- */
+      .converge {
+        margin: 0.25rem 0 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        padding: 1.25rem;
+        border-radius: 1.25rem;
+        background: var(--card-elevated, #f7fcf8);
+        border: 1px solid rgba(33, 65, 48, 0.1);
+      }
+      .converge__chip {
+        padding: 0.45rem 0.9rem;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid rgba(33, 65, 48, 0.15);
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: rgba(31, 51, 39, 0.75);
+      }
+      .converge__arrow { color: rgba(31, 51, 39, 0.35); font-size: 1.1rem; }
+      .converge__result {
+        display: grid;
+        place-items: center;
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 50%;
+        background: #2d8f60;
+        color: #fff;
+        font-weight: 800;
+        font-size: 1.15rem;
+      }
+
+      /* ---------- Grand total combine ---------- */
+      .combine {
+        margin: 0.25rem 0 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 1.25rem;
+        border-radius: 1.25rem;
+        background: var(--card-elevated, #f7fcf8);
+        border: 1px solid rgba(33, 65, 48, 0.1);
+        font-weight: 700;
+      }
+      .combine__num {
+        padding: 0.5rem 0.9rem;
+        border-radius: 0.9rem;
+        background: #fff;
+        border: 1px solid rgba(33, 65, 48, 0.15);
+        color: #1f3327;
+        font-size: 0.95rem;
+      }
+      .combine__op { color: rgba(31, 51, 39, 0.4); }
+      .combine__final {
+        display: grid;
+        place-items: center;
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 1.1rem;
+      }
+      .combine__final--11 { background: linear-gradient(150deg, #2d8f60, #3cb179); font-size: 1.05rem; }
+      .combine__final--2 { background: #2d8f60; }
+
+      /* ---------- Pull-quote ---------- */
+      .chapter-quote {
+        margin: 0;
+        max-width: 60ch;
+        padding: 0.9rem 1.1rem;
+        border-left: 3px solid #2d8f60;
+        background: rgba(45, 143, 96, 0.06);
+        border-radius: 0 0.75rem 0.75rem 0;
+        font-size: 1.05rem;
+        font-style: italic;
+        color: #1f3327;
+      }
+
+      #hva-tallene-til-slutt-sier .chapter-body a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 999px;
+        background: #2d8f60;
+        color: #fff;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      #hva-tallene-til-slutt-sier .chapter-body a:hover,
+      #hva-tallene-til-slutt-sier .chapter-body a:focus-visible { background: #24734c; text-decoration: none; }
+
+      .article-analysis {
+        background: linear-gradient(135deg, rgba(60, 177, 121, 0.15), rgba(60, 177, 121, 0.05));
+        border: 1px solid rgba(45, 143, 96, 0.25);
+        border-radius: 1.5rem;
+        padding: clamp(1.75rem, 3vw, 2.25rem);
+        display: grid;
+        gap: 0.85rem;
+      }
+      .article-analysis__title { margin: 0; font-size: 1.35rem; color: #1f3327; }
+      .article-analysis__body { color: rgba(31, 51, 39, 0.8); line-height: 1.6; }
+
+      @media (max-width: 720px) {
+        .article-detail { padding: 1.75rem; }
+        .article-detail__title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+        .reign-row { grid-template-columns: 6rem 1fr 2rem; }
+      }
+{% endblock %}
+
+{% block content %}
+  <nav class="article-breadcrumb" aria-label="{% trans 'Back to articles' %}">
+    <a href="{% url 'article_list' %}">
+      <span aria-hidden="true">←</span>
+      {% trans "All articles" %}
+    </a>
+  </nav>
+
+  <article class="article-detail">
+    <header class="article-detail__header">
+      <span class="article-detail__eyebrow">{% trans "Numerologist library" %}</span>
+      <h1 class="article-detail__title">{{ article.title }}</h1>
+      <div class="article-detail__meta">
+        <span>{% blocktrans with author=article.author %}By {{ author }}{% endblocktrans %}</span>
+        <span>{% blocktrans with date=article.published|date:"F j, Y" %}Published {{ date }}{% endblocktrans %}</span>
+      </div>
+    </header>
+
+    {% if chapters_lead %}
+      <div class="chapter-lead">{{ chapters_lead|safe }}</div>
+    {% endif %}
+
+    <nav class="article-toc" aria-label="{% trans 'In this article' %}">
+      {% for chapter in chapters %}
+        <a href="#{{ chapter.id }}"><span>{{ chapter.number }}</span>{{ chapter.title }}</a>
+      {% endfor %}
+    </nav>
+
+    <div class="article-detail__body">
+      {% for chapter in chapters %}
+        <section class="chapter{% if forloop.first and not chapters_lead %} is-first-visible{% endif %}" id="{{ chapter.id }}">
+          <div class="chapter-head">
+            <span class="chapter-badge" aria-hidden="true">{{ chapter.number }}</span>
+            <h2>{{ chapter.title }}</h2>
+          </div>
+
+          {% if chapter.id == "trettitre-år-med-skriving" %}
+            <div class="span-strip" aria-hidden="true">
+              <div class="span-strip__track">
+                <span class="span-strip__year">977</span>
+                <div class="span-strip__bar"></div>
+                <span class="span-strip__year">8. mars 1010</span>
+              </div>
+              <div class="span-strip__stats">
+                <span class="span-stat">Fullførelsesdato <strong>13 → 4</strong></span>
+                <span class="span-stat">Alder 71 år <strong>7+1 → 8</strong></span>
+              </div>
+            </div>
+            <div class="chapter-body{% if forloop.first and not chapters_lead %} has-dropcap{% endif %}">{{ chapter.body|safe }}</div>
+          {% elif chapter.id == "de-pishdadiske-kongene-de-første-fem" %}
+            <div class="chapter-body">{{ chapter.body|safe }}</div>
+            <div class="reign-chart" aria-hidden="true">
+              <div class="reign-row"><span class="reign-row__name">Keyumars</span><div class="reign-row__track"><div class="reign-row__bar" style="width:12%"></div></div><span class="reign-row__digit">3</span></div>
+              <div class="reign-row"><span class="reign-row__name">Jamshid</span><div class="reign-row__track"><div class="reign-row__bar" style="width:83%"></div></div><span class="reign-row__digit">7</span></div>
+              <div class="reign-row"><span class="reign-row__name">Zahhak</span><div class="reign-row__track"><div class="reign-row__bar" style="width:100%"></div></div><span class="reign-row__digit">1</span></div>
+              <div class="reign-row"><span class="reign-row__name">Fereydun</span><div class="reign-row__track"><div class="reign-row__bar" style="width:69%"></div></div><span class="reign-row__digit">5</span></div>
+              <div class="reign-row"><span class="reign-row__name">Manuchehr</span><div class="reign-row__track"><div class="reign-row__bar" style="width:30%"></div></div><span class="reign-row__digit">3</span></div>
+              <p class="reign-chart__sum">Bar-lengden er skalert etter regjeringsår (30–1000), ikke lineært — Zahhaks 1000 år ville ellers gjort de andre usynlige. Sum: 2350 → 1.</p>
+            </div>
+          {% elif chapter.id == "de-kayaniske-kongene-de-neste-fem" %}
+            <div class="chapter-body">{{ chapter.body|safe }}</div>
+            <div class="reign-chart" aria-hidden="true">
+              <div class="reign-row"><span class="reign-row__name">Kay Qobad</span><div class="reign-row__track"><div class="reign-row__bar" style="width:53%"></div></div><span class="reign-row__digit">1</span></div>
+              <div class="reign-row"><span class="reign-row__name">Kay Kavus</span><div class="reign-row__track"><div class="reign-row__bar" style="width:100%"></div></div><span class="reign-row__digit">6</span></div>
+              <div class="reign-row"><span class="reign-row__name">Kay Khosrow</span><div class="reign-row__track"><div class="reign-row__bar" style="width:15%"></div></div><span class="reign-row__digit">6</span></div>
+              <div class="reign-row"><span class="reign-row__name">Lohrasp</span><div class="reign-row__track"><div class="reign-row__bar" style="width:72%"></div></div><span class="reign-row__digit">3</span></div>
+              <div class="reign-row"><span class="reign-row__name">Goshtasp</span><div class="reign-row__track"><div class="reign-row__bar" style="width:72%"></div></div><span class="reign-row__digit">3</span></div>
+              <p class="reign-chart__sum">Sum: 550 → 1 — samme reduksjon som Pishdadi-dynastiet.</p>
+            </div>
+          {% elif chapter.id == "fire-konger-ett-gjentakende-tall" %}
+            <div class="converge" aria-hidden="true">
+              <span class="converge__chip">Keyumars</span>
+              <span class="converge__chip">Manuchehr</span>
+              <span class="converge__chip">Lohrasp</span>
+              <span class="converge__chip">Goshtasp</span>
+              <span class="converge__arrow">→</span>
+              <span class="converge__result">3</span>
+            </div>
+            <div class="chapter-body">{{ chapter.body|safe }}</div>
+          {% elif chapter.id == "tallet-som-knytter-det-hele-sammen" %}
+            <div class="chapter-body">{{ chapter.body|safe }}</div>
+            <div class="combine" aria-hidden="true">
+              <span class="combine__num">Pishdadi 2350</span>
+              <span class="combine__op">+</span>
+              <span class="combine__num">Kayani 550</span>
+              <span class="combine__op">=</span>
+              <span class="combine__num">2900</span>
+              <span class="combine__op">→</span>
+              <span class="combine__final combine__final--11">11</span>
+              <span class="combine__op">→</span>
+              <span class="combine__final combine__final--2">2</span>
+            </div>
+          {% elif chapter.id == "hva-tallene-til-slutt-sier" %}
+            <div class="chapter-body">{{ chapter.body|safe }}</div>
+            <p class="chapter-quote">«…det som virkelig varer — enten det er en trone eller et epos — til slutt alltid hviler på byggerens tall: elleve, som blir to, som blir én igjen.»</p>
+          {% else %}
+            <div class="chapter-body{% if forloop.first and not chapters_lead %} has-dropcap{% endif %}">{{ chapter.body|safe }}</div>
+          {% endif %}
+        </section>
+      {% endfor %}
+    </div>
+  </article>
+
+  {% if ai_analysis %}
+    <section class="article-analysis" aria-labelledby="article-analysis-title">
+      <h2 id="article-analysis-title" class="article-analysis__title">{% trans "AI insight" %}</h2>
+      <p class="article-analysis__body">{{ ai_analysis }}</p>
+    </section>
+  {% endif %}
+{% endblock %}

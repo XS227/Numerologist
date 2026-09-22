@@ -68,6 +68,9 @@ class ArticleListView(ListView):
 CUSTOM_ARTICLE_TEMPLATES = {
     "numerological-reflection-on-mahsa-amini-and-bita-azizi": "articles/detail_mahsa_bita.html",
     "navn-og-numerologi": "articles/detail_navn_numerologi.html",
+    "creative-research-practice-for-numerology": "articles/detail_creative_research.html",
+    "master-number-33": "articles/detail_master33.html",
+    "hva-avslorer-tallene-i-shahnameh": "articles/detail_shahnameh.html",
 }
 
 # Per-chapter icon key + a verbatim pull-quote (a real sentence lifted
