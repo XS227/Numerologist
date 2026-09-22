@@ -67,6 +67,7 @@ class ArticleListView(ListView):
 # is never touched — only how it's framed.
 CUSTOM_ARTICLE_TEMPLATES = {
     "numerological-reflection-on-mahsa-amini-and-bita-azizi": "articles/detail_mahsa_bita.html",
+    "navn-og-numerologi": "articles/detail_navn_numerologi.html",
 }
 
 # Per-chapter icon key + a verbatim pull-quote (a real sentence lifted
@@ -145,7 +146,7 @@ def _split_into_chapters(
         chapters.append(
             {
                 "number": index + 1,
-                "id": slugify(title) or f"chapter-{index + 1}",
+                "id": slugify(title, allow_unicode=True) or f"chapter-{index + 1}",
                 "title": title,
                 "body": body,
                 "icon": icon,
