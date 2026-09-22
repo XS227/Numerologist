@@ -113,11 +113,20 @@ MAHSA_BITA_CHAPTERS_META = [
 ]
 
 
-def _split_into_chapters(content: str) -> list[dict]:
-    """Split <h2>-delimited article HTML into a list of chapters, pairing
-    each with its icon key + pull-quote from MAHSA_BITA_CHAPTERS_META by
-    position. Falls back gracefully (no quote/icon) if the article's
-    structure ever changes and the counts stop lining up."""
+# Per-slug chapter metadata (icon key + verbatim pull-quote per position).
+# Only the Mahsa/Bita piece has curated quotes today; other articles just
+# get the generic split (numbered badge, default icon, no quote) below.
+CHAPTER_META_BY_SLUG = {
+    "numerological-reflection-on-mahsa-amini-and-bita-azizi": MAHSA_BITA_CHAPTERS_META,
+}
+
+
+def _split_into_chapters(content: str, meta: list[tuple[str, str]] | None = None) -> list[dict]:
+    """Split <h2>-delimited article HTML into a list of chapters. When
+    ``meta`` (a list of (icon_key, verbatim_quote) tuples) is given, pairs
+    each chapter with its entry by position; otherwise every chapter gets
+    the generic default icon and no quote. Falls back gracefully if the
+    article's structure ever changes and the counts stop lining up."""
     parts = re.split(r"<h2>(.*?)</h2>", content)
     chapters = []
     # parts = [before-first-h2, title0, body0, title1, body1, ...]
@@ -125,11 +134,9 @@ def _split_into_chapters(content: str) -> list[dict]:
         title = parts[i]
         body = parts[i + 1].strip() if i + 1 < len(parts) else ""
         index = (i - 1) // 2
-        icon, quote = (
-            MAHSA_BITA_CHAPTERS_META[index]
-            if index < len(MAHSA_BITA_CHAPTERS_META)
-            else (None, None)
-        )
+        icon, quote = ("default", None)
+        if meta and index < len(meta):
+            icon, quote = meta[index]
         chapters.append(
             {
                 "number": index + 1,
@@ -161,8 +168,12 @@ class ArticleDetailView(DetailView):
                 analysis = None
         context["ai_analysis"] = analysis
 
-        if self.object.slug in CUSTOM_ARTICLE_TEMPLATES:
-            context["chapters"] = _split_into_chapters(content)
+        # Only worth chaptering + a table of contents when there's enough
+        # structure to justify it; short/heading-less pieces stay plain prose.
+        meta = CHAPTER_META_BY_SLUG.get(self.object.slug)
+        chapters = _split_into_chapters(content, meta)
+        if len(chapters) >= 2:
+            context["chapters"] = chapters
 
         canonical_url = self.request.build_absolute_uri(self.request.path)
         description = _meta_description(content)

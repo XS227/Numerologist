@@ -78,13 +78,98 @@
       .article-detail__source:focus {
         text-decoration: underline;
       }
+      /* ---------- Table of contents ---------- */
+      .article-toc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        padding: 1rem 1.1rem;
+        border-radius: 1.1rem;
+        background: rgba(60, 177, 121, 0.06);
+        border: 1px solid rgba(33, 65, 48, 0.1);
+      }
+      .article-toc a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 999px;
+        background: #fff;
+        border: 1px solid rgba(33, 65, 48, 0.12);
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: rgba(31, 51, 39, 0.75);
+        text-decoration: none;
+      }
+      .article-toc a:hover, .article-toc a:focus-visible {
+        border-color: #2d8f60;
+        color: #2d8f60;
+      }
+      .article-toc a span {
+        display: inline-grid;
+        place-items: center;
+        width: 1.3rem;
+        height: 1.3rem;
+        border-radius: 50%;
+        background: #2d8f60;
+        color: #fff;
+        font-size: 0.68rem;
+        font-weight: 800;
+      }
+
+      /* ---------- Chapters ---------- */
       .article-detail__body {
         display: grid;
-        gap: 1.5rem;
-        color: rgba(31, 51, 39, 0.85);
+        gap: clamp(1.5rem, 3vw, 2rem);
+        color: rgba(31, 51, 39, 0.9);
       }
       .article-detail__body .prose {
         font-size: 1.02rem;
+      }
+      .chapter {
+        scroll-margin-top: 1.5rem;
+        border-top: 1px solid rgba(33, 65, 48, 0.1);
+        padding-top: clamp(1.5rem, 3vw, 2rem);
+        display: grid;
+        gap: 1rem;
+      }
+      .chapter:first-child { border-top: none; padding-top: 0; }
+      .chapter-head {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+      }
+      .chapter-badge {
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background: rgba(60, 177, 121, 0.14);
+        color: #2d8f60;
+        font-weight: 800;
+        font-size: 0.95rem;
+      }
+      .chapter-head h2 {
+        margin: 0;
+        font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+        color: #1f3327;
+      }
+      .chapter-body {
+        max-width: 68ch;
+        font-size: 1.03rem;
+        line-height: 1.75;
+      }
+      .chapter-body p { margin: 0 0 1.1em; }
+      .chapter-body p:last-child { margin-bottom: 0; }
+      .chapter:first-child .chapter-body p:first-of-type::first-letter {
+        float: left;
+        font-size: 3.4rem;
+        line-height: 0.85;
+        font-weight: 800;
+        padding: 0.05em 0.08em 0 0;
+        color: #2d8f60;
       }
       .article-analysis {
         background: linear-gradient(135deg, rgba(60, 177, 121, 0.15), rgba(60, 177, 121, 0.05));
@@ -139,11 +224,31 @@
       {% endif %}
     </header>
 
-    <div class="article-detail__body">
-      <div class="prose">
-        {{ article.content|safe }}
+    {% if chapters %}
+      <nav class="article-toc" aria-label="{% trans 'In this article' %}">
+        {% for chapter in chapters %}
+          <a href="#{{ chapter.id }}"><span>{{ chapter.number }}</span>{{ chapter.title }}</a>
+        {% endfor %}
+      </nav>
+
+      <div class="article-detail__body">
+        {% for chapter in chapters %}
+          <section class="chapter" id="{{ chapter.id }}">
+            <div class="chapter-head">
+              <span class="chapter-badge" aria-hidden="true">{{ chapter.number }}</span>
+              <h2>{{ chapter.title }}</h2>
+            </div>
+            <div class="chapter-body">{{ chapter.body|safe }}</div>
+          </section>
+        {% endfor %}
       </div>
-    </div>
+    {% else %}
+      <div class="article-detail__body">
+        <div class="prose">
+          {{ article.content|safe }}
+        </div>
+      </div>
+    {% endif %}
   </article>
 
   {% if ai_analysis %}
