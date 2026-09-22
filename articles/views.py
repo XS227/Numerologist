@@ -71,7 +71,13 @@ CUSTOM_ARTICLE_TEMPLATES = {
     "creative-research-practice-for-numerology": "articles/detail_creative_research.html",
     "master-number-33": "articles/detail_master33.html",
     "hva-avslorer-tallene-i-shahnameh": "articles/detail_shahnameh.html",
+    "wow-signalet-og-arecibo-linjen": "articles/detail_wow_signal.html",
 }
+
+# Slugs that render via the illustrated "journey" system (tall_project/journey.py's
+# pattern: hero + scroll-parallax chapters) instead of the chapter-reader — these
+# skip the normal chapters/lead split entirely, the whole page IS the content.
+JOURNEY_ARTICLE_SLUGS = {"wow-signalet-og-arecibo-linjen"}
 
 # Per-chapter icon key + a verbatim pull-quote (a real sentence lifted
 # straight from that chapter's own text, not new copy) so the long-form
@@ -177,13 +183,18 @@ class ArticleDetailView(DetailView):
                 analysis = None
         context["ai_analysis"] = analysis
 
-        # Only worth chaptering + a table of contents when there's enough
-        # structure to justify it; short/heading-less pieces stay plain prose.
-        meta = CHAPTER_META_BY_SLUG.get(self.object.slug)
-        lead, chapters = _split_into_chapters(content, meta)
-        if len(chapters) >= 2:
-            context["chapters"] = chapters
-            context["chapters_lead"] = lead
+        if self.object.slug in JOURNEY_ARTICLE_SLUGS:
+            from .wow_journey import wow_journey_content
+
+            context["journey"] = wow_journey_content(getattr(self.request, "LANGUAGE_CODE", "en"))
+        else:
+            # Only worth chaptering + a table of contents when there's enough
+            # structure to justify it; short/heading-less pieces stay plain prose.
+            meta = CHAPTER_META_BY_SLUG.get(self.object.slug)
+            lead, chapters = _split_into_chapters(content, meta)
+            if len(chapters) >= 2:
+                context["chapters"] = chapters
+                context["chapters_lead"] = lead
 
         canonical_url = self.request.build_absolute_uri(self.request.path)
         description = _meta_description(content)

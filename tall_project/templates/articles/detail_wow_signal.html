@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ article.title }} · Numerologist{% endblock %}
+{% block body_attrs %} class="number-journey"{% endblock %}
+{% block main %}
+<link rel="stylesheet" href="{% static 'journey/journey.css' %}">
+<style>
+  /* Placeholder visuals until real illustrations are generated (image
+     credits ran out mid-build — see git log). Div-based, not <img>, so
+     journey.js's parallax (which only needs .j-parallax + data-speed,
+     not an <img> specifically) still works. Swap back to <img class="j-parallax" ...>
+     once tall_project/static/journey/images/wow-hero.webp etc. exist. */
+  .j-placeholder {
+    width: 100%; height: 120%; position: absolute; top: -10%; left: 0;
+    background:
+      radial-gradient(circle at 30% 30%, rgba(198,167,117,.35), transparent 55%),
+      linear-gradient(160deg, #0c3336, #092426 65%);
+  }
+  .j-placeholder::after {
+    content: attr(data-glyph);
+    position: absolute; inset: 0; display: grid; place-items: center;
+    font-family: Georgia, serif; font-size: 5rem; color: rgba(198,167,117,.25);
+  }
+</style>
+<svg class="j-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="j-dish" viewBox="0 0 32 32"><path d="M4 20a12 12 0 0 1 24 0"/><path d="M16 20V8M16 8l7-3M16 20l-9 9M23 26l-2-6-6-2"/></symbol>
+<symbol id="j-wave" viewBox="0 0 32 32"><path d="M2 16c3 0 3-8 6-8s3 16 6 16 3-16 6-16 3 8 6 8 3-4 4-4"/></symbol>
+<symbol id="j-trail" viewBox="0 0 32 32"><circle cx="16" cy="16" r="3"/><circle cx="16" cy="16" r="8" stroke-dasharray="2 3"/><circle cx="16" cy="16" r="13" stroke-dasharray="2 4"/></symbol>
+<symbol id="j-pulse" viewBox="0 0 32 32"><path d="M2 16h6l3-9 4 18 3-13 2 4h10"/></symbol>
+<symbol id="j-comet" viewBox="0 0 32 32"><circle cx="23" cy="9" r="3"/><path d="M21 11 4 28M17 9 2 24M20 15 6 29"/></symbol>
+<symbol id="j-book" viewBox="0 0 32 32"><path d="M16 8C10 4 5 4 2 5v22c5-2 9-1 14 2 5-3 9-4 14-2V5c-3-1-8-1-14 3Zm0 0v21"/></symbol>
+<symbol id="j-grid" viewBox="0 0 32 32"><rect x="3" y="3" width="26" height="26" rx="2"/><path d="M3 12h26M3 21h26M12 3v26M21 3v26"/></symbol>
+<symbol id="j-triangle" viewBox="0 0 32 32"><path d="m16 3 14 25H2Z M9 16h14M6 22h20M16 3v25"/></symbol>
+<symbol id="j-spark" viewBox="0 0 32 32"><path d="m16 2 4 10 10 4-10 4-4 10-4-10L2 16l10-4Z"/></symbol>
+</defs></svg>
+<article class="j-story">
+<section class="j-hero" id="wow-hero" aria-labelledby="journey-title" data-chapter>
+  <div class="j-hero-visual"><div class="j-parallax j-placeholder" data-speed="0.16" data-glyph="◎" role="img" aria-label="{{ journey.labels.hero_alt }}"></div></div>
+  <div class="j-hero-content"><p class="j-eyebrow">{{ journey.labels.eyebrow }} <span>01 — 07</span></p>
+    <h1 id="journey-title">{{ journey.labels.title }}<br><em>{{ journey.labels.title_em }}</em></h1>
+    <p class="j-intro">{{ journey.labels.intro }}</p>
+    <a class="j-button" href="#arecibo">{{ journey.labels.start }} <span aria-hidden="true">↓</span></a>
+  </div>
+  <div class="j-hero-bottom"><span>{{ journey.labels.hero_date }}</span><p>{{ journey.labels.hero_caption }}</p><span aria-hidden="true">↓</span></div>
+</section>
+<nav class="j-chapter-nav" aria-label="{{ journey.labels.nav }}"><div class="j-progress" aria-hidden="true"></div><a href="#wow-hero" aria-current="location"><span>01</span> {{ journey.labels.origins }}</a>{% for c in journey.chapters %}<a href="#{{ c.id }}"><span>{{ c.numeral }}</span> {{ c.label }}</a>{% endfor %}<button type="button" class="j-motion" aria-pressed="false" data-pause="{{ journey.labels.pause }}" data-resume="{{ journey.labels.resume }}">{{ journey.labels.pause }}</button></nav>
+<div class="j-prologue j-reveal"><p class="j-eyebrow">1974 · 1977 · 2012</p><h2>{{ journey.labels.bridge_title }}</h2><p>{{ journey.labels.bridge }}</p></div>
+{% for c in journey.chapters %}
+<section class="j-chapter {% cycle 'j-dark' 'j-light' %}" id="{{ c.id }}" aria-labelledby="title-{{ c.id }}" data-chapter>
+  <div class="j-chapter-inner">
+    <div class="j-copy j-reveal"><div class="j-chapter-meta"><svg class="j-icon" aria-hidden="true"><use href="#j-{{ c.symbol }}"/></svg><span>{{ c.date }}</span></div><p class="j-eyebrow">{{ c.numeral }} / {{ c.label }}</p><h2 id="title-{{ c.id }}">{{ c.title }}</h2><p class="j-body">{{ c.body }}</p><p class="j-note">{{ c.note }}</p></div>
+    <figure class="j-figure"><div class="j-image-window"><div class="j-parallax j-placeholder" data-speed="0.09" data-glyph="{{ c.numeral }}" role="img" aria-label="{{ c.alt }}"></div></div><span class="j-big-number" aria-hidden="true">{{ c.numeral }}</span><figcaption>{{ journey.labels.chapter }} {{ c.numeral }} <span>{{ c.label }}</span></figcaption></figure>
+  </div>
+</section>
+{% endfor %}
+<section class="j-more" aria-labelledby="explore-title"><div class="j-section-head"><p class="j-eyebrow">{{ journey.labels.next }}</p><h2 id="explore-title">1 · 2 · 3 · 4 · 5 · 6 · 7 · 8 · 9</h2></div><div class="j-resource-grid">{% for url,title,description,icon in journey.resources %}<a class="j-resource" href="{{ url }}"><svg class="j-icon" aria-hidden="true"><use href="#j-{{ icon }}"/></svg><h3>{{ title }} <span aria-hidden="true">↗</span></h3><p>{{ description }}</p></a>{% endfor %}</div></section>
+<section class="j-faq" aria-labelledby="faq-title"><h2 id="faq-title">{{ journey.labels.faq }}</h2><div>{% for question,answer in journey.faqs %}<details><summary>{{ question }}</summary><p>{{ answer }}</p></details>{% endfor %}</div></section>
+<aside class="j-colophon"><h2>{{ journey.labels.references }}</h2><p>{{ journey.labels.references_text }}</p><small>{{ journey.labels.art_note }}</small></aside>
+</article>
+{% endblock %}
+{% block extra_scripts %}<script src="{% static 'journey/journey.js' %}" defer></script>{% endblock %}
