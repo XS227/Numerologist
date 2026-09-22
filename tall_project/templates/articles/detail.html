@@ -133,7 +133,7 @@
         display: grid;
         gap: 1rem;
       }
-      .chapter:first-child { border-top: none; padding-top: 0; }
+      .chapter.is-first-visible { border-top: none; padding-top: 0; }
       .chapter-head {
         display: flex;
         align-items: center;
@@ -163,7 +163,14 @@
       }
       .chapter-body p { margin: 0 0 1.1em; }
       .chapter-body p:last-child { margin-bottom: 0; }
-      .chapter:first-child .chapter-body p:first-of-type::first-letter {
+      .chapter-lead {
+        max-width: 68ch;
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: rgba(31, 51, 39, 0.9);
+      }
+      .chapter-lead p:first-of-type::first-letter,
+      .chapter-body.has-dropcap p:first-of-type::first-letter {
         float: left;
         font-size: 3.4rem;
         line-height: 0.85;
@@ -225,6 +232,9 @@
     </header>
 
     {% if chapters %}
+      {% if chapters_lead %}
+        <div class="chapter-lead">{{ chapters_lead|safe }}</div>
+      {% endif %}
       <nav class="article-toc" aria-label="{% trans 'In this article' %}">
         {% for chapter in chapters %}
           <a href="#{{ chapter.id }}"><span>{{ chapter.number }}</span>{{ chapter.title }}</a>
@@ -233,12 +243,12 @@
 
       <div class="article-detail__body">
         {% for chapter in chapters %}
-          <section class="chapter" id="{{ chapter.id }}">
+          <section class="chapter{% if forloop.first and not chapters_lead %} is-first-visible{% endif %}" id="{{ chapter.id }}">
             <div class="chapter-head">
               <span class="chapter-badge" aria-hidden="true">{{ chapter.number }}</span>
               <h2>{{ chapter.title }}</h2>
             </div>
-            <div class="chapter-body">{{ chapter.body|safe }}</div>
+            <div class="chapter-body{% if forloop.first and not chapters_lead %} has-dropcap{% endif %}">{{ chapter.body|safe }}</div>
           </section>
         {% endfor %}
       </div>

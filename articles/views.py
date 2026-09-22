@@ -121,13 +121,18 @@ CHAPTER_META_BY_SLUG = {
 }
 
 
-def _split_into_chapters(content: str, meta: list[tuple[str, str]] | None = None) -> list[dict]:
-    """Split <h2>-delimited article HTML into a list of chapters. When
-    ``meta`` (a list of (icon_key, verbatim_quote) tuples) is given, pairs
-    each chapter with its entry by position; otherwise every chapter gets
-    the generic default icon and no quote. Falls back gracefully if the
-    article's structure ever changes and the counts stop lining up."""
+def _split_into_chapters(
+    content: str, meta: list[tuple[str, str]] | None = None
+) -> tuple[str, list[dict]]:
+    """Split <h2>-delimited article HTML into (lead, chapters). ``lead`` is
+    whatever precedes the first <h2> (often an opening paragraph) and must
+    still be rendered — it's not a chapter itself. When ``meta`` (a list of
+    (icon_key, verbatim_quote) tuples) is given, pairs each chapter with its
+    entry by position; otherwise every chapter gets the generic default icon
+    and no quote. Falls back gracefully if the article's structure ever
+    changes and the counts stop lining up."""
     parts = re.split(r"<h2>(.*?)</h2>", content)
+    lead = parts[0].strip()
     chapters = []
     # parts = [before-first-h2, title0, body0, title1, body1, ...]
     for i in range(1, len(parts), 2):
@@ -147,7 +152,7 @@ def _split_into_chapters(content: str, meta: list[tuple[str, str]] | None = None
                 "quote": quote,
             }
         )
-    return chapters
+    return lead, chapters
 
 
 class ArticleDetailView(DetailView):
@@ -171,9 +176,10 @@ class ArticleDetailView(DetailView):
         # Only worth chaptering + a table of contents when there's enough
         # structure to justify it; short/heading-less pieces stay plain prose.
         meta = CHAPTER_META_BY_SLUG.get(self.object.slug)
-        chapters = _split_into_chapters(content, meta)
+        lead, chapters = _split_into_chapters(content, meta)
         if len(chapters) >= 2:
             context["chapters"] = chapters
+            context["chapters_lead"] = lead
 
         canonical_url = self.request.build_absolute_uri(self.request.path)
         description = _meta_description(content)
