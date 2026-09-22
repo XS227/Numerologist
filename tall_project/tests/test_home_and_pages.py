@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from django.conf import settings
 from django.test import SimpleTestCase, override_settings
 from django.urls import reverse
 
@@ -15,11 +16,26 @@ class HomeAndStaticPageTests(SimpleTestCase):
                 "birth_day": "10",
                 "birth_month": "12",
                 "birth_year": "2000",
+                "access_code": settings.CALCULATOR_ACCESS_CODE,
             }
         )
 
         self.assertTrue(form.is_valid(), form.errors)
         self.assertEqual(form.calculate()["life_path"], 6)
+
+    def test_lite_calculator_rejects_wrong_access_code(self) -> None:
+        form = LiteCalculatorForm(
+            data={
+                "full_name": "Ada Lovelace",
+                "birth_day": "10",
+                "birth_month": "12",
+                "birth_year": "2000",
+                "access_code": "000",
+            }
+        )
+
+        self.assertFalse(form.is_valid())
+        self.assertIn("access_code", form.errors)
 
     def test_lite_calculator_rejects_invalid_calendar_date(self) -> None:
         form = LiteCalculatorForm(

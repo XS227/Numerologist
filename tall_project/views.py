@@ -268,14 +268,22 @@ NUMBER_INTERPRETATIONS = {
 }
 
 
+# The calculation bug (flat letter/digit summing instead of per-name-part
+# reduction) is fixed — see intake/forms.py IntakeForm._reduce_name /
+# _life_path. Re-activated behind a 3-digit access code (LiteCalculatorForm)
+# while it's tried out with a small group before a full public launch.
+CALCULATOR_PAUSED = False
+
+
 def home(request: HttpRequest) -> HttpResponse:
     form = LiteCalculatorForm(request.POST or None)
     result = None
-    if request.method == "POST" and form.is_valid():
+    if not CALCULATOR_PAUSED and request.method == "POST" and form.is_valid():
         result = form.calculate()
     context = {
         "form": form,
         "result": result,
+        "calculator_paused": CALCULATOR_PAUSED,
     }
     return render(request, "pages/home.html", context)
 

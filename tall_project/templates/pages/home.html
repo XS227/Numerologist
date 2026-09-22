@@ -125,6 +125,13 @@
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     }
 
+    .field-hint {
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: var(--muted);
+      opacity: 0.85;
+    }
+
     label {
       display: grid;
       gap: 0.4rem;
@@ -515,6 +522,11 @@
           <h2 id="step-title">{% trans "Step 1 · Intake essentials" %}</h2>
           <span>{% trans "3 mins" %}</span>
         </header>
+        {% if calculator_paused %}
+          <div class="form-errors" role="status">
+            {% trans "The calculator is temporarily paused for maintenance while we fix a calculation issue. Please check back soon." %}
+          </div>
+        {% endif %}
         {% if form.non_field_errors %}
           <div class="form-errors" role="alert">
             {% for error in form.non_field_errors %}{{ error }}{% if not forloop.last %}<br />{% endif %}{% endfor %}
@@ -543,16 +555,28 @@
               <span class="error-message" data-error-for="birth_year">{{ form.birth_year.errors|first }}</span>
             {% endif %}
           </label>
+          <label for="{{ form.access_code.id_for_label }}" class="{% if form.access_code.errors %}has-error{% endif %}">
+            {% trans "Access code" %}
+            {{ form.access_code }}
+            <span class="field-hint">{% trans "This calculator is being tried out with a small group first — ask Åse for the current code." %}</span>
+            {% if form.access_code.errors %}
+              <span class="error-message" data-error-for="access_code">{{ form.access_code.errors|first }}</span>
+            {% endif %}
+          </label>
         </div>
         <div class="actions">
-          <button class="btn btn-primary" type="submit">{% trans "Continue" %}</button>
+          <button class="btn btn-primary" type="submit" {% if calculator_paused %}disabled aria-disabled="true"{% endif %}>{% trans "Continue" %}</button>
         </div>
       </form>
       <section id="snapshot" aria-labelledby="snapshot-title">
         <div>
           <h2 id="snapshot-title" style="margin:0 0 0.35rem;">{% trans "Your numerology snapshot" %}</h2>
           <p style="margin:0; color:var(--muted); max-width:38ch;">
-            {% trans "Complete the intake form and choose “Continue” to instantly calculate your personal numerology profile using Åse’s light calculator." %}
+            {% if calculator_paused %}
+              {% trans "The lite calculator is temporarily paused while we fix a calculation issue. Explore the number pages and articles in the meantime." %}
+            {% else %}
+              {% trans "Complete the intake form and choose “Continue” to instantly calculate your personal numerology profile using Åse’s light calculator." %}
+            {% endif %}
           </p>
         </div>
         <div class="snapshot-grid" id="snapshotGrid">

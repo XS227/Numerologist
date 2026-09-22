@@ -4,6 +4,7 @@ import calendar
 from datetime import date
 
 from django import forms
+from django.conf import settings
 
 from intake.forms import LETTER_VALUES, VOWELS, IntakeForm
 
@@ -34,6 +35,11 @@ class LiteCalculatorForm(forms.Form):
         choices=((year, year) for year in range(date.today().year, 1899, -1)),
         help_text="Year",
     )
+    access_code = forms.CharField(
+        label="Access code",
+        max_length=3,
+        help_text="This calculator is being tried out with a small group first — ask Åse for the current code.",
+    )
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
@@ -49,6 +55,15 @@ class LiteCalculatorForm(forms.Form):
             "autocomplete", "bday-month"
         )
         self.fields["birth_year"].widget.attrs.setdefault("autocomplete", "bday-year")
+        self.fields["access_code"].widget.attrs.setdefault("inputmode", "numeric")
+        self.fields["access_code"].widget.attrs.setdefault("autocomplete", "off")
+        self.fields["access_code"].widget.attrs.setdefault("placeholder", "•••")
+
+    def clean_access_code(self) -> str:
+        value = self.cleaned_data["access_code"].strip()
+        if value != settings.CALCULATOR_ACCESS_CODE:
+            raise forms.ValidationError("That code isn't right — check with Åse and try again.")
+        return value
 
     def clean(self) -> dict[str, object]:
         cleaned_data = super().clean()
@@ -74,9 +89,7 @@ class LiteCalculatorForm(forms.Form):
     def calculate(self) -> dict[str, int]:
         birth_date = self.cleaned_data["birth_date"]
         full_name = self.cleaned_data["full_name"].upper()
-        life_path = IntakeForm._reduce_digits(
-            "".join(c for c in birth_date.strftime("%Y%m%d"))
-        )
+        life_path = IntakeForm._life_path(birth_date)
         expression = IntakeForm._reduce_name(full_name)
         soul_urge = IntakeForm._reduce_name(full_name, filter_set=VOWELS)
         personality = IntakeForm._reduce_name(

@@ -26,6 +26,11 @@ if not SECRET_KEY:
 
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
+# Soft-launch gate for the homepage lite calculator: a 3-digit code the
+# visitor must enter to reveal their result, while it's being tried out
+# with trusted testers instead of the general public.
+CALCULATOR_ACCESS_CODE = os.getenv("CALCULATOR_ACCESS_CODE", "227")
+
 _default_allowed = [
     host.strip() for host in os.getenv("ALLOWED_HOSTS", "").split(",") if host.strip()
 ]
