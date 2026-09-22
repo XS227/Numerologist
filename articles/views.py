@@ -7,6 +7,7 @@ from importlib.util import find_spec
 from typing import Callable, Optional
 
 from django.utils.html import strip_tags
+from django.utils.text import slugify
 from django.views.generic import DetailView, ListView
 
 from .models import Article
@@ -68,6 +69,79 @@ CUSTOM_ARTICLE_TEMPLATES = {
     "numerological-reflection-on-mahsa-amini-and-bita-azizi": "articles/detail_mahsa_bita.html",
 }
 
+# Per-chapter icon key + a verbatim pull-quote (a real sentence lifted
+# straight from that chapter's own text, not new copy) so the long-form
+# reading further down the page isn't one unbroken wall of prose. Order
+# must match the article's actual <h2> order.
+MAHSA_BITA_CHAPTERS_META = [
+    (
+        "intro",
+        "Numerology here is a reflective lens, illuminating connections and "
+        "spiritual themes within these two young women’s legacies.",
+    ),
+    (
+        "profiles",
+        "Mahsa’s outer impression (4) was grounded and unshowy; "
+        "Bita’s (11) was quietly luminous.",
+    ),
+    (
+        "abjad",
+        "Mahsa symbolizing a moonlight of wisdom and Bita symbolizing an "
+        "unmatched strength.",
+    ),
+    (
+        "dates",
+        "From initiation (1) and building (4) to introspection (7) and "
+        "completion (9).",
+    ),
+    (
+        "synchronicities",
+        "Two lives – the victim and the driver – were forever altered, "
+        "bound by that fateful moment.",
+    ),
+    (
+        "place",
+        "Tehran, a city that imposed restrictions which ultimately claimed "
+        "Mahsa’s life, versus Asker, a place of relative freedom where Bita "
+        "lost her life to a moment of youthful excess.",
+    ),
+    (
+        "conclusion",
+        "Even in chaos, there is cosmic order; even in grief, there is "
+        "spiritual growth.",
+    ),
+]
+
+
+def _split_into_chapters(content: str) -> list[dict]:
+    """Split <h2>-delimited article HTML into a list of chapters, pairing
+    each with its icon key + pull-quote from MAHSA_BITA_CHAPTERS_META by
+    position. Falls back gracefully (no quote/icon) if the article's
+    structure ever changes and the counts stop lining up."""
+    parts = re.split(r"<h2>(.*?)</h2>", content)
+    chapters = []
+    # parts = [before-first-h2, title0, body0, title1, body1, ...]
+    for i in range(1, len(parts), 2):
+        title = parts[i]
+        body = parts[i + 1].strip() if i + 1 < len(parts) else ""
+        index = (i - 1) // 2
+        icon, quote = (
+            MAHSA_BITA_CHAPTERS_META[index]
+            if index < len(MAHSA_BITA_CHAPTERS_META)
+            else (None, None)
+        )
+        chapters.append(
+            {
+                "number": index + 1,
+                "id": slugify(title) or f"chapter-{index + 1}",
+                "title": title,
+                "body": body,
+                "icon": icon,
+                "quote": quote,
+            }
+        )
+    return chapters
+
 
 class ArticleDetailView(DetailView):
     model = Article
@@ -86,6 +160,9 @@ class ArticleDetailView(DetailView):
             except Exception:  # pragma: no cover - best effort integration
                 analysis = None
         context["ai_analysis"] = analysis
+
+        if self.object.slug in CUSTOM_ARTICLE_TEMPLATES:
+            context["chapters"] = _split_into_chapters(content)
 
         canonical_url = self.request.build_absolute_uri(self.request.path)
         description = _meta_description(content)
