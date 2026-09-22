@@ -81,7 +81,7 @@ $staticSlugs = [
     'numerologist-in-media',
     'quranian-numerology',
     'guidance-support',
-    'about-the-firm',
+    'ase-steinsland',
     'telephone-guidance',
     'contact-qa',
 ];

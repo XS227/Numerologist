@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 
 from django.http import Http404, HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .forms import LiteCalculatorForm
 from .navigation import STATIC_PAGES
@@ -355,7 +355,13 @@ SLUG_CALCULATOR_HIGHLIGHT = {
 }
 
 
+# Pages that moved to a new slug; old links and search results keep working.
+MOVED_PAGES = {"about-the-firm": "ase-steinsland"}
+
+
 def static_page(request: HttpRequest, slug: str) -> HttpResponse:
+    if slug in MOVED_PAGES:
+        return redirect("static_page", MOVED_PAGES[slug], permanent=True)
     try:
         page = STATIC_PAGES[slug]
     except KeyError as exc:  # pragma: no cover - defensive branch

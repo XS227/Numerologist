@@ -174,7 +174,7 @@
     </style>
     <!-- Shared Fibonacci design tokens (golden-ratio scale + --gold), same as
          the PHP pages, so the whole hybrid site speaks one design language. -->
-    <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-3">
+    <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-4">
   </head>
   <body{% block body_attrs %}{% endblock %}>
     <!-- Unified .l-nav — same link set as includes/layout.php and index.php
@@ -185,13 +185,12 @@
         <div class="l-wrap l-nav-inner">
           <a href="{% url 'home' %}" class="l-brand">Numero<em>logist</em></a>
           <ul class="l-nav-links" id="primaryNav">
-            <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
             <li><a href="/discover-numerology/">{% if CURRENT_LANGUAGE == 'nb' %}Om numerologi{% else %}About numerology{% endif %}</a></li>
-            <li><a href="/#tjenester">{% if CURRENT_LANGUAGE == 'nb' %}Tjenester{% else %}Services{% endif %}</a></li>
             <li><a href="{% url 'article_list' %}">{% trans "Articles" %}</a></li>
             <li><a href="/contact-qa/">{% if CURRENT_LANGUAGE == 'nb' %}Kontakt{% else %}Contact{% endif %}</a></li>
           </ul>
           <div class="l-nav-right">
+            {% include "_numbers_menu.html" %}
             {# Same nl_lang cookie as the PHP pages so language stays in sync site-wide. #}
             <div class="l-lang" aria-label="{% trans 'Switch language' %}">
               <a href="#" class="{% if LANGUAGE_CODE == 'nb' %}active{% endif %}"
@@ -233,7 +232,7 @@
             <div class="l-footer-col">
               <h4>{% if CURRENT_LANGUAGE == 'nb' %}Om oss{% else %}About us{% endif %}</h4>
               <ul>
-                <li><a href="/about-the-firm/">{% if CURRENT_LANGUAGE == 'nb' %}Møt Åse{% else %}Meet Åse{% endif %}</a></li>
+                <li><a href="/ase-steinsland/">{% if CURRENT_LANGUAGE == 'nb' %}Møt Åse{% else %}Meet Åse{% endif %}</a></li>
                 <li><a href="/guidance-support/">{% if CURRENT_LANGUAGE == 'nb' %}Veiledning{% else %}Guidance{% endif %}</a></li>
                 <li><a href="/privacy-policy/">{% if CURRENT_LANGUAGE == 'nb' %}Personvern{% else %}Privacy policy{% endif %}</a></li>
               </ul>

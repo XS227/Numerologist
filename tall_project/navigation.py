@@ -250,12 +250,12 @@ STATIC_PAGES: Dict[str, StaticPage] = {
             ),
         ),
         StaticPage(
-            "about-the-firm",
-            _("About the Firm"),
-            "pages/about-the-firm.html",
-            description=_(
-                "Om Åse Karin Steinsland: bakgrunn, metode og telefonveiledning, med "
-                "kontaktskjema for å komme i kontakt direkte."
+            "ase-steinsland",
+            "Åse Karin Steinsland",
+            "pages/ase-steinsland.html",
+            description=(
+                "Møt Åse Karin Steinsland – numerolog og livsveileder ved Bergen, "
+                "personlige analyser siden 1997. Telefonveiledning: 952 73 772."
             ),
         ),
         StaticPage(
@@ -362,7 +362,7 @@ NAVIGATION: Tuple[NavigationItem, ...] = (
         slug="guidance-support",
         title=_("Guidance & Support"),
         children=(
-            NavigationItem("about-the-firm", _("About the Firm")),
+            NavigationItem("ase-steinsland", "Åse Karin Steinsland"),
             NavigationItem("telephone-guidance", _("Telephone Guidance")),
             NavigationItem("contact-qa", _("Contact / Q&A")),
         ),

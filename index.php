@@ -233,7 +233,7 @@ $T = $no ? [
     'footer_tag'  => 'Åse Steinsland · Personlig numerologi og livsveiledning siden 1997.',
     'footer_h1'   => 'Utforsk', 'footer_h2' => 'Om oss',
     'footer_l1'   => [['Kalkulatorer','/calculators/'],['Om numerologi','/discover-numerology/'],['Artikler','/articles/']],
-    'footer_l2'   => [['Møt Åse','/about-the-firm/'],['Veiledning','/guidance-support/'],['Personvern','/privacy-policy/']],
+    'footer_l2'   => [['Møt Åse','/ase-steinsland/'],['Veiledning','/guidance-support/'],['Personvern','/privacy-policy/']],
     'footer_copy' => '© ' . date('Y') . ' Åse Steinsland · Numerologist',
     'footer_ethos'=> 'Der tall og teknologi jobber sammen — den pytagoreiske metoden, beregnet i Python. Riktig beregning, riktig teknologi.',
 ] : [
@@ -364,7 +364,7 @@ $T = $no ? [
     'footer_tag'  => 'Åse Steinsland · Personal numerology and life guidance since 1997.',
     'footer_h1'   => 'Explore', 'footer_h2' => 'About us',
     'footer_l1'   => [['Calculators','/calculators/'],['About numerology','/discover-numerology/'],['Articles','/articles/']],
-    'footer_l2'   => [['Meet Åse','/about-the-firm/'],['Guidance','/guidance-support/'],['Privacy policy','/privacy-policy/']],
+    'footer_l2'   => [['Meet Åse','/ase-steinsland/'],['Guidance','/guidance-support/'],['Privacy policy','/privacy-policy/']],
     'footer_copy' => '© ' . date('Y') . ' Åse Steinsland · Numerologist',
     'footer_ethos'=> 'Where numbers and technology work together — the Pythagorean method, computed in Python. Right calculation, right technology.',
 ];
@@ -617,7 +617,7 @@ $serviceSchemas = [
   <!-- Fonts preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-3">
+  <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-4">
   <link rel="stylesheet" href="/assets/home.css?v=2">
 </head>
 <body>
@@ -631,14 +631,13 @@ $serviceSchemas = [
     <a href="/" class="l-brand">Numero<em>logist</em></a>
 
     <ul class="l-nav-links" id="navLinks">
-      <li><a href="/"><?= $T['nav_home'] ?></a></li>
       <li><a href="/discover-numerology/"><?= $T['nav_about'] ?></a></li>
-      <li><a href="/#tjenester"><?= $T['nav_services'] ?></a></li>
       <li><a href="/articles/"><?= $T['nav_articles'] ?></a></li>
       <li><a href="/contact-qa/"><?= $T['nav_contact'] ?></a></li>
     </ul>
 
     <div class="l-nav-right">
+      <?php require_once __DIR__ . '/includes/numbers_menu.php'; echo render_numbers_menu($no); ?>
       <div class="l-lang" aria-label="<?= $no ? 'Velg språk' : 'Select language' ?>">
         <a href="/?lang=no" class="<?= $no ? 'active' : '' ?>" hreflang="no" aria-label="Norsk">🇳🇴 NO</a>
         <a href="/?lang=en" class="<?= !$no ? 'active' : '' ?>" hreflang="en" aria-label="English">🇬🇧 EN</a>
@@ -675,7 +674,7 @@ $serviceSchemas = [
 
       <div class="hero-ctas">
         <a href="#kalkulator" class="btn btn-primary"><?= htmlspecialchars($T['hero_cta1']) ?></a>
-        <a href="/about-the-firm/" class="btn btn-outline-white"><?= htmlspecialchars($T['hero_cta2']) ?></a>
+        <a href="/ase-steinsland/" class="btn btn-outline-white"><?= htmlspecialchars($T['hero_cta2']) ?></a>
       </div>
 
       <div class="hero-trust">
@@ -809,7 +808,7 @@ $serviceSchemas = [
           <h3 class="section-title" style="font-size:1.7rem"><?= htmlspecialchars($T['calc_aside_h']) ?></h3>
           <div class="section-divider"></div>
           <p class="section-sub" style="margin-bottom:2rem"><?= htmlspecialchars($T['calc_aside_p']) ?></p>
-          <a href="/about-the-firm/" class="btn btn-primary"><?= htmlspecialchars($T['about_cta']) ?></a>
+          <a href="/ase-steinsland/" class="btn btn-primary"><?= htmlspecialchars($T['about_cta']) ?></a>
         </div>
         <div id="calcAsideResult" hidden>
           <h3 class="section-title" style="font-size:1.7rem"><?= htmlspecialchars($T['calc_result_h']) ?></h3>
@@ -818,7 +817,7 @@ $serviceSchemas = [
           <p class="section-sub" style="margin-bottom:.75rem"><?= htmlspecialchars($T['calc_result_intro']) ?></p>
           <ul id="resultSummary" style="margin:0 0 1.25rem;padding-left:1.1rem;color:var(--c-text-2);line-height:1.7"></ul>
           <p class="section-sub" style="margin-bottom:1.5rem"><?= htmlspecialchars($T['calc_result_outro']) ?></p>
-          <a href="/about-the-firm/" class="btn btn-primary"><?= htmlspecialchars($T['about_cta']) ?></a>
+          <a href="/ase-steinsland/" class="btn btn-primary"><?= htmlspecialchars($T['about_cta']) ?></a>
         </div>
       </div>
     </div>
@@ -876,7 +875,7 @@ $serviceSchemas = [
             <span class="cred-pill"><?= htmlspecialchars($T[$k]) ?></span>
           <?php endforeach; ?>
         </div>
-        <a href="/about-the-firm/" class="btn btn-ghost"><?= htmlspecialchars($T['about_cta']) ?></a>
+        <a href="/ase-steinsland/" class="btn btn-ghost"><?= htmlspecialchars($T['about_cta']) ?></a>
       </div>
     </div>
   </div>
@@ -1014,7 +1013,7 @@ $serviceSchemas = [
     <p><?= htmlspecialchars($T['cta_sub']) ?></p>
     <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:.9rem">
       <a href="#kalkulator" class="btn btn-primary"><?= htmlspecialchars($T['cta_btn1']) ?></a>
-      <a href="/about-the-firm/" class="btn btn-outline-white"><?= htmlspecialchars($T['cta_btn2']) ?></a>
+      <a href="/ase-steinsland/" class="btn btn-outline-white"><?= htmlspecialchars($T['cta_btn2']) ?></a>
     </div>
   </div>
 </section>

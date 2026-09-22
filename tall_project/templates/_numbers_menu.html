@@ -1,0 +1,36 @@
+{% comment %}
+  Numbers quick-menu in the top nav: an icon that opens every core number
+  (1–9 + master numbers) with its keyword. Pure <details>, so it works
+  without JS; the small script only closes it on outside click / Escape.
+  PHP twin: includes/numbers_menu.php — keep the two in sync.
+{% endcomment %}
+{% with nb=CURRENT_LANGUAGE %}
+<details class="l-numbers">
+  <summary aria-label="{% if nb == 'nb' %}Tallene – velg et tall{% else %}The numbers – pick one{% endif %}">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><g fill="currentColor"><circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></g></svg>
+    <span class="l-numbers__label">{% if nb == 'nb' %}Tall{% else %}Numbers{% endif %}</span>
+  </summary>
+  <div class="l-numbers__panel">
+    <p class="l-numbers__title">{% if nb == 'nb' %}Velg et tall og les mer{% else %}Pick a number to read more{% endif %}</p>
+    <div class="l-numbers__grid">
+      {% if nb == 'nb' %}
+      <a href="/numbers/1/"><b>1</b><span>Initiativ</span></a><a href="/numbers/2/"><b>2</b><span>Samarbeid</span></a><a href="/numbers/3/"><b>3</b><span>Uttrykk</span></a><a href="/numbers/4/"><b>4</b><span>Struktur</span></a><a href="/numbers/5/"><b>5</b><span>Frihet</span></a><a href="/numbers/6/"><b>6</b><span>Omsorg</span></a><a href="/numbers/7/"><b>7</b><span>Fordypning</span></a><a href="/numbers/8/"><b>8</b><span>Realisering</span></a><a href="/numbers/9/"><b>9</b><span>Fullføring</span></a>
+      {% else %}
+      <a href="/numbers/1/"><b>1</b><span>Initiative</span></a><a href="/numbers/2/"><b>2</b><span>Cooperation</span></a><a href="/numbers/3/"><b>3</b><span>Expression</span></a><a href="/numbers/4/"><b>4</b><span>Structure</span></a><a href="/numbers/5/"><b>5</b><span>Freedom</span></a><a href="/numbers/6/"><b>6</b><span>Care</span></a><a href="/numbers/7/"><b>7</b><span>Reflection</span></a><a href="/numbers/8/"><b>8</b><span>Realisation</span></a><a href="/numbers/9/"><b>9</b><span>Completion</span></a>
+      {% endif %}
+    </div>
+    <p class="l-numbers__title">{% if nb == 'nb' %}Mestertall{% else %}Master numbers{% endif %}</p>
+    <div class="l-numbers__grid l-numbers__grid--masters">
+      <a href="/numbers/11/"><b>11</b><span>{% if nb == 'nb' %}Inspirasjon{% else %}Inspiration{% endif %}</span></a><a href="/numbers/22/"><b>22</b><span>{% if nb == 'nb' %}Byggmester{% else %}Builder{% endif %}</span></a><a href="/numbers/33/"><b>33</b><span>{% if nb == 'nb' %}Mesterlærer{% else %}Teacher{% endif %}</span></a>
+    </div>
+    <a class="l-numbers__all" href="/general-interpretation/">{% if nb == 'nb' %}Se alle tallene samlet{% else %}See all the numbers together{% endif %} →</a>
+  </div>
+</details>
+{% endwith %}
+<script>
+(() => {
+  const menu = document.currentScript.previousElementSibling;
+  document.addEventListener('click', e => { if (menu.open && !menu.contains(e.target)) menu.open = false; });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && menu.open) { menu.open = false; menu.querySelector('summary').focus(); } });
+})();
+</script>

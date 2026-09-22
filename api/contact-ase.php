@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../includes/mail.php';
 
-const REDIRECT_BASE = '/about-the-firm/';
+const REDIRECT_BASE = '/ase-steinsland/';
 const CONTACT_TO = 'epost@numerologen.no';
 
 function redirect(string $status): void

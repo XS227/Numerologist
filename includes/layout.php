@@ -34,7 +34,7 @@ function render_header(string $pageTitle, array $seo = []): void
     seo_head($seo);
     echo "  <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">\n";
     echo "  <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>\n";
-    echo "  <link rel=\"stylesheet\" href=\"/assets/fibonacci.css?v=journey-3\">\n";
+    echo "  <link rel=\"stylesheet\" href=\"/assets/fibonacci.css?v=journey-4\">\n";
     echo "  <link rel=\"stylesheet\" href=\"/assets/style.css?v=journey-2\">\n";
     echo "</head>\n";
     echo "<body>\n";
@@ -44,24 +44,24 @@ function render_header(string $pageTitle, array $seo = []): void
     $langEnUrl = htmlspecialchars($seo['alt_en'] ?? $seo['canonical'], ENT_QUOTES, 'UTF-8');
     $activeNo  = $no  ? ' class="lang-active"' : '';
     $activeEn  = !$no ? ' class="lang-active"' : '';
-    $noLabel   = $no  ? 'Hjem'      : 'Home';
     $aboutLabel = $no ? 'Om numerologi' : 'About numerology';
-    $srvLabel  = $no  ? 'Tjenester' : 'Services';
     $artLabel  = $no  ? 'Artikler'  : 'Articles';
     $contactLabel = $no ? 'Kontakt' : 'Contact';
+
+    require_once __DIR__ . '/numbers_menu.php';
+    $numbersMenu = render_numbers_menu($no);
 
     echo <<<HTML
 <nav class="l-nav" aria-label="{$navLabel}">
   <div class="l-wrap l-nav-inner">
     <a class="l-brand" href="{$home}">Numero<em>logist</em></a>
     <ul class="l-nav-links" id="lNavLinks">
-      <li><a href="{$home}">{$noLabel}</a></li>
       <li><a href="/discover-numerology/">{$aboutLabel}</a></li>
-      <li><a href="/#tjenester">{$srvLabel}</a></li>
       <li><a href="/articles/">{$artLabel}</a></li>
       <li><a href="/contact-qa/">{$contactLabel}</a></li>
     </ul>
     <div class="l-nav-right">
+      {$numbersMenu}
       <div class="l-lang" aria-label="Velg språk / Select language">
         <a href="{$langNoUrl}?lang=no" hreflang="no"{$activeNo}>🇳🇴 NO</a>
         <a href="{$langEnUrl}?lang=en" hreflang="en"{$activeEn}>🇬🇧 EN</a>
@@ -96,8 +96,8 @@ function render_footer(): void
         ? [['Kalkulatorer', '/calculators/'], ['Om numerologi', '/discover-numerology/'], ['Artikler', '/articles/']]
         : [['Calculators', '/calculators/'], ['About numerology', '/discover-numerology/'], ['Articles', '/articles/']];
     $l2 = $no
-        ? [['Møt Åse', '/about-the-firm/'], ['Veiledning', '/guidance-support/'], ['Personvern', '/privacy-policy/']]
-        : [['Meet Åse', '/about-the-firm/'], ['Guidance', '/guidance-support/'], ['Privacy policy', '/privacy-policy/']];
+        ? [['Møt Åse', '/ase-steinsland/'], ['Veiledning', '/guidance-support/'], ['Personvern', '/privacy-policy/']]
+        : [['Meet Åse', '/ase-steinsland/'], ['Guidance', '/guidance-support/'], ['Privacy policy', '/privacy-policy/']];
 
     $l1Html = '';
     foreach ($l1 as [$label, $href]) {

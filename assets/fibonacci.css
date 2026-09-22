@@ -117,6 +117,37 @@
   .l-burger { display: flex; align-items: center; }
 }
 
+/* Numbers quick-menu (icon in the nav → every number with its keyword) */
+.l-numbers { position: relative; }
+.l-numbers > summary { list-style: none; display: inline-flex; align-items: center; gap: .4rem; cursor: pointer;
+  padding: .38rem .75rem; border: 1px solid #c6a775; border-radius: 9999px; color: #102f31; font-size: .8rem; font-weight: 700;
+  background: #fbf7ee; transition: background .2s, color .2s; user-select: none; }
+.l-numbers > summary::-webkit-details-marker { display: none; }
+.l-numbers > summary:hover, .l-numbers[open] > summary { background: #c6a775; color: #092426; }
+.l-numbers > summary svg { color: #c6a775; }
+.l-numbers > summary:hover svg, .l-numbers[open] > summary svg { color: #092426; }
+.l-numbers__panel { position: absolute; top: calc(100% + 12px); right: 0; width: 340px; z-index: 300;
+  background: #092426; color: #f3f0e8; border: 1px solid #c6a77560; border-radius: 18px; padding: 1.1rem 1.1rem 1rem;
+  box-shadow: 0 24px 60px rgba(5,23,26,.45); animation: l-numbers-in .22s ease; }
+@keyframes l-numbers-in { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.l-numbers__title { margin: .2rem 0 .6rem; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #c6a775; }
+.l-numbers__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: .9rem; }
+.l-numbers__grid a { display: grid; justify-items: center; gap: 2px; padding: .55rem .2rem; border: 1px solid #c6a77535;
+  border-radius: 12px; text-decoration: none; color: #f3f0e8; background: #123739; transition: background .2s, border-color .2s; }
+.l-numbers__grid a:hover, .l-numbers__grid a:focus-visible { background: #c6a775; border-color: #c6a775; color: #092426; }
+.l-numbers__grid b { font-family: Georgia, serif; font-weight: 400; font-size: 1.55rem; line-height: 1; color: #e2cba2; }
+.l-numbers__grid a:hover b, .l-numbers__grid a:focus-visible b { color: #092426; }
+.l-numbers__grid span { font-size: .68rem; letter-spacing: .02em; opacity: .85; }
+.l-numbers__grid--masters b { font-size: 1.35rem; }
+.l-numbers__all { display: block; text-align: center; padding: .6rem; border-top: 1px solid #c6a77535; margin: 0 -.2rem;
+  color: #e2cba2; font-size: .85rem; font-weight: 600; text-decoration: none; }
+.l-numbers__all:hover { color: #fff; }
+@media (max-width: 780px) {
+  .l-numbers__label { display: none; }
+  .l-numbers > summary { padding: .42rem .5rem; }
+  .l-numbers__panel { position: fixed; top: 72px; left: 12px; right: 12px; width: auto; max-height: calc(100vh - 90px); overflow-y: auto; }
+}
+
 /* ============================================================================
    Unified site footer (.l-footer)
    ----------------------------------------------------------------------------

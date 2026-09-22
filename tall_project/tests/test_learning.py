@@ -45,3 +45,14 @@ class LearningTests(SimpleTestCase):
         for letter, value in LETTER_VALUES.items():
             self.assertIn(letter, rows[value - 1]["letters"].split(" · "))
         self.assertEqual([LETTER_VALUES[c] for c in "ÅÆØ"], [1, 5, 6])
+
+    def test_about_page_moved_and_nav_has_numbers_menu(self):
+        response = self.client.get("/about-the-firm/")
+        self.assertEqual(response.status_code, 301)
+        self.assertEqual(response["Location"], "/ase-steinsland/")
+        response = self.client.get("/ase-steinsland/")
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'href="tel:+4795273772"')
+        self.assertNotContains(response, "contact-ase.php")
+        self.assertContains(response, 'class="l-numbers"', count=1)
+        self.assertNotContains(response, 'href="/#tjenester"')
