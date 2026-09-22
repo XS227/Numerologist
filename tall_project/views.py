@@ -351,6 +351,9 @@ def static_page(request: HttpRequest, slug: str) -> HttpResponse:
         "noindex": page.noindex,
         "page_title": str(page.title),
     }
+    if slug == "discover-numerology":
+        from .journey import journey_content
+        context["journey"] = journey_content(getattr(request, "LANGUAGE_CODE", "en"))
     if slug in SLUGS_WITH_CALCULATOR:
         form = LiteCalculatorForm(request.POST or None)
         result = None

@@ -171,6 +171,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "tall_project" / "static"]
 MEDIA_URL = "/media/"
 STATIC_ROOT = str(BASE_DIR / "static_collected")
 MEDIA_ROOT = str(BASE_DIR / "media")
