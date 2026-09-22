@@ -492,35 +492,5 @@ button { font: inherit; cursor: pointer; }
 }
 
 /* ── Footer ────────────────────────────────────────────────────────────── */
-.site-footer { background: #091a10; color: rgba(240,248,243,.55); padding: 3.5rem 0 2rem; }
-.footer-grid {
-  display: grid; grid-template-columns: 1.6fr 1fr 1fr;
-  gap: 3rem; padding-bottom: 2.5rem;
-  border-bottom: 1px solid rgba(255,255,255,.07);
-  margin-bottom: 1.75rem;
-}
-@media (max-width: 680px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-}
-.footer-brand {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.4rem; font-weight: 700; color: #fff;
-  text-decoration: none; display: block; margin-bottom: .65rem;
-}
-.footer-tagline { font-size: .88rem; line-height: 1.6; max-width: 30ch; }
-.footer-col h4 {
-  color: #fff; font-size: .75rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .09em; margin-bottom: .9rem;
-}
-.footer-col ul { list-style: none; display: grid; gap: .45rem; }
-.footer-col ul a {
-  color: rgba(240,248,243,.55); text-decoration: none;
-  font-size: .86rem; transition: color var(--ease);
-}
-.footer-col ul a:hover { color: #fff; }
-.footer-bottom {
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: .75rem; font-size: .8rem;
-}
-.footer-bottom a { color: rgba(240,248,243,.45); text-decoration: none; }
-.footer-bottom a:hover { color: #fff; }
+/* Moved to assets/fibonacci.css as the shared .l-footer* — same footer
+   markup/classes now used on every page (PHP and Django), not just here. */

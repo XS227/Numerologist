@@ -86,20 +86,57 @@ function render_footer(): void
         ? 'Der tall og teknologi jobber sammen — den pytagoreiske metoden, beregnet i Python. Riktig beregning, riktig teknologi.'
         : 'Where numbers and technology work together — the Pythagorean method, computed in Python. Right calculation, right technology.',
         ENT_QUOTES, 'UTF-8');
-    $priv  = $no ? 'Personvern' : 'Privacy';
-    $terms = $no ? 'Vilkår'     : 'Terms';
+    $tagline = htmlspecialchars($no
+        ? 'Norges fremste numerolog, basert i Oslo. Vi hjelper deg å forstå deg selv gjennom tallenes visdom.'
+        : "Norway's leading numerologist, based in Oslo. Helping you understand yourself through the wisdom of numbers.",
+        ENT_QUOTES, 'UTF-8');
+    $h1 = $no ? 'Utforsk' : 'Explore';
+    $h2 = $no ? 'Om oss' : 'About us';
+    $l1 = $no
+        ? [['Kalkulatorer', '/calculators/'], ['Om numerologi', '/discover-numerology/'], ['Artikler', '/articles/']]
+        : [['Calculators', '/calculators/'], ['About numerology', '/discover-numerology/'], ['Articles', '/articles/']];
+    $l2 = $no
+        ? [['Møt Åse', '/about-the-firm/'], ['Veiledning', '/guidance-support/'], ['Personvern', '/privacy-policy/']]
+        : [['Meet Åse', '/about-the-firm/'], ['Guidance', '/guidance-support/'], ['Privacy policy', '/privacy-policy/']];
+
+    $l1Html = '';
+    foreach ($l1 as [$label, $href]) {
+        $l1Html .= '<li><a href="' . htmlspecialchars($href) . '">' . htmlspecialchars($label) . "</a></li>\n";
+    }
+    $l2Html = '';
+    foreach ($l2 as [$label, $href]) {
+        $l2Html .= '<li><a href="' . htmlspecialchars($href) . '">' . htmlspecialchars($label) . "</a></li>\n";
+    }
 
     echo <<<HTML
 </main>
 <footer class="l-footer">
-  <div class="l-wrap l-footer-inner">
-    <p class="l-footer-ethos">{$ethos}</p>
-    <p>{$copy}</p>
-    <nav aria-label="Footer">
-      <a href="/privacy-policy/">{$priv}</a>
-      <a href="/terms-conditions/">{$terms}</a>
-      <a href="/sitemap.php">Sitemap</a>
-    </nav>
+  <div class="l-wrap">
+    <div class="l-footer-grid">
+      <div>
+        <a href="/" class="l-footer-brand">Numero<em>logist</em></a>
+        <p class="l-footer-tagline">{$tagline}</p>
+      </div>
+      <div class="l-footer-col">
+        <h4>{$h1}</h4>
+        <ul>
+          {$l1Html}
+        </ul>
+      </div>
+      <div class="l-footer-col">
+        <h4>{$h2}</h4>
+        <ul>
+          {$l2Html}
+        </ul>
+      </div>
+    </div>
+    <div class="l-footer-bottom">
+      <span>{$copy}<br><small class="footer-ethos">{$ethos}</small></span>
+      <div class="l-footer-langs">
+        <a href="?lang=no">🇳🇴 Norsk</a>
+        <a href="?lang=en">🇬🇧 English</a>
+      </div>
+    </div>
   </div>
 </footer>
 <script>

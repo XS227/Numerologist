@@ -138,19 +138,8 @@
         gap: 0.5rem;
       }
 
-      footer {
-        padding: 2rem 1.5rem 2.75rem;
-        color: rgba(31, 51, 39, 0.7);
-        text-align: center;
-      }
-
-      footer .footer-copy {
-        margin: 0 auto;
-        max-width: 60ch;
-        display: grid;
-        gap: 0.35rem;
-        font-size: 0.95rem;
-      }
+      /* Footer itself is the shared .l-footer from fibonacci.css (same as
+         the PHP pages). */
 
       
 
@@ -225,13 +214,43 @@
       {% endblock %}
     </main>
     {% block after_main %}{% endblock %}
-    <footer>
-      <div class="layout">
+    <footer class="l-footer">
+      <div class="l-wrap">
         {% block footer_content %}
-          <p class="footer-copy">
-            &copy; {% now "Y" %} Setaei Intelligence. {% trans "Where numbers and technology work together — Åse Steinsland’s Pythagorean method, computed in Python. Right calculation, right technology." %}
-            <span>{% trans "All rights reserved." %}</span>
-          </p>
+          <div class="l-footer-grid">
+            <div>
+              <a href="{% url 'home' %}" class="l-footer-brand">Numero<em>logist</em></a>
+              <p class="l-footer-tagline">{% trans "Norway's leading numerologist, based in Oslo. Helping you understand yourself through the wisdom of numbers." %}</p>
+            </div>
+            <div class="l-footer-col">
+              <h4>{% trans "Explore" %}</h4>
+              <ul>
+                <li><a href="/calculators/">{% trans "Calculators" %}</a></li>
+                <li><a href="/discover-numerology/">{% trans "About numerology" %}</a></li>
+                <li><a href="{% url 'article_list' %}">{% trans "Articles" %}</a></li>
+              </ul>
+            </div>
+            <div class="l-footer-col">
+              <h4>{% trans "About us" %}</h4>
+              <ul>
+                <li><a href="/about-the-firm/">{% trans "Meet Åse" %}</a></li>
+                <li><a href="/guidance-support/">{% trans "Guidance" %}</a></li>
+                <li><a href="/privacy-policy/">{% trans "Privacy policy" %}</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="l-footer-bottom">
+            <span>
+              &copy; {% now "Y" %} Åse Steinsland · Numerologist<br>
+              <small class="footer-ethos">{% trans "Where numbers and technology work together — Åse Steinsland’s Pythagorean method, computed in Python. Right calculation, right technology." %}</small>
+            </span>
+            <div class="l-footer-langs">
+              <a href="#" class="{% if LANGUAGE_CODE == 'nb' %}active{% endif %}"
+                 onclick="document.cookie='nl_lang=no;path=/;max-age=31536000;samesite=lax';location.reload();return false;">🇳🇴 Norsk</a>
+              <a href="#" class="{% if LANGUAGE_CODE == 'en' %}active{% endif %}"
+                 onclick="document.cookie='nl_lang=en;path=/;max-age=31536000;samesite=lax';location.reload();return false;">🇬🇧 English</a>
+            </div>
+          </div>
         {% endblock %}
       </div>
     </footer>

@@ -231,9 +231,9 @@ $T = $no ? [
     'cta_btn1'    => 'Beregn dine tall gratis',
     'cta_btn2'    => 'Kontakt Åse',
     'footer_tag'  => 'Norges fremste numerolog, basert i Oslo. Vi hjelper deg å forstå deg selv gjennom tallenes visdom.',
-    'footer_h1'   => 'Utforsk', 'footer_h2' => 'Informasjon',
-    'footer_l1'   => [['Kalkulatorer','/calculators/'],['Om numerologi','/discover-numerology/'],['Møt Åse','/about-the-firm/']],
-    'footer_l2'   => [['Om numerologi','/discover-numerology/'],['Kalkulatorer','/calculators/'],['Artikler','/articles/'],['Personvern','/privacy-policy/']],
+    'footer_h1'   => 'Utforsk', 'footer_h2' => 'Om oss',
+    'footer_l1'   => [['Kalkulatorer','/calculators/'],['Om numerologi','/discover-numerology/'],['Artikler','/articles/']],
+    'footer_l2'   => [['Møt Åse','/about-the-firm/'],['Veiledning','/guidance-support/'],['Personvern','/privacy-policy/']],
     'footer_copy' => '© ' . date('Y') . ' Åse Steinsland · Numerologist',
     'footer_ethos'=> 'Der tall og teknologi jobber sammen — den pytagoreiske metoden, beregnet i Python. Riktig beregning, riktig teknologi.',
 ] : [
@@ -362,9 +362,9 @@ $T = $no ? [
     'cta_btn1'    => 'Calculate your numbers free',
     'cta_btn2'    => 'Contact Åse',
     'footer_tag'  => 'Norway\'s leading numerologist, based in Oslo. Helping you understand yourself through the wisdom of numbers.',
-    'footer_h1'   => 'Explore', 'footer_h2' => 'Information',
-    'footer_l1'   => [['Calculators','/calculators/'],['About numerology','/discover-numerology/'],['Meet Åse','/about-the-firm/']],
-    'footer_l2'   => [['About numerology','/discover-numerology/'],['Calculators','/calculators/'],['Articles','/articles/'],['Privacy policy','/privacy-policy/']],
+    'footer_h1'   => 'Explore', 'footer_h2' => 'About us',
+    'footer_l1'   => [['Calculators','/calculators/'],['About numerology','/discover-numerology/'],['Articles','/articles/']],
+    'footer_l2'   => [['Meet Åse','/about-the-firm/'],['Guidance','/guidance-support/'],['Privacy policy','/privacy-policy/']],
     'footer_copy' => '© ' . date('Y') . ' Åse Steinsland · Numerologist',
     'footer_ethos'=> 'Where numbers and technology work together — the Pythagorean method, computed in Python. Right calculation, right technology.',
 ];
@@ -930,14 +930,14 @@ $serviceSchemas = [
 
 
 <!-- ═══════════════════════════════════════════════════ FOOTER -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
+<footer class="l-footer">
+  <div class="l-wrap">
+    <div class="l-footer-grid">
       <div>
-        <a href="/" class="footer-brand">Numerologist</a>
-        <p class="footer-tagline"><?= htmlspecialchars($T['footer_tag']) ?></p>
+        <a href="/" class="l-footer-brand">Numero<em>logist</em></a>
+        <p class="l-footer-tagline"><?= htmlspecialchars($T['footer_tag']) ?></p>
       </div>
-      <div class="footer-col">
+      <div class="l-footer-col">
         <h4><?= htmlspecialchars($T['footer_h1']) ?></h4>
         <ul>
           <?php foreach ($T['footer_l1'] as [$label, $href]): ?>
@@ -945,7 +945,7 @@ $serviceSchemas = [
           <?php endforeach; ?>
         </ul>
       </div>
-      <div class="footer-col">
+      <div class="l-footer-col">
         <h4><?= htmlspecialchars($T['footer_h2']) ?></h4>
         <ul>
           <?php foreach ($T['footer_l2'] as [$label, $href]): ?>
@@ -954,9 +954,9 @@ $serviceSchemas = [
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="l-footer-bottom">
       <span><?= htmlspecialchars($T['footer_copy']) ?><br><small class="footer-ethos"><?= htmlspecialchars($T['footer_ethos']) ?></small></span>
-      <div style="display:flex;gap:.75rem;align-items:center">
+      <div class="l-footer-langs">
         <a href="/?lang=no">🇳🇴 Norsk</a>
         <a href="/?lang=en">🇬🇧 English</a>
       </div>

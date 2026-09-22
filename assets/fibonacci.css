@@ -116,3 +116,159 @@
   .l-nav-links.is-open a { padding: .55rem .7rem; width: 100%; }
   .l-burger { display: flex; align-items: center; }
 }
+
+/* ============================================================================
+   Unified site footer (.l-footer)
+   ----------------------------------------------------------------------------
+   Same footer everywhere — PHP homepage, PHP sub-pages, and Django pages —
+   instead of three different (and differently complete) footers. Namespaced
+   (.l-*) like .l-nav above, so it never collides with a page's own CSS.
+   ============================================================================ */
+.l-footer { background: #091a10; color: rgba(240,248,243,.55); padding: 3.5rem 1.25rem 2rem; }
+.l-footer .l-wrap { max-width: 1100px; margin: 0 auto; padding: 0; }
+.l-footer-grid {
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 3rem; padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  margin-bottom: 1.75rem;
+}
+@media (max-width: 680px) {
+  .l-footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+.l-footer-brand {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.4rem; font-weight: 700; color: #fff;
+  text-decoration: none; display: block; margin-bottom: .65rem;
+}
+.l-footer-brand em { font-style: normal; }
+.l-footer-tagline { font-size: .88rem; line-height: 1.6; max-width: 30ch; margin: 0; }
+.l-footer-col h4 {
+  color: #fff; font-size: .75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .09em; margin: 0 0 .9rem;
+}
+.l-footer-col ul { list-style: none; display: grid; gap: .45rem; margin: 0; padding: 0; }
+.l-footer-col ul a {
+  color: rgba(240,248,243,.55); text-decoration: none;
+  font-size: .86rem; transition: color 200ms cubic-bezier(.4,0,.2,1);
+}
+.l-footer-col ul a:hover { color: #fff; }
+.l-footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: .75rem; font-size: .8rem;
+}
+.l-footer-bottom a { color: rgba(240,248,243,.45); text-decoration: none; }
+.l-footer-bottom a:hover { color: #fff; }
+.l-footer-langs { display: flex; gap: .75rem; align-items: center; }
+.l-footer-langs a.active { color: #fff; font-weight: 700; }
+
+/* ============================================================================
+   Embeddable calculator widget (.calc-widget)
+   ----------------------------------------------------------------------------
+   The real LiteCalculatorForm, droppable into any Django static page that
+   promises "learn how to calculate X" — same four-number result the
+   homepage tool produces. See tall_project/templates/pages/_calculator_widget.html.
+   ============================================================================ */
+.calc-widget {
+  margin: 1.75rem 0;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: #f7fcf8;
+  border: 1px solid #c8e5d2;
+  display: grid;
+  gap: 1.25rem;
+}
+.calc-widget__notice {
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background: rgba(198, 40, 40, 0.1);
+  color: #7f1d1d;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.calc-widget__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+.calc-widget label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #4a6b55;
+}
+.calc-widget input,
+.calc-widget select {
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.6rem;
+  border: 1px solid #c8e5d2;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #fff;
+}
+.calc-widget__date { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+.calc-widget__hint { font-weight: 400; font-size: 0.78rem; color: rgba(74, 107, 85, 0.85); }
+.calc-widget__error { font-weight: 400; font-size: 0.8rem; color: #c62828; }
+.calc-widget__submit {
+  justify-self: start;
+  padding: 0.65rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  background: #2d8f60;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+.calc-widget__submit:hover { background: #1e6644; }
+.calc-widget__submit:disabled { opacity: 0.5; cursor: not-allowed; }
+.calc-widget__results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #c8e5d2;
+}
+.calc-widget__stat {
+  padding: 0.9rem;
+  border-radius: 0.9rem;
+  background: #fff;
+  border: 1px solid #c8e5d2;
+  text-align: center;
+  display: grid;
+  gap: 0.25rem;
+}
+.calc-widget__stat-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: #4a6b55; font-weight: 700; }
+.calc-widget__stat-value { font-size: 1.6rem; font-weight: 800; color: #1e6644; }
+
+/* ---------- Letter-value reference chart ---------- */
+.letter-chart { border-collapse: separate; border-spacing: 0.35rem; margin: 1rem 0 0.5rem; }
+.letter-chart tr:first-child td { background: #2d8f60; color: #fff; font-weight: 800; font-size: 0.85rem; }
+.letter-chart tr:not(:first-child) td { background: rgba(60, 177, 121, 0.08); font-weight: 700; color: #1f3327; }
+.letter-chart td { text-align: center; border-radius: 0.5rem; padding: 0.5rem 0.25rem; min-width: 1.9rem; }
+.letter-chart__note { font-size: 0.85rem; color: rgba(31, 51, 39, 0.65); margin-top: 0; }
+
+/* ---------- "Not yet a self-serve tool" notice ---------- */
+.calc-soon {
+  margin: 1.75rem 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1.25rem;
+  background: #f7fcf8;
+  border: 1px dashed #c8e5d2;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: start;
+}
+.calc-soon__badge {
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(31, 31, 31, 0.08);
+  color: rgba(31, 31, 31, 0.6);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.calc-soon p { margin: 0; color: rgba(31, 51, 39, 0.75); font-size: 0.92rem; }
+.calc-soon__cta { font-weight: 700; color: #2d8f60; text-decoration: none; }
+.calc-soon__cta:hover { text-decoration: underline; }
