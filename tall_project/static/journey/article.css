@@ -97,3 +97,41 @@
 }
 @media print{.ja-progress,.j-article .article-toc,.j-article .mb-toc{display:none}.j-article .chapter-head{background:#fff;color:#111}.j-article .chapter-head h2{color:#111}}
 .j-article .mb-dashboard{max-width:1080px;margin:0 auto;padding:0 6% clamp(50px,8vw,90px)}
+
+/* ── Fixes after reviewing every article (2026-09-23) ─────────────────── */
+/* Site palette for the variables the article templates still reference */
+.j-article { --accent: #c6a775; --accent-soft: rgba(198,167,117,.16); --accent-strong: #102f31; --shared: #102f31; --card-elevated: #fbf8f1; --border: #e0d4bc; --text: #102f31; --muted: #36575a; }
+
+/* Mahsa/Bita: the chapter number lived in a tiny absolute corner badge; with
+   the big journey numeral it spilled over the text. Stack it under the icon. */
+.j-article .chapter-badge__num { position: static; width: auto; height: auto; background: none; box-shadow: none; border-radius: 0; color: inherit; font-size: inherit; font-weight: 400; display: block; }
+
+/* Rhythm inside a chapter: blocks were spaced by the old grid gap */
+.j-article .chapter > * + * { margin-top: clamp(28px, 4vw, 44px); }
+.j-article .chapter > .chapter-head + * { margin-top: 0; }
+.j-article .chapter > .chapter-head + :not(.chapter-body) { margin-top: clamp(40px, 6vw, 64px); }
+.j-article .chapter > :not(.chapter-head):not(.chapter-body):not(.chapter-quote) + .chapter-body { padding-top: clamp(24px, 4vw, 40px); }
+.j-article .chapter-body > * + * { margin-top: 1.1em; }
+.j-article .chapter-body p { margin-bottom: 0; }
+.j-article .chapter-body h3 + p { margin-top: .4em; }
+
+/* Content that sits between the hero and the chapters (Mahsa/Bita dashboard) */
+.j-article .mb-dashboard { max-width: none; margin: 0; padding: clamp(50px, 8vw, 90px) max(6%, calc((100% - 1080px) / 2)); background: #e8e5dc; color: #102f31; }
+.j-article .mb-dashboard h2 { font-family: Georgia, serif; font-weight: 400; color: #102f31; }
+.j-article .mb-dashboard > * + * { margin-top: clamp(32px, 5vw, 56px); }
+
+/* Numbers and tables: the same gold-header grid as the letter chart */
+.j-article .chapter-body table { border-collapse: separate; border-spacing: 5px; width: auto; max-width: 100%; margin: 1.4em 0; }
+.j-article .chapter-body table td, .j-article .chapter-body table th { text-align: center; border: 0; border-radius: 8px; padding: .55rem .35rem; min-width: 2rem; background: #fff; color: #102f31; font-weight: 700; }
+.j-article .chapter-body table tr:first-child td, .j-article .chapter-body table th,
+.j-article #slik-beregner-du-uttrykkstallets .chapter-body table tr:first-child td { background: #c6a775; color: #092426; font-family: Georgia, serif; font-weight: 400; font-size: 1.1rem; }
+.j-article #slik-beregner-du-uttrykkstallets .chapter-body table tr:not(:first-child) td { background: #fff; color: #102f31; }
+.j-article .name-breakdown { background: #fff; border-color: rgba(198,167,117,.45); }
+.j-article .name-breakdown table tr:first-child td { border-color: #c6a775; font-family: Georgia, serif; font-weight: 400; }
+.j-article .name-breakdown table tr:last-child td { background: rgba(198,167,117,.18); color: #805d2d; }
+.j-article .name-breakdown__sum strong, .j-article .mb-chip__num { background: #092426; color: #e2cba2; font-family: Georgia, serif; font-weight: 400; }
+
+/* Chapter badge colour: Mahsa's icon badges keep the gold on the dark band */
+.j-article .chapter-head .chapter-badge { color: #c6a775; }
+.j-article .chapter-lead strong, .j-article .chapter-lead a, .j-article .chapter-lead em { color: #e2cba2; }
+.j-article .mb-emblems .divider { color: #c6a775; }
