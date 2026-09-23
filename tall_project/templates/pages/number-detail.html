@@ -52,7 +52,7 @@
 
   /* ---------- Master-number spectrum (reused pattern) ---------- */
   .n-spectrum {
-    display: flex; flex-wrap: wrap; align-items: flex-end; gap: .5rem;
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5rem;
     max-width: 760px; margin: 0 auto;
   }
   .n-spectrum__chip {
@@ -71,22 +71,18 @@
   .n-spectrum__master.is-current {
     background: #c6a775; color: #092426; box-shadow: 0 8px 20px rgba(198,167,117,.4);
   }
+  a.n-spectrum__chip, a.n-spectrum__master { text-decoration: none; transition: background .2s, color .2s, transform .2s; }
+  a.n-spectrum__chip:hover, a.n-spectrum__master:hover { background: #c6a775; border-color: #c6a775; color: #092426; transform: translateY(-2px); }
   .n-spectrum__sep { align-self: center; color: rgba(243,240,232,.3); font-size: 1.1rem; margin: 0 .1rem; }
 
-  /* ---------- Other numbers grid ---------- */
-  .n-other-grid {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem;
-    max-width: 900px; margin: 40px auto 0;
-  }
-  .n-other-grid a {
-    display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 50%;
-    background: rgba(255,255,255,.05); border: 1px solid rgba(243,240,232,.15);
-    color: rgba(243,240,232,.7); font-weight: 700; text-decoration: none;
-    transition: background .2s, color .2s, transform .2s;
-  }
-  .n-other-grid a:hover {
-    background: #c6a775; color: #092426; transform: translateY(-3px);
-  }
+  /* ---------- Previous / next number ---------- */
+  .n-pager { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 640px; margin: 0 auto; }
+  .n-pager__link { display: grid; gap: 4px; padding: 18px 22px; border: 1px solid rgba(198,167,117,.4); border-radius: 14px; text-decoration: none; color: #f3f0e8; text-align: left; transition: background .2s, border-color .2s; }
+  .n-pager__link--next { text-align: right; grid-column: 2; }
+  .n-pager__link span { font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: #c6a775; }
+  .n-pager__link b { font-family: Georgia, serif; font-weight: 400; font-size: 2.6rem; line-height: 1; color: #e2cba2; }
+  .n-pager__link:hover { background: rgba(198,167,117,.12); border-color: #c6a775; }
+
 </style>
 <article class="j-story">
 
@@ -102,18 +98,18 @@
   </div>
 </section>
 
-<div class="j-prologue j-reveal">
-  <p class="j-eyebrow">1 · 2 · 3 · … · 9 · 11 · 22 · 33</p>
-  <div class="n-spectrum" aria-hidden="true">
+<nav class="j-prologue j-reveal" aria-label="{% if CURRENT_LANGUAGE == 'nb' %}Alle tallene{% else %}All the numbers{% endif %}">
+  <p class="j-eyebrow">{% if CURRENT_LANGUAGE == 'nb' %}Tallet i rekken{% else %}Where this number sits{% endif %}</p>
+  <div class="n-spectrum">
     {% for n in "123456789" %}
-      <span class="n-spectrum__chip{% if number|stringformat:'s' == n %} is-current{% endif %}">{{ n }}</span>
+      {% if number|stringformat:'s' == n %}<span class="n-spectrum__chip is-current" aria-current="page">{{ n }}</span>{% else %}<a class="n-spectrum__chip" href="/numbers/{{ n }}/">{{ n }}</a>{% endif %}
     {% endfor %}
-    <span class="n-spectrum__sep">·</span>
-    <span class="n-spectrum__master{% if number == 11 %} is-current{% endif %}">11</span>
-    <span class="n-spectrum__master{% if number == 22 %} is-current{% endif %}">22</span>
-    <span class="n-spectrum__master{% if number == 33 %} is-current{% endif %}">33</span>
+    <span class="n-spectrum__sep" aria-hidden="true">·</span>
+    {% if number == 11 %}<span class="n-spectrum__master is-current" aria-current="page">11</span>{% else %}<a class="n-spectrum__master" href="/numbers/11/">11</a>{% endif %}
+    {% if number == 22 %}<span class="n-spectrum__master is-current" aria-current="page">22</span>{% else %}<a class="n-spectrum__master" href="/numbers/22/">22</a>{% endif %}
+    {% if number == 33 %}<span class="n-spectrum__master is-current" aria-current="page">33</span>{% else %}<a class="n-spectrum__master" href="/numbers/33/">33</a>{% endif %}
   </div>
-</div>
+</nav>
 
 <section class="j-chapter j-dark" id="n-strengths" aria-labelledby="n-strengths-title" data-chapter>
   <div class="j-chapter-inner">
@@ -213,11 +209,11 @@
 {% endif %}
 
 <aside class="j-colophon" style="text-align:center;max-width:100%">
-  <h2>{% trans "Other core numbers" %}</h2>
-  <div class="n-other-grid">
-    {% for n in other_numbers %}<a href="{% url 'number_detail' n %}">{{ n }}</a>{% endfor %}
+  <div class="n-pager">
+    {% if prev_number %}<a class="n-pager__link" href="{% url 'number_detail' prev_number %}" rel="prev"><span>← {% if CURRENT_LANGUAGE == 'nb' %}Forrige tall{% else %}Previous number{% endif %}</span><b>{{ prev_number }}</b></a>{% else %}<span></span>{% endif %}
+    {% if next_number %}<a class="n-pager__link n-pager__link--next" href="{% url 'number_detail' next_number %}" rel="next"><span>{% if CURRENT_LANGUAGE == 'nb' %}Neste tall{% else %}Next number{% endif %} →</span><b>{{ next_number }}</b></a>{% endif %}
   </div>
-  <p style="margin-top:2rem"><a class="j-text-link" href="{% url 'home' %}#core-numbers">{% trans "Back to core number stories" %} <span aria-hidden="true">↗</span></a></p>
+  <p style="margin-top:2rem"><a class="j-text-link" href="/general-interpretation/">{% if CURRENT_LANGUAGE == 'nb' %}Se alle tallene samlet{% else %}See all the numbers together{% endif %} <span aria-hidden="true">↗</span></a></p>
 </aside>
 
 </article>

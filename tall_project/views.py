@@ -318,14 +318,18 @@ def number_detail(request: HttpRequest, number: int) -> HttpResponse:
             ],
         }
     ) if faq else _webpage_schema(profile["title"], meta_description, canonical_url)
-    other_numbers = [n for n in NUMBER_INTERPRETATIONS if n != number]
+    sequence = [n for n in (1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33) if n in NUMBER_INTERPRETATIONS]
+    position = sequence.index(number) if number in sequence else None
+    prev_number = sequence[position - 1] if position else None
+    next_number = sequence[position + 1] if position is not None and position + 1 < len(sequence) else None
     context = {
         "number": number,
         "profile": profile,
         "meta_description": meta_description,
         "canonical_url": canonical_url,
         "structured_data": structured_data,
-        "other_numbers": other_numbers,
+        "prev_number": prev_number,
+        "next_number": next_number,
         "page_title": profile["title"],
     }
     return render(request, "pages/number-detail.html", context)
