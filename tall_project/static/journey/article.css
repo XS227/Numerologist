@@ -115,10 +115,44 @@
 .j-article .chapter-body p { margin-bottom: 0; }
 .j-article .chapter-body h3 + p { margin-top: .4em; }
 
-/* Content that sits between the hero and the chapters (Mahsa/Bita dashboard) */
-.j-article .mb-dashboard { max-width: none; margin: 0; padding: clamp(50px, 8vw, 90px) max(6%, calc((100% - 1080px) / 2)); background: #e8e5dc; color: #102f31; }
-.j-article .mb-dashboard h2 { font-family: Georgia, serif; font-weight: 400; color: #102f31; }
-.j-article .mb-dashboard > * + * { margin-top: clamp(32px, 5vw, 56px); }
+/* Mahsa/Bita dashboard: a dark journey band with explicit colours on every
+   element (the template's pale tints read washed-out). The two people keep
+   their own colour, lightened for the dark ground, as an accent only. */
+.j-article .mb-dashboard { --mb-mahsa: #a9acf2; --mb-bita: #e8b06a; max-width: none; margin: 0; border: 0; border-radius: 0;
+  padding: clamp(50px, 8vw, 90px) max(6%, calc((100% - 1080px) / 2));
+  background: radial-gradient(ellipse at 20% 0%, rgba(91,95,199,.16), transparent 55%), radial-gradient(ellipse at 80% 0%, rgba(201,131,46,.14), transparent 55%), #0d2c2e;
+  border-top: 1px solid rgba(198,167,117,.3); border-bottom: 1px solid rgba(198,167,117,.3); color: #f3f0e8; display: grid; gap: clamp(40px, 6vw, 64px); }
+.j-article .mb-dashboard h2 { font-family: Georgia, serif; font-weight: 400; }
+.j-article .mb-profiles { gap: clamp(14px, 2.5vw, 24px); }
+.j-article .mb-profile { background: #123739; border: 1px solid rgba(198,167,117,.35); border-top: 3px solid var(--mb-accent); border-radius: 16px; padding: clamp(22px, 3.5vw, 32px); gap: 18px; }
+.j-article .mb-profile--mahsa { --mb-accent: var(--mb-mahsa); }
+.j-article .mb-profile--bita { --mb-accent: var(--mb-bita); }
+.j-article .mb-profile__head h2 { color: #f3f0e8; font-size: clamp(1.45rem, 3vw, 1.8rem); letter-spacing: -.02em; }
+.j-article .mb-profile__head p { color: #bdccc7; }
+.j-article .mb-avatar { background: #092426; border: 1px solid var(--mb-accent); box-shadow: none; }
+.j-article .mb-age { background: none; border: 1px solid rgba(198,167,117,.55); color: #e2cba2; font-weight: 600; }
+.j-article .mb-age strong { font-family: Georgia, serif; font-weight: 400; font-size: 1.3rem; color: #f3f0e8; }
+.j-article .mb-numbers { gap: 8px; }
+.j-article .mb-stat { background: #092426; border: 1px solid rgba(198,167,117,.25); border-radius: 12px; padding: 12px 14px; }
+.j-article .mb-stat__label { color: #c6a775; letter-spacing: .1em; }
+.j-article .mb-stat__value { font-family: Georgia, serif; font-weight: 400; font-size: 2.2rem; color: var(--mb-accent) !important; margin: 4px 0 2px; }
+.j-article .mb-stat__note { color: #cdd8d4; }
+.j-article .mb-abjad { background: none; border: 1px dashed rgba(198,167,117,.45); color: #dce3df; }
+.j-article .mb-abjad__script { font-size: 1.6rem; font-weight: 400; color: #f3f0e8; }
+.j-article .mb-abjad__sum { display: inline-grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; background: var(--mb-accent); color: #092426; font-family: Georgia, serif; font-weight: 400; }
+.j-article .mb-constellation h2, .j-article .mb-timeline h2 { color: #c6a775; font-family: inherit; font-size: .8rem; font-weight: 700; letter-spacing: .18em; }
+.j-article .mb-chip__num { width: 3.4rem; height: 3.4rem; background: none; border: 1px solid #c6a775; color: #e2cba2; box-shadow: none; font-family: Georgia, serif; font-weight: 400; font-size: 1.4rem; }
+.j-article .mb-chip__label { color: #cdd8d4; }
+.j-article .mb-lifeline__who { color: #f3f0e8; }
+.j-article .mb-lifeline__who span { color: #bdccc7; }
+.j-article .mb-lifeline__track { background: rgba(243,240,232,.1); }
+.j-article .mb-lifeline__bar--mahsa { background: linear-gradient(90deg, rgba(169,172,242,.15), #a9acf2); }
+.j-article .mb-lifeline__bar--bita { background: linear-gradient(90deg, rgba(232,176,106,.15), #e8b06a); }
+.j-article .mb-lifeline__end { color: #bdccc7; }
+.j-article .mb-lifeline__end strong { font-family: Georgia, serif; font-weight: 400; font-size: 1.4rem; color: #e2cba2; }
+.j-article .mb-gap { border-top: 1px dashed rgba(198,167,117,.35); }
+.j-article .mb-gap__days { font-family: Georgia, serif; font-weight: 400; font-size: 2.2rem; color: #e2cba2; }
+.j-article .mb-gap__note { color: #cdd8d4; }
 
 /* Numbers and tables: the same gold-header grid as the letter chart */
 .j-article .chapter-body table { border-collapse: separate; border-spacing: 5px; width: auto; max-width: 100%; margin: 1.4em 0; }
@@ -129,9 +163,10 @@
 .j-article .name-breakdown { background: #fff; border-color: rgba(198,167,117,.45); }
 .j-article .name-breakdown table tr:first-child td { border-color: #c6a775; font-family: Georgia, serif; font-weight: 400; }
 .j-article .name-breakdown table tr:last-child td { background: rgba(198,167,117,.18); color: #805d2d; }
-.j-article .name-breakdown__sum strong, .j-article .mb-chip__num { background: #092426; color: #e2cba2; font-family: Georgia, serif; font-weight: 400; }
+.j-article .name-breakdown__sum strong { background: #092426; color: #e2cba2; font-family: Georgia, serif; font-weight: 400; }
 
 /* Chapter badge colour: Mahsa's icon badges keep the gold on the dark band */
 .j-article .chapter-head .chapter-badge { color: #c6a775; }
 .j-article .chapter-lead strong, .j-article .chapter-lead a, .j-article .chapter-lead em { color: #e2cba2; }
 .j-article .mb-emblems .divider { color: #c6a775; }
+.j-article .mb-header { border-bottom: 0; }
