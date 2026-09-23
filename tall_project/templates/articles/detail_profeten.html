@@ -1,0 +1,58 @@
+{% extends "articles/detail_journey_base.html" %}
+
+{% block eyebrow %}Numerologist · Navn og tall{% endblock %}
+
+{% block chapter_visual %}
+  {% if chapter.id == "med-respekt" %}
+    <p class="chapter-quote">Tallene beviser ingenting. De er en inngang til refleksjon.</p>
+  {% elif chapter.id == "navnet-i-abjad" %}
+    <div>
+      <div class="ja-tiles" dir="rtl" lang="ar" aria-label="محمد i abjad: 40, 8, 40, 4">
+        <div class="ja-tile"><b>م</b><span>40</span></div>
+        <div class="ja-tile"><b>ح</b><span>8</span></div>
+        <div class="ja-tile"><b>م</b><span>40</span></div>
+        <div class="ja-tile"><b>د</b><span>4</span></div>
+      </div>
+      <p class="ja-eq">40 + 8 + 40 + 4 = 92 <i>→</i> 9 + 2 = <strong class="ja-master">11</strong></p>
+    </div>
+  {% elif chapter.id == "navnet-med-åses-metode" %}
+    <div>
+      <div class="ja-tiles" aria-label="MUHAMMAD med bokstavverdier; vokalene er uthevet">
+        <div class="ja-tile"><b>M</b><span>4</span></div>
+        <div class="ja-tile ja-tile--vowel"><b>U</b><span>3</span></div>
+        <div class="ja-tile"><b>H</b><span>8</span></div>
+        <div class="ja-tile ja-tile--vowel"><b>A</b><span>1</span></div>
+        <div class="ja-tile"><b>M</b><span>4</span></div>
+        <div class="ja-tile"><b>M</b><span>4</span></div>
+        <div class="ja-tile ja-tile--vowel"><b>A</b><span>1</span></div>
+        <div class="ja-tile"><b>D</b><span>4</span></div>
+      </div>
+      <p class="ja-eq">4 + 3 + 8 + 1 + 4 + 4 + 1 + 4 = 29 <i>→</i> 2 + 9 = <strong class="ja-master">11</strong></p>
+      <div class="ja-cards" style="margin-top:24px">
+        <div class="ja-card"><span>Sjelstall · vokaler</span><b>5</b><small>U + A + A = 3 + 1 + 1</small></div>
+        <div class="ja-card"><span>Personlighetstall · konsonanter</span><b>6</b><small>4 + 8 + 4 + 4 + 4 = 24 → 6</small></div>
+      </div>
+    </div>
+  {% elif chapter.id == "sura-47-og-navnet-i-koranen" %}
+    <div class="ja-cards" aria-label="Tre veier til 11">
+      <div class="ja-card ja-card--master"><span>محمد i abjad</span><b>11</b><small>92 → 11</small></div>
+      <div class="ja-card ja-card--master"><span>MUHAMMAD</span><b>11</b><small>29 → 11</small></div>
+      <div class="ja-card ja-card--master"><span>Sura 47</span><b>11</b><small>4 + 7</small></div>
+    </div>
+  {% elif chapter.id == "fødselsdatoen-vi-ikke-kjenner-sikkert" %}
+    <div class="ja-cards">
+      <div class="ja-card"><span>20. april 570</span><b>9</b><small>20 → 2 · 4 · 570 → 3<br>2 + 4 + 3 = 9</small></div>
+      <div class="ja-card ja-card--master"><span>22. april 570</span><b>11</b><small>22 (mestertall) · 4 · 570 → 3<br>22 + 4 + 3 = 29 → 11</small></div>
+    </div>
+    <p class="ja-caption">Den nøyaktige datoen er usikker. Begge de vanligste omregningene vises.</p>
+  {% elif chapter.id == "tallene-i-livet-hans" %}
+    <ol class="ja-timeline">
+      <li><b>4</b><div><strong>40 år</strong><span>Den første åpenbaringen · grunnmuren</span></div></li>
+      <li><b>5</b><div><strong>23 år</strong><span>Åpenbaringens lengde · forandring</span></div></li>
+      <li><b>1</b><div><strong>622</strong><span>Hijra, utvandringen til Medina · en ny begynnelse</span></div></li>
+      <li><b>9</b><div><strong>63 år</strong><span>Alder ved bortgangen · fullføring</span></div></li>
+    </ol>
+  {% elif chapter.id == "hva-tallene-kan-fortelle" %}
+    <p class="chapter-quote">«Muhammad er … Guds sendebud og profetenes segl.» – Koranen 33:40</p>
+  {% endif %}
+{% endblock %}

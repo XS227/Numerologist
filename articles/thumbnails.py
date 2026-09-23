@@ -10,6 +10,18 @@ piece. Anything not curated here falls back to the article's own first word.
 from __future__ import annotations
 
 ARTICLE_THUMBNAILS: dict[str, dict[str, str]] = {
+    "tallene-i-koranen": {
+        "big": "6·7·8",
+        "small": "i Koranen",
+        "bg": "#f3f0e8",
+        "fg": "#102f31",
+    },
+    "profeten-muhammads-tall": {
+        "big": "11",
+        "small": "Navnet Muhammad",
+        "bg": "#123739",
+        "fg": "#e2cba2",
+    },
     "wow-signalet-og-arecibo-linjen": {
         "big": "WOW",
         "small": "Signalet",

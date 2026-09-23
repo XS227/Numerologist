@@ -170,3 +170,51 @@
 .j-article .chapter-lead strong, .j-article .chapter-lead a, .j-article .chapter-lead em { color: #e2cba2; }
 .j-article .mb-emblems .divider { color: #c6a775; }
 .j-article .mb-header { border-bottom: 0; }
+
+/* ── Reusable article visuals (.ja-*) — number cards, letter tiles,
+   equations, timeline and a calculator shell, in the site palette ─────── */
+.ja-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 12px; }
+.ja-card { background: #092426; color: #f3f0e8; border: 1px solid rgba(198,167,117,.35); border-radius: 14px; padding: 22px 18px; text-align: center; display: grid; gap: 6px; }
+.ja-card span { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: #c6a775; }
+.ja-card b { font-family: Georgia, serif; font-weight: 400; font-size: 3.4rem; line-height: 1; color: #e2cba2; }
+.ja-card small { color: #cdd8d4; font-size: .9rem; line-height: 1.5; }
+.ja-card--master b { color: #092426; background: #c6a775; border-radius: 50%; width: 4.6rem; height: 4.6rem; display: grid; place-items: center; margin: 4px auto; font-size: 2.3rem; }
+
+.ja-tiles { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.ja-tile { display: grid; justify-items: center; gap: 6px; min-width: 3.1rem; padding: 12px 8px 10px; background: #fff; border: 1px solid rgba(198,167,117,.55); border-radius: 12px; }
+.ja-tile b { font-family: Georgia, serif; font-weight: 400; font-size: 1.9rem; line-height: 1; color: #102f31; }
+.ja-tile span { font-size: .85rem; font-weight: 700; color: #805d2d; }
+.ja-tile--vowel { background: #092426; border-color: #c6a775; }
+.ja-tile--vowel b { color: #e2cba2; }
+.ja-tile--vowel span { color: #c6a775; }
+
+.ja-eq { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .5rem .7rem; margin-top: 18px; font-family: Georgia, serif; font-size: clamp(1.2rem, 3vw, 1.6rem); color: #102f31; }
+.ja-eq i { font-style: normal; color: #c6a775; }
+.ja-eq strong { display: inline-grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 50%; background: #092426; color: #e2cba2; font-weight: 400; }
+.ja-eq strong.ja-master { background: #c6a775; color: #092426; box-shadow: 0 0 0 6px rgba(198,167,117,.22); }
+.ja-caption { text-align: center; margin-top: 10px; font-size: .88rem; color: #6b8580; }
+
+.ja-timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; position: relative; }
+.ja-timeline:before { content: ''; position: absolute; left: 2.1rem; top: 12px; bottom: 12px; width: 1px; background: rgba(198,167,117,.6); }
+.ja-timeline li { position: relative; display: grid; grid-template-columns: 4.2rem 1fr; gap: 16px; align-items: center; padding: 12px 0; }
+.ja-timeline li > b { position: relative; z-index: 1; display: grid; place-items: center; width: 4.2rem; height: 4.2rem; border-radius: 50%; background: #092426; border: 1px solid #c6a775; font-family: Georgia, serif; font-weight: 400; font-size: 1.5rem; color: #e2cba2; }
+.ja-timeline li > div { display: grid; gap: 2px; }
+.ja-timeline li strong { font-family: Georgia, serif; font-weight: 400; font-size: 1.2rem; color: #102f31; }
+.ja-timeline li span { color: #36575a; font-size: .95rem; }
+
+.ja-wave { display: block; width: 100%; height: auto; max-width: 640px; margin: 0 auto; }
+
+.ja-calc { background: #092426; color: #f3f0e8; border: 1px solid rgba(198,167,117,.45); border-radius: 18px; padding: clamp(20px, 4vw, 34px); box-shadow: 0 24px 50px rgba(9,36,38,.25); }
+.ja-calc label { display: grid; gap: 8px; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: #c6a775; }
+.ja-calc select { font: inherit; font-size: 1.05rem; letter-spacing: 0; text-transform: none; padding: 12px 14px; border-radius: 12px; border: 1px solid #c6a775; background: #123739; color: #f3f0e8; }
+.ja-calc__steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 10px; margin: 22px 0 0; }
+.ja-calc__step { background: #123739; border: 1px solid rgba(198,167,117,.3); border-radius: 12px; padding: 14px; text-align: center; display: grid; gap: 4px; }
+.ja-calc__step span { font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #c6a775; }
+.ja-calc__step b { font-family: Georgia, serif; font-weight: 400; font-size: 1.6rem; color: #f3f0e8; }
+.ja-calc__step small { color: #bdccc7; }
+.ja-calc__result { margin-top: 18px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; text-align: left; }
+.ja-calc__root { display: grid; place-items: center; width: 5rem; height: 5rem; border-radius: 50%; background: #c6a775; color: #092426; font-family: Georgia, serif; font-size: 2.4rem; box-shadow: 0 0 0 8px rgba(198,167,117,.2); }
+.ja-calc__text { max-width: 36ch; color: #dce3df; line-height: 1.6; }
+.ja-calc__pulse { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
+.ja-calc__pulse span { display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 50%; border: 1px solid rgba(198,167,117,.5); font-family: Georgia, serif; font-size: 1.3rem; color: #bdccc7; }
+.ja-calc__pulse span.is-on { background: #c6a775; color: #092426; border-color: #c6a775; }

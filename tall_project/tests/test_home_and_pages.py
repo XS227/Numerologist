@@ -51,10 +51,16 @@ class HomeAndStaticPageTests(SimpleTestCase):
         self.assertIn("birth_day", form.errors)
 
     def test_projects_and_quran_pages_are_available(self) -> None:
-        for slug in ["projects-lab", "arecibo-line", "quranian-numerology", "quranic-analysis"]:
+        for slug in ["projects-lab", "arecibo-line"]:
             with self.subTest(slug=slug):
                 response = self.client.get(reverse("static_page", kwargs={"slug": slug}))
                 self.assertEqual(response.status_code, 200)
+        # The Quran project page became an article; the old URLs redirect.
+        for slug in ["quranian-numerology", "quranic-analysis"]:
+            with self.subTest(slug=slug):
+                response = self.client.get(reverse("static_page", kwargs={"slug": slug}))
+                self.assertEqual(response.status_code, 301)
+                self.assertEqual(response["Location"], "/articles/tallene-i-koranen/")
 
     def test_language_switch_endpoint_redirects_back(self) -> None:
         response = self.client.post(

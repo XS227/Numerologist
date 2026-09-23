@@ -1,0 +1,94 @@
+{% extends "articles/detail_journey_base.html" %}
+
+{% block eyebrow %}Numerologist · Forskningsprosjekt{% endblock %}
+
+{% block chapter_visual %}
+  {% if chapter.id == "koranen-som-tallstruktur" %}
+    <div class="ja-cards" aria-label="Rammen rundt Koranen: 6, 7 og 8">
+      <div class="ja-card"><span>114 suraer</span><b>6</b><small>1 + 1 + 4</small></div>
+      <div class="ja-card"><span>Al-Fatiha</span><b>7</b><small>7 vers i åpningen</small></div>
+      <div class="ja-card"><span>6236 vers</span><b>8</b><small>6 + 2 + 3 + 6 = 17 → 8</small></div>
+    </div>
+  {% elif chapter.id == "6-7-og-8-en-pulsmodell" %}
+    <svg class="ja-wave" viewBox="0 0 640 220" role="img" aria-label="Pulsmodellen: 6 lav, 7 terskel, 8 høy">
+      <line x1="30" y1="110" x2="610" y2="110" stroke="#c6a775" stroke-opacity=".35" stroke-dasharray="4 6"/>
+      <path d="M30 170 C 110 170, 130 110, 200 110 S 290 50, 340 50 S 420 110, 470 110 S 560 170, 610 170" fill="none" stroke="#c6a775" stroke-width="3" stroke-linecap="round"/>
+      <g font-family="Georgia, serif" text-anchor="middle">
+        <circle cx="90" cy="165" r="30" fill="#092426" stroke="#c6a775"/><text x="90" y="176" font-size="30" fill="#e2cba2">6</text>
+        <text x="90" y="214" font-size="14" fill="#36575a">lav · magnetisk</text>
+        <circle cx="200" cy="110" r="30" fill="#c6a775"/><text x="200" y="121" font-size="30" fill="#092426">7</text>
+        <text x="200" y="160" font-size="14" fill="#36575a">terskel</text>
+        <circle cx="340" cy="50" r="30" fill="#092426" stroke="#c6a775"/><text x="340" y="61" font-size="30" fill="#e2cba2">8</text>
+        <text x="340" y="100" font-size="14" fill="#36575a">høy · elektrisk</text>
+        <circle cx="470" cy="110" r="22" fill="none" stroke="#c6a775" stroke-opacity=".6"/><text x="470" y="119" font-size="22" fill="#805d2d">7</text>
+        <circle cx="570" cy="165" r="22" fill="none" stroke="#c6a775" stroke-opacity=".6"/><text x="570" y="174" font-size="22" fill="#805d2d">6</text>
+      </g>
+    </svg>
+    <p class="ja-caption">Pulsen svinger fra 6 via terskelen 7 til 8 – og tilbake.</p>
+  {% elif chapter.id == "regn-på-en-sure" %}
+    <div class="ja-calc" id="surah-calc">
+      <label for="surah-select">Velg sure
+        <select id="surah-select"></select>
+      </label>
+      <div class="ja-calc__steps" aria-live="polite">
+        <div class="ja-calc__step"><span>Surenummer</span><b id="sc-number">1</b><small id="sc-number-red">→ 1</small></div>
+        <div class="ja-calc__step"><span>Antall vers</span><b id="sc-verses">7</b><small id="sc-verses-red">→ 7</small></div>
+        <div class="ja-calc__step"><span>Delene sammen</span><b id="sc-sum">1 + 7</b><small id="sc-sum-red">= 8</small></div>
+      </div>
+      <div class="ja-calc__result">
+        <span class="ja-calc__root" id="sc-root">8</span>
+        <p class="ja-calc__text" id="sc-text"></p>
+      </div>
+      <div class="ja-calc__pulse" aria-hidden="true"><span data-n="6">6</span><span data-n="7">7</span><span data-n="8">8</span></div>
+    </div>
+  {% elif chapter.id == "tro-og-vantro-gir-samme-tall" %}
+    <div class="ja-cards">
+      <div class="ja-card"><span>إيمان · iman · tro</span><b>3</b><small>1 + 10 + 40 + 1 + 50 = 102 → 3</small></div>
+      <div class="ja-card"><span>كفر · kufr · vantro</span><b>3</b><small>20 + 80 + 200 = 300 → 3</small></div>
+    </div>
+  {% elif chapter.id == "åpningen-og-renheten" %}
+    <div class="ja-cards">
+      <div class="ja-card"><span>Al-Fatiha · sure 1</span><b>8</b><small>1 + 7 vers = 8</small></div>
+      <div class="ja-card"><span>Al-Ikhlas · sure 112</span><b>8</b><small>112 → 4, 4 vers → 4, 4 + 4 = 8</small></div>
+    </div>
+  {% elif chapter.id == "åpne-spørsmål" %}
+    <p class="chapter-quote">Tallene er et spørsmål vi stiller teksten – ikke et svar vi legger inn i den.</p>
+  {% endif %}
+{% endblock %}
+
+{% block article_scripts %}
+<script>
+(() => {
+  // Surah calculator — Åse's method: the surah number and the verse count
+  // are reduced separately (11/22/33 kept), then combined and reduced again.
+  const names = ["Al-Fatiha","Al-Baqarah","Al 'Imran","An-Nisa","Al-Ma'idah","Al-An'am","Al-A'raf","Al-Anfal","At-Tawbah","Yunus","Hud","Yusuf","Ar-Ra'd","Ibrahim","Al-Hijr","An-Nahl","Al-Isra","Al-Kahf","Maryam","Ta-Ha","Al-Anbiya","Al-Hajj","Al-Mu'minun","An-Nur","Al-Furqan","Ash-Shu'ara","An-Naml","Al-Qasas","Al-'Ankabut","Ar-Rum","Luqman","As-Sajdah","Al-Ahzab","Saba","Fatir","Ya-Sin","As-Saffat","Sad","Az-Zumar","Ghafir","Fussilat","Ash-Shura","Az-Zukhruf","Ad-Dukhan","Al-Jathiyah","Al-Ahqaf","Muhammad","Al-Fath","Al-Hujurat","Qaf","Adh-Dhariyat","At-Tur","An-Najm","Al-Qamar","Ar-Rahman","Al-Waqi'ah","Al-Hadid","Al-Mujadilah","Al-Hashr","Al-Mumtahanah","As-Saff","Al-Jumu'ah","Al-Munafiqun","At-Taghabun","At-Talaq","At-Tahrim","Al-Mulk","Al-Qalam","Al-Haqqah","Al-Ma'arij","Nuh","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyamah","Al-Insan","Al-Mursalat","An-Naba","An-Nazi'at","'Abasa","At-Takwir","Al-Infitar","Al-Mutaffifin","Al-Inshiqaq","Al-Buruj","At-Tariq","Al-A'la","Al-Ghashiyah","Al-Fajr","Al-Balad","Ash-Shams","Al-Layl","Ad-Duha","Ash-Sharh","At-Tin","Al-'Alaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah","Al-'Adiyat","Al-Qari'ah","At-Takathur","Al-'Asr","Al-Humazah","Al-Fil","Quraysh","Al-Ma'un","Al-Kawthar","Al-Kafirun","An-Nasr","Al-Masad","Al-Ikhlas","Al-Falaq","An-Nas"];
+  const verses = [7,286,200,176,120,165,206,75,129,109,123,111,43,52,99,128,111,110,98,135,112,78,118,64,77,227,93,88,69,60,34,30,73,54,45,83,182,88,75,85,54,53,89,59,37,35,38,29,18,45,60,49,62,55,78,96,29,22,24,13,14,11,11,18,12,12,30,52,52,44,28,28,20,56,40,31,50,40,46,42,29,19,36,25,22,17,19,26,30,20,15,21,11,8,8,19,5,8,8,11,11,8,3,9,5,4,7,3,6,3,5,4,5,6];
+  const MASTERS = [11, 22, 33];
+  const reduce = n => { while (n > 9 && !MASTERS.includes(n)) n = String(n).split('').reduce((a, d) => a + Number(d), 0); return n; };
+  const chain = n => { const out = [n]; while (n > 9 && !MASTERS.includes(n)) { n = String(n).split('').reduce((a, d) => a + Number(d), 0); out.push(n); } return out.join(' → '); };
+  // "→ 2 → 11"-style tail of the reduction; a single digit or a master number stays as it is.
+  const steps = n => { const c = chain(n).split(' → '); return c.length > 1 ? '→ ' + c.slice(1).join(' → ') : (MASTERS.includes(n) ? 'mestertall' : '→ ' + n); };
+  const meaning = {
+    6: 'Resultatet står på den lave polen i modellen: 6, det magnetiske fundamentet.',
+    7: 'Resultatet står på terskelen: 7, punktet der pulsen låses før den snur.',
+    8: 'Resultatet står på den høye polen: 8, den elektriske utladningen.',
+  };
+  const $ = id => document.getElementById(id);
+  const select = $('surah-select');
+  if (!select) return;
+  names.forEach((name, i) => select.add(new Option(`${i + 1}. ${name}`, String(i + 1))));
+  function render(k) {
+    const v = verses[k - 1], rk = reduce(k), rv = reduce(v), root = reduce(rk + rv);
+    $('sc-number').textContent = k; $('sc-number-red').textContent = steps(k);
+    $('sc-verses').textContent = v; $('sc-verses-red').textContent = steps(v);
+    $('sc-sum').textContent = `${rk} + ${rv}`; $('sc-sum-red').textContent = '= ' + chain(rk + rv);
+    $('sc-root').textContent = root;
+    const master = MASTERS.includes(root) ? ` ${root} er et mestertall og beholdes.` : '';
+    $('sc-text').textContent = `${names[k - 1]}: ${meaning[root] || `Resultatet ${root} ligger utenfor pulsen 6–7–8.`}${master}`;
+    document.querySelectorAll('.ja-calc__pulse span').forEach(s => s.classList.toggle('is-on', Number(s.dataset.n) === root));
+  }
+  select.addEventListener('change', () => render(Number(select.value)));
+  render(1);
+})();
+</script>
+{% endblock %}

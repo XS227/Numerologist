@@ -57,7 +57,7 @@ $today = date('Y-m-d');
 // ── Static pages ─────────────────────────────────────────────────────────────
 // Kept in sync by hand with tall_project/navigation.py STATIC_PAGES.
 // Excluded on purpose: legal, terms-conditions, privacy-policy (noindex),
-// and quranic-analysis (noindex, canonicalizes to quranian-numerology).
+// and the Quran project pages (now 301 to /articles/tallene-i-koranen/).
 $staticSlugs = [
     'discover-numerology',
     'calculators',
@@ -79,7 +79,6 @@ $staticSlugs = [
     'blog-articles',
     'references',
     'numerologist-in-media',
-    'quranian-numerology',
     'guidance-support',
     'ase-steinsland',
     'telephone-guidance',
@@ -95,6 +94,10 @@ $articleSlugs = [
     ['slug' => 'navn-og-numerologi',                                        'date' => '2025-11-03'],
     ['slug' => 'creative-research-practice-for-numerology',                 'date' => '2025-10-18'],
     ['slug' => 'numerological-reflection-on-mahsa-amini-and-bita-azizi',    'date' => '2025-11-24'],
+    ['slug' => 'hva-avslorer-tallene-i-shahnameh',                          'date' => '2026-07-11'],
+    ['slug' => 'wow-signalet-og-arecibo-linjen',                            'date' => '2026-09-22'],
+    ['slug' => 'tallene-i-koranen',                                         'date' => '2026-09-23'],
+    ['slug' => 'profeten-muhammads-tall',                                   'date' => '2026-09-23'],
 ];
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";

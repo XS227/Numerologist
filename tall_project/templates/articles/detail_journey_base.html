@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load i18n static %}
+{% comment %}
+  Shared skeleton for chapter articles in the journey style (article.css /
+  article.js). A child template only fills {% block chapter_visual %}, which
+  is rendered after each chapter's text with `chapter` in context, and may
+  add {% block article_styles %} / {% block article_scripts %}.
+{% endcomment %}
+
+{% block title %}{{ article.title }} · {% trans "Articles & Library" %} · Numerologist{% endblock %}
+{% block body_attrs %} class="number-journey j-article"{% endblock %}
+{% block extra_styles %}{% block article_styles %}{% endblock %}{% endblock %}
+
+{% block content %}
+  <link rel="stylesheet" href="{% static 'journey/article.css' %}?v=4">
+  <nav class="article-breadcrumb" aria-label="{% trans 'Back to articles' %}">
+    <a href="{% url 'article_list' %}"><span aria-hidden="true">←</span> {% trans "All articles" %}</a>
+  </nav>
+
+  <article class="article-detail">
+    <header class="article-detail__header">
+      <span class="article-detail__eyebrow">{% block eyebrow %}{% trans "Numerologist library" %}{% endblock %}</span>
+      <h1 class="article-detail__title">{{ article.title }}</h1>
+      <div class="article-detail__meta">
+        <span>{% blocktrans with author=article.author %}By {{ author }}{% endblocktrans %}</span>
+        <span>{% blocktrans with date=article.published|date:"F j, Y" %}Published {{ date }}{% endblocktrans %}</span>
+      </div>
+    </header>
+
+    {% if chapters_lead %}<div class="chapter-lead">{{ chapters_lead|safe }}</div>{% endif %}
+
+    <nav class="article-toc" aria-label="{% trans 'In this article' %}">
+      {% for chapter in chapters %}<a href="#{{ chapter.id }}"><span>{{ chapter.number }}</span>{{ chapter.title }}</a>{% endfor %}
+    </nav>
+
+    <div class="article-detail__body">
+      {% for chapter in chapters %}
+        <section class="chapter" id="{{ chapter.id }}">
+          <div class="chapter-head">
+            <span class="chapter-badge" aria-hidden="true">{{ chapter.number }}</span>
+            <h2>{{ chapter.title }}</h2>
+          </div>
+          <div class="chapter-body">{{ chapter.body|safe }}</div>
+          {% block chapter_visual %}{% endblock %}
+        </section>
+      {% endfor %}
+    </div>
+  </article>
+{% endblock %}
+
+{% block extra_scripts %}<script src="{% static 'journey/article.js' %}?v=2" defer></script>{% block article_scripts %}{% endblock %}{% endblock %}

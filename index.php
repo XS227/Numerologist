@@ -458,6 +458,8 @@ $articles = $no ? [
 function numerologist_latest_articles(int $limit, bool $no): array {
     $posters = [
         'wow-signalet-og-arecibo-linjen' => ['WOW', 'Signalet', '#092426', '#c6a775'],
+        'tallene-i-koranen' => ['6·7·8', 'i Koranen', '#f3f0e8', '#102f31'],
+        'profeten-muhammads-tall' => ['11', 'Navnet Muhammad', '#123739', '#e2cba2'],
         'hva-avslorer-tallene-i-shahnameh' => ['TALL', 'i Shahnameh', '#fdf3e3', '#a5691d'],
         'navn-og-numerologi' => ['NAVN', '& numerologi', '#f9f4ff', '#7b56b1'],
         'master-number-33' => ['33', 'Mesterlærer', '#f4f9ff', '#3a63a6'],

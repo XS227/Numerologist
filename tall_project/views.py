@@ -359,13 +359,17 @@ SLUG_CALCULATOR_HIGHLIGHT = {
 }
 
 
-# Pages that moved to a new slug; old links and search results keep working.
-MOVED_PAGES = {"about-the-firm": "ase-steinsland"}
+# Pages that moved; old links and search results keep working (301).
+MOVED_PAGES = {
+    "about-the-firm": "/ase-steinsland/",
+    "quranian-numerology": "/articles/tallene-i-koranen/",
+    "quranic-analysis": "/articles/tallene-i-koranen/",
+}
 
 
 def static_page(request: HttpRequest, slug: str) -> HttpResponse:
     if slug in MOVED_PAGES:
-        return redirect("static_page", MOVED_PAGES[slug], permanent=True)
+        return redirect(MOVED_PAGES[slug], permanent=True)
     try:
         page = STATIC_PAGES[slug]
     except KeyError as exc:  # pragma: no cover - defensive branch

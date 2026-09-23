@@ -75,6 +75,8 @@ CUSTOM_ARTICLE_TEMPLATES = {
     "master-number-33": "articles/detail_master33.html",
     "hva-avslorer-tallene-i-shahnameh": "articles/detail_shahnameh.html",
     "wow-signalet-og-arecibo-linjen": "articles/detail_wow_signal.html",
+    "tallene-i-koranen": "articles/detail_koranen.html",
+    "profeten-muhammads-tall": "articles/detail_profeten.html",
 }
 
 # Slugs that render via the illustrated "journey" system (tall_project/journey.py's
