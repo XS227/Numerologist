@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}Åse Karin Steinsland — {% if CURRENT_LANGUAGE == 'nb' %}numerolog og livsveileder{% else %}numerologist and life guide{% endif %}{% endblock %}
 
@@ -103,7 +103,7 @@
       {% endif %}
     </div>
     <figure class="ase-figure">
-      <img src="/assets/images/about-hero.jpg" alt="{% if nb == 'nb' %}Vitruvisk mann med proporsjoner, tall og målestokker{% else %}Vitruvian man with proportions, numbers and measuring scales{% endif %}" width="676" height="255" loading="lazy">
+      <img src="{% static 'journey/images/ase-method.webp' %}" alt="{% if nb == 'nb' %}Monokord og pytagoreisk geometri{% else %}Monochord and Pythagorean geometry{% endif %}" width="1536" height="1024" loading="lazy">
       <figcaption>{% if nb == 'nb' %}Tall, proporsjoner og harmoni – den pytagoreiske tradisjonen.{% else %}Number, proportion and harmony – the Pythagorean tradition.{% endif %}</figcaption>
     </figure>
   </section>

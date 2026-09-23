@@ -180,6 +180,7 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         content = self.object.content
+        context["article_thumb"] = get_thumbnail(self.object.slug, self.object.title)
         analysis = None
         if AI_ANALYZE_CONTENT is not None:
             try:

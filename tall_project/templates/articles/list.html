@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n static %}
 
 {% block title %}{% trans "Articles & Library" %} · Numerologist{% endblock %}
 
@@ -105,6 +105,9 @@
       }
       .article-card__thumb {
         display: grid;
+        position: relative;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
         place-items: center;
         gap: 0.15rem;
         border-radius: 0.9rem;
@@ -275,8 +278,8 @@
       {% for article in articles %}
         <article class="article-card" role="listitem">
           <a class="article-card__thumb" href="{{ article.get_absolute_url }}" style="background:{{ article.thumb.bg }};color:{{ article.thumb.fg }}" aria-hidden="true" tabindex="-1">
-            <span class="article-card__thumb-big">{{ article.thumb.big }}</span>
-            {% if article.thumb.small %}<span class="article-card__thumb-small">{{ article.thumb.small }}</span>{% endif %}
+            {% if article.thumb.image %}<img src="{% static 'journey/images/' %}{{ article.thumb.image }}" alt="" width="1536" height="1024" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:inherit">{% else %}<span class="article-card__thumb-big">{{ article.thumb.big }}</span>
+            {% if article.thumb.small %}<span class="article-card__thumb-small">{{ article.thumb.small }}</span>{% endif %}{% endif %}
           </a>
           <header class="article-card__meta">
             <time datetime="{{ article.published|date:'c' }}">{{ article.published|date:"F j, Y" }}</time>

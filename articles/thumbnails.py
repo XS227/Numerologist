@@ -1,58 +1,59 @@
-"""Typographic thumbnail treatment for article cards.
-
-There are no photographs to illustrate articles with (Higgsfield image
-generation ran out of credits mid-project — see the WOW-signal article's
-placeholder panels for the same constraint), so each article gets a small
-"poster" instead: one big word/number plus a short label, tone-matched per
-piece. Anything not curated here falls back to the article's own first word.
-"""
+"""Article image paths and typographic fallback treatment."""
 
 from __future__ import annotations
 
 ARTICLE_THUMBNAILS: dict[str, dict[str, str]] = {
     "tallene-i-koranen": {
+        "image": "article-tallene-i-koranen.webp",
         "big": "6·7·8",
         "small": "i Koranen",
         "bg": "#f3f0e8",
         "fg": "#102f31",
     },
     "profeten-muhammads-tall": {
+        "image": "article-profeten-muhammads-tall.webp",
         "big": "11",
         "small": "Navnet Muhammad",
         "bg": "#123739",
         "fg": "#e2cba2",
     },
     "wow-signalet-og-arecibo-linjen": {
+        "image": "wow-hero.webp",
         "big": "WOW",
         "small": "Signalet",
         "bg": "#092426",
         "fg": "#c6a775",
     },
     "hva-avslorer-tallene-i-shahnameh": {
+        "image": "article-shahnameh.webp",
         "big": "TALL",
         "small": "i Shahnameh",
         "bg": "#fdf3e3",
         "fg": "#a5691d",
     },
     "navn-og-numerologi": {
+        "image": "article-navn-numerologi.webp",
         "big": "NAVN",
         "small": "& numerologi",
         "bg": "#f9f4ff",
         "fg": "#7b56b1",
     },
     "master-number-33": {
+        "image": "article-master-33.webp",
         "big": "33",
         "small": "Mesterlærer",
         "bg": "#f4f9ff",
         "fg": "#3a63a6",
     },
     "numerological-reflection-on-mahsa-amini-and-bita-azizi": {
+        "image": "article-mahsa-bita.webp",
         "big": "2",
         "small": "Mahsa & Bita",
         "bg": "#f2fbf6",
         "fg": "#3f8f65",
     },
     "creative-research-practice-for-numerology": {
+        "image": "article-creative-research.webp",
         "big": "LAB",
         "small": "Kreativ praksis",
         "bg": "#fdf1f5",

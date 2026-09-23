@@ -20,7 +20,7 @@
 .j-article .article-detail{display:block;background:none;border:0;border-radius:0;box-shadow:none;padding:0;color:#f3f0e8}
 
 /* Hero header */
-.j-article .article-detail__header,.j-article .mb-header{position:relative;max-width:none;margin:0;padding:clamp(56px,10vw,120px) 6% clamp(64px,9vw,110px);text-align:center;display:grid;justify-items:center;gap:18px;background:radial-gradient(ellipse at 50% 0%,#c6a77533,transparent 62%)}
+.j-article .article-detail__header,.j-article .mb-header{position:relative;max-width:none;margin:0;padding:clamp(56px,10vw,120px) 6% clamp(64px,9vw,110px);text-align:center;display:grid;justify-items:center;gap:18px;background:linear-gradient(90deg,#092426e8,#092426a8),var(--article-cover);background-size:cover;background-position:center}
 .j-article .article-detail__header:after,.j-article .mb-header:after{content:'↓';display:block;margin-top:26px;color:#c6a775;font-size:1.3rem;animation:ja-bob 2.4s ease-in-out infinite}
 .j-article .article-detail__eyebrow{color:#c6a775;letter-spacing:.18em;font-size:.78rem}
 .j-article .article-detail__title{color:#f3f0e8;font-size:clamp(2.5rem,7vw,5.2rem);line-height:1.04;max-width:16ch;margin:0 auto}
