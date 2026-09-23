@@ -361,7 +361,7 @@
 {% block body_attrs %} class="number-journey j-article"{% endblock %}
 
 {% block content %}
-  <link rel="stylesheet" href="{% static 'journey/article.css' %}?v=4">
+  <link rel="stylesheet" href="{% static 'journey/article.css' %}?v=5">
   <nav class="article-breadcrumb" aria-label="{% trans 'Back to articles' %}">
     <a href="{% url 'article_list' %}">
       <span aria-hidden="true">←</span>
@@ -370,7 +370,7 @@
   </nav>
 
   <article class="article-detail">
-    <header class="article-detail__header">
+    <header class="article-detail__header"{% if article_thumb.image %} style="--article-cover:url('{% static 'journey/images/' %}{{ article_thumb.image }}')"{% endif %}>
       <span class="article-detail__eyebrow">{% trans "Numerologist library" %}</span>
       <h1 class="article-detail__title">{{ article.title }}</h1>
       <div class="article-detail__meta">

@@ -310,8 +310,8 @@ def learning_content(slug, language):
         ),
         "compute-name-vowel-consonant": dict(
             kind="method",
-            image="modern",
-            split_image="letter-workshop",
+            image="calc-soul-urge",
+            split_image="calc-personality",
             eyebrow=t("05 / Two voices in one name", "05 / To stemmer i ett navn"),
             title=t("Inner voice. Outer voice.", "Indre stemme. Ytre stemme."),
             subtitle=t(
@@ -422,8 +422,8 @@ def learning_content(slug, language):
         ),
         "calculation-methods-overview": dict(
             kind="method",
-            image="traditions",
-            split_image="name-method",
+            image="calc-methods",
+            split_image="calc-methods",
             eyebrow=t("06 / The rules behind it all", "06 / Reglene bak alt"),
             title=t("How the numbers are reduced.", "Slik reduseres tallene."),
             subtitle=t(

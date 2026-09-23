@@ -3,25 +3,7 @@
 {% block title %}{{ article.title }} · Numerologist{% endblock %}
 {% block body_attrs %} class="number-journey"{% endblock %}
 {% block main %}
-<link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=3">
-<style>
-  /* Placeholder visuals until real illustrations are generated (image
-     credits ran out mid-build — see git log). Div-based, not <img>, so
-     journey.js's parallax (which only needs .j-parallax + data-speed,
-     not an <img> specifically) still works. Swap back to <img class="j-parallax" ...>
-     once tall_project/static/journey/images/wow-hero.webp etc. exist. */
-  .j-placeholder {
-    width: 100%; height: 120%; position: absolute; top: -10%; left: 0;
-    background:
-      radial-gradient(circle at 30% 30%, rgba(198,167,117,.35), transparent 55%),
-      linear-gradient(160deg, #0c3336, #092426 65%);
-  }
-  .j-placeholder::after {
-    content: attr(data-glyph);
-    position: absolute; inset: 0; display: grid; place-items: center;
-    font-family: Georgia, serif; font-size: 5rem; color: rgba(198,167,117,.25);
-  }
-</style>
+<link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=4">
 <svg class="j-symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
 <symbol id="j-dish" viewBox="0 0 32 32"><path d="M4 20a12 12 0 0 1 24 0"/><path d="M16 20V8M16 8l7-3M16 20l-9 9M23 26l-2-6-6-2"/></symbol>
 <symbol id="j-wave" viewBox="0 0 32 32"><path d="M2 16c3 0 3-8 6-8s3 16 6 16 3-16 6-16 3 8 6 8 3-4 4-4"/></symbol>
@@ -35,7 +17,7 @@
 </defs></svg>
 <article class="j-story">
 <section class="j-hero" id="wow-hero" aria-labelledby="journey-title" data-chapter>
-  <div class="j-hero-visual"><div class="j-parallax j-placeholder" data-speed="0.16" data-glyph="◎" role="img" aria-label="{{ journey.labels.hero_alt }}"></div></div>
+  <div class="j-hero-visual"><img class="j-parallax" src="{% static 'journey/images/wow-hero.webp' %}" data-speed="0.16" alt="{{ journey.labels.hero_alt }}" width="1536" height="1024" fetchpriority="high"></div>
   <div class="j-hero-content"><p class="j-eyebrow">{{ journey.labels.eyebrow }} <span>01 — 07</span></p>
     <h1 id="journey-title">{{ journey.labels.title }}<br><em>{{ journey.labels.title_em }}</em></h1>
     <p class="j-intro">{{ journey.labels.intro }}</p>
@@ -49,7 +31,7 @@
 <section class="j-chapter {% cycle 'j-dark' 'j-light' %}" id="{{ c.id }}" aria-labelledby="title-{{ c.id }}" data-chapter>
   <div class="j-chapter-inner">
     <div class="j-copy j-reveal"><div class="j-chapter-meta"><svg class="j-icon" aria-hidden="true"><use href="#j-{{ c.symbol }}"/></svg><span>{{ c.date }}</span></div><p class="j-eyebrow">{{ c.numeral }} / {{ c.label }}</p><h2 id="title-{{ c.id }}">{{ c.title }}</h2><p class="j-body">{{ c.body }}</p><p class="j-note">{{ c.note }}</p></div>
-    <figure class="j-figure"><div class="j-image-window"><div class="j-parallax j-placeholder" data-speed="0.09" data-glyph="{{ c.numeral }}" role="img" aria-label="{{ c.alt }}"></div></div><span class="j-big-number" aria-hidden="true">{{ c.numeral }}</span><figcaption>{{ journey.labels.chapter }} {{ c.numeral }} <span>{{ c.label }}</span></figcaption></figure>
+    <figure class="j-figure"><div class="j-image-window"><img class="j-parallax" src="{% static 'journey/images/wow-' %}{{ c.id }}.webp" data-speed="0.09" alt="{{ c.alt }}" width="1536" height="1024" loading="lazy"></div><span class="j-big-number" aria-hidden="true">{{ c.numeral }}</span><figcaption>{{ journey.labels.chapter }} {{ c.numeral }} <span>{{ c.label }}</span></figcaption></figure>
   </div>
 </section>
 {% endfor %}

@@ -457,14 +457,14 @@ $articles = $no ? [
 // Falls back to the curated list above if the database can't be read.
 function numerologist_latest_articles(int $limit, bool $no): array {
     $posters = [
-        'wow-signalet-og-arecibo-linjen' => ['WOW', 'Signalet', '#092426', '#c6a775'],
-        'tallene-i-koranen' => ['6·7·8', 'i Koranen', '#f3f0e8', '#102f31'],
-        'profeten-muhammads-tall' => ['11', 'Navnet Muhammad', '#123739', '#e2cba2'],
-        'hva-avslorer-tallene-i-shahnameh' => ['TALL', 'i Shahnameh', '#fdf3e3', '#a5691d'],
-        'navn-og-numerologi' => ['NAVN', '& numerologi', '#f9f4ff', '#7b56b1'],
-        'master-number-33' => ['33', 'Mesterlærer', '#f4f9ff', '#3a63a6'],
-        'numerological-reflection-on-mahsa-amini-and-bita-azizi' => ['2', 'Mahsa & Bita', '#f2fbf6', '#3f8f65'],
-        'creative-research-practice-for-numerology' => ['LAB', 'Kreativ praksis', '#fdf1f5', '#b1467e'],
+        'wow-signalet-og-arecibo-linjen' => ['WOW', 'Signalet', '#092426', '#c6a775', 'wow-hero'],
+        'tallene-i-koranen' => ['6·7·8', 'i Koranen', '#f3f0e8', '#102f31', 'article-tallene-i-koranen'],
+        'profeten-muhammads-tall' => ['11', 'Navnet Muhammad', '#123739', '#e2cba2', 'article-profeten-muhammads-tall'],
+        'hva-avslorer-tallene-i-shahnameh' => ['TALL', 'i Shahnameh', '#fdf3e3', '#a5691d', 'article-shahnameh'],
+        'navn-og-numerologi' => ['NAVN', '& numerologi', '#f9f4ff', '#7b56b1', 'article-navn-numerologi'],
+        'master-number-33' => ['33', 'Mesterlærer', '#f4f9ff', '#3a63a6', 'article-master-33'],
+        'numerological-reflection-on-mahsa-amini-and-bita-azizi' => ['2', 'Mahsa & Bita', '#f2fbf6', '#3f8f65', 'article-mahsa-bita'],
+        'creative-research-practice-for-numerology' => ['LAB', 'Kreativ praksis', '#fdf1f5', '#b1467e', 'article-creative-research'],
     ];
     $months = $no
         ? ['jan', 'feb', 'mar', 'apr', 'mai', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'des']
@@ -490,7 +490,7 @@ function numerologist_latest_articles(int $limit, bool $no): array {
                 'slug' => $row['slug'], 'title' => $row['title'], 'excerpt' => $excerpt,
                 'tag' => $small !== '' ? $small : ($no ? 'Artikkel' : 'Article'),
                 'meta' => $minutes . ' min · ' . $date,
-                'poster' => ['big' => $big, 'small' => $small, 'bg' => $bg, 'fg' => $fg],
+                'poster' => ['big' => $big, 'small' => $small, 'bg' => $bg, 'fg' => $fg, 'image' => $posters[$row['slug']][4] ?? null],
             ];
         }
         return $out;
@@ -620,7 +620,7 @@ $serviceSchemas = [
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="/assets/fibonacci.css?v=journey-5">
-  <link rel="stylesheet" href="/assets/home.css?v=3">
+  <link rel="stylesheet" href="/assets/home.css?v=4">
 </head>
 <body>
 
@@ -828,13 +828,13 @@ $serviceSchemas = [
     $calcTiles = $no ? [
       ['/compute-life-path-number/', 'personal', '1–9', 'Livsveistall', 'Fra fødselsdatoen'],
       ['/compute-destiny-number/', 'name-method', 'A·B·C', 'Uttrykkstall', 'Fra hele navnet'],
-      ['/compute-name-vowel-consonant/#soul-urge-number', 'modern', 'A·E·I', 'Sjelstall', 'Fra vokalene'],
-      ['/compute-name-vowel-consonant/#personality-number', 'letter-workshop', 'B·C·D', 'Personlighetstall', 'Fra konsonantene'],
+      ['/compute-name-vowel-consonant/#soul-urge-number', 'calc-soul-urge', 'A·E·I', 'Sjelstall', 'Fra vokalene'],
+      ['/compute-name-vowel-consonant/#personality-number', 'calc-personality', 'B·C·D', 'Personlighetstall', 'Fra konsonantene'],
     ] : [
       ['/compute-life-path-number/', 'personal', '1–9', 'Life path', 'From the birth date'],
       ['/compute-destiny-number/', 'name-method', 'A·B·C', 'Expression', 'From the full name'],
-      ['/compute-name-vowel-consonant/#soul-urge-number', 'modern', 'A·E·I', 'Soul urge', 'From the vowels'],
-      ['/compute-name-vowel-consonant/#personality-number', 'letter-workshop', 'B·C·D', 'Personality', 'From the consonants'],
+      ['/compute-name-vowel-consonant/#soul-urge-number', 'calc-soul-urge', 'A·E·I', 'Soul urge', 'From the vowels'],
+      ['/compute-name-vowel-consonant/#personality-number', 'calc-personality', 'B·C·D', 'Personality', 'From the consonants'],
     ];
     ?>
     <div class="calc-tiles-head">
@@ -937,7 +937,9 @@ $serviceSchemas = [
       <a class="article-card" href="/articles/<?= htmlspecialchars($a['slug']) ?>/"
          aria-label="<?= htmlspecialchars($a['title']) ?>">
         <div class="article-thumb">
-          <?php if (isset($a['poster'])): ?>
+          <?php if (!empty($a['poster']['image'])): ?>
+            <img src="/static/journey/images/<?= htmlspecialchars($a['poster']['image']) ?>.webp" alt="" width="1536" height="1024" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+          <?php elseif (isset($a['poster'])): ?>
             <div class="article-poster" style="background:<?= htmlspecialchars($a['poster']['bg']) ?>;color:<?= htmlspecialchars($a['poster']['fg']) ?>" aria-hidden="true">
               <span class="article-poster__big"><?= htmlspecialchars($a['poster']['big']) ?></span>
               <?php if ($a['poster']['small'] !== ''): ?><span class="article-poster__small"><?= htmlspecialchars($a['poster']['small']) ?></span><?php endif; ?>

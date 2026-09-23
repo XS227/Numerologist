@@ -551,7 +551,7 @@ body { background: #092426; }
 .view-all, .article-read-more { color: #805d2d; }
 
 /* Hero: night ground with a gold glow instead of the green gradient */
-.hero { background: radial-gradient(ellipse at 70% 40%, rgba(198,167,117,.22), transparent 60%), #092426; }
+.hero { background: linear-gradient(90deg, #092426f2 0%, #092426c0 48%, #09242655 100%), url("/static/journey/images/home-hero.webp") center / cover no-repeat, #092426; }
 .hero::before { background: radial-gradient(ellipse at 20% 100%, rgba(198,167,117,.12) 0%, transparent 60%); }
 .hero-eyebrow { background: rgba(198,167,117,.12); border-color: rgba(198,167,117,.45); color: #e2cba2; }
 .hero-dot { background: #c6a775; }

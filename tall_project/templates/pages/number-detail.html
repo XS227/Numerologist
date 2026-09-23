@@ -7,30 +7,6 @@
 {% block main %}
 <link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=3">
 <style>
-  /* Number pages don't use photographic illustrations — the numeral itself
-     is the visual, so each "figure" slot is a CSS panel instead of an
-     <img>. Reuses journey.js's parallax (works on any .j-parallax element
-     with data-speed, not just <img>) and journey.css's existing
-     .j-chapter-inner / .j-copy / .j-figure / j-dark/j-light grid. */
-  .n-figure {
-    width: 100%; height: 120%; position: absolute; top: -10%; left: 0;
-    display: grid; place-items: center; overflow: hidden;
-    background: radial-gradient(circle at 50% 45%, rgba(198,167,117,.16), transparent 60%),
-      linear-gradient(160deg, #0c3336, #092426 70%);
-  }
-  .j-light .n-figure {
-    background: radial-gradient(circle at 50% 45%, rgba(198,167,117,.12), transparent 60%),
-      linear-gradient(160deg, #fbf8f1, #f3f0e8 70%);
-  }
-  .n-figure__ring {
-    position: absolute; border: 1px solid rgba(198,167,117,.35); border-radius: 50%;
-  }
-  .n-figure__watermark {
-    font-family: Georgia, serif; font-weight: 400; color: rgba(198,167,117,.22);
-    line-height: 1; user-select: none;
-  }
-  .j-light .n-figure__watermark { color: rgba(138,102,51,.16); }
-
   .n-hero-numeral {
     position: absolute; inset: 0; z-index: -1; display: grid; place-items: center;
     background: radial-gradient(circle at 50% 38%, rgba(198,167,117,.22), transparent 62%), #092426;
@@ -121,11 +97,7 @@
       </ul>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-figure j-parallax" data-speed="0.08">
-        <span class="n-figure__ring" style="width:60%;aspect-ratio:1"></span>
-        <span class="n-figure__ring" style="width:80%;aspect-ratio:1"></span>
-        <span class="n-figure__watermark" style="font-size:9rem">{{ number }}</span>
-      </div></div>
+      <div class="j-image-window"><img class="j-parallax" src="{% static 'journey/images/number-' %}{{ number }}.webp" data-speed="0.08" alt="" width="1536" height="1024" loading="lazy"></div>
       <span class="j-big-number" aria-hidden="true">+</span>
     </figure>
   </div>
@@ -141,10 +113,7 @@
       </ul>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-figure j-parallax" data-speed="0.08">
-        <span class="n-figure__ring" style="width:70%;aspect-ratio:1;border-style:dashed"></span>
-        <span class="n-figure__watermark" style="font-size:9rem">{{ number }}</span>
-      </div></div>
+      <div class="j-image-window"><img class="j-parallax" src="{% static 'journey/images/number-' %}{{ number }}.webp" data-speed="0.08" alt="" width="1536" height="1024" loading="lazy"></div>
       <span class="j-big-number" aria-hidden="true">△</span>
     </figure>
   </div>
@@ -158,9 +127,7 @@
       <p class="j-body">{{ profile.ase_guidance }}</p>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-figure j-parallax" data-speed="0.08">
-        <span class="n-figure__watermark" style="font-size:11rem">“</span>
-      </div></div>
+      <div class="j-image-window"><img class="j-parallax" src="{% static 'journey/images/number-' %}{{ number }}.webp" data-speed="0.08" alt="" width="1536" height="1024" loading="lazy"></div>
       <span class="j-big-number" aria-hidden="true">”</span>
     </figure>
   </div>
@@ -175,10 +142,7 @@
       <p class="j-body">{{ profile.practical_note }}</p>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-figure j-parallax" data-speed="0.08">
-        <span class="n-figure__ring" style="width:55%;aspect-ratio:1"></span>
-        <span class="n-figure__watermark" style="font-size:8rem">{{ number }}</span>
-      </div></div>
+      <div class="j-image-window"><img class="j-parallax" src="{% static 'journey/images/number-' %}{{ number }}.webp" data-speed="0.08" alt="" width="1536" height="1024" loading="lazy"></div>
       <span class="j-big-number" aria-hidden="true">⋯</span>
     </figure>
   </div>
