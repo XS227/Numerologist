@@ -33,6 +33,11 @@ ARTICLE_META = {
     "valentinsdagens-tall": {"original_date":"2024-02-14","categories":["Spesielle tall og datoer","Tall og kjærlighet"]},
     "nikola-tesla-dekodet": {"original_date":"2023-05-10","categories":["Mestertall 11","Numerologi og navn","Tallet 7"]},
     "tallet-9-fibonacci-gylne-snitt": {"original_date":"2021-12-28","categories":["Hellig geometri"]},
+    "hostjevndogn-tid-for-takknemlighet": {"original_date":"2026-09-22","categories":["Hellig geometri"]},
+    "rune-spadom-avdekk-underbevissthetens-visdom": {"original_date":"2026-09-01","categories":["Horoskop og prognoser","Inspirasjon & selvhjelp"]},
+    "sol-og-maneformorkelser-mellom-ar-1994-og-2030": {"original_date":"2026-07-27","categories":["Astronomiske ressurser","Spesielle tall og datoer","Synkroniteter"]},
+    "solfeggio-universets-helbredende-lydfrekvenser": {"original_date":"2026-06-23","categories":["Helse og tall","Lyd og frekvenser"]},
+    "primstaven-vaerspadommer-for-den-forste-vinterdagen": {"original_date":"2025-10-25","categories":["Inspirasjon & selvhjelp"]},
 }
 
 def meta_for(slug: str) -> dict:

@@ -7,9 +7,7 @@ Numerologist site while retaining Åse's interpretive method and attribution.
 
 AUTHOR = "Åse Karin Steinsland"
 
-NOTICE = """
-<p class="ase-update-note"><strong>Oppdatert utgave.</strong> Denne teksten bygger på Åse Karin Steinslands originalartikkel på Nummerologens Verden og er redigert for Numerologist. Numerologi presenteres som en symbolsk og spirituell tolkningsmetode; når artikkelen berører historie, vitenskap eller helse, skiller vi mellom dokumenterbare fakta og numerologisk tolkning.</p>
-"""
+NOTICE = ""
 
 def body(html: str) -> str:
     return NOTICE + html.strip()

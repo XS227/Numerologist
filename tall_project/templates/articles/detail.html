@@ -211,7 +211,7 @@
 {% block body_attrs %} class="number-journey j-article"{% endblock %}
 
 {% block content %}
-  <link rel="stylesheet" href="{% static 'journey/article.css' %}?v=6">
+  <link rel="stylesheet" href="{% static 'journey/article.css' %}?v=7">
   <nav class="article-breadcrumb" aria-label="{% trans 'Back to articles' %}">
     <a href="{% url 'article_list' %}">
       <span aria-hidden="true">←</span>
@@ -286,4 +286,4 @@
   {% endif %}
 {% endblock %}
 
-{% block extra_scripts %}<script src="{% static 'journey/article.js' %}?v=3" defer></script>{% endblock %}
+{% block extra_scripts %}<script src="{% static 'journey/article.js' %}?v=4" defer></script>{% endblock %}

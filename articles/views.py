@@ -108,6 +108,16 @@ LEARNING_TEMPLATES = {
     "gro-helen-torum-numerologi": "articles/learning/gro_helen.html",
     "anne-mette-rosting-tallene": "articles/learning/anne_mette.html",
     "tall-og-kompatibilitet": "articles/learning/kompatibilitet.html",
+    "sissel-grana-tallene": "articles/learning/sissel_grana.html",
+    "marion-dampier-jeans-33": "articles/learning/marion_33.html",
+    "valentinsdagens-tall": "articles/learning/valentinsdag.html",
+    "nikola-tesla-dekodet": "articles/learning/tesla.html",
+    "tallet-9-fibonacci-gylne-snitt": "articles/learning/fibonacci.html",
+    "hostjevndogn-tid-for-takknemlighet": "articles/learning/hostjevndogn.html",
+    "rune-spadom-avdekk-underbevissthetens-visdom": "articles/learning/runer.html",
+    "sol-og-maneformorkelser-mellom-ar-1994-og-2030": "articles/learning/formorkelser.html",
+    "solfeggio-universets-helbredende-lydfrekvenser": "articles/learning/solfeggio.html",
+    "primstaven-vaerspadommer-for-den-forste-vinterdagen": "articles/learning/primstaven.html",
 }
 
 # Per-chapter icon key + a verbatim pull-quote (a real sentence lifted

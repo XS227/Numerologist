@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#092426"/><stop offset="1" stop-color="#123739"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#e2cba2" stop-opacity=".92"/><stop offset="1" stop-color="#c6a775" stop-opacity="0"/></radialGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<rect width="1200" height="800" fill="url(#bg)"/>
+<circle cx="930" cy="160" r="240" fill="url(#glow)" opacity=".22"/>
+
+<g fill="none" stroke="#c6a775" stroke-width="6">
+  <path d="M595 395c0-65 53-118 118-118 104 0 188 84 188 188 0 168-136 304-304 304-270 0-489-219-489-489 0-8 0-16 1-24"/>
+  <rect x="108" y="96" width="970" height="610" rx="24" opacity=".12"/>
+  <path d="M108 470h970M410 96v610M665 96v610M870 96v610" opacity=".28"/>
+</g>
+<g fill="#e2cba2" font-family="Georgia,serif" text-anchor="middle">
+ <text x="220" y="180" font-size="54">1</text><text x="360" y="180" font-size="54">1</text><text x="520" y="180" font-size="54">2</text><text x="680" y="180" font-size="54">3</text><text x="840" y="180" font-size="54">5</text><text x="1000" y="180" font-size="54">8</text>
+</g>
+</svg>

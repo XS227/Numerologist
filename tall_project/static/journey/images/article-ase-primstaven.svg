@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#092426"/><stop offset="1" stop-color="#123739"/></linearGradient>
+  <radialGradient id="glow"><stop stop-color="#e2cba2" stop-opacity=".92"/><stop offset="1" stop-color="#c6a775" stop-opacity="0"/></radialGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="14"/></filter>
+</defs>
+<rect width="1200" height="800" fill="url(#bg)"/>
+<circle cx="930" cy="160" r="240" fill="url(#glow)" opacity=".22"/>
+
+<rect x="140" y="330" width="920" height="120" rx="32" fill="#7f5b36" stroke="#c6a775" stroke-width="6"/>
+<path d="M200 350v80M270 350v80M340 350v80M410 350v80M480 350v80M550 350v80M620 350v80M690 350v80M760 350v80M830 350v80M900 350v80M970 350v80" stroke="#e2cba2" stroke-width="4" opacity=".8"/>
+<g fill="#e2cba2" font-size="82" text-anchor="middle"><text x="245" y="250">🧤</text><text x="460" y="250">❄</text><text x="740" y="250">🌿</text><text x="955" y="250">☀</text></g>
+<path d="M210 535c125 80 655 80 780 0" fill="none" stroke="#c6a775" stroke-width="5"/>
+</svg>
