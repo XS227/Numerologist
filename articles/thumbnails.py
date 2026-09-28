@@ -5,7 +5,7 @@ from __future__ import annotations
 ARTICLE_THUMBNAILS: dict[str, dict[str, str]] = {
     "elon-musk-numerologi-16-7": {
         "big": "16/7",
-        "small": "Elon Musk · 2026 → 8",
+        "small": "X = 6 · xAI = 16/7",
         "bg": "#0d2b2c",
         "fg": "#d5b678",
     },
