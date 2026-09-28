@@ -77,6 +77,7 @@ CUSTOM_ARTICLE_TEMPLATES = {
     "wow-signalet-og-arecibo-linjen": "articles/detail_wow_signal.html",
     "tallene-i-koranen": "articles/detail_koranen.html",
     "profeten-muhammads-tall": "articles/detail_profeten.html",
+    "elon-musk-numerologi-16-7": "articles/detail_elon_musk.html",
 }
 
 # Slugs that render via the illustrated "journey" system (tall_project/journey.py's
