@@ -3,6 +3,13 @@
 from __future__ import annotations
 
 ARTICLE_THUMBNAILS: dict[str, dict[str, str]] = {
+    "22-7-riktig-beregning-av-pi": {
+        "image": "article-pi-22-7.svg",
+        "big": "π",
+        "small": "22/7 · π",
+        "bg": "#071a33",
+        "fg": "#e7bb63",
+    },
     "elon-musk-numerologi-16-7": {
         "big": "16/7",
         "small": "X = 6 · xAI = 16/7",
