@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" role="img" aria-labelledby="t d">
+<title id="t">22 delt på 7 og π</title><desc id="d">Cosmic geometry connecting 22, 7 and pi.</desc>
+<defs>
+<radialGradient id="bg" cx="68%" cy="42%" r="78%"><stop offset="0" stop-color="#173f6d"/><stop offset=".46" stop-color="#071d39"/><stop offset="1" stop-color="#020812"/></radialGradient>
+<linearGradient id="gold" x1="0" x2="1"><stop stop-color="#fff0b1"/><stop offset=".38" stop-color="#e5b65a"/><stop offset=".78" stop-color="#b67425"/><stop offset="1" stop-color="#ffecad"/></linearGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1536" height="1024" fill="url(#bg)"/>
+<g opacity=".46" stroke="#d5ad62" fill="none">
+<circle cx="420" cy="520" r="270"/><circle cx="420" cy="520" r="205" stroke-dasharray="5 14"/>
+<circle cx="840" cy="520" r="210"/><circle cx="1160" cy="520" r="285"/>
+<path d="M65 520h1405M768 90v850" stroke-width="1"/>
+<ellipse cx="845" cy="520" rx="610" ry="180" transform="rotate(-8 845 520)"/>
+</g>
+<g font-family="Georgia,Times New Roman,serif" fill="url(#gold)" filter="url(#glow)">
+<text x="220" y="610" font-size="260" font-weight="700">22</text><text x="590" y="590" font-size="150">÷</text>
+<text x="760" y="610" font-size="260" font-weight="700">7</text><text x="1025" y="585" font-size="140">→</text>
+<text x="1200" y="635" font-size="330" font-weight="700">π</text>
+</g>
+<text x="768" y="130" text-anchor="middle" font-family="Georgia,Times New Roman,serif" font-size="56" fill="#f8e8bd">22/7 · π · 142857</text>
+<text x="768" y="925" text-anchor="middle" font-family="Arial,sans-serif" font-size="38" letter-spacing="6" fill="#d8c28d">NUMEROLOGIST · THE π KEY</text>
+</svg>
