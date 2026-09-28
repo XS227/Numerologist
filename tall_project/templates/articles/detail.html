@@ -211,7 +211,7 @@
 {% block body_attrs %} class="number-journey j-article"{% endblock %}
 
 {% block content %}
-  <link rel="stylesheet" href="{% static 'journey/article.css' %}?v=5">
+  <link rel="stylesheet" href="{% static 'journey/article.css' %}?v=6">
   <nav class="article-breadcrumb" aria-label="{% trans 'Back to articles' %}">
     <a href="{% url 'article_list' %}">
       <span aria-hidden="true">←</span>
@@ -249,6 +249,9 @@
       {% if chapters_lead %}
         <div class="chapter-lead">{{ chapters_lead|safe }}</div>
       {% endif %}
+      {% if learning_template %}
+        {% include learning_template %}
+      {% endif %}
       <nav class="article-toc" aria-label="{% trans 'In this article' %}">
         {% for chapter in chapters %}
           <a href="#{{ chapter.id }}"><span>{{ chapter.number }}</span>{{ chapter.title }}</a>
@@ -283,4 +286,4 @@
   {% endif %}
 {% endblock %}
 
-{% block extra_scripts %}<script src="{% static 'journey/article.js' %}?v=2" defer></script>{% endblock %}
+{% block extra_scripts %}<script src="{% static 'journey/article.js' %}?v=3" defer></script>{% endblock %}

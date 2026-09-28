@@ -97,6 +97,19 @@ CUSTOM_ARTICLE_TEMPLATES = {
 # skip the normal chapters/lead split entirely, the whole page IS the content.
 JOURNEY_ARTICLE_SLUGS = {"wow-signalet-og-arecibo-linjen"}
 
+LEARNING_TEMPLATES = {
+    "ser-du-samme-tall": "articles/learning/ser_du_samme_tall.html",
+    "navn-navnedeterminisme": "articles/learning/navnedeterminisme.html",
+    "barn-og-navn": "articles/learning/barn_og_navn.html",
+    "tallet-4-skilpadden-og-haren": "articles/learning/tallet_4.html",
+    "11-11-enigmaet": "articles/learning/enigma_1111.html",
+    "mirakel-historier-og-tall": "articles/learning/mirakelhistorier.html",
+    "snasamannens-tall": "articles/learning/snasamannen.html",
+    "gro-helen-torum-numerologi": "articles/learning/gro_helen.html",
+    "anne-mette-rosting-tallene": "articles/learning/anne_mette.html",
+    "tall-og-kompatibilitet": "articles/learning/kompatibilitet.html",
+}
+
 # Per-chapter icon key + a verbatim pull-quote (a real sentence lifted
 # straight from that chapter's own text, not new copy) so the long-form
 # reading further down the page isn't one unbroken wall of prose. Order
@@ -195,6 +208,7 @@ class ArticleDetailView(DetailView):
         content = self.object.content
         context["article_thumb"] = get_thumbnail(self.object.slug, self.object.title)
         attach_meta(self.object)
+        context["learning_template"] = LEARNING_TEMPLATES.get(self.object.slug)
         analysis = None
         if AI_ANALYZE_CONTENT is not None:
             try:
