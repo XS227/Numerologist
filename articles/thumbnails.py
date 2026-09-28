@@ -3,6 +3,12 @@
 from __future__ import annotations
 
 ARTICLE_THUMBNAILS: dict[str, dict[str, str]] = {
+    "elon-musk-numerologi-16-7": {
+        "big": "16/7",
+        "small": "Elon Musk · 2026 → 8",
+        "bg": "#0d2b2c",
+        "fg": "#d5b678",
+    },
     "tallene-i-koranen": {
         "image": "article-tallene-i-koranen.webp",
         "big": "6·7·8",
