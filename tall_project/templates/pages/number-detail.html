@@ -6,6 +6,7 @@
 
 {% block main %}
 <link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'journey/number-detail.css' %}?v=1">
 <style>
   /* Only the first chapter shows the number's illustration; the others get
      drawn panels (rings + the numeral in gold) so the same picture isn't
@@ -80,7 +81,16 @@
   .n-pager__link:hover { background: rgba(198,167,117,.12); border-color: #c6a775; }
 
 </style>
-<article class="j-story">
+<article class="j-story n-story" data-number-story="{{ number }}">
+  <div class="n-scroll-thread" data-number-thread aria-hidden="true">
+    <span class="n-scroll-thread__line"></span>
+    <div class="n-scroll-orbit">
+      <i class="n-scroll-orbit__ring n-scroll-orbit__ring--a"></i>
+      <i class="n-scroll-orbit__ring n-scroll-orbit__ring--b"></i>
+      <i class="n-scroll-orbit__ring n-scroll-orbit__ring--c"></i>
+      <span class="n-scroll-orbit__number">{{ number }}</span>
+    </div>
+  </div>
 
 <section class="j-hero" style="min-height:min(640px,90vh)" id="n-hero" aria-labelledby="n-title" data-chapter>
   <div class="n-hero-numeral" aria-hidden="true">
@@ -94,42 +104,29 @@
   </div>
 </section>
 
-<nav class="j-prologue j-reveal" aria-label="{% if CURRENT_LANGUAGE == 'nb' %}Alle tallene{% else %}All the numbers{% endif %}">
-  <p class="j-eyebrow">{% if CURRENT_LANGUAGE == 'nb' %}Tallet i rekken{% else %}Where this number sits{% endif %}</p>
-  <div class="n-spectrum">
-    {% for n in "123456789" %}
-      {% if number|stringformat:'s' == n %}<span class="n-spectrum__chip is-current" aria-current="page">{{ n }}</span>{% else %}<a class="n-spectrum__chip" href="/numbers/{{ n }}/">{{ n }}</a>{% endif %}
-    {% endfor %}
-    <span class="n-spectrum__sep" aria-hidden="true">·</span>
-    {% if number == 11 %}<span class="n-spectrum__master is-current" aria-current="page">11</span>{% else %}<a class="n-spectrum__master" href="/numbers/11/">11</a>{% endif %}
-    {% if number == 22 %}<span class="n-spectrum__master is-current" aria-current="page">22</span>{% else %}<a class="n-spectrum__master" href="/numbers/22/">22</a>{% endif %}
-    {% if number == 33 %}<span class="n-spectrum__master is-current" aria-current="page">33</span>{% else %}<a class="n-spectrum__master" href="/numbers/33/">33</a>{% endif %}
-  </div>
-</nav>
-
-<section class="j-chapter j-dark" id="n-strengths" aria-labelledby="n-strengths-title" data-chapter>
+<section class="j-chapter j-dark n-number-chapter" id="n-strengths" aria-labelledby="n-strengths-title" data-chapter data-number-chapter data-number="{{ number }}">
   <div class="j-chapter-inner">
     <div class="j-copy j-reveal">
       <p class="j-eyebrow">{% trans "Strengths" %}</p>
-      <h2 id="n-strengths-title">{% trans "What this number does well." %}</h2>
-      <ul class="j-body" style="padding-left:1.2em;display:grid;gap:.6em">
-        {% for item in profile.strengths %}<li>{{ item }}</li>{% endfor %}
+      <h2 id="n-strengths-title">{{ story.strengths }}</h2>
+      <ul class="j-body n-traits">
+        {% for item in profile.strengths %}<li><span class="n-trait-no">0{{ forloop.counter }}</span><span>{{ item }}</span></li>{% endfor %}
       </ul>
     </div>
     <figure class="j-figure">
       <div class="j-image-window"><img class="j-parallax" src="{% static 'journey/images/number-' %}{{ number }}.webp" data-speed="0.08" alt="" width="1536" height="1024" loading="lazy"></div>
-      <span class="j-big-number" aria-hidden="true">+</span>
+      <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">+</span>
     </figure>
   </div>
 </section>
 
-<section class="j-chapter j-light" id="n-challenges" aria-labelledby="n-challenges-title" data-chapter>
+<section class="j-chapter j-light n-number-chapter" id="n-challenges" aria-labelledby="n-challenges-title" data-chapter data-number-chapter data-number="{{ number }}">
   <div class="j-chapter-inner">
     <div class="j-copy j-reveal">
       <p class="j-eyebrow">{% trans "Growth edges" %}</p>
-      <h2 id="n-challenges-title">{% trans "Where it's worth paying attention." %}</h2>
-      <ul class="j-body" style="padding-left:1.2em;display:grid;gap:.6em">
-        {% for item in profile.challenges %}<li>{{ item }}</li>{% endfor %}
+      <h2 id="n-challenges-title">{{ story.challenges }}</h2>
+      <ul class="j-body n-traits">
+        {% for item in profile.challenges %}<li><span class="n-trait-no">0{{ forloop.counter }}</span><span>{{ item }}</span></li>{% endfor %}
       </ul>
     </div>
     <figure class="j-figure">
@@ -137,16 +134,16 @@
         <span class="n-figure__ring" style="width:70%;aspect-ratio:1;border-style:dashed"></span>
         <span class="n-figure__watermark" style="font-size:9rem">{{ number }}</span>
       </div></div>
-      <span class="j-big-number" aria-hidden="true">△</span>
+      <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">△</span>
     </figure>
   </div>
 </section>
 
-<section class="j-chapter j-dark" id="n-guidance" aria-labelledby="n-guidance-title" data-chapter>
+<section class="j-chapter j-dark n-number-chapter" id="n-guidance" aria-labelledby="n-guidance-title" data-chapter data-number-chapter data-number="{{ number }}">
   <div class="j-chapter-inner">
     <div class="j-copy j-reveal">
       <p class="j-eyebrow">{% trans "Åse's guidance" %}</p>
-      <h2 id="n-guidance-title">{% trans "How to live with this number." %}</h2>
+      <h2 id="n-guidance-title">{{ story.guidance }}</h2>
       <p class="j-body">{{ profile.ase_guidance }}</p>
     </div>
     <figure class="j-figure">
@@ -154,17 +151,17 @@
         <span class="n-figure__ring" style="width:48%;aspect-ratio:1"></span>
         <span class="n-figure__watermark" style="font-size:11rem">“</span>
       </div></div>
-      <span class="j-big-number" aria-hidden="true">”</span>
+      <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">”</span>
     </figure>
   </div>
 </section>
 
 {% if profile.practical_note %}
-<section class="j-chapter j-light" id="n-practical" aria-labelledby="n-practical-title" data-chapter>
+<section class="j-chapter j-light n-number-chapter" id="n-practical" aria-labelledby="n-practical-title" data-chapter data-number-chapter data-number="{{ number }}">
   <div class="j-chapter-inner">
     <div class="j-copy j-reveal">
       <p class="j-eyebrow">{% trans "In work and relationships" %}</p>
-      <h2 id="n-practical-title">{% trans "Where this number shows up in daily life." %}</h2>
+      <h2 id="n-practical-title">{{ story.practical }}</h2>
       <p class="j-body">{{ profile.practical_note }}</p>
     </div>
     <figure class="j-figure">
@@ -173,7 +170,7 @@
         <span class="n-figure__ring" style="width:80%;aspect-ratio:1"></span>
         <span class="n-figure__watermark" style="font-size:8rem">{{ number }}</span>
       </div></div>
-      <span class="j-big-number" aria-hidden="true">⋯</span>
+      <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">⋯</span>
     </figure>
   </div>
 </section>
@@ -204,12 +201,12 @@
 
 <aside class="j-colophon" style="text-align:center;max-width:100%">
   <div class="n-pager">
-    {% if prev_number %}<a class="n-pager__link" href="{% url 'number_detail' prev_number %}" rel="prev"><span>← {% if CURRENT_LANGUAGE == 'nb' %}Forrige tall{% else %}Previous number{% endif %}</span><b>{{ prev_number }}</b></a>{% else %}<span></span>{% endif %}
-    {% if next_number %}<a class="n-pager__link n-pager__link--next" href="{% url 'number_detail' next_number %}" rel="next"><span>{% if CURRENT_LANGUAGE == 'nb' %}Neste tall{% else %}Next number{% endif %} →</span><b>{{ next_number }}</b></a>{% endif %}
+    {% if prev_number %}<a class="n-pager__link" href="{% url 'number_detail' prev_number %}" rel="prev"><span>{% if LANGUAGE_BIDI %}→{% else %}←{% endif %} {% trans "Previous number" %}</span><b>{{ prev_number }}</b></a>{% else %}<span></span>{% endif %}
+    {% if next_number %}<a class="n-pager__link n-pager__link--next" href="{% url 'number_detail' next_number %}" rel="next"><span>{% trans "Next number" %} {% if LANGUAGE_BIDI %}←{% else %}→{% endif %}</span><b>{{ next_number }}</b></a>{% endif %}
   </div>
-  <p style="margin-top:2rem"><a class="j-text-link" href="/general-interpretation/">{% if CURRENT_LANGUAGE == 'nb' %}Se alle tallene samlet{% else %}See all the numbers together{% endif %} <span aria-hidden="true">↗</span></a></p>
+  <p style="margin-top:2rem"><a class="j-text-link" href="/general-interpretation/">{% trans "See all the numbers together" %} <span aria-hidden="true">↗</span></a></p>
 </aside>
 
 </article>
 {% endblock %}
-{% block extra_scripts %}<script src="{% static 'journey/journey.js' %}" defer></script>{% endblock %}
+{% block extra_scripts %}<script src="{% static 'journey/journey.js' %}?v=2" defer></script><script src="{% static 'journey/number-detail.js' %}?v=1" defer></script>{% endblock %}

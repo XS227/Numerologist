@@ -1,0 +1,86 @@
+/* Number detail: continuous motion-thread and number-specific chapter rhythm. */
+.n-story{position:relative;isolation:isolate;--n-scroll:.05;--n-tilt:0deg;--n-turn:0deg}
+.n-story .j-hero{overflow:hidden}
+.n-story .j-chapter{overflow:hidden;isolation:isolate}
+.n-story .j-chapter-inner,.n-story .j-hero-content,.n-story .j-more,.n-story .j-faq,.n-story .j-colophon{position:relative;z-index:3}
+
+/* One subtle thread follows the reader through the story. */
+.n-scroll-thread{position:fixed;right:clamp(-9rem,-5vw,-2rem);top:50%;width:clamp(230px,30vw,470px);aspect-ratio:1;z-index:2;pointer-events:none;perspective:1100px;opacity:.22;transform:translate3d(0,calc((var(--n-scroll) - .5) * 46vh),0);transition:opacity .35s ease;will-change:transform}
+.n-scroll-thread__line{position:fixed;right:clamp(28px,4.2vw,70px);top:13vh;height:74vh;width:1px;background:linear-gradient(transparent,rgba(198,167,117,.15) 8%,rgba(198,167,117,.65) 48%,rgba(198,167,117,.15) 92%,transparent)}
+.n-scroll-thread__line:after{content:'';position:absolute;left:50%;top:calc(var(--n-scroll) * 100%);width:9px;height:9px;border-radius:50%;background:#e2cba2;box-shadow:0 0 0 8px rgba(198,167,117,.08),0 0 28px rgba(226,203,162,.7);transform:translate(-50%,-50%)}
+.n-scroll-orbit{position:absolute;inset:0;display:grid;place-items:center;transform-style:preserve-3d;transform:rotateX(var(--n-tilt)) rotateY(var(--n-turn));will-change:transform}
+.n-scroll-orbit__ring{position:absolute;inset:10%;border-radius:50%;border:1px solid rgba(198,167,117,.42);transform-style:preserve-3d}
+.n-scroll-orbit__ring--a{animation:n-ring-a 18s linear infinite;transform:rotateX(68deg)}
+.n-scroll-orbit__ring--b{inset:19%;border-style:dashed;opacity:.7;animation:n-ring-b 13s linear infinite reverse;transform:rotateY(64deg)}
+.n-scroll-orbit__ring--c{inset:29%;opacity:.5;animation:n-ring-c 10s ease-in-out infinite;transform:rotateX(38deg) rotateY(48deg)}
+.n-scroll-orbit__number{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(8rem,18vw,15rem);line-height:1;color:rgba(226,203,162,.38);-webkit-text-stroke:1px rgba(226,203,162,.35);text-shadow:0 0 40px rgba(198,167,117,.18),18px 20px 0 rgba(5,22,24,.12);transform:translateZ(42px);filter:drop-shadow(0 28px 28px rgba(0,0,0,.15))}
+
+/* The same number reappears as an outline inside every chapter: one visual thread, not a new motif every time. */
+.n-number-chapter:after{content:attr(data-number);position:absolute;right:-.04em;top:50%;z-index:0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(18rem,42vw,42rem);font-weight:400;line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(198,167,117,.12);opacity:.9;transform:translate3d(0,calc(-50% + (var(--n-local,0) * -95px)),0) rotate(calc(var(--n-local,0) * 4deg));transform-origin:center;pointer-events:none;will-change:transform}
+.n-number-chapter.j-light:after{-webkit-text-stroke-color:rgba(138,102,51,.1)}
+.n-number-chapter:nth-of-type(even):after{right:auto;left:-.04em}
+
+/* Existing image panels gain actual depth instead of remaining static placeholders. */
+.n-story .n-figure{perspective:900px}
+.n-story .n-figure__ring{will-change:transform;box-shadow:0 0 40px rgba(198,167,117,.05)}
+.n-story .n-figure__ring:first-child{animation:n-panel-ring 15s linear infinite}
+.n-story #n-practical .n-figure__ring:first-child{animation-duration:11s}
+.n-story #n-practical .n-figure__ring:nth-child(2){animation:n-panel-ring-reverse 17s linear infinite}
+.n-story .n-figure__watermark{transform:translateZ(30px);text-shadow:0 15px 50px rgba(198,167,117,.22)}
+.n-story .j-image-window{box-shadow:0 30px 80px rgba(0,0,0,.14)}
+.n-story .j-dark .j-image-window{box-shadow:0 30px 90px rgba(0,0,0,.25),0 0 0 1px rgba(198,167,117,.08)}
+.n-story .j-figure{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.n-story .j-figure.is-near{transform:translate3d(0,-8px,0) rotateX(.8deg)}
+
+/* Make the hero number feel dimensional without another navigation row below it. */
+.n-story .n-hero-numeral:before,.n-story .n-hero-numeral:after{content:'';position:absolute;left:62%;top:48%;width:min(48vw,630px);aspect-ratio:1;border:1px solid rgba(198,167,117,.16);border-radius:50%;transform:translate(-50%,-50%) rotateX(66deg);animation:n-hero-orbit 22s linear infinite}
+.n-story .n-hero-numeral:after{width:min(34vw,440px);border-style:dashed;opacity:.7;animation-direction:reverse;animation-duration:14s;transform:translate(-50%,-50%) rotateY(62deg)}
+.n-story .n-hero-numeral__num{filter:drop-shadow(0 35px 28px rgba(0,0,0,.2));text-shadow:-2px -2px 0 rgba(255,255,255,.08),2px 2px 0 rgba(5,22,24,.26),0 0 90px rgba(198,167,117,.35)}
+
+/* Remove the old decorative punctuation now that the actual number carries the visual narrative. */
+.n-story .j-big-number{font-size:clamp(5rem,9vw,9rem);opacity:.32}
+.n-story #n-strengths .j-big-number,.n-story #n-challenges .j-big-number,.n-story #n-guidance .j-big-number,.n-story #n-practical .j-big-number{color:transparent}
+.n-story #n-strengths .j-big-number:after,.n-story #n-challenges .j-big-number:after,.n-story #n-guidance .j-big-number:after,.n-story #n-practical .j-big-number:after{content:attr(data-number);color:var(--j-gold)}
+
+/* More deliberate text rhythm on the number journeys. */
+.n-story .j-copy h2{max-width:10.5ch;text-wrap:balance}
+.n-story .j-copy .j-body li{padding-left:.18em}
+.n-story .j-copy .j-body li::marker{color:#c6a775}
+.n-story .j-chapter:first-of-type{border-top:1px solid rgba(198,167,117,.08)}
+
+@keyframes n-ring-a{to{transform:rotateX(68deg) rotateZ(360deg)}}
+@keyframes n-ring-b{to{transform:rotateY(64deg) rotateZ(360deg)}}
+@keyframes n-ring-c{0%,100%{transform:rotateX(38deg) rotateY(48deg) scale(.96)}50%{transform:rotateX(52deg) rotateY(25deg) scale(1.05)}}
+@keyframes n-panel-ring{to{transform:rotate(360deg) rotateX(12deg)}}
+@keyframes n-panel-ring-reverse{to{transform:rotate(-360deg) rotateY(10deg)}}
+@keyframes n-hero-orbit{to{transform:translate(-50%,-50%) rotateX(66deg) rotateZ(360deg)}}
+
+@media(max-width:760px){
+  .n-scroll-thread{right:-105px;width:270px;opacity:.13;transform:translate3d(0,calc((var(--n-scroll) - .5) * 30vh),0)}
+  .n-scroll-thread__line{right:24px;top:12vh;height:76vh;opacity:.7}
+  .n-scroll-orbit__number{font-size:9rem}
+  .n-number-chapter:after{font-size:72vw;right:-.12em;top:42%;opacity:.7;transform:translate3d(0,calc(-50% + (var(--n-local,0) * -45px)),0) rotate(calc(var(--n-local,0) * 3deg))}
+  .n-number-chapter:nth-of-type(even):after{left:-.1em}
+  .n-story .n-hero-numeral:before,.n-story .n-hero-numeral:after{left:54%;width:92vw;opacity:.65}
+  .n-story .n-hero-numeral:after{width:65vw}
+  .n-story .j-copy h2{max-width:11ch}
+}
+@media(prefers-reduced-motion:reduce){
+  .n-scroll-thread{display:none}
+  .n-scroll-orbit__ring,.n-story .n-figure__ring,.n-story .n-hero-numeral:before,.n-story .n-hero-numeral:after{animation:none!important}
+  .n-number-chapter:after{transform:translateY(-50%)!important}
+}
+.j-paused .n-scroll-thread{display:none}
+.j-paused .n-number-chapter:after{transform:translateY(-50%)!important}
+.j-paused .n-scroll-orbit__ring,.j-paused .n-figure__ring,.j-paused .n-hero-numeral:before,.j-paused .n-hero-numeral:after{animation-play-state:paused!important}
+
+.n-story .n-traits{list-style:none;padding:0;margin:1.3rem 0 0;display:grid;gap:10px}
+.n-story .n-traits li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid rgba(198,167,117,.18);opacity:.42;transform:translateX(-10px);transition:opacity .45s ease,transform .45s ease}
+.n-story .j-light .n-traits li{border-bottom-color:rgba(138,102,51,.18)}
+.n-story .n-trait-no{display:grid;place-items:center;width:31px;height:31px;border-radius:50%;border:1px solid rgba(198,167,117,.55);color:#c6a775;font-size:.68rem;font-weight:800;letter-spacing:.06em}
+.n-story .j-light .n-trait-no{color:#8a6633;border-color:rgba(138,102,51,.45)}
+.n-story .n-number-chapter.is-active .n-traits li{opacity:1;transform:none}
+.n-story .n-number-chapter.is-active .n-traits li:nth-child(2){transition-delay:.08s}
+.n-story .n-number-chapter.is-active .n-traits li:nth-child(3){transition-delay:.16s}
+
+@media(prefers-reduced-motion:reduce){.n-story .n-traits li{opacity:1;transform:none;transition:none}}

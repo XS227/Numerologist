@@ -30,7 +30,7 @@
     });
     const top = root.getBoundingClientRect().top + scrollY;
     const amount = Math.max(0,Math.min(1,(scrollY-top) / Math.max(1,root.offsetHeight-vh)));
-    progress.style.transform = `scaleX(${amount})`;
+    if (progress) progress.style.transform = `scaleX(${amount})`;
     let current = chapters[0];
     for (const chapter of chapters) if (chapter.getBoundingClientRect().top < vh * .48) current = chapter;
     links.forEach(link => {
@@ -41,11 +41,13 @@
   function schedule() {if (!scheduled) {scheduled = true;requestAnimationFrame(paint);}}
   function setMotion(value) {
     paused = value;root.classList.toggle('j-paused',paused);
-    toggle.setAttribute('aria-pressed',String(paused));
-    toggle.textContent = paused ? toggle.dataset.resume : toggle.dataset.pause;
+    if (toggle) {
+      toggle.setAttribute('aria-pressed',String(paused));
+      toggle.textContent = paused ? toggle.dataset.resume : toggle.dataset.pause;
+    }
     schedule();
   }
-  toggle.addEventListener('click',()=>setMotion(!paused));
+  if (toggle) toggle.addEventListener('click',()=>setMotion(!paused));
   media.addEventListener('change',event=>setMotion(event.matches));
   root.querySelectorAll('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{
     const target = document.getElementById(link.hash.slice(1));
