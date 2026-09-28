@@ -90,7 +90,7 @@
     background: rgba(255,255,255,.025);
   }
   .musk-ticker__inner {
-    display: grid; grid-template-columns: repeat(5, 1fr);
+    display: grid; grid-template-columns: repeat(7, 1fr);
   }
   .musk-stat {
     padding: 1.35rem 1rem; text-align: center;
@@ -178,6 +178,44 @@
   .musk-body .profile-numbers span { text-transform:uppercase; letter-spacing:.13em; font-size:.64rem; color:#9db6ae; }
   .musk-body .profile-numbers strong { display:block; margin:.32rem 0; font-family:Georgia,serif; font-size:2rem; font-weight:400; color:#ebcf95; }
   .musk-body .profile-numbers small { font-size:.72rem; color:#bed0ca; }
+  .musk-body .x-timeline {
+    display:grid; grid-template-columns:repeat(6,1fr); gap:.55rem; margin:1.6rem 0 2rem;
+  }
+  .musk-body .x-timeline div {
+    min-width:0; padding:1rem .7rem; border-radius:1rem; text-align:center;
+    background:linear-gradient(180deg,#123a37,#0b2b2a); color:#edf5f1;
+  }
+  .musk-body .x-timeline strong,
+  .musk-body .x-timeline span,
+  .musk-body .x-timeline small { display:block; }
+  .musk-body .x-timeline strong { color:#d6b775; font-size:.7rem; letter-spacing:.12em; }
+  .musk-body .x-timeline span { margin:.32rem 0; font-family:Georgia,serif; font-size:1.25rem; }
+  .musk-body .x-timeline small { color:#a9c0b9; font-size:.68rem; line-height:1.35; }
+  .musk-body .business-grid,
+  .musk-body .family-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; margin:1.6rem 0 2rem;
+  }
+  .musk-body .business-grid div,
+  .musk-body .family-grid div {
+    padding:1.15rem; border-radius:1rem; border:1px solid rgba(23,48,46,.12);
+    background:#fff; text-align:center;
+  }
+  .musk-body .business-grid span,
+  .musk-body .business-grid strong,
+  .musk-body .business-grid small,
+  .musk-body .family-grid span,
+  .musk-body .family-grid strong,
+  .musk-body .family-grid small { display:block; }
+  .musk-body .business-grid span,
+  .musk-body .family-grid span { color:#536a64; font-size:.76rem; text-transform:uppercase; letter-spacing:.1em; }
+  .musk-body .business-grid strong,
+  .musk-body .family-grid strong { margin:.35rem 0; color:#17302e; font-family:Georgia,serif; font-size:1.8rem; font-weight:400; }
+  .musk-body .business-grid small,
+  .musk-body .family-grid small { color:#71827d; font-size:.74rem; line-height:1.35; }
+  .musk-body .source-list {
+    margin-top:1.4rem; padding:1.2rem 1.35rem; border-radius:1rem;
+    background:#e9e4d7; font-size:.9rem; line-height:1.75;
+  }
   .musk-disclaimer {
     max-width:900px; margin:4rem auto 0; padding-top:1.5rem;
     border-top:1px solid rgba(23,48,46,.14); color:#60736e; font-size:.85rem; line-height:1.65;
@@ -185,8 +223,10 @@
   @media (max-width: 860px) {
     .musk-hero { grid-template-columns:1fr; min-height:0; }
     .musk-orbit { width:min(82vw,420px); }
-    .musk-ticker__inner { grid-template-columns:repeat(5, minmax(92px,1fr)); overflow-x:auto; }
+    .musk-ticker__inner { grid-template-columns:repeat(7, minmax(92px,1fr)); overflow-x:auto; }
     .musk-body .profile-numbers { grid-template-columns:repeat(2,1fr); }
+    .musk-body .x-timeline { grid-template-columns:repeat(3,1fr); }
+    .musk-body .business-grid, .musk-body .family-grid { grid-template-columns:repeat(2,1fr); }
   }
   @media (max-width: 640px) {
     .musk-wrap { width:min(100% - 1.35rem,1180px); }
@@ -195,6 +235,8 @@
     .musk-stat { padding:1rem .75rem; }
     .musk-body .number-equation, .musk-body .name-grid { grid-template-columns:1fr; }
     .musk-body .profile-numbers { grid-template-columns:1fr 1fr; }
+    .musk-body .x-timeline { grid-template-columns:1fr 1fr; }
+    .musk-body .business-grid, .musk-body .family-grid { grid-template-columns:1fr; }
     .musk-reader { padding-top:3rem; }
     .musk-chapters { gap:3.5rem; }
   }
@@ -212,8 +254,8 @@
         <p class="musk-eyebrow">Kjente personers tall · Åses metode</p>
         <h1 class="musk-title" id="musk-title">Elon Musk i tall.</h1>
         <p class="musk-deck">
-          Fra 16/7 til 3, 2 og 1 — og videre til et personlig år 8 i 2026.
-          En etterprøvbar numerologisk lesning av fødselsdatoen og navnet Elon Reeve Musk.
+          Fra 16/7 til X = 6, xAI = 16/7 og SpaceXAI = 33 — videre til
+          virksomhetene, familie-tallene og et personlig år 8 i 2026.
         </p>
         <div class="musk-meta">
           <span>Av {{ article.author }}</span>
@@ -236,6 +278,8 @@
       <div class="musk-stat"><small>Uttrykk</small><strong>3</strong></div>
       <div class="musk-stat"><small>Sjel</small><strong>2</strong></div>
       <div class="musk-stat"><small>Personlighet</small><strong>1</strong></div>
+      <div class="musk-stat"><small>X</small><strong>6</strong></div>
+      <div class="musk-stat"><small>Familie</small><strong>14/5</strong></div>
       <div class="musk-stat"><small>2026</small><strong>8</strong></div>
     </div>
   </section>
