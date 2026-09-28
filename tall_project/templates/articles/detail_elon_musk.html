@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ article.title }} · Numerologist{% endblock %}
+
+{% block extra_styles %}
+  main { padding-inline: 0; }
+  .layout { max-width: none; gap: 0; }
+  .musk-page {
+    --ink: #eaf3ef;
+    --muted-musk: #a7bbb4;
+    --gold-musk: #d5b678;
+    --deep: #071c1e;
+    --deep-2: #0d2b2c;
+    --paper: #f3f0e8;
+    background:
+      radial-gradient(circle at 78% 12%, rgba(213,182,120,.16), transparent 28rem),
+      radial-gradient(circle at 10% 38%, rgba(67,150,119,.14), transparent 30rem),
+      var(--deep);
+    color: var(--ink);
+    overflow: clip;
+  }
+  .musk-wrap { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
+  .musk-back {
+    display: inline-flex; align-items: center; gap: .45rem; margin-top: 1.25rem;
+    color: var(--muted-musk); font-size: .9rem; font-weight: 700;
+  }
+  .musk-back:hover { color: var(--gold-musk); }
+  .musk-hero {
+    min-height: min(760px, 86vh);
+    display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
+    align-items: center; gap: clamp(2rem, 6vw, 6rem);
+    padding: clamp(3rem, 7vw, 7rem) 0;
+  }
+  .musk-eyebrow {
+    margin: 0 0 1rem; text-transform: uppercase; letter-spacing: .22em;
+    font-size: .78rem; font-weight: 800; color: var(--gold-musk);
+  }
+  .musk-title {
+    margin: 0; max-width: 13ch; font-family: Georgia, "Times New Roman", serif;
+    font-weight: 400; letter-spacing: -.045em; line-height: .96;
+    font-size: clamp(3.2rem, 7.5vw, 6.8rem);
+    color: #f7f4eb;
+  }
+  .musk-deck {
+    max-width: 60ch; margin: 1.5rem 0 0; color: #c3d1cc;
+    font-size: clamp(1.05rem, 1.7vw, 1.25rem); line-height: 1.7;
+  }
+  .musk-meta {
+    display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.6rem;
+  }
+  .musk-meta span {
+    border: 1px solid rgba(213,182,120,.35); border-radius: 999px;
+    padding: .48rem .82rem; font-size: .83rem; color: #d8e2de;
+  }
+  .musk-orbit {
+    aspect-ratio: 1; position: relative; display: grid; place-items: center;
+    width: min(100%, 500px); margin-inline: auto;
+  }
+  .musk-orbit::before, .musk-orbit::after {
+    content: ""; position: absolute; inset: 7%; border-radius: 50%;
+    border: 1px solid rgba(213,182,120,.38);
+  }
+  .musk-orbit::after {
+    inset: 19%; border-color: rgba(126,186,159,.32);
+    box-shadow: 0 0 80px rgba(95,168,137,.16) inset;
+  }
+  .musk-orbit-ring {
+    position: absolute; inset: 1%; border-radius: 50%;
+    border-top: 1px solid rgba(213,182,120,.2);
+    border-bottom: 1px solid rgba(213,182,120,.08);
+    transform: rotate(-18deg);
+  }
+  .musk-orbit-number {
+    display: grid; place-items: center; width: 58%; aspect-ratio: 1;
+    border-radius: 50%; background: radial-gradient(circle at 35% 30%, #174548, #092325 72%);
+    border: 1px solid rgba(213,182,120,.5);
+    box-shadow: 0 35px 90px rgba(0,0,0,.34), 0 0 70px rgba(213,182,120,.12);
+    font-family: Georgia, serif; font-size: clamp(4.4rem, 10vw, 8.2rem);
+    letter-spacing: -.08em; color: var(--gold-musk);
+  }
+  .musk-orbit-label {
+    position: absolute; bottom: 12%; left: 50%; transform: translateX(-50%);
+    white-space: nowrap; text-transform: uppercase; letter-spacing: .2em;
+    font-size: .72rem; color: var(--muted-musk);
+  }
+  .musk-ticker {
+    border-top: 1px solid rgba(213,182,120,.18);
+    border-bottom: 1px solid rgba(213,182,120,.18);
+    background: rgba(255,255,255,.025);
+  }
+  .musk-ticker__inner {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+  }
+  .musk-stat {
+    padding: 1.35rem 1rem; text-align: center;
+    border-inline-end: 1px solid rgba(213,182,120,.15);
+  }
+  .musk-stat:last-child { border-inline-end: 0; }
+  .musk-stat small { display:block; color: #91aaa2; font-size:.72rem; text-transform:uppercase; letter-spacing:.16em; }
+  .musk-stat strong { display:block; margin-top:.28rem; font-family:Georgia,serif; font-size:2rem; color:#f1d59b; font-weight:400; }
+  .musk-reader {
+    background: var(--paper); color: #17302e;
+    padding: clamp(3.5rem, 8vw, 7rem) 0;
+  }
+  .musk-lead {
+    max-width: 74ch; margin: 0 auto clamp(2.2rem, 5vw, 4.5rem);
+    font-size: 1.08rem; line-height: 1.85; color: #38514c;
+  }
+  .musk-lead p { margin: 0 0 1rem; }
+  .musk-toc {
+    max-width: 900px; margin: 0 auto 4rem;
+    display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem;
+  }
+  .musk-toc a {
+    display:inline-flex; align-items:center; gap:.5rem; padding:.55rem .82rem;
+    border-radius:999px; border:1px solid rgba(23,48,46,.16); background:#fff;
+    color:#36514b; font-size:.82rem; font-weight:700;
+  }
+  .musk-toc a:hover { border-color:#17302e; color:#17302e; }
+  .musk-toc b {
+    display:grid; place-items:center; width:1.45rem; height:1.45rem; border-radius:50%;
+    background:#173b38; color:#fff; font-size:.69rem;
+  }
+  .musk-chapters { max-width: 900px; margin: 0 auto; display: grid; gap: 4.5rem; }
+  .musk-chapter { scroll-margin-top: 5rem; }
+  .musk-chapter__number {
+    display:block; margin-bottom:.7rem; font-size:.75rem; font-weight:800;
+    letter-spacing:.18em; color:#9c7432; text-transform:uppercase;
+  }
+  .musk-chapter h2 {
+    margin:0 0 1.4rem; color:#112b29; font-family:Georgia,serif;
+    font-weight:400; letter-spacing:-.03em; font-size:clamp(2rem,4.5vw,3.3rem);
+  }
+  .musk-body { font-size:1.05rem; line-height:1.82; color:#38514c; }
+  .musk-body p { margin:0 0 1.15rem; }
+  .musk-body a { color:#7a5418; text-decoration:underline; text-underline-offset:.18em; }
+  .musk-body ul { padding-inline-start:1.2rem; }
+  .musk-body li { margin:.45rem 0; }
+  .musk-body .number-equation {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:.7rem;
+    margin:1.5rem 0 1.8rem;
+  }
+  .musk-body .number-equation > span {
+    padding:1rem; border:1px solid rgba(23,48,46,.12); border-radius:1rem;
+    background:#fff; text-align:center; font-variant-numeric:tabular-nums;
+  }
+  .musk-body .number-equation .number-equation__result {
+    grid-column:1 / -1; background:#123a37; color:#f3f0e8;
+    border-color:#123a37; font-size:1.12rem;
+  }
+  .musk-body .name-grid {
+    display:grid; grid-template-columns:repeat(3,1fr); gap:.8rem; margin:1.5rem 0;
+  }
+  .musk-body .name-grid div {
+    padding:1.15rem; border-radius:1rem; background:#fff;
+    border:1px solid rgba(23,48,46,.12);
+  }
+  .musk-body .name-grid strong {
+    display:block; color:#17302e; font-size:1.05rem; letter-spacing:.1em;
+  }
+  .musk-body .name-grid span { display:block; margin-top:.55rem; font-size:.9rem; }
+  .musk-body .number-callout {
+    margin:1.5rem 0; padding:1.35rem 1.5rem; border-inline-start:4px solid #c69a52;
+    background:#ebe6d9; border-radius:0 1rem 1rem 0; color:#17302e;
+    font-size:1.1rem;
+  }
+  .musk-body .number-callout strong { font-family:Georgia,serif; font-size:1.45rem; font-weight:400; }
+  .musk-body .number-callout span { color:#526661; font-size:.9rem; }
+  .musk-body .profile-numbers {
+    display:grid; grid-template-columns:repeat(5,1fr); gap:.65rem; margin:1.7rem 0;
+  }
+  .musk-body .profile-numbers div {
+    background:#0e302f; color:#eef4f0; border-radius:1rem; padding:1.1rem .8rem; text-align:center;
+  }
+  .musk-body .profile-numbers span,
+  .musk-body .profile-numbers small { display:block; }
+  .musk-body .profile-numbers span { text-transform:uppercase; letter-spacing:.13em; font-size:.64rem; color:#9db6ae; }
+  .musk-body .profile-numbers strong { display:block; margin:.32rem 0; font-family:Georgia,serif; font-size:2rem; font-weight:400; color:#ebcf95; }
+  .musk-body .profile-numbers small { font-size:.72rem; color:#bed0ca; }
+  .musk-disclaimer {
+    max-width:900px; margin:4rem auto 0; padding-top:1.5rem;
+    border-top:1px solid rgba(23,48,46,.14); color:#60736e; font-size:.85rem; line-height:1.65;
+  }
+  @media (max-width: 860px) {
+    .musk-hero { grid-template-columns:1fr; min-height:0; }
+    .musk-orbit { width:min(82vw,420px); }
+    .musk-ticker__inner { grid-template-columns:repeat(5, minmax(92px,1fr)); overflow-x:auto; }
+    .musk-body .profile-numbers { grid-template-columns:repeat(2,1fr); }
+  }
+  @media (max-width: 640px) {
+    .musk-wrap { width:min(100% - 1.35rem,1180px); }
+    .musk-title { font-size:clamp(2.75rem,14vw,4rem); }
+    .musk-deck { font-size:1rem; }
+    .musk-stat { padding:1rem .75rem; }
+    .musk-body .number-equation, .musk-body .name-grid { grid-template-columns:1fr; }
+    .musk-body .profile-numbers { grid-template-columns:1fr 1fr; }
+    .musk-reader { padding-top:3rem; }
+    .musk-chapters { gap:3.5rem; }
+  }
+{% endblock %}
+
+{% block body_attrs %} class="number-journey j-prose"{% endblock %}
+
+{% block main %}
+<div class="musk-page">
+  <div class="musk-wrap">
+    <a class="musk-back" href="{% url 'article_list' %}"><span aria-hidden="true">←</span> Alle artikler</a>
+
+    <section class="musk-hero" aria-labelledby="musk-title">
+      <div>
+        <p class="musk-eyebrow">Kjente personers tall · Åses metode</p>
+        <h1 class="musk-title" id="musk-title">Elon Musk i tall.</h1>
+        <p class="musk-deck">
+          Fra 16/7 til 3, 2 og 1 — og videre til et personlig år 8 i 2026.
+          En etterprøvbar numerologisk lesning av fødselsdatoen og navnet Elon Reeve Musk.
+        </p>
+        <div class="musk-meta">
+          <span>Av {{ article.author }}</span>
+          <span>{{ article.published|date:"j. F Y" }}</span>
+          <span>Symbolsk tolkning · ikke vitenskapelig profilering</span>
+        </div>
+      </div>
+
+      <div class="musk-orbit" aria-label="Livsveitall 16/7">
+        <span class="musk-orbit-ring" aria-hidden="true"></span>
+        <div class="musk-orbit-number">16/7</div>
+        <span class="musk-orbit-label">livsvei · analyse · fordypning</span>
+      </div>
+    </section>
+  </div>
+
+  <section class="musk-ticker" aria-label="Elon Musks nøkkeltall">
+    <div class="musk-wrap musk-ticker__inner">
+      <div class="musk-stat"><small>Livsvei</small><strong>16/7</strong></div>
+      <div class="musk-stat"><small>Uttrykk</small><strong>3</strong></div>
+      <div class="musk-stat"><small>Sjel</small><strong>2</strong></div>
+      <div class="musk-stat"><small>Personlighet</small><strong>1</strong></div>
+      <div class="musk-stat"><small>2026</small><strong>8</strong></div>
+    </div>
+  </section>
+
+  <section class="musk-reader">
+    <div class="musk-wrap">
+      {% if chapters_lead %}
+        <div class="musk-lead">{{ chapters_lead|safe }}</div>
+      {% endif %}
+
+      {% if chapters %}
+        <nav class="musk-toc" aria-label="I denne artikkelen">
+          {% for chapter in chapters %}
+            <a href="#{{ chapter.id }}"><b>{{ chapter.number }}</b>{{ chapter.title }}</a>
+          {% endfor %}
+        </nav>
+
+        <div class="musk-chapters">
+          {% for chapter in chapters %}
+            <section class="musk-chapter" id="{{ chapter.id }}">
+              <span class="musk-chapter__number">Kapittel {{ chapter.number|stringformat:"02d" }}</span>
+              <h2>{{ chapter.title }}</h2>
+              <div class="musk-body">{{ chapter.body|safe }}</div>
+            </section>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="musk-chapters">
+          <div class="musk-body">{{ article.content|safe }}</div>
+        </div>
+      {% endif %}
+
+      <p class="musk-disclaimer">
+        Numerologi er en symbolsk tolkningstradisjon. Beregningene på denne siden kan
+        etterprøves matematisk, men betydningen som tillegges tallene er fortolkning og
+        skal ikke leses som vitenskapelig dokumentasjon av personlighet eller som en
+        forutsigelse av fremtidige hendelser.
+      </p>
+    </div>
+  </section>
+</div>
+{% endblock %}
