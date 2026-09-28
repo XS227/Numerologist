@@ -98,6 +98,7 @@ $articleSlugs = [
     ['slug' => 'wow-signalet-og-arecibo-linjen',                            'date' => '2026-09-22'],
     ['slug' => 'tallene-i-koranen',                                         'date' => '2026-09-23'],
     ['slug' => 'profeten-muhammads-tall',                                   'date' => '2026-09-23'],
+    ['slug' => 'elon-musk-numerologi-16-7',                                  'date' => '2026-09-28'],
 ];
 
 echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
