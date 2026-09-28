@@ -40,14 +40,27 @@ ARTICLE_META = {
     "primstaven-vaerspadommer-for-den-forste-vinterdagen": {"original_date":"2025-10-25","categories":["Inspirasjon & selvhjelp"]},
 }
 
+# New editorial pieces created for the current Numerologist site. Keep these
+# separate from Åse's recovered archive so archive status remains honest.
+EDITORIAL_META = {
+    "22-7-riktig-beregning-av-pi": {
+        "categories": ["PI 3,14 og 22/7", "Mestertall 22", "Tallet 7", "Hellig geometri"],
+    },
+}
+
+
 def meta_for(slug: str) -> dict:
-    return ARTICLE_META.get(slug, {"original_date": "", "categories": []})
+    if slug in ARTICLE_META:
+        return ARTICLE_META[slug]
+    return EDITORIAL_META.get(slug, {"original_date": "", "categories": []})
 
 def slugs_for_category(category: str) -> list[str]:
-    return [slug for slug, meta in ARTICLE_META.items() if category in meta["categories"]]
+    combined = {**ARTICLE_META, **EDITORIAL_META}
+    return [slug for slug, meta in combined.items() if category in meta["categories"]]
 
 def active_categories() -> list[str]:
-    used = {cat for meta in ARTICLE_META.values() for cat in meta["categories"]}
+    combined = {**ARTICLE_META, **EDITORIAL_META}
+    used = {cat for meta in combined.values() for cat in meta["categories"]}
     return [cat for cat in CATEGORY_ORDER if cat in used]
 
 def attach_meta(article) -> None:
