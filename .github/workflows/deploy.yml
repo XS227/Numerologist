@@ -20,27 +20,23 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            echo "🚀 Starting deployment on $HOSTNAME"
+            set -e
+            echo "🚀 Deploying Numerologist on $HOSTNAME"
 
-            export HOME=/home/deploy
-            git config --global --add safe.directory /var/www/stee/app
-            cd /var/www/stee/app || exit 1
+            APP=/var/www/numerologist
+            cd "$APP"
 
-            echo "📥 Pulling latest code..."
-            if [ -d .git ]; then
-              git fetch origin main
-              git reset --hard origin/main
-            else
-              echo "⚠️  No .git folder found, skipping git pull."
-            fi
+            echo "📥 Syncing main while preserving the server-only commit..."
+            sudo -u www-data git -c safe.directory="$APP" fetch origin main
+            sudo -u www-data git -c safe.directory="$APP" rebase origin/main
 
-            echo "🐳 Rebuilding Docker containers..."
-            cd /var/www/stee
-            docker compose down
-            docker compose up -d --build
+            echo "⚙️  Running Django checks, migrations and static collection..."
+            sudo -u www-data "$APP/.venv/bin/python" manage.py check
+            sudo -u www-data "$APP/.venv/bin/python" manage.py migrate --noinput
+            sudo -u www-data "$APP/.venv/bin/python" manage.py collectstatic --noinput
 
-            echo "⚙️  Running migrations and collectstatic..."
-            docker exec stee-web python manage.py migrate --noinput || true
-            docker exec stee-web python manage.py collectstatic --noinput || true
+            echo "🔄 Restarting Numerologist..."
+            sudo systemctl restart numerologist.service
+            sudo systemctl is-active --quiet numerologist.service
 
-            echo "✅ Deployment complete!"
+            echo "✅ Numerologist deployment complete"
