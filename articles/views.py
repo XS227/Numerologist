@@ -12,6 +12,7 @@ from django.views.generic import DetailView, ListView
 
 from .models import Article
 from .thumbnails import get_thumbnail
+from .taxonomy import active_categories, attach_meta, slugs_for_category
 
 
 def _load_ai_analysis_hook() -> Optional[Callable[[str], str]]:
@@ -39,12 +40,23 @@ class ArticleListView(ListView):
     model = Article
     template_name = "articles/list.html"
     context_object_name = "articles"
-    paginate_by = 10
+    paginate_by = 12
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        self.active_category = self.request.GET.get("category", "").strip()
+        if self.active_category:
+            slugs = slugs_for_category(self.active_category)
+            queryset = queryset.filter(slug__in=slugs) if slugs else queryset.none()
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         for article in context["articles"]:
             article.thumb = get_thumbnail(article.slug, article.title)
+            attach_meta(article)
+        context["article_categories"] = active_categories()
+        context["active_category"] = getattr(self, "active_category", "")
         canonical_url = self.request.build_absolute_uri(self.request.path)
         description = (
             "Articles and long-form writing on numerology, symbolism, and number "
@@ -182,6 +194,7 @@ class ArticleDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         content = self.object.content
         context["article_thumb"] = get_thumbnail(self.object.slug, self.object.title)
+        attach_meta(self.object)
         analysis = None
         if AI_ANALYZE_CONTENT is not None:
             try:
