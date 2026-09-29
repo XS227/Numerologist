@@ -1,6 +1,18 @@
 from __future__ import annotations
 
 PACKAGE_CATALOG = {
+    "builder": {
+        "title": "Din numerologiske analyse",
+        "price": 227,
+        "kind": "modular",
+        "summary": "Kjerneanalyse med valgfrie kalkulatormoduler og fremtid fra 1 til 36 måneder.",
+        "sections": [
+            "Kjerne: navnetall, vokaltall, konsonanttall, livsvei og fødselsdag",
+            "Valgfrie moduler fra Åses komplette kalkulatorbibliotek",
+            "Fremtid kan legges til for 1, 3, 6, 12, 24 eller 36 måneder",
+            "Kjøpte moduler åpnes samlet på Min side",
+        ],
+    },
     "ase227": {
         "title": "ÅSE 227 Edition",
         "price": 227,
