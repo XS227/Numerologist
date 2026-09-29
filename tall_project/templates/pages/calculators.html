@@ -6,13 +6,14 @@
 {% block body_attrs %} class="number-journey"{% endblock %}
 
 {% block extra_styles %}
-    .calc-suite { color: #f3f0e8; }
+    .calc-suite { color: #f3f0e8; width:100%; max-width:100%; overflow-x:clip; }
+    .calc-suite, .calc-suite * { box-sizing:border-box; }
     .calc-suite h1, .calc-suite h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.03em; }
     .calc-suite__hero { text-align: center; padding: clamp(56px, 9vw, 110px) 6% clamp(40px, 6vw, 70px); background: radial-gradient(ellipse at 50% 0%, #c6a77533, transparent 62%); }
     .calc-suite__pill { display: inline-block; padding: 6px 16px; border: 1px solid #c6a77590; border-radius: 999px; color: #c6a775; font-size: 0.75rem; letter-spacing: 0.16em; text-transform: uppercase; }
     .calc-suite__hero h1 { font-size: clamp(2.4rem, 6.5vw, 4.6rem); line-height: 1.05; max-width: 15ch; margin: 22px auto 18px; color: #f3f0e8; }
     .calc-suite__hero p { max-width: 60ch; margin: 0 auto; color: #bdccc7; font-size: 1.1rem; line-height: 1.7; }
-    .calc-suite__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: clamp(18px, 2.5vw, 28px); max-width: 1180px; margin: 0 auto; padding: 0 6% clamp(60px, 8vw, 100px); }
+    .calc-suite__grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr)); gap:clamp(18px,2.5vw,28px); width:100%; max-width:1180px; margin:0 auto; padding:0 clamp(18px,5vw,64px) clamp(60px,8vw,100px); }
     .calc-tile { display: flex; flex-direction: column; background: #123739; border: 1px solid #c6a77530; border-radius: 16px; overflow: hidden; color: inherit; text-decoration: none; transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
     a.calc-tile:hover, a.calc-tile:focus-visible { transform: translateY(-4px); border-color: #c6a775; box-shadow: 0 24px 50px #05171a80; text-decoration: none; }
     .calc-tile__media { position: relative; aspect-ratio: 3 / 2; overflow: hidden; }
@@ -29,7 +30,7 @@
     .calc-tile__body ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 0.92rem; color: #aebfba; }
     .calc-tile__body li:before { content: '✦ '; color: #c6a775; }
     .calc-tile__cta { margin-top: auto; padding-top: 8px; font-weight: 700; font-size: 0.92rem; color: #e2cba2; }
-    .calc-catalog { max-width: 1180px; margin: 0 auto; padding: 0 6% clamp(56px, 8vw, 96px); }
+    .calc-catalog { width:100%; max-width:1180px; margin:0 auto; padding:0 clamp(18px,5vw,64px) clamp(56px,8vw,96px); }
     .calc-catalog__head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
     .calc-catalog__head h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); color: #f3f0e8; }
     .calc-catalog__head p { margin: 0; max-width: 54ch; color: #aebfba; line-height: 1.6; }
@@ -49,7 +50,7 @@
     .calc-catalog__group--future { margin-top: 22px; }
     @media (max-width: 820px) { .calc-catalog__head { align-items: start; flex-direction: column; } .calc-catalog__groups { grid-template-columns: 1fr; } }
     @media (max-width: 520px) { .calc-catalog__row { grid-template-columns: auto minmax(0,1fr); gap: 10px; padding: 13px 14px; } .calc-catalog__status { grid-column: 2; justify-self: start; } }
-    .calc-suite__learn { max-width: 1180px; margin: 0 auto; padding: 0 6% clamp(60px, 8vw, 90px); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .calc-suite__learn { width:100%; max-width:1180px; margin:0 auto; padding:0 clamp(18px,5vw,64px) clamp(60px,8vw,90px); display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
     .calc-suite__learn a { padding: 12px 20px; border: 1px solid #c6a77570; border-radius: 999px; color: #e2cba2; text-decoration: none; }
     .calc-suite__learn a:hover { background: #c6a775; color: #092426; }
     .calc-suite__faq { background: #f3f0e8; color: #102f31; padding: clamp(56px, 8vw, 90px) 6%; }
@@ -61,8 +62,8 @@
     .calc-suite__faq details p { margin: 12px 0 0; line-height: 1.7; color: #36575a; }
     .calc-suite__faq a { color: #805d2d; }
 
-    .calc-suite__ase { max-width: 1180px; margin: 0 auto clamp(32px, 5vw, 56px); padding: 0 6%; }
-    .calc-ase { position: relative; min-height: 360px; display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); overflow: hidden; border: 1px solid #c6a77555; border-radius: 22px; background: #0b3032; box-shadow: 0 28px 70px #04151655; }
+    .calc-suite__ase { width:100%; max-width:1180px; margin:0 auto clamp(32px,5vw,56px); padding:0 clamp(18px,5vw,64px); }
+    .calc-ase { position:relative; width:100%; min-width:0; min-height:360px; display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); overflow:hidden; border:1px solid #c6a77555; border-radius:22px; background:#0b3032; box-shadow:0 28px 70px #04151655; }
     .calc-ase__copy { position: relative; z-index: 2; padding: clamp(28px,5vw,54px); align-self: center; }
     .calc-ase__copy .calc-suite__pill { margin-bottom: 14px; }
     .calc-ase__copy h2 { margin: 0 0 14px; font-size: clamp(2.3rem,5vw,4.5rem); line-height: .98; color: #f7f1e7; max-width: 9ch; }
@@ -72,6 +73,8 @@
     .calc-ase__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.78) brightness(.72); }
     .calc-ase__media:after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,#0b3032 0%,transparent 42%),linear-gradient(0deg,#0b303244,transparent 50%); }
     .calc-ase__numbers { position:absolute; inset:auto 4% 4% auto; z-index:2; font:400 clamp(5rem,10vw,9rem)/.8 Georgia,serif; color:#e4c98b55; }
+    .calc-ase__copy,.calc-ase__media{min-width:0}
+    @media (max-width: 900px) { .calc-ase { grid-template-columns:1fr; } .calc-ase__media{min-height:300px;grid-row:1}.calc-ase__copy{grid-row:2}.calc-ase__media:after{background:linear-gradient(0deg,#0b3032 0%,transparent 58%)} }
     @media (max-width: 760px) { .calc-ase { grid-template-columns: 1fr; } .calc-ase__media { min-height: 250px; grid-row: 1; } .calc-ase__copy { grid-row: 2; } .calc-ase__media:after { background:linear-gradient(0deg,#0b3032 0%,transparent 58%); } }
 {% endblock %}
 

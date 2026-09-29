@@ -3,7 +3,7 @@
 
 {% block title %}{% if CURRENT_LANGUAGE == 'fa' %}نسخه ÅSE · خوانش کامل{% elif CURRENT_LANGUAGE == 'en' %}ÅSE 227 Edition · Complete Reading{% else %}ÅSE 227 Edition · Komplett tallkart{% endif %} · Numerologist{% endblock %}
 {% block body_attrs %} class="ase-engine-page"{% endblock %}
-{% block extra_styles %}
+{% block external_styles %}
 <link rel="stylesheet" href="{% static 'journey/ase-edition.css' %}?v=4">
 {% endblock %}
 

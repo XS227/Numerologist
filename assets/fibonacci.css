@@ -398,3 +398,24 @@
 .j-prose .prose th, .j-prose .prose td { border-bottom: 1px solid rgba(198,167,117,.4); padding: .55rem .4rem; text-align: left; }
 .j-prose .prose input, .j-prose .prose textarea, .j-prose .prose select { border-color: rgba(198,167,117,.6); }
 .j-prose .layout > :not(.card) { color: #f3f0e8; }
+
+
+/* Responsive nav hardening after Academy / My page were added. */
+.l-nav{width:100%;max-width:100%}
+.l-nav .l-wrap,.l-wrap.l-nav-inner{width:100%;max-width:1240px;box-sizing:border-box}
+@media (max-width:1280px){
+  .l-nav-links{display:none}
+  .l-nav-links.is-open{display:flex;flex-direction:column;align-items:flex-start;position:fixed;top:64px;left:0;right:0;background:#fff;border-bottom:1px solid #c8e5d2;padding:1rem 1.25rem;gap:.1rem;box-shadow:0 8px 30px rgba(0,0,0,.12)}
+  .l-nav-links li{width:100%}
+  .l-nav-links.is-open a{padding:.55rem .7rem;width:100%}
+  .l-burger{display:flex;align-items:center}
+}
+@media (max-width:700px){
+  .l-nav .l-wrap,.l-wrap.l-nav-inner{padding:0 .7rem}
+  .l-nav-inner{gap:.45rem}
+  .l-brand{font-size:1.15rem;gap:.35rem}
+  .l-brand-icon{width:27px;height:27px}
+  .l-nav-right{gap:.35rem}
+  .l-numbers>summary{padding:.34rem .55rem}
+  .l-lang a{font-size:.68rem;padding:.18rem .35rem}
+}

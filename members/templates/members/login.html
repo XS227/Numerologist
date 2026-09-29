@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}Min side · Numerologist{% endblock %}
 {% block body_attrs %} class="member-page"{% endblock %}
-{% block extra_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=1">{% endblock %}
+{% block external_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=2">{% endblock %}
 {% block main %}
 {% if messages %}<div class="m-alerts">{% for message in messages %}<div class="m-alert">{{ message }}</div>{% endfor %}</div>{% endif %}
 <section class="m-login">
