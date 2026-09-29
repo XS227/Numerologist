@@ -6,7 +6,7 @@
 
 {% block main %}
 <link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=3">
-<link rel="stylesheet" href="{% static 'journey/number-detail.css' %}?v=1">
+<link rel="stylesheet" href="{% static 'journey/number-detail.css' %}?v=2">
 <style>
   /* Only the first chapter shows the number's illustration; the others get
      drawn panels (rings + the numeral in gold) so the same picture isn't
@@ -114,7 +114,7 @@
       </ul>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><img class="j-parallax" src="{% static 'journey/images/number-' %}{{ number }}.webp" data-speed="0.08" alt="" width="1536" height="1024" loading="lazy"></div>
+      <div class="j-image-window">{% if number == 8 %}<div class="n8-scene-wrap"><img class="n8-scene j-parallax" src="{% static 'journey/images/number-8-strengths.svg' %}" data-speed="0.06" alt="En visuell tolkning av åtteren som lederskap, retning og gjennomføring" loading="lazy"><div class="n8-number-cloud" aria-hidden="true"><span style="--x:-38%;--y:-31%;--r:-18deg">8</span><span style="--x:34%;--y:-24%;--r:16deg">8</span><span style="--x:-28%;--y:29%;--r:11deg">8</span><span style="--x:39%;--y:32%;--r:-14deg">8</span><span style="--x:4%;--y:-42%;--r:5deg">8</span></div></div>{% else %}<img class="j-parallax" src="{% static 'journey/images/number-' %}{{ number }}.webp" data-speed="0.08" alt="" width="1536" height="1024" loading="lazy">{% endif %}</div>
       <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">+</span>
     </figure>
   </div>
@@ -130,10 +130,10 @@
       </ul>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-figure j-parallax" data-speed="0.08" aria-hidden="true">
+      <div class="j-image-window">{% if number == 8 %}<div class="n8-scene-wrap"><img class="n8-scene j-parallax" src="{% static 'journey/images/number-8-challenges.svg' %}" data-speed="0.06" alt="En visuell tolkning av balanse mellom kraft og ansvar"><div class="n8-number-cloud" aria-hidden="true"><span style="--x:-40%;--y:-28%;--r:-15deg">8</span><span style="--x:37%;--y:-29%;--r:17deg">8</span><span style="--x:-32%;--y:34%;--r:9deg">8</span><span style="--x:36%;--y:31%;--r:-12deg">8</span><span style="--x:0%;--y:-44%;--r:0deg">8</span></div></div>{% else %}<div class="n-figure j-parallax" data-speed="0.08" aria-hidden="true">
         <span class="n-figure__ring" style="width:70%;aspect-ratio:1;border-style:dashed"></span>
         <span class="n-figure__watermark" style="font-size:9rem">{{ number }}</span>
-      </div></div>
+      </div>{% endif %}</div>
       <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">△</span>
     </figure>
   </div>
@@ -147,10 +147,10 @@
       <p class="j-body">{{ profile.ase_guidance }}</p>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-figure j-parallax" data-speed="0.08" aria-hidden="true">
+      <div class="j-image-window">{% if number == 8 %}<div class="n8-scene-wrap"><img class="n8-scene j-parallax" src="{% static 'journey/images/number-8-guidance.svg' %}" data-speed="0.06" alt="En visuell tolkning av å bygge varig verdi steg for steg"><div class="n8-number-cloud" aria-hidden="true"><span style="--x:-42%;--y:-30%;--r:-14deg">8</span><span style="--x:39%;--y:-25%;--r:15deg">8</span><span style="--x:-35%;--y:30%;--r:8deg">8</span><span style="--x:40%;--y:29%;--r:-10deg">8</span><span style="--x:3%;--y:-43%;--r:0deg">8</span></div></div>{% else %}<div class="n-figure j-parallax" data-speed="0.08" aria-hidden="true">
         <span class="n-figure__ring" style="width:48%;aspect-ratio:1"></span>
         <span class="n-figure__watermark" style="font-size:11rem">“</span>
-      </div></div>
+      </div>{% endif %}</div>
       <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">”</span>
     </figure>
   </div>
@@ -165,11 +165,11 @@
       <p class="j-body">{{ profile.practical_note }}</p>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-figure j-parallax" data-speed="0.08" aria-hidden="true">
+      <div class="j-image-window">{% if number == 8 %}<div class="n8-scene-wrap"><img class="n8-scene j-parallax" src="{% static 'journey/images/number-8-practical.svg' %}" data-speed="0.06" alt="En visuell tolkning av åtteren i arbeid, samarbeid og resultater"><div class="n8-number-cloud" aria-hidden="true"><span style="--x:-39%;--y:-30%;--r:-16deg">8</span><span style="--x:36%;--y:-26%;--r:15deg">8</span><span style="--x:-31%;--y:32%;--r:10deg">8</span><span style="--x:38%;--y:33%;--r:-13deg">8</span><span style="--x:1%;--y:-45%;--r:0deg">8</span></div></div>{% else %}<div class="n-figure j-parallax" data-speed="0.08" aria-hidden="true">
         <span class="n-figure__ring" style="width:55%;aspect-ratio:1"></span>
         <span class="n-figure__ring" style="width:80%;aspect-ratio:1"></span>
         <span class="n-figure__watermark" style="font-size:8rem">{{ number }}</span>
-      </div></div>
+      </div>{% endif %}</div>
       <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">⋯</span>
     </figure>
   </div>

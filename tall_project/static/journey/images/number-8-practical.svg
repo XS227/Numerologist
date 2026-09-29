@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffaf0"/><stop offset=".55" stop-color="#f1dfbd"/><stop offset="1" stop-color="#b88b52"/></linearGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f8e4b5"/><stop offset=".5" stop-color="#c69b58"/><stop offset="1" stop-color="#8b6231"/></linearGradient>
+ <linearGradient id="cloth" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf6"/><stop offset="1" stop-color="#dfceb0"/></linearGradient>
+ <clipPath id="arch"><path d="M100 930V360C100 155 235 65 400 65s300 90 300 295v570z"/></clipPath>
+ <filter id="glow"><feGaussianBlur stdDeviation="16"/></filter>
+</defs>
+<rect width="800" height="1000" fill="#f6f0e5"/>
+<g clip-path="url(#arch)">
+ <rect x="90" y="50" width="620" height="900" fill="url(#sky)"/>
+ 
+ <circle cx="405" cy="300" r="175" fill="#f5ce78" opacity=".34"/>
+ <path d="M100 710L250 540l90 85 110-150 110 110 140-175v520H100z" fill="#123839" opacity=".8"/>
+ <path d="M520 730v-170h50v170m25 0V500h45v230m-165 0V615h38v115" fill="#c8a66c" opacity=".75"/>
+ <g fill="none" stroke="#c49a58" stroke-width="5" opacity=".8"><ellipse cx="400" cy="345" rx="130" ry="95"/><ellipse cx="400" cy="545" rx="155" ry="120"/></g>
+ <circle cx="400" cy="380" r="48" fill="#b87951"/><path d="M355 354q42-68 92-4v39q-15-45-90-16z" fill="#5e3f2e"/>
+ <path d="M315 515q85-115 170 0l60 280H255z" fill="url(#cloth)"/>
+ <ellipse cx="310" cy="690" rx="48" ry="48" fill="#ccb176" opacity=".8"/>
+ <ellipse cx="495" cy="690" rx="48" ry="48" fill="#ccb176" opacity=".8"/>
+ <path d="M345 520l-78 120 35 25 100-95 98 95 34-27-80-118z" fill="#f8f1e3"/>
+ <circle cx="400" cy="355" r="220" fill="none" stroke="#d7b06a" stroke-width="2" stroke-dasharray="6 10" opacity=".68"/>
+
+</g>
+<path d="M100 930V360C100 155 235 65 400 65s300 90 300 295v570" fill="none" stroke="#cfac70" stroke-width="3" opacity=".8"/>
+</svg>
