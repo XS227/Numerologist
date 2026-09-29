@@ -9,6 +9,7 @@ class MemberProfile(models.Model):
     display_name = models.CharField(max_length=160, blank=True)
     phone = models.CharField(max_length=40, blank=True, db_index=True)
     picture_url = models.URLField(blank=True)
+    complimentary_access = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
