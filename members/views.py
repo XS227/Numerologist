@@ -7,7 +7,7 @@ import secrets
 import urllib.error
 import urllib.parse
 import urllib.request
-from datetime import date
+from datetime import date, timedelta
 from typing import Any
 
 from django.conf import settings
@@ -15,13 +15,15 @@ from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.views.decorators.csrf import csrf_exempt
 
 from .catalog import ACADEMY_LEVELS, PACKAGE_CATALOG, PREMIUM_RESOURCES
-from .models import AcademyProgress, MemberProfile, SocialIdentity
+from .models import AcademyProgress, MemberProfile, SocialIdentity, SocialLoginHandoff
 from .order_bridge import order_for_user, orders_for_user
 from .report_engine import calculate_profile
 
@@ -126,9 +128,14 @@ def member_login(request: HttpRequest) -> HttpResponse:
             "google_enabled": bool(settings.GOOGLE_CLIENT_ID and settings.GOOGLE_CLIENT_SECRET),
             "vipps_enabled": bool(
                 settings.VIPPS_LOGIN_ENABLED
-                and settings.VIPPS_LOGIN_CLIENT_ID
-                and settings.VIPPS_LOGIN_CLIENT_SECRET
-                and settings.VIPPS_LOGIN_MSN
+                and (
+                    settings.VIPPS_LOGIN_BROKER_URL
+                    or (
+                        settings.VIPPS_LOGIN_CLIENT_ID
+                        and settings.VIPPS_LOGIN_CLIENT_SECRET
+                        and settings.VIPPS_LOGIN_MSN
+                    )
+                )
             ),
             "vipps_test_mode": settings.VIPPS_TEST_MODE,
         },
@@ -192,15 +199,25 @@ def google_callback(request: HttpRequest) -> HttpResponse:
 
 
 def vipps_start(request: HttpRequest) -> HttpResponse:
+    if not settings.VIPPS_LOGIN_ENABLED:
+        messages.error(request, "Vipps Login er ikke aktivert på serveren ennå.")
+        return redirect("members:login")
+
+    _remember_next(request)
+    broker_url = str(getattr(settings, "VIPPS_LOGIN_BROKER_URL", "") or "").strip()
+    if broker_url:
+        next_url = request.session.get("member_login_next", "/min-side/")
+        params = urllib.parse.urlencode({"next": next_url})
+        return redirect(broker_url + ("&" if "?" in broker_url else "?") + params)
+
     if not (
-        settings.VIPPS_LOGIN_ENABLED
-        and settings.VIPPS_LOGIN_CLIENT_ID
+        settings.VIPPS_LOGIN_CLIENT_ID
         and settings.VIPPS_LOGIN_CLIENT_SECRET
         and settings.VIPPS_LOGIN_MSN
     ):
-        messages.error(request, "Vipps Login er ikke aktivert på serveren ennå.")
+        messages.error(request, "Vipps Login er ikke konfigurert på serveren.")
         return redirect("members:login")
-    _remember_next(request)
+
     state = secrets.token_urlsafe(32)
     nonce = secrets.token_urlsafe(24)
     request.session["vipps_oauth_state"] = state
@@ -256,6 +273,72 @@ def vipps_callback(request: HttpRequest) -> HttpResponse:
         messages.error(request, f"Vipps-innlogging feilet: {exc}")
         return redirect("members:login")
     return redirect(request.session.pop("member_login_next", "/min-side/"))
+
+
+@csrf_exempt
+def vipps_broker_handoff(request: HttpRequest) -> JsonResponse:
+    if request.method != "POST":
+        return JsonResponse({"error": "method_not_allowed"}, status=405)
+    if request.META.get("REMOTE_ADDR") not in {"127.0.0.1", "::1"}:
+        return JsonResponse({"error": "forbidden"}, status=403)
+    try:
+        body = json.loads(request.body.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return JsonResponse({"error": "invalid_json"}, status=400)
+
+    profile = body.get("profile")
+    if not isinstance(profile, dict) or not str(profile.get("sub") or "").strip():
+        return JsonResponse({"error": "invalid_profile"}, status=400)
+
+    next_url = str(body.get("next") or "/min-side/").strip()
+    if not next_url.startswith("/") or next_url.startswith("//"):
+        next_url = "/min-side/"
+
+    raw_token = secrets.token_urlsafe(40)
+    token_hash = hashlib.sha256(raw_token.encode()).hexdigest()
+    SocialLoginHandoff.objects.create(
+        token_hash=token_hash,
+        provider="vipps",
+        payload=profile,
+        next_url=next_url[:500],
+        expires_at=timezone.now() + timedelta(minutes=5),
+    )
+    completion = request.build_absolute_uri(
+        reverse("members:vipps_complete") + "?" + urllib.parse.urlencode({"token": raw_token})
+    )
+    return JsonResponse({"completion_url": completion})
+
+
+def vipps_complete(request: HttpRequest) -> HttpResponse:
+    raw_token = request.GET.get("token", "")
+    if not raw_token:
+        messages.error(request, "Vipps-innlogging kunne ikke fullføres.")
+        return redirect("members:login")
+
+    token_hash = hashlib.sha256(raw_token.encode()).hexdigest()
+    handoff = SocialLoginHandoff.objects.filter(
+        token_hash=token_hash,
+        provider="vipps",
+        used_at__isnull=True,
+        expires_at__gte=timezone.now(),
+    ).first()
+    if handoff is None:
+        messages.error(request, "Vipps-innloggingen er utløpt eller allerede brukt.")
+        return redirect("members:login")
+
+    handoff.used_at = timezone.now()
+    handoff.save(update_fields=["used_at"])
+    try:
+        user = _find_or_create_social_user("vipps", dict(handoff.payload or {}))
+        login(request, user, backend="django.contrib.auth.backends.ModelBackend")
+    except (KeyError, ValueError) as exc:
+        messages.error(request, f"Vipps-innlogging feilet: {exc}")
+        return redirect("members:login")
+
+    next_url = handoff.next_url or "/min-side/"
+    if not next_url.startswith("/") or next_url.startswith("//"):
+        next_url = "/min-side/"
+    return redirect(next_url)
 
 
 def _ensure_academy(user: User) -> list[AcademyProgress]:
