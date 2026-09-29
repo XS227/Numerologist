@@ -26,6 +26,11 @@ final class Vipps
                 'client_id: '     . VIPPS_CLIENT_ID,
                 'client_secret: ' . VIPPS_CLIENT_SECRET,
                 'Ocp-Apim-Subscription-Key: ' . VIPPS_SUBSCRIPTION_KEY,
+                'Merchant-Serial-Number: ' . VIPPS_MSN,
+                'Vipps-System-Name: Numerologist',
+                'Vipps-System-Version: 1.0.0',
+                'Vipps-System-Plugin-Name: Numerologist-Custom',
+                'Vipps-System-Plugin-Version: 1.0.0',
                 'Content-Type: application/json',
             ]
         );
