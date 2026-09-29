@@ -172,75 +172,55 @@
     <section class="ae-section ae-section--packages" id="ae-packages">
       <div class="ae-shell">
         <div class="ae-packages__head">
-          <div><span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}اگر می‌خواهید عمیق‌تر بروید{% elif CURRENT_LANGUAGE == 'en' %}IF YOU WANT TO GO DEEPER{% else %}HVIS DU VIL GÅ DYPERE{% endif %}</span><h2>{% if CURRENT_LANGUAGE == 'fa' %}از نتیجه به بسته مناسب بروید.{% elif CURRENT_LANGUAGE == 'en' %}Choose what you want more of.{% else %}Velg hva du ønsker mer av.{% endif %}</h2></div>
-          <p>{% if CURRENT_LANGUAGE == 'fa' %}نتیجه بالا رایگان می‌ماند. این بسته‌ها برای کسی است که گزارش ذخیره‌شدنی، تحلیل انسانی Åse، آینده، رابطه یا گفت‌وگو می‌خواهد.{% elif CURRENT_LANGUAGE == 'en' %}Your reading above stays available. These packages are for a saved report, Åse's human analysis, future timing, relationship work, or a conversation.{% else %}Lesningen over forsvinner ikke. Pakkene er for deg som vil ha en lagret rapport, Åses menneskelige analyse, fremtid, relasjon eller en samtale.{% endif %}</p>
+          <div>
+            <span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}تحلیل خودت را بساز{% elif CURRENT_LANGUAGE == 'en' %}BUILD YOUR ANALYSIS{% else %}BYGG ANALYSEN DIN{% endif %}</span>
+            <h2>{% if CURRENT_LANGUAGE == 'fa' %}دیگر لازم نیست یک بسته آماده انتخاب کنید.{% elif CURRENT_LANGUAGE == 'en' %}You no longer have to choose a fixed package.{% else %}Du trenger ikke lenger velge en fast pakke.{% endif %}</h2>
+          </div>
+          <p>{% if CURRENT_LANGUAGE == 'fa' %}همه از یک هسته مشترک شروع می‌کنند. هر ماشین‌حساب یک ماژول است که می‌توانید اضافه کنید، و تحلیل آینده را می‌توانید از یک ماه تا سه سال انتخاب کنید.{% elif CURRENT_LANGUAGE == 'en' %}Everyone starts with the same core. Each calculator is a module you can add, and future analysis can run from one month to three years.{% else %}Alle starter med samme kjerne. Hver kalkulator er en modul du kan legge til, og fremtidsanalysen kan kjøpes fra én måned til tre år.{% endif %}</p>
         </div>
-        <div class="ae-goals" role="group" aria-label="{% trans 'Choose a goal' %}">
-          <button type="button" data-package-goal="digital">{% if CURRENT_LANGUAGE == 'fa' %}گزارش دیجیتال{% elif CURRENT_LANGUAGE == 'en' %}Digital report{% else %}Digital rapport{% endif %}</button>
-          <button type="button" data-package-goal="self">{% if CURRENT_LANGUAGE == 'fa' %}خودشناسی{% elif CURRENT_LANGUAGE == 'en' %}Understand myself{% else %}Forstå meg selv{% endif %}</button>
-          <button type="button" data-package-goal="future">{% if CURRENT_LANGUAGE == 'fa' %}آینده{% elif CURRENT_LANGUAGE == 'en' %}The next years{% else %}De neste årene{% endif %}</button>
-          <button type="button" data-package-goal="relationship">{% if CURRENT_LANGUAGE == 'fa' %}رابطه{% elif CURRENT_LANGUAGE == 'en' %}Relationship{% else %}Relasjon{% endif %}</button>
-          <button type="button" data-package-goal="human">{% if CURRENT_LANGUAGE == 'fa' %}گفت‌وگو با Åse{% elif CURRENT_LANGUAGE == 'en' %}Talk to Åse{% else %}Snakk med Åse{% endif %}</button>
-        </div>
-        <div class="ae-package-grid">
-          <article class="ae-package ae-package--227 is-recommended" data-package-card="ase227" data-goal="digital">
-            <div class="ae-package__top"><span class="ae-package__badge">227 EDITION</span><span class="ae-package__recommend" data-recommend-label>{% if CURRENT_LANGUAGE == 'fa' %}پیشنهاد دیجیتال{% elif CURRENT_LANGUAGE == 'en' %}Digital pick{% else %}Digitalt valg{% endif %}</span></div>
-            <h3>{% if CURRENT_LANGUAGE == 'fa' %}گزارش کامل ÅSE 227{% elif CURRENT_LANGUAGE == 'en' %}ÅSE 227 Complete Report{% else %}ÅSE 227 Fullrapport{% endif %}</h3>
-            <p>{% if CURRENT_LANGUAGE == 'fa' %}همه محاسبات موتور، روایت شخصی، زمان‌بندی و نقشه کامل در یک گزارش دیجیتال.{% elif CURRENT_LANGUAGE == 'en' %}The complete engine map, personal narrative, timing and all calculations gathered as one digital report.{% else %}Hele motorkartet, personlig fortelling, timing og alle beregningene samlet som digital rapport.{% endif %}</p>
-            <ul><li>{% if CURRENT_LANGUAGE == 'fa' %}نقشه کامل اعداد{% elif CURRENT_LANGUAGE == 'en' %}Complete number map{% else %}Komplett tallkart{% endif %}</li><li>{% if CURRENT_LANGUAGE == 'fa' %}روایت شخصی{% elif CURRENT_LANGUAGE == 'en' %}Personal narrative{% else %}Personlig fortelling{% endif %}</li><li>PDF / {% if CURRENT_LANGUAGE == 'fa' %}نسخه ذخیره‌شدنی{% elif CURRENT_LANGUAGE == 'en' %}saved copy{% else %}lagret kopi{% endif %}</li></ul>
-            <a class="ae-package__demo" href="{% url 'members:report_demo' 'ase227' %}">Se eksempel på digitalversjonen →</a>
-            <div class="ae-package__bottom"><strong>227 kr</strong><a href="/bestill/?package=ase227&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب 227{% elif CURRENT_LANGUAGE == 'en' %}Choose 227{% else %}Velg 227{% endif %} →</a></div>
-          </article>
 
-          <article class="ae-package" data-package-card="personlighet" data-goal="self">
-            <div class="ae-package__top"><span class="ae-package__badge">ÅSE ORIGINAL</span></div>
-            <h3>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل شخصیت{% elif CURRENT_LANGUAGE == 'en' %}Personality Analysis{% else %}Personlighetsanalyse{% endif %}</h3>
-            <p>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل انسانی Åse از شخصیت، کارما، سلامت نمادین و اعداد شانس.{% elif CURRENT_LANGUAGE == 'en' %}Åse's human-written analysis of personality, karmic themes, symbolic health profile and lucky numbers.{% else %}Åses menneskeskrevne analyse av personlighet, karmiske tema, symbolsk helseprofil og lykketall.{% endif %}</p>
-            <a class="ae-package__demo" href="{% url 'members:report_demo' 'personlighet' %}">Se eksempel på digitalversjonen →</a>
-            <div class="ae-package__bottom"><strong>698 kr</strong><a href="/bestill/?package=personlighet&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
+        <div class="ae-builder-steps">
+          <article>
+            <span>01</span>
+            <strong>227 kr</strong>
+            <h3>{% if CURRENT_LANGUAGE == 'fa' %}هسته تحلیل{% elif CURRENT_LANGUAGE == 'en' %}The core{% else %}Kjernen{% endif %}</h3>
+            <p>{% if CURRENT_LANGUAGE == 'fa' %}عدد نام، صدادار، بی‌صدا، مسیر زندگی و روز تولد همیشه همراه تحلیل هستند.{% elif CURRENT_LANGUAGE == 'en' %}Name, vowel, consonant, Life Path and Birthday numbers are always included.{% else %}Navnetall, vokaltall, konsonanttall, livsvei og fødselsdagstall er alltid med.{% endif %}</p>
           </article>
-
-          <article class="ae-package" data-package-card="fremtid2" data-goal="future">
-            <div class="ae-package__top"><span class="ae-package__badge">ÅSE ORIGINAL</span></div>
-            <h3>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل آینده ۲ ساله{% elif CURRENT_LANGUAGE == 'en' %}2-Year Future Analysis{% else %}2 års Fremtidsanalyse{% endif %}</h3>
-            <p>{% if CURRENT_LANGUAGE == 'fa' %}سال شخصی، جوهره، ترانزیت‌ها و تحلیل ماه‌به‌ماه برای دو سال آینده.{% elif CURRENT_LANGUAGE == 'en' %}Personal Years, Essence, transits and month-by-month analysis for the next two years.{% else %}Personlige år, essenstall, transitter og måned-for-måned analyse for de neste to årene.{% endif %}</p>
-            <a class="ae-package__demo" href="{% url 'members:report_demo' 'fremtid2' %}">Se eksempel på digitalversjonen →</a>
-            <div class="ae-package__bottom"><strong>698 kr</strong><a href="/bestill/?package=fremtid2&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
+          <article>
+            <span>02</span>
+            <strong>+29–49 kr</strong>
+            <h3>{% if CURRENT_LANGUAGE == 'fa' %}ماژول‌های بیشتر{% elif CURRENT_LANGUAGE == 'en' %}More modules{% else %}Flere moduler{% endif %}</h3>
+            <p>{% if CURRENT_LANGUAGE == 'fa' %}کارما، پل‌ها، چالش‌ها، چرخه‌ها، ترانزیت، اسنس، نشانی، تلفن و موارد دیگر را جداگانه اضافه کنید.{% elif CURRENT_LANGUAGE == 'en' %}Add karma, bridges, challenges, cycles, transits, Essence, address, phone and more individually.{% else %}Legg til karma, broer, utfordringer, sykluser, transitter, essens, adresse, telefon og mer enkeltvis.{% endif %}</p>
           </article>
-
-          <article class="ae-package" data-package-card="partner" data-goal="relationship">
-            <div class="ae-package__top"><span class="ae-package__badge">ÅSE ORIGINAL</span><span class="ae-package__recommend" data-partner-recommend hidden>{% if CURRENT_LANGUAGE == 'fa' %}مرتبط با نتیجه شما{% elif CURRENT_LANGUAGE == 'en' %}Relevant to your result{% else %}Relevant for resultatet ditt{% endif %}</span></div>
-            <h3>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل رابطه + ۱ سال{% elif CURRENT_LANGUAGE == 'en' %}Partner Analysis + 1 Year{% else %}Partneranalyse + 1 år{% endif %}</h3>
-            <p>{% if CURRENT_LANGUAGE == 'fa' %}سازگاری، نقاط تفاوت و ریتم سالانه/ماهانه رابطه.{% elif CURRENT_LANGUAGE == 'en' %}Compatibility, differences and the relationship's annual/monthly rhythm.{% else %}Kompatibilitet, forskjeller og relasjonens årlige/månedlige rytme.{% endif %}</p>
-            <a class="ae-package__demo" href="{% url 'members:report_demo' 'partner' %}">Se eksempel på digitalversjonen →</a>
-            <div class="ae-package__bottom"><strong>798 kr</strong><a href="/bestill/?package=partner&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
+          <article>
+            <span>03</span>
+            <strong>1–36</strong>
+            <h3>{% if CURRENT_LANGUAGE == 'fa' %}ماه‌های آینده{% elif CURRENT_LANGUAGE == 'en' %}Future months{% else %}Fremtidsmåneder{% endif %}</h3>
+            <p>{% if CURRENT_LANGUAGE == 'fa' %}۱، ۳، ۶، ۱۲، ۲۴ یا ۳۶ ماه را انتخاب کنید. هر ماه با سال شخصی، اسنس و ترانزیت‌ها خوانده می‌شود.{% elif CURRENT_LANGUAGE == 'en' %}Choose 1, 3, 6, 12, 24 or 36 months. Every month is read together with Personal Year, Essence and transits.{% else %}Velg 1, 3, 6, 12, 24 eller 36 måneder. Hver måned leses sammen med personlig år, essens og transitter.{% endif %}</p>
           </article>
-
-          <article class="ae-package ae-package--wide" data-package-card="komplett" data-goal="self future">
-            <div class="ae-package__top"><span class="ae-package__badge">ÅSE ORIGINAL · FULL DYBDE</span></div>
-            <h3>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل کامل شخصیت + آینده{% elif CURRENT_LANGUAGE == 'en' %}Complete Personality + Future Analysis{% else %}Komplett Personlighetsanalyse + Fremtid{% endif %}</h3>
-            <p>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل ۴۰ تا ۶۰ صفحه‌ای Åse: شخصیت، کارما، سلامت نمادین، چرخه‌ها، ترانزیت‌ها و اعداد شانس.{% elif CURRENT_LANGUAGE == 'en' %}Åse's 40–60 page analysis: personality, karmic themes, symbolic health, cycles, transits and lucky numbers.{% else %}Åses analyse på ca. 40–60 sider: personlighet, karmiske tema, symbolsk helse, sykluser, transitter og lykketall.{% endif %}</p>
-            <div class="ae-package__demo-row"><a href="{% url 'members:report_demo' 'komplett1' %}">Demo 1 år</a><a href="{% url 'members:report_demo' 'komplett2' %}">Demo 2 år</a><a href="{% url 'members:report_demo' 'komplett3' %}">Demo 3 år</a></div>
-            <div class="ae-package__variants"><a href="/bestill/?package=komplett1&amp;from=ase"><span>1 {% if CURRENT_LANGUAGE == 'fa' %}سال{% elif CURRENT_LANGUAGE == 'en' %}year{% else %}år{% endif %}</span><strong>998 kr</strong></a><a href="/bestill/?package=komplett2&amp;from=ase"><span>2 {% if CURRENT_LANGUAGE == 'fa' %}سال{% elif CURRENT_LANGUAGE == 'en' %}years{% else %}år{% endif %}</span><strong>1 098 kr</strong></a><a href="/bestill/?package=komplett3&amp;from=ase"><span>3 {% if CURRENT_LANGUAGE == 'fa' %}سال{% elif CURRENT_LANGUAGE == 'en' %}years{% else %}år{% endif %}</span><strong>1 198 kr</strong></a></div>
-          </article>
-
-          <article class="ae-package" data-package-card="veiledning15" data-goal="human">
-            <div class="ae-package__top"><span class="ae-package__badge">LIVE MED ÅSE</span></div>
-            <h3>{% if CURRENT_LANGUAGE == 'fa' %}گفت‌وگوی راهنمایی{% elif CURRENT_LANGUAGE == 'en' %}Guidance Call{% else %}Veiledningssamtale{% endif %}</h3>
-            <p>{% if CURRENT_LANGUAGE == 'fa' %}۱۵ دقیقه گفت‌وگوی مستقیم با Åse؛ قیمت اصلی ۲۴ کرون در دقیقه.{% elif CURRENT_LANGUAGE == 'en' %}15 minutes directly with Åse, based on her current rate of 24 kr per minute.{% else %}15 minutter direkte med Åse, basert på hennes nåværende pris på 24 kr per minutt.{% endif %}</p>
-            <a class="ae-package__demo" href="{% url 'members:report_demo' 'veiledning15' %}">Se eksempel på digitalversjonen →</a>
-            <div class="ae-package__bottom"><strong>360 kr</strong><a href="/bestill/?package=veiledning15&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
-          </article>
-
-          <article class="ae-package" data-package-card="familie3" data-goal="self">
-            <div class="ae-package__top"><span class="ae-package__badge">3 × KOMPLETT</span></div>
-            <h3>{% if CURRENT_LANGUAGE == 'fa' %}بسته ۳ تحلیل کامل{% elif CURRENT_LANGUAGE == 'en' %}3 Complete Analyses{% else %}3 komplette analyser{% endif %}</h3>
-            <p>{% if CURRENT_LANGUAGE == 'fa' %}برای خانواده، هدیه یا سه نفر؛ هر کدام با یک سال تحلیل آینده.{% elif CURRENT_LANGUAGE == 'en' %}For family, gifts or three people; each with one year of future analysis.{% else %}For familie, gave eller tre personer; hver med ett års fremtidsanalyse.{% endif %}</p>
-            <a class="ae-package__demo" href="{% url 'members:report_demo' 'familie3' %}">Se eksempel på digitalversjonen →</a>
-            <div class="ae-package__bottom"><strong>2 994 kr</strong><a href="/bestill/?package=familie3&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
+          <article>
+            <span>04</span>
+            <strong>+360 kr</strong>
+            <h3>{% if CURRENT_LANGUAGE == 'fa' %}گفت‌وگو با Åse{% elif CURRENT_LANGUAGE == 'en' %}Talk to Åse{% else %}Snakk med Åse{% endif %}</h3>
+            <p>{% if CURRENT_LANGUAGE == 'fa' %}در صورت تمایل، ۱۵ دقیقه راهنمایی مستقیم بر اساس همین تحلیل اضافه کنید.{% elif CURRENT_LANGUAGE == 'en' %}If you want, add 15 minutes of direct guidance based on the analysis you built.{% else %}Hvis du vil, kan du legge til 15 minutter direkte veiledning basert på analysen du har bygget.{% endif %}</p>
           </article>
         </div>
-        <p class="ae-package-source">{% if CURRENT_LANGUAGE == 'fa' %}بسته‌های Åse و قیمت‌ها بر اساس پیشنهادهای فعلی Numerologens Verden در ۲۹ سپتامبر ۲۰۲۶ تنظیم شده‌اند.{% elif CURRENT_LANGUAGE == 'en' %}Åse package names and prices mirror the current Numerologens Verden offers as checked on 29 September 2026.{% else %}Åse-pakkene og prisene følger tilbudene som ligger ute på Numerologens Verden, kontrollert 29. september 2026.{% endif %}</p>
+
+        <div class="ae-builder-prices">
+          <div><small>{% if CURRENT_LANGUAGE == 'fa' %}فقط هسته{% elif CURRENT_LANGUAGE == 'en' %}Core only{% else %}Bare kjerne{% endif %}</small><strong>227 kr</strong></div>
+          <div><small>{% if CURRENT_LANGUAGE == 'fa' %}عمق کامل{% elif CURRENT_LANGUAGE == 'en' %}Full depth{% else %}Full dybde{% endif %}</small><strong>698 kr</strong></div>
+          <div><small>{% if CURRENT_LANGUAGE == 'fa' %}عمق کامل + ۱ سال{% elif CURRENT_LANGUAGE == 'en' %}Full depth + 1 year{% else %}Full dybde + 1 år{% endif %}</small><strong>998 kr</strong></div>
+          <div><small>{% if CURRENT_LANGUAGE == 'fa' %}عمق کامل + ۲ سال{% elif CURRENT_LANGUAGE == 'en' %}Full depth + 2 years{% else %}Full dybde + 2 år{% endif %}</small><strong>1 098 kr</strong></div>
+          <div><small>{% if CURRENT_LANGUAGE == 'fa' %}عمق کامل + ۳ سال{% elif CURRENT_LANGUAGE == 'en' %}Full depth + 3 years{% else %}Full dybde + 3 år{% endif %}</small><strong>1 198 kr</strong></div>
+        </div>
+
+        <div class="ae-builder-actions">
+          <a class="ae-primary" href="/bestill/?package=builder&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}ساخت تحلیل من ←{% elif CURRENT_LANGUAGE == 'en' %}Build my analysis →{% else %}Bygg min analyse →{% endif %}</a>
+          <a class="ae-secondary" href="{% url 'members:report_demo' 'builder' %}">{% if CURRENT_LANGUAGE == 'fa' %}نمونه تحلیل ماژولار{% elif CURRENT_LANGUAGE == 'en' %}View modular report demo{% else %}Se demo av modulrapport{% endif %}</a>
+          <a class="ae-secondary" href="{% url 'members:report_demo' 'fremtid2' %}">{% if CURRENT_LANGUAGE == 'fa' %}نمونه ۲ سال آینده{% elif CURRENT_LANGUAGE == 'en' %}View 2-year future demo{% else %}Se 2-års fremtidsdemo{% endif %}</a>
+        </div>
+
+        <p class="ae-package-source">{% if CURRENT_LANGUAGE == 'fa' %}بسته‌های قدیمی برای سفارش‌های قبلی محفوظ می‌مانند. خریدهای جدید از تحلیل‌ساز ماژولار استفاده می‌کنند.{% elif CURRENT_LANGUAGE == 'en' %}Legacy packages remain available for previous orders. New purchases use the modular analysis builder.{% else %}Tidligere pakker beholdes for gamle ordre. Nye kjøp går gjennom den modulære analysebyggeren.{% endif %}</p>
       </div>
     </section>
 
