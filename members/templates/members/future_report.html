@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% get_current_language as CURRENT_LANGUAGE %}
+{% block title %}{{ package.title }} · Numerologist{% endblock %}
+{% block body_attrs %} class="member-page"{% endblock %}
+{% block external_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=4">{% endblock %}
+{% block main %}
+<header class="m-future-hero">
+  <div class="m-shell">
+    <div class="m-future-hero__top">
+      <div>
+        <span class="m-kicker">{% if demo %}{% if CURRENT_LANGUAGE == 'fa' %}نمونه · تحلیل آینده{% elif CURRENT_LANGUAGE == 'en' %}DEMO · FUTURE ANALYSIS{% else %}DEMO · FREMTIDSANALYSE{% endif %}{% else %}{% if CURRENT_LANGUAGE == 'fa' %}تحلیل آینده من{% elif CURRENT_LANGUAGE == 'en' %}MY FUTURE ANALYSIS{% else %}MIN FREMTIDSANALYSE{% endif %}{% endif %}</span>
+        <h1>{{ package.title }}</h1>
+        <p class="m-future-hero__lead">
+          {% if CURRENT_LANGUAGE == 'fa' %}یک گزارش ۲۴ ماهه که سال شخصی، ماه شخصی، اسنس، ترانزیت‌ها و چرخه‌های بلندمدت را کنار هم می‌خواند.
+          {% elif CURRENT_LANGUAGE == 'en' %}A 24-month reading that brings Personal Years, Personal Months, Essence, transits and longer life cycles together.
+          {% else %}En 24-måneders lesning som setter personlige år, måneder, essenstall, transitter og de lange livssyklusene sammen.{% endif %}
+        </p>
+      </div>
+      {% if demo %}<span class="m-demo-badge">{% if CURRENT_LANGUAGE == 'fa' %}نمونه{% elif CURRENT_LANGUAGE == 'en' %}EXAMPLE{% else %}EKSEMPEL{% endif %}</span>{% endif %}
+    </div>
+
+    <div class="m-future-profile">
+      <div><small>{% if CURRENT_LANGUAGE == 'fa' %}نام{% elif CURRENT_LANGUAGE == 'en' %}Name{% else %}Navn{% endif %}</small><strong>{{ profile.current_name|default:profile.birth_name }}</strong></div>
+      <div><small>{% if CURRENT_LANGUAGE == 'fa' %}تاریخ تولد{% elif CURRENT_LANGUAGE == 'en' %}Birth date{% else %}Fødselsdato{% endif %}</small><strong>{{ profile.birth_date }}</strong></div>
+      <div><small>{% if CURRENT_LANGUAGE == 'fa' %}مسیر زندگی{% elif CURRENT_LANGUAGE == 'en' %}Life Path{% else %}Livsvei{% endif %}</small><strong>{{ profile.life.label }}</strong></div>
+      <div><small>{% if CURRENT_LANGUAGE == 'fa' %}مرحله فعال{% elif CURRENT_LANGUAGE == 'en' %}Active Pinnacle{% else %}Aktivt utviklingstrinn{% endif %}</small><strong>{{ future_report.active_pinnacle.value.label }}</strong></div>
+    </div>
+
+    <nav class="m-future-nav" aria-label="Report sections">
+      <a href="#metode">{% if CURRENT_LANGUAGE == 'fa' %}روش خواندن{% elif CURRENT_LANGUAGE == 'en' %}How to read{% else %}Slik leses rapporten{% endif %}</a>
+      <a href="#aar">{% if CURRENT_LANGUAGE == 'fa' %}سال‌ها{% elif CURRENT_LANGUAGE == 'en' %}Years{% else %}Årene{% endif %}</a>
+      <a href="#oversikt">{% if CURRENT_LANGUAGE == 'fa' %}جدول ۲۴ ماهه{% elif CURRENT_LANGUAGE == 'en' %}24-month table{% else %}24-måneders tabell{% endif %}</a>
+      <a href="#maaneder">{% if CURRENT_LANGUAGE == 'fa' %}ماه‌به‌ماه{% elif CURRENT_LANGUAGE == 'en' %}Month by month{% else %}Måned for måned{% endif %}</a>
+      <a href="#syntese">{% if CURRENT_LANGUAGE == 'fa' %}جمع‌بندی{% elif CURRENT_LANGUAGE == 'en' %}Synthesis{% else %}Syntese{% endif %}</a>
+    </nav>
+  </div>
+</header>
+
+<section id="metode" class="m-section m-section--stone m-future-method">
+  <div class="m-shell">
+    <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}چگونه زمان خوانده می‌شود{% elif CURRENT_LANGUAGE == 'en' %}HOW TIMING IS READ{% else %}SLIK LESES TIMING{% endif %}</span>
+    <h2>{% if CURRENT_LANGUAGE == 'fa' %}عددها جدا از هم زندگی نمی‌کنند.{% elif CURRENT_LANGUAGE == 'en' %}The numbers do not live in isolation.{% else %}Tallene lever ikke hver for seg.{% endif %}</h2>
+    <p class="m-future-method__intro">{{ future_report.method_intro }}</p>
+    <div class="m-future-method__grid">
+      <article>
+        <span>01</span>
+        <h3>{% if CURRENT_LANGUAGE == 'fa' %}سال شخصی{% elif CURRENT_LANGUAGE == 'en' %}Personal Year{% else %}Personlig år{% endif %}</h3>
+        <p>{% if CURRENT_LANGUAGE == 'fa' %}فضای اصلی سال تقویمی را نشان می‌دهد: چه نوع رشد و تجربه‌ای بیشتر فعال است.{% elif CURRENT_LANGUAGE == 'en' %}The broad atmosphere of the calendar year: which kind of growth and experience is most active.{% else %}Viser hovedklimaet i kalenderåret: hvilken type vekst og erfaring som er mest aktiv.{% endif %}</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>{% if CURRENT_LANGUAGE == 'fa' %}ماه شخصی{% elif CURRENT_LANGUAGE == 'en' %}Personal Month{% else %}Personlig måned{% endif %}</h3>
+        <p>{% if CURRENT_LANGUAGE == 'fa' %}ریتم کوتاه‌تر را نشان می‌دهد و توضیح می‌دهد موضوع سال در این ماه چگونه خودش را نشان می‌دهد.{% elif CURRENT_LANGUAGE == 'en' %}Shows the shorter rhythm and how the year's theme is likely to be expressed in this particular month.{% else %}Viser den kortere rytmen og hvordan årets tema kan komme til uttrykk akkurat denne måneden.{% endif %}</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>{% if CURRENT_LANGUAGE == 'fa' %}اسنس و ترانزیت‌ها{% elif CURRENT_LANGUAGE == 'en' %}Essence & transits{% else %}Essens & transitter{% endif %}</h3>
+        <p>{% if CURRENT_LANGUAGE == 'fa' %}حروف فعال نام، لایه‌ای شخصی‌تر می‌سازند که از تولد تا تولد تغییر می‌کند.{% elif CURRENT_LANGUAGE == 'en' %}The active letters in the name create a more personal layer that changes from birthday to birthday.{% else %}De aktive bokstavene i navnet skaper et mer personlig lag som skifter fra fødselsdag til fødselsdag.{% endif %}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="m-section m-future-long">
+  <div class="m-shell m-future-long__grid">
+    <div>
+      <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}پس‌زمینه بلندمدت{% elif CURRENT_LANGUAGE == 'en' %}THE LONG ARC{% else %}DEN LANGE BUEN{% endif %}</span>
+      <div class="m-future-big-number">{{ future_report.active_pinnacle.value.label }}</div>
+    </div>
+    <div>
+      <h2>{% if CURRENT_LANGUAGE == 'fa' %}مرحله رشد {{ future_report.active_pinnacle.index }}{% elif CURRENT_LANGUAGE == 'en' %}Pinnacle {{ future_report.active_pinnacle.index }}{% else %}Utviklingstrinn {{ future_report.active_pinnacle.index }}{% endif %}</h2>
+      <p>{{ future_report.active_pinnacle.start }}{% if future_report.active_pinnacle.end %}–{{ future_report.active_pinnacle.end }}{% else %}+{% endif %} {% if CURRENT_LANGUAGE == 'fa' %}سالگی{% elif CURRENT_LANGUAGE == 'en' %}years{% else %}år{% endif %}</p>
+      <p class="m-future-long__body">{{ future_report.synthesis }}</p>
+    </div>
+  </div>
+</section>
+
+<section id="aar" class="m-section m-section--stone">
+  <div class="m-shell">
+    <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}سال‌های شخصی در این بازه{% elif CURRENT_LANGUAGE == 'en' %}PERSONAL YEARS IN THIS PERIOD{% else %}PERSONLIGE ÅR I PERIODEN{% endif %}</span>
+    <h2>{% if CURRENT_LANGUAGE == 'fa' %}هر سال یک فصل تازه در همان داستان است.{% elif CURRENT_LANGUAGE == 'en' %}Each year is a new chapter in the same story.{% else %}Hvert år er et nytt kapittel i samme fortelling.{% endif %}</h2>
+    <div class="m-future-years">
+      {% for item in future_report.years %}
+      <article class="m-future-year">
+        <div class="m-future-year__head">
+          <span>{{ item.year }}</span>
+          <strong>{{ item.number }}</strong>
+        </div>
+        <h3>{{ item.title }}</h3>
+        <p>{{ future_report.person }}, {{ item.body|lower|capfirst }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="oversikt" class="m-section m-future-table-section">
+  <div class="m-shell">
+    <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}نمای کلی ۲۴ ماه{% elif CURRENT_LANGUAGE == 'en' %}24-MONTH OVERVIEW{% else %}24-MÅNEDERS OVERSIKT{% endif %}</span>
+    <h2>{% if CURRENT_LANGUAGE == 'fa' %}همه لایه‌های فعال، کنار هم.{% elif CURRENT_LANGUAGE == 'en' %}All active layers, side by side.{% else %}Alle aktive lag, side om side.{% endif %}</h2>
+    <div class="m-future-table-wrap">
+      <table class="m-future-table">
+        <thead><tr>
+          <th>{% if CURRENT_LANGUAGE == 'fa' %}ماه{% elif CURRENT_LANGUAGE == 'en' %}Month{% else %}Måned{% endif %}</th>
+          <th>{% if CURRENT_LANGUAGE == 'fa' %}ماه شخصی{% elif CURRENT_LANGUAGE == 'en' %}Personal month{% else %}Personlig måned{% endif %}</th>
+          <th>{% if CURRENT_LANGUAGE == 'fa' %}سال شخصی{% elif CURRENT_LANGUAGE == 'en' %}Personal year{% else %}Personlig år{% endif %}</th>
+          <th>{% if CURRENT_LANGUAGE == 'fa' %}اسنس{% elif CURRENT_LANGUAGE == 'en' %}Essence{% else %}Essens{% endif %}</th>
+          <th>{% if CURRENT_LANGUAGE == 'fa' %}ترانزیت‌های فعال{% elif CURRENT_LANGUAGE == 'en' %}Active transits{% else %}Aktive transitter{% endif %}</th>
+        </tr></thead>
+        <tbody>
+        {% for item in future_report.timeline %}
+          <tr>
+            <td><strong>{{ item.month_name|capfirst }}</strong> {{ item.year }}</td>
+            <td><span class="m-num-pill">{{ item.personal_month }}</span></td>
+            <td>{{ item.personal_year }}</td>
+            <td>{{ item.essence.label }}</td>
+            <td>{% for tr in item.transits %}<span class="m-transit-letter">{{ tr.letter }}·{{ tr.value }}</span>{% empty %}—{% endfor %}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="maaneder" class="m-section m-section--stone m-future-months">
+  <div class="m-shell">
+    <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}ماه‌به‌ماه{% elif CURRENT_LANGUAGE == 'en' %}MONTH BY MONTH{% else %}MÅNED FOR MÅNED{% endif %}</span>
+    <h2>{% if CURRENT_LANGUAGE == 'fa' %}ریتم را دنبال کن، نه یک پیش‌بینی جداگانه را.{% elif CURRENT_LANGUAGE == 'en' %}Follow the rhythm, not isolated predictions.{% else %}Følg rytmen, ikke enkeltstående spådommer.{% endif %}</h2>
+    {% for group in future_report.groups %}
+      <div class="m-future-year-divider"><span>{{ group.year }}</span></div>
+      <div class="m-future-timeline">
+      {% for item in group.months %}
+        <details class="m-future-month" {% if item.index == 1 %}open{% endif %}>
+          <summary>
+            <div class="m-future-month__date"><small>{{ item.year }}</small><strong>{{ item.month_name|capfirst }}</strong></div>
+            <span class="m-future-month__number">{{ item.personal_month }}</span>
+            <div class="m-future-month__summary">
+              <strong>{{ item.title }}</strong>
+              <span>{% if CURRENT_LANGUAGE == 'fa' %}سال{% elif CURRENT_LANGUAGE == 'en' %}Year{% else %}År{% endif %} {{ item.personal_year }} · {% if CURRENT_LANGUAGE == 'fa' %}اسنس{% elif CURRENT_LANGUAGE == 'en' %}Essence{% else %}Essens{% endif %} {{ item.essence.label }}</span>
+            </div>
+            <span class="m-future-month__toggle">+</span>
+          </summary>
+          <div class="m-future-month__body">
+            <p>{{ item.body }}</p>
+            <div class="m-future-transits">
+              {% for tr in item.transits %}
+                <span>
+                  {% if tr.role == 'physical' %}{% if CURRENT_LANGUAGE == 'fa' %}فیزیکی{% elif CURRENT_LANGUAGE == 'en' %}Physical{% else %}Fysisk{% endif %}
+                  {% elif tr.role == 'mental' %}{% if CURRENT_LANGUAGE == 'fa' %}ذهنی{% elif CURRENT_LANGUAGE == 'en' %}Mental{% else %}Mental{% endif %}
+                  {% else %}{% if CURRENT_LANGUAGE == 'fa' %}معنوی{% elif CURRENT_LANGUAGE == 'en' %}Spiritual{% else %}Spirituell{% endif %}{% endif %}
+                  · {{ tr.letter }} / {{ tr.value }}
+                </span>
+              {% endfor %}
+              <span>{% if CURRENT_LANGUAGE == 'fa' %}سن{% elif CURRENT_LANGUAGE == 'en' %}Age{% else %}Alder{% endif %} {{ item.age }}</span>
+            </div>
+            {% if item.is_birthday_month %}
+              <p class="m-future-birthday-note">{% if CURRENT_LANGUAGE == 'fa' %}این ماه ماه تولد است؛ اسنس و ترانزیت‌های سال سنی تازه از تولد به بعد قوی‌تر می‌شوند.{% elif CURRENT_LANGUAGE == 'en' %}This is the birthday month; the new age's Essence and transits become stronger from the birthday onward.{% else %}Dette er fødselsmåneden; essenstallet og transittene for den nye alderen blir sterkere fra selve fødselsdagen.{% endif %}</p>
+            {% endif %}
+          </div>
+        </details>
+      {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="syntese" class="m-section m-future-synthesis">
+  <div class="m-shell m-future-synthesis__grid">
+    <div>
+      <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}جمع‌بندی{% elif CURRENT_LANGUAGE == 'en' %}SYNTHESIS{% else %}SYNTESE{% endif %}</span>
+      <h2>{% if CURRENT_LANGUAGE == 'fa' %}داستان کامل از یک عدد مهم‌تر است.{% elif CURRENT_LANGUAGE == 'en' %}The whole story matters more than one number.{% else %}Hele fortellingen er viktigere enn ett tall.{% endif %}</h2>
+    </div>
+    <div>
+      <p class="m-future-synthesis__lead">{{ future_report.synthesis }}</p>
+      <p>{% if CURRENT_LANGUAGE == 'fa' %}این گزارش عددها را به‌عنوان گرایش و زمان‌بندی نمادین می‌خواند، نه تضمین یک رویداد. وقتی چند لایه یک جهت را نشان می‌دهند، آن موضوع در تفسیر وزن بیشتری می‌گیرد.{% elif CURRENT_LANGUAGE == 'en' %}This report reads the numbers as symbolic tendencies and timing, not guarantees of specific events. When several layers point in the same direction, that theme carries more weight in the reading.{% else %}Rapporten leser tallene som symbolske tendenser og timing, ikke som garanti for bestemte hendelser. Når flere lag peker samme vei, får det temaet større tyngde i tolkningen.{% endif %}</p>
+    </div>
+  </div>
+
+  <div class="m-shell m-report-actions">
+    {% if demo %}
+      <a class="m-btn m-btn--gold" href="/bestill/?package={{ package_slug }}">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} {{ package.title }} · {{ package.price }} kr →</a>
+      <a class="m-btn m-btn--ghost" href="/ase-edition/#ae-packages">{% if CURRENT_LANGUAGE == 'fa' %}بازگشت به بسته‌ها{% elif CURRENT_LANGUAGE == 'en' %}Back to packages{% else %}Tilbake til pakkene{% endif %}</a>
+    {% else %}
+      <button class="m-btn m-btn--gold" type="button" onclick="window.print()">{% if CURRENT_LANGUAGE == 'fa' %}چاپ / ذخیره PDF{% elif CURRENT_LANGUAGE == 'en' %}Print / save PDF{% else %}Skriv ut / lagre PDF{% endif %}</button>
+      <a class="m-btn m-btn--ghost" href="{% url 'members:dashboard' %}">{% if CURRENT_LANGUAGE == 'fa' %}بازگشت به صفحه من{% elif CURRENT_LANGUAGE == 'en' %}Back to My page{% else %}Tilbake til Min side{% endif %}</a>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}
