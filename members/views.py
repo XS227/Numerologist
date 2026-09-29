@@ -147,7 +147,7 @@ def google_start(request: HttpRequest) -> HttpResponse:
     _remember_next(request)
     state = secrets.token_urlsafe(32)
     request.session["google_oauth_state"] = state
-    redirect_uri = request.build_absolute_uri(reverse("members:google_callback"))
+    redirect_uri = settings.GOOGLE_REDIRECT_URI or request.build_absolute_uri(reverse("members:google_callback"))
     params = {
         "client_id": settings.GOOGLE_CLIENT_ID,
         "redirect_uri": redirect_uri,
@@ -166,7 +166,7 @@ def google_callback(request: HttpRequest) -> HttpResponse:
     if not expected or not secrets.compare_digest(expected, state) or not code:
         messages.error(request, "Google-innlogging kunne ikke bekreftes.")
         return redirect("members:login")
-    redirect_uri = request.build_absolute_uri(reverse("members:google_callback"))
+    redirect_uri = settings.GOOGLE_REDIRECT_URI or request.build_absolute_uri(reverse("members:google_callback"))
     try:
         token = _oauth_post(
             "https://oauth2.googleapis.com/token",
