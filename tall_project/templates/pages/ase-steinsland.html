@@ -1,142 +1,105 @@
 {% extends "base.html" %}
 {% load i18n static %}
 
-{% block title %}Åse Karin Steinsland — {% if CURRENT_LANGUAGE == 'nb' %}numerolog og livsveileder{% else %}numerologist and life guide{% endif %}{% endblock %}
+{% block title %}Åse Karin Steinsland — Numerolog og livsveileder{% endblock %}
+{% block meta_description %}<meta name="description" content="Åse Karin Steinsland har laget personlige numerologiske analyser siden 1997. Lær hvordan hun beregner delene og leser helheten.">{% endblock %}
 
 {% block structured_data %}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "name": "Åse Karin Steinsland",
-      "jobTitle": "Numerolog og livsveileder",
-      "image": "https://numerologist.setai.no/assets/images/ase-steinsland.jpg",
-      "url": "https://numerologist.setai.no/ase-steinsland/",
-      "telephone": "+4795273772",
-      "worksFor": { "@type": "ProfessionalService", "name": "Numerologist" }
-    },
-    {
-      "@type": "ProfessionalService",
-      "name": "Numerologist – Åse Steinsland",
-      "founder": { "@type": "Person", "name": "Åse Karin Steinsland" },
-      "telephone": "+4795273772",
-      "areaServed": "NO",
-      "url": "https://numerologist.setai.no/ase-steinsland/"
-    }
-  ]
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Åse Karin Steinsland","jobTitle":"Numerolog og livsveileder","image":"https://numerologist.setai.no/static/journey/images/ase-profile-banner-20260929.webp","url":"https://numerologist.setai.no/ase-steinsland/","telephone":"+4795273772"}</script>
 {% endblock %}
 
 {% block body_attrs %} class="number-journey"{% endblock %}
 
 {% block extra_styles %}
-    .ase-page { color: #f3f0e8; }
-    .ase-page h1, .ase-page h2 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -0.03em; }
-    .ase-eyebrow { color: #c6a775; font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin: 0; }
-
-    .ase-hero { text-align: center; padding: clamp(56px, 9vw, 110px) 6% clamp(60px, 9vw, 110px); background: radial-gradient(ellipse at 50% 0%, #c6a77538, transparent 62%); }
-    .ase-portrait { width: clamp(150px, 30vw, 210px); height: clamp(150px, 30vw, 210px); border-radius: 50%; object-fit: cover; object-position: 50% 25%; border: 3px solid #c6a775; box-shadow: 0 0 0 12px #c6a77522, 0 22px 50px #05171a99; }
-    .ase-since { display: inline-block; margin: 22px 0 18px; padding: 6px 16px; border: 1px solid #c6a77590; border-radius: 999px; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: #e2cba2; }
-    .ase-hero h1 { font-size: clamp(2.6rem, 7vw, 4.8rem); line-height: 1.04; margin: 10px auto 16px; color: #f3f0e8; }
-    .ase-hero__lead { max-width: 34ch; margin: 0 auto; font-family: Georgia, serif; font-size: clamp(1.2rem, 2.6vw, 1.45rem); line-height: 1.55; color: #dce3df; }
-
-    .ase-call { display: inline-flex; align-items: center; gap: .7rem; margin-top: 30px; padding: 16px 30px; border-radius: 999px; background: #c6a775; color: #092426; font-size: 1.35rem; font-weight: 700; letter-spacing: .02em; text-decoration: none; box-shadow: 0 14px 34px #c6a77540; transition: transform .25s ease, background .25s ease; }
-    .ase-call:hover, .ase-call:focus-visible { background: #e2cba2; color: #092426; transform: translateY(-2px); text-decoration: none; }
-    .ase-call svg { width: 22px; height: 22px; }
-    .ase-hours { margin: 14px 0 0; font-size: .9rem; color: #bdccc7; }
-
-    .ase-about { background: #f3f0e8; color: #102f31; padding: clamp(60px, 9vw, 100px) 6%; }
-    .ase-about > div { max-width: 680px; margin: 0 auto; }
-    .ase-about h2 { font-size: clamp(2.1rem, 5vw, 3.2rem); margin: 10px 0 20px; }
-    .ase-about p { font-size: 1.1rem; line-height: 1.8; color: #1d3a3c; margin: 0 0 1em; }
-    .ase-about .ase-eyebrow { color: #805d2d; }
-    .ase-about p.ase-first { font-family: Georgia, serif; font-size: clamp(1.2rem, 2.4vw, 1.4rem); line-height: 1.6; color: #102f31; }
-
-    .ase-figure { margin: clamp(36px, 6vw, 60px) auto 0; max-width: 820px; text-align: center; }
-    .ase-figure img { width: 100%; height: auto; display: block; border-radius: 16px; border: 1px solid #c6a77580; box-shadow: 0 24px 50px rgba(9,36,38,.25); }
-    .ase-figure figcaption { margin-top: 12px; font-family: Georgia, serif; font-style: italic; color: #805d2d; }
-
-    .ase-phone { text-align: center; padding: clamp(60px, 9vw, 100px) 6%; background: radial-gradient(ellipse at 50% 100%, #c6a77526, transparent 60%), #092426; }
-    .ase-phone > div { max-width: 680px; margin: 0 auto; }
-    .ase-phone h2 { font-size: clamp(2.1rem, 5vw, 3.2rem); margin: 10px 0 18px; color: #f3f0e8; }
-    .ase-phone p { color: #cdd8d4; font-size: 1.08rem; line-height: 1.7; margin: 0 auto 1em; max-width: 56ch; }
-    .ase-topics { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 26px 0 6px; padding: 0; list-style: none; }
-    .ase-topics li { padding: 8px 16px; border: 1px solid #c6a77560; border-radius: 999px; color: #e2cba2; font-size: .9rem; }
-    .ase-note { font-size: .88rem !important; color: #9fb3ad !important; margin-top: 18px !important; }
-
-    .ase-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: clamp(44px, 7vw, 70px) 6%; }
-    .ase-links a { padding: 12px 20px; border: 1px solid #c6a77570; border-radius: 999px; color: #e2cba2; text-decoration: none; }
-    .ase-links a:hover { background: #c6a775; color: #092426; }
+.ase{--ink:#0a3031;--ink2:#123f40;--paper:#f3efe5;--paper2:#e9e2d5;--muted:#667472;--gold:#b99358;color:var(--ink);background:var(--paper)}
+.ase *{box-sizing:border-box}.ase h1,.ase h2,.ase h3,.ase blockquote{font-family:Georgia,'Times New Roman',serif;font-weight:400}.ase a{text-decoration:none}
+.ase-hero{position:relative;min-height:min(56.25vw,675px);overflow:hidden;background:#f3efe5}
+.ase-hero__media{position:absolute;inset:0}.ase-hero__media:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(247,242,231,.94) 0%,rgba(247,242,231,.78) 32%,rgba(247,242,231,.18) 57%,rgba(247,242,231,0) 72%)}
+.ase-hero__media img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.ase-hero__content{position:relative;z-index:2;margin-right:auto;width:min(50%,720px);min-height:min(56.25vw,675px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(38px,5vw,78px) 30px clamp(38px,5vw,78px) clamp(28px,6vw,90px);color:var(--ink)}
+.ase-kicker{margin:0 0 14px;font-size:.76rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#9a743d}.ase-hero h1{font-size:clamp(2.7rem,5.4vw,5.8rem);line-height:.96;letter-spacing:-.045em;margin:0 0 18px;color:#173b3c}
+.ase-hero__lead{font-size:clamp(1rem,1.5vw,1.25rem);line-height:1.6;max-width:36ch;margin:0 0 26px;color:#405856}.ase-since{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:#9a743d;margin-bottom:24px}
+.ase-actions{display:flex;gap:10px;flex-wrap:wrap}.ase-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;background:#173b3c;color:#fffaf0;font-weight:650;border:1px solid #173b3c}.ase-btn--ghost{background:rgba(255,255,255,.32);color:#173b3c;border-color:rgba(23,59,60,.3);backdrop-filter:blur(6px)}
+.ase-section{padding:clamp(64px,8vw,112px) 6%}.ase-inner{width:min(1120px,100%);margin:0 auto}.ase-eyebrow{margin:0 0 15px;font-size:.72rem;font-weight:750;letter-spacing:.18em;text-transform:uppercase;color:#8d693a}
+.ase-intro{background:var(--paper)}.ase-intro__grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);gap:clamp(38px,7vw,100px);align-items:start}.ase-intro h2,.ase-method h2,.ase-origin h2,.ase-contact h2{font-size:clamp(2.15rem,4.8vw,4rem);line-height:1.04;letter-spacing:-.035em;margin:0 0 24px}
+.ase-copy p{font-size:1.08rem;line-height:1.82;margin:0 0 18px;color:#284646}.ase-quote{margin:8px 0 0;padding-left:24px;border-left:1px solid #b99358;font-size:clamp(1.45rem,2.7vw,2.2rem);line-height:1.35;color:#71502a}
+.ase-facts{margin-top:54px;padding-top:26px;border-top:1px solid #d7cdbd;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.ase-fact strong{display:block;font:400 clamp(1.7rem,3vw,2.5rem)/1 Georgia,serif;color:var(--ink);margin-bottom:7px}.ase-fact span{font-size:.9rem;color:#667472}
+.ase-method{background:var(--ink);color:#f5f0e7}.ase-method .ase-eyebrow{color:#cfb789}.ase-method h2{color:#fff}.ase-method__intro{max-width:720px;color:#cbd9d5;font-size:1.08rem;line-height:1.75}.ase-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.16);margin-top:48px;border-top:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16)}.ase-step{background:var(--ink);padding:36px 30px}.ase-step b{display:block;font:400 2rem/1 Georgia,serif;color:#c9ad7c;margin-bottom:22px}.ase-step h3{font-size:1.55rem;margin:0 0 12px;color:#fff}.ase-step p{margin:0;color:#bdcfca;line-height:1.65}
+.ase-origin{background:#e7e0d3}.ase-origin__grid{display:grid;grid-template-columns:minmax(300px,.92fr) minmax(0,1.08fr);gap:clamp(34px,7vw,92px);align-items:center}.ase-origin__image{overflow:hidden;border-radius:2px;background:#ddd3c2}.ase-origin__image img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;filter:saturate(.78) contrast(.97)}.ase-origin__copy p{font-size:1.05rem;line-height:1.8;color:#304b4a;margin:0 0 18px}
+.ase-contact{background:#f5f1e8}.ase-contact__box{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(34px,6vw,90px);align-items:end;padding-bottom:16px}.ase-contact__copy{max-width:650px}.ase-contact__copy>p{font-size:1.08rem;line-height:1.75;color:#385351;margin:0}.ase-topics{display:flex;flex-wrap:wrap;gap:8px;margin:25px 0 0;padding:0;list-style:none}.ase-topics li{padding:9px 14px;border:1px solid #cfc3b2;border-radius:999px;font-size:.9rem;color:#36504e}
+.ase-callcard{padding:32px;border-top:1px solid #b99358;border-bottom:1px solid #b99358}.ase-callcard small{display:block;color:#71807d;margin-bottom:10px}.ase-callcard a{display:block;font:400 clamp(1.8rem,3.2vw,2.8rem)/1.1 Georgia,serif;color:var(--ink);margin-bottom:12px}.ase-callcard p{margin:0;color:#697875;line-height:1.6;font-size:.92rem}
+.ase-end{background:#092728;color:#d7e1dd;text-align:center;padding:42px 6%}.ase-end a{color:#f5f0e7;margin:0 9px;border-bottom:1px solid rgba(245,240,231,.35)}
+@media(max-width:760px){.ase-hero{min-height:auto;background:#f3efe5}.ase-hero__media{position:relative;height:auto}.ase-hero__media:after{display:none}.ase-hero__media img{height:auto;aspect-ratio:16/9;object-fit:cover;object-position:72% center}.ase-hero__content{width:100%;min-height:auto;padding:34px 7% 42px;background:#f3efe5;color:var(--ink)}.ase-hero h1{font-size:clamp(2.55rem,12vw,4rem);color:#173b3c}.ase-intro__grid,.ase-origin__grid,.ase-contact__box{grid-template-columns:1fr}.ase-facts{grid-template-columns:1fr;gap:19px}.ase-steps{grid-template-columns:1fr}.ase-step{padding:28px 0;border-bottom:1px solid rgba(255,255,255,.14)}.ase-origin__image{order:2}.ase-callcard{padding:26px 0}.ase-section{padding-left:7%;padding-right:7%}}
+@media(prefers-reduced-motion:no-preference){.ase-hero__media img{animation:aseBreathe 16s ease-in-out infinite alternate}@keyframes aseBreathe{from{transform:scale(1)}to{transform:scale(1.025)}}}
 {% endblock %}
 
 {% block main %}
-{% with nb=CURRENT_LANGUAGE %}
-<article class="ase-page" aria-labelledby="page-title">
+<article class="ase" aria-labelledby="ase-title">
   <header class="ase-hero">
-    <img class="ase-portrait" src="/assets/images/ase-steinsland.jpg" alt="Åse Karin Steinsland" width="259" height="240">
-    <br><span class="ase-since">{% if nb == 'nb' %}Siden 1997{% else %}Since 1997{% endif %}</span>
-    <p class="ase-eyebrow">{% if nb == 'nb' %}Numerolog og livsveileder{% else %}Numerologist and life guide{% endif %}</p>
-    <h1 id="page-title">Åse Karin Steinsland</h1>
-    <p class="ase-hero__lead">{% if nb == 'nb' %}Personlige numerologiske analyser – laget av Åse selv, ikke av en maskin.{% else %}Personal numerology analyses – made by Åse herself, not by a machine.{% endif %}</p>
-    <a class="ase-call" href="tel:+4795273772">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
-      952 73 772
-    </a>
-    <p class="ase-hours">{% if nb == 'nb' %}Hverdager kl. 09–16{% else %}Weekdays 09:00–16:00 (Norwegian time){% endif %}</p>
+    <div class="ase-hero__media" aria-hidden="true"><img src="{% static 'journey/images/ase-profile-banner-20260929.webp' %}" alt="" width="1200" height="675" fetchpriority="high"></div>
+    <div class="ase-hero__content">
+      {% if CURRENT_LANGUAGE == 'fa' %}
+      <p class="ase-kicker">عددشناس · راهنمای زندگی</p><h1 id="ase-title">Åse Karin Steinsland</h1>
+      <p class="ase-hero__lead">تحلیل‌های شخصی اعداد، با نگاه انسانی به الگوها، دوره‌ها و انتخاب‌های زندگی.</p><p class="ase-since">از ۱۹۹۷</p>
+      <div class="ase-actions"><a class="ase-btn" href="tel:+4795273772">تماس با Åse</a><a class="ase-btn ase-btn--ghost" href="#method">روش او</a></div>
+      {% elif CURRENT_LANGUAGE == 'en' %}
+      <p class="ase-kicker">Numerologist · Life guide</p><h1 id="ase-title">Åse Karin Steinsland</h1>
+      <p class="ase-hero__lead">Personal numerology readings with a human perspective on patterns, periods and life choices.</p><p class="ase-since">Since 1997</p>
+      <div class="ase-actions"><a class="ase-btn" href="tel:+4795273772">Call Åse</a><a class="ase-btn ase-btn--ghost" href="#method">Her method</a></div>
+      {% else %}
+      <p class="ase-kicker">Numerolog · Livsveileder</p><h1 id="ase-title">Åse Karin Steinsland</h1>
+      <p class="ase-hero__lead">Personlige numerologiske analyser med et menneskelig blikk på mønstre, perioder og valg i livet.</p><p class="ase-since">Siden 1997</p>
+      <div class="ase-actions"><a class="ase-btn" href="tel:+4795273772">Ring Åse</a><a class="ase-btn ase-btn--ghost" href="#method">Se metoden</a></div>
+      {% endif %}
+    </div>
   </header>
 
-  <section class="ase-about" aria-labelledby="about-title">
-    <div>
-      <p class="ase-eyebrow">{% if nb == 'nb' %}Om Åse{% else %}About Åse{% endif %}</p>
-      <h2 id="about-title">{% if nb == 'nb' %}Over 25 år med tall.{% else %}More than 25 years with numbers.{% endif %}</h2>
-      {% if nb == 'nb' %}
-      <p class="ase-first">Åse bor like utenfor Bergen. Hun har laget personlige numerologiske analyser siden 1997.</p>
-      <p>Metoden hennes bygger på Pytagoras. Han studerte kabbala og de matematiske systemene i flere gamle kulturer.</p>
-      <p>Hver analyse lages personlig av Åse. Ingenting er maskinelt generert.</p>
-      {% else %}
-      <p class="ase-first">Åse lives just outside Bergen. She has created personal numerology analyses since 1997.</p>
-      <p>Her method builds on Pythagoras, who studied the Kabbalah and the mathematical systems of several ancient cultures.</p>
-      <p>Every analysis is made personally by Åse. Nothing is machine-generated.</p>
-      {% endif %}
+  <section class="ase-section ase-intro">
+    <div class="ase-inner ase-intro__grid">
+      <div class="ase-copy">
+        {% if CURRENT_LANGUAGE == 'fa' %}<p class="ase-eyebrow">درباره Åse</p><h2>اعداد بخش‌ها را نشان می‌دهند. زندگی، کل تصویر است.</h2><p>Åse بیش از ۲۵ سال است که با عددشناسی کار می‌کند. برای او عدد یک برچسب نیست؛ نقطه‌ای برای دیدن ارتباط میان توانایی‌ها، دوره‌های زندگی و انتخاب‌های شخصی است.</p><p>هر تحلیل با محاسبه اجزا شروع می‌شود و سپس در کنار هم خوانده می‌شوند تا تصویر کامل‌تری از فرد شکل بگیرد.</p>
+        {% elif CURRENT_LANGUAGE == 'en' %}<p class="ase-eyebrow">About Åse</p><h2>Numbers show the parts. Life is the whole.</h2><p>Åse has worked with numerology for more than 25 years. A number is not a label to her; it is a starting point for seeing connections between abilities, life periods and personal choices.</p><p>Each reading begins by calculating the individual parts, then reading them together to form a more complete picture of the person.</p>
+        {% else %}<p class="ase-eyebrow">Om Åse</p><h2>Tall viser delene. Livet er helheten.</h2><p>Åse har arbeidet med numerologi i mer enn 25 år. For henne er et tall ikke en merkelapp, men et utgangspunkt for å se sammenhenger mellom evner, livsperioder og personlige valg.</p><p>Hver analyse begynner med å beregne de enkelte delene. Deretter leses de sammen for å gi et mer helhetlig bilde av mennesket.</p>{% endif %}
+      </div>
+      <blockquote class="ase-quote">{% if CURRENT_LANGUAGE == 'fa' %}«اجزا را محاسبه کن. سپس کل را بخوان.»{% elif CURRENT_LANGUAGE == 'en' %}“Calculate the parts. Then read the whole.”{% else %}«Beregn delene. Les deretter helheten.»{% endif %}</blockquote>
     </div>
-    <figure class="ase-figure">
-      <img src="{% static 'journey/images/ase-method.webp' %}" alt="{% if nb == 'nb' %}Monokord og pytagoreisk geometri{% else %}Monochord and Pythagorean geometry{% endif %}" width="1536" height="1024" loading="lazy">
-      <figcaption>{% if nb == 'nb' %}Tall, proporsjoner og harmoni – den pytagoreiske tradisjonen.{% else %}Number, proportion and harmony – the Pythagorean tradition.{% endif %}</figcaption>
-    </figure>
+    <div class="ase-inner ase-facts"><div class="ase-fact"><strong>1997</strong><span>{% if CURRENT_LANGUAGE == 'fa' %}شروع تحلیل‌های شخصی{% elif CURRENT_LANGUAGE == 'en' %}Personal readings since{% else %}Personlige analyser siden{% endif %}</span></div><div class="ase-fact"><strong>Bergen</strong><span>{% if CURRENT_LANGUAGE == 'fa' %}پایگاه Åse در نروژ{% elif CURRENT_LANGUAGE == 'en' %}Åse's base in Norway{% else %}Åses base i Norge{% endif %}</span></div><div class="ase-fact"><strong>1 : 1</strong><span>{% if CURRENT_LANGUAGE == 'fa' %}شخصی، نه ماشینی{% elif CURRENT_LANGUAGE == 'en' %}Personal, not machine-made{% else %}Personlig, ikke maskinlaget{% endif %}</span></div></div>
   </section>
-
-  <section class="ase-phone" aria-labelledby="phone-title">
-    <div>
-      <p class="ase-eyebrow">{% if nb == 'nb' %}Telefonveiledning{% else %}Guidance by phone{% endif %}</p>
-      <h2 id="phone-title">{% if nb == 'nb' %}Snakk med Åse.{% else %}Talk to Åse.{% endif %}</h2>
-      {% if nb == 'nb' %}
-      <p>Samtalen tar utgangspunkt i dine egne tall. Den gir ny innsikt når noe føles fastlåst.</p>
-      {% else %}
-      <p>The conversation starts from your own numbers. It offers fresh perspective when something feels stuck.</p>
-      {% endif %}
-      <ul class="ase-topics">
-        {% if nb == 'nb' %}
-        <li>Årene fremover</li><li>Gode og vanskelige perioder</li><li>Kjærlighet</li><li>Økonomi</li><li>Jobb</li><li>Viktige valg</li>
-        {% else %}
-        <li>The years ahead</li><li>Good and difficult periods</li><li>Love</li><li>Finances</li><li>Work</li><li>Important choices</li>
-        {% endif %}
-      </ul>
-      <a class="ase-call" href="tel:+4795273772">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
-        {% if nb == 'nb' %}Ring 952 73 772{% else %}Call +47 952 73 772{% endif %}
-      </a>
-      <p class="ase-note">{% if nb == 'nb' %}Priser og betaling for telefonveiledning er midlertidig satt på pause mens tjenesten oppdateres.{% else %}Prices and payment for phone guidance are temporarily paused while the service is being updated.{% endif %}</p>
+  <section class="ase-section ase-method" id="method">
+    <div class="ase-inner">
+      {% if CURRENT_LANGUAGE == 'fa' %}<p class="ase-eyebrow">روش</p><h2>سه مرحله. یک تصویر کامل‌تر.</h2><p class="ase-method__intro">روش Åse با خودِ عدد شروع نمی‌شود و همان‌جا هم تمام نمی‌شود. محاسبات، الگوها و تجربهٔ زندگی باید در کنار هم دیده شوند.</p>
+      {% elif CURRENT_LANGUAGE == 'en' %}<p class="ase-eyebrow">The method</p><h2>Three steps. One fuller picture.</h2><p class="ase-method__intro">Åse's method does not begin and end with a single number. Calculations, recurring patterns and lived experience are read together.</p>
+      {% else %}<p class="ase-eyebrow">Metoden</p><h2>Tre steg. Ett mer helhetlig bilde.</h2><p class="ase-method__intro">Åses metode begynner og slutter ikke med ett enkelt tall. Beregninger, mønstre som går igjen og menneskets egen livserfaring leses i sammenheng.</p>{% endif %}
+      <div class="ase-steps">
+        <div class="ase-step"><b>01</b><h3>{% if CURRENT_LANGUAGE == 'fa' %}محاسبه{% elif CURRENT_LANGUAGE == 'en' %}Calculate{% else %}Beregn{% endif %}</h3><p>{% if CURRENT_LANGUAGE == 'fa' %}تاریخ تولد و نام به اعداد و ساختارهای قابل خواندن تبدیل می‌شوند.{% elif CURRENT_LANGUAGE == 'en' %}Birth date and name are translated into numbers and structures that can be read.{% else %}Fødselsdato og navn omsettes til tall og strukturer som kan leses.{% endif %}</p></div>
+        <div class="ase-step"><b>02</b><h3>{% if CURRENT_LANGUAGE == 'fa' %}الگوها{% elif CURRENT_LANGUAGE == 'en' %}See patterns{% else %}Se mønstrene{% endif %}</h3><p>{% if CURRENT_LANGUAGE == 'fa' %}اعداد جداگانه با هم مقایسه می‌شوند تا تکرارها، تضادها و ریتم‌ها آشکار شوند.{% elif CURRENT_LANGUAGE == 'en' %}The individual numbers are compared to reveal repetitions, contrasts and rhythms.{% else %}De enkelte tallene ses mot hverandre for å finne gjentakelser, kontraster og rytmer.{% endif %}</p></div>
+        <div class="ase-step"><b>03</b><h3>{% if CURRENT_LANGUAGE == 'fa' %}کل تصویر{% elif CURRENT_LANGUAGE == 'en' %}Read the whole{% else %}Les helheten{% endif %}</h3><p>{% if CURRENT_LANGUAGE == 'fa' %}معنا زمانی شکل می‌گیرد که اجزا در زمینهٔ زندگی واقعی فرد قرار بگیرند.{% elif CURRENT_LANGUAGE == 'en' %}Meaning emerges when the parts are placed in the context of the person's actual life.{% else %}Meningen oppstår når delene settes inn i sammenhengen av det livet personen faktisk lever.{% endif %}</p></div>
+      </div>
     </div>
   </section>
 
-  <nav class="ase-links" aria-label="{% if nb == 'nb' %}Utforsk videre{% else %}Explore further{% endif %}">
-    <a href="/discover-numerology/">{% if nb == 'nb' %}Om numerologi{% else %}About numerology{% endif %} ↗</a>
-    <a href="/calculators/">{% if nb == 'nb' %}Beregn dine tall{% else %}Calculate your numbers{% endif %} ↗</a>
-    <a href="/articles/">{% if nb == 'nb' %}Artikler{% else %}Articles{% endif %} ↗</a>
-  </nav>
+  <section class="ase-section ase-origin">
+    <div class="ase-inner ase-origin__grid">
+      <div class="ase-origin__image"><img src="{% static 'journey/images/ase-method.webp' %}" alt="{% if CURRENT_LANGUAGE == 'fa' %}هندسه و نسبت‌های فیثاغورثی{% elif CURRENT_LANGUAGE == 'en' %}Pythagorean geometry and proportions{% else %}Pytagoreisk geometri og proporsjoner{% endif %}" width="1536" height="1024" loading="lazy"></div>
+      <div class="ase-origin__copy">
+        {% if CURRENT_LANGUAGE == 'fa' %}<p class="ase-eyebrow">ریشه‌ها</p><h2>عدد، نسبت و هماهنگی.</h2><p>Åse روش خود را در سنت فیثاغورثی قرار می‌دهد؛ جایی که عدد نه فقط برای شمارش، بلکه برای توصیف نسبت، ریتم و رابطه به کار می‌رود.</p><p>هدف، پیشگویی قطعی نیست. هدف این است که الگوها را روشن‌تر ببینیم و دربارهٔ انتخاب‌ها آگاهانه‌تر فکر کنیم.</p>
+        {% elif CURRENT_LANGUAGE == 'en' %}<p class="ase-eyebrow">The roots</p><h2>Number, proportion and harmony.</h2><p>Åse places her method in the Pythagorean tradition, where numbers are used not only to count, but to describe proportion, rhythm and relationship.</p><p>The aim is not deterministic prediction. It is to make patterns easier to see and choices easier to reflect on.</p>
+        {% else %}<p class="ase-eyebrow">Røttene</p><h2>Tall, proporsjon og harmoni.</h2><p>Åse plasserer metoden sin i den pytagoreiske tradisjonen, der tall ikke bare brukes til å telle, men også til å beskrive proporsjoner, rytme og forhold.</p><p>Målet er ikke en fasit på fremtiden. Målet er å gjøre mønstre tydeligere og gi et bedre grunnlag for refleksjon rundt egne valg.</p>{% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="ase-section ase-contact">
+    <div class="ase-inner ase-contact__box">
+      <div class="ase-contact__copy">
+        {% if CURRENT_LANGUAGE == 'fa' %}<p class="ase-eyebrow">راهنمایی شخصی</p><h2>وقتی می‌خواهی اعداد را در زندگی خودت ببینی.</h2><p>گفت‌وگو از اعداد خودت شروع می‌شود و می‌تواند دوره‌ها، روابط، کار، اقتصاد و انتخاب‌های مهم را در بر بگیرد.</p><ul class="ase-topics"><li>دوره‌های زندگی</li><li>عشق و رابطه</li><li>کار</li><li>اقتصاد</li><li>انتخاب‌های مهم</li></ul>
+        {% elif CURRENT_LANGUAGE == 'en' %}<p class="ase-eyebrow">Personal guidance</p><h2>When you want to see the numbers in your own life.</h2><p>The conversation starts with your own numbers and can cover life periods, relationships, work, finances and important choices.</p><ul class="ase-topics"><li>Life periods</li><li>Love & relationships</li><li>Work</li><li>Finances</li><li>Important choices</li></ul>
+        {% else %}<p class="ase-eyebrow">Personlig veiledning</p><h2>Når du vil se tallene i ditt eget liv.</h2><p>Samtalen tar utgangspunkt i dine egne tall og kan handle om livsperioder, relasjoner, arbeid, økonomi og viktige valg.</p><ul class="ase-topics"><li>Livsperioder</li><li>Kjærlighet & relasjoner</li><li>Arbeid</li><li>Økonomi</li><li>Viktige valg</li></ul>{% endif %}
+      </div>
+      <aside class="ase-callcard"><small>{% if CURRENT_LANGUAGE == 'fa' %}روزهای کاری، 09–16 به وقت نروژ{% elif CURRENT_LANGUAGE == 'en' %}Weekdays, 09–16 Norwegian time{% else %}Hverdager, 09–16 norsk tid{% endif %}</small><a href="tel:+4795273772">+47 952 73 772</a><p>{% if CURRENT_LANGUAGE == 'fa' %}قیمت و پرداخت برای راهنمایی تلفنی در حال به‌روزرسانی است.{% elif CURRENT_LANGUAGE == 'en' %}Prices and payment for phone guidance are currently being updated.{% else %}Priser og betaling for telefonveiledning oppdateres for øyeblikket.{% endif %}</p></aside>
+    </div>
+  </section>
+
+  <nav class="ase-end" aria-label="{% trans 'Explore further' %}"><a href="/discover-numerology/">{% if CURRENT_LANGUAGE == 'fa' %}درباره عددشناسی{% elif CURRENT_LANGUAGE == 'en' %}About numerology{% else %}Om numerologi{% endif %}</a><a href="/calculators/">{% if CURRENT_LANGUAGE == 'fa' %}محاسبه اعداد{% elif CURRENT_LANGUAGE == 'en' %}Calculate your numbers{% else %}Beregn dine tall{% endif %}</a><a href="/articles/?archive=ase-free">{% if CURRENT_LANGUAGE == 'fa' %}۹۴ مقاله رایگان آسه{% elif CURRENT_LANGUAGE == 'en' %}Åse's 94 free articles{% else %}Åses 94 gratisartikler{% endif %}</a><a href="/articles/">{% if CURRENT_LANGUAGE == 'fa' %}همه مقالات{% elif CURRENT_LANGUAGE == 'en' %}All articles{% else %}Alle artikler{% endif %}</a></nav>
 </article>
-{% endwith %}
 {% endblock %}
