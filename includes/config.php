@@ -37,7 +37,7 @@ function shared_vipps_config(): array
     $source = (string) file_get_contents($file);
     $result = [];
     foreach (['VIPPS_ENV', 'VIPPS_CLIENT_ID', 'VIPPS_CLIENT_SECRET', 'VIPPS_SUBSCRIPTION_KEY', 'VIPPS_MSN'] as $key) {
-        $pattern = '/define\\(\\s*[\\'"]' . preg_quote($key, '/') . '[\\'"]\\s*,\\s*[\\'"]([^\\'"]*)[\\'"]\\s*\\)/';
+        $pattern = "/define\\(\\s*['\\\"]" . preg_quote($key, '/') . "['\\\"]\\s*,\\s*['\\\"]([^'\\\"]*)['\\\"]\\s*\\)/";
         if (preg_match($pattern, $source, $match) === 1) {
             $result[$key] = $match[1];
         }
