@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-label="Lysbæreren">
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffaf1"/><stop offset=".52" stop-color="#eeddbd"/><stop offset="1" stop-color="#b58a56"/></linearGradient>
+ <linearGradient id="cloth" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fffdf7"/><stop offset="1" stop-color="#ddccb0"/></linearGradient>
+ <clipPath id="arch"><path d="M100 930V360C100 155 235 65 400 65s300 90 300 295v570z"/></clipPath>
+</defs>
+<rect width="800" height="1000" fill="#f6f0e6"/>
+<g clip-path="url(#arch)">
+ <rect x="90" y="50" width="620" height="900" fill="url(#sky)"/>
+ <circle cx="410" cy="300" r="176" fill="#f4cd78" opacity=".27"/>
+ <path d="M105 730 Q290 560 410 645 T700 500" fill="#12393b" opacity=".78"/>
+ <path d="M100 805h600v125H100z" fill="#0c2e30" opacity=".52"/>
+ <g opacity=".90"><path d="M350 580V350M470 580V350" stroke="#c69b58" stroke-width="12"/><circle cx="410" cy="300" r="42" fill="#f6d995"/><g stroke="#d9b76e" stroke-width="4"><path d="M410 215v-50M350 235l-35-40M470 235l35-40"/></g></g>
+ <path d="M150 245q50-55 100 0q-50 55-100 0z" fill="none" stroke="#d7b46e" stroke-width="5"/><circle cx="200" cy="245" r="10" fill="#d7b46e"/>
+ <g fill="none" stroke="#c69b58" stroke-width="4" opacity=".58">
+   <ellipse cx="400" cy="355" rx="132" ry="96"/>
+   <ellipse cx="400" cy="545" rx="156" ry="118"/>
+ </g>
+ <g transform="translate(0 18)">
+      <circle cx="400" cy="410" r="47" fill="#b87951"/>
+      <path d="M355 385q42-68 92-5v41q-14-46-90-18z" fill="#5e3f2e"/>
+      <path d="M315 555q85-120 170 0l58 250H257z" fill="url(#cloth)"/>
+      <path d="M350 535q45 45 90 0m-45 15v115" fill="none" stroke="#f6efe1" stroke-width="28" stroke-linecap="round"/>
+    </g>
+ <circle cx="400" cy="355" r="220" fill="none" stroke="#d7b06a" stroke-width="2" stroke-dasharray="6 10" opacity=".62"/>
+ <text x="645" y="850" text-anchor="middle" font-family="Georgia,serif" font-size="68" fill="#ead7af" opacity=".62">11</text>
+</g>
+<path d="M100 930V360C100 155 235 65 400 65s300 90 300 295v570" fill="none" stroke="#cfac70" stroke-width="3" opacity=".8"/>
+</svg>
