@@ -194,6 +194,76 @@ def address_number(value: str) -> int:
     return root_digit(total)
 
 
+def cornerstone(value: str) -> dict[str, Any] | None:
+    for char in (value or "").upper():
+        if char in VALUES:
+            return {"letter": char, "value": VALUES[char]}
+    return None
+
+
+def initials_number(value: str) -> dict[str, Any]:
+    total = 0
+    parts = []
+    for word in _words(value):
+        letter = next((char for char in word if char in VALUES), "")
+        if not letter:
+            continue
+        total += VALUES[letter]
+        parts.append({"letter": letter, "value": VALUES[letter]})
+    result = notation(total)
+    result["parts"] = parts
+    return result
+
+
+def bridge_number(left: dict[str, Any], right: dict[str, Any]) -> int:
+    return abs(int(left.get("root", 0)) - int(right.get("root", 0)))
+
+
+def karmic_debts(
+    birth_name: str,
+    birth_date: str,
+    current_name: str = "",
+) -> list[dict[str, Any]]:
+    life = destiny(birth_date) or notation(0)
+    checks = [
+        ("name", name_calc(birth_name)),
+        ("vowel", name_calc(birth_name, "vowels")),
+        ("consonant", name_calc(birth_name, "consonants")),
+        ("life_path", life),
+        ("birthday", notation(int(life.get("day", 0)))),
+    ]
+    if current_name:
+        checks.extend(
+            [
+                ("current_name", name_calc(current_name)),
+                ("current_vowel", name_calc(current_name, "vowels")),
+            ]
+        )
+    debts = []
+    for kind, calc in checks:
+        raw = int(calc.get("raw", 0))
+        if raw in {13, 14, 16, 19}:
+            debts.append({"kind": kind, **notation(raw)})
+    return debts
+
+
+def karmic_lessons(birth_name: str, birth_date: str) -> list[int]:
+    present = set()
+    for word in _words(birth_name):
+        for char in word:
+            if char in VALUES:
+                present.add(VALUES[char])
+    life = destiny(birth_date) or notation(0)
+    core = {
+        name_calc(birth_name)["root"],
+        name_calc(birth_name, "vowels")["root"],
+        name_calc(birth_name, "consonants")["root"],
+        life["root"],
+        root_digit(int(life.get("day", 0))),
+    }
+    return [number for number in range(1, 10) if number not in present and number not in core]
+
+
 def calculate_profile(data: dict[str, Any]) -> dict[str, Any]:
     birth_name = (data.get("birth_name") or "").strip()
     current_name = (data.get("current_name") or birth_name).strip()
@@ -207,6 +277,7 @@ def calculate_profile(data: dict[str, Any]) -> dict[str, Any]:
     soul = name_calc(birth_name, "vowels")
     personality = name_calc(birth_name, "consonants")
     current = name_calc(current_name)
+    current_vowel = name_calc(current_name, "vowels")
     age = current_age(birth_date)
     physical = transit(first, age)
     mental = transit(middle, age) if middle else None
@@ -223,6 +294,7 @@ def calculate_profile(data: dict[str, Any]) -> dict[str, Any]:
         "soul": soul,
         "personality": personality,
         "current": current,
+        "current_vowel": current_vowel,
         "life": life,
         "birthday": birthday_number(birth_date),
         "personal_year": personal_year(birth_date, date.today().year),
@@ -235,6 +307,12 @@ def calculate_profile(data: dict[str, Any]) -> dict[str, Any]:
         "life_cycles": life_cycles(birth_date),
         "challenges": challenges(birth_date),
         "maturity": maturity,
+        "cornerstone": cornerstone(birth_name),
+        "life_name_bridge": bridge_number(life, expression),
+        "vowel_consonant_bridge": bridge_number(soul, personality),
+        "balance": initials_number(birth_name),
+        "karmic_debts": karmic_debts(birth_name, birth_date, current_name),
+        "karmic_lessons": karmic_lessons(birth_name, birth_date),
         "phone": digits_number(data.get("phone") or ""),
         "address": address_number(data.get("address") or ""),
     }
