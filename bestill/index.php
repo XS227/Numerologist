@@ -95,15 +95,62 @@ function str_session(string $key, int $max = 200): string
     return mb_substr($v, 0, $max);
 }
 
+function member_pricing_context(): array
+{
+    $cookie = (string) ($_SERVER['HTTP_COOKIE'] ?? '');
+    if ($cookie === '') {
+        return ['authenticated' => false, 'complimentary' => false];
+    }
+
+    $ch = curl_init('http://127.0.0.1:8010/konto/pricing-context/');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 3,
+        CURLOPT_HTTPHEADER => [
+            'Host: numerologist.setai.no',
+            'X-Forwarded-Proto: https',
+            'Cookie: ' . $cookie,
+            'Accept: application/json',
+        ],
+    ]);
+    $body = curl_exec($ch);
+    $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($status !== 200 || !is_string($body)) {
+        return ['authenticated' => false, 'complimentary' => false];
+    }
+    $data = json_decode($body, true);
+    return is_array($data)
+        ? [
+            'authenticated' => !empty($data['authenticated']),
+            'complimentary' => !empty($data['complimentary']),
+        ]
+        : ['authenticated' => false, 'complimentary' => false];
+}
+
+function effective_price_kr(string $package, bool $complimentary): int
+{
+    if ($complimentary) return 0;
+    return (int) (PACKAGES[$package]['price'] ?? 0);
+}
+
 // ── Determine current step ────────────────────────────────────────────────────
 $step   = max(1, min(3, (int) ($_GET['step'] ?? 1)));
 $errors = [];
+
+$pricingContext = member_pricing_context();
+$complimentaryAccess = !empty($pricingContext['authenticated']) && !empty($pricingContext['complimentary']);
+
+if (!empty($_SESSION['order']['package']) && array_key_exists((string) $_SESSION['order']['package'], PACKAGES)) {
+    $_SESSION['order']['price_ore'] = effective_price_kr((string) $_SESSION['order']['package'], $complimentaryAccess) * 100;
+}
 
 // Direct package links from ÅSE Edition / results. Selecting is not a payment action.
 $directPackage = trim((string) ($_GET['package'] ?? ''));
 if ($directPackage !== '' && array_key_exists($directPackage, PACKAGES)) {
     $_SESSION['order']['package'] = $directPackage;
-    $_SESSION['order']['price_ore'] = PACKAGES[$directPackage]['price'] * 100;
+    $_SESSION['order']['price_ore'] = effective_price_kr($directPackage, $complimentaryAccess) * 100;
     header('Location: /bestill/?step=2');
     exit;
 }
@@ -131,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = $t('Velg en pakke.', 'Choose a package.', 'یک بسته انتخاب کنید.');
         } else {
             $_SESSION['order']['package']   = $pkg;
-            $_SESSION['order']['price_ore'] = PACKAGES[$pkg]['price'] * 100;
+            $_SESSION['order']['price_ore'] = effective_price_kr($pkg, $complimentaryAccess) * 100;
             header('Location: /bestill/?step=2');
             exit;
         }
@@ -187,7 +234,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $pkg       = $order['package'];
         $pkgData   = PACKAGES[$pkg];
-        $priceOre  = (int) $order['price_ore'];
+        $priceOre  = effective_price_kr($pkg, $complimentaryAccess) * 100;
+        $_SESSION['order']['price_ore'] = $priceOre;
         $authToken = bin2hex(random_bytes(24)); // stored + sent to Vipps
 
         try {
@@ -204,6 +252,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'notes'           => $order['notes'] ?? '',
                 'vipps_auth_token' => $authToken,
             ]);
+
+            if ($complimentaryAccess && $priceOre === 0) {
+                update_order_payment($orderId, 'paid', 'complimentary');
+                $freeOrder = get_order($orderId);
+                if ($freeOrder !== null) {
+                    try {
+                        send_order_confirmation($freeOrder);
+                    } catch (Throwable $mailError) {
+                        error_log('Complimentary order mail failed: ' . $mailError->getMessage());
+                    }
+                }
+                unset($_SESSION['order']);
+                header('Location: /bestill/takk.php?orderId=' . rawurlencode($orderId));
+                exit;
+            }
 
             $redirectUrl = Vipps::initiatePayment(
                 orderId:         $orderId,
@@ -300,6 +363,9 @@ function checked(string $val, string $test): string
   <p class="order-intro">
     <?= $t('Velg den pakken som passer ønsket ditt. Åses personlige analyser leveres normalt per e-post innen 5–7 virkedager; ÅSE 227 er den digitale motorpakken.', 'Choose the package that fits your goal. Åse’s personal analyses are normally delivered by email within 5–7 business days; ÅSE 227 is the digital engine package.', 'بسته‌ای را انتخاب کنید که با هدف شما هماهنگ است. تحلیل‌های شخصی Åse معمولاً طی ۵ تا ۷ روز کاری با ایمیل ارسال می‌شوند؛ ÅSE 227 بسته دیجیتال موتور است.') ?>
   </p>
+  <?php if ($complimentaryAccess): ?>
+    <p class="pay-note"><strong><?= $t('Testtilgang aktiv:', 'Test access active:', 'دسترسی آزمایشی فعال:') ?></strong> <?= $t('alle analyser er 0 kr på denne kontoen.', 'all analyses are 0 kr on this account.', 'همه تحلیل‌ها برای این حساب رایگان هستند.') ?></p>
+  <?php endif; ?>
   <?php error_list($errors); ?>
   <form method="post" action="/bestill/?step=1" class="pkg-form" novalidate>
     <input type="hidden" name="step" value="1">
@@ -313,7 +379,7 @@ function checked(string $val, string $test): string
                    <?= checked($order['package'] ?? '', $key) ?> required>
             <?php [$pkgName, $pkgDesc] = package_label($key, $lang); ?>
             <span class="pkg-name"><?= htmlspecialchars($pkgName) ?></span>
-            <span class="pkg-price"><?= $pkg['price'] ?> kr</span>
+            <span class="pkg-price"><?= effective_price_kr($key, $complimentaryAccess) ?> kr</span>
             <span class="pkg-desc"><?= htmlspecialchars($pkgDesc) ?></span>
           </label>
           <a class="pkg-demo-link" href="/rapporter/demo/<?= rawurlencode($key) ?>/"><?= $t('Se eksempel på digitalversjonen →', 'View digital version example →', 'نمونه نسخه دیجیتال ←') ?></a>
@@ -338,7 +404,7 @@ $pkgInfo   = PACKAGES[$selPkg] ?? null;
   <h1><?= $t('Dine opplysninger', 'Your details', 'اطلاعات شما') ?></h1>
   <?php if ($pkgInfo): ?>
     <div class="selected-pkg-badge">
-      <?= htmlspecialchars($pkgName) ?> &mdash; <?= $pkgInfo['price'] ?> kr
+      <?= htmlspecialchars($pkgName) ?> &mdash; <?= effective_price_kr($selPkg, $complimentaryAccess) ?> kr
       <a href="/bestill/?step=1" class="change-link"><?= $t('(endre)', '(change)', '(تغییر)') ?></a>
     </div>
   <?php endif; ?>
@@ -434,7 +500,7 @@ $pkgInfo = PACKAGES[$selPkg] ?? null;
       <?php if ($pkgInfo): ?>
         <div class="review-pkg">
           <strong><?= htmlspecialchars($pkgName) ?></strong>
-          <span class="review-price"><?= $pkgInfo['price'] ?> kr</span>
+          <span class="review-price"><?= effective_price_kr($selPkg, $complimentaryAccess) ?> kr</span>
           <p><?= htmlspecialchars($pkgDesc) ?></p>
         </div>
       <?php endif; ?>
@@ -465,23 +531,31 @@ $pkgInfo = PACKAGES[$selPkg] ?? null;
 
   <div class="total-row">
     <span><?= $t('Totalt å betale', 'Total to pay', 'مبلغ قابل پرداخت') ?></span>
-    <strong><?= $pkgInfo['price'] ?? 0 ?> kr</strong>
+    <strong><?= effective_price_kr($selPkg, $complimentaryAccess) ?> kr</strong>
   </div>
 
   <form method="post" action="/bestill/?step=3" class="pay-form">
     <input type="hidden" name="step" value="3">
     <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES) ?>">
 
-    <button type="submit" class="btn-vipps" aria-label="<?= $t('Betal med Vipps', 'Pay with Vipps', 'پرداخت با Vipps') ?>">
-      <svg width="80" height="28" viewBox="0 0 80 28" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="4" y="21" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="white"><?= $t('Betal med', 'Pay with', 'پرداخت با') ?></text>
-      </svg>
-      <span class="vipps-logo" aria-label="Vipps">Vipps</span>
-    </button>
-
-    <p class="pay-note">
-      <?= $t('Du sendes til Vipps for sikker betaling. Analysen leveres per e-post etter betaling er bekreftet.', 'You will be sent to Vipps for secure payment. Analysis delivered by email after payment confirmed.', 'برای پرداخت امن به Vipps هدایت می‌شوید. پس از تأیید پرداخت، تحلیل از طریق ایمیل ارسال می‌شود.') ?>
-    </p>
+    <?php if ($complimentaryAccess): ?>
+      <button type="submit" class="btn-primary">
+        <?= $t('Aktiver gratis analyse →', 'Activate free analysis →', 'فعال‌سازی تحلیل رایگان ←') ?>
+      </button>
+      <p class="pay-note">
+        <?= $t('Testkontoen din har 100 % tilgang. Ingen betaling eller Vipps-belastning utføres.', 'Your test account has 100% access. No payment or Vipps charge will be made.', 'حساب آزمایشی شما دسترسی کامل دارد و هیچ پرداختی انجام نمی‌شود.') ?>
+      </p>
+    <?php else: ?>
+      <button type="submit" class="btn-vipps" aria-label="<?= $t('Betal med Vipps', 'Pay with Vipps', 'پرداخت با Vipps') ?>">
+        <svg width="80" height="28" viewBox="0 0 80 28" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="4" y="21" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="white"><?= $t('Betal med', 'Pay with', 'پرداخت با') ?></text>
+        </svg>
+        <span class="vipps-logo" aria-label="Vipps">Vipps</span>
+      </button>
+      <p class="pay-note">
+        <?= $t('Du sendes til Vipps for sikker betaling. Analysen leveres per e-post etter betaling er bekreftet.', 'You will be sent to Vipps for secure payment. Analysis delivered by email after payment confirmed.', 'برای پرداخت امن به Vipps هدایت می‌شوید. پس از تأیید پرداخت، تحلیل از طریق ایمیل ارسال می‌شود.') ?>
+      </p>
+    <?php endif; ?>
   </form>
 
   <div class="review-edit-links">
