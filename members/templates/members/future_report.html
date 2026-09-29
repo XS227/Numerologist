@@ -71,7 +71,7 @@
     <div>
       <h2>{% if CURRENT_LANGUAGE == 'fa' %}مرحله رشد {{ future_report.active_pinnacle.index }}{% elif CURRENT_LANGUAGE == 'en' %}Pinnacle {{ future_report.active_pinnacle.index }}{% else %}Utviklingstrinn {{ future_report.active_pinnacle.index }}{% endif %}</h2>
       <p>{{ future_report.active_pinnacle.start }}{% if future_report.active_pinnacle.end %}–{{ future_report.active_pinnacle.end }}{% else %}+{% endif %} {% if CURRENT_LANGUAGE == 'fa' %}سالگی{% elif CURRENT_LANGUAGE == 'en' %}years{% else %}år{% endif %}</p>
-      <p class="m-future-long__body">{{ future_report.synthesis }}</p>
+      <p class="m-future-long__body">{{ future_report.long_text }}</p>
     </div>
   </div>
 </section>
@@ -88,7 +88,7 @@
           <strong>{{ item.number }}</strong>
         </div>
         <h3>{{ item.title }}</h3>
-        <p>{{ future_report.person }}, {{ item.body|lower|capfirst }}</p>
+        <p>{{ item.body }}</p>
       </article>
       {% endfor %}
     </div>
