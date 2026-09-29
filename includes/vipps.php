@@ -9,8 +9,6 @@ final class Vipps
     private static ?string $cachedToken  = null;
     private static int     $tokenExpires = 0;
 
-    // ── Access token ──────────────────────────────────────────────────────────
-
     private static function token(): string
     {
         if (self::$cachedToken !== null && time() < self::$tokenExpires) {
@@ -21,9 +19,9 @@ final class Vipps
             'POST',
             VIPPS_BASE_URL . '/accesstoken/get',
             [],
-            '{}',
+            '',
             [
-                'client_id: '     . VIPPS_CLIENT_ID,
+                'client_id: ' . VIPPS_CLIENT_ID,
                 'client_secret: ' . VIPPS_CLIENT_SECRET,
                 'Ocp-Apim-Subscription-Key: ' . VIPPS_SUBSCRIPTION_KEY,
                 'Merchant-Serial-Number: ' . VIPPS_MSN,
@@ -40,18 +38,19 @@ final class Vipps
         }
 
         $data = json_decode($body, true, 8, JSON_THROW_ON_ERROR);
-        self::$cachedToken  = (string) $data['access_token'];
-        self::$tokenExpires = time() + max(0, (int) $data['expires_in']) - 60;
+        self::$cachedToken  = (string) ($data['access_token'] ?? '');
+        self::$tokenExpires = time() + max(0, (int) ($data['expires_in'] ?? 3600)) - 60;
+        if (self::$cachedToken === '') {
+            throw new RuntimeException('Vipps: token response did not contain access_token');
+        }
 
         return self::$cachedToken;
     }
 
-    // ── Public API ────────────────────────────────────────────────────────────
-
     /**
-     * Initiate a Vipps eCommerce payment.
+     * Create a Vipps MobilePay ePayment using WEB_REDIRECT.
      *
-     * @return string  The Vipps redirect URL (send the user there).
+     * @return string Redirect URL returned by Vipps.
      */
     public static function initiatePayment(
         string $orderId,
@@ -60,98 +59,126 @@ final class Vipps
         string $phone,
         string $authToken
     ): string {
-        $callbackBase = SITE_URL . '/vipps';
-        $fallback     = SITE_URL . '/bestill/takk.php?orderId=' . rawurlencode($orderId);
+        unset($authToken); // Legacy eCom callback token; ePayment uses polling/webhooks.
 
+        $returnUrl = SITE_URL . '/bestill/takk.php?orderId=' . rawurlencode($orderId);
         $payload = [
-            'merchantInfo' => [
-                'merchantSerialNumber' => VIPPS_MSN,
-                'callbackPrefix'       => $callbackBase,
-                'fallBack'             => $fallback,
-                'authToken'            => $authToken,
-                'isApp'                => false,
+            'amount' => [
+                'value' => $amountOre,
+                'currency' => 'NOK',
             ],
-            'customerInfo' => [
-                'mobileNumber' => self::normalisePhone($phone),
+            'paymentMethod' => [
+                'type' => 'WALLET',
             ],
-            'transaction' => [
-                'orderId'         => $orderId,
-                'amount'          => $amountOre,
-                'transactionText' => mb_substr($transactionText, 0, 100),
-                'skipLandingPage' => false,
-            ],
+            'reference' => $orderId,
+            'paymentDescription' => mb_substr($transactionText, 0, 100),
+            'returnUrl' => $returnUrl,
+            'userFlow' => 'WEB_REDIRECT',
         ];
+
+        $msisdn = self::normaliseMsisdn($phone);
+        if ($msisdn !== '') {
+            $payload['customer'] = ['phoneNumber' => $msisdn];
+        }
 
         [$body, $status] = self::request(
             'POST',
-            VIPPS_BASE_URL . '/ecomm/v2/payments',
-            self::authHeaders(),
+            VIPPS_BASE_URL . '/epayment/v1/payments',
+            self::authHeaders('create-' . $orderId),
             json_encode($payload, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)
         );
 
-        if ($status !== 202) {
+        if ($status !== 201) {
             throw new RuntimeException("Vipps: payment init failed (HTTP {$status}): {$body}");
         }
 
         $data = json_decode($body, true, 8, JSON_THROW_ON_ERROR);
-        return (string) $data['url'];
+        $redirectUrl = (string) ($data['redirectUrl'] ?? '');
+        if ($redirectUrl === '') {
+            throw new RuntimeException('Vipps: payment response did not contain redirectUrl');
+        }
+        return $redirectUrl;
     }
 
-    /**
-     * Fetch full payment details for an order.
-     */
     public static function paymentDetails(string $orderId): array
     {
-        $url = VIPPS_BASE_URL . '/ecomm/v2/payments/' . rawurlencode($orderId) . '/details';
+        $url = VIPPS_BASE_URL . '/epayment/v1/payments/' . rawurlencode($orderId);
         [$body, $status] = self::request('GET', $url, self::authHeaders());
 
         if ($status !== 200) {
-            throw new RuntimeException("Vipps: get details failed (HTTP {$status}): {$body}");
+            throw new RuntimeException("Vipps: get payment failed (HTTP {$status}): {$body}");
         }
 
         return json_decode($body, true, 8, JSON_THROW_ON_ERROR);
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
-
-    private static function authHeaders(): array
+    public static function capturePayment(string $orderId, int $amountOre): array
     {
-        return [
+        $url = VIPPS_BASE_URL . '/epayment/v1/payments/' . rawurlencode($orderId) . '/capture';
+        $payload = [
+            'modificationAmount' => [
+                'value' => $amountOre,
+                'currency' => 'NOK',
+            ],
+        ];
+        [$body, $status] = self::request(
+            'POST',
+            $url,
+            self::authHeaders('capture-' . $orderId),
+            json_encode($payload, JSON_THROW_ON_ERROR)
+        );
+
+        if ($status !== 200) {
+            throw new RuntimeException("Vipps: capture failed (HTTP {$status}): {$body}");
+        }
+
+        return json_decode($body, true, 8, JSON_THROW_ON_ERROR);
+    }
+
+    private static function authHeaders(?string $idempotencyKey = null): array
+    {
+        $headers = [
             'Authorization: Bearer ' . self::token(),
             'Ocp-Apim-Subscription-Key: ' . VIPPS_SUBSCRIPTION_KEY,
             'Merchant-Serial-Number: ' . VIPPS_MSN,
-            'X-Request-Id: ' . self::uuid4(),
-            'X-Timestamp: ' . gmdate('Y-m-d\TH:i:s\Z'),
+            'Vipps-System-Name: Numerologist',
+            'Vipps-System-Version: 1.0.0',
+            'Vipps-System-Plugin-Name: Numerologist-Custom',
+            'Vipps-System-Plugin-Version: 1.0.0',
             'Content-Type: application/json',
             'Accept: application/json',
         ];
+        if ($idempotencyKey !== null && $idempotencyKey !== '') {
+            $headers[] = 'Idempotency-Key: ' . substr($idempotencyKey, 0, 50);
+        }
+        return $headers;
     }
 
     /**
-     * @return array{string, int}  [response body, HTTP status]
+     * @return array{string, int}
      */
     private static function request(
         string $method,
         string $url,
         array  $headers = [],
-        string $body    = '',
+        string $body = '',
         ?array $overrideHeaders = null
     ): array {
         $ch = curl_init($url);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT        => 15,
-            CURLOPT_CUSTOMREQUEST  => $method,
-            CURLOPT_HTTPHEADER     => $overrideHeaders ?? $headers,
+            CURLOPT_TIMEOUT => 15,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_HTTPHEADER => $overrideHeaders ?? $headers,
             CURLOPT_SSL_VERIFYPEER => true,
         ]);
-        if ($body !== '' && in_array($method, ['POST', 'PUT', 'PATCH'], true)) {
+        if (in_array($method, ['POST', 'PUT', 'PATCH'], true)) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
         }
 
         $response = (string) curl_exec($ch);
-        $status   = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $err      = curl_error($ch);
+        $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $err = curl_error($ch);
         curl_close($ch);
 
         if ($err !== '') {
@@ -161,21 +188,15 @@ final class Vipps
         return [$response, $status];
     }
 
-    private static function normalisePhone(string $phone): string
+    private static function normaliseMsisdn(string $phone): string
     {
-        $digits = preg_replace('/\D/', '', $phone);
-        // Strip Norwegian country code (47) if present and result is 10 digits
-        if (strlen($digits) === 10 && str_starts_with($digits, '47')) {
-            $digits = substr($digits, 2);
+        $digits = (string) preg_replace('/\D/', '', $phone);
+        if (strlen($digits) === 8) {
+            return '47' . $digits;
         }
-        return $digits;
-    }
-
-    private static function uuid4(): string
-    {
-        $bytes = random_bytes(16);
-        $bytes[6] = chr((ord($bytes[6]) & 0x0f) | 0x40);
-        $bytes[8] = chr((ord($bytes[8]) & 0x3f) | 0x80);
-        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($bytes), 4));
+        if (strlen($digits) === 10 && str_starts_with($digits, '47')) {
+            return $digits;
+        }
+        return '';
     }
 }
