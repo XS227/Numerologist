@@ -147,6 +147,16 @@ def member_logout(request: HttpRequest) -> HttpResponse:
     return redirect("/")
 
 
+def member_pricing_context(request: HttpRequest) -> JsonResponse:
+    if not request.user.is_authenticated:
+        return JsonResponse({"authenticated": False, "complimentary": False})
+    profile = MemberProfile.objects.filter(user=request.user).first()
+    return JsonResponse({
+        "authenticated": True,
+        "complimentary": bool(profile and profile.complimentary_access),
+    })
+
+
 def google_start(request: HttpRequest) -> HttpResponse:
     if not (settings.GOOGLE_CLIENT_ID and settings.GOOGLE_CLIENT_SECRET):
         messages.error(request, "Google-innlogging er klar i koden, men Google OAuth-nøkler mangler på serveren.")
