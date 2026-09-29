@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from django.test import SimpleTestCase, override_settings
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 
 @override_settings(ALLOWED_HOSTS=["testserver", "localhost"])
-class NumberDetailViewTests(SimpleTestCase):
+class NumberDetailViewTests(TestCase):
     def test_number_detail_page_renders_for_single_digits(self) -> None:
         response = self.client.get(reverse("number_detail", kwargs={"number": 1}))
         self.assertEqual(response.status_code, 200)

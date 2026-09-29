@@ -6,7 +6,7 @@
 
 {% block main %}
 <link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=3">
-<link rel="stylesheet" href="{% static 'journey/number-detail.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'journey/number-detail.css' %}?v=5">
 <style>
   /* Only the first chapter shows the number's illustration; the others get
      drawn panels (rings + the numeral in gold) so the same picture isn't
@@ -114,7 +114,7 @@
       </ul>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-scene-wrap"><img class="n-scene j-parallax" src="{% static 'journey/images/number-' %}{{ number }}-strengths.svg" data-speed="0.06" alt="Visuell tolkning av {{ profile.title }}: {{ story.strengths }}" loading="lazy"><div class="n-number-cloud" aria-hidden="true"><span style="--x:-38%;--y:-31%;--r:-18deg">{{ number }}</span><span style="--x:34%;--y:-24%;--r:16deg">{{ number }}</span><span style="--x:-28%;--y:29%;--r:11deg">{{ number }}</span><span style="--x:39%;--y:32%;--r:-14deg">{{ number }}</span><span style="--x:4%;--y:-42%;--r:5deg">{{ number }}</span></div></div></div>
+      <div class="j-image-window"><div class="n-scene-wrap"><img class="n-scene j-parallax" src="{% static 'journey/images/number-' %}{{ number }}-strengths-photo.webp" data-speed="0.06" alt="Visuell tolkning av {{ profile.title }}: {{ story.strengths }}" loading="lazy"><div class="n-number-cloud" aria-hidden="true"><span style="--x:-38%;--y:-31%;--r:-18deg">{{ number }}</span><span style="--x:34%;--y:-24%;--r:16deg">{{ number }}</span><span style="--x:-28%;--y:29%;--r:11deg">{{ number }}</span><span style="--x:39%;--y:32%;--r:-14deg">{{ number }}</span><span style="--x:4%;--y:-42%;--r:5deg">{{ number }}</span></div></div></div>
       <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">+</span>
     </figure>
   </div>
@@ -130,7 +130,7 @@
       </ul>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-scene-wrap"><img class="n-scene j-parallax" src="{% static 'journey/images/number-' %}{{ number }}-challenges.svg" data-speed="0.06" alt="Visuell tolkning av {{ profile.title }}: {{ story.challenges }}" loading="lazy"><div class="n-number-cloud" aria-hidden="true"><span style="--x:-40%;--y:-28%;--r:-15deg">{{ number }}</span><span style="--x:37%;--y:-29%;--r:17deg">{{ number }}</span><span style="--x:-32%;--y:34%;--r:9deg">{{ number }}</span><span style="--x:36%;--y:31%;--r:-12deg">{{ number }}</span><span style="--x:0%;--y:-44%;--r:0deg">{{ number }}</span></div></div></div>
+      <div class="j-image-window"><div class="n-scene-wrap"><img class="n-scene j-parallax" src="{% static 'journey/images/number-' %}{{ number }}-challenges-photo.webp" data-speed="0.06" alt="Visuell tolkning av {{ profile.title }}: {{ story.challenges }}" loading="lazy"><div class="n-number-cloud" aria-hidden="true"><span style="--x:-40%;--y:-28%;--r:-15deg">{{ number }}</span><span style="--x:37%;--y:-29%;--r:17deg">{{ number }}</span><span style="--x:-32%;--y:34%;--r:9deg">{{ number }}</span><span style="--x:36%;--y:31%;--r:-12deg">{{ number }}</span><span style="--x:0%;--y:-44%;--r:0deg">{{ number }}</span></div></div></div>
       <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">△</span>
     </figure>
   </div>
@@ -144,11 +144,43 @@
       <p class="j-body">{{ profile.ase_guidance }}</p>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-scene-wrap"><img class="n-scene j-parallax" src="{% static 'journey/images/number-' %}{{ number }}-guidance.svg" data-speed="0.06" alt="Visuell tolkning av {{ profile.title }}: {{ story.guidance }}" loading="lazy"><div class="n-number-cloud" aria-hidden="true"><span style="--x:-42%;--y:-30%;--r:-14deg">{{ number }}</span><span style="--x:39%;--y:-25%;--r:15deg">{{ number }}</span><span style="--x:-35%;--y:30%;--r:8deg">{{ number }}</span><span style="--x:40%;--y:29%;--r:-10deg">{{ number }}</span><span style="--x:3%;--y:-43%;--r:0deg">{{ number }}</span></div></div></div>
+      <div class="j-image-window"><div class="n-scene-wrap"><img class="n-scene j-parallax" src="{% static 'journey/images/number-' %}{{ number }}-guidance-photo.webp" data-speed="0.06" alt="Visuell tolkning av {{ profile.title }}: {{ story.guidance }}" loading="lazy"><div class="n-number-cloud" aria-hidden="true"><span style="--x:-42%;--y:-30%;--r:-14deg">{{ number }}</span><span style="--x:39%;--y:-25%;--r:15deg">{{ number }}</span><span style="--x:-35%;--y:30%;--r:8deg">{{ number }}</span><span style="--x:40%;--y:29%;--r:-10deg">{{ number }}</span><span style="--x:3%;--y:-43%;--r:0deg">{{ number }}</span></div></div></div>
       <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">”</span>
     </figure>
   </div>
 </section>
+
+
+{% if related_articles_mid %}
+<section class="n-related-band" aria-labelledby="n-related-mid-title">
+  <div class="n-related-band__inner">
+    <div class="n-related-band__lead">
+      <p class="j-eyebrow">{{ related_copy.eyebrow }}</p>
+      <h2 id="n-related-mid-title">{{ related_copy.mid_title }}</h2>
+      <p>{{ related_copy.mid_text }}</p>
+    </div>
+    <div class="n-related-band__cards">
+      {% static 'journey/images/' as article_images %}
+      {% for article in related_articles_mid %}
+      <a class="n-related-mini" href="{{ article.get_absolute_url }}">
+        <div class="n-related-mini__visual" style="--card-bg:{{ article.thumb.bg }};--card-fg:{{ article.thumb.fg }}">
+          {% if article.thumb.image %}
+          <img src="{{ article_images }}{{ article.thumb.image }}" alt="" loading="lazy">
+          {% else %}
+          <span class="n-related-mini__big">{{ article.thumb.big }}</span>
+          {% endif %}
+        </div>
+        <div class="n-related-mini__copy">
+          <span class="n-related-mini__index">0{{ forloop.counter }}</span>
+          <h3>{{ article.title }}</h3>
+          <span class="n-related-mini__arrow" aria-hidden="true">↗</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 {% if profile.practical_note %}
 <section class="j-chapter j-light n-number-chapter" id="n-practical" aria-labelledby="n-practical-title" data-chapter data-number-chapter data-number="{{ number }}">
@@ -159,7 +191,7 @@
       <p class="j-body">{{ profile.practical_note }}</p>
     </div>
     <figure class="j-figure">
-      <div class="j-image-window"><div class="n-scene-wrap"><img class="n-scene j-parallax" src="{% static 'journey/images/number-' %}{{ number }}-practical.svg" data-speed="0.06" alt="Visuell tolkning av {{ profile.title }}: {{ story.practical }}" loading="lazy"><div class="n-number-cloud" aria-hidden="true"><span style="--x:-39%;--y:-30%;--r:-16deg">{{ number }}</span><span style="--x:36%;--y:-26%;--r:15deg">{{ number }}</span><span style="--x:-31%;--y:32%;--r:10deg">{{ number }}</span><span style="--x:38%;--y:33%;--r:-13deg">{{ number }}</span><span style="--x:1%;--y:-45%;--r:0deg">{{ number }}</span></div></div></div>
+      <div class="j-image-window"><div class="n-scene-wrap"><img class="n-scene j-parallax" src="{% static 'journey/images/number-' %}{{ number }}-practical-photo.webp" data-speed="0.06" alt="Visuell tolkning av {{ profile.title }}: {{ story.practical }}" loading="lazy"><div class="n-number-cloud" aria-hidden="true"><span style="--x:-39%;--y:-30%;--r:-16deg">{{ number }}</span><span style="--x:36%;--y:-26%;--r:15deg">{{ number }}</span><span style="--x:-31%;--y:32%;--r:10deg">{{ number }}</span><span style="--x:38%;--y:33%;--r:-13deg">{{ number }}</span><span style="--x:1%;--y:-45%;--r:0deg">{{ number }}</span></div></div></div>
       <span class="j-big-number" data-number="{{ number }}" aria-hidden="true">⋯</span>
     </figure>
   </div>
@@ -177,6 +209,39 @@
     <a class="j-resource" href="{% url 'static_page' 'guidance-support' %}"><h3>{% trans "Book personal guidance with Åse" %} <span aria-hidden="true">↗</span></h3><p>{% trans "Go deeper with a personal session." %}</p></a>
   </div>
 </section>
+
+
+{% if related_articles %}
+<section class="n-related-library" aria-labelledby="n-related-more-title">
+  <div class="n-related-library__inner">
+    <div class="n-related-library__head">
+      <p class="j-eyebrow">{{ related_copy.eyebrow }}</p>
+      <h2 id="n-related-more-title">{{ related_copy.more_title }}</h2>
+    </div>
+    <div class="n-related-library__grid">
+      {% static 'journey/images/' as article_images %}
+      {% for article in related_articles %}
+      <article class="n-related-card">
+        <a href="{{ article.get_absolute_url }}">
+          <div class="n-related-card__visual" style="--card-bg:{{ article.thumb.bg }};--card-fg:{{ article.thumb.fg }}">
+            {% if article.thumb.image %}
+            <img src="{{ article_images }}{{ article.thumb.image }}" alt="" loading="lazy">
+            {% else %}
+            <span class="n-related-card__big">{{ article.thumb.big }}</span>
+            <small>{{ article.thumb.small }}</small>
+            {% endif %}
+          </div>
+          <div class="n-related-card__copy">
+            <h3>{{ article.title }}</h3>
+            <span>{{ related_copy.open }} <b aria-hidden="true">↗</b></span>
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
 
 {% if profile.faq %}
 <section class="j-faq" aria-labelledby="n-faq-title">

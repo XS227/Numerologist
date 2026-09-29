@@ -9,6 +9,7 @@ from .forms import LiteCalculatorForm
 from .navigation import STATIC_PAGES
 from .number_profiles import PROFILES_EN, get_profile, meta_description
 from .number_story import get_story_titles
+from .related_articles import get_related_articles
 
 
 def _canonical(request: HttpRequest) -> str:
@@ -98,6 +99,30 @@ def number_detail(request: HttpRequest, number: int) -> HttpResponse:
         "next_number": next_number,
         "story": get_story_titles(number, language),
         "page_title": profile["title"],
+        "related_articles": get_related_articles(number, limit=6),
+        "related_articles_mid": get_related_articles(number, limit=3),
+        "related_copy": ({
+            "nb": {
+                "eyebrow": "Relaterte artikler",
+                "mid_title": f"Les videre om tallet {number}",
+                "mid_text": "Fordyp deg i artikler som utforsker de samme mønstrene, menneskene og symbolene.",
+                "more_title": f"Flere perspektiver på {number}",
+                "open": "Åpne artikkel",
+            },
+            "fa": {
+                "eyebrow": "مقاله‌های مرتبط",
+                "mid_title": f"مطالعه بیشتر درباره عدد {number}",
+                "mid_text": "مقاله‌هایی را بخوانید که الگوها، شخصیت‌ها و نمادهای مرتبط را عمیق‌تر بررسی می‌کنند.",
+                "more_title": f"دیدگاه‌های بیشتر درباره {number}",
+                "open": "باز کردن مقاله",
+            },
+        }.get(language, {
+            "eyebrow": "Related articles",
+            "mid_title": f"Read further about number {number}",
+            "mid_text": "Explore articles that deepen the same patterns, people, and symbols.",
+            "more_title": f"More perspectives on {number}",
+            "open": "Open article",
+        })),
     }
     return render(request, "pages/number-detail.html", context)
 
