@@ -227,3 +227,4 @@ VIPPS_LOGIN_CLIENT_SECRET = os.getenv("VIPPS_LOGIN_CLIENT_SECRET", os.getenv("VI
 VIPPS_LOGIN_MSN = os.getenv("VIPPS_LOGIN_MSN", os.getenv("VIPPS_MSN", ""))
 VIPPS_TEST_MODE = os.getenv("VIPPS_TEST_MODE", "true").lower() == "true"
 VIPPS_LOGIN_BASE_URL = "https://apitest.vipps.no" if VIPPS_TEST_MODE else "https://api.vipps.no"
+VIPPS_LOGIN_BROKER_URL = os.getenv("VIPPS_LOGIN_BROKER_URL", "https://trustai.no/api/auth/vipps/numerologist.php")
