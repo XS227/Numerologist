@@ -238,6 +238,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'phone'        => preg_replace('/[^\d+\s\-\(\)]/', '', str_field('phone', 20)),
             'email'        => filter_var(str_field('email', 150), FILTER_SANITIZE_EMAIL),
             'notes'        => str_field('notes', 2000),
+            'partner_name' => str_field('partner_name', 100),
+            'partner_date' => str_field('partner_date', 10),
         ];
 
         if ($fields['birth_name'] === '')   $errors[] = $t('Fødselsnavn er påkrevd.', 'Birth name is required.', 'نام هنگام تولد الزامی است.');
@@ -248,10 +250,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!in_array($fields['sex'], ['M', 'F', 'X'], true)) {
             $errors[] = $t('Velg kjønn.', 'Choose a gender.', 'جنسیت را انتخاب کنید.');
         }
-        $addressOptional = in_array((string) ($_SESSION['order']['package'] ?? ''), ['ase227', 'veiledning15'], true);
-        if (!$addressOptional && $fields['address'] === '') $errors[] = $t('Adresse er påkrevd for denne analysen.', 'Address is required for this analysis.', 'برای این تحلیل نشانی الزامی است.');
-        $needsExtra = in_array((string) ($_SESSION['order']['package'] ?? ''), ['partner', 'familie3'], true);
-        if ($needsExtra && $fields['notes'] === '') $errors[] = $t('Legg inn opplysningene om den/de andre personen(e).', 'Enter the details for the other person/people.', 'اطلاعات فرد یا افراد دیگر را وارد کنید.');
+        $selectedPackage = (string) ($_SESSION['order']['package'] ?? '');
+        $builderConfig = analysis_builder_config(
+            is_array($_SESSION['order']['configuration'] ?? null)
+                ? $_SESSION['order']['configuration']
+                : []
+        );
+        $builderModules = $builderConfig['modules'];
+        $addressOptional = in_array($selectedPackage, ['ase227', 'veiledning15', 'builder'], true)
+            && !($selectedPackage === 'builder' && in_array('address', $builderModules, true));
+        if (!$addressOptional && $fields['address'] === '') {
+            $errors[] = $t('Adresse er påkrevd for denne analysen.', 'Address is required for this analysis.', 'برای این تحلیل نشانی الزامی است.');
+        }
+        $needsExtra = in_array($selectedPackage, ['partner', 'familie3'], true);
+        $builderPartner = $selectedPackage === 'builder' && in_array('partner', $builderModules, true);
+        if ($needsExtra && $fields['notes'] === '') {
+            $errors[] = $t('Legg inn opplysningene om den/de andre personen(e).', 'Enter the details for the other person/people.', 'اطلاعات فرد یا افراد دیگر را وارد کنید.');
+        }
+        if ($builderPartner) {
+            if ($fields['partner_name'] === '') {
+                $errors[] = $t('Partnerens navn er påkrevd når relasjonsmodulen er valgt.', 'Partner name is required when the relationship module is selected.', 'وقتی ماژول رابطه انتخاب شده، نام شریک لازم است.');
+            }
+            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $fields['partner_date'])) {
+                $errors[] = $t('Partnerens fødselsdato er ugyldig.', 'Partner date of birth is invalid.', 'تاریخ تولد شریک نامعتبر است.');
+            }
+        }
         if (!preg_match('/^[\d+][\d\s\-\(\)]{6,18}$/', $fields['phone'])) {
             $errors[] = $t('Ugyldig telefonnummer.', 'Invalid phone number.', 'شماره‌ی تلفن نامعتبر است.');
         }
@@ -260,7 +283,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         if (empty($errors)) {
+            if ($selectedPackage === 'builder') {
+                $builderConfig['partner_name'] = $fields['partner_name'];
+                $builderConfig['partner_date'] = $fields['partner_date'];
+                $_SESSION['order']['configuration'] = $builderConfig;
+            }
+            unset($fields['partner_name'], $fields['partner_date']);
             $_SESSION['order'] = array_merge($_SESSION['order'] ?? [], $fields);
+            $_SESSION['order']['price_ore'] = configured_price_kr($_SESSION['order'], $complimentaryAccess) * 100;
             header('Location: /bestill/?step=3');
             exit;
         }
@@ -277,7 +307,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $pkg       = $order['package'];
         $pkgData   = PACKAGES[$pkg];
-        $priceOre  = effective_price_kr($pkg, $complimentaryAccess) * 100;
+        $priceOre  = configured_price_kr($order, $complimentaryAccess) * 100;
         $_SESSION['order']['price_ore'] = $priceOre;
         $authToken = bin2hex(random_bytes(24)); // stored + sent to Vipps
 
@@ -292,8 +322,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'address'         => $order['address'],
                 'phone'           => $order['phone'],
                 'email'           => $order['email'],
-                'notes'           => $order['notes'] ?? '',
-                'vipps_auth_token' => $authToken,
+                'notes'              => $order['notes'] ?? '',
+                'configuration_json' => $pkg === 'builder'
+                    ? json_encode($order['configuration'] ?? [], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
+                    : '',
+                'vipps_auth_token'   => $authToken,
             ]);
 
             if ($complimentaryAccess && $priceOre === 0) {
