@@ -101,3 +101,10 @@ function update_order_payment(string $id, string $status, string $vippsOrderId =
         'UPDATE orders SET payment_status = :s, vipps_order_id = :v WHERE id = :id'
     )->execute([':s' => $status, ':v' => $vippsOrderId, ':id' => $id]);
 }
+
+function delete_pending_order(string $id): void
+{
+    db()->prepare(
+        "DELETE FROM orders WHERE id = :id AND payment_status = 'pending'"
+    )->execute([':id' => $id]);
+}
