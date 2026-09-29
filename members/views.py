@@ -27,6 +27,7 @@ from .models import AcademyProgress, MemberProfile, SocialIdentity, SocialLoginH
 from .order_bridge import order_for_user, orders_for_user
 from .report_engine import calculate_profile
 from .future_report import build_future_report
+from .modular_report import build_modular_report
 
 
 def _safe_next(request: HttpRequest, default: str = "/min-side/") -> str:
@@ -537,6 +538,36 @@ def report_demo(request: HttpRequest, package_slug: str) -> HttpResponse:
     data = _demo_data()
     profile = calculate_profile(data)
     language = site_language(getattr(request, "LANGUAGE_CODE", "en"))
+    demo_config = {
+        "modules": [
+            "current_name",
+            "cornerstone",
+            "life_name_bridge",
+            "karmic_lesson",
+            "pinnacles",
+            "maturity",
+            "challenges",
+            "essence",
+        ],
+        "future_months": 6,
+        "human_review": False,
+    }
+    if package_slug == "builder":
+        return render(
+            request,
+            "members/modular_report.html",
+            {
+                "package": package,
+                "package_slug": package_slug,
+                "profile": profile,
+                "modular": build_modular_report(data, profile, demo_config, language=language),
+                "future_report": build_future_report(
+                    data, profile, language=language, months=demo_config["future_months"]
+                ),
+                "demo": True,
+                "order": None,
+            },
+        )
     template = "members/future_report.html" if package_slug == "fremtid2" else "members/report.html"
     return render(
         request,
@@ -563,6 +594,31 @@ def report_view(request: HttpRequest, order_id: str) -> HttpResponse:
         return redirect("members:dashboard")
     profile = calculate_profile(order)
     language = site_language(getattr(request, "LANGUAGE_CODE", "en"))
+    if order["package"] == "builder":
+        config = dict(order.get("configuration") or {})
+        future_months = int(config.get("future_months") or 0)
+        return render(
+            request,
+            "members/modular_report.html",
+            {
+                "package": order["product"],
+                "package_slug": order["package"],
+                "profile": profile,
+                "modular": build_modular_report(order, profile, config, language=language),
+                "future_report": (
+                    build_future_report(
+                        order,
+                        profile,
+                        language=language,
+                        months=future_months,
+                    )
+                    if future_months
+                    else None
+                ),
+                "demo": False,
+                "order": order,
+            },
+        )
     is_future = order["package"] == "fremtid2"
     return render(
         request,
