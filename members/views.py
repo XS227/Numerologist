@@ -303,8 +303,11 @@ def vipps_broker_handoff(request: HttpRequest) -> JsonResponse:
         next_url=next_url[:500],
         expires_at=timezone.now() + timedelta(minutes=5),
     )
-    completion = request.build_absolute_uri(
-        reverse("members:vipps_complete") + "?" + urllib.parse.urlencode({"token": raw_token})
+    completion = (
+        "https://numerologist.setai.no"
+        + reverse("members:vipps_complete")
+        + "?"
+        + urllib.parse.urlencode({"token": raw_token})
     )
     return JsonResponse({"completion_url": completion})
 
