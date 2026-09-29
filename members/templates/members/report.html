@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ package.title }} · Numerologist{% endblock %}
+{% block body_attrs %} class="member-page"{% endblock %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=1">{% endblock %}
+{% block main %}
+<header class="m-report-hero">
+  <div class="m-shell">
+    <div class="m-report-hero__top">
+      <div>
+        <span class="m-kicker">{% if demo %}DEMO · DIGITALVERSJON{% else %}MIN DIGITALE RAPPORT{% endif %}</span>
+        <h1>{{ package.title }}</h1>
+        <p>{{ package.summary }}</p>
+      </div>
+      {% if demo %}<span class="m-demo-badge">EKSEMPEL</span>{% endif %}
+    </div>
+    <div class="m-report-summary">
+      <span class="m-report-chip">Livsvei <b>{{ profile.life.label }}</b></span>
+      <span class="m-report-chip">Navn <b>{{ profile.expression.label }}</b></span>
+      <span class="m-report-chip">Vokal <b>{{ profile.soul.label }}</b></span>
+      <span class="m-report-chip">Konsonant <b>{{ profile.personality.label }}</b></span>
+      <span class="m-report-chip">Personlig år <b>{{ profile.personal_year }}</b></span>
+      <span class="m-report-chip">Essens <b>{{ profile.essence.label }}</b></span>
+    </div>
+    {% if demo %}<p style="font-size:.78rem;margin-top:16px;color:#718d86">Demoen bruker eksempelpersonen Kari Elise Nordmann, født 15.01.1984. Målet er å kvalitetssjekke hva pakken inneholder — ikke å presentere dette som en ekte kunderapport.</p>{% endif %}
+  </div>
+</header>
+
+<section class="m-section m-section--stone">
+  <div class="m-shell">
+    <span class="m-kicker">SLIK SER DIGITALVERSJONEN UT</span>
+    <h2>Fra beregning til lesning.</h2>
+    {% for section in sections %}
+      <article class="m-report-section">
+        <h3>{{ section.title }}</h3>
+        <div><p class="m-report-section__lead">{{ section.lead }}</p><p class="m-report-section__body">{{ section.body }}</p></div>
+      </article>
+    {% endfor %}
+    <div class="m-report-includes">
+      <span class="m-kicker">PAKKEN SKAL INNEHOLDE</span>
+      <ul>{% for item in package.sections %}<li>{{ item }}</li>{% endfor %}</ul>
+    </div>
+    <div class="m-report-actions">
+      {% if demo %}
+        <a class="m-btn m-btn--gold" href="/bestill/?package={{ package_slug }}">Velg {{ package.title }} · {{ package.price }} kr →</a>
+        <a class="m-btn m-btn--dark" href="/ase-edition/#ae-packages">Tilbake til pakkene</a>
+      {% else %}
+        <button class="m-btn m-btn--gold" type="button" onclick="window.print()">Skriv ut / lagre PDF</button>
+        <a class="m-btn m-btn--dark" href="{% url 'members:dashboard' %}">Tilbake til Min side</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}

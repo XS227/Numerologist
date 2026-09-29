@@ -304,14 +304,17 @@ function checked(string $val, string $test): string
 
     <div class="pkg-grid" role="radiogroup" aria-label="<?= $t('Velg analysepakke', 'Choose an analysis package', 'انتخاب بسته‌ی تحلیل') ?>">
       <?php foreach (PACKAGES as $key => $pkg): ?>
-        <label class="pkg-card <?= $key === ($order['package'] ?? '') ? 'pkg-card--selected' : '' ?>">
-          <input type="radio" name="package" value="<?= $key ?>"
-                 <?= checked($order['package'] ?? '', $key) ?> required>
-          <?php [$pkgName, $pkgDesc] = package_label($key, $lang); ?>
-          <span class="pkg-name"><?= htmlspecialchars($pkgName) ?></span>
-          <span class="pkg-price"><?= $pkg['price'] ?> kr</span>
-          <span class="pkg-desc"><?= htmlspecialchars($pkgDesc) ?></span>
-        </label>
+        <div class="pkg-item">
+          <label class="pkg-card <?= $key === ($order['package'] ?? '') ? 'pkg-card--selected' : '' ?>">
+            <input type="radio" name="package" value="<?= $key ?>"
+                   <?= checked($order['package'] ?? '', $key) ?> required>
+            <?php [$pkgName, $pkgDesc] = package_label($key, $lang); ?>
+            <span class="pkg-name"><?= htmlspecialchars($pkgName) ?></span>
+            <span class="pkg-price"><?= $pkg['price'] ?> kr</span>
+            <span class="pkg-desc"><?= htmlspecialchars($pkgDesc) ?></span>
+          </label>
+          <a class="pkg-demo-link" href="/rapporter/demo/<?= rawurlencode($key) ?>/"><?= $t('Se eksempel på digitalversjonen →', 'View digital version example →', 'نمونه نسخه دیجیتال ←') ?></a>
+        </div>
       <?php endforeach; ?>
     </div>
 

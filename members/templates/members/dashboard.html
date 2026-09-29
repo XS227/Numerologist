@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Min side · Numerologist{% endblock %}
+{% block body_attrs %} class="member-page"{% endblock %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=1">{% endblock %}
+{% block main %}
+{% if messages %}<div class="m-alerts">{% for message in messages %}<div class="m-alert">{{ message }}</div>{% endfor %}</div>{% endif %}
+<header class="m-hero">
+  <div class="m-shell m-dashboard-head">
+    <div>
+      <span class="m-kicker">MIN SIDE</span>
+      <h1>{% if profile.display_name %}Hei, {{ profile.display_name|truncatewords:2 }}.{% else %}Ditt Numerologist-rom.{% endif %}</h1>
+      <p>Her samles digitale analyser, kjøp og progresjonen din i Numerology Academy.</p>
+    </div>
+    <div class="m-profile">
+      <div class="m-avatar">{% if profile.picture_url %}<img src="{{ profile.picture_url }}" alt="">{% else %}{{ user.email|default:user.username|slice:":1"|upper }}{% endif %}</div>
+      <div><strong>{{ profile.display_name|default:user.email|default:user.username }}</strong><br><a class="m-btn m-btn--ghost" style="margin-top:8px;min-height:auto;padding:8px 11px" href="{% url 'members:logout' %}">Logg ut</a></div>
+    </div>
+  </div>
+</header>
+
+<section class="m-section m-section--stone">
+  <div class="m-shell">
+    <span class="m-kicker">MINE ANALYSER</span>
+    <h2>Digitalversjonene dine.</h2>
+    <p class="m-section__intro">Når en Vipps-betaling er registrert på samme e-post eller telefon som kontoen din, dukker den digitale pakken opp her automatisk.</p>
+    <div class="m-grid" style="margin-top:28px">
+      {% for order in orders %}
+        <article class="m-card m-order">
+          <span class="m-order__status{% if order.digital_available %} m-order__status--ready{% endif %}">{% if order.digital_available %}Digital klar{% else %}Venter på betaling{% endif %}</span>
+          <h3 style="margin-top:14px">{{ order.title }}</h3>
+          <p>{{ order.product.summary|default:"Digital rapport" }}</p>
+          <div class="m-card__meta"><strong>{{ order.price|floatformat:0 }} kr</strong><span>{{ order.created_at|slice:":10" }}</span></div>
+          {% if order.digital_available %}<a class="m-btn m-btn--dark" style="margin-top:14px;width:100%;box-sizing:border-box" href="{% url 'members:report' order.id %}">Åpne digital rapport →</a>{% endif %}
+        </article>
+      {% empty %}
+        <div class="m-empty" style="grid-column:1/-1">Ingen kjøp er koblet til denne kontoen ennå. <a href="/ase-edition/">Start ÅSE 227 Edition</a> eller se <a href="/bestill/">analysepakkene</a>.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="m-section">
+  <div class="m-shell">
+    <span class="m-kicker">NUMEROLOGY ACADEMY</span>
+    <h2>Become a Numerologist.</h2>
+    <p class="m-section__intro">Fem nivåer fra tallene 1–9 til full konsultasjon. Hvert nivå har undervisning, premiumressurser og lekse.</p>
+    <div class="m-grid" style="margin-top:28px">
+      {% for item in academy %}
+        <article class="m-card m-level{% if item.progress.status == 'locked' %} m-level--locked{% endif %}">
+          <div class="m-level__no">0{{ item.level }}</div>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.subtitle }}</p>
+          <div class="m-academy-progress"><span style="width:{{ item.progress.percent }}%"></span></div>
+          <div class="m-card__meta"><strong>{{ item.progress.percent }}%</strong><span>{{ item.progress.get_status_display }}</span></div>
+          {% if item.progress.status != 'locked' %}<a class="m-btn m-btn--ghost" style="margin-top:14px;width:100%;box-sizing:border-box" href="{% url 'members:academy_level' item.level %}">Fortsett nivå →</a>{% endif %}
+        </article>
+      {% endfor %}
+    </div>
+    <div style="margin-top:24px"><a class="m-btn m-btn--gold" href="{% url 'members:academy' %}">Åpne Academy →</a></div>
+  </div>
+</section>
+{% endblock %}

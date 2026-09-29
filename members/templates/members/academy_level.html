@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Nivå {{ level.level }} · {{ level.title }} · Numerology Academy{% endblock %}
+{% block body_attrs %} class="member-page"{% endblock %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=1">{% endblock %}
+{% block main %}
+{% if messages %}<div class="m-alerts">{% for message in messages %}<div class="m-alert">{{ message }}</div>{% endfor %}</div>{% endif %}
+<header class="m-hero">
+  <div class="m-shell">
+    <span class="m-kicker">ACADEMY · NIVÅ 0{{ level.level }}</span>
+    <h1>{{ level.title }}</h1>
+    <p>{{ level.subtitle }} {{ level.description }}</p>
+    {% if progress %}<div class="m-academy-progress" style="max-width:520px"><span style="width:{{ progress.percent }}%"></span></div><p style="font-size:.84rem">{{ progress.percent }}% · {{ progress.get_status_display }}</p>{% endif %}
+  </div>
+</header>
+
+<section class="m-section{% if unlocked %}{% else %} m-section--stone{% endif %}">
+  <div class="m-shell m-level-layout">
+    <div>
+      <span class="m-kicker">UNDERVISNING</span>
+      <h2>Dette nivået lærer deg.</h2>
+      <p class="m-section__intro">{{ level.description }}</p>
+      <div class="m-premium">{% for x in premium_resources %}{% if user.is_authenticated and unlocked %}<a href="{% url 'members:premium_resource' level.level x.slug %}">PREMIUM · {{ x.title }}</a>{% else %}<span>PREMIUM · {{ x.title }}</span>{% endif %}{% endfor %}</div>
+    </div>
+    {% if unlocked %}
+      <div>
+        <div class="m-lesson-list">
+          {% for lesson in level.lessons %}
+            <article class="m-lesson"><small>LEKSJON 0{{ forloop.counter }}</small><h3>{{ lesson }}</h3></article>
+          {% endfor %}
+        </div>
+        <div class="m-homework">
+          <span class="m-kicker">LEKSE</span>
+          <h3 style="font:400 1.6rem Georgia,serif;margin:0 0 10px">Arbeid med materialet.</h3>
+          <p style="color:#a5b8b3;line-height:1.65">{{ level.homework }}</p>
+          {% if user.is_authenticated %}
+            <form method="post">{% csrf_token %}
+              <textarea name="homework" placeholder="Skriv leksen eller notatene dine her…">{{ progress.homework }}</textarea>
+              <div class="m-homework__actions">
+                <button class="m-btn m-btn--ghost" type="submit" name="action" value="save_homework">Lagre lekse</button>
+                <button class="m-btn m-btn--gold" type="submit" name="action" value="complete">Marker nivå fullført →</button>
+              </div>
+            </form>
+          {% else %}
+            <a class="m-btn m-btn--gold" href="{% url 'members:login' %}?next={{ request.path }}">Logg inn for å lagre progresjon →</a>
+          {% endif %}
+        </div>
+        <div style="margin-top:24px">
+          <span class="m-kicker">RESSURSER</span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">{% for url in level.articles %}<a class="m-btn m-btn--ghost" href="{{ url }}">Åpne ressurs {{ forloop.counter }} →</a>{% endfor %}</div>
+        </div>
+      </div>
+    {% else %}
+      <div class="m-lock">
+        <span class="m-kicker">LÅST NIVÅ</span>
+        <h3 style="font:400 1.8rem Georgia,serif;margin:0 0 10px">Fullfør nivå {{ level.level|add:"-1" }} først.</h3>
+        <p>Du kan se hva som kommer, men premiuminnhold og lekser åpnes først når forrige nivå er fullført.</p>
+        {% if not user.is_authenticated %}<a class="m-btn m-btn--gold" href="{% url 'members:login' %}?next={{ request.path }}">Logg inn →</a>{% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

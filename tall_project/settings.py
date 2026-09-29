@@ -11,6 +11,22 @@ from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Load missing settings from the project .env as a fallback. Systemd still
+# wins because existing environment variables are never overwritten. This
+# mirrors the PHP checkout's config loader and keeps both halves of the hybrid
+# site on one source of truth.
+_env_file = BASE_DIR / ".env"
+if _env_file.exists():
+    for _raw in _env_file.read_text(encoding="utf-8", errors="ignore").splitlines():
+        _line = _raw.strip()
+        if not _line or _line.startswith("#") or "=" not in _line:
+            continue
+        _key, _value = _line.split("=", 1)
+        _key = _key.strip()
+        if not _key or not _key.replace("_", "").isalnum():
+            continue
+        os.environ.setdefault(_key, _value.strip().strip('"').strip("'"))
+
 # SECURITY (2026-07-12): used to fall back to a hardcoded, guessable
 # 'dev-change-me' default — fine as long as .env is present and correct,
 # but a misconfigured/missing .env would silently degrade to a known key
@@ -59,6 +75,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "articles.apps.ArticlesConfig",
     "intake.apps.IntakeConfig",
+    "members.apps.MembersConfig",
     "wagtail",
     "wagtail.admin",
     "wagtail.documents",
@@ -179,3 +196,15 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 WAGTAIL_SITE_NAME = "Numerologist"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Member / social login configuration
+LOGIN_URL = "/min-side/login/"
+LOGIN_REDIRECT_URL = "/min-side/"
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET", "")
+VIPPS_LOGIN_ENABLED = os.getenv("VIPPS_LOGIN_ENABLED", "true").lower() in {"1", "true", "yes", "on"}
+VIPPS_LOGIN_CLIENT_ID = os.getenv("VIPPS_LOGIN_CLIENT_ID", os.getenv("VIPPS_CLIENT_ID", ""))
+VIPPS_LOGIN_CLIENT_SECRET = os.getenv("VIPPS_LOGIN_CLIENT_SECRET", os.getenv("VIPPS_CLIENT_SECRET", ""))
+VIPPS_LOGIN_MSN = os.getenv("VIPPS_LOGIN_MSN", os.getenv("VIPPS_MSN", ""))
+VIPPS_TEST_MODE = os.getenv("VIPPS_TEST_MODE", "true").lower() == "true"
+VIPPS_LOGIN_BASE_URL = "https://apitest.vipps.no" if VIPPS_TEST_MODE else "https://api.vipps.no"

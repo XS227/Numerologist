@@ -79,6 +79,19 @@ if ($order['payment_status'] === 'pending' && VIPPS_CLIENT_ID !== '') {
     }
 }
 
+$packageNames = [
+    'ase227' => 'ÅSE 227 Edition',
+    'personlighet' => 'Personlighetsanalyse',
+    'fremtid2' => '2 års Fremtidsanalyse',
+    'partner' => 'Partneranalyse + 1 år',
+    'komplett1' => 'Komplett analyse + 1 år',
+    'komplett2' => 'Komplett analyse + 2 år',
+    'komplett3' => 'Komplett analyse + 3 år',
+    'veiledning15' => 'Veiledningssamtale 15 min',
+    'familie3' => '3 komplette analyser + 1 år',
+];
+$packageDisplay = $packageNames[$order['package'] ?? ''] ?? ($order['package'] ?? '');
+
 $paymentStatus = $order['payment_status'];
 $isPaid        = ($paymentStatus === 'paid');
 $isCancelled   = in_array($paymentStatus, ['cancelled', 'void'], true);
@@ -114,18 +127,20 @@ render_header(
       <dt><?= $no ? 'Bestillingsnummer' : 'Order ID' ?></dt>
       <dd><?= htmlspecialchars($orderId) ?></dd>
       <dt><?= $no ? 'Pakke' : 'Package' ?></dt>
-      <dd><?= htmlspecialchars($order['package']) ?></dd>
+      <dd><?= htmlspecialchars($packageDisplay) ?></dd>
       <dt><?= $no ? 'Beløp' : 'Amount' ?></dt>
       <dd><?= number_format((int) $order['price_ore'] / 100, 0, ',', ' ') ?> kr</dd>
       <dt>E-post</dt>
       <dd><?= htmlspecialchars($order['email']) ?></dd>
       <dt><?= $no ? 'Forventet leveringstid' : 'Expected delivery' ?></dt>
-      <dd><?= $no ? '5–7 virkedager' : '5–7 business days' ?></dd>
+      <dd><?= ($order['package'] === 'ase227') ? ($no ? 'Digitalversjon tilgjengelig med én gang på Min side' : 'Digital version available immediately on My page') : ($no ? 'Digital grunnversjon med én gang · Åses personlige del normalt 5–7 virkedager' : 'Digital starter version immediately · Åse’s personal part normally 5–7 business days') ?></dd>
     </dl>
 
-    <a href="/" class="btn-primary" style="display:inline-block;margin-top:1.5rem;">
-      ← <?= $no ? 'Tilbake til forsiden' : 'Back to home' ?>
-    </a>
+    <div class="form-actions" style="margin-top:1.5rem;">
+      <a href="/min-side/login/?next=/min-side/" class="btn-primary"><?= $no ? 'Åpne digitalversjonen på Min side' : 'Open the digital version on My page' ?> →</a>
+      <a href="/" class="btn-ghost">← <?= $no ? 'Tilbake til forsiden' : 'Back to home' ?></a>
+    </div>
+    <p class="pay-note" style="margin-top:1rem;"><?= $no ? 'Logg inn med Vipps eller Google med samme e-post eller telefon som i bestillingen, så kobles kjøpet automatisk til kontoen.' : 'Sign in with Vipps or Google using the same email or phone as the order, and the purchase will be linked automatically.' ?></p>
 
   <?php elseif ($isCancelled): ?>
     <div class="confirm-icon confirm-icon--warn" aria-hidden="true">⚠</div>

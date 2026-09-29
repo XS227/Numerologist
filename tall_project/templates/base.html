@@ -188,6 +188,8 @@
           <ul class="l-nav-links" id="primaryNav">
             <li><a href="/discover-numerology/">{% if CURRENT_LANGUAGE == 'nb' %}Om numerologi{% else %}About numerology{% endif %}</a></li>
             <li><a href="{% url 'article_list' %}">{% trans "Articles" %}</a></li>
+            <li><a href="{% url 'members:academy' %}">Academy</a></li>
+            <li><a href="{% url 'members:dashboard' %}">{% trans "My page" %}</a></li>
             <li><a href="/contact-qa/">{% if CURRENT_LANGUAGE == 'nb' %}Kontakt{% else %}Contact{% endif %}</a></li>
           </ul>
           <div class="l-nav-right">
@@ -228,6 +230,8 @@
                 <li><a href="/calculators/">{% if CURRENT_LANGUAGE == 'nb' %}Kalkulatorer{% else %}Calculators{% endif %}</a></li>
                 <li><a href="/discover-numerology/">{% if CURRENT_LANGUAGE == 'nb' %}Om numerologi{% else %}About numerology{% endif %}</a></li>
                 <li><a href="{% url 'article_list' %}">{% trans "Articles" %}</a></li>
+                <li><a href="{% url 'members:academy' %}">Numerology Academy</a></li>
+                <li><a href="{% url 'members:dashboard' %}">{% trans "My page" %}</a></li>
               </ul>
             </div>
             <div class="l-footer-col">

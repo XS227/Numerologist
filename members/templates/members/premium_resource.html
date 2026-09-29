@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ resource.title }} · Numerology Academy{% endblock %}
+{% block body_attrs %} class="member-page"{% endblock %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=1">{% endblock %}
+{% block main %}
+<header class="m-hero">
+  <div class="m-shell">
+    <span class="m-kicker">ACADEMY · NIVÅ 0{{ level.level }} · PREMIUM</span>
+    <h1>{{ resource.title }}</h1>
+    <p>{{ resource.lead }}</p>
+  </div>
+</header>
+<section class="m-section m-section--stone">
+  <div class="m-shell" style="max-width:860px">
+    {% for paragraph in resource.body %}<p style="font:400 1.15rem/1.85 Georgia,serif;color:#304d49;margin:0 0 24px">{{ paragraph }}</p>{% endfor %}
+    <div style="margin-top:34px"><a class="m-btn m-btn--dark" href="{% url 'members:academy_level' level.level %}">← Tilbake til nivå {{ level.level }}</a></div>
+  </div>
+</section>
+{% endblock %}

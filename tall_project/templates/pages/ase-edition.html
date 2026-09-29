@@ -4,14 +4,14 @@
 {% block title %}{% if CURRENT_LANGUAGE == 'fa' %}نسخه ÅSE · خوانش کامل{% elif CURRENT_LANGUAGE == 'en' %}ÅSE 227 Edition · Complete Reading{% else %}ÅSE 227 Edition · Komplett tallkart{% endif %} · Numerologist{% endblock %}
 {% block body_attrs %} class="ase-engine-page"{% endblock %}
 {% block extra_styles %}
-<link rel="stylesheet" href="{% static 'journey/ase-edition.css' %}?v=3">
+<link rel="stylesheet" href="{% static 'journey/ase-edition.css' %}?v=4">
 {% endblock %}
 
 {% block main %}
 <div class="ae" id="ase-engine" data-lang="{{ CURRENT_LANGUAGE|default:'no' }}">
   <header class="ae-hero">
     <div class="ae-hero__media" aria-hidden="true">
-      <img src="{% static 'journey/images/ase-method.webp' %}" alt="">
+      <img src="{% static 'journey/images/ase-profile-banner.webp' %}" alt="">
       <span class="ae-orbit ae-orbit--1"></span><span class="ae-orbit ae-orbit--2"></span>
       <span class="ae-hero__number">33</span>
     </div>
@@ -188,6 +188,7 @@
             <h3>{% if CURRENT_LANGUAGE == 'fa' %}گزارش کامل ÅSE 227{% elif CURRENT_LANGUAGE == 'en' %}ÅSE 227 Complete Report{% else %}ÅSE 227 Fullrapport{% endif %}</h3>
             <p>{% if CURRENT_LANGUAGE == 'fa' %}همه محاسبات موتور، روایت شخصی، زمان‌بندی و نقشه کامل در یک گزارش دیجیتال.{% elif CURRENT_LANGUAGE == 'en' %}The complete engine map, personal narrative, timing and all calculations gathered as one digital report.{% else %}Hele motorkartet, personlig fortelling, timing og alle beregningene samlet som digital rapport.{% endif %}</p>
             <ul><li>{% if CURRENT_LANGUAGE == 'fa' %}نقشه کامل اعداد{% elif CURRENT_LANGUAGE == 'en' %}Complete number map{% else %}Komplett tallkart{% endif %}</li><li>{% if CURRENT_LANGUAGE == 'fa' %}روایت شخصی{% elif CURRENT_LANGUAGE == 'en' %}Personal narrative{% else %}Personlig fortelling{% endif %}</li><li>PDF / {% if CURRENT_LANGUAGE == 'fa' %}نسخه ذخیره‌شدنی{% elif CURRENT_LANGUAGE == 'en' %}saved copy{% else %}lagret kopi{% endif %}</li></ul>
+            <a class="ae-package__demo" href="{% url 'members:report_demo' 'ase227' %}">Se eksempel på digitalversjonen →</a>
             <div class="ae-package__bottom"><strong>227 kr</strong><a href="/bestill/?package=ase227&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب 227{% elif CURRENT_LANGUAGE == 'en' %}Choose 227{% else %}Velg 227{% endif %} →</a></div>
           </article>
 
@@ -195,6 +196,7 @@
             <div class="ae-package__top"><span class="ae-package__badge">ÅSE ORIGINAL</span></div>
             <h3>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل شخصیت{% elif CURRENT_LANGUAGE == 'en' %}Personality Analysis{% else %}Personlighetsanalyse{% endif %}</h3>
             <p>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل انسانی Åse از شخصیت، کارما، سلامت نمادین و اعداد شانس.{% elif CURRENT_LANGUAGE == 'en' %}Åse's human-written analysis of personality, karmic themes, symbolic health profile and lucky numbers.{% else %}Åses menneskeskrevne analyse av personlighet, karmiske tema, symbolsk helseprofil og lykketall.{% endif %}</p>
+            <a class="ae-package__demo" href="{% url 'members:report_demo' 'personlighet' %}">Se eksempel på digitalversjonen →</a>
             <div class="ae-package__bottom"><strong>698 kr</strong><a href="/bestill/?package=personlighet&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
           </article>
 
@@ -202,6 +204,7 @@
             <div class="ae-package__top"><span class="ae-package__badge">ÅSE ORIGINAL</span></div>
             <h3>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل آینده ۲ ساله{% elif CURRENT_LANGUAGE == 'en' %}2-Year Future Analysis{% else %}2 års Fremtidsanalyse{% endif %}</h3>
             <p>{% if CURRENT_LANGUAGE == 'fa' %}سال شخصی، جوهره، ترانزیت‌ها و تحلیل ماه‌به‌ماه برای دو سال آینده.{% elif CURRENT_LANGUAGE == 'en' %}Personal Years, Essence, transits and month-by-month analysis for the next two years.{% else %}Personlige år, essenstall, transitter og måned-for-måned analyse for de neste to årene.{% endif %}</p>
+            <a class="ae-package__demo" href="{% url 'members:report_demo' 'fremtid2' %}">Se eksempel på digitalversjonen →</a>
             <div class="ae-package__bottom"><strong>698 kr</strong><a href="/bestill/?package=fremtid2&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
           </article>
 
@@ -209,6 +212,7 @@
             <div class="ae-package__top"><span class="ae-package__badge">ÅSE ORIGINAL</span><span class="ae-package__recommend" data-partner-recommend hidden>{% if CURRENT_LANGUAGE == 'fa' %}مرتبط با نتیجه شما{% elif CURRENT_LANGUAGE == 'en' %}Relevant to your result{% else %}Relevant for resultatet ditt{% endif %}</span></div>
             <h3>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل رابطه + ۱ سال{% elif CURRENT_LANGUAGE == 'en' %}Partner Analysis + 1 Year{% else %}Partneranalyse + 1 år{% endif %}</h3>
             <p>{% if CURRENT_LANGUAGE == 'fa' %}سازگاری، نقاط تفاوت و ریتم سالانه/ماهانه رابطه.{% elif CURRENT_LANGUAGE == 'en' %}Compatibility, differences and the relationship's annual/monthly rhythm.{% else %}Kompatibilitet, forskjeller og relasjonens årlige/månedlige rytme.{% endif %}</p>
+            <a class="ae-package__demo" href="{% url 'members:report_demo' 'partner' %}">Se eksempel på digitalversjonen →</a>
             <div class="ae-package__bottom"><strong>798 kr</strong><a href="/bestill/?package=partner&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
           </article>
 
@@ -216,6 +220,7 @@
             <div class="ae-package__top"><span class="ae-package__badge">ÅSE ORIGINAL · FULL DYBDE</span></div>
             <h3>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل کامل شخصیت + آینده{% elif CURRENT_LANGUAGE == 'en' %}Complete Personality + Future Analysis{% else %}Komplett Personlighetsanalyse + Fremtid{% endif %}</h3>
             <p>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل ۴۰ تا ۶۰ صفحه‌ای Åse: شخصیت، کارما، سلامت نمادین، چرخه‌ها، ترانزیت‌ها و اعداد شانس.{% elif CURRENT_LANGUAGE == 'en' %}Åse's 40–60 page analysis: personality, karmic themes, symbolic health, cycles, transits and lucky numbers.{% else %}Åses analyse på ca. 40–60 sider: personlighet, karmiske tema, symbolsk helse, sykluser, transitter og lykketall.{% endif %}</p>
+            <div class="ae-package__demo-row"><a href="{% url 'members:report_demo' 'komplett1' %}">Demo 1 år</a><a href="{% url 'members:report_demo' 'komplett2' %}">Demo 2 år</a><a href="{% url 'members:report_demo' 'komplett3' %}">Demo 3 år</a></div>
             <div class="ae-package__variants"><a href="/bestill/?package=komplett1&amp;from=ase"><span>1 {% if CURRENT_LANGUAGE == 'fa' %}سال{% elif CURRENT_LANGUAGE == 'en' %}year{% else %}år{% endif %}</span><strong>998 kr</strong></a><a href="/bestill/?package=komplett2&amp;from=ase"><span>2 {% if CURRENT_LANGUAGE == 'fa' %}سال{% elif CURRENT_LANGUAGE == 'en' %}years{% else %}år{% endif %}</span><strong>1 098 kr</strong></a><a href="/bestill/?package=komplett3&amp;from=ase"><span>3 {% if CURRENT_LANGUAGE == 'fa' %}سال{% elif CURRENT_LANGUAGE == 'en' %}years{% else %}år{% endif %}</span><strong>1 198 kr</strong></a></div>
           </article>
 
@@ -223,6 +228,7 @@
             <div class="ae-package__top"><span class="ae-package__badge">LIVE MED ÅSE</span></div>
             <h3>{% if CURRENT_LANGUAGE == 'fa' %}گفت‌وگوی راهنمایی{% elif CURRENT_LANGUAGE == 'en' %}Guidance Call{% else %}Veiledningssamtale{% endif %}</h3>
             <p>{% if CURRENT_LANGUAGE == 'fa' %}۱۵ دقیقه گفت‌وگوی مستقیم با Åse؛ قیمت اصلی ۲۴ کرون در دقیقه.{% elif CURRENT_LANGUAGE == 'en' %}15 minutes directly with Åse, based on her current rate of 24 kr per minute.{% else %}15 minutter direkte med Åse, basert på hennes nåværende pris på 24 kr per minutt.{% endif %}</p>
+            <a class="ae-package__demo" href="{% url 'members:report_demo' 'veiledning15' %}">Se eksempel på digitalversjonen →</a>
             <div class="ae-package__bottom"><strong>360 kr</strong><a href="/bestill/?package=veiledning15&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
           </article>
 
@@ -230,6 +236,7 @@
             <div class="ae-package__top"><span class="ae-package__badge">3 × KOMPLETT</span></div>
             <h3>{% if CURRENT_LANGUAGE == 'fa' %}بسته ۳ تحلیل کامل{% elif CURRENT_LANGUAGE == 'en' %}3 Complete Analyses{% else %}3 komplette analyser{% endif %}</h3>
             <p>{% if CURRENT_LANGUAGE == 'fa' %}برای خانواده، هدیه یا سه نفر؛ هر کدام با یک سال تحلیل آینده.{% elif CURRENT_LANGUAGE == 'en' %}For family, gifts or three people; each with one year of future analysis.{% else %}For familie, gave eller tre personer; hver med ett års fremtidsanalyse.{% endif %}</p>
+            <a class="ae-package__demo" href="{% url 'members:report_demo' 'familie3' %}">Se eksempel på digitalversjonen →</a>
             <div class="ae-package__bottom"><strong>2 994 kr</strong><a href="/bestill/?package=familie3&amp;from=ase">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} →</a></div>
           </article>
         </div>
@@ -251,5 +258,5 @@
 {% endblock %}
 
 {% block extra_scripts %}
-<script src="{% static 'journey/ase-edition.js' %}?v=3" defer></script>
+<script src="{% static 'journey/ase-edition.js' %}?v=4" defer></script>
 {% endblock %}

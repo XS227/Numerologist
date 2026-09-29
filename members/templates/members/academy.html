@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Numerology Academy · Numerologist{% endblock %}
+{% block body_attrs %} class="member-page"{% endblock %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=1">{% endblock %}
+{% block main %}
+<header class="m-hero">
+  <div class="m-shell">
+    <span class="m-kicker">NUMEROLOGY ACADEMY</span>
+    <h1>Become a Numerologist.</h1>
+    <p>Et nivåbasert læringsløp som lærer deg å beregne, tolke og til slutt holde en hel numerologisk konsultasjon. Premiumartikler, case og lekser åpnes etter hvert.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px">
+      {% if user.is_authenticated %}<a class="m-btn m-btn--gold" href="{% url 'members:dashboard' %}">Min progresjon →</a>{% else %}<a class="m-btn m-btn--gold" href="{% url 'members:login' %}?next={% url 'members:academy' %}">Start Academy →</a>{% endif %}
+      <a class="m-btn m-btn--ghost" href="/ase-edition/">Prøv ÅSE 227 Edition</a>
+    </div>
+  </div>
+</header>
+
+<section class="m-section m-section--stone">
+  <div class="m-shell">
+    <span class="m-kicker">5 NIVÅER</span>
+    <h2>Fra grunnenergi til profesjonell syntese.</h2>
+    <p class="m-section__intro">Du kan se hele strukturen før du starter. Når du er logget inn, lagres progresjon og lekser på kontoen din.</p>
+    <div class="m-grid" style="margin-top:30px">
+      {% for item in levels %}
+        <article class="m-card m-level{% if item.progress and item.progress.status == 'locked' %} m-level--locked{% endif %}">
+          <div class="m-level__no">0{{ item.level }}</div>
+          <h3>{{ item.title }}</h3>
+          <p><strong>{{ item.subtitle }}</strong></p>
+          <p>{{ item.description }}</p>
+          <div class="m-premium">{% for x in item.premium %}<span>PREMIUM · {{ x }}</span>{% endfor %}</div>
+          {% if item.progress %}
+            <div class="m-academy-progress"><span style="width:{{ item.progress.percent }}%"></span></div>
+            <span class="m-level__status">{{ item.progress.get_status_display }} · {{ item.progress.percent }}%</span>
+          {% else %}
+            <span class="m-level__status">Se nivå</span>
+          {% endif %}
+          <a class="m-btn m-btn--ghost" style="margin-top:14px;width:100%;box-sizing:border-box" href="{% url 'members:academy_level' item.level %}">{% if item.progress and item.progress.status == 'locked' %}Se hva som kommer{% else %}Åpne nivå{% endif %} →</a>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="m-section">
+  <div class="m-shell">
+    <span class="m-kicker">SLUTTMÅLET</span>
+    <h2>Du skal kunne lese et menneske — ikke bare regne tall.</h2>
+    <p class="m-section__intro">Academy avsluttes med en full case der du beregner hele kartet, prioriterer de viktigste mønstrene og presenterer resultatet muntlig på en ansvarlig måte.</p>
+  </div>
+</section>
+{% endblock %}

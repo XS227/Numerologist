@@ -17,6 +17,7 @@ urlpatterns = [
     path("cms/", include("wagtail.admin.urls")),
     path("documents/", include("wagtail.documents.urls")),
     path("intake/", include("intake.urls", namespace="intake")),
+    path("", include("members.urls", namespace="members")),
     path("i18n/", include("django.conf.urls.i18n")),
     # Old PHP-era URL — merged into /articles/ (was serving identical
     # duplicate content under a second URL; now a permanent redirect so old

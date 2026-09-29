@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Min side · Numerologist{% endblock %}
+{% block body_attrs %} class="member-page"{% endblock %}
+{% block extra_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=1">{% endblock %}
+{% block main %}
+{% if messages %}<div class="m-alerts">{% for message in messages %}<div class="m-alert">{{ message }}</div>{% endfor %}</div>{% endif %}
+<section class="m-login">
+  <div class="m-login__card">
+    <span class="m-kicker">NUMEROLOGIST · MIN SIDE</span>
+    <h1>Én konto for alt.</h1>
+    <p>Logg inn for å se digitale analyser, ÅSE 227-rapporter og progresjonen din i Numerology Academy.</p>
+    <div class="m-login__buttons">
+      <a class="m-social m-social--vipps{% if not vipps_enabled %} m-social--disabled{% endif %}" href="{% if vipps_enabled %}{% url 'members:vipps_start' %}{% else %}#{% endif %}"{% if not vipps_enabled %} aria-disabled="true"{% endif %}>
+        <span class="m-social__icon">V</span><span>{% if vipps_enabled %}Fortsett med Vipps{% if vipps_test_mode %} · test{% endif %}{% else %}Vipps · kobles til{% endif %}</span>
+      </a>
+      <a class="m-social m-social--google{% if not google_enabled %} m-social--disabled{% endif %}" href="{% if google_enabled %}{% url 'members:google_start' %}{% else %}#{% endif %}"{% if not google_enabled %} aria-disabled="true"{% endif %}>
+        <span class="m-social__icon">G</span><span>{% if google_enabled %}Fortsett med Google{% else %}Google · kobles til{% endif %}</span>
+      </a>
+    </div>
+    <p class="m-login__note">Vipps er primær innlogging i Norge. Google kan knyttes til samme konto slik at kjøp og Academy-progresjon ikke splittes.</p>
+  </div>
+</section>
+{% endblock %}
