@@ -290,5 +290,6 @@ def build_future_report(
         "active_pinnacle": active_pinnacle,
         "pinnacle_number": pinnacle_number,
         "method_intro": method_intro,
+        "long_text": long_text,
         "synthesis": synthesis,
     }
