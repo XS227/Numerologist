@@ -10,13 +10,59 @@ require_once __DIR__ . '/../includes/layout.php';
 
 session_start();
 
+// Language first, so validation errors below speak the visitor's language too.
+$lang = handle_lang_switch();
+$t    = fn(string $no, string $en, string $fa): string => nl_pick($lang, $no, $en, $fa);
+$back = nl_is_rtl($lang) ? '→' : '←';
+
 // ── Packages ──────────────────────────────────────────────────────────────────
 const PACKAGES = [
-    'grunnpakke'  => ['name' => 'Grunnpakke',         'price' => 299, 'desc' => 'Livsveitall, sjelsurge og personlighetsprofil'],
-    'fullstendig' => ['name' => 'Fullstendig profil',  'price' => 599, 'desc' => 'Komplett numerologisk kartlegging – alle kjernetall'],
-    'arsanalyse'  => ['name' => 'Årsanalyse',          'price' => 399, 'desc' => 'Personlig år, måneds- og dagsplan for kommende år'],
-    'par-analyse' => ['name' => 'Par-analyse',         'price' => 499, 'desc' => 'Numerologisk kompatibilitetsanalyse for to personer'],
+    'ase227'      => ['name' => 'ÅSE 227 Edition', 'price' => 227,  'desc' => 'Digital fullrapport fra den komplette Numerologist-motoren'],
+    'personlighet'=> ['name' => 'Personlighetsanalyse', 'price' => 698, 'desc' => 'Åses personlige analyse av personlighet, karmiske tema og lykketall'],
+    'fremtid2'    => ['name' => 'Fremtidsanalyse 2 år', 'price' => 698, 'desc' => 'Årlig og månedlig analyse for de neste 2 årene'],
+    'partner'     => ['name' => 'Partneranalyse + 1 år', 'price' => 798, 'desc' => 'Relasjon, kompatibilitet og 1 års fremtidsanalyse'],
+    'komplett1'   => ['name' => 'Komplett analyse + 1 år', 'price' => 998, 'desc' => 'Personlighet, karma, helse, sykluser, transitter og 1 år fremover'],
+    'komplett2'   => ['name' => 'Komplett analyse + 2 år', 'price' => 1098,'desc' => 'Personlighet, karma, helse, sykluser, transitter og 2 år fremover'],
+    'komplett3'   => ['name' => 'Komplett analyse + 3 år', 'price' => 1198,'desc' => 'Personlighet, karma, helse, sykluser, transitter og 3 år fremover'],
+    'veiledning15'=> ['name' => 'Veiledningssamtale 15 min', 'price' => 360, 'desc' => '15 minutter direkte med Åse, basert på 24 kr per minutt'],
+    'familie3'    => ['name' => '3 komplette analyser + 1 år', 'price' => 2994,'desc' => 'Tre komplette analyser, hver med 1 års fremtidsanalyse'],
 ];
+
+// Display names/descriptions per language. PACKAGES above stays the source
+// for the order record and the Vipps transaction text.
+const PACKAGE_LABELS = [
+    'ase227' => [
+        'en' => ['ÅSE 227 Edition', 'Digital complete report from the full Numerologist engine'],
+        'fa' => ['نسخه ÅSE 227', 'گزارش دیجیتال کامل از موتور جامع Numerologist'],
+    ],
+    'personlighet' => [
+        'en' => ['Personality Analysis', 'Åse’s personal analysis of personality, karmic themes and lucky numbers'],
+        'fa' => ['تحلیل شخصیت', 'تحلیل شخصی Åse از شخصیت، موضوع‌های کارمایی و اعداد شانس'],
+    ],
+    'fremtid2' => [
+        'en' => ['2-Year Future Analysis', 'Annual and monthly analysis for the next two years'],
+        'fa' => ['تحلیل آینده ۲ ساله', 'تحلیل سالانه و ماهانه برای دو سال آینده'],
+    ],
+    'partner' => [
+        'en' => ['Partner Analysis + 1 Year', 'Relationship compatibility and one year of future analysis'],
+        'fa' => ['تحلیل رابطه + ۱ سال', 'سازگاری رابطه و یک سال تحلیل آینده'],
+    ],
+    'komplett1' => ['en' => ['Complete Analysis + 1 Year', 'Full Åse analysis plus 1 year'], 'fa' => ['تحلیل کامل + ۱ سال', 'تحلیل کامل Åse به‌همراه یک سال آینده']],
+    'komplett2' => ['en' => ['Complete Analysis + 2 Years', 'Full Åse analysis plus 2 years'], 'fa' => ['تحلیل کامل + ۲ سال', 'تحلیل کامل Åse به‌همراه دو سال آینده']],
+    'komplett3' => ['en' => ['Complete Analysis + 3 Years', 'Full Åse analysis plus 3 years'], 'fa' => ['تحلیل کامل + ۳ سال', 'تحلیل کامل Åse به‌همراه سه سال آینده']],
+    'veiledning15' => ['en' => ['15-Minute Guidance Call', '15 minutes directly with Åse'], 'fa' => ['گفت‌وگوی ۱۵ دقیقه‌ای', '۱۵ دقیقه گفت‌وگوی مستقیم با Åse']],
+    'familie3' => ['en' => ['3 Complete Analyses + 1 Year', 'Three complete analyses, each with one future year'], 'fa' => ['۳ تحلیل کامل + ۱ سال', 'سه تحلیل کامل، هرکدام با یک سال آینده']],
+];
+
+/** [name, description] of a package in the visitor's language. */
+function package_label(string $key, string $lang): array
+{
+    $pkg = PACKAGES[$key] ?? null;
+    if ($pkg === null) {
+        return ['', ''];
+    }
+    return PACKAGE_LABELS[$key][$lang] ?? [$pkg['name'], $pkg['desc']];
+}
 
 // ── CSRF helper ───────────────────────────────────────────────────────────────
 function csrf_token(): string
@@ -32,7 +78,7 @@ function csrf_verify(): void
     $token = (string) ($_POST['_csrf'] ?? '');
     if (!hash_equals((string) ($_SESSION['_csrf'] ?? ''), $token)) {
         http_response_code(403);
-        die('Ugyldig forespørsel (CSRF).');
+        die(nl_t('Ugyldig forespørsel (CSRF).', 'Invalid request (CSRF).', 'درخواست نامعتبر (CSRF).'));
     }
 }
 
@@ -52,6 +98,15 @@ function str_session(string $key, int $max = 200): string
 // ── Determine current step ────────────────────────────────────────────────────
 $step   = max(1, min(3, (int) ($_GET['step'] ?? 1)));
 $errors = [];
+
+// Direct package links from ÅSE Edition / results. Selecting is not a payment action.
+$directPackage = trim((string) ($_GET['package'] ?? ''));
+if ($directPackage !== '' && array_key_exists($directPackage, PACKAGES)) {
+    $_SESSION['order']['package'] = $directPackage;
+    $_SESSION['order']['price_ore'] = PACKAGES[$directPackage]['price'] * 100;
+    header('Location: /bestill/?step=2');
+    exit;
+}
 
 // Redirect to step 1 if session is missing required earlier data
 if ($step === 2 && empty($_SESSION['order']['package'])) {
@@ -73,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($postedStep === 1) {
         $pkg = str_field('package', 20);
         if (!array_key_exists($pkg, PACKAGES)) {
-            $errors[] = 'Velg en pakke.';
+            $errors[] = $t('Velg en pakke.', 'Choose a package.', 'یک بسته انتخاب کنید.');
         } else {
             $_SESSION['order']['package']   = $pkg;
             $_SESSION['order']['price_ore'] = PACKAGES[$pkg]['price'] * 100;
@@ -88,26 +143,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'birth_name'   => str_field('birth_name',   100),
             'current_name' => str_field('current_name', 100),
             'birth_date'   => str_field('birth_date',   10),
-            'sex'          => str_field('sex',           10),
+            'sex'          => str_field('sex',           10) ?: 'X',
             'address'      => str_field('address',      200),
             'phone'        => preg_replace('/[^\d+\s\-\(\)]/', '', str_field('phone', 20)),
             'email'        => filter_var(str_field('email', 150), FILTER_SANITIZE_EMAIL),
+            'notes'        => str_field('notes', 2000),
         ];
 
-        if ($fields['birth_name'] === '')   $errors[] = 'Fødselsnavn er påkrevd.';
-        if ($fields['current_name'] === '') $errors[] = 'Nåværende navn er påkrevd.';
+        if ($fields['birth_name'] === '')   $errors[] = $t('Fødselsnavn er påkrevd.', 'Birth name is required.', 'نام هنگام تولد الزامی است.');
+        if ($fields['current_name'] === '') $errors[] = $t('Nåværende navn er påkrevd.', 'Current name is required.', 'نام فعلی الزامی است.');
         if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $fields['birth_date'])) {
-            $errors[] = 'Ugyldig fødselsdato.';
+            $errors[] = $t('Ugyldig fødselsdato.', 'Invalid date of birth.', 'تاریخ تولد نامعتبر است.');
         }
         if (!in_array($fields['sex'], ['M', 'F', 'X'], true)) {
-            $errors[] = 'Velg kjønn.';
+            $errors[] = $t('Velg kjønn.', 'Choose a gender.', 'جنسیت را انتخاب کنید.');
         }
-        if ($fields['address'] === '') $errors[] = 'Adresse er påkrevd.';
+        $addressOptional = in_array((string) ($_SESSION['order']['package'] ?? ''), ['ase227', 'veiledning15'], true);
+        if (!$addressOptional && $fields['address'] === '') $errors[] = $t('Adresse er påkrevd for denne analysen.', 'Address is required for this analysis.', 'برای این تحلیل نشانی الزامی است.');
+        $needsExtra = in_array((string) ($_SESSION['order']['package'] ?? ''), ['partner', 'familie3'], true);
+        if ($needsExtra && $fields['notes'] === '') $errors[] = $t('Legg inn opplysningene om den/de andre personen(e).', 'Enter the details for the other person/people.', 'اطلاعات فرد یا افراد دیگر را وارد کنید.');
         if (!preg_match('/^[\d+][\d\s\-\(\)]{6,18}$/', $fields['phone'])) {
-            $errors[] = 'Ugyldig telefonnummer.';
+            $errors[] = $t('Ugyldig telefonnummer.', 'Invalid phone number.', 'شماره‌ی تلفن نامعتبر است.');
         }
         if (!filter_var($fields['email'], FILTER_VALIDATE_EMAIL)) {
-            $errors[] = 'Ugyldig e-postadresse.';
+            $errors[] = $t('Ugyldig e-postadresse.', 'Invalid email address.', 'نشانی ایمیل نامعتبر است.');
         }
 
         if (empty($errors)) {
@@ -142,6 +201,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'address'         => $order['address'],
                 'phone'           => $order['phone'],
                 'email'           => $order['email'],
+                'notes'           => $order['notes'] ?? '',
                 'vipps_auth_token' => $authToken,
             ]);
 
@@ -161,22 +221,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         } catch (RuntimeException $e) {
             error_log('Vipps initiate error: ' . $e->getMessage());
-            $errors[] = 'Betalingstjenesten er midlertidig utilgjengelig. Prøv igjen om litt, eller kontakt oss.';
+            $errors[] = $t('Betalingstjenesten er midlertidig utilgjengelig. Prøv igjen om litt, eller kontakt oss.', 'The payment service is temporarily unavailable. Please try again shortly, or contact us.', 'سرویس پرداخت موقتاً در دسترس نیست. کمی بعد دوباره تلاش کنید یا با ما تماس بگیرید.');
             $step = 3;
         }
     }
 }
 
 // ── Render helpers ────────────────────────────────────────────────────────────
-$lang  = handle_lang_switch();
-$no    = ($lang === 'no');
 $order = $_SESSION['order'] ?? [];
 
-render_header($no ? 'Bestill analyse' : 'Order Analysis', [
-    'title'       => $no ? 'Bestill numerologianalyse' : 'Order Numerology Analysis',
-    'description' => $no
-        ? 'Velg pakke og bestill din personlige numerologianalyse hos Åse Steinsland.'
-        : 'Choose a package and order your personal numerology analysis.',
+render_header($t('Bestill analyse', 'Order Analysis', 'سفارش تحلیل'), [
+    'title'       => $t('Bestill numerologianalyse', 'Order Numerology Analysis', 'سفارش تحلیل عددشناسی'),
+    'description' => $t('Velg pakke og bestill din personlige numerologianalyse hos Åse Steinsland.', 'Choose a package and order your personal numerology analysis.', 'بسته‌ی مورد نظر را انتخاب کنید و تحلیل عددشناسی شخصی خود را از اوسه استاینسلند سفارش دهید.'),
     'canonical'   => SITE_URL . '/bestill/',
     'lang'        => $lang,
     'noindex'     => true,
@@ -207,29 +263,29 @@ function checked(string $val, string $test): string
 ?>
 <link rel="stylesheet" href="/assets/bestill.css">
 
-<nav class="breadcrumb" aria-label="Brødsmulesti">
+<nav class="breadcrumb" aria-label="<?= $t('Brødsmulesti', 'Breadcrumb', 'مسیر صفحه') ?>">
   <ol>
-    <li><a href="/">Hjem</a></li>
-    <li aria-current="page">Bestill</li>
+    <li><a href="/"><?= $t('Hjem', 'Home', 'خانه') ?></a></li>
+    <li aria-current="page"><?= $t('Bestill', 'Order', 'سفارش') ?></li>
   </ol>
 </nav>
 
 <!-- Step indicator -->
-<div class="stepper" aria-label="Stegindikator">
+<div class="stepper" aria-label="<?= $t('Stegindikator', 'Progress', 'مراحل') ?>">
   <div class="stepper-inner">
     <div class="step <?= $step >= 1 ? 'step--done' : '' ?> <?= $step === 1 ? 'step--active' : '' ?>">
       <span class="step-num">1</span>
-      <span class="step-label"><?= $no ? 'Pakke' : 'Package' ?></span>
+      <span class="step-label"><?= $t('Pakke', 'Package', 'بسته') ?></span>
     </div>
     <div class="step-line <?= $step >= 2 ? 'step-line--done' : '' ?>"></div>
     <div class="step <?= $step >= 2 ? 'step--done' : '' ?> <?= $step === 2 ? 'step--active' : '' ?>">
       <span class="step-num">2</span>
-      <span class="step-label"><?= $no ? 'Opplysninger' : 'Your Info' ?></span>
+      <span class="step-label"><?= $t('Opplysninger', 'Your Info', 'اطلاعات شما') ?></span>
     </div>
     <div class="step-line <?= $step >= 3 ? 'step-line--done' : '' ?>"></div>
     <div class="step <?= $step === 3 ? 'step--active' : '' ?>">
       <span class="step-num">3</span>
-      <span class="step-label"><?= $no ? 'Betal' : 'Pay' ?></span>
+      <span class="step-label"><?= $t('Betal', 'Pay', 'پرداخت') ?></span>
     </div>
   </div>
 </div>
@@ -237,31 +293,30 @@ function checked(string $val, string $test): string
 <?php if ($step === 1): ?>
 <!-- ══ STEP 1 — Choose package ════════════════════════════════════════════════ -->
 <section class="card order-card">
-  <h1><?= $no ? 'Velg pakke' : 'Choose package' ?></h1>
+  <h1><?= $t('Velg pakke', 'Choose package', 'انتخاب بسته') ?></h1>
   <p class="order-intro">
-    <?= $no
-        ? 'Alle analyser leveres skriftlig per e-post innen 5–7 virkedager.'
-        : 'All analyses are delivered in writing by email within 5–7 business days.' ?>
+    <?= $t('Velg den pakken som passer ønsket ditt. Åses personlige analyser leveres normalt per e-post innen 5–7 virkedager; ÅSE 227 er den digitale motorpakken.', 'Choose the package that fits your goal. Åse’s personal analyses are normally delivered by email within 5–7 business days; ÅSE 227 is the digital engine package.', 'بسته‌ای را انتخاب کنید که با هدف شما هماهنگ است. تحلیل‌های شخصی Åse معمولاً طی ۵ تا ۷ روز کاری با ایمیل ارسال می‌شوند؛ ÅSE 227 بسته دیجیتال موتور است.') ?>
   </p>
   <?php error_list($errors); ?>
   <form method="post" action="/bestill/?step=1" class="pkg-form" novalidate>
     <input type="hidden" name="step" value="1">
     <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES) ?>">
 
-    <div class="pkg-grid" role="radiogroup" aria-label="Velg analysepakke">
+    <div class="pkg-grid" role="radiogroup" aria-label="<?= $t('Velg analysepakke', 'Choose an analysis package', 'انتخاب بسته‌ی تحلیل') ?>">
       <?php foreach (PACKAGES as $key => $pkg): ?>
         <label class="pkg-card <?= $key === ($order['package'] ?? '') ? 'pkg-card--selected' : '' ?>">
           <input type="radio" name="package" value="<?= $key ?>"
                  <?= checked($order['package'] ?? '', $key) ?> required>
-          <span class="pkg-name"><?= htmlspecialchars($pkg['name']) ?></span>
+          <?php [$pkgName, $pkgDesc] = package_label($key, $lang); ?>
+          <span class="pkg-name"><?= htmlspecialchars($pkgName) ?></span>
           <span class="pkg-price"><?= $pkg['price'] ?> kr</span>
-          <span class="pkg-desc"><?= htmlspecialchars($pkg['desc']) ?></span>
+          <span class="pkg-desc"><?= htmlspecialchars($pkgDesc) ?></span>
         </label>
       <?php endforeach; ?>
     </div>
 
     <button type="submit" class="btn-primary">
-      <?= $no ? 'Gå videre →' : 'Continue →' ?>
+      <?= $t('Gå videre →', 'Continue →', 'ادامه ←') ?>
     </button>
   </form>
 </section>
@@ -271,13 +326,14 @@ function checked(string $val, string $test): string
 <?php
 $selPkg    = $order['package'] ?? '';
 $pkgInfo   = PACKAGES[$selPkg] ?? null;
+[$pkgName, $pkgDesc] = package_label($selPkg, $lang);
 ?>
 <section class="card order-card">
-  <h1><?= $no ? 'Dine opplysninger' : 'Your details' ?></h1>
+  <h1><?= $t('Dine opplysninger', 'Your details', 'اطلاعات شما') ?></h1>
   <?php if ($pkgInfo): ?>
     <div class="selected-pkg-badge">
-      <?= htmlspecialchars($pkgInfo['name']) ?> &mdash; <?= $pkgInfo['price'] ?> kr
-      <a href="/bestill/?step=1" class="change-link"><?= $no ? '(endre)' : '(change)' ?></a>
+      <?= htmlspecialchars($pkgName) ?> &mdash; <?= $pkgInfo['price'] ?> kr
+      <a href="/bestill/?step=1" class="change-link"><?= $t('(endre)', '(change)', '(تغییر)') ?></a>
     </div>
   <?php endif; ?>
   <?php error_list($errors); ?>
@@ -287,66 +343,69 @@ $pkgInfo   = PACKAGES[$selPkg] ?? null;
 
     <div class="field-row">
       <div class="field">
-        <label for="birth_name"><?= $no ? 'Fullt fødselsnavn *' : 'Full birth name *' ?></label>
+        <label for="birth_name"><?= $t('Fullt fødselsnavn *', 'Full birth name *', 'نام کامل هنگام تولد *') ?></label>
         <input id="birth_name" name="birth_name" type="text" autocomplete="off"
                value="<?= htmlspecialchars($order['birth_name'] ?? '', ENT_QUOTES) ?>"
-               placeholder="<?= $no ? 'Slik det står i fødselsattest' : 'As in birth certificate' ?>" required>
-        <small><?= $no ? 'Nøyaktig navn ved fødsel, inkl. mellomnavn.' : 'Exact name at birth, incl. middle names.' ?></small>
+               placeholder="<?= $t('Slik det står i fødselsattest', 'As in birth certificate', 'همان‌طور که در شناسنامه آمده است') ?>" required>
+        <small><?= $t('Nøyaktig navn ved fødsel, inkl. mellomnavn.', 'Exact name at birth, incl. middle names.', 'نام دقیق هنگام تولد، همراه با نام‌های میانی.') ?></small>
       </div>
       <div class="field">
-        <label for="current_name"><?= $no ? 'Nåværende navn *' : 'Current name *' ?></label>
+        <label for="current_name"><?= $t('Nåværende navn *', 'Current name *', 'نام فعلی *') ?></label>
         <input id="current_name" name="current_name" type="text" autocomplete="name"
                value="<?= htmlspecialchars($order['current_name'] ?? '', ENT_QUOTES) ?>"
-               placeholder="<?= $no ? 'Navn du bruker til daglig' : 'Name you use daily' ?>" required>
+               placeholder="<?= $t('Navn du bruker til daglig', 'Name you use daily', 'نامی که هر روز از آن استفاده می‌کنید') ?>" required>
       </div>
     </div>
 
     <div class="field-row">
       <div class="field">
-        <label for="birth_date"><?= $no ? 'Fødselsdato *' : 'Date of birth *' ?></label>
+        <label for="birth_date"><?= $t('Fødselsdato *', 'Date of birth *', 'تاریخ تولد *') ?></label>
         <input id="birth_date" name="birth_date" type="date"
                value="<?= htmlspecialchars($order['birth_date'] ?? '', ENT_QUOTES) ?>"
                max="<?= date('Y-m-d') ?>" required>
       </div>
-      <div class="field">
-        <label for="sex"><?= $no ? 'Kjønn *' : 'Gender *' ?></label>
-        <select id="sex" name="sex" required>
-          <option value=""><?= $no ? '— velg —' : '— select —' ?></option>
-          <option value="F"<?= sel($order['sex'] ?? '', 'F') ?>><?= $no ? 'Kvinne' : 'Female' ?></option>
-          <option value="M"<?= sel($order['sex'] ?? '', 'M') ?>><?= $no ? 'Mann' : 'Male' ?></option>
-          <option value="X"<?= sel($order['sex'] ?? '', 'X') ?>><?= $no ? 'Annet / ikke spesifisert' : 'Other / not specified' ?></option>
-        </select>
-      </div>
+      <input type="hidden" name="sex" value="X">
     </div>
 
     <div class="field">
-      <label for="address"><?= $no ? 'Adresse *' : 'Address *' ?></label>
+      <?php $addressOptional = in_array($selPkg, ['ase227', 'veiledning15'], true); ?>
+      <label for="address"><?= $addressOptional ? $t('Adresse (valgfritt)', 'Address (optional)', 'نشانی (اختیاری)') : $t('Adresse *', 'Address *', 'نشانی *') ?></label>
       <input id="address" name="address" type="text" autocomplete="street-address"
              value="<?= htmlspecialchars($order['address'] ?? '', ENT_QUOTES) ?>"
-             placeholder="<?= $no ? 'Gateadresse, postnummer, sted' : 'Street, postal code, city' ?>" required>
+             placeholder="<?= $t('Gateadresse, postnummer, sted', 'Street, postal code, city', 'خیابان، کد پستی، شهر') ?>" <?= $addressOptional ? '' : 'required' ?>>
+    </div>
+
+    <div class="field">
+      <?php $notesRequired = in_array($selPkg, ['partner', 'familie3'], true); ?>
+      <label for="notes"><?php
+        if ($selPkg === 'partner') echo $t('Partnerens navn og fødselsdato *', "Partner's name and date of birth *", 'نام و تاریخ تولد شریک *');
+        elseif ($selPkg === 'familie3') echo $t('Person 2 og 3 – navn og fødselsdato *', 'People 2 and 3 – names and dates of birth *', 'نفرات ۲ و ۳ – نام و تاریخ تولد *');
+        else echo $t('Tilleggsopplysninger (valgfritt)', 'Additional details (optional)', 'توضیحات اضافی (اختیاری)');
+      ?></label>
+      <textarea id="notes" name="notes" rows="4" <?= $notesRequired ? 'required' : '' ?> placeholder="<?= $t('Skriv det du vil Åse skal vite før analysen.', 'Anything you want Åse to know before the analysis.', 'هر نکته‌ای که می‌خواهید Åse پیش از تحلیل بداند.') ?>"><?= htmlspecialchars($order['notes'] ?? '', ENT_QUOTES) ?></textarea>
     </div>
 
     <div class="field-row">
       <div class="field">
-        <label for="phone"><?= $no ? 'Mobilnummer *' : 'Mobile number *' ?></label>
+        <label for="phone"><?= $t('Mobilnummer *', 'Mobile number *', 'شماره‌ی موبایل *') ?></label>
         <input id="phone" name="phone" type="tel" autocomplete="tel"
                value="<?= htmlspecialchars($order['phone'] ?? '', ENT_QUOTES) ?>"
-               placeholder="<?= $no ? '+47 9XX XX XXX' : '+47 9XX XX XXX' ?>" required>
-        <small><?= $no ? 'Brukes for Vipps-betaling.' : 'Used for Vipps payment.' ?></small>
+               placeholder="<?= $t('+47 9XX XX XXX', '+47 9XX XX XXX', '+47 9XX XX XXX') ?>" required>
+        <small><?= $t('Brukes for Vipps-betaling.', 'Used for Vipps payment.', 'برای پرداخت با Vipps استفاده می‌شود.') ?></small>
       </div>
       <div class="field">
-        <label for="email"><?= $no ? 'E-postadresse *' : 'Email address *' ?></label>
+        <label for="email"><?= $t('E-postadresse *', 'Email address *', 'نشانی ایمیل *') ?></label>
         <input id="email" name="email" type="email" autocomplete="email"
                value="<?= htmlspecialchars($order['email'] ?? '', ENT_QUOTES) ?>"
-               placeholder="din@epost.no" required>
-        <small><?= $no ? 'Analysen sendes hit.' : 'Analysis delivered here.' ?></small>
+               placeholder="<?= $t('din@epost.no', 'you@example.com', 'you@example.com') ?>" required>
+        <small><?= $t('Analysen sendes hit.', 'Analysis delivered here.', 'تحلیل به این نشانی ارسال می‌شود.') ?></small>
       </div>
     </div>
 
     <div class="form-actions">
-      <a href="/bestill/?step=1" class="btn-ghost">← <?= $no ? 'Tilbake' : 'Back' ?></a>
+      <a href="/bestill/?step=1" class="btn-ghost"><?= $back ?> <?= $t('Tilbake', 'Back', 'بازگشت') ?></a>
       <button type="submit" class="btn-primary">
-        <?= $no ? 'Gå til betaling →' : 'Go to payment →' ?>
+        <?= $t('Gå til betaling →', 'Go to payment →', 'رفتن به پرداخت ←') ?>
       </button>
     </div>
   </form>
@@ -357,51 +416,49 @@ $pkgInfo   = PACKAGES[$selPkg] ?? null;
 <?php
 $selPkg  = $order['package'] ?? '';
 $pkgInfo = PACKAGES[$selPkg] ?? null;
+[$pkgName, $pkgDesc] = package_label($selPkg, $lang);
 ?>
 <section class="card order-card">
-  <h1><?= $no ? 'Gjennomgang og betaling' : 'Review and payment' ?></h1>
+  <h1><?= $t('Gjennomgang og betaling', 'Review and payment', 'بازبینی و پرداخت') ?></h1>
   <?php error_list($errors); ?>
 
   <div class="review-grid">
     <div class="review-section">
-      <h2><?= $no ? 'Din pakke' : 'Your package' ?></h2>
+      <h2><?= $t('Din pakke', 'Your package', 'بسته‌ی شما') ?></h2>
       <?php if ($pkgInfo): ?>
         <div class="review-pkg">
-          <strong><?= htmlspecialchars($pkgInfo['name']) ?></strong>
+          <strong><?= htmlspecialchars($pkgName) ?></strong>
           <span class="review-price"><?= $pkgInfo['price'] ?> kr</span>
-          <p><?= htmlspecialchars($pkgInfo['desc']) ?></p>
+          <p><?= htmlspecialchars($pkgDesc) ?></p>
         </div>
       <?php endif; ?>
     </div>
 
     <div class="review-section">
-      <h2><?= $no ? 'Dine opplysninger' : 'Your details' ?></h2>
+      <h2><?= $t('Dine opplysninger', 'Your details', 'اطلاعات شما') ?></h2>
       <dl class="review-dl">
-        <dt><?= $no ? 'Fødselsnavn' : 'Birth name' ?></dt>
+        <dt><?= $t('Fødselsnavn', 'Birth name', 'نام هنگام تولد') ?></dt>
         <dd><?= htmlspecialchars($order['birth_name'] ?? '') ?></dd>
-        <dt><?= $no ? 'Nåværende navn' : 'Current name' ?></dt>
+        <dt><?= $t('Nåværende navn', 'Current name', 'نام فعلی') ?></dt>
         <dd><?= htmlspecialchars($order['current_name'] ?? '') ?></dd>
-        <dt><?= $no ? 'Fødselsdato' : 'Date of birth' ?></dt>
+        <dt><?= $t('Fødselsdato', 'Date of birth', 'تاریخ تولد') ?></dt>
         <dd><?= htmlspecialchars($order['birth_date'] ?? '') ?></dd>
-        <dt><?= $no ? 'Kjønn' : 'Gender' ?></dt>
-        <dd><?= match($order['sex'] ?? '') {
-            'F' => $no ? 'Kvinne' : 'Female',
-            'M' => $no ? 'Mann' : 'Male',
-            'X' => $no ? 'Annet' : 'Other',
-            default => '',
-        } ?></dd>
-        <dt><?= $no ? 'Telefon' : 'Phone' ?></dt>
+        <dt><?= $t('Telefon', 'Phone', 'تلفن') ?></dt>
         <dd><?= htmlspecialchars($order['phone'] ?? '') ?></dd>
-        <dt>E-post</dt>
+        <dt><?= $t('E-post', 'Email', 'ایمیل') ?></dt>
         <dd><?= htmlspecialchars($order['email'] ?? '') ?></dd>
-        <dt><?= $no ? 'Adresse' : 'Address' ?></dt>
+        <dt><?= $t('Adresse', 'Address', 'نشانی') ?></dt>
         <dd><?= htmlspecialchars($order['address'] ?? '') ?></dd>
+        <?php if (!empty($order['notes'])): ?>
+        <dt><?= $t('Tilleggsopplysninger', 'Additional details', 'توضیحات اضافی') ?></dt>
+        <dd><?= nl2br(htmlspecialchars($order['notes'])) ?></dd>
+        <?php endif; ?>
       </dl>
     </div>
   </div>
 
   <div class="total-row">
-    <span><?= $no ? 'Totalt å betale' : 'Total to pay' ?></span>
+    <span><?= $t('Totalt å betale', 'Total to pay', 'مبلغ قابل پرداخت') ?></span>
     <strong><?= $pkgInfo['price'] ?? 0 ?> kr</strong>
   </div>
 
@@ -409,28 +466,40 @@ $pkgInfo = PACKAGES[$selPkg] ?? null;
     <input type="hidden" name="step" value="3">
     <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES) ?>">
 
-    <button type="submit" class="btn-vipps" aria-label="Betal med Vipps">
+    <button type="submit" class="btn-vipps" aria-label="<?= $t('Betal med Vipps', 'Pay with Vipps', 'پرداخت با Vipps') ?>">
       <svg width="80" height="28" viewBox="0 0 80 28" aria-hidden="true" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="4" y="21" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="white">Betal med</text>
+        <text x="4" y="21" font-family="Arial,sans-serif" font-size="18" font-weight="bold" fill="white"><?= $t('Betal med', 'Pay with', 'پرداخت با') ?></text>
       </svg>
       <span class="vipps-logo" aria-label="Vipps">Vipps</span>
     </button>
 
     <p class="pay-note">
-      <?= $no
-          ? 'Du sendes til Vipps for sikker betaling. Analysen leveres per e-post etter betaling er bekreftet.'
-          : 'You will be sent to Vipps for secure payment. Analysis delivered by email after payment confirmed.' ?>
+      <?= $t('Du sendes til Vipps for sikker betaling. Analysen leveres per e-post etter betaling er bekreftet.', 'You will be sent to Vipps for secure payment. Analysis delivered by email after payment confirmed.', 'برای پرداخت امن به Vipps هدایت می‌شوید. پس از تأیید پرداخت، تحلیل از طریق ایمیل ارسال می‌شود.') ?>
     </p>
   </form>
 
   <div class="review-edit-links">
-    <a href="/bestill/?step=1">← <?= $no ? 'Endre pakke' : 'Change package' ?></a>
-    <a href="/bestill/?step=2">← <?= $no ? 'Endre opplysninger' : 'Edit details' ?></a>
+    <a href="/bestill/?step=1"><?= $back ?> <?= $t('Endre pakke', 'Change package', 'تغییر بسته') ?></a>
+    <a href="/bestill/?step=2"><?= $back ?> <?= $t('Endre opplysninger', 'Edit details', 'ویرایش اطلاعات') ?></a>
   </div>
 </section>
 <?php endif; ?>
 
 <script>
+// Reuse details already entered in ÅSE Edition (same domain / same browser).
+try {
+  var ase = JSON.parse(localStorage.getItem('numerologist.aseedition.v1') || '{}');
+  var setIfEmpty = function(id, value) { var el=document.getElementById(id); if(el && !el.value && value) el.value=value; };
+  setIfEmpty('birth_name', [ase.birthFirst, ase.birthMiddle, ase.birthLast].filter(Boolean).join(' '));
+  setIfEmpty('current_name', ase.currentName || [ase.birthFirst, ase.birthMiddle, ase.birthLast].filter(Boolean).join(' '));
+  setIfEmpty('birth_date', ase.birthDate);
+  setIfEmpty('address', ase.address);
+  setIfEmpty('phone', ase.phone);
+  if (document.getElementById('notes') && !document.getElementById('notes').value && ase.partnerName) {
+    document.getElementById('notes').value = 'Partner: ' + ase.partnerName + (ase.partnerDate ? ' · ' + ase.partnerDate : '');
+  }
+} catch (e) {}
+
 // Highlight selected package card on click
 document.querySelectorAll('.pkg-card').forEach(function(card) {
   card.addEventListener('click', function() {

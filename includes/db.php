@@ -43,6 +43,13 @@ function db(): PDO
         )
     SQL);
 
+    // Backward-compatible schema extension for richer package details.
+    $cols = $pdo->query("PRAGMA table_info(orders)")->fetchAll();
+    $colNames = array_column($cols, 'name');
+    if (!in_array('notes', $colNames, true)) {
+        $pdo->exec('ALTER TABLE orders ADD COLUMN notes TEXT');
+    }
+
     return $pdo;
 }
 
@@ -59,10 +66,10 @@ function save_order(array $data): string
     db()->prepare(<<<'SQL'
         INSERT INTO orders
             (id, package, price_ore, birth_name, current_name, birth_date,
-             sex, address, phone, email, vipps_auth_token)
+             sex, address, phone, email, notes, vipps_auth_token)
         VALUES
             (:id, :package, :price_ore, :birth_name, :current_name, :birth_date,
-             :sex, :address, :phone, :email, :vipps_auth_token)
+             :sex, :address, :phone, :email, :notes, :vipps_auth_token)
     SQL)->execute([
         ':id'               => $id,
         ':package'          => $data['package'],
@@ -74,6 +81,7 @@ function save_order(array $data): string
         ':address'          => $data['address'],
         ':phone'            => $data['phone'],
         ':email'            => $data['email'],
+        ':notes'            => $data['notes'] ?? '',
         ':vipps_auth_token' => $data['vipps_auth_token'],
     ]);
     return $id;

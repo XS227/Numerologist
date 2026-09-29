@@ -209,3 +209,30 @@
 .confirm-icon--err { background: #fef2f2; color: #b91c1c; }
 .confirm-icon--spin{ background: var(--c-bg); font-size: 2.5rem; }
 .confirm-sub { color: var(--c-text-2); margin-bottom: 1.5rem; max-width: 460px; margin-left: auto; margin-right: auto; }
+
+
+/* 2026 Numerologist checkout refresh */
+body{background:#08292b;color:#eef4ef}
+.breadcrumb,.stepper{max-width:1120px;margin-left:auto;margin-right:auto}
+.order-card{max-width:1120px;margin:0 auto;background:linear-gradient(180deg,#0f3537,#0b2f31);border:1px solid rgba(199,166,103,.18);border-radius:26px;box-shadow:0 24px 70px rgba(0,0,0,.18);padding:clamp(22px,4vw,40px)}
+.order-card h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(2rem,4.2vw,3.8rem);font-weight:400;letter-spacing:-.035em;color:#fff7ea}
+.order-intro{color:#9eb3ae;line-height:1.65}
+.step-num{background:#0b3032;border-color:#526c67;color:#99afa9}.step--active .step-num{background:#c6a775;border-color:#c6a775;color:#08292b}.step--done:not(.step--active) .step-num{background:#123f40;border-color:#c6a775;color:#dfc184}.step-line{background:#34514d}.step-line--done{background:#c6a775}.step-label{color:#829b95}.step--active .step-label{color:#dfc184}
+.pkg-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.pkg-card{min-height:210px;text-align:left;border:1px solid rgba(153,178,170,.22);border-radius:22px;padding:20px;background:#0a2d2f;gap:8px;justify-content:flex-start}
+.pkg-card:hover{border-color:rgba(200,168,103,.55);box-shadow:0 0 0 3px rgba(200,168,103,.09)}
+.pkg-card--selected{border-color:#c6a775;background:radial-gradient(circle at 90% 0,rgba(200,168,103,.12),transparent 36%),#0d3537;box-shadow:0 0 0 3px rgba(200,168,103,.10)}
+.pkg-card:has(input[value="ase227"]){background:radial-gradient(circle at 86% 6%,rgba(226,192,126,.14),transparent 34%),linear-gradient(180deg,#113c3e,#0b3032);border-color:rgba(211,177,109,.34)}
+.pkg-card:has(input[value="ase227"])::before{content:"227 EDITION";align-self:flex-start;border-radius:999px;padding:5px 8px;background:rgba(211,177,109,.13);border:1px solid rgba(211,177,109,.25);color:#dfbf7d;font-size:.62rem;font-weight:800;letter-spacing:.08em}
+.pkg-name{font:400 1.25rem/1.15 Georgia,serif;color:#f4eee4}.pkg-price{font:400 2rem/1 Georgia,serif;color:#dfbf7d}.pkg-desc{color:#8fa8a2;line-height:1.55}
+.info-form{gap:16px}.selected-pkg-badge{background:#143d3e;color:#e8d3a6;border:1px solid rgba(200,168,103,.22)}
+.change-link{color:#a6bbb5}
+.field-row{gap:14px}.field{gap:7px}.field label{color:#e8eeea;font-size:.8rem}
+.field input,.field select,.field textarea{width:100%;box-sizing:border-box;border:1px solid rgba(148,177,170,.28);border-radius:16px;padding:14px 15px;font-size:1rem;font-family:inherit;background:#082b2d;color:#fff;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+.field textarea{resize:vertical;min-height:110px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:#c6a775;box-shadow:0 0 0 4px rgba(198,167,117,.10)}
+.field small{color:#7f9993}.btn-primary{background:#c6a775;color:#08292b;border-radius:16px;min-height:50px}.btn-primary:hover{background:#dfc184;color:#08292b}.btn-ghost{color:#c7d4d0;border-color:#526d68;border-radius:16px}.btn-ghost:hover{background:#103638;border-color:#c6a775}
+.review-section h2{color:#b4935a}.review-pkg{border-color:rgba(198,167,117,.2);border-radius:20px;background:#0a2e30}.review-pkg strong{color:#f3eee4}.review-pkg p{color:#8fa8a2}.review-price{color:#dfbd79}.review-dl dt{color:#8da49e}.review-dl dd{color:#e6ede9}.total-row{border-top-color:rgba(198,167,117,.18)}.total-row strong{color:#dfbd79}
+.pay-note,.review-edit-links a{color:#8da49e}
+@media(max-width:900px){.pkg-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.order-card{border-radius:22px}}
+@media(max-width:620px){.pkg-grid{grid-template-columns:1fr}.pkg-card{min-height:0;border-radius:18px}.order-card{width:auto;margin:0 12px;padding:20px 16px;border-radius:20px}.stepper{padding:0 16px}.stepper-inner{max-width:100%}.step-label{font-size:.64rem}.field-row{grid-template-columns:1fr}.form-actions{align-items:stretch;flex-direction:column}.form-actions .btn-primary,.form-actions .btn-ghost{width:100%;box-sizing:border-box}.review-grid{grid-template-columns:1fr}.review-dl{grid-template-columns:1fr;gap:3px}.review-dl dd{margin:0 0 10px}.btn-vipps{width:100%;justify-content:center}.pay-form{align-items:stretch}}

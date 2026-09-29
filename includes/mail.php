@@ -58,10 +58,10 @@ Pris         : {$priceKr}
 Nåværende navn : {$name}
 Fødselsnavn  : {$order['birth_name']}
 Fødselsdato  : {$birthDate}
-Kjønn        : {$order['sex']}
 Telefon      : {$order['phone']}
 E-post       : {$email}
 Adresse      : {$order['address']}
+Tilleggsinfo  : {$order['notes']}
 
 Logg inn for å se alle bestillinger:
 https://numerologist.setai.no/admin/

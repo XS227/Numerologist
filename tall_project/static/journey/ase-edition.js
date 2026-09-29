@@ -113,6 +113,20 @@
   function ledger(label,value,desc=''){return `<article class="ae-ledger-card"><small>${esc(label)}</small><b>${value}</b>${desc?`<p>${esc(desc)}</p>`:''}</article>`}
   function dominant(nums){const counts={},order=[];nums.map(Number).filter(n=>VALID.has(n)).forEach(n=>{if(!(n in counts)){counts[n]=0;order.push(n)}counts[n]++});return order.sort((a,b)=>counts[b]-counts[a])[0]||1}
   function todayIso(){const d=new Date(),z=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${z(d.getMonth()+1)}-${z(d.getDate())}`}
+  function recommendPackage(key){
+    root.querySelectorAll('[data-package-card]').forEach(card=>card.classList.toggle('is-recommended',card.dataset.packageCard===key));
+    const partnerBadge=root.querySelector('[data-partner-recommend]');
+    if(partnerBadge)partnerBadge.hidden=key!=='partner';
+  }
+  root.querySelectorAll('[data-package-goal]').forEach(btn=>btn.addEventListener('click',()=>{
+    const goal=btn.dataset.packageGoal;
+    root.querySelectorAll('[data-package-goal]').forEach(b=>b.classList.toggle('is-active',b===btn));
+    root.querySelectorAll('[data-package-card]').forEach(card=>{
+      const goals=(card.dataset.goal||'').split(/\s+/);
+      card.classList.toggle('is-highlighted',goals.includes(goal));
+      card.classList.toggle('is-muted',!goals.includes(goal));
+    });
+  }));
   if(form.elements.analysisDate&&!form.elements.analysisDate.value)form.elements.analysisDate.value=todayIso();
 
   try{const saved=JSON.parse(localStorage.getItem(STORE)||'{}');root.querySelectorAll('input[name],select[name]').forEach(el=>{if(saved[el.name]&&!el.value)el.value=saved[el.name]})}catch(e){}
@@ -241,6 +255,7 @@
       setHtml('[data-partner-story]',lang==='no'?`<p>Jeg ville ikke vurdert en relasjon ut fra ett tall. Derfor ser jeg både på navnelaget og livsveien. Navnene deres gir <strong>${gn}</strong>, mens skjebnetallene gir <strong>${gd}</strong>. Det er samspillet mellom de to som er interessant.</p>`:lang==='fa'?`<p>رابطه را با یک عدد نمی‌سنجم. لایه نام <strong>${gn}</strong> و لایه مسیر زندگی <strong>${gd}</strong> است؛ تعامل این دو مهم‌تر از یک امتیاز واحد است.</p>`:`<p>I would never judge a relationship from one number. The name layer gives <strong>${gn}</strong>, while the life-path layer gives <strong>${gd}</strong>. The interaction between both is more useful than one single score.</p>`);
       setHtml('[data-partner-grid]',`<article class="ae-compat-card"><div class="ae-compat-grade">${gn}</div><h3>${esc(tn[0])} · ${esc(UI.name)}</h3><p>${esc(tn[1])}</p></article><article class="ae-compat-card"><div class="ae-compat-grade">${gd}</div><h3>${esc(td[0])} · ${esc(UI.destiny)}</h3><p>${esc(td[1])}</p></article>`);
     }else partnerSec.hidden=true;
+    recommendPackage(partnerData?'partner':'ase227');
 
     const ledgerItems=[
       [UI.name,linkNumber(expression.kept,expression.label),birthName],
