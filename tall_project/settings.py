@@ -204,7 +204,8 @@ GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET", "")
 
 # Reuse the existing 3real Google OAuth client when this deployment does not
-# have its own Google credentials yet. Values are read server-side only and
+# have its own Google credentials yet. This also keeps the existing Google setup
+# reusable across the two server-side apps. Values are read server-side only and
 # are never exposed to templates, logs or the repository.
 if not (GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET):
     _legacy_google_env = Path("/var/www/3real/.env")
