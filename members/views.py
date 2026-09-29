@@ -23,6 +23,8 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.csrf import csrf_exempt
 
 from .catalog import ACADEMY_LEVELS, PACKAGE_CATALOG, PREMIUM_RESOURCES
+from .academy_i18n import academy_levels_for, premium_resources_for, status_label
+from tall_project.language_policy import site_language
 from .models import AcademyProgress, MemberProfile, SocialIdentity, SocialLoginHandoff
 from .order_bridge import order_for_user, orders_for_user
 from .report_engine import calculate_profile
