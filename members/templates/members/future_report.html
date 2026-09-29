@@ -10,7 +10,7 @@
     <div class="m-future-hero__top">
       <div>
         <span class="m-kicker">{% if demo %}{% if CURRENT_LANGUAGE == 'fa' %}نمونه · تحلیل آینده{% elif CURRENT_LANGUAGE == 'en' %}DEMO · FUTURE ANALYSIS{% else %}DEMO · FREMTIDSANALYSE{% endif %}{% else %}{% if CURRENT_LANGUAGE == 'fa' %}تحلیل آینده من{% elif CURRENT_LANGUAGE == 'en' %}MY FUTURE ANALYSIS{% else %}MIN FREMTIDSANALYSE{% endif %}{% endif %}</span>
-        <h1>{{ package.title }}</h1>
+        <h1>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل آینده ۲ ساله{% elif CURRENT_LANGUAGE == 'en' %}2-Year Future Analysis{% else %}2 års Fremtidsanalyse{% endif %}</h1>
         <p class="m-future-hero__lead">
           {% if CURRENT_LANGUAGE == 'fa' %}یک گزارش ۲۴ ماهه که سال شخصی، ماه شخصی، اسنس، ترانزیت‌ها و چرخه‌های بلندمدت را کنار هم می‌خواند.
           {% elif CURRENT_LANGUAGE == 'en' %}A 24-month reading that brings Personal Years, Personal Months, Essence, transits and longer life cycles together.
@@ -180,7 +180,7 @@
 
   <div class="m-shell m-report-actions">
     {% if demo %}
-      <a class="m-btn m-btn--gold" href="/bestill/?package={{ package_slug }}">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب{% elif CURRENT_LANGUAGE == 'en' %}Choose{% else %}Velg{% endif %} {{ package.title }} · {{ package.price }} kr →</a>
+      <a class="m-btn m-btn--gold" href="/bestill/?package={{ package_slug }}">{% if CURRENT_LANGUAGE == 'fa' %}انتخاب تحلیل آینده ۲ ساله{% elif CURRENT_LANGUAGE == 'en' %}Choose 2-Year Future Analysis{% else %}Velg 2 års Fremtidsanalyse{% endif %} · {{ package.price }} kr →</a>
       <a class="m-btn m-btn--ghost" href="/ase-edition/#ae-packages">{% if CURRENT_LANGUAGE == 'fa' %}بازگشت به بسته‌ها{% elif CURRENT_LANGUAGE == 'en' %}Back to packages{% else %}Tilbake til pakkene{% endif %}</a>
     {% else %}
       <button class="m-btn m-btn--gold" type="button" onclick="window.print()">{% if CURRENT_LANGUAGE == 'fa' %}چاپ / ذخیره PDF{% elif CURRENT_LANGUAGE == 'en' %}Print / save PDF{% else %}Skriv ut / lagre PDF{% endif %}</button>
