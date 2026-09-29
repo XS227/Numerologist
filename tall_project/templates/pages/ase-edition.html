@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% if CURRENT_LANGUAGE == 'fa' %}نسخه ÅSE · خوانش کامل{% elif CURRENT_LANGUAGE == 'en' %}ÅSE Edition · Complete Reading{% else %}ÅSE Edition · Komplett tallkart{% endif %} · Numerologist{% endblock %}
+{% block body_attrs %} class="ase-engine-page"{% endblock %}
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'journey/ase-edition.css' %}?v=2">
+{% endblock %}
+
+{% block main %}
+<div class="ae" id="ase-engine" data-lang="{{ CURRENT_LANGUAGE|default:'no' }}">
+  <header class="ae-hero">
+    <div class="ae-hero__media" aria-hidden="true">
+      <img src="{% static 'journey/images/ase-method.webp' %}" alt="">
+      <span class="ae-orbit ae-orbit--1"></span><span class="ae-orbit ae-orbit--2"></span>
+      <span class="ae-hero__number">33</span>
+    </div>
+    <div class="ae-hero__veil"></div>
+    <div class="ae-hero__inner">
+      <span class="ae-kicker">ÅSE EDITION · NUMEROLOGIST ENGINE</span>
+      <h1>{% if CURRENT_LANGUAGE == 'fa' %}همه اعداد شما، در یک خوانش.{% elif CURRENT_LANGUAGE == 'en' %}All your numbers. One human reading.{% else %}Alle tallene dine. Én personlig lesning.{% endif %}</h1>
+      <p>{% if CURRENT_LANGUAGE == 'fa' %}به‌جای ده‌ها محاسبه جدا، اطلاعات را یک‌بار وارد می‌کنید. موتور همه لایه‌ها را محاسبه و آن‌ها را مانند یک گفت‌وگوی عددشناسی منسجم کنار هم می‌گذارد.{% elif CURRENT_LANGUAGE == 'en' %}Instead of opening dozens of separate calculators, enter your details once. The engine builds the full chart and turns it into one coherent, conversational reading.{% else %}I stedet for å åpne dusinvis av kalkulatorer fyller du inn opplysningene én gang. Motoren bygger hele tallkartet og setter delene sammen til én sammenhengende, personlig fortelling.{% endif %}</p>
+      <a class="ae-start" href="#ae-intake">{% if CURRENT_LANGUAGE == 'fa' %}شروع خوانش{% elif CURRENT_LANGUAGE == 'en' %}Start your reading{% else %}Start lesningen{% endif %} <span>↓</span></a>
+    </div>
+  </header>
+
+  <section class="ae-intake" id="ae-intake">
+    <div class="ae-shell">
+      <div class="ae-intake__head">
+        <span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}مرحله ۱ · مواد خام{% elif CURRENT_LANGUAGE == 'en' %}STEP 1 · THE RAW MATERIAL{% else %}STEG 1 · GRUNNLAGET{% endif %}</span>
+        <h2>{% if CURRENT_LANGUAGE == 'fa' %}اول باید تصویر کامل را ببینیم.{% elif CURRENT_LANGUAGE == 'en' %}First, I need the whole picture.{% else %}Først må jeg se hele bildet.{% endif %}</h2>
+        <p>{% if CURRENT_LANGUAGE == 'fa' %}فیلدهای ستاره‌دار برای هسته خوانش لازم‌اند. نام فعلی، آدرس، تلفن و شریک اختیاری‌اند اما لایه‌های بیشتری به نتیجه اضافه می‌کنند.{% elif CURRENT_LANGUAGE == 'en' %}Required fields build the core chart. Current name, address, telephone and partner details are optional, but unlock extra layers.{% else %}Feltene med stjerne bygger selve kjernekartet. Nåværende navn, adresse, telefon og partner er valgfrie, men åpner flere lag i tolkningen.{% endif %}</p>
+      </div>
+
+      <form class="ae-form" data-engine-form novalidate>
+        <section class="ae-form__chapter">
+          <div class="ae-form__chapter-no">01</div>
+          <div class="ae-form__chapter-copy">
+            <h3>{% if CURRENT_LANGUAGE == 'fa' %}نامی که با آن به دنیا آمدید{% elif CURRENT_LANGUAGE == 'en' %}The name you arrived with{% else %}Navnet du kom inn i livet med{% endif %}</h3>
+            <p>{% if CURRENT_LANGUAGE == 'fa' %}نام را به بخش‌ها تقسیم می‌کنیم تا ترانزیت‌های جسمی، ذهنی و معنوی دقیق‌تر شوند.{% elif CURRENT_LANGUAGE == 'en' %}We separate the name parts so the physical, mental and spiritual transits can be calculated correctly.{% else %}Vi skiller navnedelene slik at fysisk, mental og spirituell transitt kan beregnes mer presist.{% endif %}</p>
+          </div>
+          <div class="ae-fields ae-fields--3">
+            <label><span>{% if CURRENT_LANGUAGE == 'fa' %}نام / نام‌های کوچک *{% elif CURRENT_LANGUAGE == 'en' %}First / given name(s) *{% else %}Fornavn *{% endif %}</span><input name="birthFirst" autocomplete="given-name" required></label>
+            <label><span>{% if CURRENT_LANGUAGE == 'fa' %}نام میانی{% elif CURRENT_LANGUAGE == 'en' %}Middle name(s){% else %}Mellomnavn{% endif %}</span><input name="birthMiddle" autocomplete="additional-name"></label>
+            <label><span>{% if CURRENT_LANGUAGE == 'fa' %}نام خانوادگی هنگام تولد *{% elif CURRENT_LANGUAGE == 'en' %}Birth surname *{% else %}Etternavn ved fødsel *{% endif %}</span><input name="birthLast" autocomplete="family-name" required></label>
+          </div>
+          <div class="ae-fields ae-fields--2">
+            <label><span>{% if CURRENT_LANGUAGE == 'fa' %}نام کامل فعلی{% elif CURRENT_LANGUAGE == 'en' %}Current full name{% else %}Nåværende fulle navn{% endif %}</span><input name="currentName" autocomplete="name"><small>{% if CURRENT_LANGUAGE == 'fa' %}اگر با نامی متفاوت از نام تولد زندگی می‌کنید.{% elif CURRENT_LANGUAGE == 'en' %}If the name you use today differs from your birth name.{% else %}Hvis navnet du bruker i dag er annerledes enn fødselsnavnet.{% endif %}</small></label>
+            <label><span>{% if CURRENT_LANGUAGE == 'fa' %}تاریخ تولد *{% elif CURRENT_LANGUAGE == 'en' %}Date of birth *{% else %}Fødselsdato *{% endif %}</span><input name="birthDate" type="date" autocomplete="bday" required></label>
+          </div>
+        </section>
+
+        <section class="ae-form__chapter">
+          <div class="ae-form__chapter-no">02</div>
+          <div class="ae-form__chapter-copy">
+            <h3>{% if CURRENT_LANGUAGE == 'fa' %}زندگی شما اکنون{% elif CURRENT_LANGUAGE == 'en' %}Your life right now{% else %}Livet ditt akkurat nå{% endif %}</h3>
+            <p>{% if CURRENT_LANGUAGE == 'fa' %}تاریخ تحلیل چرخه سال و ماه شخصی را تعیین می‌کند. آدرس و تلفن اختیاری‌اند.{% elif CURRENT_LANGUAGE == 'en' %}The reading date determines your active Personal Year and Month. Address and telephone are optional layers.{% else %}Analyseringsdatoen bestemmer aktivt personlig år og måned. Adresse og telefon er valgfrie ekstralag.{% endif %}</p>
+          </div>
+          <div class="ae-fields ae-fields--3">
+            <label><span>{% if CURRENT_LANGUAGE == 'fa' %}تاریخ تحلیل{% elif CURRENT_LANGUAGE == 'en' %}Reading date{% else %}Dato for lesningen{% endif %}</span><input name="analysisDate" type="date"></label>
+            <label><span>{% if CURRENT_LANGUAGE == 'fa' %}آدرس فعلی{% elif CURRENT_LANGUAGE == 'en' %}Current address{% else %}Nåværende adresse{% endif %}</span><input name="address" autocomplete="street-address"></label>
+            <label><span>{% if CURRENT_LANGUAGE == 'fa' %}شماره تلفن{% elif CURRENT_LANGUAGE == 'en' %}Telephone number{% else %}Telefonnummer{% endif %}</span><input name="phone" type="tel" inputmode="tel" autocomplete="tel"></label>
+          </div>
+        </section>
+
+        <details class="ae-partner">
+          <summary><span>03</span><div><strong>{% if CURRENT_LANGUAGE == 'fa' %}شریک / رابطه را هم اضافه کنم{% elif CURRENT_LANGUAGE == 'en' %}Include a partner / relationship{% else %}Ta med partner / relasjon{% endif %}</strong><small>{% if CURRENT_LANGUAGE == 'fa' %}اختیاری{% elif CURRENT_LANGUAGE == 'en' %}Optional{% else %}Valgfritt{% endif %}</small></div></summary>
+          <div class="ae-partner__body">
+            <div class="ae-fields ae-fields--2">
+              <label><span>{% if CURRENT_LANGUAGE == 'fa' %}نام کامل تولد شریک{% elif CURRENT_LANGUAGE == 'en' %}Partner's full birth name{% else %}Partners fulle fødselsnavn{% endif %}</span><input name="partnerName"></label>
+              <label><span>{% if CURRENT_LANGUAGE == 'fa' %}تاریخ تولد شریک{% elif CURRENT_LANGUAGE == 'en' %}Partner's date of birth{% else %}Partners fødselsdato{% endif %}</span><input name="partnerDate" type="date"></label>
+            </div>
+            <label class="ae-select"><span>{% if CURRENT_LANGUAGE == 'fa' %}نوع رابطه{% elif CURRENT_LANGUAGE == 'en' %}Relationship context{% else %}Relasjonstype{% endif %}</span>
+              <select name="partnerContext"><option value="personal">{% if CURRENT_LANGUAGE == 'fa' %}شخصی / عاشقانه{% elif CURRENT_LANGUAGE == 'en' %}Personal / romantic{% else %}Personlig / romantisk{% endif %}</option><option value="work">{% if CURRENT_LANGUAGE == 'fa' %}کاری{% elif CURRENT_LANGUAGE == 'en' %}Work{% else %}Arbeid{% endif %}</option></select>
+            </label>
+          </div>
+        </details>
+
+        <div class="ae-form__error" data-form-error role="alert"></div>
+        <div class="ae-form__actions">
+          <button class="ae-primary" type="submit">{% if CURRENT_LANGUAGE == 'fa' %}ساختن خوانش کامل من{% elif CURRENT_LANGUAGE == 'en' %}Build my complete reading{% else %}Bygg min komplette lesning{% endif %} <span>→</span></button>
+          <p>{% if CURRENT_LANGUAGE == 'fa' %}محاسبات در همین مرورگر انجام می‌شوند.{% elif CURRENT_LANGUAGE == 'en' %}The calculation runs in this browser.{% else %}Beregningen skjer i denne nettleseren.{% endif %}</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <article class="ae-reading" data-reading hidden>
+    <section class="ae-reading-hero">
+      <div class="ae-reading-hero__orb" aria-hidden="true"><span data-dominant-number>8</span></div>
+      <div class="ae-shell ae-reading-hero__inner">
+        <span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}خوانش شخصی شما{% elif CURRENT_LANGUAGE == 'en' %}YOUR PERSONAL READING{% else %}DIN PERSONLIGE LESNING{% endif %}</span>
+        <h2 data-reading-title></h2>
+        <div class="ae-opening" data-reading-opening></div>
+        <div class="ae-core-strip" data-core-strip></div>
+      </div>
+    </section>
+
+    <nav class="ae-reading-nav" aria-label="Reading sections">
+      <a href="#ae-core">{% if CURRENT_LANGUAGE == 'fa' %}هسته{% elif CURRENT_LANGUAGE == 'en' %}Core{% else %}Kjernen{% endif %}</a>
+      <a href="#ae-strengths">{% if CURRENT_LANGUAGE == 'fa' %}توانایی‌ها{% elif CURRENT_LANGUAGE == 'en' %}Strengths{% else %}Styrker{% endif %}</a>
+      <a href="#ae-friction">{% if CURRENT_LANGUAGE == 'fa' %}چالش{% elif CURRENT_LANGUAGE == 'en' %}Growth{% else %}Vekst{% endif %}</a>
+      <a href="#ae-practical">{% if CURRENT_LANGUAGE == 'fa' %}زندگی{% elif CURRENT_LANGUAGE == 'en' %}Life{% else %}Hverdagen{% endif %}</a>
+      <a href="#ae-now">{% if CURRENT_LANGUAGE == 'fa' %}اکنون{% elif CURRENT_LANGUAGE == 'en' %}Now{% else %}Nå{% endif %}</a>
+      <a href="#ae-long">{% if CURRENT_LANGUAGE == 'fa' %}مسیر بلند{% elif CURRENT_LANGUAGE == 'en' %}Long arc{% else %}Livsbuen{% endif %}</a>
+      <a href="#ae-ledger">{% if CURRENT_LANGUAGE == 'fa' %}همه اعداد{% elif CURRENT_LANGUAGE == 'en' %}All numbers{% else %}Alle tall{% endif %}</a>
+    </nav>
+
+    <section class="ae-section ae-section--stone" id="ae-core">
+      <div class="ae-shell ae-split">
+        <div><span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}ساختار درونی{% elif CURRENT_LANGUAGE == 'en' %}INNER ARCHITECTURE{% else %}DIN INDRE ARKITEKTUR{% endif %}</span><h2 data-core-heading></h2><div class="ae-prose" data-core-story></div></div>
+        <div class="ae-card-grid" data-core-cards></div>
+      </div>
+    </section>
+
+    <section class="ae-section ae-section--dark" id="ae-strengths">
+      <div class="ae-shell ae-split">
+        <div><span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}وقتی در بهترین حالت خود هستید{% elif CURRENT_LANGUAGE == 'en' %}WHEN YOU ARE AT YOUR BEST{% else %}NÅR DU ER PÅ DITT BESTE{% endif %}</span><h2 data-strength-heading></h2></div>
+        <div class="ae-list" data-strengths></div>
+      </div>
+    </section>
+
+    <section class="ae-section ae-section--stone" id="ae-friction">
+      <div class="ae-shell ae-split">
+        <div><span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}جایی که رشد آغاز می‌شود{% elif CURRENT_LANGUAGE == 'en' %}WHERE GROWTH BEGINS{% else %}DER VEKSTEN BEGYNNER{% endif %}</span><h2 data-friction-heading></h2><div class="ae-prose" data-friction-story></div></div>
+        <div class="ae-list ae-list--dark" data-frictions></div>
+      </div>
+    </section>
+
+    <section class="ae-section ae-section--dark" id="ae-practical">
+      <div class="ae-shell ae-split">
+        <div><span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}در زندگی واقعی{% elif CURRENT_LANGUAGE == 'en' %}IN REAL LIFE{% else %}I JOBB OG NÆRE RELASJONER{% endif %}</span><h2 data-practical-heading></h2><div class="ae-prose" data-practical-story></div></div>
+        <div class="ae-card-grid" data-practical-cards></div>
+      </div>
+    </section>
+
+    <section class="ae-section ae-section--dark" id="ae-now">
+      <div class="ae-shell">
+        <span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}زمان اکنون{% elif CURRENT_LANGUAGE == 'en' %}THE TIMING RIGHT NOW{% else %}TIMINGEN AKKURAT NÅ{% endif %}</span>
+        <h2 data-now-heading></h2>
+        <div class="ae-prose ae-prose--wide" data-now-story></div>
+        <div class="ae-cycle-grid" data-now-grid></div>
+      </div>
+    </section>
+
+    <section class="ae-section ae-section--stone" id="ae-long">
+      <div class="ae-shell">
+        <span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}قوس بلند زندگی{% elif CURRENT_LANGUAGE == 'en' %}THE LONG ARC{% else %}DEN LANGE LIVSBUEN{% endif %}</span>
+        <h2 data-long-heading></h2>
+        <div class="ae-prose ae-prose--wide" data-long-story></div>
+        <div class="ae-long-grid" data-long-grid></div>
+      </div>
+    </section>
+
+    <section class="ae-section ae-section--dark" data-environment-section hidden>
+      <div class="ae-shell ae-split">
+        <div><span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}محیط پیرامون شما{% elif CURRENT_LANGUAGE == 'en' %}THE NUMBERS AROUND YOU{% else %}TALLENE RUNDT DEG{% endif %}</span><h2 data-environment-heading></h2></div>
+        <div class="ae-card-grid" data-environment></div>
+      </div>
+    </section>
+
+    <section class="ae-section ae-section--relationship" data-partner-section hidden>
+      <div class="ae-shell">
+        <span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}رابطه{% elif CURRENT_LANGUAGE == 'en' %}RELATIONSHIP{% else %}RELASJON{% endif %}</span>
+        <h2 data-partner-heading></h2>
+        <div class="ae-prose ae-prose--wide" data-partner-story></div>
+        <div class="ae-compat-grid" data-partner-grid></div>
+      </div>
+    </section>
+
+    <section class="ae-section ae-section--ledger" id="ae-ledger">
+      <div class="ae-shell">
+        <div class="ae-ledger__head"><div><span class="ae-kicker">{% if CURRENT_LANGUAGE == 'fa' %}نقشه کامل{% elif CURRENT_LANGUAGE == 'en' %}THE COMPLETE MAP{% else %}HELE TALLKARTET{% endif %}</span><h2>{% if CURRENT_LANGUAGE == 'fa' %}همه محاسبات، در یک نگاه.{% elif CURRENT_LANGUAGE == 'en' %}Every calculation, in one place.{% else %}Alle beregningene, samlet på ett sted.{% endif %}</h2></div><button type="button" class="ae-print" data-print>{% if CURRENT_LANGUAGE == 'fa' %}چاپ / ذخیره PDF{% elif CURRENT_LANGUAGE == 'en' %}Print / save PDF{% else %}Skriv ut / lagre PDF{% endif %}</button></div>
+        <div class="ae-ledger-grid" data-ledger></div>
+        <div class="ae-number-links" data-number-links></div>
+        <p class="ae-disclosure">{% if CURRENT_LANGUAGE == 'fa' %}ÅSE Edition یک خوانش دیجیتال مبتنی بر روش عددشناسی Åse Steinsland است؛ این متن جلسه زنده با خود Åse نیست.{% elif CURRENT_LANGUAGE == 'en' %}ÅSE Edition is a digital reading based on Åse Steinsland's numerology method; it is not a live session with Åse herself.{% else %}ÅSE Edition er en digital lesning bygget på Åse Steinslands numerologiske metode; teksten er ikke en direktesamtale med Åse selv.{% endif %}</p>
+        <button type="button" class="ae-secondary" data-new-reading>{% if CURRENT_LANGUAGE == 'fa' %}خوانش جدید{% elif CURRENT_LANGUAGE == 'en' %}Start a new reading{% else %}Start en ny lesning{% endif %}</button>
+      </div>
+    </section>
+  </article>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'journey/ase-edition.js' %}?v=2" defer></script>
+{% endblock %}

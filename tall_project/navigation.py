@@ -51,6 +51,14 @@ STATIC_PAGES: Dict[str, StaticPage] = {
             ),
         ),
         StaticPage(
+            "ase-edition",
+            _("ÅSE Edition — Complete Numerology Reading"),
+            "pages/ase-edition.html",
+            description=_(
+                "One complete numerology engine that combines Åse Steinsland's calculators into a guided, personal reading."
+            ),
+        ),
+        StaticPage(
             "pythagoras-legacy",
             _("Pythagoras' Legacy"),
             "pages/pythagoras-legacy.html",

@@ -60,6 +60,19 @@
     .calc-suite__faq summary { cursor: pointer; font-family: Georgia, serif; font-size: 1.25rem; }
     .calc-suite__faq details p { margin: 12px 0 0; line-height: 1.7; color: #36575a; }
     .calc-suite__faq a { color: #805d2d; }
+
+    .calc-suite__ase { max-width: 1180px; margin: 0 auto clamp(32px, 5vw, 56px); padding: 0 6%; }
+    .calc-ase { position: relative; min-height: 360px; display: grid; grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr); overflow: hidden; border: 1px solid #c6a77555; border-radius: 22px; background: #0b3032; box-shadow: 0 28px 70px #04151655; }
+    .calc-ase__copy { position: relative; z-index: 2; padding: clamp(28px,5vw,54px); align-self: center; }
+    .calc-ase__copy .calc-suite__pill { margin-bottom: 14px; }
+    .calc-ase__copy h2 { margin: 0 0 14px; font-size: clamp(2.3rem,5vw,4.5rem); line-height: .98; color: #f7f1e7; max-width: 9ch; }
+    .calc-ase__copy p { margin: 0 0 22px; color: #b8cbc6; line-height: 1.7; max-width: 52ch; }
+    .calc-ase__cta { display: inline-flex; align-items: center; gap: 18px; padding: 13px 18px; border-radius: 999px; background: #c6a775; color: #092426; text-decoration: none; font-weight: 800; }
+    .calc-ase__media { min-height: 360px; position: relative; overflow: hidden; }
+    .calc-ase__media img { width: 100%; height: 100%; object-fit: cover; object-position: center; filter: saturate(.78) brightness(.72); }
+    .calc-ase__media:after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,#0b3032 0%,transparent 42%),linear-gradient(0deg,#0b303244,transparent 50%); }
+    .calc-ase__numbers { position:absolute; inset:auto 4% 4% auto; z-index:2; font:400 clamp(5rem,10vw,9rem)/.8 Georgia,serif; color:#e4c98b55; }
+    @media (max-width: 760px) { .calc-ase { grid-template-columns: 1fr; } .calc-ase__media { min-height: 250px; grid-row: 1; } .calc-ase__copy { grid-row: 2; } .calc-ase__media:after { background:linear-gradient(0deg,#0b3032 0%,transparent 58%); } }
 {% endblock %}
 
 {% block main %}
@@ -74,6 +87,18 @@
       {% endblocktrans %}
     </p>
   </header>
+
+  <section class="calc-suite__ase" aria-labelledby="ase-edition-title">
+    <div class="calc-ase">
+      <div class="calc-ase__copy">
+        <span class="calc-suite__pill">ÅSE EDITION</span>
+        <h2 id="ase-edition-title">{% if CURRENT_LANGUAGE == 'fa' %}یک موتور. کل نقشه شما.{% elif CURRENT_LANGUAGE == 'en' %}One engine. Your whole chart.{% else %}Én motor. Hele tallkartet ditt.{% endif %}</h2>
+        <p>{% if CURRENT_LANGUAGE == 'fa' %}اطلاعات را یک‌بار وارد کنید و همه محاسبات به یک خوانش شخصی و پیوسته تبدیل می‌شوند.{% elif CURRENT_LANGUAGE == 'en' %}Enter your details once. ÅSE Edition combines the individual calculators into one complete, conversational reading.{% else %}Fyll inn opplysningene én gang. ÅSE Edition kombinerer enkeltkalkulatorene til én komplett, samtalende og personlig lesning.{% endif %}</p>
+        <a class="calc-ase__cta" href="{% url 'static_page' 'ase-edition' %}">{% if CURRENT_LANGUAGE == 'fa' %}شروع ÅSE Edition{% elif CURRENT_LANGUAGE == 'en' %}Start ÅSE Edition{% else %}Start ÅSE Edition{% endif %} <span>→</span></a>
+      </div>
+      <div class="calc-ase__media"><img src="{% static 'journey/images/ase-method.webp' %}" alt="" loading="lazy"><span class="calc-ase__numbers">11·22·33</span></div>
+    </div>
+  </section>
   <div class="calc-suite__grid" role="list">
     <a class="calc-tile" role="listitem" href="{% url 'static_page' 'compute-life-path-number' %}">
       <div class="calc-tile__media"><img src="{% static 'journey/images/personal.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Live" %}</span><span class="calc-tile__glyph" aria-hidden="true">1–9</span></div>
