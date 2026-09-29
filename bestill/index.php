@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/analysis_builder.php';
 require_once __DIR__ . '/../includes/vipps.php';
 require_once __DIR__ . '/../includes/mail.php';
 require_once __DIR__ . '/../includes/layout.php';
@@ -17,6 +18,7 @@ $back = nl_is_rtl($lang) ? '→' : '←';
 
 // ── Packages ──────────────────────────────────────────────────────────────────
 const PACKAGES = [
+    'builder'      => ['name' => 'Din numerologiske analyse', 'price' => 227, 'desc' => 'Kjerneanalyse som kan bygges ut med moduler og fremtid'],
     'ase227'      => ['name' => 'ÅSE 227 Edition', 'price' => 227,  'desc' => 'Digital fullrapport fra den komplette Numerologist-motoren'],
     'personlighet'=> ['name' => 'Personlighetsanalyse', 'price' => 698, 'desc' => 'Åses personlige analyse av personlighet, karmiske tema og lykketall'],
     'fremtid2'    => ['name' => 'Fremtidsanalyse 2 år', 'price' => 698, 'desc' => 'Årlig og månedlig analyse for de neste 2 årene'],
@@ -31,6 +33,10 @@ const PACKAGES = [
 // Display names/descriptions per language. PACKAGES above stays the source
 // for the order record and the Vipps transaction text.
 const PACKAGE_LABELS = [
+    'builder' => [
+        'en' => ['Your Numerology Analysis', 'Core analysis that can be expanded with modules and future periods'],
+        'fa' => ['تحلیل عددشناسی شما', 'تحلیل پایه که می‌توانید با ماژول‌ها و دوره‌های آینده گسترش دهید'],
+    ],
     'ase227' => [
         'en' => ['ÅSE 227 Edition', 'Digital complete report from the full Numerologist engine'],
         'fa' => ['نسخه ÅSE 227', 'گزارش دیجیتال کامل از موتور جامع Numerologist'],
@@ -135,6 +141,23 @@ function effective_price_kr(string $package, bool $complimentary): int
     return (int) (PACKAGES[$package]['price'] ?? 0);
 }
 
+function configured_price_kr(array $order, bool $complimentary): int
+{
+    if ($complimentary) return 0;
+    $package = (string) ($order['package'] ?? '');
+    if ($package !== 'builder') {
+        return effective_price_kr($package, false);
+    }
+    $config = analysis_builder_config(
+        is_array($order['configuration'] ?? null) ? $order['configuration'] : []
+    );
+    return analysis_builder_price_kr(
+        $config['modules'],
+        $config['future_months'],
+        $config['human_review']
+    );
+}
+
 // ── Determine current step ────────────────────────────────────────────────────
 $step   = max(1, min(3, (int) ($_GET['step'] ?? 1)));
 $errors = [];
@@ -143,13 +166,23 @@ $pricingContext = member_pricing_context();
 $complimentaryAccess = !empty($pricingContext['authenticated']) && !empty($pricingContext['complimentary']);
 
 if (!empty($_SESSION['order']['package']) && array_key_exists((string) $_SESSION['order']['package'], PACKAGES)) {
-    $_SESSION['order']['price_ore'] = effective_price_kr((string) $_SESSION['order']['package'], $complimentaryAccess) * 100;
+    $_SESSION['order']['price_ore'] = configured_price_kr($_SESSION['order'], $complimentaryAccess) * 100;
 }
 
 // Direct package links from ÅSE Edition / results. Selecting is not a payment action.
 $directPackage = trim((string) ($_GET['package'] ?? ''));
 if ($directPackage !== '' && array_key_exists($directPackage, PACKAGES)) {
     $_SESSION['order']['package'] = $directPackage;
+    if ($directPackage === 'builder') {
+        $_SESSION['order']['configuration'] = analysis_builder_config(
+            is_array($_SESSION['order']['configuration'] ?? null)
+                ? $_SESSION['order']['configuration']
+                : []
+        );
+        $_SESSION['order']['price_ore'] = configured_price_kr($_SESSION['order'], $complimentaryAccess) * 100;
+        header('Location: /bestill/?step=1&builder=1');
+        exit;
+    }
     $_SESSION['order']['price_ore'] = effective_price_kr($directPackage, $complimentaryAccess) * 100;
     header('Location: /bestill/?step=2');
     exit;
@@ -177,8 +210,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!array_key_exists($pkg, PACKAGES)) {
             $errors[] = $t('Velg en pakke.', 'Choose a package.', 'یک بسته انتخاب کنید.');
         } else {
-            $_SESSION['order']['package']   = $pkg;
-            $_SESSION['order']['price_ore'] = effective_price_kr($pkg, $complimentaryAccess) * 100;
+            $_SESSION['order']['package'] = $pkg;
+            if ($pkg === 'builder') {
+                $_SESSION['order']['configuration'] = analysis_builder_config([
+                    'modules' => $_POST['modules'] ?? [],
+                    'future_months' => $_POST['future_months'] ?? 0,
+                    'human_review' => !empty($_POST['human_review']),
+                ]);
+                $_SESSION['order']['price_ore'] = configured_price_kr($_SESSION['order'], $complimentaryAccess) * 100;
+            } else {
+                unset($_SESSION['order']['configuration']);
+                $_SESSION['order']['price_ore'] = effective_price_kr($pkg, $complimentaryAccess) * 100;
+            }
             header('Location: /bestill/?step=2');
             exit;
         }
