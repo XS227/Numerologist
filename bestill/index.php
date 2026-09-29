@@ -591,7 +591,7 @@ $pkgInfo   = PACKAGES[$selPkg] ?? null;
   <h1><?= $t('Dine opplysninger', 'Your details', 'اطلاعات شما') ?></h1>
   <?php if ($pkgInfo): ?>
     <div class="selected-pkg-badge">
-      <?= htmlspecialchars($pkgName) ?> &mdash; <?= effective_price_kr($selPkg, $complimentaryAccess) ?> kr
+      <?= htmlspecialchars($pkgName) ?> &mdash; <?= configured_price_kr($order, $complimentaryAccess) ?> kr
       <a href="/bestill/?step=1" class="change-link"><?= $t('(endre)', '(change)', '(تغییر)') ?></a>
     </div>
   <?php endif; ?>
@@ -627,12 +627,32 @@ $pkgInfo   = PACKAGES[$selPkg] ?? null;
     </div>
 
     <div class="field">
-      <?php $addressOptional = in_array($selPkg, ['ase227', 'veiledning15'], true); ?>
+      <?php
+      $step2BuilderConfig = analysis_builder_config(
+          is_array($order['configuration'] ?? null) ? $order['configuration'] : []
+      );
+      $addressOptional = in_array($selPkg, ['ase227', 'veiledning15', 'builder'], true)
+          && !($selPkg === 'builder' && in_array('address', $step2BuilderConfig['modules'], true));
+      ?>
       <label for="address"><?= $addressOptional ? $t('Adresse (valgfritt)', 'Address (optional)', 'نشانی (اختیاری)') : $t('Adresse *', 'Address *', 'نشانی *') ?></label>
       <input id="address" name="address" type="text" autocomplete="street-address"
              value="<?= htmlspecialchars($order['address'] ?? '', ENT_QUOTES) ?>"
              placeholder="<?= $t('Gateadresse, postnummer, sted', 'Street, postal code, city', 'خیابان، کد پستی، شهر') ?>" <?= $addressOptional ? '' : 'required' ?>>
     </div>
+
+    <?php $builderNeedsPartner = $selPkg === 'builder' && in_array('partner', $step2BuilderConfig['modules'] ?? [], true); ?>
+    <?php if ($builderNeedsPartner): ?>
+      <div class="field-row builder-partner-fields">
+        <div class="field">
+          <label for="partner_name"><?= $t('Partnerens fulle navn *', "Partner's full name *", 'نام کامل شریک *') ?></label>
+          <input id="partner_name" name="partner_name" type="text" value="<?= htmlspecialchars($step2BuilderConfig['partner_name'] ?? '', ENT_QUOTES) ?>" required>
+        </div>
+        <div class="field">
+          <label for="partner_date"><?= $t('Partnerens fødselsdato *', "Partner's date of birth *", 'تاریخ تولد شریک *') ?></label>
+          <input id="partner_date" name="partner_date" type="date" value="<?= htmlspecialchars($step2BuilderConfig['partner_date'] ?? '', ENT_QUOTES) ?>" max="<?= date('Y-m-d') ?>" required>
+        </div>
+      </div>
+    <?php endif; ?>
 
     <div class="field">
       <?php $notesRequired = in_array($selPkg, ['partner', 'familie3'], true); ?>
@@ -687,8 +707,25 @@ $pkgInfo = PACKAGES[$selPkg] ?? null;
       <?php if ($pkgInfo): ?>
         <div class="review-pkg">
           <strong><?= htmlspecialchars($pkgName) ?></strong>
-          <span class="review-price"><?= effective_price_kr($selPkg, $complimentaryAccess) ?> kr</span>
+          <span class="review-price"><?= configured_price_kr($order, $complimentaryAccess) ?> kr</span>
           <p><?= htmlspecialchars($pkgDesc) ?></p>
+          <?php if ($selPkg === 'builder'):
+              $reviewConfig = analysis_builder_config(
+                  is_array($order['configuration'] ?? null) ? $order['configuration'] : []
+              );
+          ?>
+            <div class="builder-review-config">
+              <strong><?= htmlspecialchars(analysis_builder_summary($reviewConfig, $lang)) ?></strong>
+              <?php if (!empty($reviewConfig['modules'])): ?>
+                <div class="builder-review-tags">
+                  <?php foreach ($reviewConfig['modules'] as $moduleId): ?>
+                    <?php if (!isset(ANALYSIS_MODULES[$moduleId])) continue; ?>
+                    <span><?= htmlspecialchars(analysis_builder_label(ANALYSIS_MODULES[$moduleId], $lang)) ?></span>
+                  <?php endforeach; ?>
+                </div>
+              <?php endif; ?>
+            </div>
+          <?php endif; ?>
         </div>
       <?php endif; ?>
     </div>
@@ -718,7 +755,7 @@ $pkgInfo = PACKAGES[$selPkg] ?? null;
 
   <div class="total-row">
     <span><?= $t('Totalt å betale', 'Total to pay', 'مبلغ قابل پرداخت') ?></span>
-    <strong><?= effective_price_kr($selPkg, $complimentaryAccess) ?> kr</strong>
+    <strong><?= configured_price_kr($order, $complimentaryAccess) ?> kr</strong>
   </div>
 
   <form method="post" action="/bestill/?step=3" class="pay-form">
@@ -767,15 +804,75 @@ try {
   }
 } catch (e) {}
 
-// Highlight selected package card on click
-document.querySelectorAll('.pkg-card').forEach(function(card) {
-  card.addEventListener('click', function() {
-    document.querySelectorAll('.pkg-card').forEach(function(c) {
-      c.classList.remove('pkg-card--selected');
+// Modular analysis builder live pricing and presets.
+(function() {
+  var form = document.querySelector('[data-analysis-builder]');
+  if (!form) return;
+  var totalTop = document.querySelector('[data-builder-total]');
+  var totalBottom = document.querySelector('[data-builder-total-bottom]');
+  var base = Number(form.dataset.basePrice || 227);
+  var cap = Number(form.dataset.depthCap || 471);
+  var humanPrice = Number(form.dataset.humanPrice || 360);
+  var free = form.dataset.free === '1';
+
+  function selectedModules() {
+    return Array.from(form.querySelectorAll('[data-module-price]:checked'));
+  }
+  function updateTotal() {
+    if (free) {
+      if (totalTop) totalTop.textContent = '0 kr';
+      if (totalBottom) totalBottom.textContent = '0 kr';
+      return;
+    }
+    var depth = 0, outside = 0;
+    selectedModules().forEach(function(input) {
+      var price = Number(input.dataset.modulePrice || 0);
+      if (input.dataset.outsideCap === '1') outside += price;
+      else depth += price;
     });
-    this.classList.add('pkg-card--selected');
+    depth = Math.min(depth, cap);
+    var future = form.querySelector('[data-future-price]:checked');
+    var futurePrice = future ? Number(future.dataset.futurePrice || 0) : 0;
+    var human = form.querySelector('[data-human-review]');
+    var total = base + depth + outside + futurePrice + (human && human.checked ? humanPrice : 0);
+    var label = total.toLocaleString('nb-NO') + ' kr';
+    if (totalTop) totalTop.textContent = label;
+    if (totalBottom) totalBottom.textContent = label;
+  }
+  function setFuture(months) {
+    var radio = form.querySelector('[name="future_months"][value="' + months + '"]');
+    if (radio) radio.checked = true;
+  }
+  function setDepth(full) {
+    form.querySelectorAll('[data-module-price]').forEach(function(input) {
+      input.checked = full && input.dataset.outsideCap !== '1';
+    });
+  }
+  form.addEventListener('change', updateTotal);
+  var full = form.querySelector('[data-builder-full]');
+  if (full) full.addEventListener('click', function() { setDepth(true); updateTotal(); });
+  var core = form.querySelector('[data-builder-core-only]');
+  if (core) core.addEventListener('click', function() {
+    setDepth(false);
+    form.querySelectorAll('[data-module-price]').forEach(function(input){ input.checked = false; });
+    setFuture(0);
+    var human = form.querySelector('[data-human-review]'); if (human) human.checked = false;
+    updateTotal();
   });
-});
+  var depth = form.querySelector('[data-builder-depth]');
+  if (depth) depth.addEventListener('click', function() {
+    setDepth(true); setFuture(0);
+    var human = form.querySelector('[data-human-review]'); if (human) human.checked = false;
+    updateTotal();
+  });
+  var y2 = form.querySelector('[data-builder-24]');
+  if (y2) y2.addEventListener('click', function() {
+    setDepth(true); setFuture(24);
+    var human = form.querySelector('[data-human-review]'); if (human) human.checked = false;
+    updateTotal();
+  });
+  updateTotal();
+})();
 </script>
 
 <?php render_footer(); ?>
