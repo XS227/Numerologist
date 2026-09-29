@@ -29,6 +29,26 @@
     .calc-tile__body ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 0.92rem; color: #aebfba; }
     .calc-tile__body li:before { content: '✦ '; color: #c6a775; }
     .calc-tile__cta { margin-top: auto; padding-top: 8px; font-weight: 700; font-size: 0.92rem; color: #e2cba2; }
+    .calc-catalog { max-width: 1180px; margin: 0 auto; padding: 0 6% clamp(56px, 8vw, 96px); }
+    .calc-catalog__head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+    .calc-catalog__head h2 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); color: #f3f0e8; }
+    .calc-catalog__head p { margin: 0; max-width: 54ch; color: #aebfba; line-height: 1.6; }
+    .calc-catalog__groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .calc-catalog__group { background: #0e3032; border: 1px solid #c6a77530; border-radius: 16px; overflow: hidden; }
+    .calc-catalog__group h3 { margin: 0; padding: 18px 20px; font-family: Georgia, serif; font-size: 1.35rem; font-weight: 400; color: #e2cba2; border-bottom: 1px solid #c6a77530; }
+    .calc-catalog__rows { display: grid; }
+    .calc-catalog__row { min-width: 0; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 13px 18px; border-bottom: 1px solid #ffffff10; color: #e7ece9; text-decoration: none; }
+    .calc-catalog__row:last-child { border-bottom: 0; }
+    a.calc-catalog__row:hover, a.calc-catalog__row:focus-visible { background: #173f41; text-decoration: none; }
+    .calc-catalog__num { min-width: 2.7rem; color: #829b96; font-variant-numeric: tabular-nums; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+    .calc-catalog__name { min-width: 0; font-weight: 650; line-height: 1.35; }
+    .calc-catalog__meta { display: block; margin-top: 3px; color: #91aaa4; font-size: .78rem; font-weight: 400; }
+    .calc-catalog__status { white-space: nowrap; padding: 4px 8px; border: 1px solid #667f7b; border-radius: 999px; color: #b9c9c5; font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+    a.calc-catalog__row .calc-catalog__status { border-color: #c6a775; color: #e2cba2; }
+    .calc-catalog__note { margin: 14px 2px 0; color: #839b96; font-size: .82rem; line-height: 1.5; }
+    .calc-catalog__group--future { margin-top: 22px; }
+    @media (max-width: 820px) { .calc-catalog__head { align-items: start; flex-direction: column; } .calc-catalog__groups { grid-template-columns: 1fr; } }
+    @media (max-width: 520px) { .calc-catalog__row { grid-template-columns: auto minmax(0,1fr); gap: 10px; padding: 13px 14px; } .calc-catalog__status { grid-column: 2; justify-self: start; } }
     .calc-suite__learn { max-width: 1180px; margin: 0 auto; padding: 0 6% clamp(60px, 8vw, 90px); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
     .calc-suite__learn a { padding: 12px 20px; border: 1px solid #c6a77570; border-radius: 999px; color: #e2cba2; text-decoration: none; }
     .calc-suite__learn a:hover { background: #c6a775; color: #092426; }
@@ -103,43 +123,95 @@
         <span class="calc-tile__cta">{% trans "Try the calculator" %} →</span>
       </div>
     </a>
-    <a class="calc-tile calc-tile--soon" role="listitem" href="{% url 'static_page' 'guidance-support' %}">
-      <div class="calc-tile__media"><img src="{% static 'journey/images/calc-compatibility.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Coming soon" %}</span><span class="calc-tile__glyph" aria-hidden="true">1 + 1</span></div>
+    <a class="calc-tile" role="listitem" href="{% url 'static_page' 'partner-profile' %}">
+      <div class="calc-tile__media"><img src="{% static 'journey/images/calc-compatibility.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Live" %}</span><span class="calc-tile__glyph" aria-hidden="true">1 + 1</span></div>
       <div class="calc-tile__body">
         <h2>{% trans "Compatibility Insight" %}</h2>
-        <p>{% trans "Cross-reference two birth dates to understand shared lessons and harmony." %}</p>
+        <p>{% trans "Compare two numerology profiles with Åse’s original relationship maps." %}</p>
         <ul>
-          <li>{% trans "Compares combined life path cycles" %}</li>
-          <li>{% trans "Spotlights master number pairings" %}</li>
+          <li>{% trans "Compares both Name Numbers and Destiny Numbers" %}</li>
+          <li>{% trans "Switch between personal and work relationships" %}</li>
         </ul>
-        <span class="calc-tile__cta">{% trans "Included in a personal session with Åse for now" %} →</span>
+        <span class="calc-tile__cta">{% trans "Try the calculator" %} →</span>
       </div>
     </a>
-    <a class="calc-tile calc-tile--soon" role="listitem" href="{% url 'static_page' 'guidance-support' %}">
-      <div class="calc-tile__media"><img src="{% static 'journey/images/calc-personal-year.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Coming soon" %}</span><span class="calc-tile__glyph" aria-hidden="true">{% now "Y" %}</span></div>
+    <a class="calc-tile" role="listitem" href="{% url 'static_page' 'personal-year-number' %}">
+      <div class="calc-tile__media"><img src="{% static 'journey/images/calc-personal-year.webp' %}" alt="" width="1536" height="1024" loading="lazy"><span class="calc-tile__badge">{% trans "Live" %}</span><span class="calc-tile__glyph" aria-hidden="true">{% now "Y" %}</span></div>
       <div class="calc-tile__body">
         <h2>{% trans "Personal Year Forecast" %}</h2>
         <p>{% trans "Discover the focus of the year you’re currently walking through." %}</p>
         <ul>
           <li>{% trans "Calculates your yearly vibration from your birth date" %}</li>
-          <li>{% trans "Places it in context with your overarching life path" %}</li>
+          <li>{% trans "Links the active year directly to its number interpretation" %}</li>
         </ul>
-        <span class="calc-tile__cta">{% trans "Included in a personal session with Åse for now" %} →</span>
+        <span class="calc-tile__cta">{% trans "Try the calculator" %} →</span>
       </div>
     </a>
   </div>
-  <nav class="calc-suite__learn" aria-label="{% if CURRENT_LANGUAGE == 'nb' %}Lær metoden{% else %}Learn the method{% endif %}">
-    <a href="{% url 'static_page' 'calculation-methods-overview' %}">{% if CURRENT_LANGUAGE == 'nb' %}Slik reduseres tallene{% else %}How the numbers are reduced{% endif %} ↗</a>
-    <a href="{% url 'static_page' 'letter-value-chart' %}">{% if CURRENT_LANGUAGE == 'nb' %}Bokstavtabellen{% else %}The letter chart{% endif %} ↗</a>
-    <a href="/discover-numerology/">{% if CURRENT_LANGUAGE == 'nb' %}Om numerologi{% else %}About numerology{% endif %} ↗</a>
+  <section class="calc-catalog" aria-labelledby="calc-catalog-title">
+    <div class="calc-catalog__head">
+      <h2 id="calc-catalog-title">{% trans "Åse's calculation library" %}</h2>
+      <p>{% trans "The complete calculation list from Åse's working material. The full calculation list from Åse's working material is collected here, with the interactive tools linked directly." %}</p>
+    </div>
+    <div class="calc-catalog__groups">
+      <section class="calc-catalog__group">
+        <h3>{% trans "Personal numbers" %}</h3>
+        <div class="calc-catalog__rows">
+          <a class="calc-catalog__row" href="{% url 'static_page' 'compute-destiny-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 1</span><span class="calc-catalog__name">{% trans "Name Number" %}<small class="calc-catalog__meta">{% trans "Full birth name · often called Expression Number" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'compute-name-vowel-consonant' %}#soul-urge-number"><span class="calc-catalog__num">{% trans "Calc." %} 2</span><span class="calc-catalog__name">{% trans "Vowel Number" %}<small class="calc-catalog__meta">{% trans "Vowels in the full birth name" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'compute-name-vowel-consonant' %}#personality-number"><span class="calc-catalog__num">{% trans "Calc." %} 3</span><span class="calc-catalog__name">{% trans "Consonant Number" %}<small class="calc-catalog__meta">{% trans "Consonants in the full birth name" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'current-name-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 4</span><span class="calc-catalog__name">{% trans "Current Name Number" %}</span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'current-vowel-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 5</span><span class="calc-catalog__name">{% trans "Current Vowel Number" %}</span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'compute-life-path-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 6</span><span class="calc-catalog__name">{% trans "Destiny Number" %}<small class="calc-catalog__meta">{% trans "Birth date · often called Life Path Number" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'birthday-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 7</span><span class="calc-catalog__name">{% trans "Birthday Number" %}<small class="calc-catalog__meta">{% trans "31 possibilities" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'cornerstone-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 8</span><span class="calc-catalog__name">{% trans "Cornerstone – first letter in the name" %}<small class="calc-catalog__meta">{% trans "29 possibilities" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'life-path-name-bridge' %}"><span class="calc-catalog__num">{% trans "Calc." %} 10</span><span class="calc-catalog__name">{% trans "Life Path / Name Number Bridge" %}</span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'vowel-consonant-bridge' %}"><span class="calc-catalog__num">{% trans "Calc." %} 11</span><span class="calc-catalog__name">{% trans "Vowel / Consonant Bridge" %}</span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'balance-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 12</span><span class="calc-catalog__name">{% trans "Balance Number" %}</span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'address-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 13</span><span class="calc-catalog__name">{% trans "Address Number" %}</span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'karmic-debt-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 13</span><span class="calc-catalog__name">{% trans "Karmic Debt Number" %}<small class="calc-catalog__meta">{% trans "4 possibilities" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'karmic-lesson' %}"><span class="calc-catalog__num">{% trans "Calc." %} 14</span><span class="calc-catalog__name">{% trans "Karmic Lesson" %}<small class="calc-catalog__meta">{% trans "9 possibilities" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'health-profile-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 15</span><span class="calc-catalog__name">{% trans "Health Profile" %}<small class="calc-catalog__meta">{% trans "Two readings based on Name Number and Destiny Number" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+        </div>
+      </section>
+      <section class="calc-catalog__group">
+        <h3>{% trans "Cycle & transit numbers" %}</h3>
+        <div class="calc-catalog__rows">
+          <a class="calc-catalog__row" href="{% url 'static_page' 'personal-year-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 16</span><span class="calc-catalog__name">{% trans "Personal Year" %}<small class="calc-catalog__meta">{% trans "9 possibilities" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'personal-month-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 17</span><span class="calc-catalog__name">{% trans "Personal Month" %}<small class="calc-catalog__meta">{% trans "81 possibilities" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'physical-transit-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 18</span><span class="calc-catalog__name">{% trans "Physical Transit Number" %}<small class="calc-catalog__meta">{% trans "Choose any age · based on the 29-letter Norwegian alphabet" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'mental-transit-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 19</span><span class="calc-catalog__name">{% trans "Mental Transit Number" %}<small class="calc-catalog__meta">{% trans "Choose any age · based on the 29-letter Norwegian alphabet" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'spiritual-transit-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 20</span><span class="calc-catalog__name">{% trans "Spiritual Transit Number" %}<small class="calc-catalog__meta">{% trans "Surname layer · choose any age" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'essence-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 21</span><span class="calc-catalog__name">{% trans "Essence Number" %}<small class="calc-catalog__meta">{% trans "Combines the active name transits for a selected age" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'pinnacle-cycles' %}"><span class="calc-catalog__num">{% trans "Calc." %} 22</span><span class="calc-catalog__name">{% trans "Four Pinnacle Cycles" %}<small class="calc-catalog__meta">{% trans "Four long development stages" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'life-cycles' %}"><span class="calc-catalog__num">{% trans "Calc." %} 23</span><span class="calc-catalog__name">{% trans "Three Life Cycles" %}<small class="calc-catalog__meta">{% trans "Three long periods from month, day and year" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'maturity-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 24</span><span class="calc-catalog__name">{% trans "Maturity / Realization Number" %}<small class="calc-catalog__meta">{% trans "Name Number + Destiny Number" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'challenge-numbers' %}"><span class="calc-catalog__num">{% trans "Calc." %} 25</span><span class="calc-catalog__name">{% trans "Four Challenge Numbers" %}<small class="calc-catalog__meta">{% trans "Differences between reduced birth month, day and year" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'lucky-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 27</span><span class="calc-catalog__name">{% trans "Lucky Number" %}<small class="calc-catalog__meta">{% trans "Same birth-date base as the Destiny Number in Åse's overview" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+          <a class="calc-catalog__row" href="{% url 'static_page' 'telephone-number' %}"><span class="calc-catalog__num">{% trans "Calc." %} 28</span><span class="calc-catalog__name">{% trans "Telephone Number" %}<small class="calc-catalog__meta">{% trans "Reduce the digits and optionally compare with your core numbers" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+        </div>
+      </section>
+    </div>
+    <section class="calc-catalog__group calc-catalog__group--future">
+      <h3>{% trans "Daily & relationship tools" %}</h3>
+      <div class="calc-catalog__rows">
+        <a class="calc-catalog__row" href="/#dagstall"><span class="calc-catalog__num">{% trans "Daily" %}</span><span class="calc-catalog__name">{% trans "Daily Number" %}<small class="calc-catalog__meta">{% trans "Today's universal daily vibration — already shown on the homepage" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+        <a class="calc-catalog__row" href="{% url 'static_page' 'partner-profile' %}"><span class="calc-catalog__num">{% trans "Relations" %}</span><span class="calc-catalog__name">{% trans "Partner Profile" %}<small class="calc-catalog__meta">{% trans "Compare Name and Destiny numbers with Åse's two compatibility charts" %}</small></span><span class="calc-catalog__status">{% trans "Live" %}</span></a>
+      </div>
+    </section>
+    <p class="calc-catalog__note">{% trans "The numbered list follows Åse's source document, including skipped number 9, skipped number 26, and the repeated number 13. Daily Number is available on the homepage, and Partner Profile is available here as a separate relationship tool." %}</p>
+  </section>
+  <nav class="calc-suite__learn" aria-label="{% trans "Learn the method" %}">
+    <a href="{% url 'static_page' 'calculation-methods-overview' %}">{% trans "How the numbers are reduced" %} ↗</a>
+    <a href="{% url 'static_page' 'letter-value-chart' %}">{% trans "The letter chart" %} ↗</a>
+    <a href="/discover-numerology/">{% trans "About numerology" %} ↗</a>
   </nav>
   <section class="calc-suite__faq" aria-labelledby="calc-faq-title">
     <div>
       <h2 id="calc-faq-title">{% trans "Frequently asked questions" %}</h2>
       <details open>
-        <summary>{% trans "What is the difference between life path and destiny number?" %}</summary>
-        <p>{% trans "Life path is calculated from your birth date and describes the lessons of your lifetime. Destiny (expression) number is calculated from the letters in your full birth name and describes talents you are here to develop. See" %}
-          <a href="{% url 'static_page' 'compute-destiny-number' %}">{% trans "Compute Your Destiny Number" %}</a>.</p>
+        <summary>{% trans "Why are some number names different from other numerology sites?" %}</summary>
+        <p>{% trans "This site follows Åse's own calculation document. In her terminology, the Destiny Number is calculated from the full birth date, while the Name Number is calculated from the full birth name. Other numerology traditions may call these Life Path and Expression Number. The calculation method is shown on each tool page." %}</p>
       </details>
       <details>
         <summary>{% trans "Are these calculators as accurate as a personal session?" %}</summary>

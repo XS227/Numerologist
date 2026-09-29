@@ -59,6 +59,7 @@ RELATED_ARTICLE_SLUGS: dict[int, tuple[str, ...]] = {
         "mirakel-historier-og-tall",
     ),
     7: (
+        "elon-musk-numerologi-16-7",
         "nikola-tesla-dekodet",
         "sissel-grana-tallene",
         "snasamannens-tall",
@@ -123,4 +124,35 @@ def get_related_articles(number: int, limit: int = 6) -> list[Article]:
             continue
         article.thumb = get_thumbnail(article.slug, article.title)
         result.append(article)
+    return result
+
+
+def get_related_article_map(
+    numbers: tuple[int, ...] = (1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33),
+    limit: int = 3,
+) -> dict[int, list[Article]]:
+    """Return calculator-related reading with one database lookup.
+
+    Calculator result panels may reveal several numbers at once.  Loading the
+    curated relationships as one map lets the browser reveal only the groups
+    that match the result without doing a database query for every number.
+    """
+    wanted = {
+        number: RELATED_ARTICLE_SLUGS.get(number, ())[:limit]
+        for number in numbers
+    }
+    all_slugs = tuple(dict.fromkeys(
+        slug for slugs in wanted.values() for slug in slugs
+    ))
+    by_slug = Article.objects.in_bulk(all_slugs, field_name="slug")
+    result: dict[int, list[Article]] = {}
+    for number, slugs in wanted.items():
+        articles: list[Article] = []
+        for slug in slugs:
+            article = by_slug.get(slug)
+            if not article:
+                continue
+            article.thumb = get_thumbnail(article.slug, article.title)
+            articles.append(article)
+        result[number] = articles
     return result

@@ -1,0 +1,370 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ page.title }} · Numerologist{% endblock %}
+
+{% block extra_styles %}
+.ac-page{min-height:70vh;background:#08292b;color:#f5f1e8;padding:clamp(48px,7vw,88px) 6% 90px}.ac-shell{max-width:1040px;margin:0 auto}
+.ac-back{display:inline-flex;align-items:center;gap:8px;color:#d9c08e;text-decoration:none;font-weight:700;margin-bottom:28px}.ac-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end;border-bottom:1px solid #c7a96a55;padding-bottom:30px}
+.ac-kicker{display:inline-flex;padding:6px 12px;border:1px solid #c7a96a88;border-radius:999px;color:#d9c08e;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}.ac-hero h1{font-family:Georgia,serif;font-size:clamp(2.2rem,6vw,4.4rem);font-weight:400;line-height:1.02;letter-spacing:-.035em;margin:16px 0 14px}.ac-hero p{max-width:68ch;color:#bdd0cb;line-height:1.75;margin:0}.ac-index{font-family:Georgia,serif;font-size:clamp(3rem,9vw,6.5rem);line-height:.85;color:#c7a96a55}
+.ac-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(300px,.88fr);gap:24px;margin-top:32px}.ac-card{background:#103638;border:1px solid #c7a96a38;border-radius:18px;padding:clamp(20px,3vw,30px)}.ac-card h2,.ac-related h2{font-family:Georgia,serif;font-weight:400;font-size:1.6rem;margin:0 0 8px}.ac-card>p{color:#afc3be;line-height:1.6;margin:0 0 22px}
+.ac-form{display:grid;gap:18px}.ac-field{display:grid;gap:8px;font-weight:700;color:#e7ece8}.ac-field small{font-weight:400;color:#8ea7a1;line-height:1.45}.ac-field input,.ac-field select{width:100%;box-sizing:border-box;border:1px solid #71898588;border-radius:12px;background:#092b2d;color:#fff;padding:13px 14px;font:inherit;min-height:48px}.ac-field input:focus,.ac-field select:focus{outline:2px solid #c7a96a;outline-offset:2px}
+.ac-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.ac-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:2px}.ac-btn{border:0;border-radius:999px;min-height:46px;padding:0 19px;font:inherit;font-weight:800;cursor:pointer}.ac-btn--primary{background:#d8bd86;color:#09292b}.ac-btn--ghost{background:transparent;color:#c8d6d2;border:1px solid #71898588}.ac-privacy{display:flex;gap:10px;align-items:flex-start;color:#90aaa4;font-size:.82rem;line-height:1.45;margin-top:4px}
+.ac-result{display:grid;align-content:start;gap:18px}.ac-result__empty{color:#93aaa5;line-height:1.7}.ac-result__value{font-family:Georgia,serif;font-size:clamp(3.4rem,9vw,6rem);line-height:.9;color:#e5cca0;overflow-wrap:anywhere}.ac-result__value--list{font-size:clamp(2rem,6vw,3.8rem);line-height:1.05}.ac-result__label{font-size:.74rem;text-transform:uppercase;letter-spacing:.13em;color:#91aaa4}.ac-result__formula{border-top:1px solid #c7a96a35;padding-top:16px;color:#c7d5d1;line-height:1.65}.ac-result__formula strong{color:#fff}.ac-parts{display:grid;gap:8px;margin-top:12px}.ac-part{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid #ffffff0e;color:#9fb4af}.ac-part b{color:#e7ece8}.ac-numlink{color:#e4c996;text-decoration:none;border-bottom:1px solid #e4c99655}.ac-numlink:hover{color:#fff}
+.ac-error{display:none;padding:11px 13px;border-radius:10px;background:#5d2424;color:#fff2ef;font-size:.9rem}.ac-error.is-visible{display:block}.ac-source{margin-top:24px;padding:18px 20px;border-left:2px solid #c7a96a;color:#a9beb9;line-height:1.6}.ac-source strong{color:#e4c996}
+.ac-result-guide{display:none;margin-top:4px;padding:16px;border-radius:13px;background:#0a2e30;border:1px solid #c7a96a32;color:#b9cbc7;line-height:1.65}.ac-result-guide.is-visible{display:block;animation:acReveal .3s ease both}.ac-result-guide h3{margin:0 0 7px;font:400 1.15rem Georgia,serif;color:#f4ead5}.ac-result-guide p{margin:0}.ac-result-guide a{color:#e4c996;font-weight:700}
+.ac-learn{margin-top:38px;padding-top:32px;border-top:1px solid #c7a96a40}.ac-learn__head{max-width:720px;margin-bottom:20px}.ac-learn__eyebrow{display:block;color:#d9c08e;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}.ac-learn__head h2{font:400 clamp(1.8rem,4vw,2.6rem) Georgia,serif;margin:0 0 9px}.ac-learn__head p{margin:0;color:#a9beb9;line-height:1.7}.ac-learn__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.ac-learn__card{background:#0e3335;border:1px solid #ffffff16;border-radius:16px;padding:21px}.ac-learn__step{display:block;color:#c7a96a;font-size:.7rem;letter-spacing:.12em;margin-bottom:12px}.ac-learn__card h3{font:400 1.25rem Georgia,serif;margin:0 0 10px;color:#f5f1e8}.ac-learn__card p{margin:0;color:#a9beb9;line-height:1.7}.ac-learn__card strong{color:#e7d5b1}
+.ac-related{margin-top:34px;padding-top:30px;border-top:1px solid #c7a96a40}.ac-related[hidden]{display:none}.ac-related:not([hidden]){animation:acReveal .35s ease both}@keyframes acReveal{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}.ac-related__lead{color:#a9beb9;margin:0 0 18px;line-height:1.6}.ac-number-links{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 22px}.ac-number-links a{display:inline-flex;align-items:center;gap:7px;padding:9px 13px;border:1px solid #c7a96a66;border-radius:999px;color:#e8d6b0;text-decoration:none;font-weight:700}.ac-number-links a:hover{background:#c7a96a;color:#09292b}
+.ac-related__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.ac-article{display:grid;gap:6px;padding:16px;border:1px solid #ffffff18;border-radius:14px;background:#0e3133;color:#eaf0ed;text-decoration:none}.ac-article:hover{border-color:#c7a96a}.ac-article span{font-size:.68rem;text-transform:uppercase;letter-spacing:.09em;color:#9ab0ab}.ac-article strong{font-family:Georgia,serif;font-size:1.05rem;font-weight:400;line-height:1.35}.ac-pool{display:none}
+@media(max-width:760px){.ac-hero{grid-template-columns:1fr}.ac-index{display:none}.ac-grid,.ac-two,.ac-learn__grid{grid-template-columns:1fr}.ac-page{padding-inline:18px}.ac-card{border-radius:14px}.ac-related__grid{grid-template-columns:1fr}}
+{% endblock %}
+
+{% block main %}
+<div class="ac-page">
+<main class="ac-shell" data-calculator="{{ page.slug }}" data-calc-number="{{ calc_number|default:'' }}" id="ase-calculator">
+  <a class="ac-back" href="{% url 'static_page' 'calculators' %}">← {% trans "All calculators" %}</a>
+  <header class="ac-hero">
+    <div><span class="ac-kicker">{% if page.slug == "partner-profile" %}{% trans "Relationship tool" %}{% else %}{% trans "Calculation" %} {{ calc_number }}{% endif %}</span><h1>{{ calc_title|default:page.title }}</h1><p>{{ calc_description|default:page.description }}</p></div>
+    <div class="ac-index" aria-hidden="true">{{ calc_label }}</div>
+  </header>
+
+  <div class="ac-grid">
+    <section class="ac-card">
+      <h2>{% trans "Your information" %}</h2>
+      <p>{% trans "Your entries can be remembered on this device so you do not have to type them again in the next calculator." %}</p>
+      <form class="ac-form" data-calc-form novalidate>
+        {% if page.slug == "current-name-number" or page.slug == "current-vowel-number" %}
+          <label class="ac-field">{% trans "Current full name" %}<input name="currentName" type="text" autocomplete="name" data-profile-key="currentName"><small>{% trans "Use the complete name you currently go by." %}</small></label>
+        {% elif page.slug == "birthday-number" %}
+          <label class="ac-field">{% trans "Date of birth" %}<input name="birthDate" type="date" autocomplete="bday" data-profile-key="birthDate"></label>
+        {% elif page.slug == "address-number" %}
+          <label class="ac-field">{% trans "Street address" %}<input name="address" type="text" autocomplete="street-address" data-profile-key="address" placeholder="{% trans 'e.g. Benshaugen 8 D' %}"><small>{% trans "If the address contains a number, the street name itself is not counted." %}</small></label>
+        {% elif page.slug == "personal-year-number" %}
+          <label class="ac-field">{% trans "Date of birth" %}<input name="birthDate" type="date" autocomplete="bday" data-profile-key="birthDate"></label>
+          <label class="ac-field">{% trans "Calendar year" %}<input name="targetYear" type="number" min="1900" max="2200" data-profile-key="targetYear"><small>{% trans "Choose the year you want to explore." %}</small></label>
+        {% elif page.slug == "personal-month-number" %}
+          <label class="ac-field">{% trans "Date of birth" %}<input name="birthDate" type="date" autocomplete="bday" data-profile-key="birthDate"></label>
+          <label class="ac-field">{% trans "Calendar month" %}<input name="targetMonth" type="month" data-profile-key="targetMonth"></label>
+        {% elif page.slug == "physical-transit-number" or page.slug == "mental-transit-number" or page.slug == "spiritual-transit-number" or page.slug == "essence-number" %}
+          <label class="ac-field">{% if calc_ui.registered_name %}{{ calc_ui.registered_name }}{% else %}{% trans "Full birth name" %}{% endif %}<input name="birthName" type="text" autocomplete="name" data-profile-key="birthName"><small>{% if calc_ui.registered_name %}{{ calc_ui.registered_name }}{% else %}{% trans "Full birth name" %}{% endif %}</small></label>
+          <label class="ac-field">{% if calc_ui.age %}{{ calc_ui.age }}{% else %}{% trans "Age to explore" %}{% endif %}<input name="targetAge" type="number" min="0" max="130" data-profile-key="targetAge"><small>{% trans "Choose any age, including your current age or a future age." %}</small></label>
+        {% elif page.slug == "pinnacle-cycles" or page.slug == "life-cycles" or page.slug == "challenge-numbers" or page.slug == "lucky-number" %}
+          <label class="ac-field">{% trans "Date of birth" %}<input name="birthDate" type="date" autocomplete="bday" data-profile-key="birthDate"></label>
+        {% elif page.slug == "maturity-number" %}
+          <label class="ac-field">{% trans "Full birth name" %}<input name="birthName" type="text" autocomplete="name" data-profile-key="birthName"></label>
+          <label class="ac-field">{% trans "Date of birth" %}<input name="birthDate" type="date" autocomplete="bday" data-profile-key="birthDate"></label>
+        {% elif page.slug == "telephone-number" %}
+          <label class="ac-field">{% if calc_ui.phone %}{{ calc_ui.phone }}{% else %}{% trans "Telephone number" %}{% endif %}<input name="phoneNumber" type="tel" inputmode="tel" autocomplete="tel" data-profile-key="phoneNumber" placeholder="+47 952 73 772"><small>{% if calc_ui.phone_note %}{{ calc_ui.phone_note }}{% else %}{% trans "Only the digits are used in the calculation." %}{% endif %}</small></label>
+          <label class="ac-field">{% trans "Full birth name" %} <small>({% trans "optional" %})</small><input name="birthName" type="text" autocomplete="name" data-profile-key="birthName"></label>
+          <label class="ac-field">{% trans "Date of birth" %} <small>({% trans "optional" %})</small><input name="birthDate" type="date" autocomplete="bday" data-profile-key="birthDate"></label>
+        {% elif page.slug == "partner-profile" %}
+          <div class="ac-two">
+            <label class="ac-field">{{ calc_ui.a_name }}<input name="partnerAName" type="text" autocomplete="off" data-profile-key="partnerAName"></label>
+            <label class="ac-field">{{ calc_ui.a_date }}<input name="partnerADate" type="date" autocomplete="off" data-profile-key="partnerADate"></label>
+          </div>
+          <div class="ac-two">
+            <label class="ac-field">{{ calc_ui.b_name }}<input name="partnerBName" type="text" autocomplete="off" data-profile-key="partnerBName"></label>
+            <label class="ac-field">{{ calc_ui.b_date }}<input name="partnerBDate" type="date" autocomplete="off" data-profile-key="partnerBDate"></label>
+          </div>
+          <label class="ac-field">{{ calc_ui.context }}
+            <select name="compatContext" data-profile-key="compatContext">
+              <option value="personal">{{ calc_ui.personal }}</option>
+              <option value="work">{{ calc_ui.work }}</option>
+            </select>
+          </label>
+        {% elif page.slug == "karmic-debt-number" %}
+          <label class="ac-field">{% trans "Full birth name" %}<input name="birthName" type="text" autocomplete="name" data-profile-key="birthName"></label>
+          <label class="ac-field">{% trans "Date of birth" %}<input name="birthDate" type="date" autocomplete="bday" data-profile-key="birthDate"></label>
+          <label class="ac-field">{% trans "Current full name" %} <small>({% trans "optional" %})</small><input name="currentName" type="text" autocomplete="name" data-profile-key="currentName"></label>
+        {% elif page.slug == "life-path-name-bridge" or page.slug == "karmic-lesson" or page.slug == "health-profile-number" %}
+          <label class="ac-field">{% trans "Full birth name" %}<input name="birthName" type="text" autocomplete="name" data-profile-key="birthName"></label>
+          <label class="ac-field">{% trans "Date of birth" %}<input name="birthDate" type="date" autocomplete="bday" data-profile-key="birthDate"></label>
+        {% else %}
+          <label class="ac-field">{% trans "Full birth name" %}<input name="birthName" type="text" autocomplete="name" data-profile-key="birthName"></label>
+        {% endif %}
+        <div class="ac-error" role="alert" data-error></div>
+        <div class="ac-actions"><button class="ac-btn ac-btn--primary" type="submit">{% trans "Calculate" %}</button><button class="ac-btn ac-btn--ghost" type="button" data-forget>{% trans "Forget saved information" %}</button></div>
+        <div class="ac-privacy"><span aria-hidden="true">◌</span><span>{% trans "For now, saved information stays only in this browser on this device. When membership is introduced, your calculators can be filled automatically from your member profile." %}</span></div>
+      </form>
+    </section>
+
+    <aside class="ac-card ac-result" aria-live="polite">
+      <span class="ac-result__label">{% trans "Result" %}</span>
+      <div data-result><p class="ac-result__empty">{% trans "Enter your information and choose Calculate. The calculation steps will appear here." %}</p></div>
+      <div class="ac-result-guide" data-result-guide></div>
+    </aside>
+  </div>
+
+  <div class="ac-source"><strong>{% trans "Method:" %}</strong> {{ page.description }}</div>
+
+  <section class="ac-learn" aria-labelledby="ac-learn-title">
+    <div class="ac-learn__head">
+      <span class="ac-learn__eyebrow">{% trans "Learn the calculation" %}</span>
+      <h2 id="ac-learn-title">{% trans "What, why and how?" %}</h2>
+      <p>{% trans "The calculator gives you a result, but this section explains what it represents, how to read it and how Åse uses it as part of a larger numerology profile." %}</p>
+    </div>
+    <div class="ac-learn__grid">
+      <article class="ac-learn__card">
+        <span class="ac-learn__step">01 · {% trans "WHAT" %}</span>
+        <h3>{% trans "What does this calculator show?" %}</h3>
+        <p>
+        {% if calc_learn.what %}{{ calc_learn.what }}
+        {% elif page.slug == "current-name-number" %}
+          {% trans "The Current Name Number describes the vibration of the name you use now. It is useful when your everyday name differs from your birth name, because it lets you compare your original name pattern with the identity you actively use today." %}
+        {% elif page.slug == "current-vowel-number" %}
+          {% trans "The Current Vowel Number uses only the vowels in the name you use today. In Åse's method it is read as an inner or motivational layer of the current name: what pulls you from within rather than what the whole name expresses." %}
+        {% elif page.slug == "birthday-number" %}
+          {% trans "The Birthday Number is simply the calendar day you were born, from 1 to 31. Åse keeps this number unreduced because the exact birth day is treated as its own distinct influence." %}
+        {% elif page.slug == "cornerstone-number" %}
+          {% trans "The Cornerstone is the first letter of your full birth name. In numerology it is used as a small clue to how you tend to begin, meet new situations and make a first move." %}
+        {% elif page.slug == "life-path-name-bridge" %}
+          {% trans "This Bridge Number measures the numerical distance between the Name Number and the Destiny/Life Path Number. It is used to explore what may help the two parts work together more smoothly." %}
+        {% elif page.slug == "vowel-consonant-bridge" %}
+          {% trans "This bridge compares the vowel number with the consonant number: the inward motivational layer of the name and the outward layer other people may meet first." %}
+        {% elif page.slug == "balance-number" %}
+          {% trans "The Balance Number is calculated from the initials in the full birth name. In Åse's system it is used as a reflection point for how you regain equilibrium when life feels pressured or conflicted." %}
+        {% elif page.slug == "address-number" %}
+          {% trans "The Address Number gives a numerological tone to the place where you live. When the address contains a house number, that number is the main basis; a following letter is converted through Åse's letter table." %}
+        {% elif page.slug == "karmic-debt-number" %}
+          {% trans "This calculator looks for the traditional compound numbers 13/4, 14/5, 16/7 and 19/1 among selected core calculations. In numerology these are called karmic debt numbers; the term is symbolic and does not mean a literal debt." %}
+        {% elif page.slug == "karmic-lesson" %}
+          {% trans "Karmic Lessons are calculated from number values that are absent from the birth name and also not supplied by the checked core numbers. Åse uses them as themes for qualities that may need more conscious practice." %}
+        {% elif page.slug == "pinnacle-cycles" or page.slug == "life-cycles" or page.slug == "challenge-numbers" %}
+          {% trans "Read the result as a sequence rather than one isolated number. Each position has its own role and time frame. Open the linked number meanings, then compare how the sequence changes from one stage to the next." %}
+        {% elif page.slug == "essence-number" %}
+          {% trans "The active transit values are shown separately and then combined. Keep the compound when a master number or meaningful compound appears, while also reading the reduced root as the underlying 1–9 quality." %}
+        {% elif page.slug == "partner-profile" %}
+          {% trans "A is the most harmonious category in Åse's chart, B is good, C is more mixed or learning-oriented, D is demanding, and A/D marks strong polarity that can feel either very supportive or very challenging." %}
+        {% elif page.slug == "telephone-number" %}
+          {% trans "Read the phone number's reduced value first. If you entered your own core data, the calculator also shows whether the telephone value directly matches your Name Number or Destiny Number; that is a resonance, not an objective guarantee of luck." %}
+        {% elif page.slug == "health-profile-number" %}
+          {% trans "The numerological Health Profile compares two single-digit values derived from the Name Number and Destiny Number. It is a symbolic numerology reflection only and is not a medical test, diagnosis or treatment recommendation." %}
+        {% elif page.slug == "personal-year-number" %}
+          {% trans "The Personal Year places your birth day and month together with a chosen calendar year. It is used to describe the broad numerological theme of that year in a repeating 1–9 rhythm." %}
+        {% elif page.slug == "personal-month-number" %}
+          {% trans "The Personal Month narrows the Personal Year down to one month. It combines the year's theme with the selected calendar month to give a shorter 1–9 timing cycle." %}
+        {% elif page.slug == "physical-transit-number" %}
+          {% trans "The Physical Transit follows the letters of the first name in your birth name. Each letter becomes active for a number of years equal to its value in Åse's letter table, then the sequence moves to the next letter and eventually repeats." %}
+        {% elif page.slug == "mental-transit-number" %}
+          {% trans "The Mental Transit follows the middle-name layer of the birth name, letter by letter. Each letter stays active for a number of years equal to its numerical value before the sequence moves on and later repeats." %}
+        {% elif page.slug == "spiritual-transit-number" %}
+          {% trans "The Spiritual Transit follows the surname layer of the full birth name. The active letter changes according to the letter values, giving a third timing layer alongside the physical and mental transits." %}
+        {% elif page.slug == "essence-number" %}
+          {% trans "The Essence Number combines the active physical, mental and spiritual transit values for the selected age. In Åse's work it is a yearly cycle that runs from birthday to birthday and describes the outside influences you are ready to meet and integrate." %}
+        {% elif page.slug == "pinnacle-cycles" %}
+          {% trans "The four Pinnacle cycles are Åse's four long development stages. They are calculated from the reduced birth day, month and year and describe four broad seasons of development across the lifetime." %}
+        {% elif page.slug == "life-cycles" %}
+          {% trans "The three Life Cycles use the birth month, day and year as three long periods. They move from the early period of finding yourself, through the productive middle period, into the later flowering period." %}
+        {% elif page.slug == "maturity-number" %}
+          {% trans "The Maturity or Realization Number is the sum of the Name Number and Destiny Number. Åse describes it as an underlying aim that becomes increasingly visible from the thirties and forties onward." %}
+        {% elif page.slug == "challenge-numbers" %}
+          {% trans "The four Challenge Numbers are calculated from the differences between the reduced birth month, day and year. They are used as recurring themes for qualities that may require extra awareness and practice." %}
+        {% elif page.slug == "lucky-number" %}
+          {% trans "In Åse's calculation overview, the Lucky Number follows the same birth-date calculation as the Destiny Number. This tool calculates that number and links it to the same number interpretation." %}
+        {% elif page.slug == "telephone-number" %}
+          {% trans "The Telephone Number reduces the digits in a phone number to a single 1–9 value. If you also enter birth data, the tool compares that value with your Name and Destiny numbers as a simple numerological resonance check." %}
+        {% elif page.slug == "partner-profile" %}
+          {% trans "The Partner Profile compares two people's Name Numbers and Destiny Numbers against Åse's original 9×9 compatibility charts. You can switch between personal relationships and work relationships." %}
+        {% endif %}
+        </p>
+      </article>
+
+      <article class="ac-learn__card">
+        <span class="ac-learn__step">02 · {% trans "READ" %}</span>
+        <h3>{% trans "How do I read the result?" %}</h3>
+        <p>
+        {% if calc_learn.read %}{{ calc_learn.read }}
+        {% elif page.slug == "physical-transit-number" or page.slug == "spiritual-transit-number" %}
+          {% trans "A result such as B · 2 contains two pieces of information: B is the active letter, and 2 is that letter's numerical value. Because B = 2, it stays active for two years in that pass through the name. The age range shows exactly where those two years fall, while the full-cycle value shows how long it takes to travel through the whole first name once." %}
+        {% elif page.slug == "mental-transit-number" %}
+          {% trans "A result such as B · 2 means that B is the active letter in the mental transit and that B carries the value 2. The value also determines how long the letter remains active in the current pass. The age range tells you when it is active, and the full-cycle value tells you when the sequence starts over." %}
+        {% elif page.slug == "karmic-debt-number" %}
+          {% trans "Read both parts of a compound result. For example 16/7 keeps 16 because it is the karmic-debt compound, while 7 is the reduced root number. Click the root number to open its full number page, then use the compound as the specific context for this calculator." %}
+        {% elif page.slug == "birthday-number" %}
+          {% trans "Here 14 means birthday 14, not simply number 5. The unreduced day is the primary result. We may still link to its root number to help you explore the underlying 1–9 quality, but the birthday itself remains 14." %}
+        {% elif page.slug == "cornerstone-number" %}
+          {% trans "The letter is the main result. Its number is shown beside it so you can connect the letter to the same 1–9 meanings used elsewhere. The letter is not replaced by the number; both pieces are useful." %}
+        {% elif page.slug == "health-profile-number" %}
+          {% trans "The two values are read side by side rather than merged into one new number. One comes from the Name Number and one from the Destiny Number, so each points back to a different part of the numerology profile." %}
+        {% elif page.slug == "personal-month-number" %}
+          {% trans "The result shows the Personal Month and also the Personal Year it sits inside. Read the month as the immediate theme and the year as the larger background rhythm." %}
+        {% else %}
+          {% trans "The large number is the main result. When a compound such as 16/7 or 22/4 appears, the number before the slash preserves the compound and the number after the slash is its reduced root. The calculation lines show where the result came from." %}
+        {% endif %}
+        </p>
+      </article>
+
+      <article class="ac-learn__card">
+        <span class="ac-learn__step">03 · {% trans "USE" %}</span>
+        <h3>{% trans "How can I use it?" %}</h3>
+        <p>
+        {% if calc_learn.use %}{{ calc_learn.use }}
+        {% elif page.slug == "physical-transit-number" %}
+          {% trans "Use it as a timing and reflection tool. Look at the active letter and number for your current age, then compare that number with your Personal Year or Personal Month. In Åse's approach the physical transit is especially useful for reflecting on action, pace, practical choices and how you meet the outer world during that period." %}
+        {% elif page.slug == "mental-transit-number" %}
+          {% trans "Use it to reflect on the mental tone of a period: learning, ideas, decisions, communication and perspective. Comparing it with Personal Year and Personal Month can show how several cycles overlap at the same age." %}
+        {% elif page.slug == "personal-year-number" or page.slug == "personal-month-number" %}
+          {% trans "Use the cycle as a theme rather than a prediction. Compare it with what is actually happening in your life, note repeating patterns, and open the linked number page for a deeper interpretation of the active number." %}
+        {% elif page.slug == "address-number" %}
+          {% trans "Use it to compare the tone of different homes or to reflect on how a place feels to you. It does not tell you whether an address is objectively good or bad; it adds one numerological layer to the way you experience the place." %}
+        {% elif page.slug == "karmic-debt-number" or page.slug == "karmic-lesson" %}
+          {% trans "Use the result as a reflective theme, not as a verdict. Read the linked number meaning, compare it with the rest of your chart and look for situations where the same quality repeatedly asks for attention or practice." %}
+        {% elif page.slug == "pinnacle-cycles" or page.slug == "life-cycles" or page.slug == "challenge-numbers" or page.slug == "maturity-number" %}
+          {% trans "Use the result as a long-view map. Compare the active stage with your Personal Year, transits and core numbers, and look for recurring themes rather than treating a cycle as a fixed prediction." %}
+        {% elif page.slug == "essence-number" or page.slug == "spiritual-transit-number" %}
+          {% trans "Use it as a timing and reflection layer alongside Personal Year and Personal Month. The value is most useful when several independent parts of the chart point toward the same theme." %}
+        {% elif page.slug == "telephone-number" or page.slug == "lucky-number" %}
+          {% trans "Use the result as a light numerological reference when comparing numbers you encounter or can choose. It is not a statistical prediction of outcomes or a guarantee of luck." %}
+        {% elif page.slug == "partner-profile" %}
+          {% trans "Use both the Name and Destiny comparisons. A relationship contains more than one number, so a mixed result is normal. The chart is a reflective tool for differences in style, needs and cooperation—not a verdict on whether two people should be together." %}
+        {% elif page.slug == "health-profile-number" %}
+          {% trans "Use this only as a numerological reflection alongside the rest of the chart. Do not use it to make health decisions; symptoms, diagnosis and treatment belong with qualified healthcare professionals." %}
+        {% else %}
+          {% trans "Start by clicking the result number to read its full interpretation. Then compare it with your other calculations. A single number is most useful when you see where it agrees with, balances or contrasts with the rest of your numerology profile." %}
+        {% endif %}
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="ac-related" data-related hidden>
+    <h2>{% trans "Related people, analyses and number guides" %}</h2>
+    <p class="ac-related__lead">{% trans "The numbers in your result are clickable. You can also continue with people and articles in our archive that are connected to the same numbers." %}</p>
+    <nav class="ac-number-links" data-number-links aria-label="{% trans 'Explore result numbers' %}"></nav>
+    <div class="ac-related__grid" data-related-items></div>
+  </section>
+
+  <div class="ac-pool" aria-hidden="true">
+    {% for number, articles in calculator_related_map.items %}
+      <template data-related-template="{{ number }}">
+        {% for article in articles %}
+          <a class="ac-article" href="{{ article.get_absolute_url }}"><span>{% trans "Related analysis / article" %} · {{ number }}</span><strong>{{ article.title }}</strong></a>
+        {% endfor %}
+      </template>
+    {% endfor %}
+  </div>
+</main>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+(function(){
+  var root=document.getElementById('ase-calculator'); if(!root||root.dataset.ready==='1')return; root.dataset.ready='1';
+  var KEY='numerologist.profile.v1', MASTER={11:1,22:1,33:1}, VALID={1:1,2:1,3:1,4:1,5:1,6:1,7:1,8:1,9:1,11:1,22:1,33:1};
+  var VALUES={A:1,J:1,S:1,'Ø':1,B:2,K:2,T:2,'Å':2,C:3,L:3,U:3,D:4,M:4,V:4,E:5,N:5,W:5,F:6,O:6,X:6,G:7,P:7,Y:7,H:8,Q:8,Z:8,I:9,R:9,'Æ':9};
+  var VOWELS={A:1,E:1,I:1,O:1,U:1,'Æ':1,'Ø':1,'Å':1}, form=root.querySelector('[data-calc-form]'), out=root.querySelector('[data-result]'), err=root.querySelector('[data-error]'), guide=root.querySelector('[data-result-guide]');
+  var NUMBER_MEANINGS={
+    1:"{% trans 'In numerology, 1 is associated with initiative, independence and the impulse to begin.' %}",
+    2:"{% trans 'In numerology, 2 is associated with cooperation, sensitivity, patience and balance.' %}",
+    3:"{% trans 'In numerology, 3 is associated with expression, creativity, communication and joy.' %}",
+    4:"{% trans 'In numerology, 4 is associated with structure, discipline, reliability and building foundations.' %}",
+    5:"{% trans 'In numerology, 5 is associated with freedom, movement, change and curiosity.' %}",
+    6:"{% trans 'In numerology, 6 is associated with care, responsibility, relationships and harmony.' %}",
+    7:"{% trans 'In numerology, 7 is associated with reflection, analysis, intuition and the search for deeper meaning.' %}",
+    8:"{% trans 'In numerology, 8 is associated with leadership, results, resources, responsibility and material mastery.' %}",
+    9:"{% trans 'In numerology, 9 is associated with compassion, completion, perspective and service beyond the self.' %}",
+    11:"{% trans 'Master number 11 is associated with inspiration, heightened sensitivity, intuition and vision.' %}",
+    22:"{% trans 'Master number 22 is associated with turning a large vision into practical structure and lasting results.' %}",
+    33:"{% trans 'Master number 33 is associated with teaching, care, service and responsibility toward others.' %}"
+  };
+  function profile(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){return{}}} function save(k,v){var p=profile();p[k]=v;try{localStorage.setItem(KEY,JSON.stringify(p))}catch(e){}}
+  root.querySelectorAll('[data-profile-key]').forEach(function(input){var k=input.dataset.profileKey,v=profile()[k];if(v&&!input.value)input.value=v;input.addEventListener('input',function(){save(k,input.value.trim())});input.addEventListener('change',function(){save(k,input.value.trim())})});
+  if(form.elements.targetYear&&!form.elements.targetYear.value)form.elements.targetYear.value=String(new Date().getFullYear());
+  if(form.elements.targetMonth&&!form.elements.targetMonth.value){var n=new Date();form.elements.targetMonth.value=n.getFullYear()+'-'+String(n.getMonth()+1).padStart(2,'0')}
+  function norm(v){return String(v||'').toUpperCase().normalize('NFC')} function words(v){return norm(v).trim().split(/\s+/).map(function(w){return w.replace(/[-'’]/g,'')}).filter(Boolean)}
+  function rootDigit(n){n=Math.abs(Number(n)||0);while(n>9)n=String(n).split('').reduce(function(a,c){return a+Number(c)},0);return n} function reduceMaster(n){n=Math.abs(Number(n)||0);while(n>9&&!MASTER[n])n=String(n).split('').reduce(function(a,c){return a+Number(c)},0);return n}
+  function notation(raw){var kept=reduceMaster(raw),compound=MASTER[kept]?kept:raw,r=rootDigit(kept);return{raw:raw,kept:kept,root:r,label:compound>9?String(compound)+'/'+String(r):String(r),compound:compound}}
+  function vowelAt(word,i){var ch=word[i];if(VOWELS[ch])return true;if(ch!=='Y')return false;var prev=word[i-1]||'',next=word[i+1]||'';return !((i===0&&VOWELS[next])||VOWELS[prev]||VOWELS[next])}
+  function nameCalc(value,mode){var parts=[];words(value).forEach(function(word){var sum=0;Array.from(word).forEach(function(ch,i){if(!(ch in VALUES))return;var vowel=vowelAt(word,i);if(mode==='vowels'&&!vowel)return;if(mode==='consonants'&&vowel)return;sum+=VALUES[ch]});if(sum)parts.push({word:word,sum:sum,reduced:reduceMaster(sum)})});var raw=parts.reduce(function(a,p){return a+p.reduced},0),n=notation(raw);n.parts=parts;return n}
+  function dateParts(iso){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(iso||'');if(!m)return null;var y=Number(m[1]),mo=Number(m[2]),d=Number(m[3]),dt=new Date(Date.UTC(y,mo-1,d));if(dt.getUTCFullYear()!==y||dt.getUTCMonth()!==mo-1||dt.getUTCDate()!==d)return null;return{year:y,month:mo,day:d}}
+  function destiny(iso){var p=dateParts(iso);if(!p)return null;var rd=reduceMaster(p.day),rm=reduceMaster(p.month),ys=String(p.year).split('').reduce(function(a,c){return a+Number(c)},0),ry=reduceMaster(ys),n=notation(rd+rm+ry);n.day=p.day;n.month=p.month;n.year=p.year;return n}
+  function esc(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})} function error(t){err.textContent=t;err.classList.add('is-visible')} function clear(){err.textContent='';err.classList.remove('is-visible')}
+  function numLink(n,label){n=Number(n);return VALID[n]?'<a class="ac-numlink" href="/numbers/'+n+'/">'+esc(label==null?n:label)+'</a>':esc(label==null?n:label)}
+  function rows(parts){return parts.map(function(p){return '<div class="ac-part"><span>'+esc(p.word)+': '+p.sum+'</span><b>'+numLink(p.reduced,p.reduced)+'</b></div>'}).join('')}
+  function showGuide(numbers,custom){
+    if(!guide)return;
+    if(custom){guide.innerHTML=custom;guide.classList.add('is-visible');return}
+    var clean=(numbers||[]).map(Number).filter(function(n){return VALID[n]});
+    if(!clean.length){guide.innerHTML='';guide.classList.remove('is-visible');return}
+    var n=clean[0],meaning=NUMBER_MEANINGS[n]||'';
+    guide.innerHTML='<h3>{% trans "What does this result mean?" %}</h3><p><strong>{% trans "Number" %} '+n+':</strong> '+meaning+' <a href="/numbers/'+n+'/">{% trans "Read the full interpretation" %} →</a></p>';
+    guide.classList.add('is-visible');
+  }
+  function updateRelated(numbers){var seen={},clean=[];(numbers||[]).forEach(function(n){n=Number(n);if(VALID[n]&&!seen[n]){seen[n]=1;clean.push(n)}});var box=root.querySelector('[data-related]');if(!clean.length){box.hidden=true;return}box.hidden=false;root.querySelector('[data-number-links]').innerHTML=clean.map(function(n){return '<a href="/numbers/'+n+'/">{% trans "Read about number" %} '+n+' →</a>'}).join('');var target=root.querySelector('[data-related-items]');target.innerHTML='';var hrefs={};clean.forEach(function(n){var t=root.querySelector('template[data-related-template="'+n+'"]');if(!t)return;Array.from(t.content.children).forEach(function(el){var href=el.getAttribute('href');if(hrefs[href])return;hrefs[href]=1;target.appendChild(el.cloneNode(true))})})}
+  function render(value,formula,details,numbers,list,customGuide){out.innerHTML='<div class="ac-result__value'+(list?' ac-result__value--list':'')+'">'+value+'</div><div class="ac-result__formula">'+formula+(details?'<div class="ac-parts">'+details+'</div>':'')+'</div>';updateRelated(numbers);showGuide(numbers,customGuide)}
+  function initialsCalc(value){var ws=words(value),sum=0,parts=[];ws.forEach(function(w){var ch=Array.from(w).find(function(c){return c in VALUES});if(ch){sum+=VALUES[ch];parts.push({word:ch,sum:VALUES[ch],reduced:VALUES[ch]})}});var n=notation(sum);n.parts=parts;return n}
+  function addressCalc(value){var s=norm(value).trim(),digits=s.match(/\d+/);if(digits){var raw=digits[0].split('').reduce(function(a,c){return a+Number(c)},0),tail=s.slice((digits.index||0)+digits[0].length),letter=Array.from(tail).find(function(c){return c in VALUES});if(letter)raw+=VALUES[letter];var n=notation(raw);n.explain=digits[0]+(letter?' + '+letter+'('+VALUES[letter]+')':'');return n}var raw=0;Array.from(s).forEach(function(c){if(c in VALUES)raw+=VALUES[c]});var n2=notation(raw);n2.explain='{% trans "letters in address" %}';return n2}
+  function debtOf(calc){var c=Number(calc.compound);return [13,14,16,19].indexOf(c)>=0?{compound:c,root:calc.root,label:String(c)+'/'+String(calc.root)}:null}
+  function karmicLessons(name,date){var present={};words(name).forEach(function(w){Array.from(w).forEach(function(c){if(c in VALUES)present[VALUES[c]]=1})});var missing=[];for(var i=1;i<=9;i++)if(!present[i])missing.push(i);var dn=destiny(date),core=[nameCalc(name,'all').root,nameCalc(name,'vowels').root,nameCalc(name,'consonants').root,dn?dn.root:0,dn?rootDigit(dn.day):0];return missing.filter(function(n){return core.indexOf(n)<0})}
+  function personalYear(date,year){var p=dateParts(date);year=Number(year);if(!p||!year)return null;var y=rootDigit(String(year).split('').reduce(function(a,c){return a+Number(c)},0));return rootDigit(rootDigit(p.day)+rootDigit(p.month)+y)}
+  function transitName(birth,kind){var ws=words(birth);if(!ws.length)return'';if(kind==='physical')return ws[0];if(kind==='spiritual')return ws.length>1?ws[ws.length-1]:ws[0];if(ws.length===1)return'';if(ws.length===2)return ws[1];return ws.slice(1,-1).join('')}
+  function transit(value,age){var letters=Array.from(norm(value)).filter(function(c){return c in VALUES});age=Number(age);if(!letters.length||!Number.isInteger(age)||age<0)return null;var total=letters.reduce(function(a,c){return a+VALUES[c]},0),pos=age%total,cum=0;for(var i=0;i<letters.length;i++){var start=cum,end=cum+VALUES[letters[i]]-1;if(pos>=start&&pos<=end){var cycleStart=age-pos;return{letter:letters[i],value:VALUES[letters[i]],start:cycleStart+start,end:cycleStart+end,total:total}}cum+=VALUES[letters[i]]}return null}
+  function yearValue(year){return reduceMaster(String(year).split('').reduce(function(a,c){return a+Number(c)},0))}
+  function pinnacleCycles(date){var p=dateParts(date);if(!p)return null;var d=reduceMaster(p.day),m=reduceMaster(p.month),y=yearValue(p.year),a=notation(d+m),b=notation(y+d),c=notation(a.kept+b.kept),e=notation(y+m);return{day:d,month:m,year:y,values:[a,b,c,e]}}
+  function lifeCycles(date){var p=dateParts(date);if(!p)return null;var life=destiny(date),firstEnd=36-life.root;return{values:[reduceMaster(p.month),reduceMaster(p.day),yearValue(p.year)],ranges:['0–'+firstEnd,(firstEnd+1)+'–'+(firstEnd+27),(firstEnd+28)+'+'],life:life}}
+  function maturityCalc(name,date){var nc=nameCalc(name,'all'),dc=destiny(date);if(!nc.raw||!dc)return null;var n=notation(nc.kept+dc.kept);n.name=nc;n.destiny=dc;return n}
+  function challengeCalc(date){var p=dateParts(date);if(!p)return null;var d=rootDigit(p.day),m=rootDigit(p.month),y=rootDigit(String(p.year).split('').reduce(function(a,c){return a+Number(c)},0)),c1=Math.abs(m-d),c2=Math.abs(y-d),c3=Math.abs(c1-c2),c4=Math.abs(y-m);return{day:d,month:m,year:y,values:[c1,c2,c3,c4]}}
+  function phoneCalc(value){var ds=String(value||'').match(/\d/g)||[];if(!ds.length)return null;var raw=ds.reduce(function(a,c){return a+Number(c)},0);return{digits:ds.join(''),raw:raw,root:rootDigit(raw)}}
+  function essenceCalc(birth,age){var ws=words(birth);age=Number(age);if(!ws.length||!Number.isInteger(age)||age<0)return null;var sources=[{kind:'{% trans "Physical" %}',name:ws[0]}];if(ws.length>2)sources.push({kind:'{% trans "Mental" %}',name:ws.slice(1,-1).join('')});if(ws.length>1)sources.push({kind:'{% trans "Spiritual" %}',name:ws[ws.length-1]});var active=[];sources.forEach(function(x){var t=transit(x.name,age);if(t){t.kind=x.kind;t.source=x.name;active.push(t)}});if(!active.length)return null;var raw=active.reduce(function(a,t){return a+t.value},0),n=notation(raw);n.active=active;return n}
+
+  var COMPAT_PERSONAL=[
+    ['B','A','B','D','C','B','C','A/D','D'],
+    ['A','A','B','B','D','B','B','B','A'],
+    ['B','B','D','C','C','B','B','C','A'],
+    ['D','B','C','B','C','B','A','B','B'],
+    ['C','D','C','C','A/D','B','D','A','B'],
+    ['B','B','B','B','B','A','D','A','A'],
+    ['C','B','B','A','D','D','A','B','A'],
+    ['A/D','A','C','B','A','A','B','A/D','B'],
+    ['D','A','A','B','B','A','A','B','A']
+  ];
+  var COMPAT_WORK=[
+    ['B','A','C','B','B','B','C','A','C'],
+    ['A','C','C','B','D','D','D','B','A'],
+    ['C','C','D','C','B','B','B','A','D'],
+    ['B','B','C','A','C','B','A','A','C'],
+    ['B','D','B','C','D','C','D','A','B'],
+    ['B','D','B','B','C','D','D','B','A'],
+    ['C','D','B','A','D','D','D','A','C'],
+    ['A','B','A','A','A','B','A','A/D','C'],
+    ['C','A','D','C','B','A','C','C','B']
+  ];
+  var COMPAT_LABEL={
+    'A':['{% trans "Excellent" %}','{% trans "A very harmonious pairing in Åse’s chart." %}'],
+    'B':['{% trans "Good" %}','{% trans "A supportive pairing with generally good flow." %}'],
+    'C':['{% trans "Mixed / learning" %}','{% trans "A combination that benefits from conscious communication and understanding." %}'],
+    'D':['{% trans "Demanding" %}','{% trans "A more challenging combination in the chart; differences may need active work." %}'],
+    'A/D':['{% trans "Strong polarity" %}','{% trans "This pairing can feel unusually supportive or unusually demanding, depending on how the two energies are handled." %}']
+  };
+  function compatGrade(a,b,context){a=rootDigit(a);b=rootDigit(b);if(a<1||a>9||b<1||b>9)return null;var table=context==='work'?COMPAT_WORK:COMPAT_PERSONAL;return table[a-1][b-1]}
+  function currentAge(date){var p=dateParts(date);if(!p)return null;var now=new Date(),a=now.getFullYear()-p.year;if((now.getMonth()+1<p.month)||((now.getMonth()+1===p.month)&&now.getDate()<p.day))a--;return a>=0?a:null}
+
+  form.addEventListener('submit',function(e){e.preventDefault();clear();var slug=root.dataset.calculator,birth=(form.elements.birthName?form.elements.birthName.value:'').trim(),current=(form.elements.currentName?form.elements.currentName.value:'').trim(),date=(form.elements.birthDate?form.elements.birthDate.value:'').trim(),r;
+    if(slug==='current-name-number'||slug==='current-vowel-number'){if(!current)return error("{% trans 'Enter your current full name.' %}");r=nameCalc(current,slug==='current-vowel-number'?'vowels':'all');if(!r.raw)return error("{% trans 'Enter a name using letters from Åse’s letter table.' %}");render(numLink(r.root,r.label),'<strong>'+esc(slug==='current-vowel-number'?"{% trans 'Current Vowel Number' %}":"{% trans 'Current Name Number' %}")+':</strong> '+numLink(r.root,r.label),rows(r.parts),[r.kept,r.root]);return}
+    if(slug==='birthday-number'){r=destiny(date);if(!r)return error("{% trans 'Choose a valid date of birth.' %}");render(String(r.day),'<strong>{% trans "Birthday Number" %}:</strong> '+numLink(rootDigit(r.day),r.day)+'<br>{% trans "No reduction is used for the Birthday Number itself." %}','',[rootDigit(r.day)]);return}
+    if(slug==='cornerstone-number'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");var chars=Array.from(norm(birth)).filter(function(ch){return ch in VALUES});if(!chars.length)return error("{% trans 'Enter a name using letters from Åse’s letter table.' %}");var letter=chars[0];render(esc(letter),'<strong>{% trans "Cornerstone" %}:</strong> '+esc(letter)+'<br>{% trans "Letter-table value" %}: '+numLink(VALUES[letter],VALUES[letter]),'',[VALUES[letter]]);return}
+    if(slug==='life-path-name-bridge'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");var name=nameCalc(birth,'all'),life=destiny(date);if(!life)return error("{% trans 'Choose a valid date of birth.' %}");var bridge=Math.abs(name.root-life.root);render(numLink(bridge,bridge),'<strong>{% trans "Bridge Number" %}:</strong> |'+name.root+' − '+life.root+'| = '+numLink(bridge,bridge),'<div class="ac-part"><span>{% trans "Name Number" %}</span><b>'+numLink(name.root,name.label)+'</b></div><div class="ac-part"><span>{% trans "Destiny / Life Path" %}</span><b>'+numLink(life.root,life.label)+'</b></div>',[bridge,name.root,life.root]);return}
+    if(slug==='vowel-consonant-bridge'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");var v=nameCalc(birth,'vowels'),c=nameCalc(birth,'consonants'),b=Math.abs(v.root-c.root);render(numLink(b,b),'<strong>{% trans "Vowel / Consonant Bridge" %}:</strong> |'+v.root+' − '+c.root+'| = '+numLink(b,b),'<div class="ac-part"><span>{% trans "Vowel Number" %}</span><b>'+numLink(v.root,v.label)+'</b></div><div class="ac-part"><span>{% trans "Consonant Number" %}</span><b>'+numLink(c.root,c.label)+'</b></div>',[b,v.root,c.root]);return}
+    if(slug==='balance-number'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");r=initialsCalc(birth);render(numLink(r.root,r.label),'<strong>{% trans "Balance Number" %}:</strong> '+numLink(r.root,r.label),rows(r.parts),[r.kept,r.root]);return}
+    if(slug==='address-number'){var address=(form.elements.address?form.elements.address.value:'').trim();if(!address)return error("{% trans 'Enter your street address.' %}");r=addressCalc(address);if(!r.raw)return error("{% trans 'Enter an address containing a number or supported letters.' %}");render(numLink(r.root,r.label),'<strong>{% trans "Address Number" %}:</strong> '+numLink(r.root,r.label),'<div class="ac-part"><span>'+esc(r.explain)+'</span><b>'+esc(r.raw)+'</b></div>',[r.kept,r.root]);return}
+    if(slug==='karmic-debt-number'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");var life2=destiny(date);if(!life2)return error("{% trans 'Choose a valid date of birth.' %}");var checks=[['{% trans "Name Number" %}',nameCalc(birth,'all'),false],['{% trans "Vowel Number" %}',nameCalc(birth,'vowels'),false],['{% trans "Consonant Number" %}',nameCalc(birth,'consonants'),false],['{% trans "Destiny Number" %}',life2,false],['{% trans "Birthday Number" %}',notation(life2.day),false]];if(current){checks.push(['{% trans "Current Name Number" %}',nameCalc(current,'all'),true],['{% trans "Current Vowel Number" %}',nameCalc(current,'vowels'),true])}var debts=[];checks.forEach(function(x){var d=debtOf(x[1]);if(d){d.kind=x[0];d.changed=x[2];debts.push(d)}});if(!debts.length){render('{% trans "None" %}','{% trans "No karmic debt number 13/4, 14/5, 16/7 or 19/1 appears among the checked core numbers." %}','',checks.map(function(x){return x[1].root}));return}var labels=debts.map(function(x){return x.label}).join(' · '),detail=debts.map(function(x){return '<div class="ac-part"><span>'+esc(x.kind)+(x.changed?' · {% trans "current name" %}':'')+'</span><b>'+numLink(x.root,x.label)+'</b></div>'}).join('');render(esc(labels),'{% trans "Karmic debt found in the checked core numbers." %}',detail,debts.map(function(x){return x.root}),true);return}
+    if(slug==='karmic-lesson'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");if(!destiny(date))return error("{% trans 'Choose a valid date of birth.' %}");var lessons=karmicLessons(birth,date);if(!lessons.length){render('{% trans "None" %}','{% trans "All values missing from the birth name are represented among the checked core numbers." %}','','');return}var lessonHtml=lessons.map(function(n){return numLink(n,n)}).join(' · ');render(lessonHtml,'{% trans "Karmic lessons are the 1–9 values missing from the birth name that are also absent from the core numbers." %}','',lessons,true);return}
+    if(slug==='health-profile-number'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");var hpLife=destiny(date);if(!hpLife)return error("{% trans 'Choose a valid date of birth.' %}");var hn=nameCalc(birth,'all').root,hd=hpLife.root;render(numLink(hn,hn)+' · '+numLink(hd,hd),'{% trans "Åse’s health-profile section uses two single-digit numerology values; this is not a medical assessment." %}','<div class="ac-part"><span>{% trans "From Name Number" %}</span><b>'+numLink(hn,hn)+'</b></div><div class="ac-part"><span>{% trans "From Destiny Number" %}</span><b>'+numLink(hd,hd)+'</b></div>',[hn,hd],true);return}
+    if(slug==='personal-year-number'){var py=personalYear(date,form.elements.targetYear.value);if(py==null)return error("{% trans 'Choose a valid date of birth and year.' %}");render(numLink(py,py),'<strong>{% trans "Personal Year" %}:</strong> '+numLink(py,py)+' · '+esc(form.elements.targetYear.value),'',[py]);return}
+    if(slug==='personal-month-number'){var tm=/^(\d{4})-(\d{2})$/.exec(form.elements.targetMonth.value||'');if(!tm)return error("{% trans 'Choose a valid month.' %}");var py2=personalYear(date,Number(tm[1]));if(py2==null)return error("{% trans 'Choose a valid date of birth.' %}");var monthRoot=rootDigit(Number(tm[2])),pm=rootDigit(py2+monthRoot);render(numLink(pm,pm),'<strong>{% trans "Personal Month" %}:</strong> '+py2+' + '+monthRoot+' = '+numLink(pm,pm)+' · '+esc(form.elements.targetMonth.value),'<div class="ac-part"><span>{% trans "Personal Year" %}</span><b>'+numLink(py2,py2)+'</b></div>',[pm,py2]);return}
+    if(slug==='essence-number'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");var ea=form.elements.targetAge.value;if(ea===''){var ead=profile().birthDate,eaa=currentAge(ead);if(eaa!=null){form.elements.targetAge.value=String(eaa);ea=String(eaa)}}var er=essenceCalc(birth,Number(ea));if(!er)return error("{% trans 'Choose a valid age and full birth name.' %}");var ep=er.active.map(function(t){return '<div class="ac-part"><span>'+esc(t.kind)+' · '+esc(t.letter)+' ('+esc(t.source)+')</span><b>'+t.value+'</b></div>'}).join('');render(numLink(er.root,er.label),'<strong>{% trans "Essence Number" %}:</strong> '+er.active.map(function(t){return t.value}).join(' + ')+' = '+numLink(er.root,er.label),ep,[er.kept,er.root],true);return}
+    if(slug==='pinnacle-cycles'){var pc=pinnacleCycles(date);if(!pc)return error("{% trans 'Choose a valid date of birth.' %}");var pv=pc.values,ph=pv.map(function(x){return numLink(x.kept,x.label)}).join(' · '),pd=pv.map(function(x,i){return '<div class="ac-part"><span>{% trans "Stage" %} '+(i+1)+'</span><b>'+numLink(x.kept,x.label)+'</b></div>'}).join('');render(ph,'<strong>{% trans "Four development stages" %}:</strong> '+ph,pd,pv.map(function(x){return x.kept}),true);return}
+    if(slug==='life-cycles'){var lc=lifeCycles(date);if(!lc)return error("{% trans 'Choose a valid date of birth.' %}");var lh=lc.values.map(function(n){return numLink(n,n)}).join(' · '),ld=lc.values.map(function(n,i){return '<div class="ac-part"><span>{% trans "Life period" %} '+(i+1)+' · {% trans "ages" %} '+lc.ranges[i]+'</span><b>'+numLink(n,n)+'</b></div>'}).join('');render(lh,'<strong>{% trans "Three Life Cycles" %}:</strong> '+lh,ld,lc.values,true);return}
+    if(slug==='maturity-number'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");var mc=maturityCalc(birth,date);if(!mc)return error("{% trans 'Choose a valid date of birth.' %}");render(numLink(mc.kept,mc.label),'<strong>{% trans "Maturity / Realization Number" %}:</strong> '+numLink(mc.name.kept,mc.name.label)+' + '+numLink(mc.destiny.kept,mc.destiny.label)+' = '+numLink(mc.kept,mc.label),'<div class="ac-part"><span>{% trans "Name Number" %}</span><b>'+numLink(mc.name.kept,mc.name.label)+'</b></div><div class="ac-part"><span>{% trans "Destiny Number" %}</span><b>'+numLink(mc.destiny.kept,mc.destiny.label)+'</b></div>',[mc.kept,mc.root,mc.name.kept,mc.destiny.kept],true);return}
+    if(slug==='challenge-numbers'){var cc=challengeCalc(date);if(!cc)return error("{% trans 'Choose a valid date of birth.' %}");var ch=cc.values.map(function(n){return numLink(n,n)}).join(' · '),cd=cc.values.map(function(n,i){return '<div class="ac-part"><span>{% trans "Challenge" %} '+(i+1)+'</span><b>'+numLink(n,n)+'</b></div>'}).join('');render(ch,'<strong>{% trans "Four Challenge Numbers" %}:</strong> '+ch,cd,cc.values,true);return}
+    if(slug==='lucky-number'){var lk=destiny(date);if(!lk)return error("{% trans 'Choose a valid date of birth.' %}");render(numLink(lk.kept,lk.label),'<strong>{% trans "Lucky Number / Destiny Number" %}:</strong> '+numLink(lk.kept,lk.label),'<div class="ac-part"><span>{% trans "Birth-date sum" %}</span><b>'+esc(lk.label)+'</b></div>',[lk.kept,lk.root]);return}
+    if(slug==='telephone-number'){var pn=phoneCalc(form.elements.phoneNumber.value);if(!pn)return error("{% trans 'Enter a telephone number containing digits.' %}");var extras=[],nums=[pn.root],resonance=[];if(birth){var pnn=nameCalc(birth,'all');if(pnn.raw){extras.push('<div class="ac-part"><span>{% trans "Your Name Number" %}</span><b>'+numLink(pnn.root,pnn.label)+'</b></div>');nums.push(pnn.kept);if(pnn.root===pn.root)resonance.push('{% trans "Name Number" %}')}}if(date){var pnd=destiny(date);if(pnd){extras.push('<div class="ac-part"><span>{% trans "Your Destiny Number" %}</span><b>'+numLink(pnd.root,pnd.label)+'</b></div>');nums.push(pnd.kept);if(pnd.root===pn.root)resonance.push('{% trans "Destiny Number" %}')}}var phoneGuide='<h3>{% trans "Telephone value" %} '+pn.root+'</h3><p>'+NUMBER_MEANINGS[pn.root]+' '+(resonance.length?'<strong>{% trans "Direct resonance with" %}: '+esc(resonance.join(', '))+'.</strong>':'{% trans "No direct one-to-one match with the optional core numbers entered." %}')+'</p>';render(numLink(pn.root,pn.root),'<strong>{% trans "Telephone Number" %}:</strong> '+esc(pn.digits)+' → '+pn.raw+' → '+numLink(pn.root,pn.root),extras.join(''),nums,true,phoneGuide);return}
+    if(slug==='partner-profile'){var an=(form.elements.partnerAName.value||'').trim(),ad=form.elements.partnerADate.value,bn=(form.elements.partnerBName.value||'').trim(),bd=form.elements.partnerBDate.value,ctx=form.elements.compatContext.value;if(!an||!bn)return error("{% trans 'Enter both full birth names.' %}");var aName=nameCalc(an,'all'),bName=nameCalc(bn,'all'),aLife=destiny(ad),bLife=destiny(bd);if(!aName.raw||!bName.raw||!aLife||!bLife)return error("{% trans 'Enter two valid names and birth dates.' %}");var gName=compatGrade(aName.root,bName.root,ctx),gLife=compatGrade(aLife.root,bLife.root,ctx),l1=COMPAT_LABEL[gName],l2=COMPAT_LABEL[gLife];var cv='<div class="ac-part"><span>{% trans "Name Numbers" %}: '+aName.label+' ↔ '+bName.label+'</span><b>'+esc(gName)+' · '+esc(l1[0])+'</b></div><div class="ac-part"><span>{% trans "Destiny Numbers" %}: '+aLife.label+' ↔ '+bLife.label+'</span><b>'+esc(gLife)+' · '+esc(l2[0])+'</b></div>';var cg='<h3>{% trans "Compatibility profile" %}</h3><p><strong>{% trans "Name layer" %} '+esc(gName)+':</strong> '+esc(l1[1])+' <strong>{% trans "Destiny layer" %} '+esc(gLife)+':</strong> '+esc(l2[1])+' {% trans "Master numbers are compared through their root values in Åse’s 1–9 compatibility tables." %}</p>';render(esc(gName)+' · '+esc(gLife),'<strong>'+(ctx==='work'?'{% trans "Work relationship" %}':'{% trans "Personal relationship" %}')+'</strong>',cv,[aName.root,bName.root,aLife.root,bLife.root],true,cg);return}
+    if(slug==='physical-transit-number'||slug==='mental-transit-number'||slug==='spiritual-transit-number'){if(!birth)return error("{% trans 'Enter your full birth name.' %}");var ageRaw=form.elements.targetAge.value;if(ageRaw===''){var savedDate=profile().birthDate,autoAge=currentAge(savedDate);if(autoAge!=null){form.elements.targetAge.value=String(autoAge);ageRaw=String(autoAge)}}var age=Number(ageRaw);if(!Number.isInteger(age)||age<0)return error("{% trans 'Choose a valid age.' %}");var kind=slug==='physical-transit-number'?'physical':(slug==='mental-transit-number'?'mental':'spiritual'),source=transitName(birth,kind);if(!source)return error("{% trans 'This transit needs enough name parts in the birth name.' %}");var tr=transit(source,age);if(!tr)return error("{% trans 'Could not calculate the transit.' %}");var tname=kind==='physical'?'{% trans "Physical Transit" %}':(kind==='mental'?'{% trans "Mental Transit" %}':'{% trans "Spiritual Transit" %}');var tg='<h3>{% trans "How to read" %} '+esc(tr.letter)+' · '+tr.value+'</h3><p><strong>'+esc(tr.letter)+'</strong> {% trans "is the active letter at the selected age." %} {% trans "In Åse’s letter table it has the value" %} <strong>'+tr.value+'</strong>, {% trans "so this letter remains active for" %} <strong>'+tr.value+' {% trans "years" %}</strong> {% trans "in this pass through the name." %} {% trans "For you, this activation covers ages" %} <strong>'+tr.start+'–'+tr.end+'</strong>. '+NUMBER_MEANINGS[tr.value]+' <a href="/numbers/'+tr.value+'/">{% trans "Read more about the number" %} '+tr.value+' →</a></p>';render(esc(tr.letter)+' · '+numLink(tr.value,tr.value),'<strong>'+tname+':</strong> '+esc(tr.letter)+' = '+numLink(tr.value,tr.value),'<div class="ac-part"><span>{% trans "Name used" %}</span><b>'+esc(source)+'</b></div><div class="ac-part"><span>{% trans "Active ages in this cycle" %}</span><b>'+tr.start+'–'+tr.end+'</b></div><div class="ac-part"><span>{% trans "Full name-part cycle" %}</span><b>'+tr.total+' {% trans "years" %}</b></div>',[tr.value],true,tg);return}
+  });
+
+  root.querySelector('[data-forget]').addEventListener('click',function(){try{localStorage.removeItem(KEY)}catch(e){}root.querySelectorAll('[data-profile-key]').forEach(function(i){i.value=''});out.innerHTML='<p class="ac-result__empty">{% trans "Saved information has been cleared from this browser." %}</p>';root.querySelector('[data-related]').hidden=true;if(guide){guide.innerHTML='';guide.classList.remove('is-visible')}clear()});
+})();
+</script>
+{% endblock %}
