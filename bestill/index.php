@@ -192,7 +192,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             $orderId = save_order([
-                'package'         => $pkgData['name'],
+                'package'         => $pkg,
                 'price_ore'       => $priceOre,
                 'birth_name'      => $order['birth_name'],
                 'current_name'    => $order['current_name'],
@@ -220,6 +220,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
 
         } catch (RuntimeException $e) {
+            if (isset($orderId) && is_string($orderId) && $orderId !== '') {
+                delete_pending_order($orderId);
+            }
             error_log('Vipps initiate error: ' . $e->getMessage());
             $errors[] = $t('Betalingstjenesten er midlertidig utilgjengelig. Prøv igjen om litt, eller kontakt oss.', 'The payment service is temporarily unavailable. Please try again shortly, or contact us.', 'سرویس پرداخت موقتاً در دسترس نیست. کمی بعد دوباره تلاش کنید یا با ما تماس بگیرید.');
             $step = 3;
