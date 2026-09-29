@@ -98,6 +98,7 @@ def number_detail(request: HttpRequest, number: int) -> HttpResponse:
         "prev_number": prev_number,
         "next_number": next_number,
         "story": get_story_titles(number, language),
+        "hero_image": f"journey/images/number-{number}-{({1:'strengths',2:'strengths',3:'strengths',4:'practical',5:'strengths',6:'practical',7:'guidance',8:'challenges',9:'strengths',11:'strengths',22:'strengths',33:'guidance'}.get(number, 'strengths'))}-photo.webp",
         "page_title": profile["title"],
         "related_articles": get_related_articles(number, limit=6),
         "related_articles_mid": get_related_articles(number, limit=3),

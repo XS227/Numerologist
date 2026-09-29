@@ -113,8 +113,57 @@ FA = {
     33: {"strengths":"عدد استاد ۳۳ چه چیزی را آموزش می‌دهد و بالا می‌برد.","challenges":"وقتی مراقبت نباید به فراموش کردن خود تبدیل شود.","guidance":"با الگو بودن آموزش بده، نه با حمل کردن همه.","practical":"جایی که ۳۳ مراقبت را به راهنمایی تبدیل می‌کند."},
 }
 
+
+
+HERO = {
+    "no": {
+        1: "Motet til å gå først.",
+        2: "Styrken i å skape sammen.",
+        3: "Gleden i å uttrykke det som vil frem.",
+        4: "Kunsten å bygge noe som varer.",
+        5: "Friheten til å bevege og forandre.",
+        6: "Omsorg som skaper trygghet og skjønnhet.",
+        7: "Dybden som finner det andre overser.",
+        8: "Kraft, balanse og varige resultater.",
+        9: "Visdommen i å fullføre og gi videre.",
+        11: "Intuisjon som tenner lys i andre.",
+        22: "Visjonen som kan bli virkelig.",
+        33: "Omsorg som blir til læring og løft.",
+    },
+    "en": {
+        1: "The courage to go first.",
+        2: "The strength of creating together.",
+        3: "The joy of expressing what wants to emerge.",
+        4: "The art of building something that lasts.",
+        5: "The freedom to move and transform.",
+        6: "Care that creates beauty and belonging.",
+        7: "Depth that notices what others miss.",
+        8: "Power, balance, and lasting results.",
+        9: "The wisdom to complete and pass forward.",
+        11: "Intuition that lights something in others.",
+        22: "The vision that can become real.",
+        33: "Care transformed into teaching and uplift.",
+    },
+    "fa": {
+        1: "شجاعتِ اولین قدم را برداشتن.",
+        2: "قدرتِ ساختن در کنار یکدیگر.",
+        3: "شادیِ بیان آنچه می‌خواهد آشکار شود.",
+        4: "هنرِ ساختن چیزی ماندگار.",
+        5: "آزادیِ حرکت و دگرگونی.",
+        6: "مراقبتی که زیبایی و تعلق می‌سازد.",
+        7: "عمقی که آنچه دیگران نمی‌بینند کشف می‌کند.",
+        8: "قدرت، تعادل و نتیجه‌های ماندگار.",
+        9: "خردِ کامل کردن و واگذار کردن.",
+        11: "شهودی که در دیگران نور روشن می‌کند.",
+        22: "چشم‌اندازی که می‌تواند واقعی شود.",
+        33: "مراقبتی که به آموزش و تعالی تبدیل می‌شود.",
+    },
+}
+
 TITLES = {"no": NB, "en": EN, "fa": FA}
 
 def get_story_titles(number: int, language: str | None) -> dict:
     lang = site_language(language)
-    return TITLES.get(lang, EN).get(number, EN[number])
+    story = dict(TITLES.get(lang, EN).get(number, EN[number]))
+    story["hero"] = HERO.get(lang, HERO["en"]).get(number, HERO["en"][number])
+    return story

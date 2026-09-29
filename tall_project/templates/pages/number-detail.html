@@ -6,7 +6,7 @@
 
 {% block main %}
 <link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=3">
-<link rel="stylesheet" href="{% static 'journey/number-detail.css' %}?v=5">
+<link rel="stylesheet" href="{% static 'journey/number-detail.css' %}?v=6">
 <style>
   /* Only the first chapter shows the number's illustration; the others get
      drawn panels (rings + the numeral in gold) so the same picture isn't
@@ -92,16 +92,52 @@
     </div>
   </div>
 
-<section class="j-hero" style="min-height:min(640px,90vh)" id="n-hero" aria-labelledby="n-title" data-chapter>
-  <div class="n-hero-numeral" aria-hidden="true">
-    <span class="n-hero-numeral__num j-parallax" data-speed="0.12">{{ number }}</span>
+<section class="n-editorial-hero" id="n-hero" aria-labelledby="n-title" data-chapter>
+  <div class="n-editorial-hero__media" aria-hidden="true">
+    <img src="{% static hero_image %}" alt="">
+    <span class="n-editorial-hero__veil"></span>
+    <span class="n-editorial-hero__symbol">{{ number }}</span>
+    <span class="n-editorial-hero__ring n-editorial-hero__ring--a"></span>
+    <span class="n-editorial-hero__ring n-editorial-hero__ring--b"></span>
   </div>
-  <div class="j-hero-content">
-    <p class="j-eyebrow">{% trans "NUMEROLOGY" %}{% if number == 11 or number == 22 or number == 33 %} · {% trans "MASTER NUMBER" %}{% endif %}</p>
-    <h1 id="n-title">{{ profile.title }}</h1>
-    <p class="j-intro">{{ profile.essence }}</p>
-    <a class="j-button" href="#n-strengths">{% trans "Explore this number" %} <span aria-hidden="true">↓</span></a>
+  <div class="n-editorial-hero__inner">
+    <div class="n-editorial-hero__copy">
+      <p class="j-eyebrow">{% if number == 11 or number == 22 or number == 33 %}{% trans "MASTER NUMBER" %} {{ number }}{% else %}{% trans "NUMBER" %} {{ number }}{% endif %}</p>
+      <h1 id="n-title">{{ story.hero }}</h1>
+      <p class="n-editorial-hero__intro">{{ profile.essence }}</p>
+      <div class="n-editorial-hero__actions">
+        <a class="n-editorial-hero__button" href="#n-strengths">{% trans "Explore this number" %} <span aria-hidden="true">↓</span></a>
+        <a class="n-editorial-hero__link" href="{% url 'static_page' 'compute-destiny-number' %}">{% trans "Calculate your number" %} <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
   </div>
+</section>
+
+<nav class="n-editorial-tabs" aria-label="{% trans 'Number page sections' %}">
+  <a href="#n-strengths">{% trans "Strengths" %}</a>
+  <a href="#n-challenges">{% trans "Growth edges" %}</a>
+  <a href="#n-guidance">{% trans "Åse's guidance" %}</a>
+  <a href="#n-practical">{% trans "Work & relationships" %}</a>
+  {% if related_articles %}<a href="#n-related-more-title">{{ related_copy.eyebrow }}</a>{% endif %}
+</nav>
+
+<section class="n-editorial-overview" aria-label="{% trans 'Explore the story' %}">
+  <a class="n-editorial-tile" href="#n-strengths">
+    <div class="n-editorial-tile__media"><img src="{% static 'journey/images/number-' %}{{ number }}-strengths-photo.webp" alt="" loading="lazy"><span>{{ number }}</span></div>
+    <div class="n-editorial-tile__body"><small>01</small><h2>{% trans "Strengths" %}</h2><p>{{ story.strengths }}</p><b>{% trans "Explore" %} →</b></div>
+  </a>
+  <a class="n-editorial-tile" href="#n-challenges">
+    <div class="n-editorial-tile__media"><img src="{% static 'journey/images/number-' %}{{ number }}-challenges-photo.webp" alt="" loading="lazy"><span>{{ number }}</span></div>
+    <div class="n-editorial-tile__body"><small>02</small><h2>{% trans "Growth edges" %}</h2><p>{{ story.challenges }}</p><b>{% trans "Explore" %} →</b></div>
+  </a>
+  <a class="n-editorial-tile" href="#n-guidance">
+    <div class="n-editorial-tile__media"><img src="{% static 'journey/images/number-' %}{{ number }}-guidance-photo.webp" alt="" loading="lazy"><span>{{ number }}</span></div>
+    <div class="n-editorial-tile__body"><small>03</small><h2>{% trans "Åse's guidance" %}</h2><p>{{ story.guidance }}</p><b>{% trans "Explore" %} →</b></div>
+  </a>
+  <a class="n-editorial-tile" href="#n-practical">
+    <div class="n-editorial-tile__media"><img src="{% static 'journey/images/number-' %}{{ number }}-practical-photo.webp" alt="" loading="lazy"><span>{{ number }}</span></div>
+    <div class="n-editorial-tile__body"><small>04</small><h2>{% trans "Work & relationships" %}</h2><p>{{ story.practical }}</p><b>{% trans "Explore" %} →</b></div>
+  </a>
 </section>
 
 <section class="j-chapter j-dark n-number-chapter" id="n-strengths" aria-labelledby="n-strengths-title" data-chapter data-number-chapter data-number="{{ number }}">
