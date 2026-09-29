@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static i18n %}
+{% get_current_language as CURRENT_LANGUAGE %}
+{% block title %}{% if CURRENT_LANGUAGE == 'fa' %}تحلیل من{% elif CURRENT_LANGUAGE == 'en' %}My analysis{% else %}Min analyse{% endif %} · Numerologist{% endblock %}
+{% block body_attrs %} class="member-page"{% endblock %}
+{% block external_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=5">{% endblock %}
+{% block main %}
+<header class="m-builder-report-hero">
+  <div class="m-shell">
+    <span class="m-kicker">{% if demo %}DEMO · {% endif %}{% if CURRENT_LANGUAGE == 'fa' %}تحلیل ماژولار{% elif CURRENT_LANGUAGE == 'en' %}MODULAR ANALYSIS{% else %}MODULÆR ANALYSE{% endif %}</span>
+    <h1>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل عددشناسی شما{% elif CURRENT_LANGUAGE == 'en' %}Your numerology analysis{% else %}Din numerologiske analyse{% endif %}</h1>
+    <p>{% if CURRENT_LANGUAGE == 'fa' %}این گزارش فقط بخش‌هایی را نشان می‌دهد که در تحلیل شما فعال هستند. می‌توانید بعداً ماژول‌ها یا دوره‌ی آینده بیشتری اضافه کنید.{% elif CURRENT_LANGUAGE == 'en' %}This report shows the layers active in your analysis. More modules or a longer future period can be added later.{% else %}Denne rapporten viser lagene som er aktive i analysen din. Du kan senere legge til flere moduler eller en lengre fremtidsperiode.{% endif %}</p>
+    <div class="m-builder-report-meta">
+      <span>{{ profile.current_name|default:profile.birth_name }}</span>
+      <span>{{ profile.birth_date }}</span>
+      <span>{% if CURRENT_LANGUAGE == 'fa' %}مسیر زندگی{% elif CURRENT_LANGUAGE == 'en' %}Life Path{% else %}Livsvei{% endif %} {{ profile.life.label }}</span>
+      {% if modular.future_months %}<span>{{ modular.future_months }} {% if CURRENT_LANGUAGE == 'fa' %}ماه آینده{% elif CURRENT_LANGUAGE == 'en' %}future months{% else %}måneder fremtid{% endif %}</span>{% endif %}
+    </div>
+  </div>
+</header>
+
+<section class="m-section m-section--stone">
+  <div class="m-shell">
+    <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}هسته تحلیل{% elif CURRENT_LANGUAGE == 'en' %}THE CORE{% else %}KJERNEN{% endif %}</span>
+    <h2>{% if CURRENT_LANGUAGE == 'fa' %}پنج عددی که تحلیل از آن‌ها شروع می‌شود.{% elif CURRENT_LANGUAGE == 'en' %}Five numbers the reading starts from.{% else %}Fem tall analysen starter med.{% endif %}</h2>
+    <div class="m-builder-core">
+      {% for item in modular.core %}
+        <article><strong>{{ item.value }}</strong><span>{{ item.title }}</span></article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if modular.modules %}
+<section class="m-section m-builder-modules">
+  <div class="m-shell">
+    <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}ماژول‌های شما{% elif CURRENT_LANGUAGE == 'en' %}YOUR MODULES{% else %}DINE MODULER{% endif %}</span>
+    <h2>{% if CURRENT_LANGUAGE == 'fa' %}هر محاسبه یک لایه تازه اضافه می‌کند.{% elif CURRENT_LANGUAGE == 'en' %}Each calculation adds another layer.{% else %}Hver beregning legger til et nytt lag.{% endif %}</h2>
+    <div class="m-builder-module-list">
+      {% for item in modular.modules %}
+        <article class="m-builder-module">
+          <div class="m-builder-module__value">{{ item.value }}</div>
+          <div>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            <a href="{{ item.url }}">{% if CURRENT_LANGUAGE == 'fa' %}روش محاسبه{% elif CURRENT_LANGUAGE == 'en' %}See calculation method{% else %}Se beregningsmetoden{% endif %} →</a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if modular.partner_profile %}
+<section class="m-section m-section--stone">
+  <div class="m-shell">
+    <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}رابطه{% elif CURRENT_LANGUAGE == 'en' %}RELATIONSHIP{% else %}RELASJON{% endif %}</span>
+    <h2>{{ modular.partner_name }}</h2>
+    <div class="m-partner-compare">
+      <article><small>{{ profile.current_name|default:profile.birth_name }}</small><strong>{{ profile.expression.label }}</strong><span>{% if CURRENT_LANGUAGE == 'fa' %}نام{% elif CURRENT_LANGUAGE == 'en' %}Name{% else %}Navn{% endif %}</span><strong>{{ profile.life.label }}</strong><span>{% if CURRENT_LANGUAGE == 'fa' %}مسیر زندگی{% elif CURRENT_LANGUAGE == 'en' %}Life Path{% else %}Livsvei{% endif %}</span></article>
+      <div class="m-partner-compare__plus">+</div>
+      <article><small>{{ modular.partner_name }}</small><strong>{{ modular.partner_profile.expression.label }}</strong><span>{% if CURRENT_LANGUAGE == 'fa' %}نام{% elif CURRENT_LANGUAGE == 'en' %}Name{% else %}Navn{% endif %}</span><strong>{{ modular.partner_profile.life.label }}</strong><span>{% if CURRENT_LANGUAGE == 'fa' %}مسیر زندگی{% elif CURRENT_LANGUAGE == 'en' %}Life Path{% else %}Livsvei{% endif %}</span></article>
+    </div>
+    <p class="m-section__intro">{% if CURRENT_LANGUAGE == 'fa' %}رابطه از چند لایه خوانده می‌شود؛ عدد نام و مسیر زندگی نقطه شروع هستند، نه یک حکم نهایی درباره سازگاری.{% elif CURRENT_LANGUAGE == 'en' %}The relationship is read in layers; Name and Life Path numbers are the starting point, not a final verdict on compatibility.{% else %}Relasjonen leses i flere lag; navnetall og livsvei er utgangspunktet, ikke en endelig dom om kompatibilitet.{% endif %}</p>
+  </div>
+</section>
+{% endif %}
+
+{% if future_report %}
+<section class="m-section m-builder-future">
+  <div class="m-shell">
+    <span class="m-kicker">{% if CURRENT_LANGUAGE == 'fa' %}آینده{% elif CURRENT_LANGUAGE == 'en' %}FUTURE{% else %}FREMTID{% endif %} · {{ modular.future_months }} {% if CURRENT_LANGUAGE == 'fa' %}ماه{% elif CURRENT_LANGUAGE == 'en' %}MONTHS{% else %}MÅNEDER{% endif %}</span>
+    <h2>{% if CURRENT_LANGUAGE == 'fa' %}سال، ماه، اسنس و ترانزیت در یک خط زمانی.{% elif CURRENT_LANGUAGE == 'en' %}Year, month, Essence and transits on one timeline.{% else %}År, måned, essens og transitter på én tidslinje.{% endif %}</h2>
+    <p class="m-section__intro">{{ future_report.method_intro }}</p>
+    <div class="m-builder-future-years">
+      {% for year in future_report.years %}
+        <article><span>{{ year.year }}</span><strong>{{ year.number }}</strong><h3>{{ year.title }}</h3><p>{{ year.body }}</p></article>
+      {% endfor %}
+    </div>
+    <div class="m-builder-future-months">
+      {% for item in future_report.timeline %}
+        <details {% if forloop.first %}open{% endif %}>
+          <summary>
+            <span>{{ item.month_name|capfirst }} {{ item.year }}</span>
+            <strong>{{ item.personal_month }}</strong>
+            <small>{% if CURRENT_LANGUAGE == 'fa' %}سال{% elif CURRENT_LANGUAGE == 'en' %}Year{% else %}År{% endif %} {{ item.personal_year }} · {% if CURRENT_LANGUAGE == 'fa' %}اسنس{% elif CURRENT_LANGUAGE == 'en' %}Essence{% else %}Essens{% endif %} {{ item.essence.label }}</small>
+          </summary>
+          <p>{{ item.body }}</p>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% if modular.human_review %}
+<section class="m-section m-section--stone">
+  <div class="m-shell">
+    <span class="m-kicker">ÅSE</span>
+    <h2>{% if CURRENT_LANGUAGE == 'fa' %}تفسیر شخصی Åse به این تحلیل اضافه شده است.{% elif CURRENT_LANGUAGE == 'en' %}Åse's personal review is included in this analysis.{% else %}Åses personlige fordypning er lagt til denne analysen.{% endif %}</h2>
+    <p class="m-section__intro">{% if CURRENT_LANGUAGE == 'fa' %}بخش شخصی پس از مرور تحلیل و ماژول‌های انتخاب‌شده تکمیل می‌شود.{% elif CURRENT_LANGUAGE == 'en' %}The personal section is completed after the selected chart and modules have been reviewed.{% else %}Den personlige delen ferdigstilles etter at tallkartet og de valgte modulene er gjennomgått.{% endif %}</p>
+  </div>
+</section>
+{% endif %}
+
+<section class="m-section m-builder-report-actions">
+  <div class="m-shell">
+    <div class="m-report-actions">
+      <button class="m-btn m-btn--gold" type="button" onclick="window.print()">{% if CURRENT_LANGUAGE == 'fa' %}چاپ / ذخیره PDF{% elif CURRENT_LANGUAGE == 'en' %}Print / save PDF{% else %}Skriv ut / lagre PDF{% endif %}</button>
+      <a class="m-btn m-btn--ghost" href="{% url 'members:dashboard' %}">{% if CURRENT_LANGUAGE == 'fa' %}صفحه من{% elif CURRENT_LANGUAGE == 'en' %}My page{% else %}Min side{% endif %}</a>
+      <a class="m-btn m-btn--ghost" href="/bestill/?package=builder">{% if CURRENT_LANGUAGE == 'fa' %}افزودن ماژول{% elif CURRENT_LANGUAGE == 'en' %}Add modules{% else %}Legg til moduler{% endif %}</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
