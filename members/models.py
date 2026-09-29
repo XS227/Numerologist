@@ -33,6 +33,22 @@ class SocialIdentity(models.Model):
         return f"{self.provider}:{self.subject}"
 
 
+class SocialLoginHandoff(models.Model):
+    token_hash = models.CharField(max_length=64, unique=True, db_index=True)
+    provider = models.CharField(max_length=20)
+    payload = models.JSONField(default=dict)
+    next_url = models.CharField(max_length=500, default="/min-side/")
+    expires_at = models.DateTimeField()
+    used_at = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ("-created_at",)
+
+    def __str__(self) -> str:
+        return f"{self.provider}:{self.created_at.isoformat()}"
+
+
 class AcademyProgress(models.Model):
     STATUS = (("locked", "Locked"), ("active", "Active"), ("completed", "Completed"))
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="academy_progress")
