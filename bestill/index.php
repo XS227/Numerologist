@@ -381,6 +381,16 @@ render_header($t('Bestill analyse', 'Order Analysis', 'سفارش تحلیل'), 
 ]);
 
 $csrf = csrf_token();
+$builderConfig = analysis_builder_config(
+    is_array($order['configuration'] ?? null) ? $order['configuration'] : []
+);
+$builderPrice = $complimentaryAccess
+    ? 0
+    : analysis_builder_price_kr(
+        $builderConfig['modules'],
+        $builderConfig['future_months'],
+        $builderConfig['human_review']
+    );
 
 function error_list(array $errors): void
 {
@@ -433,40 +443,141 @@ function checked(string $val, string $test): string
 </div>
 
 <?php if ($step === 1): ?>
-<!-- ══ STEP 1 — Choose package ════════════════════════════════════════════════ -->
-<section class="card order-card">
-  <h1><?= $t('Velg pakke', 'Choose package', 'انتخاب بسته') ?></h1>
-  <p class="order-intro">
-    <?= $t('Velg den pakken som passer ønsket ditt. Åses personlige analyser leveres normalt per e-post innen 5–7 virkedager; ÅSE 227 er den digitale motorpakken.', 'Choose the package that fits your goal. Åse’s personal analyses are normally delivered by email within 5–7 business days; ÅSE 227 is the digital engine package.', 'بسته‌ای را انتخاب کنید که با هدف شما هماهنگ است. تحلیل‌های شخصی Åse معمولاً طی ۵ تا ۷ روز کاری با ایمیل ارسال می‌شوند؛ ÅSE 227 بسته دیجیتال موتور است.') ?>
-  </p>
+<!-- ══ STEP 1 — Build analysis ═══════════════════════════════════════════════ -->
+<section class="card order-card order-card--builder">
+  <div class="builder-head">
+    <div>
+      <span class="builder-kicker"><?= $t('BYGG ANALYSEN DIN', 'BUILD YOUR ANALYSIS', 'تحلیل خودت را بساز') ?></span>
+      <h1><?= $t('Én analyse. Du velger hvor dypt.', 'One analysis. You choose the depth.', 'یک تحلیل؛ عمقش را خودت انتخاب می‌کنی.') ?></h1>
+      <p class="order-intro">
+        <?= $t(
+          'Alle starter med samme kjerne. Legg til de beregningene du vil forstå mer av, og velg hvor langt frem i tid analysen skal gå.',
+          'Everyone starts with the same core. Add the calculations you want to understand more deeply and choose how far into the future the analysis should go.',
+          'همه از یک هسته مشترک شروع می‌کنند. محاسبه‌هایی را که می‌خواهید عمیق‌تر بدانید اضافه کنید و مدت تحلیل آینده را انتخاب کنید.'
+        ) ?>
+      </p>
+    </div>
+    <div class="builder-live-total">
+      <small><?= $t('Din analyse', 'Your analysis', 'تحلیل شما') ?></small>
+      <strong data-builder-total><?= $builderPrice ?> kr</strong>
+      <span><?= $t('fra 227 kr', 'from 227 kr', 'از ۲۲۷ کرون') ?></span>
+    </div>
+  </div>
+
   <?php if ($complimentaryAccess): ?>
-    <p class="pay-note"><strong><?= $t('Testtilgang aktiv:', 'Test access active:', 'دسترسی آزمایشی فعال:') ?></strong> <?= $t('alle analyser er 0 kr på denne kontoen.', 'all analyses are 0 kr on this account.', 'همه تحلیل‌ها برای این حساب رایگان هستند.') ?></p>
+    <p class="pay-note"><strong><?= $t('Testtilgang aktiv:', 'Test access active:', 'دسترسی آزمایشی فعال:') ?></strong> <?= $t('hele analysebyggeren er 0 kr på denne kontoen.', 'the entire analysis builder is 0 kr on this account.', 'کل تحلیل‌ساز برای این حساب رایگان است.') ?></p>
   <?php endif; ?>
   <?php error_list($errors); ?>
-  <form method="post" action="/bestill/?step=1" class="pkg-form" novalidate>
+
+  <form method="post" action="/bestill/?step=1" class="builder-form" data-analysis-builder data-base-price="<?= ANALYSIS_BASE_PRICE_KR ?>" data-depth-cap="<?= ANALYSIS_DEPTH_CAP_KR ?>" data-human-price="360" data-free="<?= $complimentaryAccess ? '1' : '0' ?>">
     <input type="hidden" name="step" value="1">
+    <input type="hidden" name="package" value="builder">
     <input type="hidden" name="_csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES) ?>">
 
-    <div class="pkg-grid" role="radiogroup" aria-label="<?= $t('Velg analysepakke', 'Choose an analysis package', 'انتخاب بسته‌ی تحلیل') ?>">
-      <?php foreach (PACKAGES as $key => $pkg): ?>
-        <div class="pkg-item">
-          <label class="pkg-card <?= $key === ($order['package'] ?? '') ? 'pkg-card--selected' : '' ?>">
-            <input type="radio" name="package" value="<?= $key ?>"
-                   <?= checked($order['package'] ?? '', $key) ?> required>
-            <?php [$pkgName, $pkgDesc] = package_label($key, $lang); ?>
-            <span class="pkg-name"><?= htmlspecialchars($pkgName) ?></span>
-            <span class="pkg-price"><?= effective_price_kr($key, $complimentaryAccess) ?> kr</span>
-            <span class="pkg-desc"><?= htmlspecialchars($pkgDesc) ?></span>
+    <section class="builder-core">
+      <div class="builder-section-head">
+        <div><span>01</span><h2><?= $t('Kjerneanalyse', 'Core analysis', 'تحلیل پایه') ?></h2></div>
+        <strong><?= $complimentaryAccess ? '0' : ANALYSIS_BASE_PRICE_KR ?> kr</strong>
+      </div>
+      <p><?= $t('Disse fem ligger alltid i analysen.', 'These five are always included.', 'این پنج مورد همیشه در تحلیل هستند.') ?></p>
+      <div class="builder-core-grid">
+        <?php foreach (ANALYSIS_CORE as $core): ?>
+          <span>✓ <?= htmlspecialchars(analysis_builder_label($core, $lang)) ?></span>
+        <?php endforeach; ?>
+      </div>
+    </section>
+
+    <section class="builder-modules">
+      <div class="builder-section-head">
+        <div><span>02</span><h2><?= $t('Legg til moduler', 'Add modules', 'افزودن ماژول‌ها') ?></h2></div>
+        <button type="button" class="builder-mini-btn" data-builder-full><?= $t('Velg full dybde', 'Select full depth', 'انتخاب عمق کامل') ?></button>
+      </div>
+      <p><?= $t(
+        'Hver kalkulator er en modul. Velg enkeltvis. Vanlige analysemoduler stopper prismessig på 471 kr i tillegg, slik at full dybde fortsatt blir 698 kr før fremtid.',
+        'Each calculator is a module. Choose them individually. Standard analysis modules are price-capped at 471 kr extra, so full depth remains 698 kr before future periods.',
+        'هر ماشین‌حساب یک ماژول است. می‌توانید جداگانه انتخاب کنید. هزینه ماژول‌های استاندارد حداکثر ۴۷۱ کرون اضافه می‌شود تا عمق کامل پیش از آینده ۶۹۸ کرون باقی بماند.'
+      ) ?></p>
+
+      <?php
+      $groupLabels = [
+          'identity' => $t('Navn & identitet', 'Name & identity', 'نام و هویت'),
+          'depth' => $t('Karma & fordypning', 'Karma & depth', 'کارما و عمق'),
+          'cycles' => $t('Livssykluser', 'Life cycles', 'چرخه‌های زندگی'),
+          'timing' => $t('Timing akkurat nå', 'Timing right now', 'زمان‌بندی اکنون'),
+          'environment' => $t('Miljø & hverdagsnumre', 'Environment & everyday numbers', 'محیط و اعداد روزمره'),
+          'relationship' => $t('Relasjon', 'Relationship', 'رابطه'),
+      ];
+      ?>
+      <div class="builder-groups">
+        <?php foreach ($groupLabels as $groupId => $groupLabel): ?>
+          <details class="builder-group" <?= $groupId === 'identity' ? 'open' : '' ?>>
+            <summary><?= htmlspecialchars($groupLabel) ?><span>+</span></summary>
+            <div class="builder-module-grid">
+              <?php foreach (ANALYSIS_MODULES as $id => $module): ?>
+                <?php if (($module['group'] ?? '') !== $groupId) continue; ?>
+                <label class="builder-module-option">
+                  <input
+                    type="checkbox"
+                    name="modules[]"
+                    value="<?= htmlspecialchars($id) ?>"
+                    data-module-price="<?= (int) $module['price'] ?>"
+                    data-outside-cap="<?= !empty($module['outside_cap']) ? '1' : '0' ?>"
+                    <?= in_array($id, $builderConfig['modules'], true) ? 'checked' : '' ?>
+                  >
+                  <span class="builder-check">✓</span>
+                  <span class="builder-module-copy">
+                    <strong><?= htmlspecialchars(analysis_builder_label($module, $lang)) ?></strong>
+                    <small>+<?= (int) $module['price'] ?> kr</small>
+                  </span>
+                </label>
+              <?php endforeach; ?>
+            </div>
+          </details>
+        <?php endforeach; ?>
+      </div>
+    </section>
+
+    <section class="builder-future">
+      <div class="builder-section-head">
+        <div><span>03</span><h2><?= $t('Hvor langt vil du se frem?', 'How far ahead do you want to explore?', 'تا چه مدت آینده را می‌خواهید ببینید؟') ?></h2></div>
+      </div>
+      <p><?= $t('Fremtidsdelen inkluderer personlig år, personlig måned, transitter og essenstall for hele perioden.', 'The future layer includes Personal Year, Personal Month, transits and Essence for the full period.', 'بخش آینده شامل سال شخصی، ماه شخصی، ترانزیت‌ها و اسنس در تمام دوره است.') ?></p>
+      <div class="builder-future-grid">
+        <?php foreach (ANALYSIS_FUTURE as $months => $future): ?>
+          <label>
+            <input type="radio" name="future_months" value="<?= (int) $months ?>" data-future-price="<?= (int) $future['price'] ?>" <?= (int) $builderConfig['future_months'] === (int) $months ? 'checked' : '' ?>>
+            <span><strong><?= htmlspecialchars(analysis_builder_label($future, $lang)) ?></strong><small><?= (int) $future['price'] ? '+' . (int) $future['price'] . ' kr' : $t('inkludert valg', 'included choice', 'انتخاب بدون هزینه') ?></small></span>
           </label>
-          <a class="pkg-demo-link" href="/rapporter/demo/<?= rawurlencode($key) ?>/"><?= $t('Se eksempel på digitalversjonen →', 'View digital version example →', 'نمونه نسخه دیجیتال ←') ?></a>
-        </div>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
+      </div>
+    </section>
+
+    <section class="builder-human">
+      <label class="builder-human-option">
+        <input type="checkbox" name="human_review" value="1" data-human-review <?= $builderConfig['human_review'] ? 'checked' : '' ?>>
+        <span class="builder-check">✓</span>
+        <span>
+          <strong><?= $t('Legg til 15 min veiledning med Åse', 'Add 15 min guidance with Åse', 'افزودن ۱۵ دقیقه راهنمایی با Åse') ?></strong>
+          <small><?= $t('Direkte samtale basert på analysen din', 'A direct conversation based on your analysis', 'گفت‌وگوی مستقیم بر اساس تحلیل شما') ?> · +360 kr</small>
+        </span>
+      </label>
+    </section>
+
+    <div class="builder-presets">
+      <button type="button" data-builder-core-only><?= $t('Bare kjerne · 227', 'Core only · 227', 'فقط هسته · ۲۲۷') ?></button>
+      <button type="button" data-builder-depth><?= $t('Full dybde · 698', 'Full depth · 698', 'عمق کامل · ۶۹۸') ?></button>
+      <button type="button" data-builder-24><?= $t('Full dybde + 2 år · 1 098', 'Full depth + 2 years · 1,098', 'عمق کامل + ۲ سال · ۱٬۰۹۸') ?></button>
     </div>
 
-    <button type="submit" class="btn-primary">
-      <?= $t('Gå videre →', 'Continue →', 'ادامه ←') ?>
-    </button>
+    <div class="builder-submit">
+      <div><small><?= $t('Totalt', 'Total', 'مجموع') ?></small><strong data-builder-total-bottom><?= $builderPrice ?> kr</strong></div>
+      <button type="submit" class="btn-primary"><?= $t('Fortsett med denne analysen →', 'Continue with this analysis →', 'ادامه با این تحلیل ←') ?></button>
+    </div>
   </form>
+
+  <div class="builder-legacy">
+    <span><?= $t('Har du fått lenke til en tidligere fast pakke? De gamle pakkene virker fortsatt for eksisterende kunder og direkte lenker.', 'Have a link to an earlier fixed package? Legacy packages still work for existing customers and direct links.', 'اگر لینک یکی از بسته‌های قدیمی را دارید، آن بسته‌ها برای مشتریان قبلی و لینک‌های مستقیم همچنان کار می‌کنند.') ?></span>
+  </div>
 </section>
 
 <?php elseif ($step === 2): ?>
