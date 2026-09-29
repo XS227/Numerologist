@@ -49,33 +49,48 @@ if ($order === null) {
     exit;
 }
 
-// Poll Vipps for status if still pending (user may land here before callback fires)
+// Poll Vipps ePayment if still pending. ePayment keeps state AUTHORIZED even
+// after capture, so capturedAmount is the source of truth for completed payment.
 if ($order['payment_status'] === 'pending' && VIPPS_CLIENT_ID !== '') {
     try {
-        $details     = Vipps::paymentDetails($orderId);
-        $history     = $details['transactionLogHistory'] ?? [];
-        $latestEntry = end($history) ?: [];
-        $vStatus     = strtolower((string) ($latestEntry['operation'] ?? ''));
+        $details = Vipps::paymentDetails($orderId);
+        $stateRaw = $details['state'] ?? '';
+        $state = strtoupper((string) (is_array($stateRaw) ? (end($stateRaw) ?: '') : $stateRaw));
+        $capturedOre = (int) ($details['aggregate']['capturedAmount']['value'] ?? 0);
+        $priceOre = (int) ($order['price_ore'] ?? 0);
+
+        if ($state === 'AUTHORIZED' && $capturedOre < $priceOre) {
+            // These are paid digital/service orders, so capture immediately after
+            // the customer authorizes the reservation.
+            $captured = Vipps::capturePayment($orderId, $priceOre);
+            $capturedOre = (int) ($captured['aggregate']['capturedAmount']['value'] ?? 0);
+        }
 
         $resolved = match(true) {
-            in_array($vStatus, ['reserved', 'captured', 'sale'], true) => 'paid',
-            in_array($vStatus, ['cancelled', 'void', 'failed', 'rejected'], true) => $vStatus,
+            $capturedOre >= $priceOre && $priceOre > 0 => 'paid',
+            $state === 'ABORTED' => 'cancelled',
+            $state === 'TERMINATED' => 'cancelled',
+            $state === 'EXPIRED' => 'failed',
             default => null,
         };
 
         if ($resolved !== null) {
-            update_order_payment($orderId, $resolved);
+            update_order_payment($orderId, $resolved, (string) ($details['pspReference'] ?? ''));
             if ($resolved === 'paid') {
-                // Reload and send confirmation if callback hasn't fired yet
                 $order = get_order($orderId);
                 if ($order !== null) {
-                    send_order_confirmation($order);
+                    try {
+                        send_order_confirmation($order);
+                    } catch (Throwable $e) {
+                        error_log("Vipps confirmation mail failed for {$orderId}: " . $e->getMessage());
+                    }
                 }
             }
             $order = get_order($orderId) ?? $order;
         }
-    } catch (RuntimeException) {
-        // Vipps unavailable — show pending state, callback will update later
+    } catch (RuntimeException $e) {
+        error_log("Vipps status/capture check failed for {$orderId}: " . $e->getMessage());
+        // Keep pending; the user can refresh and the payment can be reconciled later.
     }
 }
 
