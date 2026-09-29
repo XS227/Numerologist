@@ -63,3 +63,54 @@
   media.addEventListener?.('change', schedule);
   schedule();
 })();
+
+(() => {
+  const nav = document.querySelector('.n-editorial-tabs');
+  if (!nav) return;
+
+  const links = [...nav.querySelectorAll('a[href^="#"]')];
+  const targets = links.map(link => {
+    const id = link.getAttribute('href');
+    const node = id ? document.querySelector(id) : null;
+    return { link, node: node?.closest('section') || node };
+  }).filter(item => item.node);
+
+  const setActive = (link) => {
+    links.forEach(item => {
+      const active = item === link;
+      item.classList.toggle('is-active', active);
+      if (active) item.setAttribute('aria-current', 'location');
+      else item.removeAttribute('aria-current');
+    });
+  };
+
+  const updateProgress = () => {
+    const article = document.querySelector('.n-story');
+    if (!article) return;
+    const rect = article.getBoundingClientRect();
+    const travel = Math.max(1, rect.height - innerHeight);
+    const progress = Math.max(0, Math.min(1, -rect.top / travel));
+    nav.style.setProperty('--n-page-progress', progress.toFixed(4));
+  };
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (!visible) return;
+      const match = targets.find(item => item.node === visible.target);
+      if (match) {
+        setActive(match.link);
+        if (matchMedia('(max-width:760px)').matches) {
+          nav.scrollTo({left: match.link.offsetLeft - nav.clientWidth / 2 + match.link.clientWidth / 2, behavior:'smooth'});
+        }
+      }
+    }, {rootMargin:'-24% 0px -54% 0px', threshold:[0,.08,.18,.35,.55]});
+    targets.forEach(item => observer.observe(item.node));
+  }
+
+  addEventListener('scroll', updateProgress, {passive:true});
+  addEventListener('resize', updateProgress, {passive:true});
+  updateProgress();
+})();

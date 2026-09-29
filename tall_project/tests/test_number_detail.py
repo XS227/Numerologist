@@ -15,3 +15,13 @@ class NumberDetailViewTests(TestCase):
         response = self.client.get(reverse("number_detail", kwargs={"number": 22}))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Master Number 22")
+
+    def test_all_number_pages_use_editorial_template(self) -> None:
+        for number in (1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33):
+            with self.subTest(number=number):
+                response = self.client.get(reverse("number_detail", kwargs={"number": number}))
+                self.assertEqual(response.status_code, 200)
+                self.assertContains(response, 'class="n-editorial-hero"')
+                self.assertContains(response, 'class="n-editorial-overview"')
+                self.assertContains(response, f"number-{number}-strengths-photo.webp")
+

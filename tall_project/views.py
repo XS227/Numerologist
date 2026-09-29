@@ -89,6 +89,7 @@ def number_detail(request: HttpRequest, number: int) -> HttpResponse:
     position = sequence.index(number) if number in sequence else None
     prev_number = sequence[position - 1] if position else None
     next_number = sequence[position + 1] if position is not None and position + 1 < len(sequence) else None
+    related_articles = get_related_articles(number, limit=8)
     context = {
         "number": number,
         "profile": profile,
@@ -100,8 +101,9 @@ def number_detail(request: HttpRequest, number: int) -> HttpResponse:
         "story": get_story_titles(number, language),
         "hero_image": f"journey/images/number-{number}-{({1:'strengths',2:'strengths',3:'strengths',4:'practical',5:'strengths',6:'practical',7:'guidance',8:'challenges',9:'strengths',11:'strengths',22:'strengths',33:'guidance'}.get(number, 'strengths'))}-photo.webp",
         "page_title": profile["title"],
-        "related_articles": get_related_articles(number, limit=6),
-        "related_articles_mid": get_related_articles(number, limit=3),
+        "related_articles": related_articles,
+        "related_articles_mid": related_articles[:3],
+        "related_articles_more": related_articles[3:],
         "related_copy": ({
             "nb": {
                 "eyebrow": "Relaterte artikler",

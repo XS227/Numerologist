@@ -6,7 +6,7 @@
 
 {% block main %}
 <link rel="stylesheet" href="{% static 'journey/journey.css' %}?v=3">
-<link rel="stylesheet" href="{% static 'journey/number-detail.css' %}?v=7">
+<link rel="stylesheet" href="{% static 'journey/number-detail.css' %}?v=8">
 <style>
   /* Only the first chapter shows the number's illustration; the others get
      drawn panels (rings + the numeral in gold) so the same picture isn't
@@ -247,7 +247,7 @@
 </section>
 
 
-{% if related_articles %}
+{% if related_articles_more %}
 <section class="n-related-library" aria-labelledby="n-related-more-title">
   <div class="n-related-library__inner">
     <div class="n-related-library__head">
@@ -256,7 +256,7 @@
     </div>
     <div class="n-related-library__grid">
       {% static 'journey/images/' as article_images %}
-      {% for article in related_articles %}
+      {% for article in related_articles_more %}
       <article class="n-related-card">
         <a href="{{ article.get_absolute_url }}">
           <div class="n-related-card__visual" style="--card-bg:{{ article.thumb.bg }};--card-fg:{{ article.thumb.fg }}">
@@ -300,4 +300,4 @@
 
 </article>
 {% endblock %}
-{% block extra_scripts %}<script src="{% static 'journey/journey.js' %}?v=2" defer></script><script src="{% static 'journey/number-detail.js' %}?v=1" defer></script>{% endblock %}
+{% block extra_scripts %}<script src="{% static 'journey/journey.js' %}?v=2" defer></script><script src="{% static 'journey/number-detail.js' %}?v=2" defer></script>{% endblock %}

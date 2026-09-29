@@ -15,6 +15,8 @@ RELATED_ARTICLE_SLUGS: dict[int, tuple[str, ...]] = {
         "elon-musk-numerologi-16-7",
         "navn-navnedeterminisme",
         "creative-research-practice-for-numerology",
+        "navn-og-numerologi",
+        "massenes-visdom-og-gruppebevissthet",
     ),
     2: (
         "tall-og-kompatibilitet",
@@ -22,20 +24,27 @@ RELATED_ARTICLE_SLUGS: dict[int, tuple[str, ...]] = {
         "numerological-reflection-on-mahsa-amini-and-bita-azizi",
         "nikola-tesla-dekodet",
         "barn-og-navn",
+        "navn-og-numerologi",
     ),
     3: (
         "elon-musk-numerologi-16-7",
         "navn-og-numerologi",
         "creative-research-practice-for-numerology",
         "solfeggio-universets-helbredende-lydfrekvenser",
+        "luciadagen-13-lys-og-333",
+        "universets-lyd-og-mantraet-om",
     ),
     4: (
         "tallet-4-skilpadden-og-haren",
+        "de-fire-leveregler",
+        "kortstokken-som-kalender-52-4-13-365",
+        "sommersolverv-arets-lyseste-dogn",
         "hostjevndogn-tid-for-takknemlighet",
         "barn-og-navn",
-        "navn-navnedeterminisme",
     ),
     5: (
+        "amy-winehouse-og-tallet-14",
+        "tina-turner-41-5",
         "valentinsdagens-tall",
         "rune-spadom-avdekk-underbevissthetens-visdom",
         "primstaven-vaerspadommer-for-den-forste-vinterdagen",
@@ -45,7 +54,9 @@ RELATED_ARTICLE_SLUGS: dict[int, tuple[str, ...]] = {
         "marion-dampier-jeans-33",
         "master-number-33",
         "tallene-i-koranen",
+        "barn-og-navn",
         "valentinsdagens-tall",
+        "mirakel-historier-og-tall",
     ),
     7: (
         "nikola-tesla-dekodet",
@@ -60,12 +71,16 @@ RELATED_ARTICLE_SLUGS: dict[int, tuple[str, ...]] = {
         "tallene-i-koranen",
         "tall-og-kompatibilitet",
         "hva-avslorer-tallene-i-shahnameh",
+        "massenes-visdom-og-gruppebevissthet",
+        "creative-research-practice-for-numerology",
     ),
     9: (
         "tallet-9-fibonacci-gylne-snitt",
+        "de-9-innsikter-synkroniteter",
         "sissel-grana-tallene",
         "solfeggio-universets-helbredende-lydfrekvenser",
         "hva-avslorer-tallene-i-shahnameh",
+        "mirakel-historier-og-tall",
     ),
     11: (
         "11-11-enigmaet",
@@ -83,6 +98,7 @@ RELATED_ARTICLE_SLUGS: dict[int, tuple[str, ...]] = {
         "11-11-enigmaet",
         "ser-du-samme-tall",
         "hva-avslorer-tallene-i-shahnameh",
+        "creative-research-practice-for-numerology",
     ),
     33: (
         "master-number-33",
@@ -90,6 +106,7 @@ RELATED_ARTICLE_SLUGS: dict[int, tuple[str, ...]] = {
         "sissel-grana-tallene",
         "mirakel-historier-og-tall",
         "jesus-tall-888-og-11",
+        "barn-og-navn",
     ),
 }
 
