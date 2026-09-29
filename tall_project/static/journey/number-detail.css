@@ -228,3 +228,70 @@
 }
 @media(prefers-reduced-motion:reduce){.n-editorial-hero__ring{animation:none}.n-editorial-tile__media img{transition:none}}
 
+
+/* v7 — darker Numerologist balance: deep teal is the canvas, gold/ivory are highlights. */
+.n-editorial-hero__media>img{filter:saturate(.82) contrast(1.05) brightness(.72)}
+.n-editorial-hero__veil{
+  background:
+    linear-gradient(90deg,rgba(4,24,26,.98) 0%,rgba(4,24,26,.91) 30%,rgba(4,24,26,.68) 52%,rgba(4,24,26,.25) 78%),
+    linear-gradient(0deg,rgba(4,24,26,.72),transparent 48%);
+}
+.n-editorial-hero__symbol{color:rgba(210,168,93,.28);text-shadow:0 0 70px rgba(200,157,82,.23)}
+.n-editorial-hero__ring{border-color:rgba(210,174,106,.22)}
+
+.n-editorial-tabs{background:rgba(9,38,40,.97);border-bottom-color:rgba(198,167,117,.18);box-shadow:0 8px 26px rgba(0,0,0,.12)}
+.n-editorial-tabs a{color:rgba(247,241,231,.72)}
+.n-editorial-tabs a:hover{color:#e2c48c;border-bottom-color:#b58c4e}
+
+.n-editorial-overview{background:#12393b;border-block:1px solid rgba(198,167,117,.12)}
+.n-editorial-tile{background:#0c3133;color:#f3eee5;border-right:1px solid rgba(198,167,117,.12)}
+.n-editorial-tile:hover{color:#fff7ea;box-shadow:inset 0 0 0 1px rgba(198,167,117,.36)}
+.n-editorial-tile__media:after{background:linear-gradient(0deg,rgba(5,28,30,.68),rgba(5,28,30,.08) 62%)}
+.n-editorial-tile__media img{filter:saturate(.82) contrast(1.04) brightness(.78)}
+.n-editorial-tile:hover .n-editorial-tile__media img{filter:saturate(.92) contrast(1.05) brightness(.84)}
+.n-editorial-tile__body small{color:#c7a266}
+.n-editorial-tile__body h2{color:#f7f1e7}
+.n-editorial-tile__body p{color:rgba(239,234,224,.66)}
+.n-editorial-tile__body b{color:#c9a56d}
+
+/* Keep alternation, but make the "light" chapters stone rather than white. */
+.n-story .j-light{background:#ded6c8;color:#143638}
+.n-story .j-light .j-copy .j-body,
+.n-story .j-light .j-copy>p.j-body{color:#3d5552}
+.n-story .j-light .j-eyebrow{color:#8f682f}
+.n-story .j-light .n-traits li{border-bottom-color:rgba(74,59,38,.18)}
+.n-story .j-light .j-image-window{box-shadow:0 30px 80px rgba(26,38,35,.16)}
+
+/* Dark chapters become richer and less flat. */
+.n-story .j-dark{background:
+  radial-gradient(circle at 82% 18%,rgba(198,167,117,.07),transparent 30%),
+  linear-gradient(180deg,#082c2e,#062628);
+}
+.n-story .j-dark .j-image-window{box-shadow:0 34px 90px rgba(0,0,0,.32),0 0 0 1px rgba(198,167,117,.10)}
+.n-scene{filter:saturate(.80) contrast(1.04) brightness(.76)}
+.n-number-chapter.is-active .n-scene{filter:saturate(.9) contrast(1.05) brightness(.82)}
+.n-scene-wrap:after{
+  background:
+    linear-gradient(180deg,rgba(8,42,44,.10),rgba(6,32,34,.14) 55%,rgba(4,27,29,.34)),
+    radial-gradient(circle at 50% 28%,rgba(224,187,111,.08),transparent 40%);
+  mix-blend-mode:multiply;
+}
+
+/* Related reading: keep a single lighter breathing-space near the bottom, not a white page. */
+.n-related-band{background:
+  radial-gradient(circle at 76% 10%,rgba(198,167,117,.08),transparent 33%),
+  #082b2d}
+.n-related-library{background:#d8d0c2;color:#103436}
+.n-related-card{background:#eee7da;border-color:rgba(90,66,35,.16);box-shadow:0 16px 42px rgba(25,43,40,.08)}
+.n-related-card__visual img{filter:saturate(.84) brightness(.82)}
+.n-related-card:hover .n-related-card__visual img{filter:saturate(.94) brightness(.88)}
+
+@media(max-width:760px){
+  .n-editorial-hero__media>img{filter:saturate(.80) contrast(1.05) brightness(.68)}
+  .n-editorial-hero__veil{
+    background:
+      linear-gradient(0deg,rgba(4,24,26,.98) 0%,rgba(4,24,26,.88) 46%,rgba(4,24,26,.42) 78%),
+      linear-gradient(90deg,rgba(4,24,26,.45),rgba(4,24,26,.12));
+  }
+}
+
