@@ -7,6 +7,7 @@ app_name = "members"
 urlpatterns = [
     path("min-side/login/", views.member_login, name="login"),
     path("min-side/logout/", views.member_logout, name="logout"),
+    path("konto/pricing-context/", views.member_pricing_context, name="pricing_context"),
     path("min-side/", views.dashboard, name="dashboard"),
     path("min-side/rapport/<str:order_id>/", views.report_view, name="report"),
     path("konto/google/", views.google_start, name="google_start"),
