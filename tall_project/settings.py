@@ -202,6 +202,7 @@ LOGIN_URL = "/min-side/login/"
 LOGIN_REDIRECT_URL = "/min-side/"
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET", "")
+GOOGLE_REDIRECT_URI = os.getenv("GOOGLE_REDIRECT_URI", "https://3real.no/api/auth/google/callback")
 
 # Reuse the existing 3real Google OAuth client when this deployment does not
 # have its own Google credentials yet. This also keeps the existing Google setup
