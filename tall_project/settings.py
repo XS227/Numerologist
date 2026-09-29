@@ -202,6 +202,23 @@ LOGIN_URL = "/min-side/login/"
 LOGIN_REDIRECT_URL = "/min-side/"
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID", "")
 GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET", "")
+
+# Reuse the existing 3real Google OAuth client when this deployment does not
+# have its own Google credentials yet. Values are read server-side only and
+# are never exposed to templates, logs or the repository.
+if not (GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET):
+    _legacy_google_env = Path("/var/www/3real/.env")
+    if _legacy_google_env.exists():
+        _legacy_google = {}
+        for _raw in _legacy_google_env.read_text(encoding="utf-8", errors="ignore").splitlines():
+            _line = _raw.strip()
+            if not _line or _line.startswith("#") or "=" not in _line:
+                continue
+            _key, _value = _line.split("=", 1)
+            if _key.strip() in {"GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET"}:
+                _legacy_google[_key.strip()] = _value.strip().strip('"').strip("'")
+        GOOGLE_CLIENT_ID = GOOGLE_CLIENT_ID or _legacy_google.get("GOOGLE_CLIENT_ID", "")
+        GOOGLE_CLIENT_SECRET = GOOGLE_CLIENT_SECRET or _legacy_google.get("GOOGLE_CLIENT_SECRET", "")
 VIPPS_LOGIN_ENABLED = os.getenv("VIPPS_LOGIN_ENABLED", "true").lower() in {"1", "true", "yes", "on"}
 VIPPS_LOGIN_CLIENT_ID = os.getenv("VIPPS_LOGIN_CLIENT_ID", os.getenv("VIPPS_CLIENT_ID", ""))
 VIPPS_LOGIN_CLIENT_SECRET = os.getenv("VIPPS_LOGIN_CLIENT_SECRET", os.getenv("VIPPS_CLIENT_SECRET", ""))
