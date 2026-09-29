@@ -26,6 +26,7 @@ from .catalog import ACADEMY_LEVELS, PACKAGE_CATALOG, PREMIUM_RESOURCES
 from .models import AcademyProgress, MemberProfile, SocialIdentity, SocialLoginHandoff
 from .order_bridge import order_for_user, orders_for_user
 from .report_engine import calculate_profile
+from .future_report import build_future_report
 
 
 def _safe_next(request: HttpRequest, default: str = "/min-side/") -> str:
@@ -535,13 +536,16 @@ def report_demo(request: HttpRequest, package_slug: str) -> HttpResponse:
         raise Http404
     data = _demo_data()
     profile = calculate_profile(data)
+    language = site_language(getattr(request, "LANGUAGE_CODE", "en"))
+    template = "members/future_report.html" if package_slug == "fremtid2" else "members/report.html"
     return render(
         request,
-        "members/report.html",
+        template,
         {
             "package": package,
             "package_slug": package_slug,
             "profile": profile,
+            "future_report": build_future_report(data, profile, language=language) if package_slug == "fremtid2" else None,
             "sections": _report_sections(package_slug, profile),
             "demo": True,
             "order": None,
@@ -558,13 +562,16 @@ def report_view(request: HttpRequest, order_id: str) -> HttpResponse:
         messages.info(request, "Digitalversjonen åpnes så snart betalingen er registrert.")
         return redirect("members:dashboard")
     profile = calculate_profile(order)
+    language = site_language(getattr(request, "LANGUAGE_CODE", "en"))
+    is_future = order["package"] == "fremtid2"
     return render(
         request,
-        "members/report.html",
+        "members/future_report.html" if is_future else "members/report.html",
         {
             "package": order["product"],
             "package_slug": order["package"],
             "profile": profile,
+            "future_report": build_future_report(order, profile, language=language) if is_future else None,
             "sections": _report_sections(order["package"], profile),
             "demo": False,
             "order": order,
