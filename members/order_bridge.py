@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import sqlite3
 from pathlib import Path
@@ -32,11 +33,16 @@ def _rows_for_identity(email: str = "", phone: str = "") -> list[dict[str, Any]]
     try:
         columns = {row[1] for row in conn.execute("PRAGMA table_info(orders)").fetchall()}
         notes_expr = "COALESCE(notes, '') AS notes" if "notes" in columns else "'' AS notes"
+        config_expr = (
+            "COALESCE(configuration_json, '') AS configuration_json"
+            if "configuration_json" in columns
+            else "'' AS configuration_json"
+        )
         rows = conn.execute(
             f"""
             SELECT id, package, price_ore, birth_name, current_name, birth_date,
                    address, phone, email, payment_status, analysis_status,
-                   created_at, {notes_expr}
+                   created_at, {notes_expr}, {config_expr}
               FROM orders
              ORDER BY created_at DESC
             """
@@ -63,6 +69,23 @@ def orders_for_user(user) -> list[dict[str, Any]]:
         row["product"] = product
         row["title"] = product.get("title", row["package"])
         row["price"] = row["price_ore"] / 100
+        raw_config = row.get("configuration_json") or ""
+        try:
+            row["configuration"] = json.loads(raw_config) if raw_config else {}
+        except (TypeError, json.JSONDecodeError):
+            row["configuration"] = {}
+        if row["package"] == "builder":
+            config = row["configuration"]
+            module_count = len(config.get("modules") or [])
+            future_months = int(config.get("future_months") or 0)
+            row["title"] = "Din numerologiske analyse"
+            row["product"] = {
+                **product,
+                "summary": (
+                    f"Kjerneanalyse + {module_count} moduler"
+                    + (f" + {future_months} måneder fremtid" if future_months else "")
+                ),
+            }
         row["digital_available"] = row["payment_status"] in {"paid", "captured", "complete", "completed"}
     return rows
 
