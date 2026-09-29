@@ -5,7 +5,7 @@
 {% block body_attrs %} class="member-page"{% endblock %}
 {% block external_styles %}<link rel="stylesheet" href="{% static 'members/member.css' %}?v=5">{% endblock %}
 {% block main %}
-<header class="m-builder-report-hero">
+<header class="m-builder-report-hero" data-product="{{ package.title }}">
   <div class="m-shell">
     <span class="m-kicker">{% if demo %}DEMO · {% endif %}{% if CURRENT_LANGUAGE == 'fa' %}تحلیل ماژولار{% elif CURRENT_LANGUAGE == 'en' %}MODULAR ANALYSIS{% else %}MODULÆR ANALYSE{% endif %}</span>
     <h1>{% if CURRENT_LANGUAGE == 'fa' %}تحلیل عددشناسی شما{% elif CURRENT_LANGUAGE == 'en' %}Your numerology analysis{% else %}Din numerologiske analyse{% endif %}</h1>
