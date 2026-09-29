@@ -129,13 +129,12 @@ def _name_parts(name: str) -> tuple[str, str, str]:
 
 def _essence_for_age(name: str, age: int) -> dict[str, Any]:
     first, middle, last = _name_parts(name)
-    active = [
-        item for item in (
-            transit(first, age) if first else None,
-            transit(middle, age) if middle else None,
-            transit(last, age) if last else None,
-        ) if item
-    ]
+    candidates = (
+        ("physical", transit(first, age) if first else None),
+        ("mental", transit(middle, age) if middle else None),
+        ("spiritual", transit(last, age) if last else None),
+    )
+    active = [{"role": role, **item} for role, item in candidates if item]
     result = notation(sum(item["value"] for item in active))
     result["transits"] = active
     return result
