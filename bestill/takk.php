@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../includes/config.php';
 require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/analysis_builder.php';
 require_once __DIR__ . '/../includes/vipps.php';
 require_once __DIR__ . '/../includes/mail.php';
 require_once __DIR__ . '/../includes/layout.php';
@@ -95,6 +96,7 @@ if ($order['payment_status'] === 'pending' && VIPPS_CLIENT_ID !== '') {
 }
 
 $packageNames = [
+    'builder' => $no ? 'Din numerologiske analyse' : 'Your Numerology Analysis',
     'ase227' => 'ÅSE 227 Edition',
     'personlighet' => 'Personlighetsanalyse',
     'fremtid2' => '2 års Fremtidsanalyse',
@@ -134,21 +136,44 @@ render_header(
     <h1><?= $no ? 'Takk for din bestilling!' : 'Thank you for your order!' ?></h1>
     <p class="confirm-sub">
       <?= $no
-          ? 'Betalingen er bekreftet. Vi sender deg en bekreftelse per e-post og starter analysen.'
-          : 'Payment confirmed. We will send a confirmation by email and start your analysis.' ?>
+          ? (($order['package'] ?? '') === 'builder'
+              ? 'Betalingen er bekreftet. Den digitale analysen er koblet til Min side.'
+              : 'Betalingen er bekreftet. Vi sender deg en bekreftelse per e-post og starter analysen.')
+          : (($order['package'] ?? '') === 'builder'
+              ? 'Payment confirmed. Your digital analysis is linked to My page.'
+              : 'Payment confirmed. We will send a confirmation by email and start your analysis.') ?>
     </p>
 
     <dl class="review-dl review-dl--confirm">
       <dt><?= $no ? 'Bestillingsnummer' : 'Order ID' ?></dt>
       <dd><?= htmlspecialchars($orderId) ?></dd>
-      <dt><?= $no ? 'Pakke' : 'Package' ?></dt>
+      <dt><?= $no ? (($order['package'] ?? '') === 'builder' ? 'Analyse' : 'Pakke') : (($order['package'] ?? '') === 'builder' ? 'Analysis' : 'Package') ?></dt>
       <dd><?= htmlspecialchars($packageDisplay) ?></dd>
+      <?php if (($order['package'] ?? '') === 'builder'):
+          $confirmationConfig = analysis_builder_config(
+              json_decode((string) ($order['configuration_json'] ?? ''), true) ?: []
+          );
+      ?>
+        <dt><?= $no ? 'Innhold' : 'Contents' ?></dt>
+        <dd><?= htmlspecialchars(analysis_builder_summary($confirmationConfig, $lang)) ?></dd>
+      <?php endif; ?>
       <dt><?= $no ? 'Beløp' : 'Amount' ?></dt>
       <dd><?= number_format((int) $order['price_ore'] / 100, 0, ',', ' ') ?> kr</dd>
       <dt>E-post</dt>
       <dd><?= htmlspecialchars($order['email']) ?></dd>
-      <dt><?= $no ? 'Forventet leveringstid' : 'Expected delivery' ?></dt>
-      <dd><?= ($order['package'] === 'ase227') ? ($no ? 'Digitalversjon tilgjengelig med én gang på Min side' : 'Digital version available immediately on My page') : ($no ? 'Digital grunnversjon med én gang · Åses personlige del normalt 5–7 virkedager' : 'Digital starter version immediately · Åse’s personal part normally 5–7 business days') ?></dd>
+      <dt><?= $no ? 'Tilgjengelighet' : 'Availability' ?></dt>
+      <dd><?php
+        if (($order['package'] ?? '') === 'builder') {
+            echo $no ? 'Digital analyse tilgjengelig med én gang på Min side' : 'Digital analysis available immediately on My page';
+            if (!empty($confirmationConfig['human_review'])) {
+                echo $no ? ' · Veiledningssamtalen avtales separat' : ' · Guidance call is arranged separately';
+            }
+        } elseif ($order['package'] === 'ase227') {
+            echo $no ? 'Digitalversjon tilgjengelig med én gang på Min side' : 'Digital version available immediately on My page';
+        } else {
+            echo $no ? 'Digital grunnversjon med én gang · Åses personlige del normalt 5–7 virkedager' : 'Digital starter version immediately · Åse’s personal part normally 5–7 business days';
+        }
+      ?></dd>
     </dl>
 
     <div class="form-actions" style="margin-top:1.5rem;">
