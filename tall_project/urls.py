@@ -6,6 +6,7 @@ from django.urls import include, path
 from django.views.generic import RedirectView
 from intake.views import profile_numbers_api
 from tall_project.views import home, number_detail, static_page
+from tall_project.early_preview import preview, preview_auth
 
 
 def health_check(_request: HttpRequest) -> HttpResponse:
@@ -13,6 +14,8 @@ def health_check(_request: HttpRequest) -> HttpResponse:
 
 
 urlpatterns = [
+    path("early-preview/", preview, name="early_preview"),
+    path("early-preview/auth/", preview_auth, name="early_preview_auth"),
     path("admin/", admin.site.urls),
     path("cms/", include("wagtail.admin.urls")),
     path("documents/", include("wagtail.documents.urls")),
@@ -40,3 +43,4 @@ urlpatterns = [
     path("numbers/<int:number>/", number_detail, name="number_detail"),
     path("<slug:slug>/", static_page, name="static_page"),
 ]
+

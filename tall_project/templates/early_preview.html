@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Early preview · Numerologist</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:24px;background:radial-gradient(ellipse at 50% 25%,#29271f 0,#141512 50%,#0b0d0b 100%);color:#f4f0e6;font-family:system-ui,sans-serif}
+    .preview{width:min(100%,420px);padding:38px 32px;border:1px solid #b6a27955;border-radius:24px;background:#1c1e18;box-shadow:0 24px 90px #0008;text-align:center}.mark{font-family:Georgia,serif;font-size:54px;color:#d2bc8e;line-height:1;margin-bottom:24px}.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#c8b990}h1{font-size:28px;letter-spacing:-.04em;margin:12px 0}p{color:#bcbeb3;font-size:14px;line-height:1.6;margin:0 0 28px}label{display:block;text-align:left;font-size:13px;margin-bottom:10px}input{width:100%;padding:15px;border:1px solid #5e6250;background:#10120e;color:#fff;border-radius:10px;font:24px system-ui;text-align:center;letter-spacing:.25em}input:focus{outline:2px solid #d2bc8e;outline-offset:3px}button{width:100%;border:0;border-radius:10px;padding:15px;margin-top:18px;background:#d2bc8e;color:#171a13;font:600 14px system-ui;cursor:pointer}button:hover{background:#e2cfa7}button:focus-visible{outline:2px solid #fff;outline-offset:4px}.error{display:block;color:#f5b6aa;font-size:13px;margin-top:12px}small{display:block;color:#858a79;margin-top:24px;font-size:11px}@media(max-width:380px){.preview{padding:30px 22px}}
+  </style>
+</head>
+<body>
+  <main class="preview" role="dialog" aria-modal="true" aria-labelledby="preview-title" aria-describedby="preview-description">
+    <div class="mark" aria-hidden="true">π</div>
+    <div class="eyebrow">Numerologist</div>
+    <h1 id="preview-title">Early preview</h1>
+    <p id="preview-description">A private project, taking shape.<br>Enter your invitation code to explore.</p>
+    <form method="post" action="/early-preview/">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ next }}">
+      <label for="preview-code">Early preview code</label>
+      <input id="preview-code" name="preview_code" type="password" inputmode="numeric" autocomplete="off" maxlength="32" required autofocus {% if error %}aria-invalid="true" aria-describedby="preview-error"{% endif %}>
+      {% if error %}<span id="preview-error" class="error" role="alert">Incorrect code. Please try again.</span>{% endif %}
+      <button type="submit">Enter preview</button>
+    </form>
+    <small>By invitation only</small>
+  </main>
+</body>
+</html>

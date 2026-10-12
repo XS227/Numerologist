@@ -32,6 +32,7 @@ jobs:
 
             echo "⚙️  Running Django checks, migrations and static collection..."
             sudo -u www-data "$APP/.venv/bin/python" manage.py check
+            sudo -u www-data "$APP/.venv/bin/python" deploy/verify_early_preview.py
             sudo -u www-data "$APP/.venv/bin/python" manage.py migrate --noinput
             sudo -u www-data "$APP/.venv/bin/python" manage.py collectstatic --noinput
 
@@ -39,4 +40,8 @@ jobs:
             sudo systemctl restart numerologist.service
             sudo systemctl is-active --quiet numerologist.service
 
+            echo "🔒 Enabling the early preview gate for PHP, Django and static routes..."
+            sudo "$APP/.venv/bin/python" "$APP/deploy/install_early_preview.py"
+
             echo "✅ Numerologist deployment complete"
+

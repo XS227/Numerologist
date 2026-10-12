@@ -47,6 +47,10 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 # with trusted testers instead of the general public.
 CALCULATOR_ACCESS_CODE = os.getenv("CALCULATOR_ACCESS_CODE", "227")
 
+# Closed early preview until the owner explicitly opens the project.
+EARLY_PREVIEW_ENABLED = os.getenv("EARLY_PREVIEW_ENABLED", "true").lower() in {"1", "true", "yes", "on"}
+EARLY_PREVIEW_CODE = os.getenv("EARLY_PREVIEW_CODE", "227")
+
 _default_allowed = [
     host.strip() for host in os.getenv("ALLOWED_HOSTS", "").split(",") if host.strip()
 ]
@@ -101,6 +105,7 @@ MIDDLEWARE = [
     "tall_project.nl_lang_bridge.NlLangCookieMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "tall_project.early_preview.EarlyPreviewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -228,3 +233,4 @@ VIPPS_LOGIN_MSN = os.getenv("VIPPS_LOGIN_MSN", os.getenv("VIPPS_MSN", ""))
 VIPPS_TEST_MODE = os.getenv("VIPPS_TEST_MODE", "true").lower() == "true"
 VIPPS_LOGIN_BASE_URL = "https://apitest.vipps.no" if VIPPS_TEST_MODE else "https://api.vipps.no"
 VIPPS_LOGIN_BROKER_URL = os.getenv("VIPPS_LOGIN_BROKER_URL", "https://trustai.no/api/auth/vipps/numerologist.php")
+
