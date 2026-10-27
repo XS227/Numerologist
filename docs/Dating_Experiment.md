@@ -75,8 +75,12 @@ This branch registers `dating.apps.DatingConfig`, adds the `/dating/` include
 before the root slug handler, and includes the first migration. Preserve the
 existing server-side early-preview code gate (227).
 
-**Not deployed.** Work was prepared in a separate worktree during the server
-migration; the existing checkout and production services were not edited.
+**Full membership app not deployed.** A stateless review is live at
+https://setai.no/dating/ behind preview code 227. It renders the existing Django
+views/forms/templates and calls the existing member-report engine. Registration
+and the real match pool are visibly disabled in this review. No production
+member data is loaded and test names/dates are not stored. The existing
+Numerologist checkout and services were not edited.
 
 A full-project `manage.py check` on base commit
 `66a40008d70541ca978c282021241f2e173878a8` fails before the dating module loads:
@@ -95,3 +99,23 @@ protected app routes. Avoid serving this path through the PHP catch-all.
 Validated on 27 October 2026: 22 isolated Django tests pass; the isolated system
 check reports no issues; migration drift check reports no changes. Full-project
 and visual browser verification are pending for the reasons above.
+
+## SETAEI review deployment (27 October 2026)
+
+- Source worktree: /opt/numerologist-dating-review.
+- PHP entry point: /var/www/setai/dating/index.php (from deploy/dating_review_index.php).
+- Generated GET pages: /var/cache/numerologist-dating-review, outside the document root.
+- Rebuild cached pages: /var/www/numerologist/.venv/bin/python deploy/dating_review.py --build.
+- Calculations POST to the same PHP entry point, validate the preview session and
+  CSRF, then pass bounded JSON through stdin to deploy/dating_review.py. No shell
+  interpolation, no database, no new persistent service or nginx reload.
+- Response headers prohibit indexing and caching. Cookies are Secure/HttpOnly
+  and scoped to /dating. Existing site sessions are not reused.
+- Public HTTP checks passed: gate, landing, paired calculation, EN/FA pages,
+  disabled profile review, empty match preview, and CSRF rejection.
+- Direct renderer checks passed for paired calculations in all three languages
+  and rejection of a minor birth date. Browser confirmed the public access gate;
+  authenticated browser/mobile layout verification remains pending.
+- Migration note: this path is currently served from the active setai.no host,
+  5.249.255.116. Include the review worktree, generated cache and PHP entry point
+  in the next server migration, retaining the Python runtime path.
