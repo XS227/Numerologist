@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="{{ lang }}" dir="{% if lang == 'fa' %}rtl{% else %}ltr{% endif %}">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ t.tag }} · Numerologist</title><meta name="robots" content="noindex,nofollow">
+<style>{% include "dating/style.css" %}</style></head>
+<body>
+<header class="nav"><a class="brand" href="/dating/?lang={{ lang }}"><span class="brandmark">π</span><span>NUMEROLOGIST<small>BY SETAEI</small></span></a>
+<nav class="languages" aria-label="Language"><a href="?lang=no{% if mode == 'pair' %}&mode=pair{% endif %}" {% if lang == 'no' %}aria-current="true"{% endif %}>NO</a><a href="?lang=en{% if mode == 'pair' %}&mode=pair{% endif %}" {% if lang == 'en' %}aria-current="true"{% endif %}>EN</a><a href="?lang=fa{% if mode == 'pair' %}&mode=pair{% endif %}" {% if lang == 'fa' %}aria-current="true"{% endif %}>فا</a><a class="account" href="/min-side/login/?next=/dating/profile/">{{ t.account }} ↗</a></nav></header>
+<main>
+{% if page == 'experiment' %}
+<section class="hero"><div class="hero-copy"><p class="eyebrow"><span class="spark">✦</span> {{ t.tag }}</p><h1>{{ t.title }}<br><em>{{ t.title2 }}</em></h1><p class="intro">{{ t.intro }}</p><a href="#explore" class="button">{{ t.start }} <span>↗</span></a><p class="micro">01 / {{ t.hero_caption }}</p></div>
+<div class="orbit-art" aria-hidden="true" title="Illustration"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="art-center">∞</div><div class="number-orb first">2<small>11 / 2</small></div><div class="number-orb second">6<small>33 / 6</small></div><span class="art-star">✦</span><span class="art-caption">{{ t.hero_caption }}</span></div></section>
+{% endif %}
+<div class="workspace" id="explore">
+<div class="tabs" aria-label="{{ t.tag }}"><a href="/dating/?lang={{ lang }}" {% if page == 'experiment' and mode == 'self' %}aria-current="page"{% endif %}>{{ t.start }}</a><a href="/dating/?mode=pair&lang={{ lang }}" {% if page == 'experiment' and mode == 'pair' or page == 'connection' %}aria-current="page"{% endif %}>{{ t.pair }}</a><a href="/dating/matches/?lang={{ lang }}" {% if page == 'matches' %}aria-current="page"{% endif %}>{{ t.matches }}</a><a href="/dating/profile/?lang={{ lang }}" {% if page == 'profile' %}aria-current="page"{% endif %}>{{ t.profile }}</a></div>
+{% if page == 'experiment' %}
+<div class="form-layout"><div><p class="eyebrow">01 / {{ t.test }}</p><h2>{% if mode == 'pair' %}{{ t.pair }}{% else %}{{ t.start }}{% endif %}</h2><p class="subtle">{{ t.latin }}</p></div>
+<form method="post" class="calculation-form" action="?lang={{ lang }}#results">{% csrf_token %}<input type="hidden" name="mode" value="{{ mode }}">
+<div class="person-forms"><fieldset><legend>{{ t.you }}</legend>{% for field in left %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{ field.errors }}{% endfor %}</fieldset>
+{% if mode == 'pair' %}<fieldset><legend>{{ t.other }}</legend>{% for field in right %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{ field.errors }}{% endfor %}</fieldset>{% endif %}</div>
+<button class="button" type="submit">{% if mode == 'pair' %}{{ t.calculate }}{% else %}{{ t.submit }}{% endif %} <span>↗</span></button><p class="micro muted">{{ t.privacy }}</p></form></div>
+{% endif %}
+{% if page == 'profile' %}
+<section class="profile-section"><p class="eyebrow">02 / {{ t.profile }}</p><h2>{{ t.profile }}</h2><p class="subtle">{{ t.latin }}</p>
+<form method="post" action="?lang={{ lang }}" class="profile-form">{% csrf_token %}
+{% if profile_form.errors %}<p class="error-summary" role="alert">{{ t.check }}</p>{% endif %}
+<div class="profile-fields">{% for field in profile_form %}{% if field.name != 'consent' and field.name != 'is_visible' %}<div><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>{% endif %}{% endfor %}</div>
+<div class="consent"><label>{{ profile_form.is_visible }} <span>{{ t.is_visible }}</span></label>{{ profile_form.is_visible.errors }}<label>{{ profile_form.consent }} <span>{{ t.consent }}</span></label>{{ profile_form.consent.errors }}</div>
+<button class="button" type="submit">{{ t.save }} ↗</button></form>
+{% if has_profile %}<form method="post" action="/dating/delete/?lang={{ lang }}" class="delete-form">{% csrf_token %}<p class="micro">{{ t.delete_info }}</p><button type="submit" class="text-button">{{ t.delete }}</button></form>{% endif %}</section>
+{% endif %}
+{% if page == 'matches' %}
+<section class="matches-section"><div class="section-heading"><div><p class="eyebrow">03 / {{ t.matches }}</p><h2>{{ t.matches }}</h2><p class="subtle">{{ t.filters }}</p></div><a class="text-link" href="/dating/profile/?lang={{ lang }}">{{ t.edit }} ↗</a></div>
+{% if not me.is_visible %}<div class="empty-state"><span>◌</span><h3>{{ t.hidden }}</h3><a class="button" href="/dating/profile/?lang={{ lang }}">{{ t.edit }} ↗</a></div>
+{% elif not results %}<div class="empty-state"><span>∞</span><h3>{{ t.empty }}</h3><p>{{ t.empty_text }}</p></div>
+{% else %}<div class="match-grid">{% for match in results %}<article class="match-card"><div class="match-numeral">{{ match.life }}</div><div><h3>{{ match.alias }}, {{ match.age }}</h3><p class="subtle">{{ match.city }}</p></div><div class="mini-index">{{ match.score }}<small>{{ t.score }}</small></div><a class="text-link" href="/dating/connection/{{ match.id }}/?lang={{ lang }}">{{ t.see }} ↗</a></article>{% endfor %}</div>{% endif %}</section>
+{% endif %}
+<div id="results" aria-live="polite">
+{% if numbers %}<section class="result-section"><p class="eyebrow">02 / {{ t.your_numbers }}</p><h2>{{ t.your_numbers }}</h2><div class="numbers-grid">{% for item in numbers %}<article><span class="large-number">{{ item.value }}</span><h3>{{ item.label }}</h3><p>{{ item.theme }}</p></article>{% endfor %}</div></section>{% endif %}
+{% if solo_years %}<section class="result-section"><h2>{{ t.timeline }}</h2><div class="year-grid">{% for item in solo_years %}<article><span class="year-label">{{ item.year }}</span><div class="year-numbers">{{ item.number }}</div><p>{{ item.theme }}</p></article>{% endfor %}</div><a class="button secondary" href="/dating/?mode=pair&lang={{ lang }}">{{ t.pair }} ↗</a></section>{% endif %}
+{% if report %}
+<section class="result-section"><div class="section-heading"><div><p class="eyebrow">02 / {{ t.connection }}{% if candidate_alias %} · {{ candidate_alias }}{% endif %}</p><h2>{{ t.connection }}</h2><p class="subtle">{{ t.together }} <strong>{{ report.relationship_number }}</strong> · {{ report.relationship_theme }}</p></div><div class="score-circle"><strong>{{ report.score }}</strong><span>{{ t.score }}</span><small>{{ t.of100 }}</small></div></div>
+<div class="component-list">{% for item in report.components %}<article><div class="component-title"><h3>{{ item.label }}</h3><span>{{ item.a }} <i>↔</i> {{ item.b }}</span></div><div class="meter" role="img" aria-label="{{ item.label }}: {{ item.score|default_if_none:t.missing }}"><span style="width:{{ item.score|default_if_none:0 }}%"></span></div><div class="component-reading"><p>{{ item.theme_a }} · {{ item.theme_b }}</p><strong>{{ item.reading }}{% if item.score != None %} · {{ item.score }}/100{% endif %}</strong></div></article>{% endfor %}</div><p class="prompt">{{ t.question }}</p></section>
+<section class="result-section"><p class="eyebrow">03 / {{ t.timing }}</p><h2>{{ t.timeline }}</h2><p class="subtle">{{ t.timeline_intro }}</p><div class="year-grid">{% for year in report.years %}<article><span class="year-label">{{ year.year }}</span><div class="year-numbers">{{ year.a }} <i>↔</i> {{ year.b }}</div><p>{{ year.theme_a }}</p><p>{{ year.theme_b }}</p><p class="year-reading">{{ year.reading }}</p></article>{% endfor %}</div>
+<h3 class="months-title">{{ t.months }}</h3><div class="month-grid">{% for month in report.months %}<article><span>{{ month.date|date:"m/Y" }}</span><strong>{{ month.a }} <i>·</i> {{ month.b }}</strong></article>{% endfor %}</div></section>
+{% endif %}</div>
+<details class="method"><summary>{{ t.method }} <span>+</span></summary><p>{{ t.method_text }}</p><code>numerologist-dating-v1</code></details>
+<p class="disclosure">{{ t.note }}</p>
+</div></main><footer><a href="/dating/?lang={{ lang }}">NUMEROLOGIST <span>×</span> SETAEI</a><p>{{ t.tag }} · 18+</p></footer>
+</body></html>
