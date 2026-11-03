@@ -88,6 +88,8 @@ def main() -> None:
 
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     backup = Path(f"/var/backups/namnum-lv55-{stamp}-{os.getpid()}")
+    backup.mkdir(parents=True, exist_ok=False)
+    backup.chmod(0o755)
     for path in INJECTIONS:
         destination = backup / path
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -121,7 +123,7 @@ def main() -> None:
         f'obj, created = Article.objects.update_or_create(slug={SLUG!r}, defaults={{'
         "'title': 'Louis Vuitton: De skjulte tallene bak LV = 55', "
         "'content': content, "
-        "'author': 'NAMNum Research · SETAEI'}})\n"
+        "'author': 'NAMNum Research · SETAEI'})\n"
         'print("ARTIKKEL:", obj.pk, "opprettet" if created else "oppdatert")\n'
     )
     run("sudo", "-u", "www-data", str(APP / ".venv/bin/python"),
