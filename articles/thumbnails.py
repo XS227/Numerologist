@@ -3,6 +3,13 @@
 from __future__ import annotations
 
 ARTICLE_THUMBNAILS: dict[str, dict[str, str]] = {
+    "louis-vuitton-lv-55": {
+        "image": "article-lv-55.svg",
+        "big": "55",
+        "small": "LV · Louis Vuitton",
+        "bg": "#21150e",
+        "fg": "#e5c48d",
+    },
     "22-7-riktig-beregning-av-pi": {
         "image": "article-pi-22-7.svg",
         "big": "π",
