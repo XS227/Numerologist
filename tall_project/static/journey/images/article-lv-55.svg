@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" role="img" aria-labelledby="title desc">
+<title id="title">Louis Vuitton and the number 55</title>
+<desc id="desc">Original NAMNum editorial illustration: deep leather-brown backdrop, gold ornamental rings, LV lettering and number 55.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#100b09"/><stop offset=".48" stop-color="#3d281c"/><stop offset="1" stop-color="#180f0b"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8b6338"/><stop offset=".5" stop-color="#f0d39a"/><stop offset="1" stop-color="#a57947"/></linearGradient>
+<pattern id="weave" width="58" height="58" patternUnits="userSpaceOnUse" patternTransform="rotate(35)"><path d="M0 0H58 M0 29H58" stroke="#d1a76d" stroke-width="1" opacity=".07"/></pattern>
+<radialGradient id="halo"><stop stop-color="#ccac7520"/><stop offset="1" stop-color="#ccac7500"/></radialGradient>
+</defs>
+<rect width="1536" height="1024" fill="url(#bg)"/>
+<rect width="1536" height="1024" fill="url(#weave)"/>
+<circle cx="1010" cy="510" r="540" fill="url(#halo)"/>
+<rect x="45" y="45" width="1446" height="934" fill="none" stroke="#bb9a68" stroke-width="2" opacity=".65"/>
+<rect x="62" y="62" width="1412" height="900" fill="none" stroke="#bb9a68" stroke-width="1" opacity=".28"/>
+<circle cx="1040" cy="507" r="342" fill="none" stroke="url(#gold)" stroke-width="2" opacity=".9"/>
+<circle cx="1040" cy="507" r="310" fill="none" stroke="#b88c52" stroke-width="1" stroke-dasharray="3 10" opacity=".7"/>
+<circle cx="1040" cy="507" r="260" fill="#21150f" stroke="#927048" stroke-width="1"/>
+<text x="1040" y="540" font-family="Georgia,Times New Roman,serif" text-anchor="middle" font-size="256" letter-spacing="-24" fill="url(#gold)">LV</text>
+<text x="1040" y="640" font-family="Arial,Helvetica,sans-serif" text-anchor="middle" font-size="25" letter-spacing="10" fill="#d7b889">50 + 5 = 55</text>
+<path d="M98 260 H660" stroke="#b59a70" opacity=".4"/>
+<text x="100" y="190" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="700" letter-spacing="8" fill="#d5b684">NAMNUM · RESEARCH</text>
+<text x="96" y="400" font-family="Georgia,Times New Roman,serif" font-size="104" fill="#f4e7d2">LOUIS</text>
+<text x="96" y="515" font-family="Georgia,Times New Roman,serif" font-size="104" fill="#e9c58a">VUITTON</text>
+<text x="102" y="600" font-family="Arial,Helvetica,sans-serif" font-size="31" letter-spacing="5" fill="#d2bfa8">THE HIDDEN NUMBERS</text>
+<text x="102" y="650" font-family="Arial,Helvetica,sans-serif" font-size="31" letter-spacing="5" fill="#d2bfa8">BEHIND THE MONOGRAM</text>
+<path d="M102 715 H630" stroke="#b59a70" opacity=".6"/>
+<text x="102" y="786" font-family="Georgia,Times New Roman,serif" font-size="54" fill="#e5c48d">55  /  53–8  /  24–6</text>
+<text x="100" y="903" font-family="Arial,Helvetica,sans-serif" font-size="22" letter-spacing="7" fill="#bb9e77">1821 — 2026</text>
+</svg>
