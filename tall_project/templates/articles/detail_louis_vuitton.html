@@ -1,0 +1,331 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}Louis Vuitton · LV = 55 | NAMNum Research{% endblock %}
+{% block og_title %}Louis Vuitton: The Hidden Numbers Behind LV = 55{% endblock %}
+{% block body_attrs %} class="lv-page"{% endblock %}
+
+{% block extra_styles %}
+main{padding:0!important}
+.lv{
+ --lv-bg:#110c0a; --lv-brown:#251711; --lv-gold:#ccab73; --lv-ivory:#f0e8dc;
+ --lv-line:rgba(224,190,135,.22); --lv-quiet:#bcae9b; --lv-teal:#9ec6c7;
+ background:var(--lv-bg);color:var(--lv-ivory);overflow:clip;font-family:Inter,"Helvetica Neue",Arial,sans-serif;
+}
+.lv *{box-sizing:border-box}
+.lv-wrap{width:min(1220px,calc(100% - 3rem));margin-inline:auto}
+.lv a{color:inherit}.lv a:hover{color:#ffe3b0}
+.lv-progress{position:fixed;inset:0 auto auto 0;height:3px;width:0;background:linear-gradient(90deg,#86704d,#f9dda6,#9ec6c7);z-index:201;pointer-events:none}
+.lv-kicker{display:block;color:var(--lv-gold);font-size:.71rem;line-height:1.5;font-weight:800;letter-spacing:.26em;text-transform:uppercase}
+.lv-gold{color:var(--lv-gold)}.lv-quiet{color:var(--lv-quiet)}
+.lv-hero{position:relative;isolation:isolate;min-height:min(890px,calc(100svh - 62px));display:grid;align-items:center;
+ background:radial-gradient(ellipse at 70% 44%,rgba(151,96,49,.22),transparent 37%),radial-gradient(ellipse at 10% 85%,rgba(31,91,93,.14),transparent 36%),linear-gradient(135deg,#0e0b09,#22140e 60%,#110b09)}
+.lv-hero:before,.lv-hero:after{content:"";position:absolute;pointer-events:none;inset:0;z-index:-1}
+.lv-hero:before{background-image:repeating-linear-gradient(115deg,rgba(255,217,166,.035) 0,rgba(255,217,166,.035) 1px,transparent 1px,transparent 22px);mask-image:linear-gradient(90deg,transparent,black 50%,black);opacity:.8}
+.lv-hero:after{background-image:radial-gradient(circle,#d0ad77 1px,transparent 1.5px);background-size:48px 48px;opacity:.08;mask-image:linear-gradient(90deg,transparent 30%,black)}
+.lv-hero-grid{display:grid;grid-template-columns:minmax(0,1.06fr) minmax(350px,.94fr);gap:clamp(2rem,6vw,6rem);align-items:center;padding:clamp(4rem,8vw,7rem) 0}
+.lv-back{display:inline-block;margin-bottom:3rem;color:#c7b8a6!important;font-size:.87rem}
+.lv-h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.055em;font-size:clamp(3.8rem,8vw,8.5rem);line-height:.87;margin:1.25rem 0 0}
+.lv-h1 em{display:block;font-style:normal;color:var(--lv-gold)}
+.lv-deck{font-family:Georgia,serif;font-size:clamp(1.12rem,1.8vw,1.48rem);font-weight:400;line-height:1.55;color:#d9cdc0;margin:1.8rem 0 0;max-width:48ch}
+.lv-meta{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:2rem;color:#ad9d8d;font-size:.76rem;letter-spacing:.04em}
+.lv-meta span{padding:.48rem .75rem;border:1px solid var(--lv-line);border-radius:30px}
+.lv-cta{display:inline-flex;margin-top:2rem;gap:1rem;align-items:center;background:var(--lv-gold);color:#1d130e!important;border-radius:2px;padding:.85rem 1.2rem;font-weight:800;text-transform:uppercase;font-size:.74rem;letter-spacing:.11em;box-shadow:0 16px 50px rgba(0,0,0,.18);transition:transform .25s}
+.lv-cta:hover{transform:translateY(-3px)}
+.lv-artefact{position:relative;width:min(100%,560px);aspect-ratio:1/1.16;display:grid;place-items:center;isolation:isolate;perspective:850px;margin:auto}
+.lv-artefact:before{content:"";position:absolute;inset:8% 12%;border:1px solid var(--lv-line);transform:rotate(-13deg);border-radius:999px;box-shadow:0 0 90px rgba(205,164,96,.08) inset}
+.lv-artefact:after{content:"";position:absolute;inset:0;transform:rotate(17deg);border:1px solid rgba(204,171,115,.12);border-radius:999px;pointer-events:none}
+.lv-trunk{position:relative;z-index:1;width:70%;aspect-ratio:5/6;background:
+ linear-gradient(90deg,rgba(8,5,4,.38) 0 9%,transparent 13% 85%,rgba(5,3,2,.45) 95%),
+ repeating-linear-gradient(0deg,transparent,transparent 13px,rgba(231,196,142,.012) 14px,transparent 15px),
+ linear-gradient(125deg,#4b3022,#22140f 52%,#42291d);
+ border:8px solid #332016;outline:1px solid #b18e54;transform:rotateY(-12deg) rotateZ(-4deg);
+ box-shadow:24px 38px 95px rgba(0,0,0,.64),inset 0 0 0 2px #8e683e,inset 0 0 0 17px #23150f;
+ display:grid;place-items:center;overflow:hidden;animation:lvFloat 9s ease-in-out infinite}
+.lv-trunk:before{content:"";position:absolute;inset:3%;background:repeating-linear-gradient(90deg,transparent 0 46px,rgba(230,180,112,.08) 47px 48px,transparent 49px 94px);opacity:.8}
+.lv-trunk:after{content:"";position:absolute;inset:11% 0 auto;height:2px;background:#ac875a;box-shadow:0 214px #ac875a;opacity:.55}
+.lv-trunk-inside{position:relative;display:grid;place-items:center;text-align:center;border:1px solid rgba(227,184,107,.52);width:73%;aspect-ratio:1;padding:1rem;z-index:2;background:radial-gradient(circle,rgba(226,168,94,.16),rgba(24,13,9,.55) 76%);box-shadow:0 0 0 14px rgba(10,6,4,.2)}
+.lv-insignia{font-family:Georgia,serif;font-size:clamp(5.4rem,12vw,10rem);font-weight:400;line-height:.9;letter-spacing:-.09em;color:#ebcb8f;text-shadow:0 9px 18px rgba(0,0,0,.45)}
+.lv-insignia-small{font-size:.69rem;color:#d7b47c;letter-spacing:.26em;text-transform:uppercase;margin-top:1rem}
+.lv-float{position:absolute;z-index:3;right:-2%;top:14%;padding:.75rem 1rem;background:rgba(15,10,7,.9);border:1px solid var(--lv-line);box-shadow:0 10px 50px #0009;font-family:Georgia,serif;font-size:2rem;color:#ead8b3}
+.lv-float small{display:block;font-family:Arial,sans-serif;font-size:.58rem;letter-spacing:.14em;color:#c1aa8b;text-transform:uppercase}
+@keyframes lvFloat{50%{transform:rotateY(-5deg) rotateZ(-2deg) translateY(-9px)}}
+.lv-strip{border-top:1px solid var(--lv-line);border-bottom:1px solid var(--lv-line);background:#21160f}
+.lv-strip-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.lv-strip-item{padding:1.45rem 1rem;text-align:center;border-inline-end:1px solid var(--lv-line)}.lv-strip-item:last-child{border:0}
+.lv-strip-item small{display:block;font-size:.64rem;letter-spacing:.13em;text-transform:uppercase;color:#af9c85}
+.lv-strip-item b{display:block;margin-top:.25rem;font-family:Georgia,serif;font-size:clamp(1.5rem,3.5vw,2.6rem);font-weight:400;color:#e5c48d}
+.lv-section{padding:clamp(4.5rem,9vw,9rem) 0;scroll-margin-top:5rem}
+.lv-section--paper{background:#ece1d2;color:#261b14}
+.lv-section--brown{background:linear-gradient(150deg,#25170f,#110d0b 65%)}
+.lv-section--ink{background:#150d0a}
+.lv-title{font-family:Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(2.75rem,6vw,5.6rem);line-height:1.03;margin:.8rem 0 1rem}
+.lv-copy{font-size:clamp(1rem,1.5vw,1.13rem);line-height:1.85;max-width:64ch;color:#c6b8a6}
+.lv-section--paper .lv-copy{color:#635144}
+.lv-split{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(2rem,7vw,7rem);align-items:center}
+.lv-ring{position:relative;width:min(100%,490px);aspect-ratio:1;margin-inline:auto;display:grid;place-items:center}
+.lv-ring svg{position:absolute;inset:0;width:100%;height:100%;animation:lvRotate 32s linear infinite}
+.lv-ring svg circle{fill:none;stroke:#a98d63;stroke-width:.5;stroke-dasharray:2 2}
+.lv-ring-core{width:64%;aspect-ratio:1;background:radial-gradient(circle at 32% 25%,#5d3c25,#160e0a 73%);border-radius:50%;border:1px solid #be9a62;display:grid;place-content:center;text-align:center;box-shadow:inset 0 0 50px #0008,0 0 60px #b7894a22}
+.lv-ring-core strong{font-family:Georgia,serif;font-size:clamp(6rem,15vw,11rem);font-weight:400;line-height:1;color:#e9c78b}
+.lv-ring-core span{font-size:.69rem;color:#d7b47c;letter-spacing:.17em;text-transform:uppercase}
+@keyframes lvRotate{to{transform:rotate(360deg)}}
+.lv-formula{margin-top:1.6rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem}
+.lv-formula div{padding:1.1rem;border:1px solid var(--lv-line);text-align:center}
+.lv-formula strong,.lv-formula span{display:block}
+.lv-formula strong{font-family:Georgia,serif;font-size:clamp(1.6rem,3vw,2.8rem);font-weight:400;color:#e5c48d}
+.lv-formula span{font-size:.7rem;color:#b7a18b;text-transform:uppercase;letter-spacing:.12em}
+.lv-stat-groups{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.lv-stat{border:1px solid #d8c6af;background:#f9f1e8;padding:2rem 1.5rem;box-shadow:0 25px 50px #160d0812}
+.lv-stat small{display:block;color:#8d6546;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+.lv-stat strong{font:400 clamp(3rem,6vw,5rem) Georgia,serif;display:block;line-height:1.1;margin:.5rem 0;color:#4a2e22}
+.lv-stat p{font-size:.88rem;color:#6e5949;line-height:1.7}
+.lv-system-toggle{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.5rem 0}
+.lv-system-toggle button,.lv-year{border:1px solid #9b7c5c;background:transparent;color:inherit;padding:.65rem .95rem;font-size:.82rem;cursor:pointer;transition:.22s;font-family:inherit}
+.lv-system-toggle button[aria-pressed="true"]{background:#493020;color:#f5e3c5;border-color:#493020}
+.lv-calc{background:#fff9f1;border:1px solid #d5c5b1;padding:clamp(1.2rem,4vw,2.4rem);box-shadow:0 22px 70px #160d0817}
+.lv-calc-head{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;color:#644935}
+.lv-calc-head span{font-size:.72rem;letter-spacing:.17em;text-transform:uppercase}
+.lv-calc-head strong{font:400 clamp(2rem,4vw,3rem) Georgia,serif;color:#39251b}
+.lv-calc-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.2rem 0}
+.lv-calc-breakdown div{padding:1rem;background:#efe4d7;color:#3c2b20}
+.lv-calc-breakdown b{display:block;font:400 2.3rem Georgia,serif;color:#714c2b}
+.lv-calc-breakdown small{display:block;font-size:.72rem;color:#6e5b4b}
+.lv-digits{display:flex;gap:.3rem;flex-wrap:wrap;border-top:1px solid #d8c8b8;padding-top:1rem;margin-top:.8rem}
+.lv-digit{display:grid;place-items:center;min-width:30px;padding:.5rem .3rem;border:1px solid #d7c5ac;font-size:.79rem;color:#64442c}
+.lv-digit b{display:block;font-size:1.1rem;font-family:Georgia,serif;color:#352116}
+.lv-timeline{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.65rem;margin-top:2.5rem}
+.lv-year{display:grid;gap:.45rem;justify-items:start;text-align:left;min-height:108px;padding:.9rem .75rem;border-color:rgba(204,171,115,.32);color:#c9b6a1}
+.lv-year b{font:400 1.75rem Georgia,serif;color:#e5bd80}
+.lv-year span{font-size:.73rem;line-height:1.35}
+.lv-year[aria-pressed="true"]{background:#d8b37a;color:#24170f;border-color:#d8b37a;box-shadow:0 12px 35px #0005}
+.lv-year[aria-pressed="true"] b{color:#25180e}
+.lv-year-detail{margin-top:1.25rem;padding:clamp(1.6rem,3vw,2.5rem);border:1px solid var(--lv-line);background:rgba(255,255,255,.045);display:grid;grid-template-columns:170px 1fr;gap:1.5rem}
+.lv-year-number{font:400 clamp(3.5rem,8vw,6rem) Georgia,serif;color:#ecd19e;line-height:1}
+.lv-year-number span{display:block;font:700 .72rem Inter,Arial,sans-serif;color:#b8a083;letter-spacing:.2em;margin-top:.8rem;text-transform:uppercase}
+.lv-year-detail h3{margin:0 0 .5rem;font:400 1.55rem Georgia,serif;color:#eee3d4}
+.lv-year-detail p{line-height:1.75;margin:0;color:#b9a998}
+.lv-people{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.2rem}
+.lv-person{position:relative;min-height:290px;border:1px solid #d3bd9f;background:linear-gradient(150deg,#fcf4e9,#d9c7af);padding:1.25rem;color:#241a13;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.lv-person:after{content:attr(data-initial);font:400 12rem Georgia,serif;position:absolute;top:-3.2rem;right:-1.3rem;color:#aa8f711c;pointer-events:none}
+.lv-person-index{font-size:.7rem;letter-spacing:.2em;color:#876d4c;font-weight:800}
+.lv-person strong{display:block;font:400 2rem Georgia,serif;max-width:11ch;line-height:1.08}
+.lv-person span{display:block;font-size:.81rem;color:#705b46;line-height:1.5;margin-top:.6rem}
+.lv-person b{display:inline-block;font:400 2.2rem Georgia,serif;color:#79532e;margin-top:1.1rem}
+.lv-cycle{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.2rem}
+.lv-cycle div{padding:1.5rem;border:1px solid var(--lv-line);background:#fff1}
+.lv-cycle b{display:block;font:400 2.8rem Georgia,serif;color:#ecd09c}
+.lv-cycle span{display:block;margin:.7rem 0;color:#e9d9c1;font-size:.9rem}
+.lv-cycle small{font-size:.77rem;color:#ad9c88;line-height:1.55}
+.lv-verify{margin-top:2.2rem;padding:1.3rem 1.5rem;border-left:3px solid var(--lv-teal);background:#a3dbd00c;color:#c8d8d5;line-height:1.7;font-size:.93rem}
+.lv-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#aa8457;border:1px solid #aa8457;margin:3rem 0}
+.lv-summary div{padding:2rem 1.2rem;text-align:center;background:#21150e}
+.lv-summary b{font:400 clamp(2.7rem,7vw,5.7rem) Georgia,serif;color:#eed1a1;display:block}
+.lv-summary span{font-size:.73rem;color:#bea78d}
+.lv-sources{padding:2rem 0 5rem;border-top:1px solid var(--lv-line)}
+.lv-sources p{line-height:1.8;color:#b9a792;max-width:72ch}
+.lv-sources a{text-decoration:underline;text-underline-offset:4px;color:#d9bc89}
+.lv-enter{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.lv-enter.in-view{opacity:1;transform:none}
+@media(max-width:1000px){.lv-hero-grid,.lv-split{grid-template-columns:1fr}.lv-hero{min-height:auto}.lv-artefact{max-width:520px}.lv-timeline{grid-template-columns:repeat(4,1fr)}.lv-people{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.lv-wrap{width:min(100% - 1.35rem,1220px)}.lv-h1{font-size:clamp(3.5rem,16vw,5.8rem)}.lv-hero-grid{padding:2rem 0 4rem}.lv-back{margin-bottom:2rem}.lv-artefact{max-width:380px}.lv-trunk{width:72%}.lv-float{right:0;font-size:1.3rem}.lv-strip-grid,.lv-stat-groups,.lv-cycle{grid-template-columns:repeat(2,1fr)}.lv-strip-item:nth-child(2){border:0}.lv-timeline{grid-template-columns:repeat(2,1fr)}.lv-year-detail{grid-template-columns:1fr}.lv-people{grid-template-columns:1fr 1fr}.lv-person{min-height:230px;padding:1rem}.lv-person strong{font-size:1.45rem}.lv-summary{grid-template-columns:1fr}.lv-summary div{padding:1.4rem}.lv-ring{width:100%}}
+@media(prefers-reduced-motion:reduce){.lv-trunk,.lv-ring svg{animation:none!important}.lv-enter{opacity:1;transform:none;transition:none}.lv-cta{transition:none}}
+{% endblock %}
+
+{% block main %}
+<div class="lv" id="lv-top">
+  <div class="lv-progress" id="lvProgress" aria-hidden="true"></div>
+  <section class="lv-hero" aria-labelledby="lvTitle">
+    <div class="lv-wrap lv-hero-grid">
+      <div>
+        <a class="lv-back" href="{% url 'article_list' %}">← NAMNum · Alle analyser</a>
+        <span class="lv-kicker">NAMNum research · Numerology of luxury · 03.11.2026</span>
+        <h1 class="lv-h1" id="lvTitle">Louis <em>Vuitton.</em></h1>
+        <p class="lv-deck">Et av verdens mest gjenkjennelige monogrammer skjuler også et romertall. Men hvor langt følger mønsteret historien?</p>
+        <div class="lv-meta"><span>LV = 55</span><span>1854 — 2026</span><span>En undersøkelse, ikke et bevis</span></div>
+        <a class="lv-cta" href="#monogram">Utforsk tallene <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="lv-artefact" role="img" aria-label="Illustrert historisk reisekoffert med stilisert LV og numerologisk tall 55">
+        <div class="lv-trunk"><div class="lv-trunk-inside"><div><span class="lv-insignia">LV</span><span class="lv-insignia-small">L = 50 · V = 5</span></div></div></div>
+        <div class="lv-float"><small>Roman numeral</small>55</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lv-strip"><div class="lv-wrap lv-strip-grid">
+    <div class="lv-strip-item"><small>Monogram</small><b>LV</b></div>
+    <div class="lv-strip-item"><small>Romertall</small><b>55</b></div>
+    <div class="lv-strip-item"><small>Navnesum</small><b>53/8</b></div>
+    <div class="lv-strip-item"><small>Monogram siden</small><b>1896</b></div>
+  </div></div>
+
+  <section class="lv-section lv-section--brown" id="monogram">
+    <div class="lv-wrap lv-split">
+      <div class="lv-enter">
+        <span class="lv-kicker">01 / The symbol</span>
+        <h2 class="lv-title">To bokstaver.<br><span class="lv-gold">Ett tall.</span></h2>
+        <p class="lv-copy">L er 50. V er 5. Sammen er de romertallet <strong>55</strong>. I numerologi: 5 + 5 = 10 → 1. Reisen, forandringen og bevegelsen forbindes tradisjonelt med 5 — en poetisk kontrast til et hus som startet med reisekofferter.</p>
+        <p class="lv-copy">Den dokumenterte forklaringen er enklere: Georges Vuitton utviklet monogrammet i 1896 til minne om faren Louis, samtidig som mønsteret skulle gjøre kopiering vanskeligere. Det finnes ikke grunnlag for å si at 55 var tilsiktet.</p>
+        <div class="lv-formula">
+          <div><strong>L = 50</strong><span>Romertall</span></div>
+          <div><strong>V = 5</strong><span>Romertall</span></div>
+          <div><strong>55 → 1</strong><span>Reduksjon</span></div>
+        </div>
+      </div>
+      <div class="lv-ring lv-enter" aria-label="Animert numerologisk sirkeldiagram for tallet 55">
+        <svg viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="191"/><circle cx="200" cy="200" r="167"/><circle cx="200" cy="200" r="142"/><path d="M200 9 L200 45 M391 200 L355 200 M200 391 L200 355 M9 200 L45 200" stroke="#c8ad7e" stroke-width="1"/></svg>
+        <div class="lv-ring-core"><strong>55</strong><span>5 + 5 → 10 → 1</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lv-section lv-section--paper" id="navnet">
+    <div class="lv-wrap">
+      <div class="lv-split">
+        <div class="lv-enter">
+          <span class="lv-kicker" style="color:#895e35">02 / The name</span>
+          <h2 class="lv-title">To systemer.<br>Samme resultat.</h2>
+          <p class="lv-copy">Et fullt navn på 13 bokstaver, beregnet i to forskjellige alfabet. Begge gir 53 → 8. Utforsk forskjellen mellom de to systemene og kontroller bokstavverdiene.</p>
+          <div class="lv-stat-groups">
+            <div class="lv-stat"><small>Pytagoreisk</small><strong>53/8</strong><p>LOUIS 22 + VUITTON 31</p></div>
+            <div class="lv-stat"><small>Kaldeisk</small><strong>53/8</strong><p>LOUIS 20 + VUITTON 33</p></div>
+          </div>
+        </div>
+        <div class="lv-calc lv-enter">
+          <div class="lv-calc-head"><span>Interactive letter lab</span><strong id="lvCalcTotal">53 → 8</strong></div>
+          <div class="lv-system-toggle" aria-label="Velg alfabet">
+            <button type="button" class="lv-system" data-system="pyth" aria-pressed="true">Pytagoreisk</button>
+            <button type="button" class="lv-system" data-system="chald" aria-pressed="false">Kaldeisk</button>
+          </div>
+          <div class="lv-calc-breakdown">
+            <div><small>LOUIS</small><b id="lvLouis">22 → 4</b></div>
+            <div><small>VUITTON</small><b id="lvVuitton">31 → 4</b></div>
+          </div>
+          <div id="lvDigits" class="lv-digits" aria-live="polite"></div>
+          <p style="color:#73604e;line-height:1.6;font-size:.83rem;margin:1.2rem 0 0">I pytagoreisk beregning er vokalsummen 18 → 9 i begge navnedeler. Lik total på tvers av systemer er et mønster, ikke dokumentasjon på intensjon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lv-section lv-section--ink" id="historien">
+    <div class="lv-wrap">
+      <span class="lv-kicker">03 / The legacy</span>
+      <h2 class="lv-title">172 år i en <span class="lv-gold">tidslinje.</span></h2>
+      <p class="lv-copy">Velg et år. Se hva som faktisk skjedde, og hvordan årstallet reduseres. Hendelsene er historiske; tallsymbolikken er vår analyse.</p>
+      <div class="lv-timeline" role="group" aria-label="Historiske årstall">
+        <button type="button" class="lv-year" aria-pressed="true" data-year="1821"><b>1821</b><span>Grunnleggeren født</span></button>
+        <button type="button" class="lv-year" aria-pressed="false" data-year="1854"><b>1854</b><span>Huset grunnlegges</span></button>
+        <button type="button" class="lv-year" aria-pressed="false" data-year="1885"><b>1885</b><span>London</span></button>
+        <button type="button" class="lv-year" aria-pressed="false" data-year="1896"><b>1896</b><span>Monogrammet</span></button>
+        <button type="button" class="lv-year" aria-pressed="false" data-year="1987"><b>1987</b><span>LVMH</span></button>
+        <button type="button" class="lv-year" aria-pressed="false" data-year="2023"><b>2023</b><span>Beccari</span></button>
+        <button type="button" class="lv-year" aria-pressed="false" data-year="2026"><b>2026</b><span>130-årsjubileet</span></button>
+      </div>
+      <div class="lv-year-detail" aria-live="polite">
+        <div class="lv-year-number" id="lvYearNumber">1821<span id="lvYearSum">1 + 8 + 2 + 1 = 12 → 3</span></div>
+        <div><h3 id="lvYearHeading">Louis Vuitton blir født</h3><p id="lvYearText">Louis Vuitton ble født 4. august 1821. Hele fødselsdatoen har tverrsummen 24 → 6, selv om selve årstallet gir 12 → 3.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="lv-section lv-section--paper" id="menneskene">
+    <div class="lv-wrap">
+      <span class="lv-kicker" style="color:#895e35">04 / Behind the house</span>
+      <h2 class="lv-title">Menneskene bak initialene.</h2>
+      <p class="lv-copy">Et familieforetak som ble et konsernimperium. Hver verdi under er beregnet pytagoreisk fra personens fulle navn; tolkningen beskriver ikke personen objektivt.</p>
+      <div class="lv-people">
+        <article class="lv-person lv-enter" data-initial="L"><div class="lv-person-index">01 · FOUNDING</div><div><strong>Louis Vuitton</strong><span>1821–1892 · Grunnlegger</span><b>53/8</b></div></article>
+        <article class="lv-person lv-enter" data-initial="G"><div class="lv-person-index">02 · HERITAGE</div><div><strong>Georges Vuitton</strong><span>1857–1936 · Skapte monogrammet</span><b>71/8</b></div></article>
+        <article class="lv-person lv-enter" data-initial="B"><div class="lv-person-index">03 · GROUP</div><div><strong>Bernard Arnault</strong><span>1949– · Leder av LVMH</span><b>59/5</b></div></article>
+        <article class="lv-person lv-enter" data-initial="P"><div class="lv-person-index">04 · NOW</div><div><strong>Pietro Beccari</strong><span>1967– · Leder av Louis Vuitton</span><b>70/7</b></div></article>
+      </div>
+      <div class="lv-verify"><strong>Et lite arvet mønster:</strong> LOUIS = 22 → 4 og GEORGES = 40 → 4. Kombinert med VUITTON = 31 → 4 ender begge fulle navn på 8. Et felles etternavn øker naturlig sjansen for fellestrekk.</div>
+    </div>
+  </section>
+
+  <section class="lv-section lv-section--brown" id="mønstre">
+    <div class="lv-wrap">
+      <span class="lv-kicker">05 / Patterns & counterexamples</span>
+      <h2 class="lv-title">Når tallene <span class="lv-gold">møtes.</span></h2>
+      <p class="lv-copy">Her viser vi både treff og manglende treff. Uten moteksempler blir enhver numerologisk studie bare et utvalg av tilfeldighetene som passer.</p>
+      <div class="lv-cycle">
+        <div><b>24/6</b><span>Fødselsdato &amp; 1896</span><small>04.08.1821 → 24/6. Monogramåret 1896 → 24/6. Samme tverrsum, forskjellige typer data.</small></div>
+        <div><b>11</b><span>London → monogram</span><small>1885 til 1896 er 11 kalenderår. Dette er et reelt intervall, uten påvist numerologisk årsak.</small></div>
+        <div><b>4</b><span>Død → hyllest</span><small>Louis døde i 1892. Georges skapte monogrammet fire år senere, i 1896. Jubileet 130 → 4 i 2026.</small></div>
+      </div>
+      <div class="lv-verify"><strong>Motprøve på «55-syklusen»:</strong> 1854 + 55 = 1909; 1896 + 55 = 1951. Disse årene er ikke dokumentert som tilsvarende hovedmilepæler i merkevarens offisielle historie. Derfor er «LV = 55» foreløpig et visuelt/tallmessig sammenfall, ikke et historisk mønster med prediktiv kraft.</div>
+    </div>
+  </section>
+
+  <section class="lv-section lv-section--ink" id="konklusjon">
+    <div class="lv-wrap">
+      <span class="lv-kicker">06 / Research conclusion</span>
+      <h2 class="lv-title">En signatur.<br><span class="lv-gold">Tre nøkkelfunn.</span></h2>
+      <div class="lv-summary">
+        <div><b>55</b><span>LV som romertall</span></div>
+        <div><b>53/8</b><span>Samme navnesum i to alfabet</span></div>
+        <div><b>24/6</b><span>Fødselsdato &amp; monogramår</span></div>
+      </div>
+      <p class="lv-copy">Dette er en systematisk studie av navnesummer, symboler og historiske datoer. Beregningene kan etterprøves, men numerologisk fortolkning er ikke vitenskapelig dokumentasjon på selskapets suksess eller en skjult plan bak merkevaren.</p>
+      <div class="lv-sources">
+        <span class="lv-kicker">Dokumenterte historiske kilder</span>
+        <p><a href="https://us.louisvuitton.com/eng-us/magazine/articles/heritage" target="_blank" rel="noopener noreferrer">Louis Vuitton · Heritage</a> · <a href="https://www.lvmh.com/en/news-lvmh/louis-vuitton-celebrates-130-years-of-its-monogram-a-universal-symbol-of-creativity" target="_blank" rel="noopener noreferrer">LVMH · 130 Years of the Monogram (2026)</a> · <a href="https://www.lvmh.com/en/our-group/governance/pietro-beccari" target="_blank" rel="noopener noreferrer">LVMH · Pietro Beccari</a>. Numerologiske tabeller er beregnet av NAMNum Research.</p>
+        <p><a href="{% url 'article_list' %}">← Flere undersøkelser på NAMNum</a></p>
+      </div>
+    </div>
+  </section>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+(function(){
+  "use strict";
+  var page = document.querySelector(".lv"), progress = document.getElementById("lvProgress");
+  if(!page) return;
+  var reduced = function(n){while(n>9){n=String(n).split("").reduce(function(s,d){return s+Number(d)},0)}return n};
+  var names = {pyth:{LOUIS:[3,6,3,9,1],VUITTON:[4,3,9,2,2,6,5]},chald:{LOUIS:[3,7,6,1,3],VUITTON:[6,6,1,4,4,7,5]}};
+  var sysButtons = Array.from(document.querySelectorAll(".lv-system"));
+  function showSystem(key){
+    var n=names[key], l=n.LOUIS.reduce(function(a,b){return a+b},0),v=n.VUITTON.reduce(function(a,b){return a+b},0), all=l+v;
+    document.getElementById("lvLouis").textContent=l+" → "+reduced(l);
+    document.getElementById("lvVuitton").textContent=v+" → "+reduced(v);
+    document.getElementById("lvCalcTotal").textContent=all+" → "+reduced(all);
+    document.getElementById("lvDigits").innerHTML="";
+    ["LOUIS","VUITTON"].forEach(function(word){
+      word.split("").forEach(function(ch,i){
+        var el=document.createElement("span");
+        el.className="lv-digit";el.textContent=ch+" · "+n[word][i];
+        document.getElementById("lvDigits").appendChild(el);
+      });
+    });
+    sysButtons.forEach(function(b){b.setAttribute("aria-pressed",String(b.dataset.system===key))});
+  }
+  sysButtons.forEach(function(b){b.addEventListener("click",function(){showSystem(b.dataset.system)})});showSystem("pyth");
+  var years={
+    "1821":["Louis Vuitton blir født","Louis Vuitton ble født 4. august 1821. Hele fødselsdatoen gir 24 → 6, mens selve årstallet gir 12 → 3."],
+    "1854":["Det første huset åpner","Louis Vuitton grunnlegger virksomheten i Paris, 33 år gammel. Årstallet gir 18 → 9."],
+    "1885":["Den første internasjonale butikken","Georges Vuitton åpner butikk i London. 1885 gir 22 → 4 — elleve år før monogrammet."],
+    "1896":["LV-monogrammet blir til","Georges skaper monogrammet som hyllest til faren og for å beskytte huset mot kopiering. Årstallet gir 24 → 6."],
+    "1987":["LVMH etableres","Louis Vuitton og Moët Hennessy danner LVMH. Årstallet gir 25 → 7."],
+    "2023":["Ny leder av Louis Vuitton","Pietro Beccari tiltrer som administrerende direktør i februar 2023. Årstallet gir 7."],
+    "2026":["130 år med monogrammet","1896 + 130 = 2026. Jubileumsintervallet 130 reduseres til 4, og 2026 gir 10 → 1."]
+  };
+  var yearBtns=Array.from(document.querySelectorAll(".lv-year"));
+  yearBtns.forEach(function(b){b.addEventListener("click",function(){
+    var y=b.dataset.year, digits=y.split("").join(" + "), sum=y.split("").reduce(function(a,n){return a+Number(n)},0);
+    yearBtns.forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});
+    document.getElementById("lvYearNumber").firstChild.nodeValue=y;
+    document.getElementById("lvYearSum").textContent=digits+" = "+sum+" → "+reduced(sum);
+    document.getElementById("lvYearHeading").textContent=years[y][0];
+    document.getElementById("lvYearText").textContent=years[y][1];
+  })});
+  function updateProgress(){var limit=document.documentElement.scrollHeight-innerHeight;progress.style.width=(limit>0?Math.max(0,Math.min(100,scrollY/limit*100)):0)+"%"}
+  addEventListener("scroll",updateProgress,{passive:true});updateProgress();
+  if("IntersectionObserver" in window){
+    var observer=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in-view");observer.unobserve(e.target)}})},{threshold:.12});
+    document.querySelectorAll(".lv-enter").forEach(function(e){observer.observe(e)});
+  }else{document.querySelectorAll(".lv-enter").forEach(function(e){e.classList.add("in-view")})}
+})();
+</script>
+{% endblock %}
