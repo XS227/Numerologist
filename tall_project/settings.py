@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     "articles.apps.ArticlesConfig",
     "intake.apps.IntakeConfig",
     "members.apps.MembersConfig",
+    "dating.apps.DatingConfig",
     "wagtail",
     "wagtail.admin",
     "wagtail.documents",

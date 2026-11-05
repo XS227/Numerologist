@@ -14,6 +14,7 @@ def health_check(_request: HttpRequest) -> HttpResponse:
 
 
 urlpatterns = [
+    path("dating/", include("dating.urls")),
     path("early-preview/", preview, name="early_preview"),
     path("early-preview/auth/", preview_auth, name="early_preview_auth"),
     path("admin/", admin.site.urls),
